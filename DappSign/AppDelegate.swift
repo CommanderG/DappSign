@@ -17,7 +17,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Parse.setApplicationId("cDeJlDRgoAyGETx9QNNx8Dif22QnLLsuHmgbGjLN", clientKey: "uanRP24yCqZPpCNoYR0nfiN2dzJyvd42fuYl6mB3")
+        
+        PFFacebookUtils.initializeFacebook()
+        
+        var testObject:PFObject = PFObject(className: "TestObject")
+        
+        testObject["foo"] = "bar"
+        
+        testObject.setObject("user1", forKey: "user")
+        
+        testObject.saveInBackgroundWithBlock{
+            (success:Bool! , error: NSError!) -> Void in
+            if(success != nil){
+                NSLog("Object created with id: \(testObject.objectId)")
+            }else{
+                NSLog("%@" , error)
+            }
+        }
+
+        
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
     }
 
     func applicationWillResignActive(application: UIApplication) {
