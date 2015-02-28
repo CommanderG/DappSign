@@ -28,6 +28,14 @@
 		4CD9C9B81AA1DE7800046CA2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9B71AA1DE7800046CA2 /* libz.dylib */; };
 		4CD9C9BA1AA1DEB300046CA2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9B91AA1DEB300046CA2 /* ParseFacebookUtils.framework */; };
 		4CD9C9BC1AA1DED900046CA2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */; };
+		4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */; };
+		4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */; };
+		4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */; };
+		4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */; };
+		4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C31AA1EC1A00046CA2 /* Data.swift */; };
+		4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */; };
+		4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */; };
+		4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +75,14 @@
 		4CD9C9B71AA1DE7800046CA2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4CD9C9B91AA1DEB300046CA2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappColors.swift; sourceTree = "<group>"; };
+		4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappFonts.swift; sourceTree = "<group>"; };
+		4CD9C9C31AA1EC1A00046CA2 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +142,7 @@
 				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
 				4CD9C9A01AA1DC5000046CA2 /* Bridging-Header.h */,
 				4CD9C9811AA1D59900046CA2 /* Main.storyboard */,
+				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
 				4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */,
 				4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */,
@@ -137,6 +154,7 @@
 		4CD9C9781AA1D59900046CA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CD9C9BF1AA1EC1A00046CA2 /* Spring */,
 				4CD9C99F1AA1DA8100046CA2 /* Frameworks */,
 				4CD9C9791AA1D59900046CA2 /* Info.plist */,
 			);
@@ -179,6 +197,20 @@
 				4CD9C99D1AA1DA7C00046CA2 /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4CD9C9BF1AA1EC1A00046CA2 /* Spring */ = {
+			isa = PBXGroup;
+			children = (
+				4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */,
+				4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */,
+				4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */,
+				4CD9C9C31AA1EC1A00046CA2 /* Data.swift */,
+				4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */,
+				4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */,
+				4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */,
+			);
+			path = Spring;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,9 +313,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
+				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
+				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
+				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
+				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
+				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
+				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
+				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
