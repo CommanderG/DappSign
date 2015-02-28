@@ -106,6 +106,55 @@ class HomeViewController: UIViewController {
 
     
     @IBAction func handleGesture(sender: AnyObject) {
+        let location = sender.locationInView(view)
+        let boxLocation = sender.locationInView(dappView)
+        let myView = dappView
+        //let originalLocation = dappView.center
+        
+        dappView.center = location
+        
+        if sender.state == UIGestureRecognizerState.Began {
+            animator.removeBehavior(snapBehavior)
+            
+            let centerOffset = UIOffsetMake(boxLocation.x - CGRectGetMidX(myView.bounds), boxLocation.y - CGRectGetMidY(myView.bounds));
+            attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
+            attachmentBehavior.frequency = 0
+            
+            animator.addBehavior(attachmentBehavior)
+        }
+        else if sender.state == UIGestureRecognizerState.Changed {
+            attachmentBehavior.anchorPoint = location
+        }
+        else if sender.state == UIGestureRecognizerState.Ended {
+            animator.removeBehavior(attachmentBehavior)
+            
+            snapBehavior = UISnapBehavior(item: myView, snapToPoint: originalLocation)
+            animator.addBehavior(snapBehavior)
+            
+            let translation = sender.translationInView(view)
+            if translation.x > 100 {
+                animator.removeAllBehaviors()
+                
+                var gravity = UIGravityBehavior(items: [dappView])
+                gravity.gravityDirection = CGVectorMake(10, -30)
+                animator.addBehavior(gravity)
+                
+                delay(0.3) {
+                    self.refreshView()
+                }
+            }else if translation.x < -100 {
+                animator.removeAllBehaviors()
+                
+                var gravity = UIGravityBehavior(items: [dappView])
+                gravity.gravityDirection = CGVectorMake(-10, 30)
+                animator.addBehavior(gravity)
+                
+                delay(0.3) {
+                    self.refreshView()
+                }
+            }
+            
+        }
     }
     
     //load data from parse
