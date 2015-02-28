@@ -22,20 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebook()
         
-        var testObject:PFObject = PFObject(className: "TestObject")
-        
-        testObject["foo"] = "bar"
-        
-        testObject.setObject("user1", forKey: "user")
-        
-        testObject.saveInBackgroundWithBlock{
-            (success:Bool! , error: NSError!) -> Void in
-            if(success != nil){
-                NSLog("Object created with id: \(testObject.objectId)")
-            }else{
-                NSLog("%@" , error)
-            }
-        }
+//        var testObject:PFObject = PFObject(className: "TestObject")
+//        
+//        testObject["foo"] = "bar"
+//        
+//        testObject.setObject("user1", forKey: "user")
+//        
+//        testObject.saveInBackgroundWithBlock{
+//            (success:Bool! , error: NSError!) -> Void in
+//            if(success != nil){
+//                NSLog("Object created with id: \(testObject.objectId)")
+//            }else{
+//                NSLog("%@" , error)
+//            }
+//        }
 
         
         return true

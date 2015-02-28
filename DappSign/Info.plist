@@ -45,6 +45,19 @@
 			</array>
 		</dict>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>banksia.ttf</string>
+		<string>Bellota-Regular.otf</string>
+		<string>Capture_it.ttf</string>
+		<string>Elsie-Regular.otf</string>
+		<string>Exo-SemiBold.otf</string>
+		<string>Exo-Regular.otf</string>
+		<string>KlinicSlabMedium.otf</string>
+		<string>PrintClearly.otf</string>
+		<string>Sansation-Regular.ttf</string>
+		<string>Walkway_SemiBold.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -30,6 +30,7 @@ class DappFonts{
     var printClearly = UIFont(name:"Print Clearly" , size: CGFloat(29.0))
     var sansation = UIFont(name:"Sansation" , size: CGFloat(29.0))
     var walkwaySemiBold = UIFont(name:"Walkway SemiBold" , size: CGFloat(29.0))
+    //var exoSemiBold = UIFont(name:"DemiBold" , size: CGFloat(29.0))
 
     
     var dappFontBook = [String: UIFont]()
@@ -53,6 +54,7 @@ class DappFonts{
         dappFontBook.updateValue(printClearly!, forKey: "printClearly")
         dappFontBook.updateValue(sansation!, forKey: "sansation")
         dappFontBook.updateValue(walkwaySemiBold!, forKey: "walkwaySemiBold")
+        //dappFontBook.updateValue(exoSemiBold!, forKey: "exoSemiBold")
         
     
     }

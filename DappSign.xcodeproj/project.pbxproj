@@ -36,6 +36,15 @@
 		4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */; };
 		4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */; };
 		4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */; };
+		4CD9C9D81AA21A5100046CA2 /* banksia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9CF1AA21A5100046CA2 /* banksia.ttf */; };
+		4CD9C9D91AA21A5100046CA2 /* Bellota-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D01AA21A5100046CA2 /* Bellota-Regular.otf */; };
+		4CD9C9DA1AA21A5100046CA2 /* Capture_it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D11AA21A5100046CA2 /* Capture_it.ttf */; };
+		4CD9C9DB1AA21A5100046CA2 /* Elsie-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D21AA21A5100046CA2 /* Elsie-Regular.otf */; };
+		4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D31AA21A5100046CA2 /* Exo-Regular.otf */; };
+		4CD9C9DD1AA21A5100046CA2 /* KlinicSlabMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D41AA21A5100046CA2 /* KlinicSlabMedium.otf */; };
+		4CD9C9DE1AA21A5100046CA2 /* PrintClearly.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D51AA21A5100046CA2 /* PrintClearly.otf */; };
+		4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */; };
+		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +92,16 @@
 		4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringAnimation.swift; sourceTree = "<group>"; };
+		4CD9C9CF1AA21A5100046CA2 /* banksia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = banksia.ttf; sourceTree = "<group>"; };
+		4CD9C9D01AA21A5100046CA2 /* Bellota-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bellota-Regular.otf"; sourceTree = "<group>"; };
+		4CD9C9D11AA21A5100046CA2 /* Capture_it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Capture_it.ttf; sourceTree = "<group>"; };
+		4CD9C9D21AA21A5100046CA2 /* Elsie-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Elsie-Regular.otf"; sourceTree = "<group>"; };
+		4CD9C9D31AA21A5100046CA2 /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.otf"; sourceTree = "<group>"; };
+		4CD9C9D41AA21A5100046CA2 /* KlinicSlabMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabMedium.otf; sourceTree = "<group>"; };
+		4CD9C9D51AA21A5100046CA2 /* PrintClearly.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PrintClearly.otf; sourceTree = "<group>"; };
+		4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansation-Regular.ttf"; sourceTree = "<group>"; };
+		4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Walkway_SemiBold.ttf; sourceTree = "<group>"; };
+		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +157,9 @@
 		4CD9C9771AA1D59900046CA2 /* DappSign */ = {
 			isa = PBXGroup;
 			children = (
+				4CD9C9A01AA1DC5000046CA2 /* Bridging-Header.h */,
 				4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */,
 				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
-				4CD9C9A01AA1DC5000046CA2 /* Bridging-Header.h */,
 				4CD9C9811AA1D59900046CA2 /* Main.storyboard */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
@@ -154,6 +173,8 @@
 		4CD9C9781AA1D59900046CA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CD9C9CE1AA21A5100046CA2 /* Fonts */,
+				4CD9C9E21AA21CAA00046CA2 /* Design */,
 				4CD9C9BF1AA1EC1A00046CA2 /* Spring */,
 				4CD9C99F1AA1DA8100046CA2 /* Frameworks */,
 				4CD9C9791AA1D59900046CA2 /* Info.plist */,
@@ -203,13 +224,38 @@
 			isa = PBXGroup;
 			children = (
 				4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */,
-				4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */,
-				4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */,
 				4CD9C9C31AA1EC1A00046CA2 /* Data.swift */,
 				4CD9C9C41AA1EC1A00046CA2 /* DesignableView.swift */,
 				4CD9C9C51AA1EC1A00046CA2 /* Misc.swift */,
 				4CD9C9C61AA1EC1A00046CA2 /* SpringAnimation.swift */,
 			);
+			path = Spring;
+			sourceTree = "<group>";
+		};
+		4CD9C9CE1AA21A5100046CA2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4CD9C9CF1AA21A5100046CA2 /* banksia.ttf */,
+				4CD9C9D01AA21A5100046CA2 /* Bellota-Regular.otf */,
+				4CD9C9D11AA21A5100046CA2 /* Capture_it.ttf */,
+				4CD9C9D21AA21A5100046CA2 /* Elsie-Regular.otf */,
+				4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */,
+				4CD9C9D31AA21A5100046CA2 /* Exo-Regular.otf */,
+				4CD9C9D41AA21A5100046CA2 /* KlinicSlabMedium.otf */,
+				4CD9C9D51AA21A5100046CA2 /* PrintClearly.otf */,
+				4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */,
+				4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4CD9C9E21AA21CAA00046CA2 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */,
+				4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */,
+			);
+			name = Design;
 			path = Spring;
 			sourceTree = "<group>";
 		};
@@ -293,8 +339,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD9C9D91AA21A5100046CA2 /* Bellota-Regular.otf in Resources */,
+				4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */,
+				4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */,
+				4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */,
+				4CD9C9DE1AA21A5100046CA2 /* PrintClearly.otf in Resources */,
+				4CD9C9DD1AA21A5100046CA2 /* KlinicSlabMedium.otf in Resources */,
+				4CD9C9D81AA21A5100046CA2 /* banksia.ttf in Resources */,
+				4CD9C9DA1AA21A5100046CA2 /* Capture_it.ttf in Resources */,
 				4CD9C9831AA1D59900046CA2 /* Main.storyboard in Resources */,
 				4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */,
+				4CD9C9DB1AA21A5100046CA2 /* Elsie-Regular.otf in Resources */,
 				4CD9C9851AA1D59900046CA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,6 +36,10 @@ class ViewController: UIViewController {
         
         performSegueWithIdentifier("showHomeViewController", sender: self)
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 
 }
 
