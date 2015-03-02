@@ -132,6 +132,16 @@ class HomeViewController: UIViewController {
     }
     
     
+    
+    
+    
+    
+    
+
+    @IBAction func composeButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("showAddDappViewController", sender: self)
+    }
+    
     @IBAction func handleGesture(sender: AnyObject) {
         let location = sender.locationInView(view)
         let boxLocation = sender.locationInView(dappView)
