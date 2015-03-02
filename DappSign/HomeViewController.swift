@@ -11,13 +11,22 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //storyboard elements
+//    @IBOutlet weak var dappView: UIView!
+//    @IBOutlet weak var dappHeaderView: UIView!
+//    @IBOutlet weak var dappFooterView: UIView!
+//    @IBOutlet weak var dappCounterView: UIView!
+//    @IBOutlet weak var dappLogoView: UIView!
+//    @IBOutlet weak var dappTextView: UITextView!
+//    @IBOutlet var panRecognizer: UIPanGestureRecognizer!
+    
     @IBOutlet weak var dappView: UIView!
-    @IBOutlet weak var dappHeaderView: UIView!
-    @IBOutlet weak var dappFooterView: UIView!
-    @IBOutlet weak var dappCounterView: UIView!
-    @IBOutlet weak var dappLogoView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var dappTextView: UITextView!
+    @IBOutlet weak var scoreView: UIView!
+    @IBOutlet weak var logoView: UIView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
+    
     
     //array to be loaded from parse
     var dappData: NSMutableArray! = NSMutableArray()
@@ -105,6 +114,24 @@ class HomeViewController: UIViewController {
     }
 
     
+    
+    //load data from parse
+    func loadData(){
+        var findDappDeckData:PFQuery = PFQuery(className: "Dapps")
+        
+        findDappDeckData.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
+            
+            if error == nil{
+                for object in objects{
+                    var dapp:PFObject = object as PFObject
+                    self.dappData.addObject(dapp)
+                    
+                }
+            }
+        }
+    }
+    
+    
     @IBAction func handleGesture(sender: AnyObject) {
         let location = sender.locationInView(view)
         let boxLocation = sender.locationInView(dappView)
@@ -155,23 +182,10 @@ class HomeViewController: UIViewController {
             }
             
         }
+        
     }
     
-    //load data from parse
-    func loadData(){
-        var findDappDeckData:PFQuery = PFQuery(className: "Dapps")
-        
-        findDappDeckData.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
-            
-            if error == nil{
-                for object in objects{
-                    var dapp:PFObject = object as PFObject
-                    self.dappData.addObject(dapp)
-                    
-                }
-            }
-        }
-    }
+    
 
 
 }

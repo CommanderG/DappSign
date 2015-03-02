@@ -3,6 +3,14 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Exo-Regular.otf">
+            <string>Exo-Regular</string>
+        </mutableArray>
+        <mutableArray key="Exo-SemiBold.otf">
+            <string>Exo-DemiBold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -26,14 +34,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
-                                <rect key="frame" x="67" y="205" width="186" height="26"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                <rect key="frame" x="67" y="204" width="186" height="26"/>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
-                                <rect key="frame" x="42" y="106" width="237" height="64"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
+                                <rect key="frame" x="48" y="117" width="237" height="64"/>
+                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -60,39 +68,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9x-gg-iz3">
-                                <rect key="frame" x="9" y="69" width="303" height="430"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j6X-Bh-YOW">
+                                <rect key="frame" x="20" y="86" width="280" height="400"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXe-eG-yBv">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="303" id="XRL-px-Jje"/>
-                                        </constraints>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-fJ-cPr">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                                        <color key="backgroundColor" red="0.17647058823529413" green="0.51764705882352946" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ay-XX-k5X">
-                                        <rect key="frame" x="0.0" y="386" width="303" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="303" id="FJ1-PR-J8b"/>
-                                        </constraints>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jn-lb4">
+                                        <rect key="frame" x="0.0" y="360" width="280" height="40"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.51764705879999995" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cMN-bD-Y2q">
-                                        <rect key="frame" x="0.0" y="365" width="303" height="21"/>
-                                        <color key="backgroundColor" red="0.51372549020000002" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLX-yk-AnC">
-                                        <rect key="frame" x="0.0" y="64" width="303" height="301"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5N-P2-oiu">
+                                        <rect key="frame" x="0.0" y="60" width="280" height="280"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0P-C3-8cl">
-                                        <rect key="frame" x="0.0" y="43" width="303" height="21"/>
-                                        <color key="backgroundColor" red="0.51372549019607838" green="0.58039215686274515" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-i2-0Li">
+                                        <rect key="frame" x="0.0" y="340" width="280" height="20"/>
+                                        <color key="backgroundColor" red="0.17647058823529413" green="0.72156862745098038" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMS-WC-CNG">
+                                        <rect key="frame" x="0.0" y="40" width="280" height="20"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.72156862749999995" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.68627450980392157" green="0.71372549019607845" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -100,26 +102,26 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="qvV-B0-og8" appends="YES" id="tmI-Lp-wpx"/>
+                                    <outletCollection property="gestureRecognizers" destination="33h-y8-gkP" appends="YES" id="oB9-5N-fN4"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12941176470588237" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="dappCounterView" destination="z0P-C3-8cl" id="416-Rp-d5A"/>
-                        <outlet property="dappFooterView" destination="8ay-XX-k5X" id="WbT-Pq-1uT"/>
-                        <outlet property="dappHeaderView" destination="AXe-eG-yBv" id="FGO-pq-B83"/>
-                        <outlet property="dappLogoView" destination="cMN-bD-Y2q" id="Okt-l6-fgs"/>
-                        <outlet property="dappTextView" destination="OLX-yk-AnC" id="GJg-Po-pbD"/>
-                        <outlet property="dappView" destination="B9x-gg-iz3" id="ryS-VX-6c8"/>
-                        <outlet property="panRecognizer" destination="qvV-B0-og8" id="VF0-0C-BnE"/>
+                        <outlet property="dappTextView" destination="t5N-P2-oiu" id="HHI-lz-xSR"/>
+                        <outlet property="dappView" destination="j6X-Bh-YOW" id="Rtb-GZ-dwQ"/>
+                        <outlet property="footerView" destination="3Lw-Jn-lb4" id="ysL-ue-xaH"/>
+                        <outlet property="headerView" destination="Alz-fJ-cPr" id="1JD-7n-YWC"/>
+                        <outlet property="logoView" destination="ZqI-i2-0Li" id="npS-Oe-tZU"/>
+                        <outlet property="panRecognizer" destination="33h-y8-gkP" id="HcA-3B-ILv"/>
+                        <outlet property="scoreView" destination="GMS-WC-CNG" id="XrR-03-Mxn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-gB-rqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="qvV-B0-og8">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="33h-y8-gkP">
                     <connections>
-                        <action selector="handleGesture:" destination="EG5-sL-doW" id="rEl-qF-vfQ"/>
+                        <action selector="handleGesture:" destination="EG5-sL-doW" id="i5M-4Q-Jrj"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
