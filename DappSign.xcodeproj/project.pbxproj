@@ -46,6 +46,7 @@
 		4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */; };
 		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
 		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
+		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Walkway_SemiBold.ttf; sourceTree = "<group>"; };
 		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
+		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */,
 				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
 				4CD9C9811AA1D59900046CA2 /* Main.storyboard */,
+				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
@@ -381,6 +384,7 @@
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
 				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
+				4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,
 			);

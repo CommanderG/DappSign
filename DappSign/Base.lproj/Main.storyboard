@@ -4,12 +4,38 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Bellota-Regular.otf">
+            <string>Bellota-Regular</string>
+        </mutableArray>
+        <mutableArray key="Capture_it.ttf">
+            <string>Captureit</string>
+        </mutableArray>
+        <mutableArray key="Elsie-Regular.otf">
+            <string>Elsie-Regular</string>
+        </mutableArray>
         <mutableArray key="Exo-Regular.otf">
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
+        </mutableArray>
+        <mutableArray key="KlinicSlabMedium.otf">
+            <string>KlinicSlab-Medium</string>
+        </mutableArray>
+        <mutableArray key="PrintClearly.otf">
+            <string>PrintClearly</string>
+        </mutableArray>
+        <mutableArray key="Sansation-Regular.ttf">
+            <string>Sansation-Regular</string>
+        </mutableArray>
+        <mutableArray key="Walkway_SemiBold.ttf">
+            <string>WalkwaySemiBold</string>
+        </mutableArray>
+        <mutableArray key="banksia.ttf">
+            <string>Banksia</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -56,6 +82,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="129" y="297"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gWr-LM-htg">
+            <objects>
+                <viewController id="Q8A-2e-yyY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5g8-4v-4qN"/>
+                        <viewControllerLayoutGuide type="bottom" id="lQ7-Ig-0M9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LfZ-v8-fqo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mKa-cP-7uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="-327"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="01m-FC-o7H">
@@ -198,6 +242,15 @@
                                             <action selector="wisteriaButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="0oJ-cB-mdl"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUn-hG-LXM">
+                                        <rect key="frame" x="214" y="74" width="98" height="52"/>
+                                        <state key="normal" image="Sunflower">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sunflowerButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="hcO-Wf-5JH"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tp6-WY-Os3">
                                         <rect key="frame" x="8" y="140" width="98" height="52"/>
                                         <state key="normal" image="Asbestos">
@@ -225,25 +278,151 @@
                                             <action selector="amethystButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="nC9-A8-WAf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUn-hG-LXM">
-                                        <rect key="frame" x="214" y="74" width="98" height="52"/>
-                                        <state key="normal" image="Sunflower">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9M-ui-IlI">
+                                        <rect key="frame" x="8" y="8" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="sunflowerButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="hcO-Wf-5JH"/>
+                                            <action selector="banksiaButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="z8p-zo-ebr"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-g4-0Rb">
+                                        <rect key="frame" x="111" y="8" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bellotaButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="C4f-Yd-pyJ"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3s7-Bl-IPc">
+                                        <rect key="frame" x="214" y="8" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="captureButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="YdK-gf-Xgq"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHM-Gb-pVd">
+                                        <rect key="frame" x="8" y="74" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="elsieButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="VFa-ID-j30"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnC-eu-TeE">
+                                        <rect key="frame" x="111" y="74" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="exoButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="jhU-Ig-0On"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6G-lM-cXJ">
+                                        <rect key="frame" x="214" y="74" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="klinicButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="Kjr-cc-Ljt"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-8q-m31">
+                                        <rect key="frame" x="8" y="140" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="printClearly:" destination="Run-wI-cqj" eventType="touchUpInside" id="Xw7-Yj-VNt"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-7V-iaO">
+                                        <rect key="frame" x="111" y="140" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sansationButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="d0I-7J-512"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmV-1Q-bW3">
+                                        <rect key="frame" x="214" y="140" width="98" height="52"/>
+                                        <state key="normal" image="FilledFontButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="walkwayButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="tAC-R8-KXa"/>
+                                        </connections>
+                                    </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Banksia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkJ-eJ-sfr">
+                                        <rect key="frame" x="27" y="23" width="61" height="21"/>
+                                        <fontDescription key="fontDescription" name="Banksia" family="Banksia" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bellota" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BmW-3p-4sM">
+                                        <rect key="frame" x="132" y="23" width="57" height="21"/>
+                                        <fontDescription key="fontDescription" name="Bellota-Regular" family="Bellota" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Elsie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyJ-Mw-B8a">
+                                        <rect key="frame" x="38" y="88" width="39" height="23"/>
+                                        <fontDescription key="fontDescription" name="Elsie-Regular" family="Elsie" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOV-Lu-GWI">
+                                        <rect key="frame" x="145" y="89" width="30" height="21"/>
+                                        <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Klinic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-gt-LBG">
+                                        <rect key="frame" x="241" y="89" width="45" height="22"/>
+                                        <fontDescription key="fontDescription" name="KlinicSlab-Medium" family="Klinic Slab" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PrintClearly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PH3-vQ-tEp">
+                                        <rect key="frame" x="22" y="155" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" name="PrintClearly" family="Print Clearly" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sansation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecN-wA-0r7">
+                                        <rect key="frame" x="121" y="155" width="79" height="21"/>
+                                        <fontDescription key="fontDescription" name="Sansation-Regular" family="Sansation" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Walkway" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zR-ZI-v2U">
+                                        <rect key="frame" x="227" y="156" width="72" height="20"/>
+                                        <fontDescription key="fontDescription" name="WalkwaySemiBold" family="Walkway SemiBold" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Capture" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYI-xy-NBF">
+                                        <rect key="frame" x="226" y="23" width="74" height="21"/>
+                                        <fontDescription key="fontDescription" name="Captureit" family="Capture it" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Pick a color" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHT-lw-Hmf">
-                                <rect key="frame" x="20" y="52" width="280" height="280"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JHT-lw-Hmf">
+                                <rect key="frame" x="20" y="48" width="280" height="280"/>
                                 <color key="backgroundColor" red="0.17647058823529413" green="0.17647058823529413" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="23"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -253,21 +432,53 @@
                                     <outletCollection property="gestureRecognizers" destination="bn9-JL-UgP" appends="YES" id="g9C-LE-kP1"/>
                                 </connections>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Instruction Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWg-94-t1W">
+                                <rect key="frame" x="25" y="24" width="406" height="21"/>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="240" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEu-ba-x1Y">
+                                <rect key="frame" x="278" y="325" width="26" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="amethystButtonOutlet" destination="h77-qb-gOk" id="zEi-Xh-XtH"/>
                         <outlet property="asbestosButtonOutlet" destination="Tp6-WY-Os3" id="ZJZ-47-vAY"/>
+                        <outlet property="banksiaButtonOutlet" destination="O9M-ui-IlI" id="Vp3-JJ-XOy"/>
+                        <outlet property="banksiaLabel" destination="IkJ-eJ-sfr" id="w5I-8q-cMJ"/>
+                        <outlet property="bellotaButtonOutlet" destination="uYW-g4-0Rb" id="skD-3E-79k"/>
+                        <outlet property="bellotaLabel" destination="BmW-3p-4sM" id="UqT-v2-SqZ"/>
+                        <outlet property="captureButtonOutlet" destination="3s7-Bl-IPc" id="ft9-l5-hRw"/>
+                        <outlet property="captureLabel" destination="wYI-xy-NBF" id="zjW-u2-jBv"/>
                         <outlet property="carrotButtonOutlet" destination="5Tr-6T-rtR" id="w6u-Rk-Af9"/>
+                        <outlet property="characterCountLabel" destination="UEu-ba-x1Y" id="KZh-NE-EYS"/>
                         <outlet property="dappTextView" destination="JHT-lw-Hmf" id="tsZ-Lw-CRu"/>
+                        <outlet property="elsieButtonOutlet" destination="qHM-Gb-pVd" id="SlV-ET-8WA"/>
+                        <outlet property="elsieLabel" destination="MyJ-Mw-B8a" id="gXK-e3-gd6"/>
                         <outlet property="emeraldButtonOutlet" destination="AlX-dX-PTo" id="rie-dA-Dju"/>
+                        <outlet property="exoButtonOutlet" destination="XnC-eu-TeE" id="d3G-We-q1e"/>
+                        <outlet property="exoLabel" destination="aOV-Lu-GWI" id="V7g-zX-Vxq"/>
+                        <outlet property="instructionLabel" destination="BWg-94-t1W" id="Iur-zh-kia"/>
+                        <outlet property="klinicButtonOutlet" destination="Z6G-lM-cXJ" id="Bex-Zt-6sS"/>
+                        <outlet property="klinicLabel" destination="9Ns-gt-LBG" id="YUp-Wl-G1q"/>
                         <outlet property="panRecognizer" destination="bn9-JL-UgP" id="cmQ-qe-ibj"/>
                         <outlet property="panelView" destination="gL2-LW-bze" id="DbV-NQ-fyT"/>
                         <outlet property="peterRiverOutlet" destination="5oJ-7O-RZt" id="RdI-ue-wRK"/>
                         <outlet property="pomegranateButtonOutlet" destination="7Hs-Li-htF" id="eQ9-A1-VdA"/>
+                        <outlet property="printClearlyButtonOutlet" destination="Vua-8q-m31" id="6qq-Hf-Fyc"/>
+                        <outlet property="printClearlyLabel" destination="PH3-vQ-tEp" id="ejh-FD-0gZ"/>
+                        <outlet property="sansationButtonOutlet" destination="ELM-7V-iaO" id="8kL-1d-Z06"/>
+                        <outlet property="sansationLabel" destination="ecN-wA-0r7" id="feD-Sr-XVl"/>
                         <outlet property="sunflowerButtonOutlet" destination="tUn-hG-LXM" id="4jR-yR-YAx"/>
                         <outlet property="turquoiseButtonOutlet" destination="bKf-IQ-mSH" id="cuK-vr-0DY"/>
+                        <outlet property="walkwayButtonOutlet" destination="tmV-1Q-bW3" id="HlP-Mw-Kir"/>
+                        <outlet property="walkwayLabel" destination="0zR-ZI-v2U" id="mNV-14-2zM"/>
                         <outlet property="wisteriaButtonOutlet" destination="woB-1U-Gjt" id="tlw-lX-MaP"/>
                     </connections>
                 </viewController>
@@ -288,6 +499,7 @@
         <image name="Compose" width="168" height="157"/>
         <image name="Emerald" width="173" height="84"/>
         <image name="Facebook Login" width="234" height="61"/>
+        <image name="FilledFontButton" width="173" height="84"/>
         <image name="PeterRiver" width="173" height="84"/>
         <image name="Pomegranate" width="173" height="84"/>
         <image name="Sunflower" width="173" height="84"/>
