@@ -29,6 +29,9 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
@@ -228,11 +231,33 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-fJ-cPr">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
-                                        <color key="backgroundColor" red="0.17647058823529413" green="0.51764705882352946" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MyCongressIcon" translatesAutoresizingMaskIntoConstraints="NO" id="8xf-9g-Fg1">
+                                                <rect key="frame" x="3" y="2" width="36" height="36"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To the Congress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akY-2e-gKL">
+                                                <rect key="frame" x="56" y="9" width="142" height="23"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.21176470588235294" green="0.20784313725490197" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jn-lb4">
                                         <rect key="frame" x="0.0" y="360" width="280" height="40"/>
-                                        <color key="backgroundColor" red="0.1764705882" green="0.51764705879999995" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Ao-N9W">
+                                                <rect key="frame" x="237" y="2" width="35" height="35"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmW-pk-rwf">
+                                                <rect key="frame" x="187" y="9" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.21176470588235294" green="0.20784313725490197" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5N-P2-oiu">
                                         <rect key="frame" x="0.0" y="60" width="280" height="280"/>
@@ -242,6 +267,14 @@
                                     </textView>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-i2-0Li">
                                         <rect key="frame" x="0.0" y="340" width="280" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pe-O9-lPx">
+                                                <rect key="frame" x="8" y="-1" width="234" height="23"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.17647058823529413" green="0.72156862745098038" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMS-WC-CNG">
@@ -282,10 +315,13 @@
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12941176470588237" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="congressImageView" destination="8xf-9g-Fg1" id="bCF-1I-QTB"/>
                         <outlet property="dappTextView" destination="t5N-P2-oiu" id="HHI-lz-xSR"/>
                         <outlet property="dappView" destination="j6X-Bh-YOW" id="Rtb-GZ-dwQ"/>
                         <outlet property="footerView" destination="3Lw-Jn-lb4" id="ysL-ue-xaH"/>
+                        <outlet property="fromLabel" destination="jmW-pk-rwf" id="bf5-Um-q8T"/>
                         <outlet property="headerView" destination="Alz-fJ-cPr" id="1JD-7n-YWC"/>
+                        <outlet property="logoLabel" destination="1pe-O9-lPx" id="gcG-91-Xcy"/>
                         <outlet property="logoView" destination="ZqI-i2-0Li" id="npS-Oe-tZU"/>
                         <outlet property="panRecognizer" destination="33h-y8-gkP" id="HcA-3B-ILv"/>
                         <outlet property="scoreView" destination="GMS-WC-CNG" id="XrR-03-Mxn"/>
@@ -665,7 +701,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZF-Um-z9o">
-                                                <rect key="frame" x="187" y="9" width="47" height="21"/>
+                                                <rect key="frame" x="98" y="9" width="136" height="21"/>
                                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>

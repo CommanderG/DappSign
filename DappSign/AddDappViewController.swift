@@ -367,37 +367,37 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func bellotaButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["bellota"]
+        self.dappTextView.font = dappFonts.dappFontBook["bellota"]!
         self.currentFont = dappFonts.dappFontBook["bellota"]!
         dappFontString = "bellota"
         self.viewDidAppear(true)
     }
     
     @IBAction func captureButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["capture"]
-        self.currentFont = dappFonts.dappFontBook["capture"]!
-        dappFontString = "capture"
+        self.dappTextView.font = dappFonts.dappFontBook["captureIt"]!
+        self.currentFont = dappFonts.dappFontBook["captureIt"]!
+        dappFontString = "captureIt"
         self.viewDidAppear(true)
     }
     
     @IBAction func elsieButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["elsie"]
+        self.dappTextView.font = dappFonts.dappFontBook["elsie"]!
         self.currentFont = dappFonts.dappFontBook["elsie"]!
         dappFontString = "elsie"
         self.viewDidAppear(true)
     }
     
     @IBAction func exoButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["exo"]
+        self.dappTextView.font = dappFonts.dappFontBook["exo"]!
         self.currentFont = dappFonts.dappFontBook["exo"]!
         dappFontString = "exo"
         self.viewDidAppear(true)
     }
     
     @IBAction func klinicButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["klinic"]
-        self.currentFont = dappFonts.dappFontBook["klinic"]!
-        dappFontString = "klinic"
+        self.dappTextView.font = dappFonts.dappFontBook["klinicSlab"]!
+        self.currentFont = dappFonts.dappFontBook["klinicSlab"]!
+        dappFontString = "klinicSlab"
         self.viewDidAppear(true)
     }
 
@@ -409,16 +409,16 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func sansationButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["banksia"]
+        self.dappTextView.font = dappFonts.dappFontBook["banksia"]!
         self.currentFont = dappFonts.dappFontBook["banksia"]!
         dappFontString = "banksia"
         self.viewDidAppear(true)
     }
     
     @IBAction func walkwayButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["walkway"]
-        self.currentFont = dappFonts.dappFontBook["walkway"]!
-        dappFontString = "walkway"
+        self.dappTextView.font = dappFonts.dappFontBook["walkwaySemiBold"]!
+        self.currentFont = dappFonts.dappFontBook["walkwaySemiBold"]!
+        dappFontString = "walkwaySemiBold"
         self.viewDidAppear(true)
     }
 

@@ -26,6 +26,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var logoView: UIView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
+    @IBOutlet weak var congressImageView: UIImageView!
+    @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var logoLabel: UILabel!
     
     var user = PFUser.currentUser()
     
@@ -103,8 +106,10 @@ class HomeViewController: UIViewController {
             self.dappTextView.font = dappFonts.dappFontBook[dappData[count].objectForKey("dappFont") as String!]
             self.dappTextView.textColor = UIColor.whiteColor()
             self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappData[count].objectForKey("dappBackgroundColor") as String!]
+            self.scoreView.backgroundColor = self.dappTextView.backgroundColor
+            self.logoView.backgroundColor = self.dappTextView.backgroundColor
         } else {
-            self.dappTextView.text = "No more DappCards. Feel free to submit your own!"
+            self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
             self.dappTextView.font  = dappFonts.dappFontBook["exo"]!
             self.dappTextView.textColor = UIColor.whiteColor()
             self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
