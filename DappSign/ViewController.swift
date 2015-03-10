@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,13 +24,15 @@ class ViewController: UIViewController {
         
         var permissions = ["public_profile" , "email"]
         PFFacebookUtils.logInWithPermissions(permissions, {
-            (user:PFUser!, error:NSError!) -> Void in
-            if user == nil{
-                NSLog("User cancelled the Facebook login.")
-            }else if user.isNew{
-                NSLog("User signed up and logged in through Facebook")
-            }else{
-                NSLog("User logged in through Facebook!")
+            (user: PFUser!, error: NSError!) -> Void in
+            if let user = user {
+                if user.isNew {
+                    println("User signed up and logged in through Facebook!")
+                } else {
+                    println("User logged in through Facebook!")
+                }
+            } else {
+                println("Uh oh. The user cancelled the Facebook login.")
             }
         })
         

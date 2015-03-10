@@ -13,12 +13,18 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     //ControlFlow
     var mode:String = "chooseColor"
     
+    //To be uploaded
+    var dappColorString:String!
+    var dappFontString:String!
+    var nameString:String!
+    
     //Storyboard connections
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var dappTextView: UITextView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var hashtagTextView: UITextField!
     
     //button labels
     @IBOutlet weak var banksiaLabel: UILabel!
@@ -69,6 +75,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //AddDappColor Setup
+        self.panelView.hidden = false
         self.dappTextView.backgroundColor = UIColor.whiteColor()
         self.dappTextView.editable = false
         self.currentColor = self.dappColors.dappColorWheel["midnightBlue"]!
@@ -253,6 +260,9 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
                         self.transitionChooseFont()
                         self.mode = "chooseFont"
                         self.refreshView()
+                    }else if self.mode == "chooseFont"{
+                        self.submitDapp()
+                        self.performSegueWithIdentifier("showFinalDappSubmitViewController", sender: self)
                     }
                 }
             }else if translation.x < -100 {
@@ -287,54 +297,63 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     @IBAction func emeraldButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["emerald"]!
         currentColor = dappColors.dappColorWheel["emerald"]!
+        dappColorString = "emerald"
         self.viewDidAppear(true)
     }
     
     @IBAction func carrotButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["carrot"]!
         currentColor = dappColors.dappColorWheel["carrot"]!
+        dappColorString = "carrot"
         self.viewDidAppear(true)
     }
     
     @IBAction func peterRiverButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["peterRiver"]!
         currentColor = dappColors.dappColorWheel["peterRiver"]!
+        dappColorString = "peterRiver"
         self.viewDidAppear(true)
     }
     
     @IBAction func pomegranateButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["pomegranate"]!
         currentColor = dappColors.dappColorWheel["pomegranate"]!
+        dappColorString = "pomegranate"
         self.viewDidAppear(true)
     }
     
     @IBAction func wisteriaButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["wisteria"]!
         currentColor = dappColors.dappColorWheel["wisteria"]!
+        dappColorString = "wisteria"
         self.viewDidAppear(true)
     }
     
     @IBAction func sunflowerButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["sunFlower"]!
         currentColor = dappColors.dappColorWheel["sunFlower"]!
+        dappColorString = "sunFlower"
         self.viewDidAppear(true)
     }
     
     @IBAction func asbestosButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["asbestos"]!
         currentColor = dappColors.dappColorWheel["asbestos"]!
+        dappColorString = "asbestos"
         self.viewDidAppear(true)
     }
     
     @IBAction func turqoiseButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["turquoise"]!
         currentColor = dappColors.dappColorWheel["turquoise"]!
+        dappColorString = "turquoise"
         self.viewDidAppear(true)
     }
     
     @IBAction func amethystButton(sender: AnyObject) {
         self.dappTextView.backgroundColor = dappColors.dappColorWheel["amethyst"]!
         currentColor = dappColors.dappColorWheel["amethyst"]!
+        dappColorString = "amethyst"
         self.viewDidAppear(true)
     }
     
@@ -343,63 +362,74 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     @IBAction func banksiaButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["banksia"]!
         self.currentFont = dappFonts.dappFontBook["banksia"]!
+        dappFontString = "banksia"
         self.viewDidAppear(true)
     }
     
     @IBAction func bellotaButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["bellota"]
         self.currentFont = dappFonts.dappFontBook["bellota"]!
+        dappFontString = "bellota"
         self.viewDidAppear(true)
     }
     
     @IBAction func captureButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["capture"]
         self.currentFont = dappFonts.dappFontBook["capture"]!
+        dappFontString = "capture"
         self.viewDidAppear(true)
     }
     
     @IBAction func elsieButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["elsie"]
         self.currentFont = dappFonts.dappFontBook["elsie"]!
+        dappFontString = "elsie"
         self.viewDidAppear(true)
     }
     
     @IBAction func exoButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["exo"]
         self.currentFont = dappFonts.dappFontBook["exo"]!
+        dappFontString = "exo"
         self.viewDidAppear(true)
     }
     
     @IBAction func klinicButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["klinic"]
         self.currentFont = dappFonts.dappFontBook["klinic"]!
+        dappFontString = "klinic"
         self.viewDidAppear(true)
     }
 
     @IBAction func printClearly(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["printClearly"]
         self.currentFont = dappFonts.dappFontBook["printClearly"]!
+        dappFontString = "printClearly"
         self.viewDidAppear(true)
     }
     
     @IBAction func sansationButton(sender: AnyObject) {
         self.dappTextView.font = dappFonts.dappFontBook["banksia"]
         self.currentFont = dappFonts.dappFontBook["banksia"]!
+        dappFontString = "banksia"
         self.viewDidAppear(true)
     }
     
     @IBAction func walkwayButton(sender: AnyObject) {
-        self.dappTextView.font = dappFonts.dappFontBook["banksia"]
-        self.currentFont = dappFonts.dappFontBook["banksia"]!
+        self.dappTextView.font = dappFonts.dappFontBook["walkway"]
+        self.currentFont = dappFonts.dappFontBook["walkway"]!
+        dappFontString = "walkway"
         self.viewDidAppear(true)
     }
 
     
     func transitionAddText(){
-        self.dappTextView.editable = true
-        self.instructionLabel.text = "Type your message. Only one rule: Contribute. Dapp to continue."
+        self.instructionLabel.text = "Only one rule: Contribute. Dapp to continue."
         dappTextView.editable = true
         characterCountLabel.hidden = false
+        panelView.hidden = true //why doesnt this work????
+        panelView.alpha = 0
+        hashtagTextView.hidden = false
         dappTextView.becomeFirstResponder()
     }
     
@@ -407,6 +437,43 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         self.dappTextView.editable = false
         self.instructionLabel.text = "Pick a color. Swipe left to go back. Dapp to continue."
         characterCountLabel.hidden = true
+        hashtagTextView.hidden = true
+        panelView.hidden = false
+        
+        //hide all of the font buttons/labels in case the user goes all the way to choose font and then goes all the way back to choose color
+        banksiaButtonOutlet.hidden = true
+        bellotaButtonOutlet.hidden = true
+        captureButtonOutlet.hidden = true
+        elsieButtonOutlet.hidden = true
+        exoButtonOutlet.hidden = true
+        klinicButtonOutlet.hidden = true
+        printClearlyButtonOutlet.hidden = true
+        sansationButtonOutlet.hidden = true
+        walkwayButtonOutlet.hidden = true
+        
+        banksiaLabel.hidden = true
+        bellotaLabel.hidden = true
+        captureLabel.hidden = true
+        elsieLabel.hidden = true
+        exoLabel.hidden = true
+        klinicLabel.hidden = true
+        printClearlyLabel.hidden = true
+        sansationLabel.hidden = true
+        walkwayLabel.hidden = true
+        
+        //unhide the color buttons
+        emeraldButtonOutlet.hidden = false
+        carrotButtonOutlet.hidden = false
+        asbestosButtonOutlet.hidden = false
+        pomegranateButtonOutlet.hidden = false
+        wisteriaButtonOutlet.hidden = false
+        sunflowerButtonOutlet.hidden = false
+        asbestosButtonOutlet.hidden = false
+        turquoiseButtonOutlet.hidden = false
+        amethystButtonOutlet.hidden = false
+
+        
+        
     }
     
     func transitionChooseFont(){
@@ -443,6 +510,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         printClearlyLabel.hidden = false
         sansationLabel.hidden = false
         walkwayLabel.hidden = false
+        
+        hashtagTextView.hidden = true
         
         self.instructionLabel.text = "Pick your font. Dapp to continue."
         characterCountLabel.hidden = true
@@ -484,6 +553,42 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         viewDidAppear(true)
         
         
+    }
+    
+    
+    
+    func submitDapp(){
+        nameString = PFUser.currentUser().objectForKey("name") as String!
+        var dapp:PFObject = PFObject(className: "Dapps")
+        dapp["dappStatement"] = dappTextView.text
+        dapp["dappFont"] = self.dappFontString
+        dapp["dappBackgroundColor"] = dappColorString
+        dapp["name"] = nameString
+        dapp["userid"] = PFUser.currentUser().objectId
+        dapp["dappScore"] = 1
+        
+        
+        dapp.saveInBackgroundWithBlock {(success:Bool!, error:NSError!) -> Void in
+            if(success != nil){
+                NSLog("Dapp created with id: \(dapp.objectId)")
+            }else{
+                NSLog("%@" , error)
+            }
+        }
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      
+        if segue.identifier == "showFinalDappSubmitViewController"{
+            let finalDappSubmitVC:FinalDappSubmitViewController = segue.destinationViewController as FinalDappSubmitViewController
+            
+            finalDappSubmitVC.dappColorString = self.dappColorString
+            finalDappSubmitVC.dappStatementString = self.dappTextView.text
+            finalDappSubmitVC.dappFontString = self.dappFontString
+            finalDappSubmitVC.nameString = self.nameString
+        }
+      
     }
 
     

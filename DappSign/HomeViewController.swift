@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var logoView: UIView!
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
     
+    var user = PFUser.currentUser()
     
     //array to be loaded from parse
     var dappData: NSMutableArray! = NSMutableArray()
@@ -47,10 +48,40 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (PFUser.currentUser() != nil && user["name"] == nil){
+            var FBSession = PFFacebookUtils.session()
+            var accessToken = FBSession.accessTokenData.accessToken
+            
+            let url = NSURL(string: "https://graph.facebook.com/me/picture?type=large&return_ssl_resources+1&access_token="+accessToken)
+            
+            let urlRequest = NSURLRequest(URL: url!)
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
+                response, data, error in
+                let image = UIImage(data: data)
+                
+                self.user["image"] = data
+                self.user.save()
+                
+                FBRequestConnection.startForMeWithCompletionHandler({
+                    connection, result, error in
+                    self.user["name"] = result["name"]
+                    self.user.save()
+                    
+                })
+                
+            })
+            self.user["dappScore"] = 0
+            self.user.save()
+        }
+        
+        
         originalLocation = dappView.center
         animator = UIDynamicAnimator(referenceView: view)
         dappView.alpha = 0
         self.loadData()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -187,6 +218,9 @@ class HomeViewController: UIViewController {
     }
     
     
+    @IBAction func profileButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("showProfileViewController", sender: self)
+    }
 
 
 }
