@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -15,7 +16,6 @@
 		4CD9C9851AA1D59900046CA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9841AA1D59900046CA2 /* Images.xcassets */; };
 		4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */; };
 		4CD9C9941AA1D59900046CA2 /* DappSignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9931AA1D59900046CA2 /* DappSignTests.swift */; };
-		4CD9C99E1AA1DA7C00046CA2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C99D1AA1DA7C00046CA2 /* FacebookSDK.framework */; };
 		4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9A21AA1DDEE00046CA2 /* Parse.framework */; };
 		4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9A51AA1DE1D00046CA2 /* AudioToolbox.framework */; };
 		4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9A71AA1DE2600046CA2 /* CFNetwork.framework */; };
@@ -62,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		4CD9C98D1AA1D59900046CA2 /* DappSignTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DappSignTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9921AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CD9C9931AA1D59900046CA2 /* DappSignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSignTests.swift; sourceTree = "<group>"; };
-		4CD9C99D1AA1DA7C00046CA2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		4CD9C9A01AA1DC5000046CA2 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		4CD9C9A21AA1DDEE00046CA2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4CD9C9A51AA1DE1D00046CA2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -117,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */,
 				4CD9C9BC1AA1DED900046CA2 /* libsqlite3.dylib in Frameworks */,
 				4CD9C9BA1AA1DEB300046CA2 /* ParseFacebookUtils.framework in Frameworks */,
 				4CD9C9B81AA1DE7800046CA2 /* libz.dylib in Frameworks */,
@@ -129,7 +130,6 @@
 				4CD9C9AA1AA1DE3000046CA2 /* CoreGraphics.framework in Frameworks */,
 				4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */,
 				4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */,
-				4CD9C99E1AA1DA7C00046CA2 /* FacebookSDK.framework in Frameworks */,
 				4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +214,7 @@
 		4CD9C99F1AA1DA8100046CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2714317F1AB086AB002F9527 /* FacebookSDK.framework */,
 				4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */,
 				4CD9C9B71AA1DE7800046CA2 /* libz.dylib */,
 				4CD9C9B91AA1DEB300046CA2 /* ParseFacebookUtils.framework */,
@@ -227,7 +228,6 @@
 				4CD9C9A71AA1DE2600046CA2 /* CFNetwork.framework */,
 				4CD9C9A51AA1DE1D00046CA2 /* AudioToolbox.framework */,
 				4CD9C9A21AA1DDEE00046CA2 /* Parse.framework */,
-				4CD9C99D1AA1DA7C00046CA2 /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
