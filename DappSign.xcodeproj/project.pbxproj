@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
+		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
+		2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318A1AB0C462002F9527 /* FacebookHelper.swift */; };
+		2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
+		2714318A1AB0C462002F9527 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
+		2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerAlertViewExtension.swift; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
+				271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */,
+				2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */,
+				2714318A1AB0C462002F9527 /* FacebookHelper.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
 				4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */,
 				4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */,
@@ -383,6 +392,8 @@
 				4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
+				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
+				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */,
@@ -392,6 +403,7 @@
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
 				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
+				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,

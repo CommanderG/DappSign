@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var congressImageView: UIImageView!
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var shareOnFacebookButton: UIButton!
     
     var user = PFUser.currentUser()
     
@@ -51,6 +52,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.shareOnFacebookButton?.layer.cornerRadius = 8.0
         
         if (PFUser.currentUser() != nil && user["name"] == nil){
             var FBSession = PFFacebookUtils.session()
@@ -226,6 +229,22 @@ class HomeViewController: UIViewController {
     @IBAction func profileButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("showProfileViewController", sender: self)
     }
-
-
+    
+    @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+            completion: {
+                (success, error) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
+                } else {
+                    if error != nil {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                    }
+                }
+        })
+    }
 }

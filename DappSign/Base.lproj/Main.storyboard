@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -311,6 +311,17 @@
                                     <action selector="profileButtonTapped:" destination="EG5-sL-doW" eventType="touchUpInside" id="dM9-Rc-fdt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu2-AW-APN">
+                                <rect key="frame" x="150" y="504" width="150" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Share on Facebook">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="Wv9-Hh-gn9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12941176470588237" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -325,6 +336,7 @@
                         <outlet property="logoView" destination="ZqI-i2-0Li" id="npS-Oe-tZU"/>
                         <outlet property="panRecognizer" destination="33h-y8-gkP" id="HcA-3B-ILv"/>
                         <outlet property="scoreView" destination="GMS-WC-CNG" id="XrR-03-Mxn"/>
+                        <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="kDb-3y-fmx"/>
                         <segue destination="Run-wI-cqj" kind="modal" identifier="showAddDappViewController" id="7wg-lO-bfS"/>
                         <segue destination="Q8A-2e-yyY" kind="modal" identifier="showProfileViewController" id="2ba-Ha-mL9"/>
                     </connections>
@@ -758,6 +770,17 @@
                                     <outletCollection property="gestureRecognizers" destination="pFI-bd-r4z" appends="YES" id="A4n-ZE-gfU"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52N-Q2-5Y5">
+                                <rect key="frame" x="150" y="504" width="150" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Share on Facebook">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="postCurrentDappCardToFacebook:" destination="TpI-xw-hu0" eventType="touchUpInside" id="gjA-es-c59"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.074509803921568626" green="0.070588235294117646" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -776,6 +799,7 @@
                         <outlet property="panRecognizer" destination="pFI-bd-r4z" id="8QH-Cx-alZ"/>
                         <outlet property="scoreLabelNum" destination="jUk-5n-MOp" id="eEi-DJ-KQI"/>
                         <outlet property="scoreLabelText" destination="pzv-cR-K5r" id="qqA-VM-0Ne"/>
+                        <outlet property="shareOnFacebookButton" destination="52N-Q2-5Y5" id="xWT-iV-6Eg"/>
                         <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewControllerAfterSubmit" id="mYk-4f-hdk"/>
                     </connections>
                 </viewController>

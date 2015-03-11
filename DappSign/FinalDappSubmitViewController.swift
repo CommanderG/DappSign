@@ -23,6 +23,7 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var scoreLabelNum: UILabel!
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var dappTextView: UITextView!
+    @IBOutlet weak var shareOnFacebookButton: UIButton!
     
     //design
     var dappColors = DappColors()
@@ -49,6 +50,9 @@ class FinalDappSubmitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.shareOnFacebookButton?.layer.cornerRadius = 8.0
+        
         var user = PFUser.currentUser()
         
         originalLocation = dappView.center
@@ -150,5 +154,22 @@ class FinalDappSubmitViewController: UIViewController {
 
         
     }
-
+    
+    @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+            completion: {
+                (success, error) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
+                } else {
+                    if error != nil {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                    }
+                }
+        })
+    }
 }
