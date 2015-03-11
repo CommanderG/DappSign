@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
+    @IBOutlet weak var tweetThisCardButton: UIButton!
     
     var user = PFUser.currentUser()
     
@@ -54,6 +55,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.shareOnFacebookButton?.layer.cornerRadius = 8.0
+        self.tweetThisCardButton?.layer.cornerRadius = 8.0
         
         if (PFUser.currentUser() != nil && user["name"] == nil){
             var FBSession = PFFacebookUtils.session()
@@ -243,6 +245,24 @@ class HomeViewController: UIViewController {
                         self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
                     } else {
                         self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                    }
+                }
+        })
+    }
+    
+    @IBAction func tweetCurrentDappCard(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
+            completion: {
+                (success, error) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                } else {
+                    if error != nil {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
                     }
                 }
         })

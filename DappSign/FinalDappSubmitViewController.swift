@@ -24,6 +24,7 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var dappTextView: UITextView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
+    @IBOutlet weak var tweetThisCardButton: UIButton!
     
     //design
     var dappColors = DappColors()
@@ -52,6 +53,7 @@ class FinalDappSubmitViewController: UIViewController {
         super.viewDidLoad()
         
         self.shareOnFacebookButton?.layer.cornerRadius = 8.0
+        self.tweetThisCardButton?.layer.cornerRadius = 8.0
         
         var user = PFUser.currentUser()
         
@@ -168,6 +170,24 @@ class FinalDappSubmitViewController: UIViewController {
                         self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
                     } else {
                         self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                    }
+                }
+        })
+    }
+    
+    @IBAction func tweetCurrentDappCard(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
+            completion: {
+                (success, error) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                } else {
+                    if error != nil {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
                     }
                 }
         })

@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                NSLog("%@" , error)
 //            }
 //        }
-
+        
+        Fabric.with([Twitter()])
         
         return true
     }

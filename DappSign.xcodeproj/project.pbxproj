@@ -11,6 +11,10 @@
 		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
 		2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318A1AB0C462002F9527 /* FacebookHelper.swift */; };
 		2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */; };
+		271431911AB0D181002F9527 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714318E1AB0D181002F9527 /* Fabric.framework */; };
+		271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714318F1AB0D181002F9527 /* TwitterKit.framework */; };
+		271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 271431901AB0D181002F9527 /* TwitterKitResources.bundle */; };
+		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -69,6 +73,10 @@
 		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
 		2714318A1AB0C462002F9527 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
 		2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerAlertViewExtension.swift; sourceTree = "<group>"; };
+		2714318E1AB0D181002F9527 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		2714318F1AB0D181002F9527 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		271431901AB0D181002F9527 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
+		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 				4CD9C9AE1AA1DE4300046CA2 /* MobileCoreServices.framework in Frameworks */,
 				4CD9C9AC1AA1DE3700046CA2 /* CoreLocation.framework in Frameworks */,
 				4CD9C9AA1AA1DE3000046CA2 /* CoreGraphics.framework in Frameworks */,
+				271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */,
+				271431911AB0D181002F9527 /* Fabric.framework in Frameworks */,
 				4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */,
 				4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */,
 				4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */,
@@ -183,6 +193,7 @@
 				271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */,
 				2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */,
 				2714318A1AB0C462002F9527 /* FacebookHelper.swift */,
+				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
 				4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */,
 				4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */,
@@ -223,6 +234,9 @@
 		4CD9C99F1AA1DA8100046CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2714318E1AB0D181002F9527 /* Fabric.framework */,
+				2714318F1AB0D181002F9527 /* TwitterKit.framework */,
+				271431901AB0D181002F9527 /* TwitterKitResources.bundle */,
 				2714317F1AB086AB002F9527 /* FacebookSDK.framework */,
 				4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */,
 				4CD9C9B71AA1DE7800046CA2 /* libz.dylib */,
@@ -362,6 +376,7 @@
 			files = (
 				4CD9C9D91AA21A5100046CA2 /* Bellota-Regular.otf in Resources */,
 				4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */,
+				271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */,
 				4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */,
 				4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */,
 				4CD9C9DE1AA21A5100046CA2 /* PrintClearly.otf in Resources */,
@@ -397,6 +412,7 @@
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */,
+				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
