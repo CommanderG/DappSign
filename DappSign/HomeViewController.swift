@@ -120,6 +120,9 @@ class HomeViewController: UIViewController {
             self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
         }
         
+        self.scoreView?.backgroundColor = self.dappTextView?.backgroundColor
+        self.logoView?.backgroundColor = self.dappTextView?.backgroundColor
+        
         dappView.alpha = 1
     }
 
