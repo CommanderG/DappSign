@@ -69,14 +69,16 @@ class HomeViewController: UIViewController {
                 response, data, error in
                 let image = UIImage(data: data)
                 
+                
                 self.user["image"] = data
                 self.user.save()
                 
                 FBRequestConnection.startForMeWithCompletionHandler({
                     connection, result, error in
-                    self.user["name"] = result["name"]
-                    self.user.save()
-                    
+                    if let resultDict = result as? NSDictionary {
+                        self.user["name"] = resultDict["name"]
+                        self.user.save()
+                    }
                 })
                 
             })
