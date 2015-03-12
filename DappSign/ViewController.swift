@@ -9,20 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     @IBAction func facebookLoginButton(sender: AnyObject) {
+        let loginWithFacebookButton = sender as UIButton
+        var permissions = ["public_profile", "email"]
         
-        var permissions = ["public_profile" , "email"]
+        loginWithFacebookButton.userInteractionEnabled = false
+        loginWithFacebookButton.alpha = 0.5
+        
         PFFacebookUtils.logInWithPermissions(permissions, {
             (user: PFUser!, error: NSError!) -> Void in
             if let user = user {
@@ -31,17 +33,19 @@ class ViewController: UIViewController {
                 } else {
                     println("User logged in through Facebook!")
                 }
+                
+                self.performSegueWithIdentifier("showHomeViewController", sender: self)
             } else {
                 println("Uh oh. The user cancelled the Facebook login.")
             }
+            
+            loginWithFacebookButton.userInteractionEnabled = true
+            loginWithFacebookButton.alpha = 1.0
         })
-        
-        performSegueWithIdentifier("showHomeViewController", sender: self)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
-
 }
 
