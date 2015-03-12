@@ -9,6 +9,10 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    enum Swipe {
+        case SwipeFromLeftToRight
+        case SwipeFromRightToLeft
+    }
     
     //storyboard elements
 //    @IBOutlet weak var dappView: UIView!
@@ -35,8 +39,8 @@ class HomeViewController: UIViewController {
     var user = PFUser.currentUser()
     
     //array to be loaded from parse
-    var dappData: NSMutableArray! = NSMutableArray()
-    var count = 0 //index
+    var dapps: NSMutableArray! = NSMutableArray()
+    var currentDappIndex = 0
     
     //dapp Colors and fonts
     var dappColors = DappColors()
@@ -45,17 +49,17 @@ class HomeViewController: UIViewController {
     //animator behavior variables
     var originalLocation: CGPoint!
     var animator : UIDynamicAnimator!
-    var attachmentBehavior : UIAttachmentBehavior!
+    var attachmentBehavior : UIAttachmentBehavior?
     var gravityBehaviour : UIGravityBehavior!
     var snapBehavior : UISnapBehavior!
-
     
+    let dappsSwipedRelationKey = "dappsSwiped"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.shareOnFacebookButton?.layer.cornerRadius = 8.0
-        self.tweetThisCardButton?.layer.cornerRadius = 8.0
+        self.shareOnFacebookButton.layer.cornerRadius = 8.0
+        self.tweetThisCardButton.layer.cornerRadius = 8.0
         
         if (PFUser.currentUser() != nil && user["name"] == nil){
             var FBSession = PFFacebookUtils.session()
@@ -68,7 +72,6 @@ class HomeViewController: UIViewController {
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
                 response, data, error in
                 let image = UIImage(data: data)
-                
                 
                 self.user["image"] = data
                 self.user.save()
@@ -86,95 +89,25 @@ class HomeViewController: UIViewController {
             self.user.save()
         }
         
-        
         originalLocation = dappView.center
         animator = UIDynamicAnimator(referenceView: view)
-        dappView.alpha = 0
-        self.loadData()
         
+        dappView.hidden = true
+        
+        self.downloadDappsFromParse()
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(Bool())
-        
-        let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0, -200)
-        dappView.transform = CGAffineTransformConcat(scale, translate)
-        
-        spring(0.5) {
-            let scale = CGAffineTransformMakeScale(1, 1)
-            let translate = CGAffineTransformMakeTranslation(0, 0)
-            self.dappView.transform = CGAffineTransformConcat(scale, translate)
-        }
-        
-        
-        if count < dappData.count{
-            self.dappTextView.text = dappData[count].objectForKey("dappStatement") as String!
-            self.dappTextView.font = dappFonts.dappFontBook[dappData[count].objectForKey("dappFont") as String!]
-            self.dappTextView.textColor = UIColor.whiteColor()
-            self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappData[count].objectForKey("dappBackgroundColor") as String!]
-            self.scoreView.backgroundColor = self.dappTextView.backgroundColor
-            self.logoView.backgroundColor = self.dappTextView.backgroundColor
-        } else {
-            self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
-            self.dappTextView.font  = dappFonts.dappFontBook["exo"]!
-            self.dappTextView.textColor = UIColor.whiteColor()
-            self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
-        }
-        
-        self.scoreView?.backgroundColor = self.dappTextView?.backgroundColor
-        self.logoView?.backgroundColor = self.dappTextView?.backgroundColor
-        
-        dappView.alpha = 1
+        super.viewDidAppear(animated)
     }
-
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - IBActions
     
-    func refreshView() {
-        count++
-        
-        animator.removeAllBehaviors()
-        
-        snapBehavior = UISnapBehavior(item:dappView, snapToPoint: view.center)
-        attachmentBehavior.anchorPoint = view.center
-        
-        dappView.center = view.center ///uh......dunno
-        
-        viewDidAppear(true)
-        
-        
-    }
-
-    
-    
-    //load data from parse
-    func loadData(){
-        var findDappDeckData:PFQuery = PFQuery(className: "Dapps")
-        
-        findDappDeckData.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
-            
-            if error == nil{
-                for object in objects{
-                    var dapp:PFObject = object as PFObject
-                    self.dappData.addObject(dapp)
-                    
-                }
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-
     @IBAction func composeButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("showAddDappViewController", sender: self)
     }
@@ -190,48 +123,41 @@ class HomeViewController: UIViewController {
         if sender.state == UIGestureRecognizerState.Began {
             animator.removeBehavior(snapBehavior)
             
-            let centerOffset = UIOffsetMake(boxLocation.x - CGRectGetMidX(myView.bounds), boxLocation.y - CGRectGetMidY(myView.bounds));
-            attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
-            attachmentBehavior.frequency = 0
+            let centerOffset = UIOffset(
+                horizontal: boxLocation.x - CGRectGetMidX(myView.bounds),
+                vertical: boxLocation.y - CGRectGetMidY(myView.bounds)
+            )
+            attachmentBehavior = UIAttachmentBehavior(
+                item: myView,
+                offsetFromCenter: centerOffset,
+                attachedToAnchor: location
+            )
+            attachmentBehavior?.frequency = 0
             
             animator.addBehavior(attachmentBehavior)
-        }
-        else if sender.state == UIGestureRecognizerState.Changed {
-            attachmentBehavior.anchorPoint = location
-        }
-        else if sender.state == UIGestureRecognizerState.Ended {
+        } else if sender.state == UIGestureRecognizerState.Changed {
+            attachmentBehavior?.anchorPoint = location
+        } else if sender.state == UIGestureRecognizerState.Ended {
             animator.removeBehavior(attachmentBehavior)
             
             snapBehavior = UISnapBehavior(item: myView, snapToPoint: originalLocation)
+            
             animator.addBehavior(snapBehavior)
             
             let translation = sender.translationInView(view)
-            if translation.x > 100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappView])
-                gravity.gravityDirection = CGVectorMake(10, -30)
-                animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    self.refreshView()
-                }
-            }else if translation.x < -100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappView])
-                gravity.gravityDirection = CGVectorMake(-10, 30)
-                animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    self.refreshView()
-                }
+            
+            if currentDappIndex >= dapps.count {
+                // Current Dapp is "No more DappSigns.". It doesn't exist on the server, so ignore it
+                return
             }
             
+            if translation.x > 100 {
+                self.handleSwipe(.SwipeFromLeftToRight)
+            } else if translation.x < -100 {
+                self.handleSwipe(.SwipeFromRightToLeft)
+            }
         }
-        
     }
-    
     
     @IBAction func profileButtonTapped(sender: AnyObject) {
         performSegueWithIdentifier("showProfileViewController", sender: self)
@@ -271,5 +197,148 @@ class HomeViewController: UIViewController {
                     }
                 }
         })
+    }
+    
+    // MARK: -
+    
+    private func updateDappView() -> Void {
+        if currentDappIndex < dapps.count {
+            if let dapp = dapps[currentDappIndex] as? PFObject {
+                let dappFontName = dapp["dappFont"] as String!
+                let dappBgColoName = dapp["dappBackgroundColor"] as String!
+                
+                self.dappTextView.text = dapp["dappStatement"] as String!
+                self.dappTextView.font = dappFonts.dappFontBook[dappFontName]
+                self.dappTextView.textColor = UIColor.whiteColor()
+                self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+            }
+        } else {
+            self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
+            self.dappTextView.font  = dappFonts.dappFontBook["exo"]!
+            self.dappTextView.textColor = UIColor.whiteColor()
+            self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+        }
+        
+        self.scoreView.backgroundColor = self.dappTextView.backgroundColor
+        self.logoView.backgroundColor = self.dappTextView.backgroundColor
+    }
+    
+    private func showCurrentDapp() {
+        animator.removeAllBehaviors()
+        
+        snapBehavior = UISnapBehavior(item:dappView, snapToPoint: view.center)
+        attachmentBehavior?.anchorPoint = view.center
+        
+        dappView.center = view.center ///uh......dunno
+        
+        
+        
+        let scale = CGAffineTransformMakeScale(0.5, 0.5)
+        let translate = CGAffineTransformMakeTranslation(0, -200)
+        
+        dappView.transform = CGAffineTransformConcat(scale, translate)
+        
+        spring(0.5) {
+            let scale = CGAffineTransformMakeScale(1, 1)
+            let translate = CGAffineTransformMakeTranslation(0, 0)
+            self.dappView.transform = CGAffineTransformConcat(scale, translate)
+        }
+        
+        self.updateDappView()
+        
+        dappView.hidden = false
+    }
+    
+    private func downloadDappsFromParse() {
+        let user = PFUser.currentUser()
+        let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
+        
+        // this query will return first 100 Dapps (default limit) swiped by the user
+        // this objects are stored in the User class in 'dappsSwiped' relation
+        let dappsSwipedRelationQuery = dappsSwipedRelation.query()
+        
+        // this query will return first 100 Dapps (default limit)
+        // this objects are stored in the Dapps class
+        let allDappsQuery = PFQuery(className: "Dapps")
+        
+        // here we say that from that 100 Dapps we want only these which hasn't been swiped by the user
+        allDappsQuery.whereKey("objectId",
+            doesNotMatchKey: "objectId",
+            inQuery: dappsSwipedRelationQuery
+        )
+        
+        // don't download Dapps created by the user
+        allDappsQuery.whereKey("userid", notEqualTo: user.objectId)
+        
+        allDappsQuery.orderByAscending("createdAt")
+        
+        allDappsQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error != nil {
+                println(error)
+                
+                return
+            }
+            
+            if objects == nil {
+                println("Error. Parse returned nil array of Dapps.")
+                
+                return
+            }
+            
+            self.dapps.removeAllObjects()
+            
+            self.dapps = NSMutableArray(array: objects)
+            self.currentDappIndex = 0
+            
+            self.showCurrentDapp()
+        }
+    }
+    
+    private func handleSwipe(swipe: Swipe) -> Void {
+        var gravityDirection: CGVector
+        
+        switch swipe {
+            case .SwipeFromLeftToRight:
+                gravityDirection = CGVectorMake(10, -30)
+            case .SwipeFromRightToLeft:
+                gravityDirection = CGVectorMake(-10, 30)
+        }
+        
+        self.markCurrentDappAsSwiped({
+            (succeeded: Bool, error: NSError?) -> Void in
+            if succeeded {
+                self.animator.removeAllBehaviors()
+                
+                var gravity = UIGravityBehavior(items: [self.dappView])
+                gravity.gravityDirection = gravityDirection
+                
+                self.animator.addBehavior(gravity)
+                
+                delay(0.3) {
+                    ++self.currentDappIndex
+                    
+                    self.showCurrentDapp()
+                }
+            } else {
+                if error != nil {
+                    println("Failed to mark current Dapp as swiped. Error: \(error!)")
+                } else {
+                    println("Failed to mark current Dapp as swiped. Unknown error")
+                }
+            }
+        })
+    }
+    
+    private func markCurrentDappAsSwiped(completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+        let user = PFUser.currentUser()
+        let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
+        let currentDapp = self.dapps[currentDappIndex] as PFObject
+        
+        dappsSwipedRelation.addObject(currentDapp)
+        user.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: succeeded, error: error)
+        }
     }
 }
