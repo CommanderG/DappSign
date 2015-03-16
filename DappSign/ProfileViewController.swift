@@ -16,13 +16,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var publicPrivateLabel: UILabel!
     @IBOutlet weak var numDappsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var editDappsButton: UIButton!
     
     //design
     var dappColors = DappColors()
     var dappFonts = DappFonts()
     var user = PFUser.currentUser()
     var userid:String!
-    
     
     var submittedDappData: NSMutableArray! = NSMutableArray()
     //var dappedDappData:NSMutableArray! = NSMutableArray()
@@ -43,6 +43,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         profilePic.image = image
         
         nameLabel.text = name
+        
+        
+        
+        let mainBundle = NSBundle.mainBundle()
+        
+        if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
+            if contains(adminUsersIDs, self.user.objectId) {
+                self.editDappsButton.layer.cornerRadius = 8.0
+            } else {
+                self.editDappsButton.hidden = true
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -77,6 +77,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>AdminUsersIDs</key>
+	<array>
+		<string>qDCt6a1CVE</string>
+		<string>1SQHVHeSL4</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

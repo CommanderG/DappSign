@@ -566,7 +566,15 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         dapp["name"] = nameString
         dapp["userid"] = PFUser.currentUser().objectId
         dapp["dappScore"] = 1
+        dapp["isDeleted"] = false
         
+        let mainBundle = NSBundle.mainBundle()
+        
+        if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
+            if contains(adminUsersIDs, PFUser.currentUser().objectId) {
+                dapp["dappTypeId"] = DappTypeId.Secondary.rawValue
+            }
+        }
         
         dapp.saveInBackgroundWithBlock {(success:Bool!, error:NSError!) -> Void in
             if(success != nil){

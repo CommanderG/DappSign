@@ -158,11 +158,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func profileButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("showProfileViewController", sender: self)
-    }
-    
+        
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
         
@@ -250,6 +246,75 @@ class HomeViewController: UIViewController {
     }
     
     private func downloadDappsFromParse() {
+        self.downloadDapps(.Primary,
+            completion: {
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error != nil {
+                    println(error)
+                    
+                    self.currentDappIndex = 0
+                    
+                    self.showCurrentDapp()
+                    
+                    return
+                }
+                
+                self.dapps.removeAllObjects()
+                
+                self.dapps = NSMutableArray(array: objects)
+                
+                if self.dapps.count > 0 {
+                    self.currentDappIndex = 0
+                    
+                    self.showCurrentDapp()
+                }
+                
+                self.downloadDapps(.Secondary,
+                    completion: {
+                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        if error != nil {
+                            println(error)
+                            
+                            self.currentDappIndex = 0
+                            
+                            self.showCurrentDapp()
+                            
+                            return
+                        }
+                        
+                        if objects.count > 0 {
+                            var shouldShowCurrentDapp = false;
+                            
+                            if self.dapps.count == 0 {
+                                self.currentDappIndex = 0
+                                
+                                shouldShowCurrentDapp = true
+                            }
+                            
+                            var dapps = objects as [PFObject]
+                            
+                            sort(&dapps, {
+                                (dapp1: PFObject, dapp2: PFObject) -> Bool in
+                                return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
+                            })
+                            
+                            for dapp in dapps {
+                                self.dapps.addObject(dapp)
+                            }
+                            
+                            if shouldShowCurrentDapp {
+                                self.showCurrentDapp()
+                            }
+                        } else if self.dapps.count == 0 {
+                            self.currentDappIndex = 0
+                            
+                            self.showCurrentDapp()
+                        }
+                })
+        })
+    }
+    
+    private func downloadDapps(dappType: DappType, completion: (objects: [AnyObject]!, error: NSError!) -> Void) -> Void {
         let user = PFUser.currentUser()
         let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
         
@@ -257,9 +322,25 @@ class HomeViewController: UIViewController {
         // this objects are stored in the User class in 'dappsSwiped' relation
         let dappsSwipedRelationQuery = dappsSwipedRelation.query()
         
-        // this query will return first 100 Dapps (default limit)
-        // this objects are stored in the Dapps class
-        let allDappsQuery = PFQuery(className: "Dapps")
+        let predicate = DappQueriesBuilder.predicateForAllDapsOfType(dappType)
+        
+        if predicate == nil {
+            let error = NSError(
+                domain: "Failed to create predicate for \(dappType)",
+                code: 0,
+                userInfo: nil
+            )
+            
+            completion(objects: nil, error: error)
+            
+            return
+        }
+        
+        let allDappsQuery = PFQuery(
+            className: "Dapps",
+            predicate: predicate
+        )
+        allDappsQuery.limit = 1000
         
         // here we say that from that 100 Dapps we want only these which hasn't been swiped by the user
         allDappsQuery.whereKey("objectId",
@@ -270,28 +351,13 @@ class HomeViewController: UIViewController {
         // don't download Dapps created by the user
         allDappsQuery.whereKey("userid", notEqualTo: user.objectId)
         
-        allDappsQuery.orderByAscending("createdAt")
+        if dappType == .Primary {
+            allDappsQuery.orderByAscending("createdAt")
+        }
         
         allDappsQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil {
-                println(error)
-                
-                return
-            }
-            
-            if objects == nil {
-                println("Error. Parse returned nil array of Dapps.")
-                
-                return
-            }
-            
-            self.dapps.removeAllObjects()
-            
-            self.dapps = NSMutableArray(array: objects)
-            self.currentDappIndex = 0
-            
-            self.showCurrentDapp()
+            completion(objects: objects, error: error)
         }
     }
     
@@ -305,7 +371,7 @@ class HomeViewController: UIViewController {
                 gravityDirection = CGVectorMake(-10, 30)
         }
         
-        self.markCurrentDappAsSwiped({
+        self.markCurrentDappAsSwiped(swipe, {
             (succeeded: Bool, error: NSError?) -> Void in
             if succeeded {
                 self.animator.removeAllBehaviors()
@@ -318,7 +384,11 @@ class HomeViewController: UIViewController {
                 delay(0.3) {
                     ++self.currentDappIndex
                     
-                    self.showCurrentDapp()
+                    if self.currentDappIndex == self.dapps.count {
+                        self.downloadDappsFromParse()
+                    } else {
+                        self.showCurrentDapp()
+                    }
                 }
             } else {
                 if error != nil {
@@ -330,7 +400,7 @@ class HomeViewController: UIViewController {
         })
     }
     
-    private func markCurrentDappAsSwiped(completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+    private func markCurrentDappAsSwiped(swipe: Swipe, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
         let user = PFUser.currentUser()
         let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
         let currentDapp = self.dapps[currentDappIndex] as PFObject
@@ -339,6 +409,33 @@ class HomeViewController: UIViewController {
         user.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError!) -> Void in
             completion(succeeded: succeeded, error: error)
+            
+            if swipe != .SwipeFromLeftToRight {
+                return
+            }
+            
+            if let dappTypeId = currentDapp["dappTypeId"] as? String {
+                if dappTypeId != DappTypeId.Secondary.rawValue {
+                    return
+                }
+                
+                var dappScore = currentDapp["dappScore"] as? Int
+                
+                if dappScore != nil  {
+                    currentDapp["dappScore"] = ++dappScore!
+                } else {
+                    currentDapp["dappScore"] = 2 // (undefined) + 1
+                }
+                
+                currentDapp.saveInBackgroundWithBlock({
+                    (succeeded: Bool, error: NSError!) -> Void in
+                    if error != nil {
+                        println(error)
+                        
+                        return
+                    }
+                })
+            }
         }
     }
 }

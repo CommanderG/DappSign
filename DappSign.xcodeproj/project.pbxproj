@@ -15,6 +15,9 @@
 		271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714318F1AB0D181002F9527 /* TwitterKit.framework */; };
 		271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 271431901AB0D181002F9527 /* TwitterKitResources.bundle */; };
 		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
+		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
+		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
+		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -56,6 +59,8 @@
 		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
 		4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */; };
+		84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */; };
+		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +82,9 @@
 		2714318F1AB0D181002F9527 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		271431901AB0D181002F9527 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
+		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
+		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
+		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +132,8 @@
 		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DappCell.swift; path = ../DappCell.swift; sourceTree = "<group>"; };
+		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
+		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,19 +191,14 @@
 		4CD9C9771AA1D59900046CA2 /* DappSign */ = {
 			isa = PBXGroup;
 			children = (
-				4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */,
+				84C3D3851AB602A600E0F350 /* Other */,
+				84C3D3841AB5FF0500E0F350 /* Extensions */,
+				84C3D3831AB5FEF500E0F350 /* Helpers */,
+				84C3D3821AB5FECF00E0F350 /* View Controllers */,
+				84C3D3811AB5FEC700E0F350 /* Views */,
 				4CD9C9A01AA1DC5000046CA2 /* Bridging-Header.h */,
 				4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */,
-				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
 				4CD9C9811AA1D59900046CA2 /* Main.storyboard */,
-				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
-				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
-				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
-				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
-				271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */,
-				2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */,
-				2714318A1AB0C462002F9527 /* FacebookHelper.swift */,
-				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
 				4CD9C9841AA1D59900046CA2 /* Images.xcassets */,
 				4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */,
 				4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */,
@@ -292,6 +297,56 @@
 			);
 			name = Design;
 			path = Spring;
+			sourceTree = "<group>";
+		};
+		84C3D3811AB5FEC700E0F350 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */,
+				84C3D3861AB6030E00E0F350 /* DappCardCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84C3D3821AB5FECF00E0F350 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
+				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
+				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
+				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
+				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
+				279A31211AB30EA700850508 /* EditDappsTableViewController.swift */,
+				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		84C3D3831AB5FEF500E0F350 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2714318A1AB0C462002F9527 /* FacebookHelper.swift */,
+				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		84C3D3841AB5FF0500E0F350 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */,
+				2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		84C3D3851AB602A600E0F350 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				279A31251AB333AC00850508 /* Enums.swift */,
+				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,12 +469,17 @@
 				4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
+				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
+				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
+				279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */,
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
 				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
+				279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
+				84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */,
 				4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,
