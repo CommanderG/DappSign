@@ -10,6 +10,7 @@ import UIKit
 
 class DappCardCell: UITableViewCell {
     @IBOutlet weak var dappStatementLabel: UILabel!
+    @IBOutlet weak var dappIndexLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

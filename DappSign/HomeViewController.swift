@@ -259,9 +259,7 @@ class HomeViewController: UIViewController {
                     return
                 }
                 
-                self.dapps.removeAllObjects()
-                
-                self.dapps = NSMutableArray(array: objects)
+                self.dapps = NSMutableArray(array: PrimaryDapps.sortDapps(objects as [PFObject]))
                 
                 if self.dapps.count > 0 {
                     self.currentDappIndex = 0
