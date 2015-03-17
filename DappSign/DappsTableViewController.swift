@@ -35,6 +35,7 @@ class DappsTableViewController: UITableViewController {
     var actionSheet: UIActionSheet?
     var dappWithTheSameIndex: PFObject?
     var selectedDappNewIndex: Int?
+    var dappsDownloader: DappsDownloader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,32 +57,27 @@ class DappsTableViewController: UITableViewController {
                     self.title = "Unapproved Dapps"
             }
             
-            if var query = DappQueriesBuilder.queryForAllDappsOfType(dappsType) {
-                query.orderByAscending("createdAt")
-                query.findObjectsInBackgroundWithBlock({
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error != nil {
-                        println(error)
-                        
-                        return
-                    }
+            self.dappsDownloader = DappsDownloader(type: dappsType)
+            
+            self.dappsDownloader.downloadAllDapps({
+                (dapps: [PFObject], error: NSError!) -> Void in
+                if error != nil {
+                    let alertView = UIAlertView(
+                        title: nil,
+                        message: error.localizedDescription,
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
                     
-                    var dapps = objects as [PFObject]
+                    alertView.show()
                     
-                    if dappsType == .Primary {
-                        dapps = PrimaryDapps.sortDapps(dapps)
-                    } else if dappsType == .Secondary {
-                        sort(&dapps, {
-                            (dapp1: PFObject, dapp2: PFObject) -> Bool in
-                            return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
-                        })
-                    }
-                    
-                    self.dapps = dapps
-                    
-                    self.tableView.reloadData()
-                })
-            }
+                    return
+                }
+                
+                self.dapps = dapps
+                
+                self.tableView.reloadData()
+            })
         }
     }
     
@@ -266,9 +262,27 @@ extension DappsTableViewController: UIActionSheetDelegate {
                 properties: ["isDeleted": true]
             )
         } else if buttonTitle == UIActionSheetButton.MakePrimary.rawValue {
-            self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                properties: ["dappTypeId": DappTypeId.Primary.rawValue]
-            )
+            let query = DappQueriesBuilder.queryForAllDappsOfType(.Primary)
+            
+            query?.countObjectsInBackgroundWithBlock({
+                (count: Int32, error: NSError!) -> Void in
+                if Int(count) == primaryDappsMaxCount {
+                    let alertView = UIAlertView(
+                        title: "Error",
+                        message: "Can't make this Dapp primary because maximum number of primary Dapps (\(primaryDappsMaxCount)) has been reached.",
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+                    
+                    return
+                }
+                
+                self.updatePropertiesForDappAtIndex(selectedDappIndex,
+                    properties: ["dappTypeId": DappTypeId.Primary.rawValue]
+                )
+            })
         } else if buttonTitle == UIActionSheetButton.MakeSecondary.rawValue {
             self.updatePropertiesForDappAtIndex(selectedDappIndex,
                 properties: ["dappTypeId": DappTypeId.Secondary.rawValue]

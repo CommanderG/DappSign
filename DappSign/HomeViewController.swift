@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
     var snapBehavior : UISnapBehavior!
     
     let dappsSwipedRelationKey = "dappsSwiped"
+    var dappsDownloader: DappsDownloader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,10 +246,21 @@ class HomeViewController: UIViewController {
         dappView.hidden = false
     }
     
+    // MARK: - Requests
+    
     private func downloadDappsFromParse() {
-        self.downloadDapps(.Primary,
+        self.downloadPrimaryDappsWithSuccessClosure {
+            () -> Void in
+            self.downloadSecondaryDapps()
+        }
+    }
+    
+    private func downloadPrimaryDappsWithSuccessClosure(success: () -> Void) {
+        self.dappsDownloader = DappsDownloader(type: .Primary)
+        
+        self.dappsDownloader.downloadDappsNotSwipedByUser(self.user,
             completion: {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
+                (dapps: [PFObject], error: NSError!) -> Void in
                 if error != nil {
                     println(error)
                     
@@ -259,7 +271,7 @@ class HomeViewController: UIViewController {
                     return
                 }
                 
-                self.dapps = NSMutableArray(array: PrimaryDapps.sortDapps(objects as [PFObject]))
+                self.dapps = NSMutableArray(array: dapps)
                 
                 if self.dapps.count > 0 {
                     self.currentDappIndex = 0
@@ -267,134 +279,54 @@ class HomeViewController: UIViewController {
                     self.showCurrentDapp()
                 }
                 
-                self.downloadDapps(.Secondary,
-                    completion: {
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
-                        if error != nil {
-                            println(error)
-                            
-                            self.currentDappIndex = 0
-                            
-                            self.showCurrentDapp()
-                            
-                            return
-                        }
-                        
-                        if objects.count > 0 {
-                            var shouldShowCurrentDapp = false;
-                            
-                            if self.dapps.count == 0 {
-                                self.currentDappIndex = 0
-                                
-                                shouldShowCurrentDapp = true
-                            }
-                            
-                            var dapps = objects as [PFObject]
-                            
-                            sort(&dapps, {
-                                (dapp1: PFObject, dapp2: PFObject) -> Bool in
-                                return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
-                            })
-                            
-                            for dapp in dapps {
-                                self.dapps.addObject(dapp)
-                            }
-                            
-                            if shouldShowCurrentDapp {
-                                self.showCurrentDapp()
-                            }
-                        } else if self.dapps.count == 0 {
-                            self.currentDappIndex = 0
-                            
-                            self.showCurrentDapp()
-                        }
-                })
+                success()
         })
     }
     
-    private func downloadDapps(dappType: DappType, completion: (objects: [AnyObject]!, error: NSError!) -> Void) -> Void {
-        let user = PFUser.currentUser()
-        let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
+    private func downloadSecondaryDapps() {
+        self.dappsDownloader = DappsDownloader(type: .Secondary)
         
-        // this query will return first 100 Dapps (default limit) swiped by the user
-        // this objects are stored in the User class in 'dappsSwiped' relation
-        let dappsSwipedRelationQuery = dappsSwipedRelation.query()
-        
-        let predicate = DappQueriesBuilder.predicateForAllDapsOfType(dappType)
-        
-        if predicate == nil {
-            let error = NSError(
-                domain: "Failed to create predicate for \(dappType)",
-                code: 0,
-                userInfo: nil
-            )
-            
-            completion(objects: nil, error: error)
-            
-            return
-        }
-        
-        let allDappsQuery = PFQuery(
-            className: "Dapps",
-            predicate: predicate
-        )
-        allDappsQuery.limit = 1000
-        
-        // here we say that from that 100 Dapps we want only these which hasn't been swiped by the user
-        allDappsQuery.whereKey("objectId",
-            doesNotMatchKey: "objectId",
-            inQuery: dappsSwipedRelationQuery
-        )
-        
-        // don't download Dapps created by the user
-        allDappsQuery.whereKey("userid", notEqualTo: user.objectId)
-        
-        if dappType == .Primary {
-            allDappsQuery.orderByAscending("createdAt")
-        }
-        
-        allDappsQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(objects: objects, error: error)
-        }
-    }
-    
-    private func handleSwipe(swipe: Swipe) -> Void {
-        var gravityDirection: CGVector
-        
-        switch swipe {
-            case .SwipeFromLeftToRight:
-                gravityDirection = CGVectorMake(10, -30)
-            case .SwipeFromRightToLeft:
-                gravityDirection = CGVectorMake(-10, 30)
-        }
-        
-        self.markCurrentDappAsSwiped(swipe, {
-            (succeeded: Bool, error: NSError?) -> Void in
-            if succeeded {
-                self.animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [self.dappView])
-                gravity.gravityDirection = gravityDirection
-                
-                self.animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    ++self.currentDappIndex
+        self.dappsDownloader.downloadDappsNotSwipedByUser(self.user,
+            completion: {
+                (dapps: [PFObject], error: NSError!) -> Void in
+                if error != nil {
+                    println(error)
                     
-                    if self.currentDappIndex == self.dapps.count {
-                        self.downloadDappsFromParse()
-                    } else {
+                    self.currentDappIndex = 0
+                    
+                    self.showCurrentDapp()
+                    
+                    return
+                }
+                
+                if dapps.count > 0 {
+                    var shouldShowCurrentDapp = false;
+                    
+                    if self.dapps.count == 0 {
+                        self.currentDappIndex = 0
+                        
+                        shouldShowCurrentDapp = true
+                    }
+                    
+                    var sortedDapps = dapps
+                    
+                    sort(&sortedDapps, {
+                        (dapp1: PFObject, dapp2: PFObject) -> Bool in
+                        return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
+                    })
+                    
+                    for dapp in sortedDapps {
+                        self.dapps.addObject(dapp)
+                    }
+                    
+                    if shouldShowCurrentDapp {
                         self.showCurrentDapp()
                     }
+                } else if self.dapps.count == 0 {
+                    self.currentDappIndex = 0
+                    
+                    self.showCurrentDapp()
                 }
-            } else {
-                if error != nil {
-                    println("Failed to mark current Dapp as swiped. Error: \(error!)")
-                } else {
-                    println("Failed to mark current Dapp as swiped. Unknown error")
-                }
-            }
         })
     }
     
@@ -435,5 +367,46 @@ class HomeViewController: UIViewController {
                 })
             }
         }
+    }
+    
+    // MARK: -
+    
+    private func handleSwipe(swipe: Swipe) -> Void {
+        var gravityDirection: CGVector
+        
+        switch swipe {
+            case .SwipeFromLeftToRight:
+                gravityDirection = CGVectorMake(10, -30)
+            case .SwipeFromRightToLeft:
+                gravityDirection = CGVectorMake(-10, 30)
+        }
+        
+        self.markCurrentDappAsSwiped(swipe, {
+            (succeeded: Bool, error: NSError?) -> Void in
+            if succeeded {
+                self.animator.removeAllBehaviors()
+                
+                var gravity = UIGravityBehavior(items: [self.dappView])
+                gravity.gravityDirection = gravityDirection
+                
+                self.animator.addBehavior(gravity)
+                
+                delay(0.3) {
+                    ++self.currentDappIndex
+                    
+                    if self.currentDappIndex == self.dapps.count {
+                        self.downloadDappsFromParse()
+                    } else {
+                        self.showCurrentDapp()
+                    }
+                }
+            } else {
+                if error != nil {
+                    println("Failed to mark current Dapp as swiped. Error: \(error!)")
+                } else {
+                    println("Failed to mark current Dapp as swiped. Unknown error")
+                }
+            }
+        })
     }
 }

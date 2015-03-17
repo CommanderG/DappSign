@@ -16,6 +16,7 @@
 		271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 271431901AB0D181002F9527 /* TwitterKitResources.bundle */; };
 		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
 		27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* PrimaryDapps.swift */; };
+		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
@@ -84,6 +85,7 @@
 		271431901AB0D181002F9527 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
 		27810DF01AB7297300223350 /* PrimaryDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryDapps.swift; sourceTree = "<group>"; };
+		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -346,8 +348,9 @@
 			isa = PBXGroup;
 			children = (
 				279A31251AB333AC00850508 /* Enums.swift */,
-				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
 				27810DF01AB7297300223350 /* PrimaryDapps.swift */,
+				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
+				278B78291AB86B0500EB39AB /* DappsDownloader.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
+				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,

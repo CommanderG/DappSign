@@ -30,9 +30,29 @@ class DappQueriesBuilder {
         if let predicate = self.predicateForAllDapsOfType(dappType) {
             let query = PFQuery(className: "Dapps", predicate: predicate)
             
+            if dappType == .Primary || dappType == .Unapproved {
+                query.orderByAscending("createdAt")
+            }
+            
             return query
         }
         
         return nil
+    }
+    
+    class func queryForAllDapsNotSwipedByUser(dappType: DappType, user: PFUser) -> PFQuery? {
+        let user = PFUser.currentUser()
+        let dappsSwipedRelation = user.relationForKey("dappsSwiped")
+        let dappsSwipedRelationQuery = dappsSwipedRelation.query()
+        var allDappsQuery = self.queryForAllDappsOfType(dappType)
+        
+        allDappsQuery?.whereKey("objectId",
+            doesNotMatchKey: "objectId",
+            inQuery: dappsSwipedRelationQuery
+        )
+        
+        allDappsQuery?.whereKey("userid", notEqualTo: user.objectId)
+        
+        return allDappsQuery
     }
 }
