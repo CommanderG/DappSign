@@ -58,8 +58,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.shareOnFacebookButton.layer.cornerRadius = 8.0
-        self.tweetThisCardButton.layer.cornerRadius = 8.0
+        //self.shareOnFacebookButton.layer.cornerRadius = 8.0
+        //self.tweetThisCardButton.layer.cornerRadius = 8.0
         
         if (PFUser.currentUser() != nil && user["name"] == nil){
             var FBSession = PFFacebookUtils.session()
@@ -124,7 +124,7 @@ class HomeViewController: UIViewController {
             animator.removeBehavior(snapBehavior)
             
             let centerOffset = UIOffset(
-                horizontal: boxLocation.x - CGRectGetMidX(myView.bounds),
+                horizontal: boxLocation.x - CGRectGetMidX(myView.bounds), //diff
                 vertical: boxLocation.y - CGRectGetMidY(myView.bounds)
             )
             attachmentBehavior = UIAttachmentBehavior(
@@ -140,7 +140,7 @@ class HomeViewController: UIViewController {
         } else if sender.state == UIGestureRecognizerState.Ended {
             animator.removeBehavior(attachmentBehavior)
             
-            snapBehavior = UISnapBehavior(item: myView, snapToPoint: originalLocation)
+            snapBehavior = UISnapBehavior(item: myView, snapToPoint: view.center) //originalLocation replace view.center
             
             animator.addBehavior(snapBehavior)
             
