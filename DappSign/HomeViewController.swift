@@ -80,10 +80,7 @@ class HomeViewController: UIViewController {
                 FBRequestConnection.startForMeWithCompletionHandler({
                     connection, result, error in
                     if let resultDict = result as? NSDictionary {
-                        let name = resultDict["name"] as String
-                        
-                        self.user["name"] = name
-                        self.user["lowercaseName"] = name.lowercaseString
+                        self.user["name"] = resultDict["name"]
                         self.user.save()
                     }
                 })
