@@ -555,12 +555,11 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    
-    
-    func submitDapp(){
+    func submitDapp() {
         nameString = PFUser.currentUser().objectForKey("name") as String!
         var dapp:PFObject = PFObject(className: "Dapps")
         dapp["dappStatement"] = dappTextView.text
+        dapp["lowercaseDappStatement"] = dappTextView.text.lowercaseString
         dapp["dappFont"] = self.dappFontString
         dapp["dappBackgroundColor"] = dappColorString
         dapp["name"] = nameString
@@ -576,14 +575,35 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
             }
         }
         
-        dapp.saveInBackgroundWithBlock {(success:Bool!, error:NSError!) -> Void in
-            if(success != nil){
-                NSLog("Dapp created with id: \(dapp.objectId)")
-            }else{
-                NSLog("%@" , error)
-            }
+        var hashtagNames = split(self.hashtagTextView.text) { $0 == " " }
+        hashtagNames = hashtagNames.map {
+            // removes #
+            $0[1...countElements($0) - 1]
         }
-
+        
+        Requests.uploadHashtags(hashtagNames, completion: {
+            (hashtags: [PFObject]?, error: NSError!) -> Void in
+            if error != nil {
+                println("Failed to upload hashtags \(hashtagNames). Error: \(error)")
+            }
+            
+            if let hashtags = hashtags {
+                let hashtagsRelation = dapp.relationForKey("hashtags")
+                
+                for hashtag in hashtags {
+                    hashtagsRelation.addObject(hashtag)
+                }
+            }
+            
+            dapp.saveInBackgroundWithBlock({
+                (succeeded: Bool, error: NSError!) -> Void in
+                if succeeded {
+                    println("Dapp created with id: \(dapp.objectId)")
+                } else {
+                    println("%@" , error)
+                }
+            })
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -602,4 +622,87 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     
 
     
+}
+
+extension String {
+    subscript(r: Range<Int>) -> String {
+        get {
+            let rangeStart = advance(self.startIndex, r.startIndex, self.endIndex)
+            let rangeEnd = advance(rangeStart, r.endIndex - r.startIndex, self.endIndex)
+            let range = Range(start: rangeStart, end: rangeEnd)
+            
+            return self.substringWithRange(range)
+        }
+    }
+    
+    private func containsOnlyDigitsOrLetters() -> Bool {
+        let letters = NSCharacterSet.letterCharacterSet()
+        let digits = NSCharacterSet.decimalDigitCharacterSet()
+        
+        for uni in self.unicodeScalars {
+            if letters.longCharacterIsMember(uni.value) {
+                continue
+            }
+            
+            if digits.longCharacterIsMember(uni.value) {
+                continue
+            }
+            
+            return false
+        }
+        
+        return true
+    }
+    
+    func isHashtag() -> Bool {
+        if countElements(self) < 2 {
+            return false
+        }
+        
+        if first(self) != "#" {
+            return false
+        }
+        
+        let rest = self[1...countElements(self)]
+        
+        return rest.containsOnlyDigitsOrLetters()
+    }
+    
+}
+
+extension AddDappViewController: UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text as NSString
+        let newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
+        
+        if countElements(newText) < 2 {
+            if first(newText) == "#" {
+                return true
+            }
+            
+            return false
+        }
+        
+        if newText.rangeOfString("  ") != nil {
+            return false
+        }
+        
+        if newText.rangeOfString("# ") != nil {
+            return false
+        }
+        
+        let possibleHashtags = split(newText) { $0 == " " }
+        
+        for possibleHashtag in possibleHashtags {
+            if possibleHashtag == "#" {
+                continue
+            }
+            
+            if !possibleHashtag.isHashtag() {
+                return false
+            }
+        }
+        
+        return true
+    }
 }

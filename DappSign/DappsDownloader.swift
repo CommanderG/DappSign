@@ -42,6 +42,26 @@ class DappsDownloader {
         })
     }
     
+    internal func downloadDappWithID(dappID: String, completion: (dapp: PFObject?, error: NSError!) -> Void) {
+        let query = DappQueriesBuilder.queryForDownloadingDappWithID(dappID)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error != nil {
+                completion(dapp: nil, error: error)
+                
+                return
+            }
+            
+            let dapps = objects as [PFObject]
+            let dapp = dapps.first
+            
+            completion(dapp: dapp, error: nil)
+        }
+    }
+    
+    // MARK: -
+    
     private func downloadDappsWithQuery(query: PFQuery?, completion: downloadCompletionClosureWithDappsAndError) {
         if let dappsType = self.dappsType {
             switch dappsType {
