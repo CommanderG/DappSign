@@ -72,7 +72,7 @@ class Requests {
         })
     }
     
-    class func downloadDappsWithStatementWhichContains(statementSubstring: String, notSwipedByUsser user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
+    class func downloadDappsWithStatementWhichContains(statementSubstring: String, notSwipedByUser user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         var query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
             dappStatementSubstring: statementSubstring
         )
