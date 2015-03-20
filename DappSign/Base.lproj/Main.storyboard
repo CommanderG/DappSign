@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,6 +15,11 @@
             <string>Elsie-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
@@ -125,6 +130,169 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKP-BR-v9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1490" y="-1096"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZY8-BZ-3bG">
+            <objects>
+                <navigationController storyboardIdentifier="dappsNavigationController" id="uqY-rG-5UR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w5x-86-fFR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xMM-mz-go9" kind="relationship" relationship="rootViewController" id="Wkv-ER-7kA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s3r-he-z8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="-1114"/>
+        </scene>
+        <!--Dapps View Controller-->
+        <scene sceneID="Pgl-cl-cad">
+            <objects>
+                <viewController id="xMM-mz-go9" customClass="DappsViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kry-Hm-l5C"/>
+                        <viewControllerLayoutGuide type="bottom" id="v1L-KF-kX8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QOT-dC-gHV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phr-IR-UDi">
+                                <rect key="frame" x="20" y="86" width="280" height="400"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PpK-YR-m6B">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MyCongressIcon" translatesAutoresizingMaskIntoConstraints="NO" id="y0j-IW-2pA">
+                                                <rect key="frame" x="3" y="2" width="36" height="36"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To the Congress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTu-8C-jlg">
+                                                <rect key="frame" x="56" y="9" width="142" height="23"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.21176470589999999" green="0.20784313730000001" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FIh-Pg-ZkE">
+                                        <rect key="frame" x="0.0" y="360" width="280" height="40"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPh-Po-562">
+                                                <rect key="frame" x="237" y="2" width="35" height="35"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGG-Y4-nUE">
+                                                <rect key="frame" x="187" y="9" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.21176470589999999" green="0.20784313730000001" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgr-tm-MYA">
+                                        <rect key="frame" x="0.0" y="60" width="280" height="280"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVD-ia-WGx">
+                                        <rect key="frame" x="0.0" y="340" width="280" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTb-yS-AEQ">
+                                                <rect key="frame" x="8" y="-1" width="234" height="23"/>
+                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.72156862749999995" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sx-UV-hMC">
+                                        <rect key="frame" x="0.0" y="40" width="280" height="20"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.72156862749999995" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="o1B-U8-9pL" appends="YES" id="ywJ-bX-SNx"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGy-eD-pZK">
+                                <rect key="frame" x="150" y="504" width="150" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="9Jr-nT-b0U"/>
+                                    <constraint firstAttribute="height" constant="44" id="QFz-oa-kXl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
+                                <state key="normal" title="Share on Facebook">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="postCurrentDappCardToFacebook:" destination="xMM-mz-go9" eventType="touchUpInside" id="VJu-4N-8dh"/>
+                                    <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="raF-Kq-dFG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9y-gO-FE5">
+                                <rect key="frame" x="20" y="504" width="120" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Oak-Ip-exG"/>
+                                    <constraint firstAttribute="width" constant="120" id="wKK-L3-uXX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Tweet this card">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tweetCurrentDappCard:" destination="xMM-mz-go9" eventType="touchUpInside" id="aN2-k0-2Ev"/>
+                                    <action selector="tweetCurrentDappCard:" destination="EG5-sL-doW" eventType="touchUpInside" id="mUv-M9-3Dt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12549019610000001" green="0.12941176469999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="i9y-gO-FE5" firstAttribute="leading" secondItem="QOT-dC-gHV" secondAttribute="leading" constant="20" id="GEC-fE-gKu"/>
+                            <constraint firstItem="v1L-KF-kX8" firstAttribute="top" secondItem="i9y-gO-FE5" secondAttribute="bottom" constant="20" id="Qe6-Lj-BjE"/>
+                            <constraint firstItem="v1L-KF-kX8" firstAttribute="top" secondItem="tGy-eD-pZK" secondAttribute="bottom" constant="20" id="dSU-wD-97h"/>
+                            <constraint firstAttribute="trailing" secondItem="tGy-eD-pZK" secondAttribute="trailing" constant="20" id="teB-1N-Zcn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dhp-vx-0Xq">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="v28-ny-zwR">
+                            <connections>
+                                <action selector="close:" destination="xMM-mz-go9" id="ZRl-s0-pIG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dappTextView" destination="Kgr-tm-MYA" id="Dfx-CW-6Eb"/>
+                        <outlet property="dappView" destination="Phr-IR-UDi" id="tHv-nI-iPG"/>
+                        <outlet property="logoView" destination="zVD-ia-WGx" id="bA3-3g-DvI"/>
+                        <outlet property="scoreView" destination="7sx-UV-hMC" id="8K9-NN-e7J"/>
+                        <outlet property="shareOnFacebookButton" destination="tGy-eD-pZK" id="y0b-GJ-cIe"/>
+                        <outlet property="tweetThisCardButton" destination="i9y-gO-FE5" id="Yq9-Wd-XXv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cil-pr-8e7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="o1B-U8-9pL">
+                    <connections>
+                        <action selector="handleGesture:" destination="xMM-mz-go9" id="rqm-UA-myN"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="625" y="-1114"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="gWr-LM-htg">
@@ -474,6 +642,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="H1x-NN-A95" id="AMW-XT-f6G"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47c-zB-9bY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

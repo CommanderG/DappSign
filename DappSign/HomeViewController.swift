@@ -8,12 +8,15 @@
 
 import UIKit
 
+internal let DappSwipedNotification = "dappSwipedNotification"
+internal let dappsSwipedRelationKey = "dappsSwiped"
+
+internal enum Swipe {
+    case SwipeFromLeftToRight
+    case SwipeFromRightToLeft
+}
+
 class HomeViewController: UIViewController {
-    enum Swipe {
-        case SwipeFromLeftToRight
-        case SwipeFromRightToLeft
-    }
-    
     //storyboard elements
 //    @IBOutlet weak var dappView: UIView!
 //    @IBOutlet weak var dappHeaderView: UIView!
@@ -53,7 +56,6 @@ class HomeViewController: UIViewController {
     var gravityBehaviour : UIGravityBehavior!
     var snapBehavior : UISnapBehavior!
     
-    let dappsSwipedRelationKey = "dappsSwiped"
     var dappsDownloader: DappsDownloader!
     
     override func viewDidLoad() {
@@ -99,6 +101,14 @@ class HomeViewController: UIViewController {
         dappView.hidden = true
         
         self.downloadDappsFromParse()
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: Selector("dappSwiped:"),
+            name: DappSwipedNotification,
+            object: nil
+        )
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -335,7 +345,7 @@ class HomeViewController: UIViewController {
     
     private func markCurrentDappAsSwiped(swipe: Swipe, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
         let user = PFUser.currentUser()
-        let dappsSwipedRelation = user.relationForKey(self.dappsSwipedRelationKey)
+        let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
         let currentDapp = self.dapps[currentDappIndex] as PFObject
         
         dappsSwipedRelation.addObject(currentDapp)
@@ -370,6 +380,22 @@ class HomeViewController: UIViewController {
                 })
             }
         }
+    }
+    
+    // MARK: - Notifications
+    
+    func dappSwiped(notification: NSNotification) {
+        println(notification.object)
+        
+//        if let swipedDapp = notification.object as? PFObject {
+//            for dapp in self.dapps {
+//                if swipedDapp.objectId == dapp.objectId {
+//                    self.dapps.removeObject(dapp)
+//                    
+//                    return
+//                }
+//            }
+//        }
     }
     
     // MARK: -
