@@ -15,7 +15,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     
     //To be uploaded
     var dappColorString:String!
-    var dappFontString:String!
+    var dappFontString:String! = "exo" // default
     var nameString:String!
     
     //Storyboard connections
@@ -219,16 +219,13 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func handleGesture(sender: AnyObject) {
         let location = sender.locationInView(view)
-        let boxLocation = sender.locationInView(dappTextView)
         let myView = dappTextView
         let originalLocation = dappTextView.center
-        
-        dappTextView.center = location
         
         if sender.state == UIGestureRecognizerState.Began {
             animator.removeBehavior(snapBehavior)
             
-            let centerOffset = UIOffsetMake(boxLocation.x - CGRectGetMidX(myView.bounds), boxLocation.y - CGRectGetMidY(myView.bounds));
+            let centerOffset = UIOffsetMake(location.x - CGRectGetMidX(myView.bounds), location.y - CGRectGetMidY(myView.bounds));
             attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
             attachmentBehavior.frequency = 0
             
