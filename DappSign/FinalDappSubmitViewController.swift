@@ -105,16 +105,12 @@ class FinalDappSubmitViewController: UIViewController {
     
     @IBAction func handleGesture(sender: AnyObject) {
         let location = sender.locationInView(view)
-        let boxLocation = sender.locationInView(dappView)
         let myView = dappView
-        //let originalLocation = dappView.center
-        
-        dappView.center = location
         
         if sender.state == UIGestureRecognizerState.Began {
             animator.removeBehavior(snapBehavior)
             
-            let centerOffset = UIOffsetMake(boxLocation.x - CGRectGetMidX(myView.bounds), boxLocation.y - CGRectGetMidY(myView.bounds));
+            let centerOffset = UIOffsetMake(location.x - CGRectGetMidX(myView.bounds), location.y - CGRectGetMidY(myView.bounds));
             attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
             attachmentBehavior.frequency = 0
             
