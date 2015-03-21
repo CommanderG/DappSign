@@ -286,7 +286,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cil-pr-8e7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="o1B-U8-9pL">
                     <connections>
-                        <action selector="handleGesture:" destination="xMM-mz-go9" id="rqm-UA-myN"/>
+                        <action selector="handleSwipe:" destination="xMM-mz-go9" id="ay4-PP-ZS7"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>

@@ -28,11 +28,10 @@ class DappsViewController: UIViewController {
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     
-    var animator : UIDynamicAnimator!
-    var snapBehavior : UISnapBehavior!
-    var attachmentBehavior : UIAttachmentBehavior?
-    var originalLocation: CGPoint!
-    var currentDappIndex = 0
+    var animator: UIDynamicAnimator!
+    var snapBehavior: UISnapBehavior!
+    var attachmentBehavior: UIAttachmentBehavior!
+    
     var dappFonts = DappFonts()
     var dappColors = DappColors()
     
@@ -42,11 +41,195 @@ class DappsViewController: UIViewController {
         self.shareOnFacebookButton.layer.cornerRadius = 8.0
         self.tweetThisCardButton.layer.cornerRadius = 8.0
         
-        self.originalLocation = dappView.center
         self.animator = UIDynamicAnimator(referenceView: view)
+        self.snapBehavior = UISnapBehavior(
+            item: self.dappView,
+            snapToPoint: self.view.center
+        )
         
-        self.showCurrentDapp()
+        self.initTitle()
+        self.initDappView()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - @IBActions
+    
+    @IBAction func handleSwipe(sender: AnyObject) {
+        let panGestureRecognizer = sender as UIPanGestureRecognizer
         
+        if panGestureRecognizer.state == .Began {
+            self.animator.removeBehavior(self.snapBehavior)
+            
+            let location = panGestureRecognizer.locationInView(self.dappView)
+            let centerOffset = UIOffset(
+                horizontal: location.x - CGRectGetMidX(self.dappView.bounds),
+                vertical: location.y - CGRectGetMidY(self.dappView.bounds)
+            )
+            
+            self.attachmentBehavior = UIAttachmentBehavior(
+                item: self.dappView,
+                offsetFromCenter: centerOffset,
+                attachedToAnchor: self.dappView.center
+            )
+            self.attachmentBehavior.frequency = 0.0
+            
+            self.animator.addBehavior(self.attachmentBehavior)
+        } else if panGestureRecognizer.state == .Changed {
+            let location = panGestureRecognizer.locationInView(self.view)
+            
+            self.attachmentBehavior.anchorPoint = location
+        } else if panGestureRecognizer.state == .Ended {
+            self.animator.removeBehavior(self.attachmentBehavior)
+            self.animator.addBehavior(self.snapBehavior)
+            
+            let translation = panGestureRecognizer.translationInView(self.view)
+            let swipedFromRightToLeft = translation.x < -150.0
+            let swipedFromLeftToRight = translation.x > 150.0
+            
+            if swipedFromRightToLeft || swipedFromLeftToRight {
+                self.animator.removeAllBehaviors()
+                
+                var gravity = UIGravityBehavior(items: [self.dappView])
+                gravity.gravityDirection = CGVectorMake(0, 10)
+                
+                self.animator.addBehavior(gravity)
+                
+                delay(0.3) {
+                    self.animator.removeAllBehaviors()
+                    
+                    self.attachmentBehavior.anchorPoint = self.view.center
+                    self.dappView.center = self.view.center
+                    
+                    let scale = CGAffineTransformMakeScale(0.5, 0.5)
+                    let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+                    
+                    self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                    
+                    if swipedFromLeftToRight {
+                        if let currentDapp = self.dappsInfo?.dapps.first {
+                            self.markDappAsSwiped(currentDapp, completion: {
+                                (succeeded: Bool, error: NSError?) -> Void in
+                                if succeeded {
+                                    println("Successfully marked Dapp with Id \(currentDapp.objectId) as swiped.")
+                                    
+                                    return
+                                }
+                                
+                                if let error = error {
+                                    println("Failed to mark current Dapp as swiped. Error: \(error)")
+                                } else {
+                                    println("Failed to mark current Dapp as swiped. Unknown error")
+                                }
+                            })
+                        }
+                    }
+                    
+                    if self.dappsInfo?.dapps.count > 0 {
+                        self.dappsInfo?.dapps.removeAtIndex(0)
+                    }
+                    
+                    if self.dappsInfo?.dapps.count > 0 {
+                        self.initDappView()
+                    } else {
+                        self.dappView.hidden = true
+                        
+                        delay(0.15) {
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                        }
+                    }
+                    
+                    spring(0.5) {
+                        let scale = CGAffineTransformMakeScale(1.0, 1.0)
+                        let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
+                        
+                        self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func close(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+            completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
+                } else {
+                    if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                    }
+                }
+        })
+    }
+    
+    @IBAction func tweetCurrentDappCard(sender: AnyObject) {
+        let currentDappCardAsImage = self.dappView.toImage()
+        
+        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
+            completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                } else {
+                    if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
+                    }
+                }
+        })
+    }
+    
+    // MARK: - Requests
+    
+    private func markDappAsSwiped(dapp: PFObject, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+        let user = PFUser.currentUser()
+        let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
+        
+        dappsSwipedRelation.addObject(dapp)
+        
+        user.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: succeeded, error: error)
+            
+            if let dappTypeId = dapp["dappTypeId"] as? String {
+                if dappTypeId != DappTypeId.Secondary.rawValue {
+                    return
+                }
+                
+                if let dappScore = dapp["dappScore"] as? Int {
+                    dapp["dappScore"] = dappScore + 1
+                } else {
+                    dapp["dappScore"] = 2 // (undefined) + 1
+                }
+                
+                dapp.saveInBackgroundWithBlock({
+                    (succeeded: Bool, error: NSError!) -> Void in
+                    if error != nil {
+                        println(error)
+                        
+                        return
+                    }
+                })
+            }
+        }
+    }
+    
+    // MARK: -
+    
+    private func initTitle() {
         if let dappsInfo = self.dappsInfo {
             if let title = self.dappsInfo?.hashtag?["name"] as? String {
                 self.title = "#\(title)"
@@ -62,231 +245,47 @@ class DappsViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - @IBActions
-    
-    @IBAction func close(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func handleGesture(sender: AnyObject) {
-        let location = sender.locationInView(view)
-        let boxLocation = sender.locationInView(dappView)
-        let myView = self.dappView
-        //let originalLocation = dappView.center
-        
-        self.dappView.center = location
-        
-        if sender.state == UIGestureRecognizerState.Began {
-            self.animator.removeBehavior(self.snapBehavior)
+    private func initDappView() {
+        self.perform_only_one_time() {
+            let scale = CGAffineTransformMakeScale(0.5, 0.5)
+            let translate = CGAffineTransformMakeTranslation(0, -200)
             
-            let centerOffset = UIOffset(
-                horizontal: boxLocation.x - CGRectGetMidX(myView.bounds),
-                vertical: boxLocation.y - CGRectGetMidY(myView.bounds)
-            )
-            self.attachmentBehavior = UIAttachmentBehavior(
-                item: myView,
-                offsetFromCenter: centerOffset,
-                attachedToAnchor: location
-            )
-            self.attachmentBehavior?.frequency = 0
-            
-            self.animator.addBehavior(attachmentBehavior)
-        } else if sender.state == UIGestureRecognizerState.Changed {
-            self.attachmentBehavior?.anchorPoint = location
-        } else if sender.state == UIGestureRecognizerState.Ended {
-            self.animator.removeBehavior(self.attachmentBehavior?)
-            
-            self.snapBehavior = UISnapBehavior(item: myView, snapToPoint: self.originalLocation)
-            
-            self.animator.addBehavior(self.snapBehavior)
-            
-            let translation = sender.translationInView(view)
-            
-            if self.currentDappIndex >= self.dappsInfo?.dapps.count {
-                // Current Dapp is "No more DappSigns.". It doesn't exist on the server, so ignore it
-                return
-            }
-            
-            if translation.x > 100 {
-                self.handleSwipe(.SwipeFromLeftToRight)
-            } else if translation.x < -100 {
-                self.handleSwipe(.SwipeFromRightToLeft)
-            }
-        }
-    }
-    
-    @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
-        
-        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-            completion: {
-                (success, error) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
-                } else {
-                    if error != nil {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
-                    }
-                }
-        })
-    }
-    
-    @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
-        
-        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
-            completion: {
-                (success, error) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
-                } else {
-                    if error != nil {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
-                    }
-                }
-        })
-    }
-    
-    
-    
-    // MARK: -
-    
-    private func handleSwipe(swipe: Swipe) -> Void {
-        var gravityDirection: CGVector
-        
-        switch swipe {
-        case .SwipeFromLeftToRight:
-            gravityDirection = CGVectorMake(10, -30)
-        case .SwipeFromRightToLeft:
-            gravityDirection = CGVectorMake(-10, 30)
-        }
-        
-        self.markCurrentDappAsSwiped(swipe, {
-            (succeeded: Bool, error: NSError?) -> Void in
-            if succeeded {
-                self.animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [self.dappView])
-                gravity.gravityDirection = gravityDirection
-                
-                self.animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    ++self.currentDappIndex
-                    
-                    if self.currentDappIndex == self.dappsInfo?.dapps.count {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    } else {
-                        self.showCurrentDapp()
-                    }
-                }
-            } else {
-                if error != nil {
-                    println("Failed to mark current Dapp as swiped. Error: \(error!)")
-                } else {
-                    println("Failed to mark current Dapp as swiped. Unknown error")
-                }
-            }
-        })
-    }
-    
-    private func showCurrentDapp() {
-        animator.removeAllBehaviors()
-        
-        snapBehavior = UISnapBehavior(item:dappView, snapToPoint: view.center)
-        attachmentBehavior?.anchorPoint = view.center
-        
-        dappView.center = view.center ///uh......dunno
-        
-        
-        
-        let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0, -200)
-        
-        dappView.transform = CGAffineTransformConcat(scale, translate)
-        
-        spring(0.5) {
-            let scale = CGAffineTransformMakeScale(1, 1)
-            let translate = CGAffineTransformMakeTranslation(0, 0)
             self.dappView.transform = CGAffineTransformConcat(scale, translate)
+            
+            spring(0.5) {
+                let scale = CGAffineTransformMakeScale(1, 1)
+                let translate = CGAffineTransformMakeTranslation(0, 0)
+                
+                self.dappView.transform = CGAffineTransformConcat(scale, translate)
+            }
         }
         
-        self.updateDappView()
-        
-        dappView.hidden = false
-    }
-    
-    private func updateDappView() -> Void {
-        if currentDappIndex < self.dappsInfo?.dapps.count {
-            if let dapp = self.dappsInfo?.dapps[self.currentDappIndex] {
-                let dappFontName = dapp["dappFont"] as String!
-                let dappBgColoName = dapp["dappBackgroundColor"] as String!
+        if self.dappsInfo?.dapps.count > 0 {
+            if let dapp = self.dappsInfo?.dapps.first {
+                self.dappTextView.text = dapp["dappStatement"] as? String
                 
-                self.dappTextView.text = dapp["dappStatement"] as String!
-                self.dappTextView.font = dappFonts.dappFontBook[dappFontName]
+                if let dappFontName = dapp["dappFont"] as? String {
+                    self.dappTextView.font = dappFonts.dappFontBook[dappFontName]
+                }
+                
                 self.dappTextView.textColor = UIColor.whiteColor()
-                self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+                
+                if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
+                    self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+                }
             }
+        } else {
+            self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
+            
+            if let font = dappFonts.dappFontBook["exo"] {
+                self.dappTextView.font = font
+            }
+            
+            self.dappTextView.textColor = UIColor.whiteColor()
+            self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
         }
         
         self.scoreView.backgroundColor = self.dappTextView.backgroundColor
         self.logoView.backgroundColor = self.dappTextView.backgroundColor
-    }
-    
-    private func markCurrentDappAsSwiped(swipe: Swipe, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
-        let user = PFUser.currentUser()
-        let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
-        let currentDapp = self.dappsInfo?.dapps[self.currentDappIndex]
-        
-        dappsSwipedRelation.addObject(currentDapp)
-        user.saveInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError!) -> Void in
-            completion(succeeded: succeeded, error: error)
-            
-            if swipe != .SwipeFromLeftToRight {
-                return
-            }
-            
-            if currentDapp == nil {
-                return
-            }
-            
-            if let dappTypeId = currentDapp!["dappTypeId"] as? String {
-                if dappTypeId != DappTypeId.Secondary.rawValue {
-                    return
-                }
-                
-                var dappScore = currentDapp!["dappScore"] as? Int
-                
-                if dappScore != nil  {
-                    currentDapp!["dappScore"] = ++dappScore!
-                } else {
-                    currentDapp!["dappScore"] = 2 // (undefined) + 1
-                }
-                
-                currentDapp!.saveInBackgroundWithBlock({
-                    (succeeded: Bool, error: NSError!) -> Void in
-                    if error != nil {
-                        println(error)
-                        
-                        return
-                    }
-                    
-                    NSNotificationCenter.defaultCenter().postNotificationName(DappSwipedNotification,
-                        object: currentDapp,
-                        userInfo: nil
-                    )
-                })
-            }
-        }
     }
 }
