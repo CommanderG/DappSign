@@ -47,12 +47,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         profilePic.image = UIImage(data: user["image"] as NSData)
         nameLabel.text = user["name"] as? String
         
-        let mainBundle = NSBundle.mainBundle()
-        
-        if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-            if !contains(adminUsersIDs, self.user.objectId) {
-                self.navigationItem.rightBarButtonItem = nil
+        if let currentUser = PFUser.currentUser() {
+            let mainBundle = NSBundle.mainBundle()
+            
+            if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
+                if !contains(adminUsersIDs, currentUser.objectId) {
+                    self.navigationItem.rightBarButtonItem = nil
+                }
             }
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
     
@@ -92,6 +96,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.dappStatementLabel.textColor = UIColor.whiteColor()
         
         return cell
+    }
+    
+    // MARK: - <UITableViewDelegate>
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: - Requests

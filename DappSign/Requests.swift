@@ -86,7 +86,7 @@ class Requests {
         }
     }
     
-    class func downloadUsersWithNameWhichContains(nameSubstring: String, completion: (users: [PFObject], error: NSError!) -> Void) {
+    class func downloadUsersWithNameWhichContains(nameSubstring: String, completion: (users: [PFUser], error: NSError!) -> Void) {
         let usersQuery = PFUser.query()
         usersQuery.limit = 1000
         
@@ -94,7 +94,7 @@ class Requests {
         
         usersQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(users: objects as [PFObject], error: error)
+            completion(users: objects as [PFUser], error: error)
         }
     }
     

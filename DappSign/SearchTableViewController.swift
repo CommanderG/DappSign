@@ -15,9 +15,9 @@ class SearchTableViewController: UITableViewController {
         case Dapps = 2
     }
     
-    var users:[PFObject]? = []
-    var hashtags:[PFObject]? = []
-    var dapps:[PFObject]? = []
+    var users: [PFUser]? = []
+    var hashtags: [PFObject]? = []
+    var dapps: [PFObject]? = []
     
     let cellIdentifier = "cell"
     let dappCellIdentifier = "dappCell"
@@ -26,6 +26,17 @@ class SearchTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let font = UIFont(name: "Exo-Regular", size: 18.0) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+        }
+        
+        if let font = UIFont(name: "Exo-Regular", size: 16.0) {
+            self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSFontAttributeName: font],
+                forState: .Normal
+            )
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -113,7 +124,24 @@ class SearchTableViewController: UITableViewController {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if indexPath.section == Section.Users.rawValue {
+            let profileNavigationController =
+                self.storyboard?.instantiateViewControllerWithIdentifier("profileNavigationController") as? UINavigationController
             
+            if profileNavigationController == nil {
+                return
+            }
+            
+            let profileViewController = profileNavigationController?.viewControllers.first as? ProfileViewController
+            
+            if profileViewController == nil {
+                return
+            }
+            
+            if let user = self.users?[indexPath.row] {
+                profileViewController?.user = user
+                
+                self.presentViewController(profileNavigationController!, animated: true, completion: nil)
+            }
         } else {
             let dappsNavigationController =
                 self.storyboard?.instantiateViewControllerWithIdentifier("dappsNavigationController") as? UINavigationController
@@ -122,7 +150,11 @@ class SearchTableViewController: UITableViewController {
                 return
             }
             
-            let dappsViewController = dappsNavigationController!.viewControllers.first as DappsViewController
+            let dappsViewController = dappsNavigationController!.viewControllers.first as? DappsViewController
+            
+            if dappsViewController == nil {
+                return
+            }
             
             if indexPath.section == Section.Hashtags.rawValue {
                 if let hashtag = self.hashtags?[indexPath.row] {
@@ -156,7 +188,7 @@ class SearchTableViewController: UITableViewController {
                             dapps: dapps
                         )
                         
-                        dappsViewController.dappsInfo = dappsInfo
+                        dappsViewController!.dappsInfo = dappsInfo
                         
                         self.presentViewController(dappsNavigationController!,
                             animated: true,
@@ -166,7 +198,7 @@ class SearchTableViewController: UITableViewController {
                 }
             } else if indexPath.section == Section.Dapps.rawValue {
                 if let dapp = self.dapps?[indexPath.row] {
-                    dappsViewController.dappsInfo = DappsInfo(hashtag: nil, dapps: [dapp])
+                    dappsViewController!.dappsInfo = DappsInfo(hashtag: nil, dapps: [dapp])
                     
                     self.presentViewController(dappsNavigationController!,
                         animated: true,
@@ -187,7 +219,7 @@ class SearchTableViewController: UITableViewController {
     
     private func searchText(searchText: String) {
         Requests.downloadUsersWithNameWhichContains(searchText, completion: {
-            (users: [PFObject], error: NSError!) -> Void in
+            (users: [PFUser], error: NSError!) -> Void in
             if error != nil {
                 println(error)
                 
