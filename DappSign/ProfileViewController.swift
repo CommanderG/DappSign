@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    internal var user: PFUser!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var privateSwitch: UISwitch!
@@ -20,30 +21,31 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     //design
     var dappColors = DappColors()
     var dappFonts = DappFonts()
-    var user = PFUser.currentUser()
-    var userid:String!
     
-    var submittedDappData: NSMutableArray! = NSMutableArray()
-    //var dappedDappData:NSMutableArray! = NSMutableArray()
+    var dapps: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userid = user.objectId
-        self.loadData()
         
+        if let font = UIFont(name: "Exo-Regular", size: 18.0) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+        }
         
-        //var user = PFUser.currentUser()
+        if let font = UIFont(name: "Exo-Regular", size: 16.0) {
+            self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSFontAttributeName: font],
+                forState: .Normal
+            )
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(
+                [NSFontAttributeName: font],
+                forState: .Normal
+            )
+        }
         
-        let image = UIImage(data: user["image"] as NSData)
+        self.downloadDappsCreatedByUser()
         
-        let name:String = user.objectForKey("name") as String
-        
-        
-        profilePic.image = image
-        
-        nameLabel.text = name
-        
-        
+        profilePic.image = UIImage(data: user["image"] as NSData)
+        nameLabel.text = user["name"] as? String
         
         let mainBundle = NSBundle.mainBundle()
         
@@ -59,65 +61,59 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    //DataSource functions
+    // MARK: - <UITableViewDataSource>
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.dapps.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: DappCell = tableView.dequeueReusableCellWithIdentifier("dappCell") as DappCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as DappProfileCell
         
-        if submittedDappData.count > 0 {
-            var dappBackgroundColorString = submittedDappData[indexPath.row].objectForKey("dappBackgroundColor") as String
-            var dappStatementString = submittedDappData[indexPath.row].objectForKey("dappStatement") as String
-            var dappFontString = submittedDappData[indexPath.row].objectForKey("dappFont") as String
-            var dappScore = submittedDappData[indexPath.row].objectForKey("dappScore") as Int
-            
-            
-            cell.dappCellTextView.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
-            cell.dappCellTextView.text = dappStatementString
-            cell.dappCellTextView.font = dappFonts.dappFontBook[dappFontString]
-            
-            cell.dappsNumberLabel.text = String(dappScore)
-            
+        let dapp = self.dapps[indexPath.row]
+        
+        if let dappBackgroundColorString = dapp["dappBackgroundColor"] as? String {
+            cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
         }
         
+        cell.dappStatementLabel.text = dapp["dappStatement"] as? String
         
+        if let dappFontString = dapp["dappFont"] as? String {
+            cell.dappStatementLabel.font = dappFonts.dappFontBook[dappFontString]
+        }
+        
+        if let dappScore = dapp["dappScore"] as? Int {
+            cell.dappScoreLabel.text = String(dappScore)
+        } else {
+            cell.dappScoreLabel.text = nil
+        }
+        
+        cell.dappScoreLabel.textColor = UIColor.whiteColor()
+        cell.dappStatementLabel.textColor = UIColor.whiteColor()
         
         return cell
-        
     }
     
+    // MARK: - Requests
     
-    //Delegate function
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func downloadDappsCreatedByUser() {
+        var query = PFQuery(className: "Dapps")
         
-    }
-    
-    
-    
-    func loadData(){
-        var findDappDeckData:PFQuery = PFQuery(className: "Dapps")
-        findDappDeckData.whereKey("userid", equalTo: self.userid)
+        query.whereKey("userid", equalTo: self.user.objectId)
+        query.orderByDescending("createdAt")
         
-        findDappDeckData.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError!) -> Void in
-            
-            if error == nil{
-                println("success \(objects.count)")
-                for object in objects{
-                    println(object.objectId)
-                    //var dapp:PFObject = object as PFObject
-                    self.submittedDappData.addObject(object)
-                    println(self.submittedDappData.count)
-                }
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error != nil {
+                println(error)
+                
+                return
             }
             
-            //println("num of dapps: \(self.submittedDappData.count)")
+            self.dapps = objects as [PFObject]
+            
+            self.tableView.reloadData()
         }
-        
-        
-        
-        
     }
     
     // MARK: - @IBActions

@@ -553,14 +553,29 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     }
     
     func submitDapp() {
-        nameString = PFUser.currentUser().objectForKey("name") as String!
-        var dapp:PFObject = PFObject(className: "Dapps")
-        dapp["dappStatement"] = dappTextView.text
-        dapp["lowercaseDappStatement"] = dappTextView.text.lowercaseString
-        dapp["dappFont"] = self.dappFontString
-        dapp["dappBackgroundColor"] = dappColorString
-        dapp["name"] = nameString
-        dapp["userid"] = PFUser.currentUser().objectId
+        let user = PFUser.currentUser()
+        
+        var dapp = PFObject(className: "Dapps")
+        
+        dapp["dappStatement"] = self.dappTextView.text
+        dapp["lowercaseDappStatement"] = self.dappTextView.text.lowercaseString
+        
+        if let dappFont = self.dappFontString {
+            dapp["dappFont"] = dappFont
+        }
+        
+        if let dappBackgroundColor = self.dappColorString {
+            dapp["dappBackgroundColor"] = dappBackgroundColor
+        }
+        
+        if user != nil {
+            if let name = user["name"] as? String {
+                dapp["name"] = name
+            }
+            
+            dapp["userid"] = user.objectId
+        }
+        
         dapp["dappScore"] = 1
         dapp["isDeleted"] = false
         
@@ -596,6 +611,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
                 (succeeded: Bool, error: NSError!) -> Void in
                 if succeeded {
                     println("Dapp created with id: \(dapp.objectId)")
+                    println(dapp)
                 } else {
                     println("%@" , error)
                 }

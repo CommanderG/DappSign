@@ -1,18 +1,16 @@
 //
-//  DappCell.swift
+//  DappProfileCell.swift
 //  DappSign
 //
-//  Created by Seshagiri Vakkalanka on 3/2/15.
+//  Created by Admin on 3/21/15.
 //  Copyright (c) 2015 DappSign. All rights reserved.
 //
 
 import UIKit
 
-class DappCell: UITableViewCell {
-
-    @IBOutlet weak var dappCellTextView: UITextView!
-    @IBOutlet weak var dappsWordLabel: UILabel!
-    @IBOutlet weak var dappsNumberLabel: UILabel!
+class DappProfileCell: UITableViewCell {
+    @IBOutlet weak var dappStatementLabel: UILabel!
+    @IBOutlet weak var dappScoreLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

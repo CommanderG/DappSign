@@ -62,11 +62,11 @@
 		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
 		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
-		4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
 		84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
+		84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,11 +141,11 @@
 		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DappCell.swift; path = ../DappCell.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
+		84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,8 +314,8 @@
 		84C3D3811AB5FEC700E0F350 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4CD9C9E91AA4FD9500046CA2 /* DappCell.swift */,
 				84C3D3861AB6030E00E0F350 /* DappCardCell.swift */,
+				84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -479,6 +479,7 @@
 			files = (
 				4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */,
 				84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */,
+				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
 				849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */,
@@ -486,7 +487,6 @@
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
-				4CD9C9EA1AA4FD9500046CA2 /* DappCell.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,

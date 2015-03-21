@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -46,6 +47,10 @@ class HomeViewController: UIViewController {
         )
         
         self.dappView.hidden = true
+        
+        if PFUser.currentUser() == nil {
+            self.profileButton.hidden = true
+        }
         
         self.updateUserInformation()
         self.downloadDapps()
@@ -334,6 +339,18 @@ class HomeViewController: UIViewController {
                         return
                     }
                 })
+            }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showProfile" {
+            let profileNC = segue.destinationViewController as UINavigationController
+            
+            if let profileVC = profileNC.viewControllers.first as? ProfileViewController {
+                profileVC.user = PFUser.currentUser()
             }
         }
     }

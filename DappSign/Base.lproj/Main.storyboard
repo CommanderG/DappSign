@@ -46,7 +46,6 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
@@ -343,46 +342,51 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="280" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4kJ-1L-sOB">
-                                <rect key="frame" x="0.0" y="184" width="320" height="390"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
+                                <rect key="frame" x="0.0" y="182" width="320" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" id="jto-yY-pDc" customClass="DappCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jto-yY-pDc" id="d7y-rt-Fvz">
+                                    <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="44" id="p9d-h5-kh7" customClass="DappProfileCell" customModule="DappSign" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9d-h5-kh7" id="HSn-o5-ezQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dkt-ch-9XG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfq-aj-P9f">
-                                                    <rect key="frame" x="206" y="8" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ty0-Bb-dmp">
+                                                    <rect key="frame" x="8" y="11" width="162" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dapps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-rb-JHM">
-                                                    <rect key="frame" x="261" y="8" width="51" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyZ-E8-V9N">
+                                                    <rect key="frame" x="270" y="4" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="b7N-YQ-ry9"/>
+                                                        <constraint firstAttribute="width" constant="42" id="zGb-ld-oGP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="VyZ-E8-V9N" secondAttribute="trailing" constant="8" id="9B6-25-bv7"/>
+                                                <constraint firstItem="ty0-Bb-dmp" firstAttribute="leading" secondItem="HSn-o5-ezQ" secondAttribute="leadingMargin" id="E6G-Gb-IRZ"/>
+                                                <constraint firstItem="ty0-Bb-dmp" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="11" id="LmH-ve-ema"/>
+                                                <constraint firstAttribute="bottom" secondItem="ty0-Bb-dmp" secondAttribute="bottom" constant="11" id="W2A-3v-h2w"/>
+                                                <constraint firstItem="VyZ-E8-V9N" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="4" id="c1J-96-sGM"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ty0-Bb-dmp" secondAttribute="trailing" constant="10" id="nVg-LZ-Iog"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="dappCellTextView" destination="dkt-ch-9XG" id="zSs-gq-8Ja"/>
-                                            <outlet property="dappsNumberLabel" destination="Hfq-aj-P9f" id="jaY-aR-Oah"/>
-                                            <outlet property="dappsWordLabel" destination="ah8-rb-JHM" id="IKn-JB-sIW"/>
+                                            <outlet property="dappScoreLabel" destination="VyZ-E8-V9N" id="d7T-61-dbx"/>
+                                            <outlet property="dappStatementLabel" destination="ty0-Bb-dmp" id="asZ-PB-wuX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Q8A-2e-yyY" id="hJe-fR-jIV"/>
-                                    <outlet property="delegate" destination="Q8A-2e-yyY" id="Yp6-fM-s1Y"/>
+                                    <outlet property="dataSource" destination="Q8A-2e-yyY" id="BIO-tq-Ius"/>
+                                    <outlet property="delegate" destination="Q8A-2e-yyY" id="vTK-sx-iml"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -406,7 +410,7 @@
                         <outlet property="privateSwitch" destination="1rf-8H-vwc" id="xnY-Be-8Wu"/>
                         <outlet property="profilePic" destination="hfZ-WI-Ejb" id="6E4-aA-0Rz"/>
                         <outlet property="publicPrivateLabel" destination="ilz-Er-ufL" id="uuT-k4-X6W"/>
-                        <outlet property="tableView" destination="4kJ-1L-sOB" id="l0H-r5-lWo"/>
+                        <outlet property="tableView" destination="4mG-pu-R2B" id="wBq-fP-3Of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKa-cP-7uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -736,15 +740,6 @@
                                     <segue destination="Run-wI-cqj" kind="modal" id="ZQp-xw-34e"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zep-yS-dfF">
-                                <rect key="frame" x="20" y="28" width="44" height="30"/>
-                                <state key="normal" title="Profile">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="2Do-FT-vzw" kind="modal" id="ELH-xj-bjC"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu2-AW-APN">
                                 <rect key="frame" x="150" y="504" width="150" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -776,6 +771,15 @@
                                 </state>
                                 <connections>
                                     <segue destination="Iyj-7z-odA" kind="modal" id="pKu-HH-ZwY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zep-yS-dfF">
+                                <rect key="frame" x="20" y="28" width="44" height="30"/>
+                                <state key="normal" title="Profile">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2Do-FT-vzw" kind="modal" identifier="showProfile" id="ELH-xj-bjC"/>
                                 </connections>
                             </button>
                         </subviews>
