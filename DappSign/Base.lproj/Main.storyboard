@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -240,7 +240,6 @@
                                 </state>
                                 <connections>
                                     <action selector="postCurrentDappCardToFacebook:" destination="xMM-mz-go9" eventType="touchUpInside" id="VJu-4N-8dh"/>
-                                    <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="raF-Kq-dFG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9y-gO-FE5">
@@ -257,7 +256,6 @@
                                 </state>
                                 <connections>
                                     <action selector="tweetCurrentDappCard:" destination="xMM-mz-go9" eventType="touchUpInside" id="aN2-k0-2Ev"/>
-                                    <action selector="tweetCurrentDappCard:" destination="EG5-sL-doW" eventType="touchUpInside" id="mUv-M9-3Dt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -751,7 +749,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="composeButtonTapped:" destination="EG5-sL-doW" eventType="touchUpInside" id="H2m-P2-iA5"/>
+                                    <segue destination="Run-wI-cqj" kind="modal" id="ZQp-xw-34e"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zep-yS-dfF">
@@ -772,7 +770,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="Wv9-Hh-gn9"/>
+                                    <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="8ce-ju-qMi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gal-zO-XBA">
@@ -784,7 +782,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="tweetCurrentDappCard:" destination="EG5-sL-doW" eventType="touchUpInside" id="m0A-EU-sIY"/>
+                                    <action selector="tweetCurrentDappCard:" destination="EG5-sL-doW" eventType="touchUpInside" id="5rp-d8-agu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3O5-Ue-Ctg">
@@ -800,25 +798,18 @@
                         <color key="backgroundColor" red="0.12549019607843137" green="0.12941176470588237" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="congressImageView" destination="8xf-9g-Fg1" id="bCF-1I-QTB"/>
-                        <outlet property="dappTextView" destination="t5N-P2-oiu" id="HHI-lz-xSR"/>
-                        <outlet property="dappView" destination="j6X-Bh-YOW" id="Rtb-GZ-dwQ"/>
-                        <outlet property="footerView" destination="3Lw-Jn-lb4" id="ysL-ue-xaH"/>
-                        <outlet property="fromLabel" destination="jmW-pk-rwf" id="bf5-Um-q8T"/>
-                        <outlet property="headerView" destination="Alz-fJ-cPr" id="1JD-7n-YWC"/>
-                        <outlet property="logoLabel" destination="1pe-O9-lPx" id="gcG-91-Xcy"/>
-                        <outlet property="logoView" destination="ZqI-i2-0Li" id="npS-Oe-tZU"/>
-                        <outlet property="panRecognizer" destination="33h-y8-gkP" id="HcA-3B-ILv"/>
-                        <outlet property="scoreView" destination="GMS-WC-CNG" id="XrR-03-Mxn"/>
-                        <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="kDb-3y-fmx"/>
-                        <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="uUu-vx-pkL"/>
-                        <segue destination="Run-wI-cqj" kind="modal" identifier="showAddDappViewController" id="7wg-lO-bfS"/>
+                        <outlet property="dappTextView" destination="t5N-P2-oiu" id="MXd-Dz-Muz"/>
+                        <outlet property="dappView" destination="j6X-Bh-YOW" id="sum-3J-x38"/>
+                        <outlet property="logoView" destination="ZqI-i2-0Li" id="qou-Wj-TAW"/>
+                        <outlet property="scoreView" destination="GMS-WC-CNG" id="d08-ZC-zv3"/>
+                        <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
+                        <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-gB-rqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="33h-y8-gkP">
                     <connections>
-                        <action selector="handleGesture:" destination="EG5-sL-doW" id="i5M-4Q-Jrj"/>
+                        <action selector="handleSwipe:" destination="EG5-sL-doW" id="a3H-7A-HqW"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
