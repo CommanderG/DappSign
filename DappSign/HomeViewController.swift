@@ -37,9 +37,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.shareOnFacebookButton.layer.cornerRadius = 8.0
-        self.tweetThisCardButton.layer.cornerRadius = 8.0
-        
         self.animator = UIDynamicAnimator(referenceView: view)
         self.snapBehavior = UISnapBehavior(
             item: self.dappView,
