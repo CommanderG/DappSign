@@ -66,13 +66,7 @@ class EditDappsTableViewController: UITableViewController {
         
         return cell
     }
-    
-    // MARK: - @IBActions
-    
-    @IBAction func close(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+        
     // MARK: - Navigation
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {

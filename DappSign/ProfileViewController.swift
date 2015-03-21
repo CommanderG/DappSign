@@ -9,14 +9,13 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var publicPrivateLabel: UILabel!
     @IBOutlet weak var numDappsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var editDappsButton: UIButton!
     
     //design
     var dappColors = DappColors()
@@ -31,7 +30,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         userid = user.objectId
         self.loadData()
-    
+        
         
         //var user = PFUser.currentUser()
         
@@ -39,7 +38,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let name:String = user.objectForKey("name") as String
         
-
+        
         profilePic.image = image
         
         nameLabel.text = name
@@ -49,14 +48,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let mainBundle = NSBundle.mainBundle()
         
         if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-            if contains(adminUsersIDs, self.user.objectId) {
-                self.editDappsButton.layer.cornerRadius = 8.0
-            } else {
-                self.editDappsButton.hidden = true
+            if !contains(adminUsersIDs, self.user.objectId) {
+                self.navigationItem.rightBarButtonItem = nil
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -88,7 +85,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         return cell
-
+        
     }
     
     
@@ -122,8 +119,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
     }
-
-
     
-
+    // MARK: - @IBActions
+    
+    @IBAction func close(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

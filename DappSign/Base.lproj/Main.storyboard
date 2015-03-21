@@ -47,8 +47,6 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
@@ -124,12 +122,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="AnE-wK-30e" kind="relationship" relationship="rootViewController" id="Gb4-fQ-iig"/>
+                        <segue destination="Q8A-2e-yyY" kind="relationship" relationship="rootViewController" id="1OP-sA-gRk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKP-BR-v9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="-1096"/>
+            <point key="canvasLocation" x="1055" y="-1096"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZY8-BZ-3bG">
@@ -292,7 +290,7 @@
             </objects>
             <point key="canvasLocation" x="625" y="-1114"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="gWr-LM-htg">
             <objects>
                 <viewController id="Q8A-2e-yyY" customClass="ProfileViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
@@ -305,7 +303,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-WI-Ejb">
-                                <rect key="frame" x="6" y="30" width="62" height="59"/>
+                                <rect key="frame" x="6" y="74" width="62" height="59"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -313,40 +311,40 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylj-62-KEJ">
-                                <rect key="frame" x="76" y="30" width="46" height="21"/>
+                                <rect key="frame" x="76" y="74" width="46" height="21"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhQ-cu-Pwx">
-                                <rect key="frame" x="76" y="54" width="16" height="21"/>
+                                <rect key="frame" x="76" y="98" width="16" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dapps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mz5-hL-Web">
-                                <rect key="frame" x="94" y="54" width="51" height="21"/>
+                                <rect key="frame" x="94" y="98" width="51" height="21"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1rf-8H-vwc">
-                                <rect key="frame" x="255" y="100" width="51" height="31"/>
+                                <rect key="frame" x="255" y="144" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Submit DappSigns:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIo-ap-SSv">
-                                <rect key="frame" x="6" y="105" width="144" height="23"/>
+                                <rect key="frame" x="6" y="149" width="144" height="23"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publicly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilz-Er-ufL">
-                                <rect key="frame" x="152" y="106" width="61" height="21"/>
+                                <rect key="frame" x="152" y="150" width="61" height="21"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="280" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4kJ-1L-sOB">
-                                <rect key="frame" x="0.0" y="140" width="320" height="434"/>
+                                <rect key="frame" x="0.0" y="184" width="320" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" id="jto-yY-pDc" customClass="DappCell" customModule="DappSign" customModuleProvider="target">
@@ -368,7 +366,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dapps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-rb-JHM">
-                                                    <rect key="frame" x="264" y="8" width="51" height="21"/>
+                                                    <rect key="frame" x="261" y="8" width="51" height="21"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -387,30 +385,22 @@
                                     <outlet property="delegate" destination="Q8A-2e-yyY" id="Yp6-fM-s1Y"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMm-q0-SGV">
-                                <rect key="frame" x="133" y="0.0" width="54" height="29"/>
-                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i0h-Uc-xHz">
-                                <rect key="frame" x="214" y="30" width="90" height="38"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
-                                <state key="normal" title="Edit Dapps">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="2Do-FT-vzw" kind="modal" id="hkN-hL-Yyz"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WdX-uV-PeL"/>
+                    <navigationItem key="navigationItem" title="Profile" id="WdX-uV-PeL">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="ofV-Br-hAH">
+                            <connections>
+                                <action selector="close:" destination="Q8A-2e-yyY" id="tMB-bB-225"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit Dapps" id="EFc-bg-oi9">
+                            <connections>
+                                <segue destination="AnE-wK-30e" kind="push" id="sbk-D3-qRX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="editDappsButton" destination="i0h-Uc-xHz" id="DYr-V2-yvu"/>
                         <outlet property="nameLabel" destination="Ylj-62-KEJ" id="KTO-lN-Pon"/>
                         <outlet property="numDappsLabel" destination="qhQ-cu-Pwx" id="gOO-c6-DWP"/>
                         <outlet property="privateSwitch" destination="1rf-8H-vwc" id="xnY-Be-8Wu"/>
@@ -421,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKa-cP-7uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="-1096"/>
+            <point key="canvasLocation" x="1490" y="-1096"/>
         </scene>
         <!--Edit Dapps-->
         <scene sceneID="lVc-PM-esS">
@@ -511,13 +501,7 @@
                             <outlet property="delegate" destination="AnE-wK-30e" id="ihf-cl-dEg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Dapps" id="6D8-38-KJI">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="1aJ-zS-QlR">
-                            <connections>
-                                <action selector="close:" destination="AnE-wK-30e" id="O8L-ed-yUS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Edit Dapps" id="6D8-38-KJI"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvL-tt-a6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -758,7 +742,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Q8A-2e-yyY" kind="modal" identifier="showProfileViewController" id="DRr-5m-mNP"/>
+                                    <segue destination="2Do-FT-vzw" kind="modal" id="ELH-xj-bjC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu2-AW-APN">
@@ -1316,7 +1300,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mYk-4f-hdk"/>
         <segue reference="xG9-la-u2M"/>
+        <segue reference="mYk-4f-hdk"/>
     </inferredMetricsTieBreakers>
 </document>
