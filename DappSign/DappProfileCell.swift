@@ -9,7 +9,7 @@
 import UIKit
 
 class DappProfileCell: UITableViewCell {
-    @IBOutlet weak var dappStatementLabel: UILabel!
+    @IBOutlet weak var dappStatementTextView: UITextView!
     @IBOutlet weak var dappScoreLabel: UILabel!
     
     override func awakeFromNib() {

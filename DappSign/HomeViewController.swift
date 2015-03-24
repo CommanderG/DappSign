@@ -112,19 +112,21 @@ class HomeViewController: UIViewController {
                     
                     if swipedFromLeftToRight {
                         if let currentDapp = self.dapps.first {
-                            self.markDappAsSwiped(currentDapp, completion: {
-                                (succeeded: Bool, error: NSError?) -> Void in
-                                if succeeded {
-                                    println("Successfully marked Dapp with Id \(currentDapp.objectId) as swiped.")
+                            Requests.markDappAsSwiped(currentDapp,
+                                user: PFUser.currentUser(),
+                                completion: {
+                                    (succeeded: Bool, error: NSError?) -> Void in
+                                    if succeeded {
+                                        println("Successfully marked Dapp with Id \(currentDapp.objectId) as swiped.")
+                                        
+                                        return
+                                    }
                                     
-                                    return
-                                }
-                                
-                                if let error = error {
-                                    println("Failed to mark current Dapp as swiped. Error: \(error)")
-                                } else {
-                                    println("Failed to mark current Dapp as swiped. Unknown error")
-                                }
+                                    if let error = error {
+                                        println("Failed to mark current Dapp as swiped. Error: \(error)")
+                                    } else {
+                                        println("Failed to mark current Dapp as swiped. Unknown error")
+                                    }
                             })
                         }
                     }
@@ -305,39 +307,6 @@ class HomeViewController: UIViewController {
                     self.initDappView()
                 }
         })
-    }
-    
-    private func markDappAsSwiped(dapp: PFObject, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
-        let user = PFUser.currentUser()
-        let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
-        
-        dappsSwipedRelation.addObject(dapp)
-        
-        user.saveInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError!) -> Void in
-            completion(succeeded: succeeded, error: error)
-            
-            if let dappTypeId = dapp["dappTypeId"] as? String {
-                if dappTypeId != DappTypeId.Secondary.rawValue {
-                    return
-                }
-                
-                if let dappScore = dapp["dappScore"] as? Int {
-                    dapp["dappScore"] = dappScore + 1
-                } else {
-                    dapp["dappScore"] = 2 // (undefined) + 1
-                }
-                
-                dapp.saveInBackgroundWithBlock({
-                    (succeeded: Bool, error: NSError!) -> Void in
-                    if error != nil {
-                        println(error)
-
-                        return
-                    }
-                })
-            }
-        }
     }
     
     // MARK: - Navigation

@@ -23,8 +23,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var dappColors = DappColors()
     var dappFonts = DappFonts()
     
-    var dappsCreatedByUser: [PFObject]? = nil
-    var dappsSwipedByUser: [PFObject]? = nil
+    var dappsIdsSwipedByLoggedInUser: [String]? = nil
+    var dappsCreatedByUserInProfile: [PFObject]? = nil
+    var dappsSwipedByUserInProfile: [PFObject]? = nil
     
     enum DappsFilter: Int {
         case DappSigns = 0
@@ -33,6 +34,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.user.objectId != PFUser.currentUser().objectId {
+            Requests.downloadDappsSwipedByUser(PFUser.currentUser(), completion: {
+                (dapps: [PFObject], error: NSError!) -> Void in
+                if error != nil {
+                    println(error)
+                    
+                    return
+                }
+                
+                self.dappsIdsSwipedByLoggedInUser = dapps.map({ $0.objectId })
+            })
+        }
         
         if let font = UIFont(name: "Exo-Regular", size: 18.0) {
             self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
@@ -56,7 +70,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let mainBundle = NSBundle.mainBundle()
             
             if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-                if !contains(adminUsersIDs, currentUser.objectId) {
+                if !contains(adminUsersIDs, currentUser.objectId) || self.user.objectId != currentUser.objectId {
                     self.navigationItem.rightBarButtonItem = nil
                 }
             }
@@ -92,10 +106,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
             }
             
-            cell.dappStatementLabel.text = dapp["dappStatement"] as? String
+            cell.dappStatementTextView.text = dapp["dappStatement"] as? String
             
             if let dappFontString = dapp["dappFont"] as? String {
-                cell.dappStatementLabel.font = dappFonts.dappFontBook[dappFontString]
+                cell.dappStatementTextView.font = dappFonts.dappFontBook[dappFontString]
             }
             
             if let dappScore = dapp["dappScore"] as? Int {
@@ -105,16 +119,77 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             cell.dappScoreLabel.textColor = UIColor.whiteColor()
-            cell.dappStatementLabel.textColor = UIColor.whiteColor()
+            cell.dappStatementTextView.textColor = UIColor.whiteColor()
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     // MARK: - <UITableViewDelegate>
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        if self.user.objectId == PFUser.currentUser().objectId {
+            return []
+        }
+        
+        var selecteedDappHasBeenDapped: Bool
+        
+        if self.user.objectId == PFUser.currentUser().objectId {
+            selecteedDappHasBeenDapped = true
+        } else {
+            if let dapps = self.dapps() {
+                let dapp = dapps[indexPath.row]
+                
+                if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
+                    if contains(dappsIdsSwipedByLoggedInUser, dapp.objectId) {
+                        selecteedDappHasBeenDapped = true
+                    } else {
+                        selecteedDappHasBeenDapped = false
+                    }
+                } else {
+                    selecteedDappHasBeenDapped = false
+                }
+            } else {
+                selecteedDappHasBeenDapped = false
+            }
+        }
+        
+        var dappAction: UITableViewRowAction
+        
+        if selecteedDappHasBeenDapped {
+            dappAction = UITableViewRowAction(
+                style: UITableViewRowActionStyle.Normal,
+                title: "Dapp",
+                handler: {
+                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                    let alertView = UIAlertView(
+                        title: nil,
+                        message: "You have already tapped this dapp",
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+            })
+        } else {
+            dappAction = UITableViewRowAction(
+                style: UITableViewRowActionStyle.Default,
+                title: "Dapp",
+                handler: {
+                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                    self.dappCardWithIndex(indexPath.row)
+            })
+        }
+        
+        return [dappAction]
     }
     
     // MARK: - @IBActions
@@ -137,9 +212,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let index = self.dappsFilterSegmentedControl.selectedSegmentIndex
         
         if index == DappsFilter.DappSigns.rawValue {
-            return self.dappsCreatedByUser
+            return self.dappsCreatedByUserInProfile
         } else if index == DappsFilter.Dapped.rawValue {
-            return self.dappsSwipedByUser
+            return self.dappsSwipedByUserInProfile
         }
         
         return nil
@@ -171,7 +246,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 return
             }
             
-            self.dappsCreatedByUser = dapps
+            self.dappsCreatedByUserInProfile = dapps
             
             self.tableView.reloadData()
         })
@@ -193,9 +268,47 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 return
             }
             
-            self.dappsSwipedByUser = dapps
+            self.dappsSwipedByUserInProfile = dapps
             
             self.tableView.reloadData()
         })
+    }
+    
+    private func dappCardWithIndex(index: Int) {
+        if let dapps = self.dapps() {
+            let dapp = dapps[index]
+            
+            Requests.markDappAsSwiped(dapp, user: PFUser.currentUser(), completion: {
+                (succeeded: Bool, error: NSError?) -> Void in
+                var message: String
+                
+                if succeeded {
+                    if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
+                        if !contains(dappsIdsSwipedByLoggedInUser, dapp.objectId) {
+                            self.dappsIdsSwipedByLoggedInUser?.append(dapp.objectId)
+                        }
+                    }
+                    
+                    self.tableView.setEditing(false, animated: true)
+                    
+                    message = "You have successfully dapped this card."
+                } else {
+                    if let error = error {
+                        message = "Failed to mark current Dapp as swiped. Error: \(error.localizedDescription)"
+                    } else {
+                        message = "Failed to mark current Dapp as swiped. Unknown error."
+                    }
+                }
+                
+                let alertView = UIAlertView(
+                    title: "Success",
+                    message: "You have successfully dapped this card.",
+                    delegate: nil,
+                    cancelButtonTitle: "OK"
+                )
+                
+                alertView.show()
+            })
+        }
     }
 }
