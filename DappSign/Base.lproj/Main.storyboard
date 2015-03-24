@@ -77,8 +77,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc7-Lr-jcy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc7-Lr-jcy">
                                 <rect key="frame" x="48" y="450" width="225" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="YkJ-Ke-0em"/>
+                                    <constraint firstAttribute="height" constant="54" id="mT0-f8-Ge2"/>
+                                </constraints>
                                 <state key="normal" image="Facebook Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -86,20 +90,34 @@
                                     <action selector="facebookLoginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Cr8-Bi-Iuz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
-                                <rect key="frame" x="67" y="204" width="186" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
+                                <rect key="frame" x="70" y="204" width="181" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="Mfn-Wh-yJg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
-                                <rect key="frame" x="48" y="117" width="237" height="64"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DappSign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
+                                <rect key="frame" x="55" y="117" width="210" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="xeo-Kc-EDE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588237" green="0.13333333333333333" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="mUe-E1-ZtY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="97" id="18y-8Y-ciS"/>
+                            <constraint firstAttribute="centerX" secondItem="mUe-E1-ZtY" secondAttribute="centerX" id="AzA-WJ-QnM"/>
+                            <constraint firstAttribute="centerX" secondItem="Dc7-Lr-jcy" secondAttribute="centerX" constant="-0.5" id="G5i-X4-v3e"/>
+                            <constraint firstItem="A9c-HG-7TN" firstAttribute="top" secondItem="mUe-E1-ZtY" secondAttribute="bottom" constant="23" id="INZ-1d-Wht"/>
+                            <constraint firstAttribute="centerX" secondItem="A9c-HG-7TN" secondAttribute="centerX" id="dL6-SX-Ibv"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Dc7-Lr-jcy" secondAttribute="bottom" constant="64" id="kEF-MA-PF7"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewController" id="XgB-ZI-Ie0"/>
@@ -1437,7 +1455,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="XgB-ZI-Ie0"/>
         <segue reference="xG9-la-u2M"/>
-        <segue reference="mYk-4f-hdk"/>
     </inferredMetricsTieBreakers>
 </document>
