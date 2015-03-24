@@ -98,6 +98,30 @@ class Requests {
         }
     }
     
+    class func downloadDappsCreatedByUserWithId(userId: String, completion: (dapps: [PFObject], error: NSError!) -> Void) {
+        var query = PFQuery(className: "Dapps")
+        
+        query.whereKey("userid", equalTo: userId)
+        query.orderByDescending("createdAt")
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(dapps: objects as [PFObject], error: error)
+        }
+    }
+    
+    class func downloadDappsSwipedByUser(user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
+        let relation = user.relationForKey("dappsSwiped")
+        var query = relation.query()
+        
+        query.limit = 1000
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(dapps: objects as [PFObject], error: error)
+        }
+    }
+    
     // MARK: -
     
     private class func downloadHashtagWthName(name: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {
