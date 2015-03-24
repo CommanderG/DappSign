@@ -24,6 +24,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -353,6 +355,11 @@ class HomeViewController: UIViewController {
                 if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
                     self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
                 }
+                
+                let currentUser = PFUser.currentUser()
+                
+                self.usernameLabel.text = currentUser["name"] as String?
+                self.userProfileImageView.image = UIImage(data: currentUser["image"] as NSData)
             }
         } else {
             self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
@@ -363,6 +370,8 @@ class HomeViewController: UIViewController {
             
             self.dappTextView.textColor = UIColor.whiteColor()
             self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+            self.usernameLabel.text = nil
+            self.userProfileImageView.image = nil
         }
         
         self.scoreView.backgroundColor = self.dappTextView.backgroundColor

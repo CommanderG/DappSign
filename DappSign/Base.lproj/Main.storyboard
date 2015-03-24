@@ -780,15 +780,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jn-lb4">
                                         <rect key="frame" x="0.0" y="360" width="280" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Ao-N9W">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Ao-N9W">
                                                 <rect key="frame" x="237" y="2" width="35" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="EhU-dg-q9y"/>
                                                     <constraint firstAttribute="height" constant="35" id="fDb-tH-WMy"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmW-pk-rwf">
-                                                <rect key="frame" x="187" y="9" width="42" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmW-pk-rwf">
+                                                <rect key="frame" x="8" y="9" width="221" height="21"/>
                                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -802,6 +802,7 @@
                                             <constraint firstAttribute="bottom" secondItem="jmW-pk-rwf" secondAttribute="bottom" constant="10" id="da0-vX-IQV"/>
                                             <constraint firstAttribute="bottom" secondItem="Z4e-Ao-N9W" secondAttribute="bottom" constant="3" id="kyH-ln-OZf"/>
                                             <constraint firstAttribute="height" constant="40" id="mcD-XT-AQ4"/>
+                                            <constraint firstItem="jmW-pk-rwf" firstAttribute="leading" secondItem="3Lw-Jn-lb4" secondAttribute="leading" constant="8" id="u0O-RE-AO6"/>
                                             <constraint firstItem="Z4e-Ao-N9W" firstAttribute="leading" secondItem="jmW-pk-rwf" secondAttribute="trailing" constant="8" id="u7s-qD-rD4"/>
                                         </constraints>
                                     </view>
@@ -937,9 +938,12 @@
                         <outlet property="dappTextView" destination="t5N-P2-oiu" id="MXd-Dz-Muz"/>
                         <outlet property="dappView" destination="j6X-Bh-YOW" id="sum-3J-x38"/>
                         <outlet property="logoView" destination="ZqI-i2-0Li" id="qou-Wj-TAW"/>
+                        <outlet property="profileButton" destination="Zep-yS-dfF" id="72N-lR-hUr"/>
                         <outlet property="scoreView" destination="GMS-WC-CNG" id="d08-ZC-zv3"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
                         <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
+                        <outlet property="userProfileImageView" destination="Z4e-Ao-N9W" id="Cgw-XY-mGI"/>
+                        <outlet property="usernameLabel" destination="jmW-pk-rwf" id="8wQ-zi-lbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-gB-rqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
