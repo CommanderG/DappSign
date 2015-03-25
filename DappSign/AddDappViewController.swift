@@ -51,6 +51,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     var dappFonts = DappFonts()
     var originalLocation: CGPoint!
     
+    var dapp: PFObject!
+    
     //Button Outlets
     @IBOutlet weak var emeraldButtonOutlet: UIButton!
     @IBOutlet weak var carrotButtonOutlet: UIButton!
@@ -555,35 +557,35 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     func submitDapp() {
         let user = PFUser.currentUser()
         
-        var dapp = PFObject(className: "Dapps")
+        self.dapp = PFObject(className: "Dapps")
         
-        dapp["dappStatement"] = self.dappTextView.text
-        dapp["lowercaseDappStatement"] = self.dappTextView.text.lowercaseString
+        self.dapp["dappStatement"] = self.dappTextView.text
+        self.dapp["lowercaseDappStatement"] = self.dappTextView.text.lowercaseString
         
         if let dappFont = self.dappFontString {
-            dapp["dappFont"] = dappFont
+            self.dapp["dappFont"] = dappFont
         }
         
         if let dappBackgroundColor = self.dappColorString {
-            dapp["dappBackgroundColor"] = dappBackgroundColor
+            self.dapp["dappBackgroundColor"] = dappBackgroundColor
         }
         
         if user != nil {
             if let name = user["name"] as? String {
-                dapp["name"] = name
+                self.dapp["name"] = name
             }
             
-            dapp["userid"] = user.objectId
+            self.dapp["userid"] = user.objectId
         }
         
-        dapp["dappScore"] = 1
-        dapp["isDeleted"] = false
+        self.dapp["dappScore"] = 1
+        self.dapp["isDeleted"] = false
         
         let mainBundle = NSBundle.mainBundle()
         
         if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
             if contains(adminUsersIDs, PFUser.currentUser().objectId) {
-                dapp["dappTypeId"] = DappTypeId.Secondary.rawValue
+                self.dapp["dappTypeId"] = DappTypeId.Secondary.rawValue
             }
         }
         
@@ -600,18 +602,18 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
             }
             
             if let hashtags = hashtags {
-                let hashtagsRelation = dapp.relationForKey("hashtags")
+                let hashtagsRelation = self.dapp.relationForKey("hashtags")
                 
                 for hashtag in hashtags {
                     hashtagsRelation.addObject(hashtag)
                 }
             }
             
-            dapp.saveInBackgroundWithBlock({
+            self.dapp.saveInBackgroundWithBlock({
                 (succeeded: Bool, error: NSError!) -> Void in
                 if succeeded {
-                    println("Dapp created with id: \(dapp.objectId)")
-                    println(dapp)
+                    println("Dapp created with id: \(self.dapp.objectId)")
+                    println(self.dapp)
                 } else {
                     println("%@" , error)
                 }
@@ -624,10 +626,17 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         if segue.identifier == "showFinalDappSubmitViewController"{
             let finalDappSubmitVC:FinalDappSubmitViewController = segue.destinationViewController as FinalDappSubmitViewController
             
+            if let name = PFUser.currentUser()["name"] as String? {
+                self.nameString = name
+            } else {
+                self.nameString = ""
+            }
+            
             finalDappSubmitVC.dappColorString = self.dappColorString
             finalDappSubmitVC.dappStatementString = self.dappTextView.text
             finalDappSubmitVC.dappFontString = self.dappFontString
             finalDappSubmitVC.nameString = self.nameString
+            finalDappSubmitVC.dapp = self.dapp
         }
       
     }

@@ -37,7 +37,7 @@ class FinalDappSubmitViewController: UIViewController {
     var dappFontString:String!
     var dappStatementString:String!
     var nameString:String!
-
+    var dapp: PFObject!
     
     //animation stuff
     @IBOutlet var panRecognizer: UIPanGestureRecognizer!
@@ -172,9 +172,14 @@ class FinalDappSubmitViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
+        if self.dapp == nil {
+            return
+        }
+        
         let currentDappCardAsImage = self.dappView.toImage()
         
-        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
+        TwitterHelper.tweetDapp(self.dapp!,
+            image: currentDappCardAsImage,
             completion: {
                 (success, error) -> Void in
                 if success {

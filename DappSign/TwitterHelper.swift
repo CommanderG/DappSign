@@ -10,7 +10,7 @@ import Foundation
 import TwitterKit
 
 class TwitterHelper {
-    class func tweetDappCardImage(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
+    class func tweetDapp(dapp: PFObject, image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         Twitter.sharedInstance().logInWithCompletion {
             (session, error) -> Void in
             if (session == nil) {
@@ -24,13 +24,33 @@ class TwitterHelper {
             self.uploadImageToTwitter(image, completion: {
                 (mediaID) -> Void in
                 if let _mediaID = mediaID {
-                    self.tweetImageWithMediaID(_mediaID, completion: {
-                        (success: Bool) -> Void in
-                        if success {
-                            completion(success: true, error: nil)
-                        } else {
-                            completion(success: false, error: nil)
+                    let hashtagsRelation = dapp.relationForKey("hashtags")
+                    
+                    hashtagsRelation.query().findObjectsInBackgroundWithBlock({
+                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        var status = ""
+                        
+                        if objects != nil {
+                            let hashtags = objects as [PFObject]
+                            let hashtagNames = hashtags.filter({
+                                $0["name"] != nil
+                            }).map({
+                                $0["name"] as String!
+                            }).map({
+                                "#" + $0
+                            })
+                            
+                            status = (hashtagNames as NSArray).componentsJoinedByString(" ")
                         }
+                        
+                        self.tweetImageWithMediaID(_mediaID, status: status, completion: {
+                            (success: Bool) -> Void in
+                            if success {
+                                completion(success: true, error: nil)
+                            } else {
+                                completion(success: false, error: nil)
+                            }
+                        })
                     })
                 } else {
                     let errorUserInfo = [NSLocalizedDescriptionKey: "Failed to upload image of the card to Twitter"]
@@ -92,9 +112,9 @@ class TwitterHelper {
         }
     }
     
-    private class func tweetImageWithMediaID(mediaID: String, completion: (success: Bool) -> Void) -> Void {
+    private class func tweetImageWithMediaID(mediaID: String, status: String, completion: (success: Bool) -> Void) -> Void {
         let parameters = [
-            "status": "Hello http://www.apple.com/",
+            "status": status,
             "wrap_links": "true",
             "media_ids": mediaID
         ]

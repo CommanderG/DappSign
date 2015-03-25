@@ -175,8 +175,14 @@ class HomeViewController: UIViewController {
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
+        let currentDapp = self.dapps.first
         
-        TwitterHelper.tweetDappCardImage(currentDappCardAsImage,
+        if currentDapp == nil {
+            return
+        }
+        
+        TwitterHelper.tweetDapp(currentDapp!,
+            image: currentDappCardAsImage,
             completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
