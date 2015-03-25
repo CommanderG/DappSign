@@ -27,6 +27,9 @@ class DappsViewController: UIViewController {
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var dappsSwipesCountLabel: UILabel!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -262,6 +265,20 @@ class DappsViewController: UIViewController {
         
         if self.dappsInfo?.dapps.count > 0 {
             if let dapp = self.dappsInfo?.dapps.first {
+                if let dappScore = dapp["dappScore"] as Int? {
+                    var text: String
+                    
+                    if dappScore == 1 {
+                        text = "1 Dapp and counting"
+                    } else {
+                        text = "\(dappScore) Dapps and counting"
+                    }
+                    
+                    self.dappsSwipesCountLabel.text = text
+                } else {
+                    self.dappsSwipesCountLabel.text = nil
+                }
+                
                 self.dappTextView.text = dapp["dappStatement"] as? String
                 
                 if let dappFontName = dapp["dappFont"] as? String {
@@ -273,8 +290,14 @@ class DappsViewController: UIViewController {
                 if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
                     self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
                 }
+                
+                let currentUser = PFUser.currentUser()
+                
+                self.usernameLabel.text = currentUser["name"] as String?
+                self.userProfileImageView.image = UIImage(data: currentUser["image"] as NSData)
             }
         } else {
+            self.dappsSwipesCountLabel.text = nil
             self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
             
             if let font = dappFonts.dappFontBook["exo"] {
@@ -283,6 +306,8 @@ class DappsViewController: UIViewController {
             
             self.dappTextView.textColor = UIColor.whiteColor()
             self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+            self.usernameLabel.text = nil
+            self.userProfileImageView.image = nil
         }
         
         self.scoreView.backgroundColor = self.dappTextView.backgroundColor

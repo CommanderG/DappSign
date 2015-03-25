@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var dappsSwipesCountLabel: UILabel!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -344,6 +345,20 @@ class HomeViewController: UIViewController {
         
         if dapps.count > 0 {
             if let dapp = dapps.first {
+                if let dappScore = dapp["dappScore"] as Int? {
+                    var text: String
+                    
+                    if dappScore == 1 {
+                        text = "1 Dapp and counting"
+                    } else {
+                        text = "\(dappScore) Dapps and counting"
+                    }
+                    
+                    self.dappsSwipesCountLabel.text = text
+                } else {
+                    self.dappsSwipesCountLabel.text = nil
+                }
+                
                 self.dappTextView.text = dapp["dappStatement"] as? String
                 
                 if let dappFontName = dapp["dappFont"] as? String {
@@ -362,6 +377,7 @@ class HomeViewController: UIViewController {
                 self.userProfileImageView.image = UIImage(data: currentUser["image"] as NSData)
             }
         } else {
+            self.dappsSwipesCountLabel.text = nil
             self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
             
             if let font = dappFonts.dappFontBook["exo"] {
