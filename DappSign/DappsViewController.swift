@@ -41,6 +41,17 @@ class DappsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let font = UIFont(name: "Exo-Regular", size: 18.0) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+        }
+        
+        if let font = UIFont(name: "Exo-Regular", size: 16.0) {
+            self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
+                [NSFontAttributeName: font],
+                forState: .Normal
+            )
+        }
+        
         self.shareOnFacebookButton.layer.cornerRadius = 8.0
         self.tweetThisCardButton.layer.cornerRadius = 8.0
         
