@@ -60,18 +60,6 @@ class Requests {
         }
     }
     
-    class func downloadDappsWithHashtag(hashtag: PFObject, completion: (dapps: [PFObject], error: NSError!) -> Void) {
-        let dappsQuery = PFQuery(className: "Dapps")
-        dappsQuery.limit = 1000
-        
-        dappsQuery.whereKey("hashtags", equalTo: hashtag)
-        
-        dappsQuery.findObjectsInBackgroundWithBlock({
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(dapps: objects as [PFObject], error: error)
-        })
-    }
-    
     class func downloadDappsWithStatementWhichContains(statementSubstring: String, notSwipedByUser user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         var query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
             dappStatementSubstring: statementSubstring
@@ -151,6 +139,41 @@ class Requests {
                     completion(succeeded: succeeded, error: error)
                 })
             }
+        }
+    }
+    
+    class func downloadDappsNotSwipedByUser(user: PFUser, hashtag: PFObject, completion: (dapps: [PFObject]?, error: NSError?) -> Void) {
+        if let dappsQuery = DappQueriesBuilder.queryForDownloadingDappsNotSwipedByUser(user, withHashtag: hashtag) {
+            dappsQuery.whereKey("hashtags", containedIn: [hashtag])
+            
+            dappsQuery.findObjectsInBackgroundWithBlock({
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error != nil {
+                    completion(dapps: nil, error: error)
+                    
+                    return
+                }
+                
+                let dapps = objects as [PFObject]
+                
+                completion(dapps: dapps, error: nil)
+            })
+        } else {
+            var userInfo: [String: String]
+            
+            if let hashtagName = hashtag["name"] as String? {
+                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #\(hashtagName)."]
+            } else {
+                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #<unknown name>."]
+            }
+            
+            let error = NSError(
+                domain: "Dapps type",
+                code: 0,
+                userInfo: userInfo
+            )
+            
+            completion(dapps: nil, error: error)
         }
     }
     

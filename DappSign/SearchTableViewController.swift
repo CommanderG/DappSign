@@ -160,20 +160,16 @@ class SearchTableViewController: UITableViewController {
                 if let hashtag = self.hashtags?[indexPath.row] {
                     self.tableView.userInteractionEnabled = false
                     
-                    Requests.downloadDappsWithHashtag(hashtag, completion: {
-                        (dapps: [PFObject], error: NSError!) -> Void in
+                    let currentUser = PFUser.currentUser()
+                    
+                    Requests.downloadDappsNotSwipedByUser(currentUser, hashtag: hashtag, completion: {
+                        (dapps: [PFObject]?, error: NSError?) -> Void in
                         self.tableView.userInteractionEnabled = true
                         
-                        if error != nil {
-                            println(error)
-                            
-                            return
-                        }
-                        
-                        if dapps.count == 0 {
+                        if let error = error {
                             let alertView = UIAlertView(
                                 title: "Error",
-                                message: "There are no dapps with such hashtag",
+                                message: error.localizedDescription,
                                 delegate: nil,
                                 cancelButtonTitle: "OK"
                             )
@@ -183,17 +179,41 @@ class SearchTableViewController: UITableViewController {
                             return
                         }
                         
-                        let dappsInfo = DappsInfo(
-                            hashtag: self.hashtags![indexPath.row],
-                            dapps: dapps
-                        )
-                        
-                        dappsViewController!.dappsInfo = dappsInfo
-                        
-                        self.presentViewController(dappsNavigationController!,
-                            animated: true,
-                            completion: nil
-                        )
+                        if let dapps = dapps {
+                            if dapps.count == 0 {
+                                let alertView = UIAlertView(
+                                    title: "Error",
+                                    message: "There are no dapps with such hashtag",
+                                    delegate: nil,
+                                    cancelButtonTitle: "OK"
+                                )
+                                
+                                alertView.show()
+                                
+                                return
+                            }
+                            
+                            let dappsInfo = DappsInfo(
+                                hashtag: self.hashtags![indexPath.row],
+                                dapps: dapps
+                            )
+                            
+                            dappsViewController!.dappsInfo = dappsInfo
+                            
+                            self.presentViewController(dappsNavigationController!,
+                                animated: true,
+                                completion: nil
+                            )
+                        } else {
+                            let alertView = UIAlertView(
+                                title: "Error",
+                                message: "There are no dapps with such hashtag",
+                                delegate: nil,
+                                cancelButtonTitle: "OK"
+                            )
+                            
+                            alertView.show()
+                        }
                     })
                 }
             } else if indexPath.section == Section.Dapps.rawValue {
