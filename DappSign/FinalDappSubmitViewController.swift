@@ -71,9 +71,16 @@ class FinalDappSubmitViewController: UIViewController {
             self.dappView.transform = CGAffineTransformConcat(scale, translate)
         }
         
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappColorString]
+        if self.dappColorString != nil {
+            self.dappTextView.backgroundColor = dappColors.dappColorWheel[self.dappColorString]
+        }
+        
         self.dappTextView.text = dappStatementString
-        self.dappTextView.font = dappFonts.dappFontBook[dappFontString]
+        
+        if self.dappFontString != nil {
+            self.dappTextView.font = dappFonts.dappFontBook[self.dappFontString]
+        }
+        
         self.dappTextView.textColor = UIColor.whiteColor()
         self.dappScoreView.backgroundColor = self.dappTextView.backgroundColor
         self.dappLogoView.backgroundColor = self.dappTextView.backgroundColor
