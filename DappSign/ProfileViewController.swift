@@ -186,6 +186,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 handler: {
                     (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
                     self.dappCardWithIndex(indexPath.row)
+                    
+                    self.tableView.setEditing(false, animated: true)
             })
         }
         
@@ -275,40 +277,41 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     private func dappCardWithIndex(index: Int) {
-        if let dapps = self.dapps() {
-            let dapp = dapps[index]
-            
-            Requests.markDappAsSwiped(dapp, user: PFUser.currentUser(), completion: {
-                (succeeded: Bool, error: NSError?) -> Void in
-                var message: String
-                
-                if succeeded {
-                    if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
-                        if !contains(dappsIdsSwipedByLoggedInUser, dapp.objectId) {
-                            self.dappsIdsSwipedByLoggedInUser?.append(dapp.objectId)
-                        }
-                    }
-                    
-                    self.tableView.setEditing(false, animated: true)
-                    
-                    message = "You have successfully dapped this card."
-                } else {
-                    if let error = error {
-                        message = "Failed to mark current Dapp as swiped. Error: \(error.localizedDescription)"
-                    } else {
-                        message = "Failed to mark current Dapp as swiped. Unknown error."
-                    }
-                }
-                
-                let alertView = UIAlertView(
-                    title: "Success",
-                    message: "You have successfully dapped this card.",
-                    delegate: nil,
-                    cancelButtonTitle: "OK"
-                )
-                
-                alertView.show()
-            })
+        let dapps = self.dapps()
+        
+        if dapps == nil {
+            return
         }
+        
+        let dapp = dapps![index]
+        let currentUser = PFUser.currentUser()
+        
+        Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
+            (succeeded: Bool, error: NSError?) -> Void in
+            var message: String
+            
+            if succeeded {
+                message = "You have successfully dapped this card."
+                
+                Requests.incrementScoreOfTheDapp(dapp, completion: {
+                    (succeeded: Bool, error: NSError?) -> Void in
+                })
+            } else {
+                if let error = error {
+                    message = "Failed to dapp this card. Error: \(error.localizedDescription)"
+                } else {
+                    message = "Failed to dapp this card. Unknown error."
+                }
+            }
+            
+            let alertView = UIAlertView(
+                title: nil,
+                message: message,
+                delegate: nil,
+                cancelButtonTitle: "OK"
+            )
+            
+            alertView.show()
+        })
     }
 }

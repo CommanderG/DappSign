@@ -103,64 +103,71 @@ class DappsViewController: UIViewController {
             let swipedFromRightToLeft = translation.x < -150.0
             let swipedFromLeftToRight = translation.x > 150.0
             
-            if swipedFromRightToLeft || swipedFromLeftToRight {
+            if !swipedFromRightToLeft && !swipedFromLeftToRight {
+                return
+            }
+            
+            self.animator.removeAllBehaviors()
+            
+            var gravity = UIGravityBehavior(items: [self.dappView])
+            gravity.gravityDirection = CGVectorMake(0, 10)
+            
+            self.animator.addBehavior(gravity)
+            
+            delay(0.3) {
                 self.animator.removeAllBehaviors()
                 
-                var gravity = UIGravityBehavior(items: [self.dappView])
-                gravity.gravityDirection = CGVectorMake(0, 10)
+                self.attachmentBehavior.anchorPoint = self.view.center
+                self.dappView.center = self.view.center
                 
-                self.animator.addBehavior(gravity)
+                let scale = CGAffineTransformMakeScale(0.5, 0.5)
+                let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
                 
-                delay(0.3) {
-                    self.animator.removeAllBehaviors()
+                self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                
+                if let currentDapp = self.dappsInfo?.dapps.first {
+                    let currentUser = PFUser.currentUser()
                     
-                    self.attachmentBehavior.anchorPoint = self.view.center
-                    self.dappView.center = self.view.center
+                    Requests.addDappToDappsSwipedArray(currentDapp, user: currentUser, completion: {
+                        (succeeded: Bool, error: NSError?) -> Void in
+                        if succeeded {
+                            if swipedFromLeftToRight {
+                                Requests.incrementScoreOfTheDapp(currentDapp, completion: {
+                                    (succeeded: Bool, error: NSError?) -> Void in
+                                    if !succeeded {
+                                        if let error = error {
+                                            println(error)
+                                        }
+                                    }
+                                })
+                            }
+                        } else {
+                            if let error = error {
+                                println(error)
+                            }
+                        }
+                    })
+                }
+                
+                if self.dappsInfo?.dapps.count > 0 {
+                    self.dappsInfo?.dapps.removeAtIndex(0)
+                }
+                
+                if self.dappsInfo?.dapps.count > 0 {
+                    self.initDappView()
+                } else {
+                    self.dappView.hidden = true
                     
-                    let scale = CGAffineTransformMakeScale(0.5, 0.5)
-                    let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+                    delay(0.15) {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                }
+                
+                spring(0.5) {
+                    let scale = CGAffineTransformMakeScale(1.0, 1.0)
+                    let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
                     
                     self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                    
-                    if swipedFromLeftToRight {
-                        if let currentDapp = self.dappsInfo?.dapps.first {
-                            self.markDappAsSwiped(currentDapp, completion: {
-                                (succeeded: Bool, error: NSError?) -> Void in
-                                if succeeded {
-                                    println("Successfully marked Dapp with Id \(currentDapp.objectId) as swiped.")
-                                    
-                                    return
-                                }
-                                
-                                if let error = error {
-                                    println("Failed to mark current Dapp as swiped. Error: \(error)")
-                                } else {
-                                    println("Failed to mark current Dapp as swiped. Unknown error")
-                                }
-                            })
-                        }
-                    }
-                    
-                    if self.dappsInfo?.dapps.count > 0 {
-                        self.dappsInfo?.dapps.removeAtIndex(0)
-                    }
-                    
-                    if self.dappsInfo?.dapps.count > 0 {
-                        self.initDappView()
-                    } else {
-                        self.dappView.hidden = true
-                        
-                        delay(0.15) {
-                            self.dismissViewControllerAnimated(true, completion: nil)
-                        }
-                    }
-                    
-                    spring(0.5) {
-                        let scale = CGAffineTransformMakeScale(1.0, 1.0)
-                        let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-                        
-                        self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                    }
                 }
             }
         }
@@ -211,41 +218,6 @@ class DappsViewController: UIViewController {
                     }
                 }
         })
-    }
-    
-    // MARK: - Requests
-    
-    private func markDappAsSwiped(dapp: PFObject, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
-        let user = PFUser.currentUser()
-        let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
-        
-        dappsSwipedRelation.addObject(dapp)
-        
-        user.saveInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError!) -> Void in
-            completion(succeeded: succeeded, error: error)
-            
-            if let dappTypeId = dapp["dappTypeId"] as? String {
-                if dappTypeId != DappTypeId.Secondary.rawValue {
-                    return
-                }
-                
-                if let dappScore = dapp["dappScore"] as? Int {
-                    dapp["dappScore"] = dappScore + 1
-                } else {
-                    dapp["dappScore"] = 2 // (undefined) + 1
-                }
-                
-                dapp.saveInBackgroundWithBlock({
-                    (succeeded: Bool, error: NSError!) -> Void in
-                    if error != nil {
-                        println(error)
-                        
-                        return
-                    }
-                })
-            }
-        }
     }
     
     // MARK: -

@@ -110,36 +110,28 @@ class Requests {
         }
     }
     
-    class func markDappAsSwiped(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+    class func addDappToDappsSwipedArray(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
         let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
         
         dappsSwipedRelation.addObject(dapp)
         
         user.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError!) -> Void in
-            if error != nil {
-                completion(succeeded: succeeded, error: error)
-                
-                return
-            }
-            
-            if let dappTypeId = dapp["dappTypeId"] as? String {
-                if dappTypeId != DappTypeId.Secondary.rawValue {
-                    return
-                }
-                
-                if let dappScore = dapp["dappScore"] as? Int {
-                    dapp["dappScore"] = dappScore + 1
-                } else {
-                    dapp["dappScore"] = 2 // (undefined) + 1
-                }
-                
-                dapp.saveInBackgroundWithBlock({
-                    (succeeded: Bool, error: NSError!) -> Void in
-                    completion(succeeded: succeeded, error: error)
-                })
-            }
+            completion(succeeded: succeeded, error: error)
         }
+    }
+    
+    class func incrementScoreOfTheDapp(dapp: PFObject, completion: (succeeded: Bool, error: NSError!) -> Void) {
+        if let dappScore = dapp["dappScore"] as? Int {
+            dapp["dappScore"] = dappScore + 1
+        } else {
+            dapp["dappScore"] = 2 // (undefined) + 1
+        }
+        
+        dapp.saveInBackgroundWithBlock({
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: succeeded, error: error)
+        })
     }
     
     class func downloadDappsNotSwipedByUser(user: PFUser, hashtag: PFObject, completion: (dapps: [PFObject]?, error: NSError?) -> Void) {

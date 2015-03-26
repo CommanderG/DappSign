@@ -94,64 +94,72 @@ class HomeViewController: UIViewController {
             let swipedFromRightToLeft = translation.x < -150.0
             let swipedFromLeftToRight = translation.x > 150.0
             
-            if swipedFromRightToLeft || swipedFromLeftToRight {
+            if !swipedFromRightToLeft && !swipedFromLeftToRight {
+                return
+            }
+            
+            self.animator.removeAllBehaviors()
+            
+            var gravity = UIGravityBehavior(items: [self.dappView])
+            gravity.gravityDirection = CGVectorMake(0, 10)
+            
+            self.animator.addBehavior(gravity)
+            
+            delay(0.3) {
                 self.animator.removeAllBehaviors()
                 
-                var gravity = UIGravityBehavior(items: [self.dappView])
-                gravity.gravityDirection = CGVectorMake(0, 10)
+                self.attachmentBehavior.anchorPoint = self.view.center
+                self.dappView.center = self.view.center
                 
-                self.animator.addBehavior(gravity)
+                let scale = CGAffineTransformMakeScale(0.5, 0.5)
+                let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
                 
-                delay(0.3) {
-                    self.animator.removeAllBehaviors()
+                self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                
+                if let currentDapp = self.dapps.first {
+                    let currentUser = PFUser.currentUser()
                     
-                    self.attachmentBehavior.anchorPoint = self.view.center
-                    self.dappView.center = self.view.center
-                    
-                    let scale = CGAffineTransformMakeScale(0.5, 0.5)
-                    let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+                    Requests.addDappToDappsSwipedArray(currentDapp, user: currentUser, completion: {
+                        (succeeded: Bool, error: NSError?) -> Void in
+                        if succeeded {
+                            if swipedFromLeftToRight {
+                                Requests.incrementScoreOfTheDapp(currentDapp, completion: {
+                                    (succeeded: Bool, error: NSError?) -> Void in
+                                    if !succeeded {
+                                        if let error = error {
+                                            println(error)
+                                        }
+                                    }
+                                })
+                            }
+                        } else {
+                            if let error = error {
+                                println(error)
+                            }
+                        }
+                    })
+                }
+                
+                if self.dapps.count > 0 {
+                    self.dapps.removeAtIndex(0)
+                }
+                
+                if self.dapps.count > 0 {
+                    self.initDappView()
+                } else {
+                    self.downloadDapps()
+                }
+                
+                spring(0.5) {
+                    let scale = CGAffineTransformMakeScale(1.0, 1.0)
+                    let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
                     
                     self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                    
-                    if swipedFromLeftToRight {
-                        if let currentDapp = self.dapps.first {
-                            Requests.markDappAsSwiped(currentDapp,
-                                user: PFUser.currentUser(),
-                                completion: {
-                                    (succeeded: Bool, error: NSError?) -> Void in
-                                    if succeeded {
-                                        println("Successfully marked Dapp with Id \(currentDapp.objectId) as swiped.")
-                                        
-                                        return
-                                    }
-                                    
-                                    if let error = error {
-                                        println("Failed to mark current Dapp as swiped. Error: \(error)")
-                                    } else {
-                                        println("Failed to mark current Dapp as swiped. Unknown error")
-                                    }
-                            })
-                        }
-                    }
-                    
-                    if self.dapps.count > 0 {
-                        self.dapps.removeAtIndex(0)
-                    }
-                    
-                    if self.dapps.count > 0 {
-                        self.initDappView()
-                    } else {
-                        self.downloadDapps()
-                    }
-                    
-                    spring(0.5) {
-                        let scale = CGAffineTransformMakeScale(1.0, 1.0)
-                        let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-                        
-                        self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                    }
                 }
             }
+            
+                
+               
         }
     }
     
