@@ -309,10 +309,31 @@ class DappsViewController: UIViewController {
                     self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
                 }
                 
-                let currentUser = PFUser.currentUser()
+                self.usernameLabel.text = nil
+                self.userProfileImageView.image = nil
                 
-                self.usernameLabel.text = currentUser["name"] as String?
-                self.userProfileImageView.image = UIImage(data: currentUser["image"] as NSData)
+                if let userId = dapp["userid"] as String? {
+                    let userQuery = PFUser.query()
+                    
+                    userQuery.whereKey("objectId", equalTo: userId)
+                    
+                    userQuery.findObjectsInBackgroundWithBlock({
+                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        if error != nil {
+                            println(error)
+                            
+                            return
+                        }
+                        
+                        if let user = objects.first as PFObject? {
+                            self.usernameLabel.text = user["name"] as String?
+                            self.userProfileImageView.image = UIImage(data: user["image"] as NSData)
+                        } else {
+                            self.usernameLabel.text = nil
+                            self.userProfileImageView.image = nil
+                        }
+                    })
+                }
             }
         } else {
             self.dappsSwipesCountLabel.text = nil
