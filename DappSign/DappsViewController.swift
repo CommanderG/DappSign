@@ -131,6 +131,12 @@ class DappsViewController: UIViewController {
                     Requests.addDappToDappsSwipedArray(currentDapp, user: currentUser, completion: {
                         (succeeded: Bool, error: NSError?) -> Void in
                         if succeeded {
+                            let notificationCenter = NSNotificationCenter.defaultCenter()
+                            
+                            notificationCenter.postNotificationName(DappSwipedNotification,
+                                object: currentDapp.objectId
+                            )
+                            
                             if swipedFromLeftToRight {
                                 Requests.incrementScoreOfTheDapp(currentDapp, completion: {
                                     (succeeded: Bool, error: NSError?) -> Void in

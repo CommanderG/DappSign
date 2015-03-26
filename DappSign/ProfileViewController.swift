@@ -293,6 +293,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             if succeeded {
                 message = "You have successfully dapped this card."
                 
+                let notificationCenter = NSNotificationCenter.defaultCenter()
+                
+                notificationCenter.postNotificationName(DappSwipedNotification,
+                    object: dapp.objectId
+                )
+                
                 Requests.incrementScoreOfTheDapp(dapp, completion: {
                     (succeeded: Bool, error: NSError?) -> Void in
                 })

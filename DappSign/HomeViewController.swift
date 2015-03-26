@@ -54,6 +54,12 @@ class HomeViewController: UIViewController {
         
         self.updateUserInformation()
         self.downloadDapps()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: Selector("handleDappSwipedNotification:"),
+            name: DappSwipedNotification,
+            object: nil
+        )
     }
     
     override func didReceiveMemoryWarning() {
@@ -336,6 +342,18 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: -
+    
+    internal func handleDappSwipedNotification(notification: NSNotification) {
+        if let dappId = notification.object as String? {
+            if self.dapps.first?.objectId == dappId {
+                self.dapps.removeAtIndex(0)
+                
+                self.initDappView()
+            } else {
+                self.dapps = self.dapps.filter({ $0.objectId != dappId })
+            }
+        }
+    }
     
     private func initDappView() {
         self.dappView.hidden = false
