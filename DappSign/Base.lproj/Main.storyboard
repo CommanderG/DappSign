@@ -1465,7 +1465,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hashtags" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hashtags" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
                                 <rect key="frame" x="18" y="306" width="284" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7VI-e2-Emb"/>
@@ -1476,7 +1476,7 @@
                                     <outlet property="delegate" destination="Run-wI-cqj" id="1kR-Qm-d0T"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEu-ba-x1Y">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEu-ba-x1Y">
                                 <rect key="frame" x="282" y="290" width="20" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="l2b-aQ-fIe"/>
