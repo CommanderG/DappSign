@@ -144,9 +144,9 @@ class HomeViewController: UIViewController {
                     self.dapps.removeAtIndex(0)
                 }
                 
-                if self.dapps.count > 0 {
-                    self.initDappView()
-                } else {
+                self.initDappView()
+                
+                if self.dapps.count == 0 {
                     self.downloadDapps()
                 }
                 
@@ -157,9 +157,6 @@ class HomeViewController: UIViewController {
                     self.dappView.transform = CGAffineTransformConcat(scale, translate)
                 }
             }
-            
-                
-               
         }
     }
     
