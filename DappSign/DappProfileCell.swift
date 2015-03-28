@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DappProfileCell: UITableViewCell {
+class DappProfileCell: SWTableViewCell {
     @IBOutlet weak var dappStatementTextView: UITextView!
     @IBOutlet weak var dappScoreLabel: UILabel!
     

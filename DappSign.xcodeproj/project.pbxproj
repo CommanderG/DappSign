@@ -67,6 +67,12 @@
 		84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
 		84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */; };
+		84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */; };
+		84D848801AC726D000D1B3F9 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848761AC726D000D1B3F9 /* SWCellScrollView.m */; };
+		84D848811AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848781AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m */; };
+		84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */; };
+		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +152,18 @@
 		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
 		84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappProfileCell.swift; sourceTree = "<group>"; };
+		84D848731AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		84D848751AC726D000D1B3F9 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		84D848761AC726D000D1B3F9 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		84D848771AC726D000D1B3F9 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		84D848781AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		84D848791AC726D000D1B3F9 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		84D8487B1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +332,7 @@
 		84C3D3811AB5FEC700E0F350 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84D848721AC726D000D1B3F9 /* SWTableViewCell */,
 				84C3D3861AB6030E00E0F350 /* DappCardCell.swift */,
 				84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */,
 			);
@@ -365,6 +384,25 @@
 				271D0DC61ABAD8E400227DE7 /* Requests.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		84D848721AC726D000D1B3F9 /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				84D848731AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.h */,
+				84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */,
+				84D848751AC726D000D1B3F9 /* SWCellScrollView.h */,
+				84D848761AC726D000D1B3F9 /* SWCellScrollView.m */,
+				84D848771AC726D000D1B3F9 /* SWLongPressGestureRecognizer.h */,
+				84D848781AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m */,
+				84D848791AC726D000D1B3F9 /* SWTableViewCell.h */,
+				84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */,
+				84D8487B1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.h */,
+				84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */,
+				84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */,
+				84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */,
+			);
+			path = SWTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */,
+				84D848801AC726D000D1B3F9 /* SWCellScrollView.m in Sources */,
 				84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */,
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
@@ -485,9 +524,11 @@
 				849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */,
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
+				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
+				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
@@ -496,6 +537,8 @@
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
+				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */,
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
 				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
@@ -504,6 +547,7 @@
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */,
 				84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */,
+				84D848811AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m in Sources */,
 				4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,

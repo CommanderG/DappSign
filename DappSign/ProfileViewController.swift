@@ -86,114 +86,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - <UITableViewDataSource>
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let dapps = self.dapps() {
-            return dapps.count
-        }
-        
-        return 0
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as DappProfileCell
-        
-        if let dapps = self.dapps() {
-            let dapp = dapps[indexPath.row]
-            
-            if let dappBackgroundColorString = dapp["dappBackgroundColor"] as? String {
-                cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
-            }
-            
-            cell.dappStatementTextView.text = dapp["dappStatement"] as? String
-            
-            if let dappFontString = dapp["dappFont"] as? String {
-                cell.dappStatementTextView.font = dappFonts.dappFontBook[dappFontString]
-            }
-            
-            if let dappScore = dapp["dappScore"] as? Int {
-                cell.dappScoreLabel.text = String(dappScore)
-            } else {
-                cell.dappScoreLabel.text = nil
-            }
-            
-            cell.dappScoreLabel.textColor = UIColor.whiteColor()
-            cell.dappStatementTextView.textColor = UIColor.whiteColor()
-        }
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    
-    // MARK: - <UITableViewDelegate>
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        if self.user.objectId == PFUser.currentUser().objectId {
-            return []
-        }
-        
-        var selecteedDappHasBeenDapped: Bool
-        
-        if self.user.objectId == PFUser.currentUser().objectId {
-            selecteedDappHasBeenDapped = true
-        } else {
-            if let dapps = self.dapps() {
-                let dapp = dapps[indexPath.row]
-                
-                if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
-                    if contains(dappsIdsSwipedByLoggedInUser, dapp.objectId) {
-                        selecteedDappHasBeenDapped = true
-                    } else {
-                        selecteedDappHasBeenDapped = false
-                    }
-                } else {
-                    selecteedDappHasBeenDapped = false
-                }
-            } else {
-                selecteedDappHasBeenDapped = false
-            }
-        }
-        
-        var dappAction: UITableViewRowAction
-        
-        if selecteedDappHasBeenDapped {
-            dappAction = UITableViewRowAction(
-                style: UITableViewRowActionStyle.Normal,
-                title: "Dapp",
-                handler: {
-                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-                    let alertView = UIAlertView(
-                        title: nil,
-                        message: "You have already tapped this dapp",
-                        delegate: nil,
-                        cancelButtonTitle: "OK"
-                    )
-                    
-                    alertView.show()
-            })
-        } else {
-            dappAction = UITableViewRowAction(
-                style: UITableViewRowActionStyle.Default,
-                title: "Dapp",
-                handler: {
-                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-                    self.dappCardWithIndex(indexPath.row)
-                    
-                    self.tableView.setEditing(false, animated: true)
-            })
-        }
-        
-        return [dappAction]
-    }
-    
     // MARK: - @IBActions
     
     @IBAction func close(sender: AnyObject) {
@@ -221,6 +113,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         return nil
     }
+    
+    private func canShowDappButtonInCellWithDappWithId(dappId: String) -> Bool {
+        if self.user.objectId == PFUser.currentUser().objectId {
+            return false
+        }
+        
+        if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
+            if contains(dappsIdsSwipedByLoggedInUser, dappId) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    // MARK: - Requests
     
     private func downloadDapps() {
         let index = self.dappsFilterSegmentedControl.selectedSegmentIndex
@@ -276,14 +184,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
     }
     
-    private func dappCardWithIndex(index: Int) {
-        let dapps = self.dapps()
-        
-        if dapps == nil {
-            return
-        }
-        
-        let dapp = dapps![index]
+    private func dapp(dapp: PFObject, completion: () -> Void) {
         let currentUser = PFUser.currentUser()
         
         Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
@@ -292,6 +193,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             if succeeded {
                 message = "You have successfully dapped this card."
+                
+                self.dappsIdsSwipedByLoggedInUser?.append(dapp.objectId)
                 
                 let notificationCenter = NSNotificationCenter.defaultCenter()
                 
@@ -318,6 +221,83 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             )
             
             alertView.show()
+            
+            completion()
         })
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let dapps = self.dapps() {
+            return dapps.count
+        }
+        
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as DappProfileCell
+        
+        if let dapps = self.dapps() {
+            let dapp = dapps[indexPath.row]
+            
+            if let dappBackgroundColorString = dapp["dappBackgroundColor"] as? String {
+                cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
+            }
+            
+            cell.dappStatementTextView.text = dapp["dappStatement"] as? String
+            
+            if let dappFontString = dapp["dappFont"] as? String {
+                cell.dappStatementTextView.font = dappFonts.dappFontBook[dappFontString]
+            }
+            
+            if let dappScore = dapp["dappScore"] as? Int {
+                cell.dappScoreLabel.text = String(dappScore)
+            } else {
+                cell.dappScoreLabel.text = nil
+            }
+            
+            cell.dappScoreLabel.textColor = UIColor.whiteColor()
+            cell.dappStatementTextView.textColor = UIColor.whiteColor()
+            
+            if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
+                var buttons = NSMutableArray(capacity: 1)
+                
+                buttons.sw_addUtilityButtonWithColor(
+                    UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
+                    title: "Dapp"
+                )
+                
+                cell.leftUtilityButtons = buttons
+                cell.delegate = self
+            } else {
+                cell.leftUtilityButtons = []
+                cell.delegate = nil
+            }
+        }
+        
+        return cell
+    }
+}
+
+extension ProfileViewController: SWTableViewCellDelegate {
+    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
+        return true
+    }
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
+        if let indexPath = self.tableView.indexPathForCell(cell) {
+            if let dapps = self.dapps() {
+                let dapp = dapps[indexPath.row];
+                
+                self.dapp(dapp, completion: {
+                    () -> Void in
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+                })
+                
+                cell.hideUtilityButtonsAnimated(true)
+            }
+        }
     }
 }
