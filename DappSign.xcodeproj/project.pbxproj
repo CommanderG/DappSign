@@ -22,6 +22,7 @@
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
+		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -101,6 +102,7 @@
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
+		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				4CD9C9B41AA1DE5F00046CA2 /* StoreKit.framework in Frameworks */,
 				4CD9C9B21AA1DE5500046CA2 /* Security.framework in Frameworks */,
 				4CD9C9B01AA1DE4E00046CA2 /* QuartzCore.framework in Frameworks */,
+				4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */,
 				4CD9C9AE1AA1DE4300046CA2 /* MobileCoreServices.framework in Frameworks */,
 				4CD9C9AC1AA1DE3700046CA2 /* CoreLocation.framework in Frameworks */,
 				4CD9C9AA1AA1DE3000046CA2 /* CoreGraphics.framework in Frameworks */,
@@ -269,6 +272,7 @@
 		4CD9C99F1AA1DA8100046CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */,
 				2714318E1AB0D181002F9527 /* Fabric.framework */,
 				2714318F1AB0D181002F9527 /* TwitterKit.framework */,
 				271431901AB0D181002F9527 /* TwitterKitResources.bundle */,
@@ -415,6 +419,7 @@
 				4CD9C9711AA1D59900046CA2 /* Sources */,
 				4CD9C9721AA1D59900046CA2 /* Frameworks */,
 				4CD9C9731AA1D59900046CA2 /* Resources */,
+				4C1D14EE1AC943E600040DE1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -509,6 +514,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4C1D14EE1AC943E600040DE1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d22483edfe701d576bc4ce54b30b66ee9d8dc2dc 95f50e0f2ff2859c379f76a72c321060314f4b052b472b0466ef1a8d32e585a3";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4CD9C9711AA1D59900046CA2 /* Sources */ = {
@@ -677,6 +698,7 @@
 					"$(inherited)",
 					/Users/Vakkalanka/Documents/FacebookSDK,
 					"$(PROJECT_DIR)/DappSign",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DappSign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -693,6 +715,7 @@
 					"$(inherited)",
 					/Users/Vakkalanka/Documents/FacebookSDK,
 					"$(PROJECT_DIR)/DappSign",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DappSign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

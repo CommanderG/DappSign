@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import Fabric
 import TwitterKit
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        Fabric.with([Twitter()])
+        Fabric.with([Twitter(), Crashlytics()])
         
         return true
     }
