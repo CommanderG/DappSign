@@ -218,6 +218,10 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
 
     @IBAction func handleGesture(sender: AnyObject) {
         let location = sender.locationInView(view)
@@ -640,10 +644,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         }
       
     }
-
-    
-
-    
 }
 
 extension String {
@@ -727,8 +727,10 @@ extension AddDappViewController: UITextFieldDelegate {
         
         return true
     }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true;
     }
 }
