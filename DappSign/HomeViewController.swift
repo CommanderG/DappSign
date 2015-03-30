@@ -443,4 +443,8 @@ class HomeViewController: UIViewController {
         self.scoreView.backgroundColor = self.dappTextView.backgroundColor
         self.logoView.backgroundColor = self.dappTextView.backgroundColor
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }

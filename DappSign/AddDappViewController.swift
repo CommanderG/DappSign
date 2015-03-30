@@ -727,4 +727,8 @@ extension AddDappViewController: UITextFieldDelegate {
         
         return true
     }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }

@@ -23,6 +23,8 @@
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
+		4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
+		4C1D14F31AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
@@ -103,6 +105,7 @@
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		4C1D14F11AC9476700040DE1 /* Exo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Black.otf"; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -309,6 +312,7 @@
 		4CD9C9CE1AA21A5100046CA2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4C1D14F11AC9476700040DE1 /* Exo-Black.otf */,
 				4CD9C9CF1AA21A5100046CA2 /* banksia.ttf */,
 				4CD9C9D01AA21A5100046CA2 /* Bellota-Regular.otf */,
 				4CD9C9D11AA21A5100046CA2 /* Capture_it.ttf */,
@@ -502,6 +506,7 @@
 				4CD9C9831AA1D59900046CA2 /* Main.storyboard in Resources */,
 				4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */,
 				4CD9C9DB1AA21A5100046CA2 /* Elsie-Regular.otf in Resources */,
+				4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */,
 				4CD9C9851AA1D59900046CA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +515,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C1D14F31AC9476700040DE1 /* Exo-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
