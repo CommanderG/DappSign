@@ -90,6 +90,7 @@ class Requests {
         var query = PFQuery(className: "Dapps")
         
         query.whereKey("userid", equalTo: userId)
+        query.whereKey("isDeleted", notEqualTo: true)
         query.orderByDescending("createdAt")
         
         query.findObjectsInBackgroundWithBlock {
@@ -103,6 +104,8 @@ class Requests {
         var query = relation.query()
         
         query.limit = 1000
+        
+        query.whereKey("isDeleted", notEqualTo: true)
         
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
