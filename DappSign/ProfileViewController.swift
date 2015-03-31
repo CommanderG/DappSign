@@ -184,7 +184,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
     }
     
-    private func dapp(dapp: PFObject, completion: () -> Void) {
+    private func dapp(dapp: PFObject, completion: (succeeded: Bool) -> Void) {
         let currentUser = PFUser.currentUser()
         
         Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
@@ -222,7 +222,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             alertView.show()
             
-            completion()
+            completion(succeeded: succeeded)
         })
     }
 }
@@ -292,7 +292,20 @@ extension ProfileViewController: SWTableViewCellDelegate {
                 let dapp = dapps[indexPath.row];
                 
                 self.dapp(dapp, completion: {
-                    () -> Void in
+                    (succeeded: Bool) -> Void in
+                    if succeeded {
+                        if let userId = dapp["userid"] as String? {
+                            Requests.incrementDappScoreForUserWithId(userId, completion: {
+                                (succeeded: Bool, error: NSError?) -> Void in
+                                if !succeeded {
+                                    if let error = error {
+                                        println(error.localizedDescription)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                    
                     self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
                 })
                 

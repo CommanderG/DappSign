@@ -16,6 +16,7 @@
         </mutableArray>
         <mutableArray key="Exo-Black.otf">
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -777,7 +778,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6X-Bh-YOW">
-                                <rect key="frame" x="20" y="84" width="280" height="400"/>
+                                <rect key="frame" x="20" y="99" width="280" height="385"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-fJ-cPr">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
@@ -810,7 +811,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-i2-0Li">
-                                        <rect key="frame" x="0.0" y="340" width="280" height="20"/>
+                                        <rect key="frame" x="0.0" y="325" width="280" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pe-O9-lPx">
                                                 <rect key="frame" x="8" y="-1" width="234" height="23"/>
@@ -825,7 +826,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lw-Jn-lb4">
-                                        <rect key="frame" x="0.0" y="360" width="280" height="40"/>
+                                        <rect key="frame" x="0.0" y="345" width="280" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Ao-N9W">
                                                 <rect key="frame" x="237" y="2" width="35" height="35"/>
@@ -854,7 +855,7 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5N-P2-oiu">
-                                        <rect key="frame" x="0.0" y="60" width="280" height="280"/>
+                                        <rect key="frame" x="0.0" y="60" width="280" height="265"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -975,6 +976,16 @@
                                     <segue destination="Iyj-7z-odA" kind="modal" id="pKu-HH-ZwY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Dapp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNt-Hl-eRK">
+                                <rect key="frame" x="20" y="70" width="153" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="ERk-1d-zLi"/>
+                                    <constraint firstAttribute="height" constant="21" id="x9m-AO-BEW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -987,14 +998,17 @@
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Mzg-dd-Xpd"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="j6X-Bh-YOW" secondAttribute="bottom" constant="84" id="NOj-kc-eNL"/>
                             <constraint firstItem="j6X-Bh-YOW" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="Oql-st-s3j"/>
+                            <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="top" constant="-33" id="P5T-Wi-05a"/>
+                            <constraint firstItem="FNt-Hl-eRK" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="QpK-KO-mq3"/>
                             <constraint firstItem="5Z8-aq-G7z" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Tkg-CY-p8w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Z8-aq-G7z" secondAttribute="trailing" constant="4" id="UbR-23-TGr"/>
                             <constraint firstAttribute="centerX" secondItem="3O5-Ue-Ctg" secondAttribute="centerX" constant="-0.5" id="VUh-CX-PjU"/>
-                            <constraint firstItem="j6X-Bh-YOW" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="64" id="dro-9P-a1y"/>
+                            <constraint firstItem="j6X-Bh-YOW" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="79" id="dro-9P-a1y"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="iR9-rg-teR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dappScoreLabel" destination="FNt-Hl-eRK" id="k6X-hn-cp9"/>
                         <outlet property="dappTextView" destination="t5N-P2-oiu" id="MXd-Dz-Muz"/>
                         <outlet property="dappView" destination="j6X-Bh-YOW" id="sum-3J-x38"/>
                         <outlet property="dappsSwipesCountLabel" destination="Yzg-Ef-ROj" id="bpJ-mj-FuO"/>

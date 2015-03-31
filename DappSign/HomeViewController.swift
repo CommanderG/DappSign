@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var dappsSwipesCountLabel: UILabel!
+    @IBOutlet weak var dappScoreLabel: UILabel!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -37,8 +38,12 @@ class HomeViewController: UIViewController {
     var dappFonts = DappFonts()
     var dappColors = DappColors()
     
+    var timer: NSTimer? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.dappScoreLabel.text = nil;
         
         self.animator = UIDynamicAnimator(referenceView: view)
         self.snapBehavior = UISnapBehavior(
@@ -64,6 +69,20 @@ class HomeViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(
+            1.0,
+            target: self,
+            selector: Selector("updateDappScore"),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.timer?.invalidate()
     }
     
     // MARK: - @IBActions
@@ -123,27 +142,10 @@ class HomeViewController: UIViewController {
                 self.dappView.transform = CGAffineTransformConcat(scale, translate)
                 
                 if let currentDapp = self.dapps.first {
-                    let currentUser = PFUser.currentUser()
-                    
-                    Requests.addDappToDappsSwipedArray(currentDapp, user: currentUser, completion: {
-                        (succeeded: Bool, error: NSError?) -> Void in
-                        if succeeded {
-                            if swipedFromLeftToRight {
-                                Requests.incrementScoreOfTheDapp(currentDapp, completion: {
-                                    (succeeded: Bool, error: NSError?) -> Void in
-                                    if !succeeded {
-                                        if let error = error {
-                                            println(error)
-                                        }
-                                    }
-                                })
-                            }
-                        } else {
-                            if let error = error {
-                                println(error)
-                            }
-                        }
-                    })
+                    self.sendRequestsForDapp(
+                        currentDapp,
+                        swipedFromLeftToRight: swipedFromLeftToRight
+                    )
                 }
                 
                 if self.dapps.count > 0 {
@@ -205,6 +207,50 @@ class HomeViewController: UIViewController {
                         self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
                     }
                 }
+        })
+    }
+    
+    // MARK: - 
+    
+    private func sendRequestsForDapp(dapp: PFObject, swipedFromLeftToRight: Bool) {
+        let currentUser = PFUser.currentUser()
+        
+        Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
+            (succeeded: Bool, error: NSError?) -> Void in
+            if !succeeded {
+                if let error = error {
+                    println(error)
+                }
+                
+                return
+            }
+            
+            if !swipedFromLeftToRight {
+                return
+            }
+            
+            Requests.incrementScoreOfTheDapp(dapp, completion: {
+                (succeeded: Bool, error: NSError?) -> Void in
+                if !succeeded {
+                    if let error = error {
+                        println(error)
+                    }
+                }
+            })
+            
+            if let userId = dapp["userid"] as String? {
+                Requests.incrementDappScoreForUserWithId(userId, completion: {
+                    (succeeded: Bool, error: NSError?) -> Void in
+                    if !succeeded {
+                        if let error = error {
+                            println("Failed to update dappScore for user with id \(userId). Error: \(error.localizedDescription)")
+                        } else {
+                            println("Failed to update dappScore for user with id \(userId). Unknown error")
+                        }
+                    }
+                })
+            }
+            
         })
     }
     
@@ -339,6 +385,33 @@ class HomeViewController: UIViewController {
                 profileVC.user = PFUser.currentUser()
             }
         }
+    }
+    
+    // MARK: - Timer
+    
+    func updateDappScore() {
+        println("updateDappScore")
+        
+        let currentUser = PFUser.currentUser()
+        
+        Requests.downloadDappScoreForUserWithId(currentUser.objectId, completion: {
+            (dappScore: Int?, error: NSError?) -> Void in
+            if error != nil {
+                println(error)
+                
+                self.dappScoreLabel.text = nil
+                
+                return
+            }
+            
+            if let dappScore = dappScore {
+                if dappScore == 1 {
+                    self.dappScoreLabel.text = "1 Dapp"
+                } else {
+                    self.dappScoreLabel.text = "\(dappScore) Dapps"
+                }
+            }
+        })
     }
     
     // MARK: -

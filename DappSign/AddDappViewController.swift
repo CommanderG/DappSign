@@ -618,6 +618,17 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
                 if succeeded {
                     println("Dapp created with id: \(self.dapp.objectId)")
                     println(self.dapp)
+                    
+                    if let userId = self.dapp["userid"] as String? {
+                        Requests.incrementDappScoreForUserWithId(userId, completion: {
+                            (succeeded: Bool, error: NSError?) -> Void in
+                            if !succeeded {
+                                if let error = error {
+                                    println(error.localizedDescription)
+                                }
+                            }
+                        })
+                    }
                 } else {
                     println("%@" , error)
                 }
