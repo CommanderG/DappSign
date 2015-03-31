@@ -304,6 +304,17 @@ extension ProfileViewController: SWTableViewCellDelegate {
                                 }
                             })
                         }
+                        
+                        let currentUserId = PFUser.currentUser().objectId
+                        
+                        Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
+                            (succeeded: Bool, error: NSError?) -> Void in
+                            if !succeeded {
+                                if let error = error {
+                                    println(error.localizedDescription)
+                                }
+                            }
+                        })
                     }
                     
                     self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)

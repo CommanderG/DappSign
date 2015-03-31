@@ -629,6 +629,17 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
                             }
                         })
                     }
+                    
+                    let currentUserId = PFUser.currentUser().objectId
+                    
+                    Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
+                        (succeeded: Bool, error: NSError?) -> Void in
+                        if !succeeded {
+                            if let error = error {
+                                println(error.localizedDescription)
+                            }
+                        }
+                    })
                 } else {
                     println("%@" , error)
                 }
