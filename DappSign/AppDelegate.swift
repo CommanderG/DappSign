@@ -47,6 +47,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        if let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication) {
+            if let data = bfurl.appLinkData {
+                println(data)
+                return true
+            }
+        }
         return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
     }
 
