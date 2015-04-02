@@ -13,9 +13,14 @@ class FacebookHelper {
         
         self.performFacebookPublishAction({ () -> Void in
             
+            let image = [[
+                "url": image,
+                "user_generated": "true",
+                ]]
+            
             // create og obj
             let path = "me/dappsign:create"
-            let object = FBGraphObject.openGraphObjectForPostWithType("dappsign:dappsign", title: "title", image: image, url: "https://fb.me/1561242164125124", description: "des") as FBGraphObjectProtocol
+            let object = FBGraphObject.openGraphObjectForPostWithType("dappsign:dappsign", title: nil, image: image, url: "http://fb.me/1561473017435372", description: nil) as FBGraphObjectProtocol
             
             let bridge = FacebookBridge()
             let action = bridge.graphObject()
