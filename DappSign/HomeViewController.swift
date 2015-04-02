@@ -169,26 +169,14 @@ class HomeViewController: UIViewController, FBSDKSharingDelegate {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        PFUser.currentUser().fetch()
-        PFFacebookUtils.logInInBackgroundWithPublishPermissions(["publish_actions"], block: { (
-            user, error) -> Void in
-            if let dapp = self.dapps.first {
-                let currentDappCardAsImage = self.dappView.toImage()
-                let photo = FBSDKSharePhoto(image: currentDappCardAsImage, userGenerated: true)
-                
-                let object = FBSDKShareOpenGraphObject(properties: [
-                    "dappsign:id": dapp.objectId,
-                    ])
-                let action = FBSDKShareOpenGraphAction(type: "dappsign.share", object: object, key: "dappsign")
-                action.setPhoto(photo, forKey: "dappsign.photo")
-                
-                let content = FBSDKShareOpenGraphContent()
-                content.action = action
-                content.previewPropertyName = "dappsign.photo"
-                
-                FBSDKShareAPI.shareWithContent(content, delegate: self)
-            }
-        })
+        if FBSDKAccessToken.currentAccessToken().hasGranted("publish_actions") {
+            self.publishToFacebook()
+        } else {
+            let manager = PFFacebookUtils.facebookLoginManager()
+            manager.logInWithPublishPermissions(["publish_actions"], handler: { (result, error) -> Void in
+                self.publishToFacebook()
+            })
+        }
 
         /*
         
@@ -562,5 +550,25 @@ class HomeViewController: UIViewController, FBSDKSharingDelegate {
     
     func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
         println(error)
+    }
+    
+    func publishToFacebook() {
+        if let dapp = self.dapps.first {
+            let currentDappCardAsImage = self.dappView.toImage()
+            let photo = FBSDKSharePhoto(image: currentDappCardAsImage, userGenerated: true)
+            
+            let object = FBSDKShareOpenGraphObject(properties: [
+                "og:type": "DappSign",
+                "dappsign:id": dapp.objectId,
+                ])
+            let action = FBSDKShareOpenGraphAction(type: "dappsign.share", object: object, key: "dappsign")
+            action.setPhoto(photo, forKey: "dappsign.photo")
+            
+            let content = FBSDKShareOpenGraphContent()
+            content.action = action
+            content.previewPropertyName = "dappsign.photo"
+            
+            FBSDKShareAPI.shareWithContent(content, delegate: self)
+        }
     }
 }
