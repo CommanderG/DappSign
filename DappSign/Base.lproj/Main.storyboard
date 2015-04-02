@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -32,17 +32,19 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
+        </mutableArray>
+        <mutableArray key="Exo-SemiBold.otf">
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
+            <string>Exo-DemiBold</string>
         </mutableArray>
         <mutableArray key="KlinicSlabMedium.otf">
             <string>KlinicSlab-Medium</string>
@@ -217,7 +219,7 @@
                                                     <constraint firstAttribute="height" constant="23" id="WJD-w4-RQx"/>
                                                     <constraint firstAttribute="width" constant="142" id="tc9-wZ-CjS"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -236,7 +238,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn0-PE-iB0">
                                                 <rect key="frame" x="8" y="-1" width="234" height="23"/>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -258,7 +260,7 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KT-En-cY1">
                                                 <rect key="frame" x="8" y="9" width="221" height="21"/>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -294,7 +296,7 @@
                                             <constraint firstAttribute="height" constant="20" id="jni-jj-RYk"/>
                                             <constraint firstAttribute="width" constant="143" id="rYS-yw-yCZ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -796,7 +798,7 @@
                                                     <constraint firstAttribute="height" constant="23" id="1cq-wh-6Hb"/>
                                                     <constraint firstAttribute="width" constant="142" id="jrq-93-CW6"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -837,7 +839,7 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmW-pk-rwf">
                                                 <rect key="frame" x="8" y="9" width="221" height="21"/>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -873,7 +875,7 @@
                                             <constraint firstAttribute="width" constant="143" id="7Q1-xb-BCJ"/>
                                             <constraint firstAttribute="height" constant="20" id="ano-FK-FmM"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1566,7 +1568,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To the Congress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSr-ee-tfA">
                                                 <rect key="frame" x="42" y="9" width="125" height="21"/>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1604,7 +1606,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="iJU-lU-jMZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1625,11 +1627,11 @@
                                         <rect key="frame" x="0.0" y="40" width="280" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Dapp and counting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzv-cR-K5r">
-                                                <rect key="frame" x="170" y="0.0" width="106" height="20"/>
+                                                <rect key="frame" x="169" y="0.0" width="107" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="4P2-Pb-k7z"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1647,7 +1649,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3e-dW-5aL">
                                                 <rect key="frame" x="3" y="-1" width="243" height="21"/>
-                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1789,7 +1791,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="XgB-ZI-Ie0"/>
+        <segue reference="mYk-4f-hdk"/>
         <segue reference="xG9-la-u2M"/>
     </inferredMetricsTieBreakers>
 </document>
