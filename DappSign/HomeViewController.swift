@@ -555,18 +555,20 @@ class HomeViewController: UIViewController, FBSDKSharingDelegate {
     func publishToFacebook() {
         if let dapp = self.dapps.first {
             let currentDappCardAsImage = self.dappView.toImage()
-            let photo = FBSDKSharePhoto(image: currentDappCardAsImage, userGenerated: true)
+            // let photo = FBSDKSharePhoto(image: currentDappCardAsImage, userGenerated: true)
             
             let object = FBSDKShareOpenGraphObject(properties: [
                 "og:type": "DappSign",
+                "og:title": "A Game of Thrones",
                 "dappsign:id": dapp.objectId,
                 ])
-            let action = FBSDKShareOpenGraphAction(type: "dappsign.share", object: object, key: "dappsign")
-            action.setPhoto(photo, forKey: "dappsign.photo")
+            let action = FBSDKShareOpenGraphAction(type: "dappsign.share", object: object, key: "dappsign.dappsign")
+            // action.setPhoto(photo, forKey: "dappsign.photo")
             
             let content = FBSDKShareOpenGraphContent()
             content.action = action
-            content.previewPropertyName = "dappsign.photo"
+            content.previewPropertyName = "dappsign.dappsign"
+            // content.previewPropertyName = "dappsign.photo"
             
             FBSDKShareAPI.shareWithContent(content, delegate: self)
         }
