@@ -77,6 +77,7 @@
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 		B377145B1ACCEFFE00B5AE77 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B377145A1ACCEFFE00B5AE77 /* Bolts.framework */; };
+		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,8 @@
 		84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		B377145A1ACCEFFE00B5AE77 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
+		B37714691ACD5A4200B5AE77 /* FacebookBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +397,8 @@
 				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
 				278B78291AB86B0500EB39AB /* DappsDownloader.swift */,
 				271D0DC61ABAD8E400227DE7 /* Requests.swift */,
+				B37714681ACD5A4200B5AE77 /* FacebookBridge.h */,
+				B37714691ACD5A4200B5AE77 /* FacebookBridge.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -567,6 +572,7 @@
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
+				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,

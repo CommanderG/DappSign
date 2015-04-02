@@ -11,3 +11,4 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "SWTableViewCell.h"
+#import "FacebookBridge.h"

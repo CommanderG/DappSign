@@ -9,6 +9,30 @@
 import Foundation
 
 class FacebookHelper {
+    class func postActionToFacebook(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
+        
+        self.performFacebookPublishAction({ () -> Void in
+            
+            // create og obj
+            let path = "me/dappsign:create"
+            let object = FBGraphObject.openGraphObjectForPostWithType("dappsign:dappsign", title: "title", image: image, url: "https://fb.me/1561242164125124", description: "des") as FBGraphObjectProtocol
+            
+            let bridge = FacebookBridge()
+            let action = bridge.graphObject()
+            action.setObject(object, forKey: "dappsign")
+            
+            FBOpenGraphActionParams(action: action, actionType: "dappsign:create", previewPropertyName: "dappsign")
+            
+            FBDialogs.presentShareDialogWithOpenGraphAction(action, actionType: "dappsign:create", previewPropertyName: "dappsign", handler: { ( call, results, error) -> Void in
+                println(results)
+                println(error)
+            })
+        }, failure: {
+            (error) -> Void in
+            completion(success: false, error: error)
+        })
+    }
+    
     class func postImageToFacebook(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         let photoParams = FBPhotoParams(photos: [image])
         var shareDialogHasBeenPresented = false

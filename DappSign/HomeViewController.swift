@@ -171,7 +171,7 @@ class HomeViewController: UIViewController {
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
         
-        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+        FacebookHelper.postActionToFacebook(currentDappCardAsImage,
             completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
