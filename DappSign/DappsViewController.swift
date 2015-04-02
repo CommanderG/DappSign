@@ -186,6 +186,8 @@ class DappsViewController: UIViewController {
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
         
+        /*
+        TODO
         FacebookHelper.postImageToFacebook(currentDappCardAsImage,
             completion: {
                 (success: Bool, error: NSError?) -> Void in
@@ -198,7 +200,7 @@ class DappsViewController: UIViewController {
                         self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
                     }
                 }
-        })
+        })*/
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {

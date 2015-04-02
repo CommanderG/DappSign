@@ -24,9 +24,7 @@ class ViewController: UIViewController {
         
         loginWithFacebookButton.userInteractionEnabled = false
         loginWithFacebookButton.alpha = 0.5
-        
-        PFFacebookUtils.logInWithPermissions(permissions, {
-            (user: PFUser!, error: NSError!) -> Void in
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) -> Void in
             if let user = user {
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
@@ -43,7 +41,7 @@ class ViewController: UIViewController {
             
             loginWithFacebookButton.userInteractionEnabled = true
             loginWithFacebookButton.alpha = 1.0
-        })
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

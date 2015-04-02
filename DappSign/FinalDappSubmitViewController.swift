@@ -163,6 +163,7 @@ class FinalDappSubmitViewController: UIViewController {
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
         
+        /*
         FacebookHelper.postImageToFacebook(currentDappCardAsImage,
             completion: {
                 (success, error) -> Void in
@@ -176,6 +177,7 @@ class FinalDappSubmitViewController: UIViewController {
                     }
                 }
         })
+*/
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {

@@ -171,6 +171,8 @@ class HomeViewController: UIViewController {
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
         
+        /*
+        TODO
         FacebookHelper.postImageToFacebook(currentDappCardAsImage,
             completion: {
                 (success: Bool, error: NSError?) -> Void in
@@ -184,6 +186,7 @@ class HomeViewController: UIViewController {
                     }
                 }
         })
+*/
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
@@ -279,8 +282,7 @@ class HomeViewController: UIViewController {
             return
         }
         
-        let FBSession = PFFacebookUtils.session()
-        let accessToken = FBSession.accessTokenData.accessToken
+        let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
         
         let url = NSURL(string: "https://graph.facebook.com/me/picture?type=large&return_ssl_resources+1&access_token=\(accessToken)")
         let urlRequest = NSURLRequest(URL: url!)
@@ -290,22 +292,20 @@ class HomeViewController: UIViewController {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             // TODO user["image"] = UIImage(data: data)
             
-            user.save()
-            
-            FBRequestConnection.startForMeWithCompletionHandler({
-                connection, result, error in
+            let request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+            request.startWithCompletionHandler({ (connection, result, error) -> Void in
                 if let resultDict = result as? NSDictionary {
                     let name = resultDict["name"] as String
                     
                     user["name"] = name
                     user["lowercaseName"] = name.lowercaseString
                     
-                    user.save()
+                    user.saveEventually()
                 }
             })
             
             user["dappScore"] = 0
-            user.save()
+            user.saveEventually()
         }
     }
 

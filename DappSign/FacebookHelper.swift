@@ -9,6 +9,7 @@
 import Foundation
 
 class FacebookHelper {
+    /*
     class func postImageToFacebook(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         let photoParams = FBPhotoParams(photos: [image])
         var shareDialogHasBeenPresented = false
@@ -76,4 +77,5 @@ class FacebookHelper {
                 }
         }
     }
+*/
 }

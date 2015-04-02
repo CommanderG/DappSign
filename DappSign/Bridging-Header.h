@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 DappSign. All rights reserved.
 //
 
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <ParseUI/ParseUI.h>
 #import <Bolts/Bolts.h>
 #import <Parse/Parse.h>
-#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "SWTableViewCell.h"
