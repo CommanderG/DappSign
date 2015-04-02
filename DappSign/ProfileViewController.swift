@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             )
         }
         
-        profilePic.image = UIImage(data: user["image"] as NSData)
+        // TODO profilePic.image = UIImage(data: user["image"] as NSData)
         nameLabel.text = user["name"] as? String
         
         if let currentUser = PFUser.currentUser() {
