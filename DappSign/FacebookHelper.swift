@@ -9,7 +9,7 @@
 import Foundation
 
 class FacebookHelper {
-    class func postActionToFacebook(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
+    class func postActionToFacebook(title: String, description: String, image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         
         self.performFacebookPublishAction({ () -> Void in
             
@@ -17,10 +17,10 @@ class FacebookHelper {
                 "url": image,
                 "user_generated": "true",
                 ]]
-            
+
             // create og obj
             let path = "me/dappsign:create"
-            let object = FBGraphObject.openGraphObjectForPostWithType("dappsign:dappsign", title: nil, image: image, url: "http://fb.me/1561473017435372", description: nil) as FBGraphObjectProtocol
+            let object = FBGraphObject.openGraphObjectForPostWithType("dappsign:dappsign", title: title, image: image, url: "http://fb.me/1561473017435372", description: description) as FBGraphObjectProtocol
             
             let bridge = FacebookBridge()
             let action = bridge.graphObject()

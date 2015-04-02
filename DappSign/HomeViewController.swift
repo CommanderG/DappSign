@@ -170,20 +170,24 @@ class HomeViewController: UIViewController {
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
-        
-        FacebookHelper.postActionToFacebook(currentDappCardAsImage,
-            completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
-                } else {
-                    if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+        if let currentDapp = self.dapps.first {
+            let description = currentDapp["dappStatement"] as String
+            let name = PFUser.currentUser()["name"] as String
+            let title = "To the Congress from (\(name))"
+            FacebookHelper.postActionToFacebook(title, description: description, image: currentDappCardAsImage,
+                completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                        if let error = error {
+                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                        } else {
+                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                        }
                     }
-                }
-        })
+            })
+        }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
