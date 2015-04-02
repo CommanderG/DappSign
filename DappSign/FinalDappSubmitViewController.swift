@@ -85,9 +85,11 @@ class FinalDappSubmitViewController: UIViewController {
         self.dappScoreView.backgroundColor = self.dappTextView.backgroundColor
         self.dappLogoView.backgroundColor = self.dappTextView.backgroundColor
         self.footerLabel.text = self.nameString
-        // TODO self.footerImage.image = UIImage(data: user["image"] as NSData)
-    
-
+        
+        if let imageData = user["image"] as NSData? {
+            self.footerImage.image = UIImage(data: imageData)
+        }
+        
         self.dappView.alpha = 1
 
         // Do any additional setup after loading the view.
