@@ -21,10 +21,10 @@ class ViewController: UIViewController {
     @IBAction func facebookLoginButton(sender: AnyObject) {
         let loginWithFacebookButton = sender as UIButton
         var permissions = ["public_profile", "email"]
-        
         loginWithFacebookButton.userInteractionEnabled = false
         loginWithFacebookButton.alpha = 0.5
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user, error) -> Void in
+        
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { [unowned self] (user, error) -> Void in
             if let user = user {
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.setApplicationId("cDeJlDRgoAyGETx9QNNx8Dif22QnLLsuHmgbGjLN", clientKey: "uanRP24yCqZPpCNoYR0nfiN2dzJyvd42fuYl6mB3")
         
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(nil)
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
 //        var testObject:PFObject = PFObject(className: "TestObject")
 //        

@@ -16,7 +16,7 @@ internal enum Swipe {
     case SwipeFromRightToLeft
 }
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, FBSDKSharingDelegate {
     @IBOutlet weak var dappView: UIView!
     @IBOutlet weak var dappTextView: UITextView!
     @IBOutlet weak var scoreView: UIView!
@@ -169,9 +169,29 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
-        
+        PFUser.currentUser().fetch()
+        PFFacebookUtils.logInInBackgroundWithPublishPermissions(["publish_actions"], block: { (
+            user, error) -> Void in
+            if let dapp = self.dapps.first {
+                let currentDappCardAsImage = self.dappView.toImage()
+                let photo = FBSDKSharePhoto(image: currentDappCardAsImage, userGenerated: true)
+                
+                let object = FBSDKShareOpenGraphObject(properties: [
+                    "dappsign:id": dapp.objectId,
+                    ])
+                let action = FBSDKShareOpenGraphAction(type: "dappsign.share", object: object, key: "dappsign")
+                action.setPhoto(photo, forKey: "dappsign.photo")
+                
+                let content = FBSDKShareOpenGraphContent()
+                content.action = action
+                content.previewPropertyName = "dappsign.photo"
+                
+                FBSDKShareAPI.shareWithContent(content, delegate: self)
+            }
+        })
+
         /*
+        
         TODO
         FacebookHelper.postImageToFacebook(currentDappCardAsImage,
             completion: {
@@ -529,5 +549,18 @@ class HomeViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    
+    // MARK: FB Sharing
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        println(results)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        println(error)
     }
 }
