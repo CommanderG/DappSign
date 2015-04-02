@@ -126,7 +126,12 @@ class HomeViewController: UIViewController {
             self.animator.removeAllBehaviors()
             
             var gravity = UIGravityBehavior(items: [self.dappView])
-            gravity.gravityDirection = CGVectorMake(0, 10)
+            
+            if swipedFromLeftToRight {
+                gravity.gravityDirection = CGVectorMake(0, -10)
+            } else {
+                gravity.gravityDirection = CGVectorMake(0, 10)
+            }
             
             self.animator.addBehavior(gravity)
             
