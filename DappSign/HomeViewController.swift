@@ -297,9 +297,7 @@ class HomeViewController: UIViewController {
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            if let data = data {
-                user["image"] = UIImage(data: data)
-            }
+            user["image"] = data
             
             user.save()
             
