@@ -244,7 +244,7 @@ class DappsViewController: UIViewController {
             if dappsInfo.dapps.count < 2 {
                 self.title = "Dapp"
             } else if dappsInfo.dapps.count > 0 {
-                self.title = "Dapps"
+                self.title = "Dapp"
             }
         }
     }
@@ -272,7 +272,7 @@ class DappsViewController: UIViewController {
                     if dappScore == 1 {
                         text = "1 Dapp and counting"
                     } else {
-                        text = "\(dappScore) Dapps and counting"
+                        text = "\(dappScore) Dapp and counting"
                     }
                     
                     self.dappsSwipesCountLabel.text = text

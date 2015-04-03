@@ -429,7 +429,7 @@ class HomeViewController: UIViewController {
                 if dappScore == 1 {
                     self.dappScoreLabel.text = "1 Dapp"
                 } else {
-                    self.dappScoreLabel.text = "\(dappScore) Dapps"
+                    self.dappScoreLabel.text = "\(dappScore) Dapp"
                 }
             }
         })
@@ -474,7 +474,7 @@ class HomeViewController: UIViewController {
                     if dappScore == 1 {
                         text = "1 Dapp and counting"
                     } else {
-                        text = "\(dappScore) Dapps and counting"
+                        text = "\(dappScore) Dapp and counting"
                     }
                     
                     self.dappsSwipesCountLabel.text = text
