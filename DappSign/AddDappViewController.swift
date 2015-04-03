@@ -520,12 +520,14 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         characterCountLabel.hidden = true
         
         dappTextView.resignFirstResponder()
+        hashtagTextView.resignFirstResponder()
     }
     
     func reverseTransitionChooseFontToAddText(){
         self.panelView.hidden = true
         self.dappTextView.editable = true
         self.instructionLabel.text = "Type your message. Only one rule: Contribute. Dapp to continue."
+        self.hashtagTextView.hidden = false
         self.dappTextView.becomeFirstResponder()
         
     }
