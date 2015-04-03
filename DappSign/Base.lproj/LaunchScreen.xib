@@ -1,49 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Exo-Black.otf">
-            <string>Exo-Black</string>
-        </mutableArray>
-        <mutableArray key="Exo-Regular.otf">
-            <string>Exo-Regular</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6W-bs-Xec">
-                    <rect key="frame" x="70" y="204" width="181" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="26" id="8I3-Oy-eQm"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="20"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DappSign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-4z-1VL">
-                    <rect key="frame" x="53" y="117" width="215" height="64"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="64" id="79Z-C9-0Yv"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="50"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
             <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
-            <constraints>
-                <constraint firstItem="zv5-4z-1VL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="117" id="27b-si-Mat"/>
-                <constraint firstItem="b6W-bs-Xec" firstAttribute="top" secondItem="zv5-4z-1VL" secondAttribute="bottom" constant="23" id="Dr8-Xg-o0Y"/>
-                <constraint firstAttribute="centerX" secondItem="zv5-4z-1VL" secondAttribute="centerX" id="cYd-az-0Nj"/>
-                <constraint firstAttribute="centerX" secondItem="b6W-bs-Xec" secondAttribute="centerX" constant="-0.5" id="hoG-li-Eer"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="585" y="499"/>
