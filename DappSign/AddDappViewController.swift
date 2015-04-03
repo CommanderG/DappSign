@@ -427,7 +427,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
 
     
     func transitionAddText(){
-        self.instructionLabel.text = "Only one rule: Contribute. Dapp to continue."
+        self.instructionLabel.text = "Type your message. Only one rule: Contribute. Dapp to continue."
         dappTextView.editable = true
         characterCountLabel.hidden = false
         panelView.hidden = true //why doesnt this work????
