@@ -43,6 +43,8 @@ class TwitterHelper {
                                 status = (hashtagNames as NSArray).componentsJoinedByString(" ")
                             }
                             
+                            status += "\nwww.dappsign.com";
+                            
                             self.tweetImageWithMediaID(_mediaID, status: status, completion: {
                                 (success: Bool) -> Void in
                                 if success {

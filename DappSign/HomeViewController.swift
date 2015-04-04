@@ -175,9 +175,15 @@ class HomeViewController: UIViewController {
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
+        let currentDapp = self.dapps.first
+        
+        if currentDapp == nil {
+            return
+        }
         
         if let currentDapp = self.dapps.first {
             FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+                dapp: currentDapp,
                 completion: {
                     (success: Bool, error: NSError?) -> Void in
                     if success {
@@ -448,7 +454,7 @@ class HomeViewController: UIViewController {
                 if dappScore == 1 {
                     self.dappScoreLabel.text = "1 Dapp"
                 } else {
-                    self.dappScoreLabel.text = "\(dappScore) Dapp"
+                    self.dappScoreLabel.text = "\(dappScore) Dapps"
                 }
             }
         })

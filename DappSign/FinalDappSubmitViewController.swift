@@ -166,6 +166,7 @@ class FinalDappSubmitViewController: UIViewController {
         let currentDappCardAsImage = self.dappView.toImage()
         
         FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+            dapp: self.dapp!,
             completion: {
                 (success, error) -> Void in
                 if success {

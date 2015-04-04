@@ -9,7 +9,7 @@
 import Foundation
 
 class FacebookHelper {
-    class func postImageToFacebook(image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
+    class func postImageToFacebook(image: UIImage, dapp: PFObject, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         let photoParams = FBPhotoParams(photos: [image])
         var shareDialogHasBeenPresented = false
         
@@ -34,19 +34,44 @@ class FacebookHelper {
         if !shareDialogHasBeenPresented {
             self.performFacebookPublishAction({
                 () -> Void in
-                var connection = FBRequestConnection()
-                connection.errorBehavior = .ReconnectSession
+                let hashtagsRelation = dapp.relationForKey("hashtags")
                 
-                connection.addRequest(FBRequest(forUploadPhoto: image),
-                    completionHandler: {
-                        (innerConnection, result, error) -> Void in
-                        if error == nil {
-                            completion(success: true, error: nil)
-                        } else {
-                            completion(success: false, error: error)
-                        }
+                hashtagsRelation.query().findObjectsInBackgroundWithBlock({
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    var message = ""
+                    
+                    if objects != nil {
+                        let hashtags = objects as [PFObject]
+                        let hashtagNames = hashtags.filter({
+                            $0["name"] != nil
+                        }).map({
+                            $0["name"] as String!
+                        }).map({
+                            "#" + $0
+                        })
+                        
+                        message = (hashtagNames as NSArray).componentsJoinedByString(" ")
+                    }
+                    
+                    message += "\nwww.dappsign.com";
+                    
+                    let parameters = [
+                        "message": message,
+                        "picture": image
+                    ]
+                    
+                    FBRequestConnection.startWithGraphPath("me/photos",
+                        parameters: parameters,
+                        HTTPMethod: "POST",
+                        completionHandler: {
+                            (connection:FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+                            if error == nil {
+                                completion(success: true, error: nil)
+                            } else {
+                                completion(success: false, error: error)
+                            }
+                    })
                 })
-                connection.start()
             }, failure: {
                 (error) -> Void in
                 completion(success: false, error: error)
