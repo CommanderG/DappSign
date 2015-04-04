@@ -297,7 +297,15 @@ class HomeViewController: UIViewController {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             user["image"] = data
             
-            user.save()
+            user.saveInBackgroundWithBlock({
+                (succeeded: Bool, error: NSError!) -> Void in
+                if succeeded {
+                    println("Successfully saved user's image.")
+                } else {
+                    println("Failed to save user's image.")
+                    println("Errro: \(error)")
+                }
+            })
             
             FBRequestConnection.startForMeWithCompletionHandler({
                 connection, result, error in
@@ -307,12 +315,29 @@ class HomeViewController: UIViewController {
                     user["name"] = name
                     user["lowercaseName"] = name.lowercaseString
                     
-                    user.save()
+                    user.saveInBackgroundWithBlock({
+                        (succeeded: Bool, error: NSError!) -> Void in
+                        if succeeded {
+                            println("Successfully saved user's name.")
+                        } else {
+                            println("Failed to save user's name.")
+                            println("Errro: \(error)")
+                        }
+                    })
                 }
             })
             
             user["dappScore"] = 0
-            user.save()
+            
+            user.saveInBackgroundWithBlock({
+                (succeeded: Bool, error: NSError!) -> Void in
+                if succeeded {
+                    println("Successfully set user's dappScore to 0.")
+                } else {
+                    println("Failed to set user's dappScore to 0.")
+                    println("Errro: \(error)")
+                }
+            })
         }
     }
 
@@ -407,8 +432,6 @@ class HomeViewController: UIViewController {
     // MARK: - Timer
     
     func updateDappScore() {
-        println("updateDappScore")
-        
         let currentUser = PFUser.currentUser()
         
         Requests.downloadDappScoreForUserWithId(currentUser.objectId, completion: {
