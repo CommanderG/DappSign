@@ -7,7 +7,6 @@
 //
 
 #import <FacebookSDK/FacebookSDK.h>
-#import <Bolts/Bolts.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "SWTableViewCell.h"

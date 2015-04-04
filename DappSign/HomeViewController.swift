@@ -175,11 +175,9 @@ class HomeViewController: UIViewController {
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappView.toImage()
+        
         if let currentDapp = self.dapps.first {
-            let description = currentDapp["dappStatement"] as String
-            let name = PFUser.currentUser()["name"] as String
-            let title = "To the Congress from (\(name))"
-            FacebookHelper.postActionToFacebook(title, description: description, image: currentDappCardAsImage,
+            FacebookHelper.postImageToFacebook(currentDappCardAsImage,
                 completion: {
                     (success: Bool, error: NSError?) -> Void in
                     if success {

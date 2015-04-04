@@ -76,7 +76,6 @@
 		84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */; };
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
-		B377145B1ACCEFFE00B5AE77 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B377145A1ACCEFFE00B5AE77 /* Bolts.framework */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -171,7 +170,6 @@
 		84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
-		B377145A1ACCEFFE00B5AE77 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
 		B37714691ACD5A4200B5AE77 /* FacebookBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,7 +194,6 @@
 				271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */,
 				271431911AB0D181002F9527 /* Fabric.framework in Frameworks */,
 				4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */,
-				B377145B1ACCEFFE00B5AE77 /* Bolts.framework in Frameworks */,
 				4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */,
 				4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */,
 			);
@@ -281,7 +278,6 @@
 		4CD9C99F1AA1DA8100046CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B377145A1ACCEFFE00B5AE77 /* Bolts.framework */,
 				4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */,
 				2714318E1AB0D181002F9527 /* Fabric.framework */,
 				2714318F1AB0D181002F9527 /* TwitterKit.framework */,
