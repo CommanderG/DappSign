@@ -11,6 +11,8 @@ import UIKit
 internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
 
+
+
 internal enum Swipe {
     case SwipeFromLeftToRight
     case SwipeFromRightToLeft
@@ -510,7 +512,18 @@ class HomeViewController: UIViewController {
                 self.dappTextView.text = dapp["dappStatement"] as? String
                 
                 if let dappFontName = dapp["dappFont"] as? String {
+                    
+                    let screenSize: CGRect = UIScreen.mainScreen().bounds
+                    let screenWidth = screenSize.width
+                    let screenHeight = screenSize.height
                     self.dappTextView.font = dappFonts.dappFontBook[dappFontName]
+                    
+                    if screenWidth == 320 && screenHeight == 480{
+                        self.dappTextView.font = UIFont(name: dappFontName, size: 22)
+                    }else if screenWidth == 320 && screenHeight == 568{
+                        self.dappTextView.font = UIFont(name: dappFontName, size: 27)
+                    }
+
                 }
                 
                 self.dappTextView.textColor = UIColor.whiteColor()
