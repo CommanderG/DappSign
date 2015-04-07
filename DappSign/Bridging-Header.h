@@ -11,3 +11,5 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "SWTableViewCell.h"
 #import "FacebookBridge.h"
+#import <Crashlytics/Crashlytics.h>
+#import "UIImageView+WebCache.h"
