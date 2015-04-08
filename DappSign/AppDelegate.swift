@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
-import Fabric
 import TwitterKit
+import Fabric
+import Crashlytics
+
  
 
 @UIApplicationMain

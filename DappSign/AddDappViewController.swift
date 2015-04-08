@@ -427,10 +427,10 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
 
     
     func transitionAddText(){
-        self.instructionLabel.text = "Type your message. Only one rule: Contribute. Dapp to continue."
+        self.instructionLabel.text = "Type your message. Only one rule: Contribute."
         dappTextView.editable = true
         characterCountLabel.hidden = false
-        panelView.hidden = true //why doesnt this work????
+        panelView.hidden = true
         panelView.alpha = 0
         hashtagTextView.hidden = false
         dappTextView.becomeFirstResponder()
@@ -526,7 +526,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     func reverseTransitionChooseFontToAddText(){
         self.panelView.hidden = true
         self.dappTextView.editable = true
-        self.instructionLabel.text = "Type your message. Only one rule: Contribute. Dapp to continue."
+        self.instructionLabel.text = "Type your message. Only one rule: Contribute."
         self.hashtagTextView.hidden = false
         self.dappTextView.becomeFirstResponder()
         

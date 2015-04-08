@@ -11,25 +11,25 @@ import UIKit
 
 class DappFonts{
     
-    var futura = UIFont(name: "Futura" , size: CGFloat(29.0))
-    var baskerville = UIFont(name: "Baskerville" , size: CGFloat(29.0))
-    var avenir = UIFont(name: "Avenir" , size: CGFloat(29.0))
-    var copperplate = UIFont(name: "Copperplate" , size: CGFloat(29.0))
-    var menlo = UIFont(name: "Menlo" , size: CGFloat(29.0))
-    var verdana = UIFont(name: "Verdana" , size: CGFloat(29.0))
-    var helvetica = UIFont(name: "Helvetica" , size: CGFloat(29.0))
-    var didot = UIFont(name: "Didot" , size: CGFloat(29.0))
+    var futura = UIFont(name: "Futura" , size: CGFloat(25.0))
+    var baskerville = UIFont(name: "Baskerville" , size: CGFloat(25.0))
+    var avenir = UIFont(name: "Avenir" , size: CGFloat(25.0))
+    var copperplate = UIFont(name: "Copperplate" , size: CGFloat(25.0))
+    var menlo = UIFont(name: "Menlo" , size: CGFloat(25.0))
+    var verdana = UIFont(name: "Verdana" , size: CGFloat(25.0))
+    var helvetica = UIFont(name: "Helvetica" , size: CGFloat(25.0))
+    var didot = UIFont(name: "Didot" , size: CGFloat(25.0))
     
     //new fonts
-    var banksia = UIFont(name:"Banksia" , size: CGFloat(29.0))
-    var bellota = UIFont(name:"Bellota" , size: CGFloat(29.0))
-    var capture = UIFont(name:"Capture it" , size: CGFloat(29.0))
-    var elsie = UIFont(name: "Elsie", size: CGFloat(29.0))
-    var exo = UIFont(name:"Exo", size: CGFloat(29.0))
-    var klinicSlab = UIFont(name:"Klinic Slab", size: CGFloat(29.0))
-    var printClearly = UIFont(name:"Print Clearly" , size: CGFloat(29.0))
-    var sansation = UIFont(name:"Sansation" , size: CGFloat(29.0))
-    var walkwaySemiBold = UIFont(name:"Walkway SemiBold" , size: CGFloat(29.0))
+    var banksia = UIFont(name:"Banksia" , size: CGFloat(25.0))
+    var bellota = UIFont(name:"Bellota" , size: CGFloat(25.0))
+    var capture = UIFont(name:"Capture it" , size: CGFloat(25.0))
+    var elsie = UIFont(name: "Elsie", size: CGFloat(25.0))
+    var exo = UIFont(name:"Exo", size: CGFloat(25.0))
+    var klinicSlab = UIFont(name:"Klinic Slab", size: CGFloat(25.0))
+    var printClearly = UIFont(name:"Print Clearly" , size: CGFloat(25.0))
+    var sansation = UIFont(name:"Sansation" , size: CGFloat(25.0))
+    var walkwaySemiBold = UIFont(name:"Walkway SemiBold" , size: CGFloat(25.0))
     //var exoSemiBold = UIFont(name:"DemiBold" , size: CGFloat(29.0))
 
     

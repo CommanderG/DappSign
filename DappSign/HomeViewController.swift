@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.dappTextView.TextAlignment
         
         self.dappScoreLabel.text = nil;
         
@@ -456,7 +457,7 @@ class HomeViewController: UIViewController {
                 if dappScore == 1 {
                     self.dappScoreLabel.text = "1 Dapp"
                 } else {
-                    self.dappScoreLabel.text = "\(dappScore) Dapps"
+                    self.dappScoreLabel.text = "\(dappScore) Dapp"
                 }
             }
         })
@@ -499,9 +500,9 @@ class HomeViewController: UIViewController {
                     var text: String
                     
                     if dappScore == 1 {
-                        text = "1 Dapp and counting"
+                        text = "1 Dapp"
                     } else {
-                        text = "\(dappScore) Dapp and counting"
+                        text = "\(dappScore) Dapp"
                     }
                     
                     self.dappsSwipesCountLabel.text = text

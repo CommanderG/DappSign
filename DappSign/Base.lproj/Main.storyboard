@@ -35,7 +35,6 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
-            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -415,25 +414,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhQ-cu-Pwx">
-                                <rect key="frame" x="76" y="98" width="16" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="3Ia-b5-kee"/>
-                                    <constraint firstAttribute="width" constant="16" id="YJP-9P-AH5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mz5-hL-Web">
-                                <rect key="frame" x="94" y="98" width="218" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Ocg-XT-lwc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="292" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
                                 <rect key="frame" x="0.0" y="219" width="320" height="349"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -491,6 +471,7 @@
                                     <segment title="DappSigns"/>
                                     <segment title="Dapped"/>
                                 </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="dappsFilterSegmentedControlValueChanged:" destination="Q8A-2e-yyY" eventType="valueChanged" id="hBs-yP-v3a"/>
                                 </connections>
@@ -503,14 +484,9 @@
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="10" id="DNO-FI-XuB"/>
                             <constraint firstAttribute="trailing" secondItem="Ylj-62-KEJ" secondAttribute="trailing" constant="8" id="IYK-Hl-ck1"/>
                             <constraint firstItem="4mG-pu-R2B" firstAttribute="top" secondItem="CIx-8J-2rR" secondAttribute="bottom" constant="8" id="K3v-Xg-wUB"/>
-                            <constraint firstItem="mz5-hL-Web" firstAttribute="top" secondItem="Ylj-62-KEJ" secondAttribute="bottom" constant="3" id="NHr-SO-DKo"/>
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="leading" secondItem="hfZ-WI-Ejb" secondAttribute="trailing" constant="8" id="TC8-lP-3uS"/>
-                            <constraint firstItem="qhQ-cu-Pwx" firstAttribute="leading" secondItem="hfZ-WI-Ejb" secondAttribute="trailing" constant="8" id="aox-OB-CBw"/>
-                            <constraint firstItem="mz5-hL-Web" firstAttribute="leading" secondItem="qhQ-cu-Pwx" secondAttribute="trailing" constant="2" id="cHD-vE-O7H"/>
-                            <constraint firstItem="qhQ-cu-Pwx" firstAttribute="top" secondItem="Ylj-62-KEJ" secondAttribute="bottom" constant="3" id="eLY-32-Tc7"/>
                             <constraint firstItem="CIx-8J-2rR" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="119" id="fSK-wV-TRy"/>
                             <constraint firstItem="4mG-pu-R2B" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="i0L-Eg-1Iq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mz5-hL-Web" secondAttribute="trailing" constant="-8" id="jcy-n6-b9N"/>
                             <constraint firstItem="hfZ-WI-Ejb" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leadingMargin" constant="-10" id="l7A-go-osU"/>
                             <constraint firstAttribute="centerX" secondItem="CIx-8J-2rR" secondAttribute="centerX" id="vBR-7V-oRM"/>
                             <constraint firstItem="hfZ-WI-Ejb" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="10" id="zmZ-da-y09"/>
@@ -531,7 +507,6 @@
                     <connections>
                         <outlet property="dappsFilterSegmentedControl" destination="CIx-8J-2rR" id="UmL-3O-oTY"/>
                         <outlet property="nameLabel" destination="Ylj-62-KEJ" id="KTO-lN-Pon"/>
-                        <outlet property="numDappsLabel" destination="qhQ-cu-Pwx" id="gOO-c6-DWP"/>
                         <outlet property="profilePic" destination="hfZ-WI-Ejb" id="6E4-aA-0Rz"/>
                         <outlet property="tableView" destination="4mG-pu-R2B" id="wBq-fP-3Of"/>
                     </connections>
@@ -932,7 +907,7 @@
                                     <outlet property="delegate" destination="0LN-h1-YCv" id="47F-Wj-rqW"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These people work for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-I2-gbJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These people work for you!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-I2-gbJ">
                                 <rect key="frame" x="16" y="521" width="288" height="27"/>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1076,7 +1051,7 @@
                                             <constraint firstAttribute="height" constant="20" id="1B1-iL-yTp"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Dapp and counting" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzg-Ef-ROj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Dapp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzg-Ef-ROj">
                                         <rect key="frame" x="129" y="40" width="143" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="143" id="7Q1-xb-BCJ"/>
@@ -1833,7 +1808,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSV-qW-38s">
                                         <rect key="frame" x="0.0" y="40" width="280" height="20"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Dapp and counting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzv-cR-K5r">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1 Dapp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzv-cR-K5r">
                                                 <rect key="frame" x="169" y="0.0" width="107" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="4P2-Pb-k7z"/>
@@ -1999,7 +1974,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jNM-sC-DFE"/>
+        <segue reference="mYk-4f-hdk"/>
         <segue reference="xG9-la-u2M"/>
     </inferredMetricsTieBreakers>
 </document>
