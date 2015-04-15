@@ -22,7 +22,7 @@ class DappsViewController: UIViewController {
     internal var dappsInfo: DappsInfo? = nil
     
     @IBOutlet weak var dappView: UIView!
-    @IBOutlet weak var dappTextView: UITextView!
+    @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
@@ -287,16 +287,16 @@ class DappsViewController: UIViewController {
                     self.dappsSwipesCountLabel.text = nil
                 }
                 
-                self.dappTextView.text = dapp["dappStatement"] as? String
+                self.dappStatementLabel.text = dapp["dappStatement"] as? String
                 
                 if let dappFontName = dapp["dappFont"] as? String {
-                    self.dappTextView.font = dappFonts.dappFontBook[dappFontName]
+                    self.dappStatementLabel.font = dappFonts.dappFontBook[dappFontName]
                 }
                 
-                self.dappTextView.textColor = UIColor.whiteColor()
+                self.dappStatementLabel.textColor = UIColor.whiteColor()
                 
                 if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
-                    self.dappTextView.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+                    self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
                 }
                 
                 self.usernameLabel.text = nil
@@ -327,19 +327,20 @@ class DappsViewController: UIViewController {
             }
         } else {
             self.dappsSwipesCountLabel.text = nil
-            self.dappTextView.text = "No more DappSigns. Feel free to submit your own!"
+            self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
             
             if let font = dappFonts.dappFontBook["exo"] {
-                self.dappTextView.font = font
+                self.dappStatementLabel.font = font
             }
             
-            self.dappTextView.textColor = UIColor.whiteColor()
-            self.dappTextView.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+            self.dappStatementLabel.textColor = UIColor.whiteColor()
+            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
         }
         
-        self.scoreView.backgroundColor = self.dappTextView.backgroundColor
-        self.logoView.backgroundColor = self.dappTextView.backgroundColor
+        self.scoreView.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.logoView.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
     }
 }

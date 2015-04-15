@@ -22,7 +22,7 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var scoreLabelText: UILabel!
     @IBOutlet weak var scoreLabelNum: UILabel!
     @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var dappTextView: UITextView!
+    @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     
@@ -72,18 +72,19 @@ class FinalDappSubmitViewController: UIViewController {
         }
         
         if self.dappColorString != nil {
-            self.dappTextView.backgroundColor = dappColors.dappColorWheel[self.dappColorString]
+            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[self.dappColorString]
         }
         
-        self.dappTextView.text = dappStatementString
+        self.dappStatementLabel.text = dappStatementString
         
         if self.dappFontString != nil {
-            self.dappTextView.font = dappFonts.dappFontBook[self.dappFontString]
+            self.dappStatementLabel.font = dappFonts.dappFontBook[self.dappFontString]
         }
         
-        self.dappTextView.textColor = UIColor.whiteColor()
-        self.dappScoreView.backgroundColor = self.dappTextView.backgroundColor
-        self.dappLogoView.backgroundColor = self.dappTextView.backgroundColor
+        self.dappStatementLabel.textColor = UIColor.whiteColor()
+        self.dappScoreView.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.dappLogoView.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
         self.footerLabel.text = self.nameString
         
         if let imageData = user["image"] as NSData? {
