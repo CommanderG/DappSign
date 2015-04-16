@@ -22,6 +22,7 @@
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
+		27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F134871AE06023004BCF7D /* Crashlytics.framework */; };
 		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
 		4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
 		4C1D14F31AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
@@ -127,6 +128,7 @@
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
+		27F134871AE06023004BCF7D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		4C1D14F11AC9476700040DE1 /* Exo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Black.otf"; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				4CD9C9B01AA1DE4E00046CA2 /* QuartzCore.framework in Frameworks */,
 				4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */,
 				4CD9C9AE1AA1DE4300046CA2 /* MobileCoreServices.framework in Frameworks */,
+				27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */,
 				4CD9C9AC1AA1DE3700046CA2 /* CoreLocation.framework in Frameworks */,
 				4CD9C9AA1AA1DE3000046CA2 /* CoreGraphics.framework in Frameworks */,
 				271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */,
@@ -310,6 +313,7 @@
 		4CD9C9781AA1D59900046CA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				27F134871AE06023004BCF7D /* Crashlytics.framework */,
 				4CD9C9CE1AA21A5100046CA2 /* Fonts */,
 				4CD9C9E21AA21CAA00046CA2 /* Design */,
 				4CD9C9BF1AA1EC1A00046CA2 /* Spring */,
