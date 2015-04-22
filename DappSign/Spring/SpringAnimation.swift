@@ -40,7 +40,7 @@ func slideUp(duration: NSTimeInterval, animations: (() -> Void)!) {
         
         animations()
         
-        }, nil)
+        }, completion: nil)
 }
 
 func springWithCompletion(duration: NSTimeInterval, animations: (() -> Void)!, completion: ((Bool) -> Void)!) {

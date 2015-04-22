@@ -53,7 +53,7 @@ class DappsDownloader {
                 return
             }
             
-            let dapps = objects as [PFObject]
+            let dapps = objects as! [PFObject]
             let dapp = dapps.first
             
             completion(dapp: dapp, error: nil)
@@ -76,7 +76,7 @@ class DappsDownloader {
                     }
                 )
             case .Secondary:
-                self.downloadAllDappsWithQuery(query, {
+                self.downloadAllDappsWithQuery(query,completion:  {
                     (error: NSError!) -> Void in
                     
                     sort(&self.dapps, {
@@ -87,7 +87,7 @@ class DappsDownloader {
                     completion(dapps: self.dapps, error: error)
                 })
             case .Unapproved:
-                self.downloadAllDappsWithQuery(query, {
+                self.downloadAllDappsWithQuery(query, completion: {
                     (error: NSError!) -> Void in
                     completion(dapps: self.dapps, error: error)
                 })
@@ -114,7 +114,7 @@ class DappsDownloader {
                 return
             }
             
-            self.dapps = objects as [PFObject]
+            self.dapps = objects as! [PFObject]
             
             completion(error: nil)
         })
@@ -134,7 +134,7 @@ class DappsDownloader {
                 return
             }
             
-            let dapps = objects as [PFObject]
+            let dapps = objects as! [PFObject]
             
             for dapp in dapps {
                 self.dapps.append(dapp)

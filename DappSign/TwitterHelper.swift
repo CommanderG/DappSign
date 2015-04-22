@@ -31,11 +31,11 @@ class TwitterHelper {
                             var status = ""
                             
                             if objects != nil {
-                                let hashtags = objects as [PFObject]
+                                let hashtags = objects as! [PFObject]
                                 let hashtagNames = hashtags.filter({
                                     $0["name"] != nil
                                 }).map({
-                                    $0["name"] as String!
+                                    $0["name"] as! String
                                 }).map({
                                     "#" + $0
                                 })

@@ -208,7 +208,7 @@ extension DappsTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier,
-            forIndexPath: indexPath) as DappCardCell
+            forIndexPath: indexPath) as! DappCardCell
         
         if let dapps = self.dapps {
             let dapp = dapps[indexPath.row] as PFObject
@@ -423,7 +423,7 @@ extension DappsTableViewController: UITextFieldDelegate {
         let currentText = textField.text as NSString
         var newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
         
-        if countElements(newText) == 0 {
+        if count(newText) == 0 {
             return true
         }
         

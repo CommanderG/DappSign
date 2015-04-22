@@ -23,13 +23,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func facebookLoginButton(sender: AnyObject) {
-        let loginWithFacebookButton = sender as UIButton
+        let loginWithFacebookButton = sender as! UIButton
         var permissions = ["public_profile", "email"]
         
         loginWithFacebookButton.userInteractionEnabled = false
         loginWithFacebookButton.alpha = 0.5
         
-        PFFacebookUtils.logInWithPermissions(permissions, {
+        PFFacebookUtils.logInWithPermissions(permissions, block: {
             (user: PFUser!, error: NSError!) -> Void in
             if let user = user {
                 if user.isNew {
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if bIsZipCode{
-            var ZipCodeVC : ZipCodeViewController = segue.destinationViewController as ZipCodeViewController
+            var ZipCodeVC : ZipCodeViewController = segue.destinationViewController as! ZipCodeViewController
             ZipCodeVC.strUserID = strUserID
         }
     }

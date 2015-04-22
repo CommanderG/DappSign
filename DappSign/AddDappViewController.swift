@@ -598,7 +598,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         var hashtagNames = split(self.hashtagTextView.text) { $0 == " " }
         hashtagNames = hashtagNames.map {
             // removes #
-            $0[1...countElements($0) - 1]
+            $0[1...count($0) - 1]
         }
         
         Requests.uploadHashtags(hashtagNames, completion: {
@@ -621,7 +621,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
                     println("Dapp created with id: \(self.dapp.objectId)")
                     println(self.dapp)
                     
-                    if let userId = self.dapp["userid"] as String? {
+                    if let userId = self.dapp["userid"] as? String {
                         Requests.incrementDappScoreForUserWithId(userId, completion: {
                             (succeeded: Bool, error: NSError?) -> Void in
                             if !succeeded {
@@ -652,9 +652,9 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       
         if segue.identifier == "showFinalDappSubmitViewController"{
-            let finalDappSubmitVC:FinalDappSubmitViewController = segue.destinationViewController as FinalDappSubmitViewController
+            let finalDappSubmitVC:FinalDappSubmitViewController = segue.destinationViewController as! FinalDappSubmitViewController
             
-            if let name = PFUser.currentUser()["name"] as String? {
+            if let name = PFUser.currentUser()["name"] as? String {
                 self.nameString = name
             } else {
                 self.nameString = ""
@@ -701,7 +701,7 @@ extension String {
     }
     
     func isHashtag() -> Bool {
-        if countElements(self) < 2 {
+        if count(self) < 2 {
             return false
         }
         
@@ -709,7 +709,7 @@ extension String {
             return false
         }
         
-        let rest = self[1...countElements(self)]
+        let rest = self[1...count(self)]
         
         return rest.containsOnlyDigitsOrLetters()
     }
@@ -721,7 +721,7 @@ extension AddDappViewController: UITextFieldDelegate {
         let currentText = textField.text as NSString
         let newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
         
-        if countElements(newText) < 2 {
+        if count(newText) < 2 {
             if first(newText) == "#" {
                 return true
             }

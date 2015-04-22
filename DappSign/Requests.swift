@@ -22,12 +22,12 @@ class Requests {
                 return
             }
             
-            var hashtagsOnTheServer = objects as [PFObject]
+            var hashtagsOnTheServer = objects as! [PFObject]
             
             let hashtagsOnTheServerLowercaseNames = hashtagsOnTheServer.filter({
                 $0["lowercaseName"] != nil
             }).map({
-                $0["lowercaseName"]! as String
+                $0["lowercaseName"]! as! String
             })
             
             var hashtagNamesForUploading = hashtagNames.filter({
@@ -56,7 +56,7 @@ class Requests {
         
         hashtagsQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(hashtags: objects as [PFObject], error: error)
+            completion(hashtags: objects as! [PFObject], error: error)
         }
     }
     
@@ -70,7 +70,7 @@ class Requests {
         
         query?.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(dapps: objects as [PFObject], error: error)
+            completion(dapps: objects as! [PFObject], error: error)
         }
     }
     
@@ -82,7 +82,7 @@ class Requests {
         
         usersQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(users: objects as [PFUser], error: error)
+            completion(users: objects as! [PFUser], error: error)
         }
     }
     
@@ -95,7 +95,7 @@ class Requests {
         
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(dapps: objects as [PFObject], error: error)
+            completion(dapps: objects as! [PFObject], error: error)
         }
     }
     
@@ -109,7 +109,7 @@ class Requests {
         
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(dapps: objects as [PFObject], error: error)
+            completion(dapps: objects as! [PFObject], error: error)
         }
     }
     
@@ -149,14 +149,14 @@ class Requests {
                     return
                 }
                 
-                let dapps = objects as [PFObject]
+                let dapps = objects as! [PFObject]
                 
                 completion(dapps: dapps, error: nil)
             })
         } else {
             var userInfo: [String: String]
             
-            if let hashtagName = hashtag["name"] as String? {
+            if let hashtagName = hashtag["name"] as? String {
                 userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #\(hashtagName)."]
             } else {
                 userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #<unknown name>."]
@@ -186,7 +186,7 @@ class Requests {
             }
             
             if let userIdDappScore = objects.first as? PFObject {
-                let dappScore = userIdDappScore["dappScore"] as Int?
+                let dappScore = userIdDappScore["dappScore"] as? Int
                 
                 completion(dappScore: dappScore, error: error)
             } else {
@@ -257,7 +257,7 @@ class Requests {
             if let userIdDappScore = objects.first as? PFObject {
                 let dappScoreKey = "dappScore"
                 
-                if let dappScore = userIdDappScore[dappScoreKey] as Int? {
+                if let dappScore = userIdDappScore[dappScoreKey] as? Int {
                     userIdDappScore[dappScoreKey] = dappScore + 1
                 } else {
                     userIdDappScore[dappScoreKey] = 1

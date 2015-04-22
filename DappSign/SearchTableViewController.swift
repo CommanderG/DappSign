@@ -42,7 +42,7 @@ class SearchTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if countElements(self.searchBar.text) > 0 {
+        if count(self.searchBar.text) > 0 {
             self.searchText(self.searchBar.text)
         }
     }
@@ -93,7 +93,7 @@ class SearchTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == Section.Dapps.rawValue {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.dappCellIdentifier,
-                forIndexPath: indexPath) as DappCardCell
+                forIndexPath: indexPath) as! DappCardCell
             
             if let dapp = self.dapps?[indexPath.row] {
                 cell.dappStatementLabel.text = dapp["dappStatement"] as? String
@@ -102,7 +102,7 @@ class SearchTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier,
-                forIndexPath: indexPath) as UITableViewCell
+                forIndexPath: indexPath) as! UITableViewCell
             
             if indexPath.section == Section.Users.rawValue {
                 if let user = self.users?[indexPath.row] {
@@ -291,7 +291,7 @@ class SearchTableViewController: UITableViewController {
 
 extension SearchTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if countElements(searchBar.text) > 0 {
+        if count(searchBar.text) > 0 {
             self.searchText(searchBar.text)
         }
     }

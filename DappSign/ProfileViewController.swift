@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             )
         }
         
-        if let imageData = user["image"] as NSData? {
+        if let imageData = user["image"] as? NSData {
             profilePic.image = UIImage(data: imageData)
         }
         
@@ -240,7 +240,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as DappProfileCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
         
         if let dapps = self.dapps() {
             let dapp = dapps[indexPath.row]
@@ -272,7 +272,7 @@ extension ProfileViewController: UITableViewDataSource {
                     title: "Dapp"
                 )
                 
-                cell.leftUtilityButtons = buttons
+                cell.leftUtilityButtons = buttons as [AnyObject]
                 cell.delegate = self
             } else {
                 cell.leftUtilityButtons = []
@@ -297,7 +297,7 @@ extension ProfileViewController: SWTableViewCellDelegate {
                 self.dapp(dapp, completion: {
                     (succeeded: Bool) -> Void in
                     if succeeded {
-                        if let userId = dapp["userid"] as String? {
+                        if let userId = dapp["userid"] as? String {
                             Requests.incrementDappScoreForUserWithId(userId, completion: {
                                 (succeeded: Bool, error: NSError?) -> Void in
                                 if !succeeded {

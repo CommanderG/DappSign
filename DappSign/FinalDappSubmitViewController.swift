@@ -87,7 +87,7 @@ class FinalDappSubmitViewController: UIViewController {
         self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
         self.footerLabel.text = self.nameString
         
-        if let imageData = user["image"] as NSData? {
+        if let imageData = user["image"] as? NSData {
             self.footerImage.image = UIImage(data: imageData)
         }
         

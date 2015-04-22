@@ -72,7 +72,7 @@ class DappsViewController: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func handleSwipe(sender: AnyObject) {
-        let panGestureRecognizer = sender as UIPanGestureRecognizer
+        let panGestureRecognizer = sender as! UIPanGestureRecognizer
         
         if panGestureRecognizer.state == .Began {
             self.animator.removeBehavior(self.snapBehavior)
@@ -273,7 +273,7 @@ class DappsViewController: UIViewController {
         
         if self.dappsInfo?.dapps.count > 0 {
             if let dapp = self.dappsInfo?.dapps.first {
-                if let dappScore = dapp["dappScore"] as Int? {
+                if let dappScore = dapp["dappScore"] as? Int {
                     var text: String
                     
                     if dappScore == 1 {
@@ -302,7 +302,7 @@ class DappsViewController: UIViewController {
                 self.usernameLabel.text = nil
                 self.userProfileImageView.image = nil
                 
-                if let userId = dapp["userid"] as String? {
+                if let userId = dapp["userid"] as? String {
                     let userQuery = PFUser.query()
                     
                     userQuery.whereKey("objectId", equalTo: userId)
@@ -315,9 +315,9 @@ class DappsViewController: UIViewController {
                             return
                         }
                         
-                        if let user = objects.first as PFObject? {
-                            self.usernameLabel.text = user["name"] as String?
-                            self.userProfileImageView.image = UIImage(data: user["image"] as NSData)
+                        if let user = objects.first as? PFObject {
+                            self.usernameLabel.text = user["name"] as? String
+                            self.userProfileImageView.image = UIImage(data: user["image"] as! NSData)
                         } else {
                             self.usernameLabel.text = nil
                             self.userProfileImageView.image = nil

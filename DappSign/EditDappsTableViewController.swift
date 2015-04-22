@@ -83,11 +83,11 @@ class EditDappsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowPrimaryDapps.rawValue {
-            (segue.destinationViewController as DappsTableViewController).dappsType = .Primary
+            (segue.destinationViewController as! DappsTableViewController).dappsType = .Primary
         } else if segue.identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {
-            (segue.destinationViewController as DappsTableViewController).dappsType = .Secondary
+            (segue.destinationViewController as! DappsTableViewController).dappsType = .Secondary
         } else if segue.identifier == SegueIdentifier.ShowUnapprovedDapps.rawValue {
-            (segue.destinationViewController as DappsTableViewController).dappsType = .Unapproved
+            (segue.destinationViewController as! DappsTableViewController).dappsType = .Unapproved
         }
     }
     

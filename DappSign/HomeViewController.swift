@@ -91,7 +91,7 @@ class HomeViewController: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func handleSwipe(sender: AnyObject) {
-        let panGestureRecognizer = sender as UIPanGestureRecognizer
+        let panGestureRecognizer = sender as! UIPanGestureRecognizer
         
         if panGestureRecognizer.state == .Began {
             self.animator.removeBehavior(self.snapBehavior)
@@ -254,7 +254,7 @@ class HomeViewController: UIViewController {
                 }
             })
             
-            if let userId = dapp["userid"] as String? {
+            if let userId = dapp["userid"] as? String {
                 Requests.incrementDappScoreForUserWithId(userId, completion: {
                     (succeeded: Bool, error: NSError?) -> Void in
                     if !succeeded {
@@ -319,7 +319,7 @@ class HomeViewController: UIViewController {
             FBRequestConnection.startForMeWithCompletionHandler({
                 connection, result, error in
                 if let resultDict = result as? NSDictionary {
-                    let name = resultDict["name"] as String
+                    let name = resultDict["name"] as! String
                     
                     user["name"] = name
                     user["lowercaseName"] = name.lowercaseString
@@ -430,7 +430,7 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showProfile" {
-            let profileNC = segue.destinationViewController as UINavigationController
+            let profileNC = segue.destinationViewController as! UINavigationController
             
             if let profileVC = profileNC.viewControllers.first as? ProfileViewController {
                 profileVC.user = PFUser.currentUser()
@@ -466,7 +466,7 @@ class HomeViewController: UIViewController {
     // MARK: -
     
     internal func handleDappSwipedNotification(notification: NSNotification) {
-        if let dappId = notification.object as String? {
+        if let dappId = notification.object as? String {
             if self.dapps.first?.objectId == dappId {
                 self.dapps.removeAtIndex(0)
                 
@@ -496,7 +496,7 @@ class HomeViewController: UIViewController {
         
         if dapps.count > 0 {
             if let dapp = dapps.first {
-                if let dappScore = dapp["dappScore"] as Int? {
+                if let dappScore = dapp["dappScore"] as? Int {
                     var text: String
                     
                     if dappScore == 1 {
@@ -536,7 +536,7 @@ class HomeViewController: UIViewController {
                 self.usernameLabel.text = nil
                 self.userProfileImageView.image = nil
                 
-                if let userId = dapp["userid"] as String? {
+                if let userId = dapp["userid"] as? String {
                     let userQuery = PFUser.query()
                     
                     userQuery.whereKey("objectId", equalTo: userId)
@@ -549,9 +549,9 @@ class HomeViewController: UIViewController {
                             return
                         }
                         
-                        if let user = objects.first as PFObject? {
-                            self.usernameLabel.text = user["name"] as String?
-                            self.userProfileImageView.image = UIImage(data: user["image"] as NSData)
+                        if let user = objects.first as? PFObject {
+                            self.usernameLabel.text = user["name"] as? String
+                            self.userProfileImageView.image = UIImage(data: user["image"] as! NSData)
                         } else {
                             self.usernameLabel.text = nil
                             self.userProfileImageView.image = nil

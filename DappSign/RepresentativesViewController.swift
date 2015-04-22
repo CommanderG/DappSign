@@ -32,8 +32,8 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
         SaveDataToPArse()
         
         arrRepresentativeData = NSMutableArray ()
-        arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataSen)
-        arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataRep)
+        arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataSen as [AnyObject])
+        arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataRep as [AnyObject])
 
         tblView.reloadData()
     }
@@ -44,16 +44,16 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
         
         for var i = 0; i < 3; i++
         {
-            var ObjectValue: NSDictionary = arrRepresentativeData[i] as NSDictionary
-            let strFName : String = ObjectValue.valueForKey("first_name")! as String
-            let strLName : String = ObjectValue.valueForKey("last_name")! as String
+            var ObjectValue: NSDictionary = arrRepresentativeData[i] as! NSDictionary
+            let strFName : String = ObjectValue.valueForKey("first_name")! as! String
+            let strLName : String = ObjectValue.valueForKey("last_name")! as! String
             var strFullName : String =  "\(strFName) \(strLName)"
             
-            var strTitle : String = ObjectValue.valueForKey("title")! as String
-            var strParty : String = ObjectValue.valueForKey("party")! as String
+            var strTitle : String = ObjectValue.valueForKey("title")! as! String
+            var strParty : String = ObjectValue.valueForKey("party")! as! String
             
             let strUrl1 : String = "https://theunitedstates.io/images/congress/original/"
-            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as String
+            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
             let strUrl3 : String = ".jpg"
             
             if strTitle == "Sen" {
@@ -90,33 +90,31 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
         -> UITableViewCell {
             
             let cell : CustomCell = tableView.dequeueReusableCellWithIdentifier("repreCell", forIndexPath: indexPath)
-                as CustomCell
+                as! CustomCell
             
-            var ObjectValue: NSDictionary = arrRepresentativeData[indexPath.row] as NSDictionary
+            var ObjectValue: NSDictionary = arrRepresentativeData[indexPath.row] as! NSDictionary
            
             
-            let strFName : String = ObjectValue.valueForKey("first_name")! as String
-            let strLName : String = ObjectValue.valueForKey("last_name")! as String
+            let strFName : String = ObjectValue.valueForKey("first_name")! as! String
+            let strLName : String = ObjectValue.valueForKey("last_name")! as! String
             var strFullName : String =  "\(strFName) \(strLName)"
             
-            var strTitle : String = ObjectValue.valueForKey("title")! as String
-            var strParty : String = ObjectValue.valueForKey("party")! as String
+            var strTitle : String = ObjectValue.valueForKey("title")! as! String
+            var strParty : String = ObjectValue.valueForKey("party")! as! String
 
             cell.setCell(strFullName, strTitle: strTitle, strParty: strParty)
             
-            let block: SDWebImageCompletionBlock! = {(image: UIImage!, error: NSError!, cacheType: SDImageCacheType!, imageURL: NSURL!) -> Void in
-                
-            }
-            
             let strUrl1 : String = "https://theunitedstates.io/images/congress/original/"
-            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as String
+            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
             let strUrl3 : String = ".jpg"
             
             var strImgUrl : String = strUrl1+strUrl2+strUrl3
             
             let url = NSURL(string: strImgUrl)
             
-            cell.imgView.sd_setImageWithURL(url, completed: block)
+            cell.imgView.sd_setImageWithURL(url, completed: {
+                (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, url: NSURL!) -> Void in
+            })
             cell.imgView.layer.cornerRadius = cell.imgView.frame.size.width/2
             cell.imgView.clipsToBounds = true
             

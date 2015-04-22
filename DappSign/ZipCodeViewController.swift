@@ -63,12 +63,12 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         var err: NSError
         // throwing an error on the line below (can't figure out where the error message is)
-        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-        var resultCount = jsonResult["count"] as NSInteger
+        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
+        var resultCount = jsonResult["count"] as! NSInteger
 
         
         if resultCount > 0{
-            arrSentData = jsonResult["results"] as NSMutableArray
+            arrSentData = jsonResult["results"] as! NSMutableArray
            //  performSegueWithIdentifier("Representative", sender: nil)
              self.performSegueWithIdentifier("Representative", sender: self)
             
@@ -86,7 +86,7 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var RepresentativeVC : RepresentativesViewController = segue.destinationViewController as RepresentativesViewController
+        var RepresentativeVC : RepresentativesViewController = segue.destinationViewController as! RepresentativesViewController
         RepresentativeVC.arrRepresentativeData = arrSentData
         RepresentativeVC.userID = strUserID 
     }

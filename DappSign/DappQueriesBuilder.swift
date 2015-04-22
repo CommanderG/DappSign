@@ -67,22 +67,18 @@ class DappQueriesBuilder {
     class func queryForDownloadingDappsNotSwipedByUser(user: PFUser, withHashtag hashtag: PFObject) -> PFQuery? {
         let dappsSwipedRelation = user.relationForKey("dappsSwiped")
         let dappsSwipedRelationQuery = dappsSwipedRelation.query()
+        let predicate = NSPredicate(format: "isDeleted != true")
+        let dappsQuery = PFQuery(className: "Dapps", predicate: predicate)
         
-        if let predicate = NSPredicate(format: "isDeleted != true") {
-            let dappsQuery = PFQuery(className: "Dapps", predicate: predicate)
-            
-            dappsQuery.whereKey("hashtags", containedIn: [hashtag])
-            dappsQuery.whereKey("userid", notEqualTo: user.objectId)
-            dappsQuery.orderByAscending("createdAt")
-            dappsQuery.whereKey("objectId",
-                doesNotMatchKey: "objectId",
-                inQuery: dappsSwipedRelationQuery
-            )
-            
-            return dappsQuery
-        }
+        dappsQuery.whereKey("hashtags", containedIn: [hashtag])
+        dappsQuery.whereKey("userid", notEqualTo: user.objectId)
+        dappsQuery.orderByAscending("createdAt")
+        dappsQuery.whereKey("objectId",
+            doesNotMatchKey: "objectId",
+            inQuery: dappsSwipedRelationQuery
+        )
         
-        return nil
+        return dappsQuery
     }
     
     // MARK: -
