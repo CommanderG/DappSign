@@ -48,7 +48,6 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     func startConnection(){
         let urlPath: String = "http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + txtZipCode.text + "&apikey=a01b4a2e39e044d78d8e5cd18e78fefb"
         var url: NSURL = NSURL(string: urlPath)!
-        txtZipCode.text=""
         self.data = NSMutableData()
         
         var request: NSURLRequest = NSURLRequest(URL: url)
@@ -68,6 +67,8 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
 
         
         if resultCount > 0{
+            self.downloadAndSetUserCongressionalDistrictIDForZipCode(txtZipCode.text)
+            
             arrSentData = jsonResult["results"] as! NSMutableArray
            //  performSegueWithIdentifier("Representative", sender: nil)
              self.performSegueWithIdentifier("Representative", sender: self)
@@ -94,6 +95,65 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
-
+    
+    private func downloadAndSetUserCongressionalDistrictIDForZipCode(zipCode: String) {
+        Requests.downloadCongressialDistrictsForZipCode(zipCode, completion: {
+            (data: NSData!, error: NSError!) -> Void in
+            if let err = error {
+                println("\(err.localizedDescription)")
+                
+                return
+            }
+            
+            if let congressialDistrictID = self.getCongressialDistrictIDFromResponseData(data) {
+                let user = PFUser.currentUser()
+                
+                user["congressionalDistrictID"] = congressialDistrictID
+                
+                user.saveInBackgroundWithBlock({
+                    (success: Bool, error: NSError!) -> Void in
+                    if (success) {
+                        println("Successfully set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId)")
+                    } else {
+                        println("Failed to set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId). Error = \(error.localizedDescription)")
+                    }
+                })
+            }
+        })
+    }
+    
+    private func getCongressialDistrictIDFromResponseData(data: NSData!) -> String? {
+        func getDistrictStr(district: Int) -> String {
+            if district >= 10 {
+                return "\(district)"
+            }
+            
+            return "0\(district)"
+        }
+        
+        var serializationError: NSError?
+        let result = NSJSONSerialization.JSONObjectWithData(data,
+            options: NSJSONReadingOptions.MutableContainers,
+            error: &serializationError) as? NSDictionary
+        
+        if let serErr = serializationError {
+            println(serErr.localizedDescription)
+            
+            return nil
+        }
+        
+        if let
+            res                   = result,
+            statesAndDistricts    = res["results"] as? [NSDictionary],
+            firstStateAndDistrict = statesAndDistricts.first,
+            state                 = firstStateAndDistrict["state"] as? String,
+            district              = firstStateAndDistrict["district"] as? Int {
+                let districtStr = getDistrictStr(district)
+                let congressialDistrictID = "\(state)-\(districtStr)"
+                
+                return congressialDistrictID
+        }
+        
+        return nil
+    }
 }

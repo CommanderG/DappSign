@@ -280,6 +280,21 @@ class Requests {
         }
     }
     
+    class func downloadCongressialDistrictsForZipCode(zipCode: String, completion: (data: NSData!, error: NSError!) -> Void) {
+        let APIKey = "a01b4a2e39e044d78d8e5cd18e78fefb"
+        let URLStr = "http://congress.api.sunlightfoundation.com/districts/locate?zip=\(zipCode)&apikey=\(APIKey)"
+        
+        if let URL = NSURL(string: URLStr) {
+            let request = NSURLRequest(URL: URL)
+            let queue = NSOperationQueue.mainQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: {
+                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                completion(data: data, error: error)
+            })
+        }
+    }
+    
     // MARK: -
     
     private class func downloadHashtagWthName(name: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {
