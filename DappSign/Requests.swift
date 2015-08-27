@@ -86,6 +86,16 @@ class Requests {
         }
     }
     
+    class func downloadUsersWhoDapped(dapp: PFObject, completion: (objects: [AnyObject]!, error: NSError!) -> Void) {
+        let query = PFUser.query()
+        query.whereKey("dappsDapped", equalTo: dapp)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(objects: objects, error: error)
+        }
+    }
+    
     class func downloadDappsCreatedByUserWithId(userId: String, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         var query = PFQuery(className: "Dapps")
         
@@ -117,6 +127,17 @@ class Requests {
         let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
         
         dappsSwipedRelation.addObject(dapp)
+        
+        user.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: succeeded, error: error)
+        }
+    }
+    
+    class func addDappToDappsDappedArray(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+        let dappsDappedRelation = user.relationForKey(dappsDappedRelationKey)
+        
+        dappsDappedRelation.addObject(dapp)
         
         user.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError!) -> Void in

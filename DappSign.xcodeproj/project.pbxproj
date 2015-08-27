@@ -16,6 +16,7 @@
 		271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 271431901AB0D181002F9527 /* TwitterKitResources.bundle */; };
 		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
 		271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D0DC61ABAD8E400227DE7 /* Requests.swift */; };
+		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* PrimaryDapps.swift */; };
 		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
@@ -122,6 +123,7 @@
 		271431901AB0D181002F9527 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
 		271D0DC61ABAD8E400227DE7 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27810DF01AB7297300223350 /* PrimaryDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryDapps.swift; sourceTree = "<group>"; };
 		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 				2714318A1AB0C462002F9527 /* FacebookHelper.swift */,
 				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
+				2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
+				2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */,
 				F37246811AD3ED7600AD56E2 /* UIButton+WebCache.m in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,

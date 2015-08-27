@@ -10,6 +10,7 @@ import UIKit
 
 internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
+internal let dappsDappedRelationKey = "dappsDapped"
 
 
 
@@ -152,7 +153,7 @@ class HomeViewController: UIViewController {
                 if let currentDapp = self.dapps.first {
                     self.sendRequestsForDapp(
                         currentDapp,
-                        swipedFromLeftToRight: swipedFromLeftToRight
+                        dapped: swipedFromLeftToRight
                     )
                 }
                 
@@ -228,7 +229,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - 
     
-    private func sendRequestsForDapp(dapp: PFObject, swipedFromLeftToRight: Bool) {
+    private func sendRequestsForDapp(dapp: PFObject, dapped: Bool) {
         let currentUser = PFUser.currentUser()
         
         Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
@@ -241,9 +242,20 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            if !swipedFromLeftToRight {
+            if !dapped {
                 return
             }
+            
+            Requests.addDappToDappsDappedArray(dapp, user: currentUser, completion: {
+                (succeeded: Bool, error: NSError?) -> Void in
+                if !succeeded {
+                    if let error = error {
+                        println("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Error = \(error.localizedDescription)")
+                    } else {
+                        println("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Unknown error.")
+                    }
+                }
+            })
             
             Requests.incrementScoreOfTheDapp(dapp, completion: {
                 (succeeded: Bool, error: NSError?) -> Void in
@@ -388,41 +400,40 @@ class HomeViewController: UIViewController {
         
         self.dappsDownloader = DappsDownloader(type: .Secondary)
         
-        self.dappsDownloader?.downloadDappsNotSwipedByUser(user,
-            completion: {
-                (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
-                    println(error)
-                    
-                    self.initDappView()
-
-                    return
+        self.dappsDownloader?.downloadDappsNotSwipedByUser(user, completion: {
+            (dapps: [PFObject], error: NSError!) -> Void in
+            if error != nil {
+                println(error)
+                
+                self.initDappView()
+                
+                return
+            }
+            
+            if dapps.count > 0 {
+                var shouldShowCurrentDapp = false;
+                
+                if self.dapps.count == 0 {
+                    shouldShowCurrentDapp = true
+                }
+                
+                var sortedDapps = dapps
+                
+                sort(&sortedDapps, {
+                    (dapp1: PFObject, dapp2: PFObject) -> Bool in
+                    return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
+                })
+                
+                for dapp in sortedDapps {
+                    self.dapps.append(dapp)
                 }
 
-                if dapps.count > 0 {
-                    var shouldShowCurrentDapp = false;
-                    
-                    if self.dapps.count == 0 {
-                        shouldShowCurrentDapp = true
-                    }
-
-                    var sortedDapps = dapps
-                    
-                    sort(&sortedDapps, {
-                        (dapp1: PFObject, dapp2: PFObject) -> Bool in
-                        return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
-                    })
-                    
-                    for dapp in sortedDapps {
-                        self.dapps.append(dapp)
-                    }
-
-                    if shouldShowCurrentDapp {
-                        self.initDappView()
-                    }
-                } else if self.dapps.count == 0 {
+                if shouldShowCurrentDapp {
                     self.initDappView()
                 }
+            } else if self.dapps.count == 0 {
+                self.initDappView()
+            }
         })
     }
     
