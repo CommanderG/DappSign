@@ -20,16 +20,10 @@ internal enum Swipe {
 }
 
 class HomeViewController: UIViewController {
-    @IBOutlet weak var dappView: UIView!
-    @IBOutlet weak var dappStatementLabel: UILabel!
-    @IBOutlet weak var scoreView: UIView!
-    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var dappSignView: DappSignView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userProfileImageView: UIImageView!
-    @IBOutlet weak var dappsSwipesCountLabel: UILabel!
     @IBOutlet weak var dappScoreLabel: UILabel!
     
     var animator: UIDynamicAnimator!
@@ -51,11 +45,11 @@ class HomeViewController: UIViewController {
         
         self.animator = UIDynamicAnimator(referenceView: view)
         self.snapBehavior = UISnapBehavior(
-            item: self.dappView,
+            item: self.dappSignView,
             snapToPoint: self.view.center
         )
         
-        self.dappView.hidden = true
+        self.dappSignView.hidden = true
         
         if PFUser.currentUser() == nil {
             self.profileButton.hidden = true
@@ -97,16 +91,16 @@ class HomeViewController: UIViewController {
         if panGestureRecognizer.state == .Began {
             self.animator.removeBehavior(self.snapBehavior)
             
-            let location = panGestureRecognizer.locationInView(self.dappView)
+            let location = panGestureRecognizer.locationInView(self.dappSignView)
             let centerOffset = UIOffset(
-                horizontal: location.x - CGRectGetMidX(self.dappView.bounds),
-                vertical: location.y - CGRectGetMidY(self.dappView.bounds)
+                horizontal: location.x - CGRectGetMidX(self.dappSignView.bounds),
+                vertical: location.y - CGRectGetMidY(self.dappSignView.bounds)
             )
             
             self.attachmentBehavior = UIAttachmentBehavior(
-                item: self.dappView,
+                item: self.dappSignView,
                 offsetFromCenter: centerOffset,
-                attachedToAnchor: self.dappView.center
+                attachedToAnchor: self.dappSignView.center
             )
             self.attachmentBehavior.frequency = 0.0
             
@@ -129,7 +123,7 @@ class HomeViewController: UIViewController {
             
             self.animator.removeAllBehaviors()
             
-            var gravity = UIGravityBehavior(items: [self.dappView])
+            var gravity = UIGravityBehavior(items: [self.dappSignView])
             
             if swipedFromLeftToRight {
                 gravity.gravityDirection = CGVectorMake(0, -10)
@@ -143,12 +137,12 @@ class HomeViewController: UIViewController {
                 self.animator.removeAllBehaviors()
                 
                 self.attachmentBehavior.anchorPoint = self.view.center
-                self.dappView.center = self.view.center
+                self.dappSignView.center = self.view.center
                 
                 let scale = CGAffineTransformMakeScale(0.5, 0.5)
                 let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
                 
-                self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
                 
                 if let currentDapp = self.dapps.first {
                     self.sendRequestsForDapp(
@@ -171,14 +165,14 @@ class HomeViewController: UIViewController {
                     let scale = CGAffineTransformMakeScale(1.0, 1.0)
                     let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
                     
-                    self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                    self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
                 }
             }
         }
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
+        let currentDappCardAsImage = self.dappSignView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -204,7 +198,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
+        let currentDappCardAsImage = self.dappSignView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -489,104 +483,41 @@ class HomeViewController: UIViewController {
     }
     
     private func initDappView() {
-        self.dappView.hidden = false
+        self.dappSignView.hidden = false
         
         self.perform_only_one_time() {
             let scale = CGAffineTransformMakeScale(0.5, 0.5)
-            let translate = CGAffineTransformMakeTranslation(0, -200)
+            let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
             
-            self.dappView.transform = CGAffineTransformConcat(scale, translate)
+            self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
             
             spring(0.5) {
                 let scale = CGAffineTransformMakeScale(1, 1)
                 let translate = CGAffineTransformMakeTranslation(0, 0)
                 
-                self.dappView.transform = CGAffineTransformConcat(scale, translate)
+                self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
             }
         }
         
-        if dapps.count > 0 {
-            if let dapp = dapps.first {
-                if let dappScore = dapp["dappScore"] as? Int {
-                    var text: String
-                    
-                    if dappScore == 1 {
-                        text = "1 Dapp"
-                    } else {
-                        text = "\(dappScore) Dapp"
+        let dapp = dapps.first
+        
+        self.dappSignView.showDapp(dapp)
+        
+        if let dapp_ = dapp, userId = dapp_["userid"] as? String {
+            let userQuery = PFUser.query()
+            
+            userQuery.whereKey("objectId", equalTo: userId)
+            userQuery.findObjectsInBackgroundWithBlock({
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    if let user = objects.first as? PFObject? {
+                        self.dappSignView.showUserInfo(user)
                     }
-                    
-                    self.dappsSwipesCountLabel.text = text
                 } else {
-                    self.dappsSwipesCountLabel.text = nil
+                    println(error)
                 }
-                
-                self.dappStatementLabel.text = dapp["dappStatement"] as? String
-                
-                if let dappFontName = dapp["dappFont"] as? String {
-                    
-                    let screenSize: CGRect = UIScreen.mainScreen().bounds
-                    let screenWidth = screenSize.width
-                    let screenHeight = screenSize.height
-                    self.dappStatementLabel.font = dappFonts.dappFontBook[dappFontName]
-                    
-                    if screenWidth == 320 && screenHeight == 480{
-                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 22)
-                    }else if screenWidth == 320 && screenHeight == 568{
-                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 27)
-                    }
-
-                }
-                
-                self.dappStatementLabel.textColor = UIColor.whiteColor()
-                
-                if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
-                    self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
-                }
-                
-                self.usernameLabel.text = nil
-                self.userProfileImageView.image = nil
-                
-                if let userId = dapp["userid"] as? String {
-                    let userQuery = PFUser.query()
-                    
-                    userQuery.whereKey("objectId", equalTo: userId)
-                    
-                    userQuery.findObjectsInBackgroundWithBlock({
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
-                        if error != nil {
-                            println(error)
-                            
-                            return
-                        }
-                        
-                        if let user = objects.first as? PFObject {
-                            self.usernameLabel.text = user["name"] as? String
-                            self.userProfileImageView.image = UIImage(data: user["image"] as! NSData)
-                        } else {
-                            self.usernameLabel.text = nil
-                            self.userProfileImageView.image = nil
-                        }
-                    })
-                }
-            }
-        } else {
-            self.dappsSwipesCountLabel.text = nil
-            self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
-            
-            if let font = dappFonts.dappFontBook["exo"] {
-                self.dappStatementLabel.font = font
-            }
-            
-            self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
-            self.usernameLabel.text = nil
-            self.userProfileImageView.image = nil
+            })
         }
-        
-        self.scoreView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.logoView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
     }
     
     override func prefersStatusBarHidden() -> Bool {

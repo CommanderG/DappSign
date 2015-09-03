@@ -209,8 +209,8 @@ class CongressionalDistrictsIDs: NSObject {
         "LA-05",
         "LA-06",
         
-        "MN-01",
-        "MN-02",
+        "ME-01",
+        "ME-02",
         
         "MD-01",
         "MD-02",
