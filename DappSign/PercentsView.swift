@@ -8,96 +8,35 @@
 
 import UIKit
 
-class PercentsView: UIView {
-    var lineWidth: CGFloat = 8.0
-    var percents: UInt = 0
-    var numbersLabel: UILabel? = nil
-    var percentsLabel: UILabel? = nil
-    var fgCircleLayer: CAShapeLayer? = nil
-    var bgCircleLayer: CAShapeLayer? = nil
+class PercentsView: XIBView {
+    private let lineWidth: CGFloat = 8.0
+    private var fgCircleLayer: CAShapeLayer? = nil
+    private var bgCircleLayer: CAShapeLayer? = nil
     
-    // MARK: - init
-    
-    required init(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-    }
+    @IBOutlet var numbersLabel: UILabel!
     
     // MARK: - internal functions
     
     internal func showPercents(percents: UInt) {
-        self.percents = percents
+        self.fgCircleLayer?.removeFromSuperlayer()
+        self.bgCircleLayer?.removeFromSuperlayer()
         
-        self.initAndAddLabels()
-        
-        if self.percents > 0 && self.percents <= 100 {
-            self.numbersLabel?.text = "\(self.percents)"
+        if percents > 0 && percents <= 100 {
+            self.numbersLabel?.text = "\(percents)"
             
-            self.showCircleLayers()
+            self.showCircleLayers(percents)
         }
     }
     
     // MARK: - private function
     
-    private func initAndAddLabels() {
-        self.numbersLabel?.removeFromSuperview()
-        
-        let numbersLabelFrame = CGRectMake(
-            self.lineWidth * 2
-        ,   CGRectGetHeight(frame) / 4.5
-        ,   CGRectGetWidth(frame) - self.lineWidth * 4
-        ,   CGRectGetHeight(frame) / 3
-        )
-        let numbersLabel = UILabel(frame: numbersLabelFrame)
-        numbersLabel.backgroundColor = UIColor.clearColor()
-        numbersLabel.textAlignment = NSTextAlignment.Center
-        numbersLabel.font = UIFont.systemFontOfSize(32.0)
-        numbersLabel.textColor = UIColor.whiteColor()
-        numbersLabel.adjustsFontSizeToFitWidth = true
-        numbersLabel.minimumScaleFactor = 0.5
-        numbersLabel.backgroundColor = UIColor.darkGrayColor()
-        
-        self.numbersLabel = numbersLabel
-        
-        self.addSubview(numbersLabel)
-        
-        
-        
-        self.percentsLabel?.removeFromSuperview()
-        
-        let percentsLabelFrame = CGRectMake(
-            CGRectGetMinX(numbersLabelFrame)
-        ,   CGRectGetMaxY(numbersLabelFrame) + CGFloat(4.0)
-        ,   CGRectGetWidth(numbersLabelFrame)
-        ,   CGRectGetHeight(frame) / 5
-        )
-        let percentsLabel = UILabel(frame: percentsLabelFrame)
-        percentsLabel.backgroundColor = UIColor.clearColor()
-        percentsLabel.text = "PERCENT"
-        percentsLabel.textAlignment = NSTextAlignment.Center
-        percentsLabel.font = UIFont.systemFontOfSize(10.0)
-        percentsLabel.textColor = UIColor.whiteColor()
-        percentsLabel.adjustsFontSizeToFitWidth = true
-        percentsLabel.minimumScaleFactor = 0.5
-        percentsLabel.backgroundColor = UIColor.darkGrayColor()
-        
-        self.percentsLabel = percentsLabel
-        
-        self.addSubview(percentsLabel)
-    }
-    
-    private func showCircleLayers() {
-        self.fgCircleLayer?.removeFromSuperlayer()
-        self.bgCircleLayer?.removeFromSuperlayer()
-        
-        
-        
+    private func showCircleLayers(percents: UInt) {
         let startAngle: CGFloat = CGFloat(-M_PI) / CGFloat(2.0)
         let endAngle:   CGFloat = CGFloat(M_PI) * CGFloat(1.5)
-        let radius:     CGFloat = CGRectGetWidth(frame) / 2 - lineWidth / 2
+        let radius:     CGFloat = CGRectGetWidth(self.bounds) / 2 - self.lineWidth / 2
+        let fgCircleEndAngle = startAngle + (endAngle - startAngle) * (CGFloat(percents) / 100.0)
         
         
-        
-        let fgCircleEndAngle = startAngle + (endAngle - startAngle) * (CGFloat(self.percents) / 100.0)
         
         let fgCircleLayer = CAShapeLayer()
         fgCircleLayer.path = UIBezierPath(

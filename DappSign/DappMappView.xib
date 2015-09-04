@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappMappView" customModule="DappSign" customModuleProvider="target">
             <connections>
                 <outlet property="dappsCountLabel" destination="SVj-ag-gQZ" id="t1P-Lf-x0E"/>
+                <outlet property="percentsView" destination="22H-z5-zwb" id="PAw-Vk-5rk"/>
                 <outlet property="webView" destination="T65-DB-uH4" id="CzZ-Xa-PLD"/>
             </connections>
         </placeholder>
@@ -46,7 +47,7 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRa-BG-jX4">
                     <rect key="frame" x="4" y="418" width="312" height="22"/>
-                    <color key="backgroundColor" red="0.28627450980000002" green="0.58431372550000005" blue="0.97647058819999999" alpha="0.58999999999999997" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="itg-ls-z1m"/>
                     </constraints>
@@ -56,7 +57,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The DappSign has 4350 Dapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SVj-ag-gQZ">
                     <rect key="frame" x="12" y="44" width="296" height="35"/>
-                    <color key="backgroundColor" red="0.28627450980000002" green="0.58431372550000005" blue="0.97647058819999999" alpha="0.58999999999999997" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="meu-kb-8Ef"/>
                     </constraints>
@@ -66,7 +67,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here's where this DappSign is most popular:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yi3-Wf-fUk">
                     <rect key="frame" x="24" y="79" width="272" height="19"/>
-                    <color key="backgroundColor" red="0.28627450980000002" green="0.58431372550000005" blue="0.97647058819999999" alpha="0.58999999999999997" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="uQb-rE-amP"/>
                     </constraints>
@@ -87,22 +88,22 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yf-eV-Z4y">
                             <rect key="frame" x="0.0" y="168" width="276" height="136"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22H-z5-zwb">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22H-z5-zwb" customClass="PercentsView" customModule="DappSign" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="34" width="68" height="68"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="22H-z5-zwb" secondAttribute="height" multiplier="1:1" id="uEY-Ui-zDM"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage of users in your district who have given Dapp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o0R-bT-fSE">
                                     <rect key="frame" x="80" y="34" width="196" height="68"/>
-                                    <color key="backgroundColor" red="0.88671875" green="0.084010074010000005" blue="0.31372549020000001" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="16"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.28627450980000002" green="0.58431372550000005" blue="0.97647058819999999" alpha="0.58999999999999997" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="22H-z5-zwb" firstAttribute="leading" secondItem="4yf-eV-Z4y" secondAttribute="leading" id="0D8-61-Dex"/>
                                 <constraint firstItem="22H-z5-zwb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4yf-eV-Z4y" secondAttribute="top" id="1h9-MF-F1E"/>
@@ -122,7 +123,7 @@
                             </constraints>
                         </webView>
                     </subviews>
-                    <color key="backgroundColor" red="0.83348572254180908" green="0.049190007150173187" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="T65-DB-uH4" secondAttribute="centerX" id="1dc-d7-SQ1"/>
                         <constraint firstItem="4yf-eV-Z4y" firstAttribute="leading" secondItem="50p-vg-18r" secondAttribute="leading" id="Gz5-7u-YeU"/>
@@ -164,7 +165,7 @@
                     <integer key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="191" y="440"/>
+            <point key="canvasLocation" x="293" y="505"/>
         </view>
     </objects>
 </document>

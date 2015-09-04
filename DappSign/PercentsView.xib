@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PercentsView" customModule="DappSign" customModuleProvider="target">
+            <connections>
+                <outlet property="numbersLabel" destination="xpK-b5-laj" id="hY8-TY-W8j"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-lQ-oal">
+                    <rect key="frame" x="8" y="8" width="184" height="184"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="xpK-b5-laj">
+                            <rect key="frame" x="8" y="10" width="168" height="24"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="PERCENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="FLV-HQ-w7O">
+                            <rect key="frame" x="8" y="163" width="168" height="15"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="xpK-b5-laj" firstAttribute="height" secondItem="FLV-HQ-w7O" secondAttribute="height" multiplier="1.55" id="IYs-SX-SAk"/>
+                        <constraint firstItem="xpK-b5-laj" firstAttribute="top" secondItem="ppe-lQ-oal" secondAttribute="top" constant="10" id="Sv8-Ts-U29"/>
+                        <constraint firstItem="FLV-HQ-w7O" firstAttribute="leading" secondItem="ppe-lQ-oal" secondAttribute="leading" constant="8" id="YfE-4a-f6s"/>
+                        <constraint firstItem="FLV-HQ-w7O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xpK-b5-laj" secondAttribute="bottom" id="dYO-du-IhE"/>
+                        <constraint firstAttribute="bottom" secondItem="FLV-HQ-w7O" secondAttribute="bottom" constant="6" id="i0O-gB-GyO"/>
+                        <constraint firstAttribute="trailing" secondItem="FLV-HQ-w7O" secondAttribute="trailing" constant="8" id="kte-pz-Im2"/>
+                        <constraint firstItem="xpK-b5-laj" firstAttribute="leading" secondItem="ppe-lQ-oal" secondAttribute="leading" constant="8" id="sRb-6h-Ugc"/>
+                        <constraint firstAttribute="trailing" secondItem="xpK-b5-laj" secondAttribute="trailing" constant="8" id="vhi-wz-Zpe"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ppe-lQ-oal" secondAttribute="bottom" constant="8" id="ID8-di-A2c"/>
+                <constraint firstAttribute="trailing" secondItem="ppe-lQ-oal" secondAttribute="trailing" constant="8" id="OuI-UJ-a2a"/>
+                <constraint firstItem="ppe-lQ-oal" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Pva-N9-b0U"/>
+                <constraint firstItem="ppe-lQ-oal" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ucm-iO-0d9"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="1198" y="1797"/>
+        </view>
+    </objects>
+</document>

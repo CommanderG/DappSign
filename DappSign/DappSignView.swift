@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DappSignView: UIView {
+class DappSignView: XIBView {
     private var dappSignView: UIView? = nil
     
     @IBOutlet weak var scoreView: UIView!
@@ -17,73 +17,6 @@ class DappSignView: UIView {
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
-    
-    // MARK: - init
-    
-    required init(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-        
-        self.backgroundColor = UIColor.clearColor()
-        
-        if let view = NSBundle.mainBundle().loadNibNamed("DappSignView", owner: self, options: nil).first as? UIView {
-            self.dappSignView = view
-            
-            view.setTranslatesAutoresizingMaskIntoConstraints(false)
-            self.addSubview(view)
-            
-            // set width
-            self.addConstraint(
-                NSLayoutConstraint(
-                    item:       view
-                ,   attribute:  NSLayoutAttribute.Width
-                ,   relatedBy:  NSLayoutRelation.Equal
-                ,   toItem:     self
-                ,   attribute:  NSLayoutAttribute.Width
-                ,   multiplier: 1.0
-                ,   constant:   0.0
-                )
-            )
-            
-            // set height
-            self.addConstraint(
-                NSLayoutConstraint(
-                    item:       view
-                ,   attribute:  NSLayoutAttribute.Height
-                ,   relatedBy:  NSLayoutRelation.Equal
-                ,   toItem:     self
-                ,   attribute:  NSLayoutAttribute.Height
-                ,   multiplier: 1.0
-                ,   constant:   0.0
-                )
-            )
-            
-            // center horizontally
-            self.addConstraint(
-                NSLayoutConstraint(
-                    item:       view
-                ,   attribute:  NSLayoutAttribute.CenterX
-                ,   relatedBy:  NSLayoutRelation.Equal
-                ,   toItem:     self
-                ,   attribute:  NSLayoutAttribute.CenterX
-                ,   multiplier: 1.0
-                ,   constant:   0.0
-                )
-            )
-            
-            // center vertically
-            self.addConstraint(
-                NSLayoutConstraint(
-                    item:       view
-                ,   attribute:  NSLayoutAttribute.CenterY
-                ,   relatedBy:  NSLayoutRelation.Equal
-                ,   toItem:     self
-                ,   attribute:  NSLayoutAttribute.CenterY
-                ,   multiplier: 1.0
-                ,   constant:   0.0
-                )
-            )
-        }
-    }
     
     // MARK: -
     
