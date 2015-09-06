@@ -18,6 +18,12 @@ class DappSignView: XIBView {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     
+    required init(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+        
+        self.dappSignView = self.viewInXIB
+    }
+    
     // MARK: -
     
     func showDapp(dapp: PFObject?) {

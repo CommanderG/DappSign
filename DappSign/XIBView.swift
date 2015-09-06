@@ -9,6 +9,8 @@
 import UIKit
 
 class XIBView: UIView {
+    internal private(set) var viewInXIB: UIView? = nil
+    
     required init(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
@@ -16,11 +18,14 @@ class XIBView: UIView {
         
         if let dotIndex = dynamicTypeStr.rangeOfString(".", options: .LiteralSearch)?.startIndex.successor() {
             let NIBName = dynamicTypeStr.substringFromIndex(dotIndex)
+            let views = NSBundle.mainBundle().loadNibNamed(NIBName, owner: self, options: nil)
             
-            if let view = NSBundle.mainBundle().loadNibNamed(NIBName, owner: self, options: nil).first as? UIView {
+            if let view = views.first as? UIView {
                 view.setTranslatesAutoresizingMaskIntoConstraints(false)
                 
                 self.addSubview(view)
+                
+                self.viewInXIB = view
                 
                 // set width
                 self.addConstraint(

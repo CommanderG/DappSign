@@ -12,19 +12,21 @@ internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
 internal let dappsDappedRelationKey = "dappsDapped"
 
-
-
 internal enum Swipe {
     case SwipeFromLeftToRight
     case SwipeFromRightToLeft
 }
 
 class HomeViewController: UIViewController {
+    @IBOutlet weak var dappViewsContainerView: UIView!
     @IBOutlet weak var dappSignView: DappSignView!
+    @IBOutlet weak var dappMappView: DappMappView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var dappScoreLabel: UILabel!
+    
+    private var visibleDappView: UIView!
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -45,11 +47,13 @@ class HomeViewController: UIViewController {
         
         self.animator = UIDynamicAnimator(referenceView: view)
         self.snapBehavior = UISnapBehavior(
-            item: self.dappSignView,
+            item: self.dappViewsContainerView,
             snapToPoint: self.view.center
         )
         
-        self.dappSignView.hidden = true
+        self.dappViewsContainerView.hidden = true
+        
+        self.showDappView(self.dappSignView)
         
         if PFUser.currentUser() == nil {
             self.profileButton.hidden = true
@@ -91,16 +95,16 @@ class HomeViewController: UIViewController {
         if panGestureRecognizer.state == .Began {
             self.animator.removeBehavior(self.snapBehavior)
             
-            let location = panGestureRecognizer.locationInView(self.dappSignView)
+            let location = panGestureRecognizer.locationInView(self.dappViewsContainerView)
             let centerOffset = UIOffset(
-                horizontal: location.x - CGRectGetMidX(self.dappSignView.bounds),
-                vertical: location.y - CGRectGetMidY(self.dappSignView.bounds)
+                horizontal: location.x - CGRectGetMidX(self.dappViewsContainerView.bounds),
+                vertical: location.y - CGRectGetMidY(self.dappViewsContainerView.bounds)
             )
             
             self.attachmentBehavior = UIAttachmentBehavior(
-                item: self.dappSignView,
+                item: self.dappViewsContainerView,
                 offsetFromCenter: centerOffset,
-                attachedToAnchor: self.dappSignView.center
+                attachedToAnchor: self.dappViewsContainerView.center
             )
             self.attachmentBehavior.frequency = 0.0
             
@@ -123,7 +127,7 @@ class HomeViewController: UIViewController {
             
             self.animator.removeAllBehaviors()
             
-            var gravity = UIGravityBehavior(items: [self.dappSignView])
+            var gravity = UIGravityBehavior(items: [self.dappViewsContainerView])
             
             if swipedFromLeftToRight {
                 gravity.gravityDirection = CGVectorMake(0, -10)
@@ -137,22 +141,30 @@ class HomeViewController: UIViewController {
                 self.animator.removeAllBehaviors()
                 
                 self.attachmentBehavior.anchorPoint = self.view.center
-                self.dappSignView.center = self.view.center
+                self.dappViewsContainerView.center = self.view.center
                 
                 let scale = CGAffineTransformMakeScale(0.5, 0.5)
                 let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
                 
-                self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
+                self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
                 
-                if let currentDapp = self.dapps.first {
-                    self.sendRequestsForDapp(
-                        currentDapp,
-                        dapped: swipedFromLeftToRight
-                    )
-                }
-                
-                if self.dapps.count > 0 {
-                    self.dapps.removeAtIndex(0)
+                if (self.visibleDappView == self.dappSignView) {
+                    if let currentDapp = self.dapps.first {
+                        self.sendRequestsForDapp(
+                            currentDapp,
+                            dapped: swipedFromLeftToRight
+                        )
+                    }
+                    
+                    if self.dapps.count > 0 {
+                        self.dapps.removeAtIndex(0)
+                    }
+                    
+                    if (swipedFromLeftToRight && self.dapps.count > 0) {
+                        self.showDappView(self.dappMappView)
+                    }
+                } else {
+                    self.showDappView(self.dappSignView)
                 }
                 
                 self.initDappView()
@@ -165,14 +177,14 @@ class HomeViewController: UIViewController {
                     let scale = CGAffineTransformMakeScale(1.0, 1.0)
                     let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
                     
-                    self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
+                    self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
                 }
             }
         }
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappSignView.toImage()
+        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -198,7 +210,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappSignView.toImage()
+        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -483,40 +495,58 @@ class HomeViewController: UIViewController {
     }
     
     private func initDappView() {
-        self.dappSignView.hidden = false
+        self.dappViewsContainerView.hidden = false
         
         self.perform_only_one_time() {
             let scale = CGAffineTransformMakeScale(0.5, 0.5)
             let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
             
-            self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
+            self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
             
             spring(0.5) {
                 let scale = CGAffineTransformMakeScale(1, 1)
                 let translate = CGAffineTransformMakeTranslation(0, 0)
                 
-                self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
+                self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
             }
         }
         
-        let dapp = dapps.first
-        
-        self.dappSignView.showDapp(dapp)
-        
-        if let dapp_ = dapp, userId = dapp_["userid"] as? String {
-            let userQuery = PFUser.query()
+        if (self.visibleDappView == self.dappSignView) {
+            let dapp = dapps.first
             
-            userQuery.whereKey("objectId", equalTo: userId)
-            userQuery.findObjectsInBackgroundWithBlock({
-                (objects: [AnyObject]!, error: NSError!) -> Void in
-                if error == nil {
-                    if let user = objects.first as? PFObject? {
-                        self.dappSignView.showUserInfo(user)
+            self.dappSignView.showDapp(dapp)
+            
+            if let dapp_ = dapp, userId = dapp_["userid"] as? String {
+                let userQuery = PFUser.query()
+                
+                userQuery.whereKey("objectId", equalTo: userId)
+                userQuery.findObjectsInBackgroundWithBlock({
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        if let user = objects.first as? PFObject? {
+                            self.dappSignView.showUserInfo(user)
+                        }
+                    } else {
+                        println(error)
                     }
-                } else {
-                    println(error)
-                }
-            })
+                })
+            }
+        } else if (self.visibleDappView == self.dappMappView) {
+            
+        }
+    }
+    
+    // MARK: - 
+    
+    private func showDappView(dappView: UIView) {
+        if (dappView == self.dappSignView) {
+            self.dappSignView.hidden = false
+            self.dappMappView.hidden = true
+            self.visibleDappView = dappView
+        } else if (dappView == self.dappMappView) {
+            self.dappSignView.hidden = true
+            self.dappMappView.hidden = false
+            self.visibleDappView = dappView
         }
     }
     
