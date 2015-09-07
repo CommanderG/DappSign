@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     
     private var visibleDappView: UIView!
     
+    private var lastDappedDapp: PFObject?
+    
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
     var attachmentBehavior: UIAttachmentBehavior!
@@ -150,10 +152,14 @@ class HomeViewController: UIViewController {
                 
                 if (self.visibleDappView == self.dappSignView) {
                     if let currentDapp = self.dapps.first {
+                        self.lastDappedDapp = currentDapp
+                        
                         self.sendRequestsForDapp(
                             currentDapp,
                             dapped: swipedFromLeftToRight
                         )
+                    } else {
+                        self.lastDappedDapp = nil
                     }
                     
                     if self.dapps.count > 0 {
@@ -530,13 +536,128 @@ class HomeViewController: UIViewController {
                         println(error)
                     }
                 })
+                
+                Requests.addUserToUsersWhoSaw(dapp_, user: PFUser.currentUser(), completion: {
+                    (succeeded: Bool, error: NSError!) -> Void in
+                    if !succeeded {
+                        if let err = error {
+                            println("error = \(err)")
+                        } else {
+                            println("error = unknown")
+                        }
+                        
+                        return
+                    }
+                })
             }
         } else if (self.visibleDappView == self.dappMappView) {
+            let SVGMapURL = SVGMapGenerator.generate([:])
             
+            // placeholders
+            self.dappMappView.show(0, SVGMapURLPath: SVGMapURL, percents: 0)
+            
+            if let dapp = self.lastDappedDapp {
+                println(dapp["dappStatement"])
+                
+                Requests.percents(dapp, completion: {
+                    (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
+                    println("error = \(error)")
+                    
+                    if let usersDapped_ = usersDapped {
+                        if usersDapped_.count >= 20 {
+                            self.downloadDataForMapAndShowIt(usersDapped_, dapp: dapp)
+                            
+                            return
+                        }
+                        
+                        var dappsCount = UInt(10 + arc4random_uniform(20))
+                        var IDsFreqs = CongressionalDistrictsIDs.getRandomIDsFreqs(dappsCount)
+                        let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
+                        var percents = 0 as UInt
+                        
+                        if let
+                            user = PFUser.currentUser(),
+                            congrDistrID = user["congressionalDistrictID"] as? String {
+                                var additionalFreq = UInt(1 + arc4random_uniform(4))
+                                var dappTotalViews = 1 as UInt
+                                var dappDapps = 1 as UInt
+                                
+                                if let freq = IDsFreqs[congrDistrID] as UInt? {
+                                    IDsFreqs[congrDistrID] = freq + additionalFreq
+                                    
+                                    dappTotalViews = freq + additionalFreq
+                                } else {
+                                    IDsFreqs[congrDistrID] = additionalFreq
+                                    
+                                    dappTotalViews = additionalFreq
+                                }
+                                
+                                dappDapps = UInt(arc4random_uniform(UInt32(dappTotalViews)))
+                                
+                                if dappDapps == 0 {
+                                    dappDapps = 1
+                                } else if dappDapps > dappTotalViews {
+                                    dappDapps = dappTotalViews
+                                }
+                                
+                                percents = UInt(roundf(Float(dappDapps) / Float(dappTotalViews) * 100))
+                                dappsCount += additionalFreq
+                        }
+                        
+                        self.dappMappView.show(dappsCount, SVGMapURLPath: SVGMapURL, percents: percents)
+                    }
+                })
+            }
         }
     }
     
-    // MARK: - 
+    private func downloadDataForMapAndShowIt(usersDapped: [PFObject:Bool], dapp: PFObject) {
+        let users = usersDapped.keys.array
+        let dapps = usersDapped.values.array
+        
+        CongressionalDistrictsIDs.getIDsFrequenciesForDapp(dapp, completion: {
+            (IDsFreqs: IDsFrequencies?) -> Void in
+            if let IDsFreqs_ = IDsFreqs {
+                var dappScore = 0 as UInt
+                
+                if let dappScore_ = dapp["dappScore"] as? UInt {
+                    dappScore = dappScore_
+                }
+                
+                let SVGMapURL = SVGMapGenerator.generate(IDsFreqs_)
+                var dappedCount = usersDapped.keys.array.filter({
+                    let currentUser = PFUser.currentUser()
+                    
+                    if let
+                        currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String,
+                        userCongrDistrID = $0["congressionalDistrictID"] as? String {
+                            if $0.objectId == currentUser.objectId {
+                                // the back end hasn't been updated yet
+                                return true
+                            } else if currentUserCongrDistrID == userCongrDistrID {
+                                if let dapped = usersDapped[$0] as Bool? {
+                                    if dapped == true {
+                                        return true
+                                    }
+                                }
+                            }
+                    }
+                    
+                    return false
+                }).count
+                
+                var percents = 0 as UInt
+                
+                if dappedCount > 0 && dapps.count > 0 {
+                    percents = UInt(roundf(Float(dappedCount) / Float(dapps.count) * 100))
+                }
+                
+                self.dappMappView.show(dappScore, SVGMapURLPath: SVGMapURL, percents: percents)
+            }
+        })
+    }
+    
+    // MARK: -
     
     private func showDappView(dappView: UIView) {
         if (dappView == self.dappSignView) {

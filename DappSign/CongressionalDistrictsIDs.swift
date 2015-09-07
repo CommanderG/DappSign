@@ -549,6 +549,48 @@ class CongressionalDistrictsIDs: NSObject {
         return maxFreq
     }
     
+    class func getRandomIDsFreqs(count: UInt) -> IDsFrequencies {
+        var IDsFreqs: [String:UInt] = [:]
+        var randomIDs: [String] = []
+        let IDsCount = UInt32(IDs.count)
+        var dappsCount = count
+        
+        while true {
+            if UInt(randomIDs.count) == count {
+                break
+            }
+            
+            let index = arc4random_uniform(IDsCount)
+            
+            if index < IDsCount {
+                let random = IDs.count
+                let ID = IDs[Int(index)]
+                
+                if !contains(randomIDs, ID) {
+                    randomIDs.append(ID)
+                }
+            }
+        }
+        
+        for randomID in randomIDs {
+            var freq = UInt(1 + arc4random_uniform(3))
+            
+            if freq > dappsCount {
+                freq = dappsCount
+            }
+            
+            dappsCount -= freq
+            
+            IDsFreqs[randomID] = freq
+            
+            if dappsCount == 0 {
+                break
+            }
+        }
+        
+        return IDsFreqs
+    }
+    
     // MARK: -
     
     private class func getCongressionalDistrictsIDsFrequencies(IDs: [String]) -> IDsFrequencies {

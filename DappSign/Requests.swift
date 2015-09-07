@@ -123,6 +123,17 @@ class Requests {
         }
     }
     
+    class func downloadDappsDappedByUser(user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
+        let relation = user.relationForKey("dappsDapped")
+        
+        var query = relation.query()
+        query.whereKey("isDeleted", notEqualTo: true)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(dapps: objects as! [PFObject], error: error)
+        }
+    }
+    
     class func addDappToDappsSwipedArray(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
         let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
         
@@ -259,8 +270,6 @@ class Requests {
             (succeeded: Bool, error: NSError!) -> Void in
         })
     }
-
-    
     
     class func incrementDappScoreForUserWithId(userId: String, completion: (succeeded: Bool, error: NSError?) -> Void) {
         let query = PFQuery(className: "UserIdDappScore")
@@ -314,6 +323,81 @@ class Requests {
                 completion(data: data, error: error)
             })
         }
+    }
+    
+    class func addUserToUsersWhoSaw(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError!) -> Void) {
+        let relation = dapp.relationForKey("usersWhoSawIt")
+        
+        relation.addObject(user)
+        
+        dapp.saveInBackgroundWithBlock {
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: succeeded, error: error)
+        }
+    }
+    
+    class func percents(dapp: PFObject, completion: (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void) {
+        let relation = dapp.relationForKey("usersWhoSawIt")
+        
+        let query = relation.query()
+        query.limit = 1000
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if let err = error {
+                println("error = \(err)")
+                
+                completion(usersDapped: nil, error: error)
+                
+                return
+            }
+            
+            if let users = objects as? [PFUser] {
+                self.downloadDappsDapped(dapp, users: users, userIndex: 0, usersDapped: [:], completion: {
+                    (usersDapped: [PFUser:Bool]) -> Void in
+                    completion(usersDapped: usersDapped, error: nil)
+                })
+            } else {
+                completion(usersDapped: nil, error: nil)
+            }
+        }
+    }
+    
+    class func downloadDappsDapped(dapp: PFObject, users: [PFUser], userIndex: Int, var usersDapped: [PFUser:Bool], completion: (usersDapped: [PFUser:Bool]) -> Void) {
+        if (userIndex > users.count - 1 || userIndex < 0) {
+            completion(usersDapped: usersDapped)
+            
+            return
+        }
+        
+        let user = users[userIndex]
+        
+        Requests.downloadDappsDappedByUser(user, completion: {
+            (dapps: [PFObject], error: NSError!) in
+            var dappSwiped = false
+            
+            if let dappStatement1 = dapp["dappStatement"] as? String {
+                for dapp in dapps {
+                    if let dappStatement2 = dapp["dappStatement"] as? String {
+                        if dappStatement1 == dappStatement2 {
+                            dappSwiped = true
+                            
+                            break
+                        }
+                    }
+                }
+            }
+            
+            usersDapped[user] = dappSwiped
+            
+            self.downloadDappsDapped(
+                dapp
+            ,   users: users
+            ,   userIndex: userIndex + 1
+            ,   usersDapped: usersDapped
+            ,   completion: completion
+            )
+        })
     }
     
     // MARK: -

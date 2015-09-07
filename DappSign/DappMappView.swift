@@ -12,7 +12,6 @@ class DappMappView: XIBView {
     @IBOutlet weak var dappsCountLabel: UILabel!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var percentsView: PercentsView!
-    @IBOutlet weak var label: UILabel!
     
     required init(coder decoder: NSCoder) {
         super.init(coder: decoder)
@@ -22,10 +21,32 @@ class DappMappView: XIBView {
         self.webView.delegate = self
     }
     
-    internal func showSVGMapAtURL(SVGMapURL: NSURL) {
-        let request = NSURLRequest(URL: SVGMapURL)
+    internal func show(dappsCount: UInt, SVGMapURLPath: String?, percents: UInt) {
+        var str = "The DappSign has \(dappsCount) Dapp"
         
-        self.webView.loadRequest(request)
+        if (dappsCount != 1) {
+            str += "s"
+        }
+        
+        self.dappsCountLabel.text = str
+        
+        
+        
+        self.webView.hidden = true
+        
+        if let
+            mapURLPath = SVGMapURLPath,
+            URL        = NSURL(fileURLWithPath: mapURLPath) {
+                let request = NSURLRequest(URL: URL)
+                
+                self.webView.loadRequest(request)
+                
+                self.webView.hidden = false
+        }
+        
+        
+        
+        self.percentsView.showPercents(percents)
     }
 }
 

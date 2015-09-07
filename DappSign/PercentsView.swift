@@ -21,7 +21,7 @@ class PercentsView: XIBView {
         self.fgCircleLayer?.removeFromSuperlayer()
         self.bgCircleLayer?.removeFromSuperlayer()
         
-        if percents > 0 && percents <= 100 {
+        if percents >= 0 && percents <= 100 {
             self.numbersLabel?.text = "\(percents)"
             
             self.showCircleLayers(percents)

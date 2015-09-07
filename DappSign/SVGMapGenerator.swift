@@ -490,7 +490,7 @@ class SVGMapGenerator: NSObject {
     /**
     :returns: Path to the SVG file with the map.
     */
-    class func generate(IDsFreqs: IDsFrequencies, minRadius: Double = 2.0, maxRadius: Double = 80.0, mapFillColor: String = "white", circleFillColor: String = "#3B98D8") -> String? {
+    class func generate(IDsFreqs: IDsFrequencies, minRadius: Double = 2.0, maxRadius: Double = 40.0, mapFillColor: String = "white", circleFillColor: String = "#3B98D8") -> String? {
         func getPaths() -> String {
             var str = ""
             
@@ -530,6 +530,10 @@ class SVGMapGenerator: NSObject {
             }
             
             var str = ""
+            
+            if IDsFreqs.count == 0 {
+                return str
+            }
             
             let circles = congrDstrsCircles.filter({
                 return contains(IDsFreqs.keys.array, $0.id)
