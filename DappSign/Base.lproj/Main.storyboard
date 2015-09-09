@@ -409,53 +409,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="292" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
-                                <rect key="frame" x="0.0" y="219" width="320" height="349"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="289" id="p9d-h5-kh7" customClass="DappProfileCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9d-h5-kh7" id="HSn-o5-ezQ">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyZ-E8-V9N">
-                                                    <rect key="frame" x="284" y="4" width="32" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="EXA-H1-cwT"/>
-                                                        <constraint firstAttribute="width" constant="32" id="jb6-hi-g7t"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Dapp statement" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjf-BN-468">
-                                                    <rect key="frame" x="4" y="4" width="280" height="280"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="vjf-BN-468" firstAttribute="leading" secondItem="HSn-o5-ezQ" secondAttribute="leading" constant="4" id="L5n-cl-j89"/>
-                                                <constraint firstAttribute="bottom" secondItem="vjf-BN-468" secondAttribute="bottom" constant="4" id="Psi-yL-wq6"/>
-                                                <constraint firstItem="VyZ-E8-V9N" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="4" id="UT2-Xp-tCg"/>
-                                                <constraint firstItem="vjf-BN-468" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="4" id="eUc-We-xZU"/>
-                                                <constraint firstItem="VyZ-E8-V9N" firstAttribute="leading" secondItem="vjf-BN-468" secondAttribute="trailing" id="kO4-zX-5fr"/>
-                                                <constraint firstAttribute="trailing" secondItem="VyZ-E8-V9N" secondAttribute="trailing" constant="4" id="rHS-vx-Yde"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="dappScoreLabel" destination="VyZ-E8-V9N" id="Kdh-Tj-DET"/>
-                                            <outlet property="dappStatementTextView" destination="vjf-BN-468" id="227-wU-0SV"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="Q8A-2e-yyY" id="BIO-tq-Ius"/>
-                                    <outlet property="delegate" destination="Q8A-2e-yyY" id="vTK-sx-iml"/>
-                                </connections>
-                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-Mi-XsQ">
+                                <rect key="frame" x="0.0" y="218" width="320" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="0BX-nZ-Yb5"/>
+                                </constraints>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CIx-8J-2rR">
                                 <rect key="frame" x="68" y="183" width="184" height="29"/>
                                 <constraints>
@@ -471,14 +431,52 @@
                                     <action selector="dappsFilterSegmentedControlValueChanged:" destination="Q8A-2e-yyY" eventType="valueChanged" id="hBs-yP-v3a"/>
                                 </connections>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="374" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
+                                <rect key="frame" x="0.0" y="219" width="320" height="349"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="374" id="p9d-h5-kh7" customClass="DappProfileCell" customModule="DappSign" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9d-h5-kh7" id="HSn-o5-ezQ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAK-fG-IeP" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
+                                                    <rect key="frame" x="64" y="12" width="192" height="350"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GAK-fG-IeP" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="12" id="7Lq-hR-zbk"/>
+                                                <constraint firstAttribute="bottom" secondItem="GAK-fG-IeP" secondAttribute="bottom" constant="12" id="E6M-jG-vvg"/>
+                                                <constraint firstItem="GAK-fG-IeP" firstAttribute="leading" secondItem="HSn-o5-ezQ" secondAttribute="leading" constant="64" id="aq6-tg-LIK"/>
+                                                <constraint firstAttribute="trailing" secondItem="GAK-fG-IeP" secondAttribute="trailing" constant="64" id="bIJ-pv-Pwm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="dappSignView" destination="GAK-fG-IeP" id="vHo-7K-fk4"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Q8A-2e-yyY" id="BIO-tq-Ius"/>
+                                    <outlet property="delegate" destination="Q8A-2e-yyY" id="vTK-sx-iml"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4mG-pu-R2B" secondAttribute="trailing" id="5Zz-TN-uGI"/>
                             <constraint firstItem="lQ7-Ig-0M9" firstAttribute="top" secondItem="4mG-pu-R2B" secondAttribute="bottom" id="5x2-sE-IdC"/>
+                            <constraint firstItem="RVC-Mi-XsQ" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="DLm-Fa-YBA"/>
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="10" id="DNO-FI-XuB"/>
+                            <constraint firstItem="RVC-Mi-XsQ" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="154" id="HOT-xE-4WX"/>
                             <constraint firstAttribute="trailing" secondItem="Ylj-62-KEJ" secondAttribute="trailing" constant="8" id="IYK-Hl-ck1"/>
                             <constraint firstItem="4mG-pu-R2B" firstAttribute="top" secondItem="CIx-8J-2rR" secondAttribute="bottom" constant="8" id="K3v-Xg-wUB"/>
+                            <constraint firstAttribute="trailing" secondItem="RVC-Mi-XsQ" secondAttribute="trailing" id="SFJ-BJ-nC6"/>
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="leading" secondItem="hfZ-WI-Ejb" secondAttribute="trailing" constant="8" id="TC8-lP-3uS"/>
                             <constraint firstItem="CIx-8J-2rR" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="119" id="fSK-wV-TRy"/>
                             <constraint firstItem="4mG-pu-R2B" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="i0L-Eg-1Iq"/>

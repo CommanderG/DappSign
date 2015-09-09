@@ -245,24 +245,7 @@ extension ProfileViewController: UITableViewDataSource {
         if let dapps = self.dapps() {
             let dapp = dapps[indexPath.row]
             
-            if let dappBackgroundColorString = dapp["dappBackgroundColor"] as? String {
-                cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
-            }
-            
-            cell.dappStatementTextView.text = dapp["dappStatement"] as? String
-            
-            if let dappFontString = dapp["dappFont"] as? String {
-                cell.dappStatementTextView.font = dappFonts.dappFontBook[dappFontString]
-            }
-            
-            if let dappScore = dapp["dappScore"] as? Int {
-                cell.dappScoreLabel.text = String(dappScore)
-            } else {
-                cell.dappScoreLabel.text = nil
-            }
-            
-            cell.dappScoreLabel.textColor = UIColor.whiteColor()
-            cell.dappStatementTextView.textColor = UIColor.whiteColor()
+            cell.dappSignView.showDapp(dapp)
             
             if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
                 var buttons = NSMutableArray(capacity: 1)

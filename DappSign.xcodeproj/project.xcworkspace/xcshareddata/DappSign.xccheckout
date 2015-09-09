@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>DD9DDB12-6E7E-4688-BCB6-B5F0042FDD5E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>DappSign</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E2BA0539512B6D9A81C16E89B43DCC2185F57859</key>
@@ -16,7 +16,7 @@
 		<string>https://svn.venuiti.com/svn/Fiesta/trunk/iPad/FotoFiesta</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DappSign.xcodeproj/project.xcworkspace</string>
+	<string>DappSign.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E2BA0539512B6D9A81C16E89B43DCC2185F57859</key>
