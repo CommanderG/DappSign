@@ -400,6 +400,31 @@ class Requests {
         })
     }
     
+    class func downloadRepresentativesForUserWithID(userID: String, completion: (representatives: [PFObject]?, error: NSError?) -> Void) {
+        let query = PFQuery(className: "UserRepresentatives")
+        query.whereKey("UserID", equalTo: userID)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            completion(representatives: objects as? [PFObject], error: error)
+        }
+    }
+    
+    class func downloadImageFromURL(URL: NSURL, completion: (image: UIImage?, error: NSError?) -> Void) {
+        let request = NSURLRequest(URL: URL)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if data != nil {
+                let image = UIImage(data: data)
+                
+                completion(image: image, error: nil)
+            } else {
+                completion(image: nil, error: error)
+            }
+        }
+    }
+    
     // MARK: -
     
     private class func downloadHashtagWthName(name: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {

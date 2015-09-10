@@ -1031,15 +1031,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI">
-                                <rect key="frame" x="20" y="99" width="280" height="385"/>
+                                <rect key="frame" x="20" y="105" width="280" height="379"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CL9-dN-aM0" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="385"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="379"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-9f-XPM" customClass="DappMappView" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="385"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="379"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
@@ -1059,12 +1059,52 @@
                                     <outletCollection property="gestureRecognizers" destination="zMU-O8-UnH" appends="YES" id="KBq-Zb-kWP"/>
                                 </connections>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfK-Xm-b3D">
+                                <rect key="frame" x="236" y="66" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0WJ-VH-Slx"/>
+                                    <constraint firstAttribute="width" constant="30" id="WnB-tj-mcp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KLc-9D-dpW">
+                                <rect key="frame" x="198" y="66" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="45r-31-xWw"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ayr-Sw-AGJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y9h-U7-mgg">
+                                <rect key="frame" x="274" y="66" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Oka-Uq-iXM"/>
+                                    <constraint firstAttribute="height" constant="30" id="PoP-MI-hFr"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="16" id="0ih-64-5mR"/>
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="bottom" constant="8" id="79B-Rc-c8d"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="gal-zO-XBA" secondAttribute="bottom" constant="14" id="BPh-QF-zan"/>
+                            <constraint firstItem="Y9h-U7-mgg" firstAttribute="top" secondItem="5Z8-aq-G7z" secondAttribute="bottom" constant="9" id="Csl-K6-xef"/>
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="trailing" secondItem="y0b-e0-s53" secondAttribute="trailingMargin" id="Ghf-Y6-v2e"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="IXL-Dh-WIH"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="18" id="LtK-yw-893"/>
@@ -1072,12 +1112,17 @@
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="top" constant="-33" id="P5T-Wi-05a"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="20" id="PfJ-Ld-bey"/>
                             <constraint firstItem="FNt-Hl-eRK" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="QpK-KO-mq3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y9h-U7-mgg" secondAttribute="trailing" id="Ti5-eO-ipf"/>
                             <constraint firstItem="5Z8-aq-G7z" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Tkg-CY-p8w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Z8-aq-G7z" secondAttribute="trailing" constant="4" id="UbR-23-TGr"/>
                             <constraint firstAttribute="centerX" secondItem="3O5-Ue-Ctg" secondAttribute="centerX" constant="-0.5" id="VUh-CX-PjU"/>
-                            <constraint firstItem="osF-qS-9VI" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="8" id="g31-6c-XOJ"/>
+                            <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="UfK-Xm-b3D" secondAttribute="trailing" constant="8" id="VkT-o8-klI"/>
+                            <constraint firstItem="osF-qS-9VI" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="14" id="g31-6c-XOJ"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="iR9-rg-teR"/>
                             <constraint firstAttribute="trailing" secondItem="osF-qS-9VI" secondAttribute="trailing" constant="20" id="jKo-fp-hPO"/>
+                            <constraint firstItem="KLc-9D-dpW" firstAttribute="centerY" secondItem="UfK-Xm-b3D" secondAttribute="centerY" id="rpJ-ZS-Ym4"/>
+                            <constraint firstItem="UfK-Xm-b3D" firstAttribute="centerY" secondItem="Y9h-U7-mgg" secondAttribute="centerY" id="vsK-D8-4zU"/>
+                            <constraint firstItem="UfK-Xm-b3D" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="8" id="xmj-Bi-cBe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1086,6 +1131,9 @@
                         <outlet property="dappSignView" destination="CL9-dN-aM0" id="e5o-um-HDO"/>
                         <outlet property="dappViewsContainerView" destination="osF-qS-9VI" id="VG8-ml-Uw0"/>
                         <outlet property="profileButton" destination="Zep-yS-dfF" id="72N-lR-hUr"/>
+                        <outlet property="representative1ImageView" destination="KLc-9D-dpW" id="x5I-fn-XmM"/>
+                        <outlet property="representative2ImageView" destination="UfK-Xm-b3D" id="ZEi-uI-kql"/>
+                        <outlet property="representative3ImageView" destination="Y9h-U7-mgg" id="4Bd-5c-Y82"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
                         <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
                     </connections>

@@ -26,6 +26,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var dappScoreLabel: UILabel!
     
+    @IBOutlet weak var representative1ImageView: UIImageView!
+    @IBOutlet weak var representative2ImageView: UIImageView!
+    @IBOutlet weak var representative3ImageView: UIImageView!
+    
+    private var representativesImageViews: [UIImageView] = []
+    private var representativesImagesURLs: [NSURL] = []
+    
     private var visibleDappView: UIView!
     
     private var lastDappedDapp: PFObject?
@@ -44,6 +51,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.dappTextView.TextAlignment
+        
+        self.representativesImageViews = [
+            self.representative1ImageView
+        ,   self.representative2ImageView
+        ,   self.representative3ImageView
+        ]
         
         self.dappScoreLabel.text = nil;
         
@@ -83,6 +96,8 @@ class HomeViewController: UIViewController {
             userInfo: nil,
             repeats: true
         )
+        
+        self.downloadRepresentativesImages()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -655,6 +670,72 @@ class HomeViewController: UIViewController {
                 self.dappMappView.show(dappScore, SVGMapURLPath: SVGMapURL, percents: percents)
             }
         })
+    }
+    
+    func downloadRepresentativesImages() {
+        func representativesImagesURLs(completion: (URLs: [NSURL]?) -> Void) {
+            if self.representativesImagesURLs.count > 0 {
+                completion(URLs: self.representativesImagesURLs)
+                
+                return
+            }
+            
+            self.representativesImagesURLs = []
+            
+            let currentUser = PFUser.currentUser()
+            
+            Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
+                (representatives: [PFObject]?, error: NSError?) -> Void in
+                if let representatives_ = representatives {
+                    for representative in representatives_ {
+                        if let
+                            imgURLStr = representative["imgUrl"] as? String,
+                            imgURL = NSURL(string: imgURLStr) {
+                                self.representativesImagesURLs.append(imgURL)
+                        }
+                    }
+                    
+                    completion(URLs: self.representativesImagesURLs)
+                } else {
+                    if let err = error {
+                        println("\(err)")
+                    } else {
+                        println("Unknown error.")
+                    }
+                    
+                    completion(URLs: nil)
+                }
+            })
+        }
+        
+        representativesImagesURLs { (URLs: [NSURL]?) -> Void in
+            if let URLs_ = URLs {
+                for index in 0 ... URLs_.count {
+                    if index == self.representativesImagesURLs.count {
+                        break
+                    }
+                    
+                    let representativeImageView = self.representativesImageViews[index]
+                    
+                    if representativeImageView.image != nil {
+                        break
+                    }
+                    
+                    let URL = URLs_[index]
+                    
+                    Requests.downloadImageFromURL(URL, completion: {
+                        (image: UIImage?, error: NSError?) -> Void in
+                        if let img = image {
+                            representativeImageView.image = img
+                        } else if let err = error {
+                            println("\(err)")
+                        } else {
+                            println("Unknown error.")
+                        }
+                    })
+                }
+            }
+        }
     }
     
     // MARK: -
