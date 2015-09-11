@@ -26,11 +26,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var dappScoreLabel: UILabel!
     
-    @IBOutlet weak var representative1ImageView: UIImageView!
-    @IBOutlet weak var representative2ImageView: UIImageView!
-    @IBOutlet weak var representative3ImageView: UIImageView!
+    @IBOutlet var representativesImagesViews: [UIImageView]!
+    @IBOutlet var plusOneLabels: [UILabel]!
     
-    private var representativesImageViews: [UIImageView] = []
     private var representativesImagesURLs: [NSURL] = []
     
     private var visibleDappView: UIView!
@@ -51,12 +49,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.dappTextView.TextAlignment
-        
-        self.representativesImageViews = [
-            self.representative1ImageView
-        ,   self.representative2ImageView
-        ,   self.representative3ImageView
-        ]
         
         self.dappScoreLabel.text = nil;
         
@@ -82,6 +74,8 @@ class HomeViewController: UIViewController {
             name: DappSwipedNotification,
             object: nil
         )
+        
+        self.hideLabels(self.plusOneLabels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -290,7 +284,11 @@ class HomeViewController: UIViewController {
                     if let error = error {
                         println(error)
                     }
+                    
+                    return
                 }
+                
+                self.showThenHidePlusOneLabels()
             })
             
             if let userId = dapp["userid"] as? String {
@@ -710,15 +708,18 @@ class HomeViewController: UIViewController {
         
         representativesImagesURLs { (URLs: [NSURL]?) -> Void in
             if let URLs_ = URLs {
-                for index in 0 ... URLs_.count {
-                    if index == self.representativesImagesURLs.count {
-                        break
+                self.representativesImagesURLs = URLs_
+                
+                for index in 0 ... self.representativesImagesURLs.count {
+                    if (index == self.representativesImagesURLs.count ||
+                        index == self.representativesImagesViews.count) {
+                            break
                     }
                     
-                    let representativeImageView = self.representativesImageViews[index]
+                    let representativeImageView = self.representativesImagesViews[index]
                     
                     if representativeImageView.image != nil {
-                        break
+                        continue
                     }
                     
                     let URL = URLs_[index]
@@ -754,5 +755,27 @@ class HomeViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    private func showThenHidePlusOneLabels() {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.showLabels(self.plusOneLabels)
+        }, completion: { (finished: Bool) -> Void in
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.hideLabels(self.plusOneLabels)
+            })
+        })
+    }
+    
+    private func showLabels(labels: [UILabel]) {
+        for label in labels {
+            label.alpha = 1.0
+        }
+    }
+    
+    private func hideLabels(labels: [UILabel]) {
+        for label in labels {
+            label.alpha = 0.0
+        }
     }
 }
