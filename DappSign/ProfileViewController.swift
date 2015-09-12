@@ -247,6 +247,19 @@ extension ProfileViewController: UITableViewDataSource {
             
             cell.dappSignView.showDapp(dapp)
             
+            if let userID = dapp["userid"] as? String {
+                Requests.userWithID(userID, completion: {
+                    (user: PFUser?, error: NSError?) -> Void in
+                    if let usr = user {
+                        cell.dappSignView.showUserInfo(usr)
+                    } else if let err = error {
+                        println("Failed to download information about user with ID \(userID). Error = \(error)")
+                    } else {
+                        println("Failed to download information about user with ID \(userID). Unknown error.")
+                    }
+                })
+            }
+            
             if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
                 var buttons = NSMutableArray(capacity: 1)
                 

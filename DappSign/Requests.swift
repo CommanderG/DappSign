@@ -123,6 +123,18 @@ class Requests {
         }
     }
     
+    class func userWithID(userID: String, completion: (user: PFUser?, error: NSError?) -> Void) {
+        let userQuery = PFUser.query()
+        
+        userQuery.whereKey("objectId", equalTo: userID)
+        userQuery.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            let user = objects.first as? PFUser
+            
+            completion(user: user, error: error);
+        })
+    }
+    
     class func downloadDappsDappedByUser(user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         let relation = user.relationForKey("dappsDapped")
         

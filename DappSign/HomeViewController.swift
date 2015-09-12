@@ -535,18 +535,15 @@ class HomeViewController: UIViewController {
             
             self.dappSignView.showDapp(dapp)
             
-            if let dapp_ = dapp, userId = dapp_["userid"] as? String {
-                let userQuery = PFUser.query()
-                
-                userQuery.whereKey("objectId", equalTo: userId)
-                userQuery.findObjectsInBackgroundWithBlock({
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil {
-                        if let user = objects.first as? PFObject? {
-                            self.dappSignView.showUserInfo(user)
-                        }
+            if let dapp_ = dapp, userID = dapp_["userid"] as? String {
+                Requests.userWithID(userID, completion: {
+                    (user: PFUser?, error: NSError?) -> Void in
+                    if let usr = user {
+                        self.dappSignView.showUserInfo(usr)
+                    } else if let err = error {
+                        println("Failed to download information about user with ID \(userID). Error = \(error)")
                     } else {
-                        println(error)
+                        println("Failed to download information about user with ID \(userID). Unknown error.")
                     }
                 })
                 
