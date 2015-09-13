@@ -29,11 +29,13 @@ class HomeViewController: UIViewController {
     @IBOutlet var representativesImagesViews: [UIImageView]!
     @IBOutlet var plusOneLabels: [UILabel]!
     
+    @IBOutlet var representativesPlusOneLabelsVerticalTopConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var dappsCountPlusOneLabelTopConstraint: NSLayoutConstraint!
+    
     private var representativesImagesURLs: [NSURL] = []
-    
     private var visibleDappView: UIView!
-    
     private var lastDappedDapp: PFObject?
+    private var animatingPlusOneLabels = false
     
     var animator: UIDynamicAnimator!
     var snapBehavior: UISnapBehavior!
@@ -167,6 +169,8 @@ class HomeViewController: UIViewController {
                             currentDapp,
                             dapped: swipedFromLeftToRight
                         )
+                        
+                        self.showThenHidePlusOneLabels()
                     } else {
                         self.lastDappedDapp = nil
                     }
@@ -287,8 +291,6 @@ class HomeViewController: UIViewController {
                     
                     return
                 }
-                
-                self.showThenHidePlusOneLabels()
             })
             
             if let userId = dapp["userid"] as? String {
@@ -755,11 +757,38 @@ class HomeViewController: UIViewController {
     }
     
     private func showThenHidePlusOneLabels() {
+        if self.animatingPlusOneLabels {
+            return
+        }
+        
+        self.animatingPlusOneLabels = true
+        
+        var representativesPlusOneLabelsVerticalTopConstraintMax: CGFloat = 46.0
+        var dappsCountPlusOneLabelTopConstraintMax: CGFloat = 34.0
+        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.showLabels(self.plusOneLabels)
+            
+            for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
+                topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax - 15.0
+            }
+            
+            self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax - 15.0
+            
+            self.view.layoutIfNeeded()
         }, completion: { (finished: Bool) -> Void in
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.hideLabels(self.plusOneLabels)
+            }, completion: { (finished: Bool) -> Void in
+                for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
+                    topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax
+                }
+                
+                self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax
+                
+                self.view.layoutIfNeeded()
+                
+                self.animatingPlusOneLabels = false
             })
         })
     }
