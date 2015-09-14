@@ -12,13 +12,8 @@ internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
 internal let dappsDappedRelationKey = "dappsDapped"
 
-internal enum Swipe {
-    case SwipeFromLeftToRight
-    case SwipeFromRightToLeft
-}
-
-class HomeViewController: UIViewController {
-    @IBOutlet weak var dappViewsContainerView: UIView!
+class HomeViewController: UIViewController, SwipeableViewDelegate {
+    @IBOutlet weak var dappViewsContainerView: SwipeableView!
     @IBOutlet weak var dappSignView: DappSignView!
     @IBOutlet weak var dappMappView: DappMappView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
@@ -37,10 +32,6 @@ class HomeViewController: UIViewController {
     private var lastDappedDapp: PFObject?
     private var animatingPlusOneLabels = false
     
-    var animator: UIDynamicAnimator!
-    var snapBehavior: UISnapBehavior!
-    var attachmentBehavior: UIAttachmentBehavior!
-    
     var dapps: [PFObject] = []
     var dappsDownloader: DappsDownloader?
     var dappFonts = DappFonts()
@@ -54,13 +45,9 @@ class HomeViewController: UIViewController {
         
         self.dappScoreLabel.text = nil;
         
-        self.animator = UIDynamicAnimator(referenceView: view)
-        self.snapBehavior = UISnapBehavior(
-            item: self.dappViewsContainerView,
-            snapToPoint: self.view.center
-        )
-        
         self.dappViewsContainerView.hidden = true
+        self.dappViewsContainerView.delegate = self
+        self.dappViewsContainerView.minTranslationX = 150.0;
         
         self.showDappView(self.dappSignView)
         
@@ -85,12 +72,11 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(
-            1.0,
-            target: self,
-            selector: Selector("updateDappScore"),
-            userInfo: nil,
-            repeats: true
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0
+        ,   target: self
+        ,   selector: Selector("updateDappScore")
+        ,   userInfo: nil
+        ,   repeats: true
         )
         
         self.downloadRepresentativesImages()
@@ -101,106 +87,6 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - @IBActions
-    
-    @IBAction func handleSwipe(sender: AnyObject) {
-        let panGestureRecognizer = sender as! UIPanGestureRecognizer
-        
-        if panGestureRecognizer.state == .Began {
-            self.animator.removeBehavior(self.snapBehavior)
-            
-            let location = panGestureRecognizer.locationInView(self.dappViewsContainerView)
-            let centerOffset = UIOffset(
-                horizontal: location.x - CGRectGetMidX(self.dappViewsContainerView.bounds),
-                vertical: location.y - CGRectGetMidY(self.dappViewsContainerView.bounds)
-            )
-            
-            self.attachmentBehavior = UIAttachmentBehavior(
-                item: self.dappViewsContainerView,
-                offsetFromCenter: centerOffset,
-                attachedToAnchor: self.dappViewsContainerView.center
-            )
-            self.attachmentBehavior.frequency = 0.0
-            
-            self.animator.addBehavior(self.attachmentBehavior)
-        } else if panGestureRecognizer.state == .Changed {
-            let location = panGestureRecognizer.locationInView(self.view)
-            
-            self.attachmentBehavior.anchorPoint = location
-        } else if panGestureRecognizer.state == .Ended {
-            self.animator.removeBehavior(self.attachmentBehavior)
-            self.animator.addBehavior(self.snapBehavior)
-            
-            let translation = panGestureRecognizer.translationInView(self.view)
-            let swipedFromRightToLeft = translation.x < -150.0
-            let swipedFromLeftToRight = translation.x > 150.0
-            
-            if !swipedFromRightToLeft && !swipedFromLeftToRight {
-                return
-            }
-            
-            self.animator.removeAllBehaviors()
-            
-            var gravity = UIGravityBehavior(items: [self.dappViewsContainerView])
-            
-            if swipedFromLeftToRight {
-                gravity.gravityDirection = CGVectorMake(0, -10)
-            } else {
-                gravity.gravityDirection = CGVectorMake(0, 10)
-            }
-            
-            self.animator.addBehavior(gravity)
-            
-            delay(0.3) {
-                self.animator.removeAllBehaviors()
-                
-                self.attachmentBehavior.anchorPoint = self.view.center
-                self.dappViewsContainerView.center = self.view.center
-                
-                let scale = CGAffineTransformMakeScale(0.5, 0.5)
-                let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
-                
-                self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
-                
-                if (self.visibleDappView == self.dappSignView) {
-                    if let currentDapp = self.dapps.first {
-                        self.lastDappedDapp = currentDapp
-                        
-                        self.sendRequestsForDapp(
-                            currentDapp,
-                            dapped: swipedFromLeftToRight
-                        )
-                        
-                        self.showThenHidePlusOneLabels()
-                    } else {
-                        self.lastDappedDapp = nil
-                    }
-                    
-                    if self.dapps.count > 0 {
-                        self.dapps.removeAtIndex(0)
-                    }
-                    
-                    if (swipedFromLeftToRight && self.dapps.count > 0) {
-                        self.showDappView(self.dappMappView)
-                    }
-                } else {
-                    self.showDappView(self.dappSignView)
-                }
-                
-                self.initDappView()
-                
-                if self.dapps.count == 0 {
-                    self.downloadDapps()
-                }
-                
-                spring(0.5) {
-                    let scale = CGAffineTransformMakeScale(1.0, 1.0)
-                    let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-                    
-                    self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
-                }
-            }
-        }
-    }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         let currentDappCardAsImage = self.dappViewsContainerView.toImage()
@@ -388,7 +274,7 @@ class HomeViewController: UIViewController {
             })
         }
     }
-
+    
     private func downloadDapps() {
         self.downloadPrimaryDappsWithSuccessClosure {
             () -> Void in
@@ -516,20 +402,10 @@ class HomeViewController: UIViewController {
     }
     
     private func initDappView() {
-        self.dappViewsContainerView.hidden = false
-        
-        self.perform_only_one_time() {
-            let scale = CGAffineTransformMakeScale(0.5, 0.5)
-            let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+        if self.dappViewsContainerView.hidden {
+            self.dappViewsContainerView.hidden = false
             
-            self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
-            
-            spring(0.5) {
-                let scale = CGAffineTransformMakeScale(1, 1)
-                let translate = CGAffineTransformMakeTranslation(0, 0)
-                
-                self.dappViewsContainerView.transform = CGAffineTransformConcat(scale, translate)
-            }
+            self.dappViewsContainerView.show()
         }
         
         if (self.visibleDappView == self.dappSignView) {
@@ -569,12 +445,8 @@ class HomeViewController: UIViewController {
             self.dappMappView.show(0, SVGMapURLPath: SVGMapURL, percents: 0)
             
             if let dapp = self.lastDappedDapp {
-                println(dapp["dappStatement"])
-                
                 Requests.percents(dapp, completion: {
                     (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
-                    println("error = \(error)")
-                    
                     if let usersDapped_ = usersDapped {
                         if usersDapped_.count >= 20 {
                             self.downloadDataForMapAndShowIt(usersDapped_, dapp: dapp)
@@ -735,6 +607,42 @@ class HomeViewController: UIViewController {
                     })
                 }
             }
+        }
+    }
+    
+    // MARK: - SwipeableViewDelegate
+    
+    func didSwipe(swipeDirection: SwipeDirection) {
+        if (self.visibleDappView == self.dappSignView) {
+            let dapped = (swipeDirection == SwipeDirection.LeftToRight)
+            
+            if let currentDapp = self.dapps.first {
+                self.lastDappedDapp = currentDapp
+                
+                self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                
+                if dapped {
+                    self.showThenHidePlusOneLabels()
+                }
+            } else {
+                self.lastDappedDapp = nil
+            }
+            
+            if self.dapps.count > 0 {
+                self.dapps.removeAtIndex(0)
+            }
+            
+            if (dapped && self.dapps.count > 0) {
+                self.showDappView(self.dappMappView)
+            }
+        } else {
+            self.showDappView(self.dappSignView)
+        }
+        
+        self.initDappView()
+        
+        if self.dapps.count == 0 {
+            self.downloadDapps()
         }
     }
     
