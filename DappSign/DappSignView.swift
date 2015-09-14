@@ -18,6 +18,8 @@ class DappSignView: XIBView {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     
+    @IBOutlet var arrowImageViewsAndLabels: [UIView]!
+    
     required init(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
@@ -68,6 +70,8 @@ class DappSignView: XIBView {
             
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
+            
+            self.showArrowImageViewsAndLabels()
         } else {
             self.dappsSwipesCountLabel.text = nil
             self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
@@ -80,6 +84,8 @@ class DappSignView: XIBView {
             self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
+            
+            self.hideArrowImageViewsAndLabels()
         }
         
         self.scoreView.backgroundColor = self.dappStatementLabel.backgroundColor
@@ -94,6 +100,18 @@ class DappSignView: XIBView {
         } else {
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
+        }
+    }
+    
+    private func showArrowImageViewsAndLabels() {
+        for view in self.arrowImageViewsAndLabels {
+            view.hidden = false
+        }
+    }
+    
+    private func hideArrowImageViewsAndLabels() {
+        for view in self.arrowImageViewsAndLabels {
+            view.hidden = true
         }
     }
 }
