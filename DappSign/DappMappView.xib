@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Exo-Black.otf">
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappMappView" customModule="DappSign" customModuleProvider="target">
+            <connections>
+                <outlet property="dappsCountLabel" destination="SVj-ag-gQZ" id="t1P-Lf-x0E"/>
+                <outlet property="percentsView" destination="22H-z5-zwb" id="PAw-Vk-5rk"/>
+                <outlet property="webView" destination="T65-DB-uH4" id="CzZ-Xa-PLD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="YRP-Vc-ddu">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOd-bZ-VGW">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The DappMapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGc-H0-02b">
+                            <rect key="frame" x="20" y="0.0" width="280" height="40"/>
+                            <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="24"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.21176470589999999" green="0.20784313730000001" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="VGc-H0-02b" secondAttribute="bottom" id="5st-jj-zbI"/>
+                        <constraint firstAttribute="height" constant="40" id="F1J-O4-El7"/>
+                        <constraint firstItem="VGc-H0-02b" firstAttribute="top" secondItem="yOd-bZ-VGW" secondAttribute="top" id="HCw-Fk-TBf"/>
+                        <constraint firstAttribute="trailing" secondItem="VGc-H0-02b" secondAttribute="trailing" constant="20" id="pGP-dH-Ln0"/>
+                        <constraint firstItem="VGc-H0-02b" firstAttribute="leading" secondItem="yOd-bZ-VGW" secondAttribute="leading" constant="20" id="vh0-fE-0C6"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="DappSign: The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRa-BG-jX4">
+                    <rect key="frame" x="4" y="418" width="312" height="22"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="itg-ls-z1m"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The DappSign has 4350 Dapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SVj-ag-gQZ">
+                    <rect key="frame" x="12" y="44" width="296" height="35"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="meu-kb-8Ef"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="24"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here's where this DappSign is most popular:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yi3-Wf-fUk">
+                    <rect key="frame" x="24" y="79" width="272" height="19"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="uQb-rE-amP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSz-cU-Ubf">
+                    <rect key="frame" x="0.0" y="440" width="320" height="40"/>
+                    <color key="backgroundColor" red="0.21176470589999999" green="0.20784313730000001" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="1a6-Xe-ze4"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50p-vg-18r">
+                    <rect key="frame" x="22" y="106" width="276" height="304"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yf-eV-Z4y">
+                            <rect key="frame" x="0.0" y="168" width="276" height="136"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22H-z5-zwb" customClass="PercentsView" customModule="DappSign" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="34" width="68" height="68"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="22H-z5-zwb" secondAttribute="height" multiplier="1:1" id="uEY-Ui-zDM"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage of users in your district who have given Dapp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o0R-bT-fSE">
+                                    <rect key="frame" x="80" y="34" width="196" height="68"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="16"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="22H-z5-zwb" firstAttribute="leading" secondItem="4yf-eV-Z4y" secondAttribute="leading" id="0D8-61-Dex"/>
+                                <constraint firstItem="22H-z5-zwb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4yf-eV-Z4y" secondAttribute="top" id="1h9-MF-F1E"/>
+                                <constraint firstAttribute="trailing" secondItem="o0R-bT-fSE" secondAttribute="trailing" id="Ehh-8n-wDG"/>
+                                <constraint firstAttribute="centerY" secondItem="22H-z5-zwb" secondAttribute="centerY" id="MWB-Ny-LG6"/>
+                                <constraint firstItem="o0R-bT-fSE" firstAttribute="height" secondItem="22H-z5-zwb" secondAttribute="height" id="QbY-xn-PT9"/>
+                                <constraint firstItem="o0R-bT-fSE" firstAttribute="leading" secondItem="22H-z5-zwb" secondAttribute="trailing" constant="12" id="jpA-cz-E54"/>
+                                <constraint firstItem="o0R-bT-fSE" firstAttribute="centerY" secondItem="22H-z5-zwb" secondAttribute="centerY" id="lJk-3E-mdJ"/>
+                                <constraint firstAttribute="width" secondItem="22H-z5-zwb" secondAttribute="height" multiplier="69:17" id="ndx-9B-ewg"/>
+                            </constraints>
+                        </view>
+                        <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T65-DB-uH4">
+                            <rect key="frame" x="0.0" y="0.0" width="276" height="160"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="T65-DB-uH4" secondAttribute="height" multiplier="69:40" id="b7q-Xj-zkD"/>
+                            </constraints>
+                        </webView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="T65-DB-uH4" secondAttribute="centerX" id="1dc-d7-SQ1"/>
+                        <constraint firstItem="4yf-eV-Z4y" firstAttribute="leading" secondItem="50p-vg-18r" secondAttribute="leading" id="Gz5-7u-YeU"/>
+                        <constraint firstItem="T65-DB-uH4" firstAttribute="top" secondItem="50p-vg-18r" secondAttribute="top" id="J7N-sH-nu9"/>
+                        <constraint firstAttribute="bottom" secondItem="4yf-eV-Z4y" secondAttribute="bottom" id="K8l-8Z-aXa"/>
+                        <constraint firstItem="4yf-eV-Z4y" firstAttribute="top" secondItem="T65-DB-uH4" secondAttribute="bottom" constant="8" id="Qmh-Qd-ziv"/>
+                        <constraint firstAttribute="trailing" secondItem="4yf-eV-Z4y" secondAttribute="trailing" id="v6I-0v-QbS"/>
+                        <constraint firstAttribute="width" secondItem="T65-DB-uH4" secondAttribute="width" priority="750" id="vIS-Xv-B0G"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.059027887880802155" green="0.63911348581314087" blue="0.55069839954376221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="RRa-BG-jX4" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" constant="4" id="8E7-bE-MfB"/>
+                <constraint firstAttribute="trailing" secondItem="yOd-bZ-VGW" secondAttribute="trailing" id="93W-9B-Xaw"/>
+                <constraint firstAttribute="trailing" secondItem="RRa-BG-jX4" secondAttribute="trailing" constant="4" id="FLo-ow-Gm5"/>
+                <constraint firstItem="SVj-ag-gQZ" firstAttribute="top" secondItem="yOd-bZ-VGW" secondAttribute="bottom" constant="4" id="MSk-9i-AIS"/>
+                <constraint firstItem="yOd-bZ-VGW" firstAttribute="top" secondItem="YRP-Vc-ddu" secondAttribute="top" id="MTH-zO-cPh"/>
+                <constraint firstItem="oSz-cU-Ubf" firstAttribute="top" secondItem="RRa-BG-jX4" secondAttribute="bottom" id="P4G-tN-o7s"/>
+                <constraint firstAttribute="trailing" secondItem="Yi3-Wf-fUk" secondAttribute="trailing" constant="24" id="R6o-Dg-f7o"/>
+                <constraint firstItem="SVj-ag-gQZ" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" constant="12" id="TVJ-oa-3Pu"/>
+                <constraint firstAttribute="bottom" secondItem="oSz-cU-Ubf" secondAttribute="bottom" id="Wfo-Uf-rJs"/>
+                <constraint firstItem="Yi3-Wf-fUk" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" constant="24" id="YUe-Xu-sHV"/>
+                <constraint firstItem="oSz-cU-Ubf" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" id="bRY-Ga-TYH"/>
+                <constraint firstAttribute="trailing" secondItem="50p-vg-18r" secondAttribute="trailing" constant="22" id="e1g-hq-Bvq"/>
+                <constraint firstAttribute="trailing" secondItem="oSz-cU-Ubf" secondAttribute="trailing" id="lF1-8C-LWm"/>
+                <constraint firstAttribute="trailing" secondItem="SVj-ag-gQZ" secondAttribute="trailing" constant="12" id="mfY-2B-f2G"/>
+                <constraint firstItem="50p-vg-18r" firstAttribute="top" secondItem="Yi3-Wf-fUk" secondAttribute="bottom" constant="8" id="nAe-Fu-Yzz"/>
+                <constraint firstItem="50p-vg-18r" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" constant="22" id="nUW-Lf-QK6"/>
+                <constraint firstItem="Yi3-Wf-fUk" firstAttribute="top" secondItem="SVj-ag-gQZ" secondAttribute="bottom" id="ryf-E8-UGe"/>
+                <constraint firstItem="yOd-bZ-VGW" firstAttribute="leading" secondItem="YRP-Vc-ddu" secondAttribute="leading" id="xwA-QV-oJh"/>
+                <constraint firstItem="RRa-BG-jX4" firstAttribute="top" secondItem="50p-vg-18r" secondAttribute="bottom" constant="8" id="yFt-yt-tEw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="293" y="505"/>
+        </view>
+    </objects>
+</document>

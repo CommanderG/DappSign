@@ -12,6 +12,8 @@
 	<dict>
 		<key>E2BA0539512B6D9A81C16E89B43DCC2185F57859</key>
 		<string>https://github.com/CommanderG/DappSign.git</string>
+		<key>cb5fedf5-10e4-8948-9e47-17c76c746d80++5081</key>
+		<string>https://svn.venuiti.com/svn/Fiesta/trunk/iPad/FotoFiesta</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DappSign.xcodeproj</string>
@@ -19,6 +21,13 @@
 	<dict>
 		<key>E2BA0539512B6D9A81C16E89B43DCC2185F57859</key>
 		<string>../..</string>
+		<key>cb5fedf5-10e4-8948-9e47-17c76c746d80++5081</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>cb5fedf5-10e4-8948-9e47-17c76c746d80++5081</key>
+		<string>https://svn.venuiti.com/svn/Fiesta</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/CommanderG/DappSign.git</string>
@@ -28,6 +37,14 @@
 	<string>E2BA0539512B6D9A81C16E89B43DCC2185F57859</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>cb5fedf5-10e4-8948-9e47-17c76c746d80++5081</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

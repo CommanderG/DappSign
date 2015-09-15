@@ -245,24 +245,20 @@ extension ProfileViewController: UITableViewDataSource {
         if let dapps = self.dapps() {
             let dapp = dapps[indexPath.row]
             
-            if let dappBackgroundColorString = dapp["dappBackgroundColor"] as? String {
-                cell.backgroundColor = dappColors.dappColorWheel[dappBackgroundColorString]
+            cell.dappSignView.showDapp(dapp)
+            
+            if let userID = dapp["userid"] as? String {
+                Requests.userWithID(userID, completion: {
+                    (user: PFUser?, error: NSError?) -> Void in
+                    if let usr = user {
+                        cell.dappSignView.showUserInfo(usr)
+                    } else if let err = error {
+                        println("Failed to download information about user with ID \(userID). Error = \(error)")
+                    } else {
+                        println("Failed to download information about user with ID \(userID). Unknown error.")
+                    }
+                })
             }
-            
-            cell.dappStatementTextView.text = dapp["dappStatement"] as? String
-            
-            if let dappFontString = dapp["dappFont"] as? String {
-                cell.dappStatementTextView.font = dappFonts.dappFontBook[dappFontString]
-            }
-            
-            if let dappScore = dapp["dappScore"] as? Int {
-                cell.dappScoreLabel.text = String(dappScore)
-            } else {
-                cell.dappScoreLabel.text = nil
-            }
-            
-            cell.dappScoreLabel.textColor = UIColor.whiteColor()
-            cell.dappStatementTextView.textColor = UIColor.whiteColor()
             
             if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
                 var buttons = NSMutableArray(capacity: 1)

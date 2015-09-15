@@ -12,29 +12,25 @@ internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
 internal let dappsDappedRelationKey = "dappsDapped"
 
-
-
-internal enum Swipe {
-    case SwipeFromLeftToRight
-    case SwipeFromRightToLeft
-}
-
-class HomeViewController: UIViewController {
-    @IBOutlet weak var dappView: UIView!
-    @IBOutlet weak var dappStatementLabel: UILabel!
-    @IBOutlet weak var scoreView: UIView!
-    @IBOutlet weak var logoView: UIView!
+class HomeViewController: UIViewController, SwipeableViewDelegate {
+    @IBOutlet weak var dappViewsContainerView: SwipeableView!
+    @IBOutlet weak var dappSignView: DappSignView!
+    @IBOutlet weak var dappMappView: DappMappView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userProfileImageView: UIImageView!
-    @IBOutlet weak var dappsSwipesCountLabel: UILabel!
     @IBOutlet weak var dappScoreLabel: UILabel!
     
-    var animator: UIDynamicAnimator!
-    var snapBehavior: UISnapBehavior!
-    var attachmentBehavior: UIAttachmentBehavior!
+    @IBOutlet var representativesImagesViews: [UIImageView]!
+    @IBOutlet var plusOneLabels: [UILabel]!
+    
+    @IBOutlet var representativesPlusOneLabelsVerticalTopConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var dappsCountPlusOneLabelTopConstraint: NSLayoutConstraint!
+    
+    private var representativesImagesURLs: [NSURL] = []
+    private var visibleDappView: UIView!
+    private var lastDappedDapp: PFObject?
+    private var animatingPlusOneLabels = false
     
     var dapps: [PFObject] = []
     var dappsDownloader: DappsDownloader?
@@ -49,13 +45,11 @@ class HomeViewController: UIViewController {
         
         self.dappScoreLabel.text = nil;
         
-        self.animator = UIDynamicAnimator(referenceView: view)
-        self.snapBehavior = UISnapBehavior(
-            item: self.dappView,
-            snapToPoint: self.view.center
-        )
+        self.dappViewsContainerView.hidden = true
+        self.dappViewsContainerView.delegate = self
+        self.dappViewsContainerView.minTranslationX = 150.0;
         
-        self.dappView.hidden = true
+        self.showDappView(self.dappSignView)
         
         if PFUser.currentUser() == nil {
             self.profileButton.hidden = true
@@ -69,6 +63,8 @@ class HomeViewController: UIViewController {
             name: DappSwipedNotification,
             object: nil
         )
+        
+        self.hideLabels(self.plusOneLabels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,13 +72,14 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(
-            1.0,
-            target: self,
-            selector: Selector("updateDappScore"),
-            userInfo: nil,
-            repeats: true
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0
+        ,   target: self
+        ,   selector: Selector("updateDappScore")
+        ,   userInfo: nil
+        ,   repeats: true
         )
+        
+        self.downloadRepresentativesImages()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -91,94 +88,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - @IBActions
     
-    @IBAction func handleSwipe(sender: AnyObject) {
-        let panGestureRecognizer = sender as! UIPanGestureRecognizer
-        
-        if panGestureRecognizer.state == .Began {
-            self.animator.removeBehavior(self.snapBehavior)
-            
-            let location = panGestureRecognizer.locationInView(self.dappView)
-            let centerOffset = UIOffset(
-                horizontal: location.x - CGRectGetMidX(self.dappView.bounds),
-                vertical: location.y - CGRectGetMidY(self.dappView.bounds)
-            )
-            
-            self.attachmentBehavior = UIAttachmentBehavior(
-                item: self.dappView,
-                offsetFromCenter: centerOffset,
-                attachedToAnchor: self.dappView.center
-            )
-            self.attachmentBehavior.frequency = 0.0
-            
-            self.animator.addBehavior(self.attachmentBehavior)
-        } else if panGestureRecognizer.state == .Changed {
-            let location = panGestureRecognizer.locationInView(self.view)
-            
-            self.attachmentBehavior.anchorPoint = location
-        } else if panGestureRecognizer.state == .Ended {
-            self.animator.removeBehavior(self.attachmentBehavior)
-            self.animator.addBehavior(self.snapBehavior)
-            
-            let translation = panGestureRecognizer.translationInView(self.view)
-            let swipedFromRightToLeft = translation.x < -150.0
-            let swipedFromLeftToRight = translation.x > 150.0
-            
-            if !swipedFromRightToLeft && !swipedFromLeftToRight {
-                return
-            }
-            
-            self.animator.removeAllBehaviors()
-            
-            var gravity = UIGravityBehavior(items: [self.dappView])
-            
-            if swipedFromLeftToRight {
-                gravity.gravityDirection = CGVectorMake(0, -10)
-            } else {
-                gravity.gravityDirection = CGVectorMake(0, 10)
-            }
-            
-            self.animator.addBehavior(gravity)
-            
-            delay(0.3) {
-                self.animator.removeAllBehaviors()
-                
-                self.attachmentBehavior.anchorPoint = self.view.center
-                self.dappView.center = self.view.center
-                
-                let scale = CGAffineTransformMakeScale(0.5, 0.5)
-                let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
-                
-                self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                
-                if let currentDapp = self.dapps.first {
-                    self.sendRequestsForDapp(
-                        currentDapp,
-                        dapped: swipedFromLeftToRight
-                    )
-                }
-                
-                if self.dapps.count > 0 {
-                    self.dapps.removeAtIndex(0)
-                }
-                
-                self.initDappView()
-                
-                if self.dapps.count == 0 {
-                    self.downloadDapps()
-                }
-                
-                spring(0.5) {
-                    let scale = CGAffineTransformMakeScale(1.0, 1.0)
-                    let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-                    
-                    self.dappView.transform = CGAffineTransformConcat(scale, translate)
-                }
-            }
-        }
-    }
-    
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
+        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -204,7 +115,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappView.toImage()
+        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
         let currentDapp = self.dapps.first
         
         if currentDapp == nil {
@@ -263,6 +174,8 @@ class HomeViewController: UIViewController {
                     if let error = error {
                         println(error)
                     }
+                    
+                    return
                 }
             })
             
@@ -361,7 +274,7 @@ class HomeViewController: UIViewController {
             })
         }
     }
-
+    
     private func downloadDapps() {
         self.downloadPrimaryDappsWithSuccessClosure {
             () -> Void in
@@ -489,107 +402,314 @@ class HomeViewController: UIViewController {
     }
     
     private func initDappView() {
-        self.dappView.hidden = false
-        
-        self.perform_only_one_time() {
-            let scale = CGAffineTransformMakeScale(0.5, 0.5)
-            let translate = CGAffineTransformMakeTranslation(0, -200)
+        if self.dappViewsContainerView.hidden {
+            self.dappViewsContainerView.hidden = false
             
-            self.dappView.transform = CGAffineTransformConcat(scale, translate)
-            
-            spring(0.5) {
-                let scale = CGAffineTransformMakeScale(1, 1)
-                let translate = CGAffineTransformMakeTranslation(0, 0)
-                
-                self.dappView.transform = CGAffineTransformConcat(scale, translate)
-            }
+            self.dappViewsContainerView.show()
         }
         
-        if dapps.count > 0 {
-            if let dapp = dapps.first {
-                if let dappScore = dapp["dappScore"] as? Int {
-                    var text: String
-                    
-                    if dappScore == 1 {
-                        text = "1 Dapp"
+        if (self.visibleDappView == self.dappSignView) {
+            let dapp = dapps.first
+            
+            self.dappSignView.showDapp(dapp)
+            
+            if let dapp_ = dapp, userID = dapp_["userid"] as? String {
+                Requests.userWithID(userID, completion: {
+                    (user: PFUser?, error: NSError?) -> Void in
+                    if let usr = user {
+                        self.dappSignView.showUserInfo(usr)
+                    } else if let err = error {
+                        println("Failed to download information about user with ID \(userID). Error = \(error)")
                     } else {
-                        text = "\(dappScore) Dapp"
+                        println("Failed to download information about user with ID \(userID). Unknown error.")
                     }
-                    
-                    self.dappsSwipesCountLabel.text = text
-                } else {
-                    self.dappsSwipesCountLabel.text = nil
-                }
+                })
                 
-                self.dappStatementLabel.text = dapp["dappStatement"] as? String
-                
-                if let dappFontName = dapp["dappFont"] as? String {
-                    
-                    let screenSize: CGRect = UIScreen.mainScreen().bounds
-                    let screenWidth = screenSize.width
-                    let screenHeight = screenSize.height
-                    self.dappStatementLabel.font = dappFonts.dappFontBook[dappFontName]
-                    
-                    if screenWidth == 320 && screenHeight == 480{
-                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 22)
-                    }else if screenWidth == 320 && screenHeight == 568{
-                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 27)
+                Requests.addUserToUsersWhoSaw(dapp_, user: PFUser.currentUser(), completion: {
+                    (succeeded: Bool, error: NSError!) -> Void in
+                    if !succeeded {
+                        if let err = error {
+                            println("error = \(err)")
+                        } else {
+                            println("error = unknown")
+                        }
+                        
+                        return
                     }
-
-                }
-                
-                self.dappStatementLabel.textColor = UIColor.whiteColor()
-                
-                if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
-                    self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
-                }
-                
-                self.usernameLabel.text = nil
-                self.userProfileImageView.image = nil
-                
-                if let userId = dapp["userid"] as? String {
-                    let userQuery = PFUser.query()
-                    
-                    userQuery.whereKey("objectId", equalTo: userId)
-                    
-                    userQuery.findObjectsInBackgroundWithBlock({
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
-                        if error != nil {
-                            println(error)
+                })
+            }
+        } else if (self.visibleDappView == self.dappMappView) {
+            let SVGMapURL = SVGMapGenerator.generate([:])
+            
+            // placeholders
+            self.dappMappView.show(0, SVGMapURLPath: SVGMapURL, percents: 0)
+            
+            if let dapp = self.lastDappedDapp {
+                Requests.percents(dapp, completion: {
+                    (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
+                    if let usersDapped_ = usersDapped {
+                        if usersDapped_.count >= 20 {
+                            self.downloadDataForMapAndShowIt(usersDapped_, dapp: dapp)
                             
                             return
                         }
                         
-                        if let user = objects.first as? PFObject {
-                            self.usernameLabel.text = user["name"] as? String
-                            self.userProfileImageView.image = UIImage(data: user["image"] as! NSData)
+                        var dappsCount = UInt(10 + arc4random_uniform(20))
+                        var IDsFreqs = CongressionalDistrictsIDs.getRandomIDsFreqs(dappsCount)
+                        let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
+                        var percents = 0 as UInt
+                        
+                        if let
+                            user = PFUser.currentUser(),
+                            congrDistrID = user["congressionalDistrictID"] as? String {
+                                var additionalFreq = UInt(1 + arc4random_uniform(4))
+                                var dappTotalViews = 1 as UInt
+                                var dappDapps = 1 as UInt
+                                
+                                if let freq = IDsFreqs[congrDistrID] as UInt? {
+                                    IDsFreqs[congrDistrID] = freq + additionalFreq
+                                    
+                                    dappTotalViews = freq + additionalFreq
+                                } else {
+                                    IDsFreqs[congrDistrID] = additionalFreq
+                                    
+                                    dappTotalViews = additionalFreq
+                                }
+                                
+                                dappDapps = UInt(arc4random_uniform(UInt32(dappTotalViews)))
+                                
+                                if dappDapps == 0 {
+                                    dappDapps = 1
+                                } else if dappDapps > dappTotalViews {
+                                    dappDapps = dappTotalViews
+                                }
+                                
+                                percents = UInt(roundf(Float(dappDapps) / Float(dappTotalViews) * 100))
+                                dappsCount += additionalFreq
+                        }
+                        
+                        self.dappMappView.show(dappsCount, SVGMapURLPath: SVGMapURL, percents: percents)
+                    }
+                })
+            }
+        }
+    }
+    
+    private func downloadDataForMapAndShowIt(usersDapped: [PFObject:Bool], dapp: PFObject) {
+        let users = usersDapped.keys.array
+        let dapps = usersDapped.values.array
+        
+        CongressionalDistrictsIDs.getIDsFrequenciesForDapp(dapp, completion: {
+            (IDsFreqs: IDsFrequencies?) -> Void in
+            if let IDsFreqs_ = IDsFreqs {
+                var dappScore = 0 as UInt
+                
+                if let dappScore_ = dapp["dappScore"] as? UInt {
+                    dappScore = dappScore_
+                }
+                
+                let SVGMapURL = SVGMapGenerator.generate(IDsFreqs_)
+                var dappedCount = usersDapped.keys.array.filter({
+                    let currentUser = PFUser.currentUser()
+                    
+                    if let
+                        currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String,
+                        userCongrDistrID = $0["congressionalDistrictID"] as? String {
+                            if $0.objectId == currentUser.objectId {
+                                // the back end hasn't been updated yet
+                                return true
+                            } else if currentUserCongrDistrID == userCongrDistrID {
+                                if let dapped = usersDapped[$0] as Bool? {
+                                    if dapped == true {
+                                        return true
+                                    }
+                                }
+                            }
+                    }
+                    
+                    return false
+                }).count
+                
+                var percents = 0 as UInt
+                
+                if dappedCount > 0 && dapps.count > 0 {
+                    percents = UInt(roundf(Float(dappedCount) / Float(dapps.count) * 100))
+                }
+                
+                self.dappMappView.show(dappScore, SVGMapURLPath: SVGMapURL, percents: percents)
+            }
+        })
+    }
+    
+    func downloadRepresentativesImages() {
+        func representativesImagesURLs(completion: (URLs: [NSURL]?) -> Void) {
+            if self.representativesImagesURLs.count > 0 {
+                completion(URLs: self.representativesImagesURLs)
+                
+                return
+            }
+            
+            self.representativesImagesURLs = []
+            
+            let currentUser = PFUser.currentUser()
+            
+            Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
+                (representatives: [PFObject]?, error: NSError?) -> Void in
+                if let representatives_ = representatives {
+                    for representative in representatives_ {
+                        if let
+                            imgURLStr = representative["imgUrl"] as? String,
+                            imgURL = NSURL(string: imgURLStr) {
+                                self.representativesImagesURLs.append(imgURL)
+                        }
+                    }
+                    
+                    completion(URLs: self.representativesImagesURLs)
+                } else {
+                    if let err = error {
+                        println("\(err)")
+                    } else {
+                        println("Unknown error.")
+                    }
+                    
+                    completion(URLs: nil)
+                }
+            })
+        }
+        
+        representativesImagesURLs { (URLs: [NSURL]?) -> Void in
+            if let URLs_ = URLs {
+                self.representativesImagesURLs = URLs_
+                
+                for index in 0 ... self.representativesImagesURLs.count {
+                    if (index == self.representativesImagesURLs.count ||
+                        index == self.representativesImagesViews.count) {
+                            break
+                    }
+                    
+                    let representativeImageView = self.representativesImagesViews[index]
+                    
+                    if representativeImageView.image != nil {
+                        continue
+                    }
+                    
+                    let URL = URLs_[index]
+                    
+                    Requests.downloadImageFromURL(URL, completion: {
+                        (image: UIImage?, error: NSError?) -> Void in
+                        if let img = image {
+                            representativeImageView.image = img
+                        } else if let err = error {
+                            println("\(err)")
                         } else {
-                            self.usernameLabel.text = nil
-                            self.userProfileImageView.image = nil
+                            println("Unknown error.")
                         }
                     })
                 }
             }
-        } else {
-            self.dappsSwipesCountLabel.text = nil
-            self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
+        }
+    }
+    
+    // MARK: - SwipeableViewDelegate
+    
+    func didSwipe(swipeDirection: SwipeDirection) {
+        if (self.visibleDappView == self.dappSignView) {
+            let dapped = (swipeDirection == SwipeDirection.LeftToRight)
             
-            if let font = dappFonts.dappFontBook["exo"] {
-                self.dappStatementLabel.font = font
+            if let currentDapp = self.dapps.first {
+                self.lastDappedDapp = currentDapp
+                
+                self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                
+                if dapped {
+                    self.showThenHidePlusOneLabels()
+                }
+            } else {
+                self.lastDappedDapp = nil
             }
             
-            self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
-            self.usernameLabel.text = nil
-            self.userProfileImageView.image = nil
+            if self.dapps.count > 0 {
+                self.dapps.removeAtIndex(0)
+            }
+            
+            if (dapped && self.dapps.count > 0) {
+                self.showDappView(self.dappMappView)
+            }
+        } else {
+            self.showDappView(self.dappSignView)
         }
         
-        self.scoreView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.logoView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.initDappView()
+        
+        if self.dapps.count == 0 {
+            self.downloadDapps()
+        }
+    }
+    
+    // MARK: -
+    
+    private func showDappView(dappView: UIView) {
+        if (dappView == self.dappSignView) {
+            self.dappSignView.hidden = false
+            self.dappMappView.hidden = true
+            self.visibleDappView = dappView
+        } else if (dappView == self.dappMappView) {
+            self.dappSignView.hidden = true
+            self.dappMappView.hidden = false
+            self.visibleDappView = dappView
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    private func showThenHidePlusOneLabels() {
+        if self.animatingPlusOneLabels {
+            return
+        }
+        
+        self.animatingPlusOneLabels = true
+        
+        var representativesPlusOneLabelsVerticalTopConstraintMax: CGFloat = 46.0
+        var dappsCountPlusOneLabelTopConstraintMax: CGFloat = 34.0
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.showLabels(self.plusOneLabels)
+            
+            for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
+                topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax - 15.0
+            }
+            
+            self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax - 15.0
+            
+            self.view.layoutIfNeeded()
+        }, completion: { (finished: Bool) -> Void in
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.hideLabels(self.plusOneLabels)
+            }, completion: { (finished: Bool) -> Void in
+                for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
+                    topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax
+                }
+                
+                self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax
+                
+                self.view.layoutIfNeeded()
+                
+                self.animatingPlusOneLabels = false
+            })
+        })
+    }
+    
+    private func showLabels(labels: [UILabel]) {
+        for label in labels {
+            label.alpha = 1.0
+        }
+    }
+    
+    private func hideLabels(labels: [UILabel]) {
+        for label in labels {
+            label.alpha = 0.0
+        }
     }
 }
