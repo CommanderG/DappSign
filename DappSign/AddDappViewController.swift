@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddDappViewController: UIViewController, UITextViewDelegate {
+class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableViewDelegate {
     
     //ControlFlow
     var mode:String = "chooseColor"
@@ -19,9 +19,9 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     var nameString:String!
     
     //Storyboard connections
+    @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var dappTextView: UITextView!
-    @IBOutlet var panRecognizer: UIPanGestureRecognizer!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var characterCountLabel: UILabel!
     @IBOutlet weak var hashtagTextView: UITextField!
@@ -36,13 +36,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var printClearlyLabel: UILabel!
     @IBOutlet weak var sansationLabel: UILabel!
     @IBOutlet weak var walkwayLabel: UILabel!
-    
-    //Animation
-    var animator : UIDynamicAnimator!
-    var attachmentBehavior : UIAttachmentBehavior!
-    var gravityBehaviour : UIGravityBehavior!
-    var snapBehavior : UISnapBehavior!
-     var originalCenter: CGPoint!
     
     //Design
     var currentColor = UIColor()
@@ -86,15 +79,13 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         
         //AddDappText Setup
         dappTextView.delegate = self
-
-        //initialize animator
-        animator = UIDynamicAnimator(referenceView: view)
-        originalCenter = dappTextView.center
         
         //start with elements hidden to prep for animation
         dappTextView.hidden = true
         panelView.hidden = true
         
+        self.containerView.delegate = self
+        self.containerView.minTranslationX = 200.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -221,80 +212,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    
-
-    @IBAction func handleGesture(sender: AnyObject) {
-        let location = sender.locationInView(view)
-        let myView = dappTextView
-        let originalLocation = dappTextView.center
-        
-        if sender.state == UIGestureRecognizerState.Began {
-            animator.removeBehavior(snapBehavior)
-            
-            let centerOffset = UIOffsetMake(location.x - CGRectGetMidX(myView.bounds), location.y - CGRectGetMidY(myView.bounds));
-            attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
-            attachmentBehavior.frequency = 0
-            
-            animator.addBehavior(attachmentBehavior)
-        }
-        else if sender.state == UIGestureRecognizerState.Changed {
-            attachmentBehavior.anchorPoint = location
-        }
-        else if sender.state == UIGestureRecognizerState.Ended {
-            animator.removeBehavior(attachmentBehavior)
-            
-            snapBehavior = UISnapBehavior(item: myView, snapToPoint: originalCenter)
-            animator.addBehavior(snapBehavior)
-            
-            let translation = sender.translationInView(view)
-            if translation.x > 100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappTextView])
-                gravity.gravityDirection = CGVectorMake(10, 0)
-                animator.addBehavior(gravity)
-                
-                delay(0.1) {
-                    if self.mode == "chooseColor"{
-                        self.transitionAddText()
-                        self.mode = "addText"
-                        self.refreshView()
-                    }else if self.mode == "addText"{
-                        self.transitionChooseFont()
-                        self.mode = "chooseFont"
-                        self.refreshView()
-                    }else if self.mode == "chooseFont"{
-                        self.submitDapp()
-                        self.performSegueWithIdentifier("showFinalDappSubmitViewController", sender: self)
-                    }
-                }
-            }else if translation.x < -100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappTextView])
-                gravity.gravityDirection = CGVectorMake(-10, 0)
-                animator.addBehavior(gravity)
-                
-                delay(0.1) {
-                    if self.mode == "chooseColor"{
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }else if self.mode == "addText"{
-                        self.reverseTransitionAddTextToChooseColor()
-                        self.mode = "chooseColor"
-                        self.refreshView()
-                    }else if self.mode == "chooseFont"{
-                        //do some shit
-                        self.reverseTransitionChooseFontToAddText()
-                        self.mode = "addText"
-                        self.refreshView()
-                    }
-                }
-            }
-            
-        }
-
-    }
-    
     
     //Color Buttons
     @IBAction func emeraldButton(sender: AnyObject) {
@@ -546,20 +463,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    func refreshView() {
-        
-        animator.removeAllBehaviors()
-        
-        snapBehavior = UISnapBehavior(item:dappTextView, snapToPoint: self.originalCenter)
-        attachmentBehavior.anchorPoint = originalCenter
-        
-        dappTextView.center = originalCenter
-        
-        viewDidAppear(true)
-        
-        
-    }
-    
     func submitDapp() {
         let user = PFUser.currentUser()
         
@@ -756,5 +659,42 @@ extension AddDappViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true;
+    }
+}
+
+extension AddDappViewController: SwipeableViewDelegate {
+    func didSwipe(swipeDirection: SwipeDirection) {
+        switch swipeDirection {
+        case .LeftToRight:
+            if self.mode == "chooseColor" {
+                self.transitionAddText()
+                self.mode = "addText"
+                self.viewDidAppear(true)
+            } else if self.mode == "addText" {
+                self.transitionChooseFont()
+                self.mode = "chooseFont"
+                self.viewDidAppear(true)
+            } else if self.mode == "chooseFont" {
+                self.submitDapp()
+                self.performSegueWithIdentifier("showFinalDappSubmitViewController", sender: self)
+            }
+            
+            break
+        case .RightToLeft:
+            if self.mode == "chooseColor" {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else if self.mode == "addText" {
+                self.reverseTransitionAddTextToChooseColor()
+                self.mode = "chooseColor"
+                self.viewDidAppear(true)
+            } else if self.mode == "chooseFont" {
+                //do some shit
+                self.reverseTransitionChooseFontToAddText()
+                self.mode = "addText"
+                self.viewDidAppear(true)
+            }
+            
+            break
+        }
     }
 }

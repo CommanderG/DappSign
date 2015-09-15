@@ -72,9 +72,7 @@ class SwipeableView: UIView {
     internal func show() {
         self.animator?.removeAllBehaviors()
         
-        if let superview = self.superview {
-            self.center = superview.center
-        }
+        self.center = self.originalCenter
         
         let scale = CGAffineTransformMakeScale(0.5, 0.5)
         let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
