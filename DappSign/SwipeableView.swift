@@ -44,13 +44,15 @@ class SwipeableView: UIView {
     }
     
     override func layoutSubviews() {
+        self.originalCenter = self.center
+        
         if let superview = self.superview {
             if self.animator == nil {
                 self.animator = UIDynamicAnimator(referenceView: superview)
             }
             
             if self.snapBehavior == nil {
-                let snapBehaviour = UISnapBehavior(item: self, snapToPoint: superview.center)
+                let snapBehaviour = UISnapBehavior(item: self, snapToPoint: self.originalCenter)
                 snapBehaviour.damping = 0.4
                 
                 self.snapBehavior = snapBehaviour
@@ -99,8 +101,6 @@ class SwipeableView: UIView {
         switch panGR.state {
         case .Began:
             self.animator?.removeAllBehaviors()
-            
-            self.originalCenter = self.center
             
             break
         case .Changed:
