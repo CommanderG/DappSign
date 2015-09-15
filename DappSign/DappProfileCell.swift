@@ -10,6 +10,7 @@ import UIKit
 
 class DappProfileCell: SWTableViewCell {
     @IBOutlet weak var dappSignView: DappSignView!
+    @IBOutlet weak var editLinksView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,5 +20,9 @@ class DappProfileCell: SWTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func editLinks() {
+        println("edit links")
     }
 }

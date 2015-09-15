@@ -247,6 +247,12 @@ extension ProfileViewController: UITableViewDataSource {
             
             cell.dappSignView.showDapp(dapp)
             
+            if self.dappsFilterSegmentedControl.selectedSegmentIndex == DappsFilter.DappSigns.rawValue {
+                cell.editLinksView.hidden = false
+            } else {
+                cell.editLinksView.hidden = true
+            }
+            
             if let userID = dapp["userid"] as? String {
                 Requests.userWithID(userID, completion: {
                     (user: PFUser?, error: NSError?) -> Void in

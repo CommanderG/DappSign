@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -452,20 +453,66 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAK-fG-IeP" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
-                                                    <rect key="frame" x="64" y="12" width="192" height="350"/>
+                                                    <rect key="frame" x="68" y="12" width="184" height="350"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q2g-3I-AzR">
+                                                    <rect key="frame" x="256" y="80" width="60" height="81"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2F4-1v-PqO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="81"/>
+                                                            <state key="normal">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="editLinks" destination="p9d-h5-kh7" eventType="touchUpInside" id="amI-rn-5cM"/>
+                                                            </connections>
+                                                        </button>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_links_icon" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-pB-xxa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="UbA-pB-xxa" secondAttribute="height" multiplier="1:1" id="fPk-JP-EPa"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit links" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Wo0-t7-R0F">
+                                                            <rect key="frame" x="0.0" y="64" width="60" height="17"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="UbA-pB-xxa" firstAttribute="top" secondItem="Q2g-3I-AzR" secondAttribute="top" id="6es-VP-Qni"/>
+                                                        <constraint firstItem="UbA-pB-xxa" firstAttribute="leading" secondItem="Q2g-3I-AzR" secondAttribute="leading" id="7Rk-pa-ado"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Wo0-t7-R0F" secondAttribute="bottom" id="Gj3-3r-xj3"/>
+                                                        <constraint firstAttribute="trailing" secondItem="UbA-pB-xxa" secondAttribute="trailing" id="asu-Nc-SwW"/>
+                                                        <constraint firstAttribute="bottom" secondItem="2F4-1v-PqO" secondAttribute="bottom" id="b2S-Al-gmB"/>
+                                                        <constraint firstAttribute="width" secondItem="Q2g-3I-AzR" secondAttribute="height" multiplier="20:27" id="hvP-s1-jVJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2F4-1v-PqO" secondAttribute="trailing" id="jgP-a2-8y7"/>
+                                                        <constraint firstItem="2F4-1v-PqO" firstAttribute="leading" secondItem="Q2g-3I-AzR" secondAttribute="leading" id="nu5-AW-Qrq"/>
+                                                        <constraint firstItem="Wo0-t7-R0F" firstAttribute="leading" secondItem="Q2g-3I-AzR" secondAttribute="leading" id="qU3-Vh-W8L"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Wo0-t7-R0F" secondAttribute="trailing" id="rhf-KY-1QW"/>
+                                                        <constraint firstItem="2F4-1v-PqO" firstAttribute="top" secondItem="Q2g-3I-AzR" secondAttribute="top" id="zDB-fc-5Gr"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="GAK-fG-IeP" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="12" id="7Lq-hR-zbk"/>
                                                 <constraint firstAttribute="bottom" secondItem="GAK-fG-IeP" secondAttribute="bottom" constant="12" id="E6M-jG-vvg"/>
-                                                <constraint firstItem="GAK-fG-IeP" firstAttribute="leading" secondItem="HSn-o5-ezQ" secondAttribute="leading" constant="64" id="aq6-tg-LIK"/>
-                                                <constraint firstAttribute="trailing" secondItem="GAK-fG-IeP" secondAttribute="trailing" constant="64" id="bIJ-pv-Pwm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Q2g-3I-AzR" secondAttribute="trailing" constant="4" id="PRH-ED-lIV"/>
+                                                <constraint firstItem="GAK-fG-IeP" firstAttribute="leading" secondItem="HSn-o5-ezQ" secondAttribute="leading" constant="68" id="aq6-tg-LIK"/>
+                                                <constraint firstAttribute="trailing" secondItem="GAK-fG-IeP" secondAttribute="trailing" constant="68" id="bIJ-pv-Pwm"/>
+                                                <constraint firstItem="Q2g-3I-AzR" firstAttribute="top" secondItem="HSn-o5-ezQ" secondAttribute="top" constant="80" id="do6-Yp-sRZ"/>
+                                                <constraint firstItem="Q2g-3I-AzR" firstAttribute="leading" secondItem="GAK-fG-IeP" secondAttribute="trailing" constant="4" id="fay-rG-GUo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="dappSignView" destination="GAK-fG-IeP" id="vHo-7K-fk4"/>
+                                            <outlet property="editLinksView" destination="Q2g-3I-AzR" id="Q1b-df-NkN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2005,6 +2052,7 @@
         <image name="Turquoise" width="173" height="84"/>
         <image name="Wisteria" width="173" height="84"/>
         <image name="dapp_icon" width="31" height="36"/>
+        <image name="edit_links_icon" width="76" height="76"/>
         <image name="facebookIcon" width="30" height="55"/>
         <image name="tapp_icon" width="26" height="36"/>
         <image name="twitterIcon" width="61" height="51"/>
