@@ -35,6 +35,10 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -1073,43 +1077,43 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oht-H0-5nU">
-                                <rect key="frame" x="28" y="99" width="264" height="30"/>
+                                <rect key="frame" x="31" y="99" width="258" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpr-bX-n9a">
-                                        <rect key="frame" x="2" y="7" width="35" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="2" y="7" width="33" height="19"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="33D-jq-0xE">
-                                        <rect key="frame" x="39" y="1" width="22" height="28"/>
+                                        <rect key="frame" x="37" y="2" width="22" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="sNS-Hp-3Bl"/>
                                             <constraint firstAttribute="width" constant="22" id="wxy-wG-PfI"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to sign." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFB-X2-e4d">
-                                        <rect key="frame" x="63" y="7" width="48" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="61" y="7" width="47" height="19"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRs-4i-UFf">
-                                        <rect key="frame" x="115" y="7" width="32" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="112" y="7" width="30" height="19"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ur8-ni-dBy">
-                                        <rect key="frame" x="149" y="1" width="20" height="28"/>
+                                        <rect key="frame" x="144" y="2" width="20" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="KIT-He-rT8"/>
                                             <constraint firstAttribute="height" constant="28" id="pKA-Le-cDi"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to learn more." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bya-dZ-hti">
-                                        <rect key="frame" x="171" y="7" width="90" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="166" y="7" width="89" height="19"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>

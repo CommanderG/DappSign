@@ -9,6 +9,8 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -129,8 +131,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pass" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H50-um-82E">
-                    <rect key="frame" x="62" y="66" width="38" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="62" y="67" width="31" height="19"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -141,8 +144,9 @@
                     <rect key="frame" x="542" y="64" width="50" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapp +1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fo0-O9-SBM">
-                    <rect key="frame" x="471" y="66" width="67" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="490" y="67" width="48" height="19"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -162,9 +166,9 @@
                 <constraint firstItem="21n-Lc-EPp" firstAttribute="top" secondItem="hlW-M2-1aU" secondAttribute="bottom" constant="4" id="Q07-XS-Uqz"/>
                 <constraint firstAttribute="trailing" secondItem="tqn-J1-HcU" secondAttribute="trailing" id="RzA-BB-DSK"/>
                 <constraint firstItem="hlW-M2-1aU" firstAttribute="leading" secondItem="Tve-sd-qHg" secondAttribute="leading" constant="4" id="SDb-jL-p1n"/>
-                <constraint firstItem="fo0-O9-SBM" firstAttribute="top" secondItem="HRO-h9-KoU" secondAttribute="bottom" constant="6" id="Sgi-j0-XEx"/>
+                <constraint firstItem="fo0-O9-SBM" firstAttribute="top" secondItem="HRO-h9-KoU" secondAttribute="bottom" constant="7" id="Sgi-j0-XEx"/>
                 <constraint firstItem="cbC-aq-i6W" firstAttribute="top" secondItem="tqn-J1-HcU" secondAttribute="bottom" constant="4" id="Tle-Ai-nOX"/>
-                <constraint firstItem="H50-um-82E" firstAttribute="top" secondItem="tqn-J1-HcU" secondAttribute="bottom" constant="6" id="VVo-Hy-F7Y"/>
+                <constraint firstItem="H50-um-82E" firstAttribute="top" secondItem="tqn-J1-HcU" secondAttribute="bottom" constant="7" id="VVo-Hy-F7Y"/>
                 <constraint firstItem="Ldw-DW-3Fn" firstAttribute="top" secondItem="21n-Lc-EPp" secondAttribute="bottom" id="WgR-kA-Bgv"/>
                 <constraint firstAttribute="trailing" secondItem="7fc-mz-tL0" secondAttribute="trailing" constant="8" id="dEu-0B-HTo"/>
                 <constraint firstItem="7fc-mz-tL0" firstAttribute="top" secondItem="HRO-h9-KoU" secondAttribute="bottom" constant="4" id="dKK-EE-cau"/>
@@ -183,7 +187,7 @@
                     <integer key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="803" y="564"/>
+            <point key="canvasLocation" x="536" y="501"/>
         </view>
     </objects>
     <resources>
