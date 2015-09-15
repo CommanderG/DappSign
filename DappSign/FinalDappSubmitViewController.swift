@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FinalDappSubmitViewController: UIViewController {
-
+class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
+    @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var dappView: UIView!
     @IBOutlet weak var dappHeaderView: UIView!
     @IBOutlet weak var headerImage: UIImageView!
@@ -20,7 +20,6 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var dappScoreView: UIView!
     @IBOutlet weak var dappLogoView: UIView!
     @IBOutlet weak var scoreLabelText: UILabel!
-    @IBOutlet weak var scoreLabelNum: UILabel!
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
@@ -29,8 +28,6 @@ class FinalDappSubmitViewController: UIViewController {
     //design
     var dappColors = DappColors()
     var dappFonts = DappFonts()
-
-    
     
     //from previous VC
     var dappColorString:String!
@@ -38,16 +35,6 @@ class FinalDappSubmitViewController: UIViewController {
     var dappStatementString:String!
     var nameString:String!
     var dapp: PFObject!
-    
-    //animation stuff
-    @IBOutlet var panRecognizer: UIPanGestureRecognizer!
-    var animator : UIDynamicAnimator!
-    var attachmentBehavior : UIAttachmentBehavior!
-    var gravityBehaviour : UIGravityBehavior!
-    var snapBehavior : UISnapBehavior!
-    var originalLocation: CGPoint!
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +44,6 @@ class FinalDappSubmitViewController: UIViewController {
         
         var user = PFUser.currentUser()
         
-        originalLocation = dappView.center
-        animator = UIDynamicAnimator(referenceView: view)
         dappView.alpha = 0
         
         let scale = CGAffineTransformMakeScale(0.5, 0.5)
@@ -92,75 +77,13 @@ class FinalDappSubmitViewController: UIViewController {
         }
         
         self.dappView.alpha = 1
-
-        // Do any additional setup after loading the view.
+        
+        self.containerView.minTranslationX = 150.0
+        self.containerView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    
-    @IBAction func handleGesture(sender: AnyObject) {
-        let location = sender.locationInView(view)
-        let myView = dappView
-        
-        if sender.state == UIGestureRecognizerState.Began {
-            animator.removeBehavior(snapBehavior)
-            
-            let centerOffset = UIOffsetMake(location.x - CGRectGetMidX(myView.bounds), location.y - CGRectGetMidY(myView.bounds));
-            attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
-            attachmentBehavior.frequency = 0
-            
-            animator.addBehavior(attachmentBehavior)
-        }
-        else if sender.state == UIGestureRecognizerState.Changed {
-            attachmentBehavior.anchorPoint = location
-        }
-        else if sender.state == UIGestureRecognizerState.Ended {
-            animator.removeBehavior(attachmentBehavior)
-            
-            snapBehavior = UISnapBehavior(item: myView, snapToPoint: originalLocation)
-            animator.addBehavior(snapBehavior)
-            
-            let translation = sender.translationInView(view)
-            if translation.x > 100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappView])
-                gravity.gravityDirection = CGVectorMake(10, -30)
-                animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    self.performSegueWithIdentifier("showHomeViewControllerAfterSubmit", sender: self)
-                }
-            }else if translation.x < -100 {
-                animator.removeAllBehaviors()
-                
-                var gravity = UIGravityBehavior(items: [dappView])
-                gravity.gravityDirection = CGVectorMake(-10, 30)
-                animator.addBehavior(gravity)
-                
-                delay(0.3) {
-                    self.performSegueWithIdentifier("showHomeViewControllerAfterSubmit", sender: self)
-                }
-            }
-            
-        }
-
-        
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
@@ -206,5 +129,11 @@ class FinalDappSubmitViewController: UIViewController {
     }
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+}
+
+extension FinalDappSubmitViewController: SwipeableViewDelegate {
+    func didSwipe(swipeDirection: SwipeDirection) {
+        self.performSegueWithIdentifier("showHomeViewControllerAfterSubmit", sender: self)
     }
 }
