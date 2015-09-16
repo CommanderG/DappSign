@@ -13,3 +13,5 @@
 #import "FacebookBridge.h"
 #import <Crashlytics/Crashlytics.h>
 #import "UIImageView+WebCache.h"
+#import "HTMLParser.h"
+#import "HTMLNode.h"

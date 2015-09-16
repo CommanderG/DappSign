@@ -437,6 +437,15 @@ class Requests {
         }
     }
     
+    class func downloadDataFromURL(URL: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
+        let request = NSURLRequest(URL: URL)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            completion(data: data, error: error)
+        }
+    }
+    
     // MARK: -
     
     private class func downloadHashtagWthName(name: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {

@@ -29,8 +29,13 @@
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
+		279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D3F1BA9A2D700408B90 /* HTMLNode.m */; };
+		279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D411BA9A2D700408B90 /* HTMLParser.m */; };
+		279D4D451BA9A7DB00408B90 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 279D4D441BA9A7DB00408B90 /* libxml2.dylib */; };
+		279D4D471BA9B56500408B90 /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D461BA9B56400408B90 /* LinkCell.swift */; };
 		27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */; };
 		27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934F1B949B690017D8D2 /* PercentsView.swift */; };
+		27B723311BA8806F009EAC41 /* LinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B723301BA8806F009EAC41 /* LinksVC.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F134871AE06023004BCF7D /* Crashlytics.framework */; };
 		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
@@ -145,8 +150,15 @@
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		279D4D3E1BA9A2D700408B90 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		279D4D3F1BA9A2D700408B90 /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		279D4D401BA9A2D700408B90 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		279D4D411BA9A2D700408B90 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		279D4D441BA9A7DB00408B90 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		279D4D461BA9B56400408B90 /* LinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
 		27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapGenerator.swift; sourceTree = "<group>"; };
 		27AF934F1B949B690017D8D2 /* PercentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsView.swift; sourceTree = "<group>"; };
+		27B723301BA8806F009EAC41 /* LinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinksVC.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27F134871AE06023004BCF7D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
@@ -262,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279D4D451BA9A7DB00408B90 /* libxml2.dylib in Frameworks */,
 				271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */,
 				4CD9C9BC1AA1DED900046CA2 /* libsqlite3.dylib in Frameworks */,
 				4CD9C9BA1AA1DEB300046CA2 /* ParseFacebookUtils.framework in Frameworks */,
@@ -293,6 +306,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		279D4D3D1BA9A2B300408B90 /* HTML Parser */ = {
+			isa = PBXGroup;
+			children = (
+				279D4D3E1BA9A2D700408B90 /* HTMLNode.h */,
+				279D4D3F1BA9A2D700408B90 /* HTMLNode.m */,
+				279D4D401BA9A2D700408B90 /* HTMLParser.h */,
+				279D4D411BA9A2D700408B90 /* HTMLParser.m */,
+			);
+			name = "HTML Parser";
+			sourceTree = "<group>";
+		};
 		4CD9C96C1AA1D59900046CA2 = {
 			isa = PBXGroup;
 			children = (
@@ -333,7 +357,6 @@
 		4CD9C9781AA1D59900046CA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				27F134871AE06023004BCF7D /* Crashlytics.framework */,
 				4CD9C9CE1AA21A5100046CA2 /* Fonts */,
 				4CD9C9E21AA21CAA00046CA2 /* Design */,
 				4CD9C9BF1AA1EC1A00046CA2 /* Spring */,
@@ -363,6 +386,8 @@
 		4CD9C99F1AA1DA8100046CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				279D4D441BA9A7DB00408B90 /* libxml2.dylib */,
+				27F134871AE06023004BCF7D /* Crashlytics.framework */,
 				4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */,
 				2714318E1AB0D181002F9527 /* Fabric.framework */,
 				2714318F1AB0D181002F9527 /* TwitterKit.framework */,
@@ -439,6 +464,7 @@
 				27811A671B959A38007E97EE /* DappSignView.xib */,
 				27811A691B95C6FE007E97EE /* DappMappView.swift */,
 				27811A6B1B95C70D007E97EE /* DappMappView.xib */,
+				279D4D461BA9B56400408B90 /* LinkCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -458,6 +484,7 @@
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
+				27B723301BA8806F009EAC41 /* LinksVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -487,6 +514,7 @@
 		84C3D3851AB602A600E0F350 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				279D4D3D1BA9A2B300408B90 /* HTML Parser */,
 				F37246491AD3ED3C00AD56E2 /* images */,
 				279A31251AB333AC00850508 /* Enums.swift */,
 				27810DF01AB7297300223350 /* PrimaryDapps.swift */,
@@ -704,6 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
+				279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */,
 				F372467D1AD3ED7600AD56E2 /* SDWebImageDownloader.m in Sources */,
 				F37246841AD3ED7600AD56E2 /* UIImage+WebP.m in Sources */,
 				4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */,
@@ -713,10 +742,12 @@
 				F37246551AD3ED5300AD56E2 /* ZipCodeViewController.swift in Sources */,
 				F37246791AD3ED7600AD56E2 /* NSData+ImageContentType.m in Sources */,
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
+				279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */,
 				F372467E1AD3ED7600AD56E2 /* SDWebImageDownloaderOperation.m in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				F372467C1AD3ED7600AD56E2 /* SDWebImageDecoder.m in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
+				279D4D471BA9B56500408B90 /* LinkCell.swift in Sources */,
 				849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */,
 				F37246541AD3ED5300AD56E2 /* RepresentativesViewController.swift in Sources */,
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
@@ -735,6 +766,7 @@
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
+				27B723311BA8806F009EAC41 /* LinksVC.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
@@ -894,6 +926,11 @@
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/DappSign/FacebookSDK.framework\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = DappSign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -910,6 +947,11 @@
 					"$(PROJECT_DIR)/DappSign",
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/DappSign/FacebookSDK.framework\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = DappSign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
