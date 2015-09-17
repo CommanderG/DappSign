@@ -8,10 +8,17 @@
 
 import UIKit
 
+struct Link {
+    var URL: NSURL
+    var title: String
+}
+
 class LinksVC: UIViewController {
     @IBOutlet weak var v1: UIView!
     @IBOutlet weak var v2: UIView!
     @IBOutlet weak var linksTableView: UITableView!
+    
+    private var links: [Link] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,23 +28,6 @@ class LinksVC: UIViewController {
         
 //        self.v1.hidden = false
 //        self.v2.hidden = true
-        
-        
-        
-        if let URL = NSURL(string: "http://adsadasdasderge.com") {
-            self.getTitleFromURL(URL, completion: { (title: String?, errorMessage: String?) -> Void in
-                if let title = title {
-                    println(title)
-                } else if let errorMessage = errorMessage {
-                    UIAlertView(
-                        title: nil
-                    ,   message: errorMessage
-                    ,   delegate: nil
-                    ,   cancelButtonTitle: "OK"
-                    ).show()
-                }
-            })
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,7 +49,9 @@ class LinksVC: UIViewController {
                     
                     completion(title: nil, errorMessage: errorMessage)
                 } else {
-                    let title = parser.head().findChildTag("title").contents()
+                    let headTag = parser.head() as HTMLNode?
+                    let titleTag = headTag?.findChildTag("title") as HTMLNode?
+                    let title = titleTag?.contents()
                     
                     completion(title: title, errorMessage: nil)
                 }
@@ -102,6 +94,15 @@ extension LinksVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! LinkCell
         
+        if links.count > indexPath.row {
+            let link = self.links[indexPath.row]
+            
+            cell.showViewsForState(State.Link)
+            cell.showLinkInfo(linkIndex: indexPath.row + 1, linkTitle: link.title)
+        } else {
+            cell.showViewsForState(State.NoLink)
+        }
+        
         return cell
     }
     
@@ -120,13 +121,20 @@ extension LinksVC: LinkCellDelegate {
                 cell.makeViews(ViewsState.Enabled)
                 
                 if let title = title {
-                    println(title)
+                    let link = Link(URL: URL, title: title)
                     
-                    if let indexPath = self.linksTableView.indexPathForCell(cell) {
-                        let linkIndex = indexPath.row + 1
-                        
-                        cell.showViewsForState(State.Link)
-                        cell.showLinkInfo(linkIndex: linkIndex, linkTitle: title)
+                    self.links.append(link)
+                    
+                    let linkIndexPath = NSIndexPath(forRow: self.links.count - 1, inSection: 0)
+                    
+                    self.linksTableView.reloadRowsAtIndexPaths([linkIndexPath]
+                    ,   withRowAnimation: UITableViewRowAnimation.Automatic
+                    )
+                    
+                    if let cellIndexPath = self.linksTableView.indexPathForCell(cell) {
+                        self.linksTableView.reloadRowsAtIndexPaths([cellIndexPath]
+                        ,   withRowAnimation: UITableViewRowAnimation.Automatic
+                        )
                     }
                 } else if let errorMessage = errorMessage {
                     UIAlertView(

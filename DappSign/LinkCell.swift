@@ -38,16 +38,49 @@ class LinkCell: UITableViewCell {
     internal var delegate: LinkCellDelegate?
     internal private(set) var state: State = State.NoLink
     
+    private var containerViewBorderLayer: CAShapeLayer?
+    
+    internal let selectedBackgroundColor = UIColor(red:0.356, green:0.254, blue:0.448, alpha:1.0)
+    internal let unselectedBackgroundColor = UIColor(red:0.458, green:0.360, blue:0.541, alpha:1.0)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.hideAllViewsExcept(self.viewsForState(self.state))
         
+        self.backgroundColor = unselectedBackgroundColor
+    }
+    
+    override func layoutSubviews() {
         let borderColor = UIColor(red:0.509, green:0.45, blue:0.564, alpha:1.0).CGColor
         
-        self.containerView.layer.cornerRadius = 4.0
-        self.containerView.layer.borderWidth = 4.0
-        self.containerView.layer.borderColor = borderColor
+        
+        
+        self.containerView.layoutIfNeeded()
+        
+        let containerViewBorderLayer = self.getBorderLayerForView(self.containerView
+        ,   strokeColor: borderColor
+        )
+        
+        if state != State.Link {
+            self.containerView.layer.addSublayer(containerViewBorderLayer)
+        }
+        
+        self.containerViewBorderLayer = containerViewBorderLayer
+        
+        
+        
+        self.linkIndexLabel.layoutIfNeeded()
+        
+        let linkIndexLabelBorderLayer = self.getBorderLayerForView(self.linkIndexLabel
+        ,   strokeColor: UIColor.whiteColor().CGColor
+        )
+        
+        self.linkIndexLabel.layer.addSublayer(linkIndexLabelBorderLayer)
+        
+        
+        
+        super.layoutSubviews()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -96,12 +129,49 @@ class LinkCell: UITableViewCell {
     
     // MARK: - private
     
+    private func getBorderLayerForView(view: UIView, strokeColor: CGColor) -> CAShapeLayer {
+        var roundedRect = view.bounds
+        roundedRect.origin.x += 2.0
+        roundedRect.origin.y += 2.0
+        roundedRect.size.width -= roundedRect.origin.x * 2
+        roundedRect.size.height -= roundedRect.origin.y * 2
+        
+        let borderLayer = CAShapeLayer()
+        borderLayer.fillColor = UIColor.clearColor().CGColor
+        borderLayer.path = UIBezierPath(roundedRect: roundedRect, cornerRadius: 10.0).CGPath
+        borderLayer.frame = view.bounds
+        borderLayer.strokeColor = strokeColor
+        borderLayer.lineWidth = 4.0
+        
+        return borderLayer
+    }
+    
     private func hideAllViewsExcept(views: [UIView]) {
         self.hideViews(self.noLinkViews)
         self.hideViews(self.enterLinkViews)
         self.hideViews(self.linkViews)
         self.showViews(views)
         self.enableViews(views)
+        
+        if views == self.enterLinkViews {
+            self.textField.text = ""
+        }
+        
+        if views == self.linkViews {
+            let layerBorderColor = UIColor(red:0.592, green:0.592, blue:0.592, alpha:1.0).CGColor
+            
+            self.containerViewBorderLayer?.removeFromSuperlayer()
+            
+            self.containerView.backgroundColor = self.selectedBackgroundColor
+            self.containerView.layer.borderColor = layerBorderColor
+            self.containerView.layer.borderWidth = 1.0
+        } else {
+            self.containerView.layer.addSublayer(self.containerViewBorderLayer)
+            
+            self.containerView.backgroundColor = self.unselectedBackgroundColor
+            self.containerView.layer.borderColor = UIColor.clearColor().CGColor
+            self.containerView.layer.borderWidth = 0.0
+        }
     }
     
     private func enableViews(views: [UIView]) {
