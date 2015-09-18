@@ -14,20 +14,19 @@ struct Link {
 }
 
 class LinksVC: UIViewController {
-    @IBOutlet weak var v1: UIView!
-    @IBOutlet weak var v2: UIView!
+    @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var linksTableView: UITableView!
     
+    internal var dapp: Dapp?
+    
+    private let finalDappSegueID = "finalDappSegue"
     private var links: [Link] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.v1.hidden = true
-        self.v2.hidden = true
-        
-//        self.v1.hidden = false
-//        self.v2.hidden = true
+        self.containerView.minTranslationX = 150.0
+        self.containerView.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,6 +60,14 @@ class LinksVC: UIViewController {
                 completion(title: nil, errorMessage: nil)
             }
         })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == self.finalDappSegueID {
+            let finalDappSubmitVC = segue.destinationViewController as! FinalDappSubmitViewController
+            finalDappSubmitVC.dapp = self.dapp
+            finalDappSubmitVC.links = self.links
+        }
     }
     
     private func flipWithDuration(duration: NSTimeInterval, view1: UIView, view2: UIView) {
@@ -149,6 +156,28 @@ extension LinksVC: LinkCellDelegate {
                     cell.showViewsForState(State.NoLink)
                 }
             })
+        } else {
+            UIAlertView(
+                title: nil
+            ,   message: "Incorrect URL."
+            ,   delegate: nil
+            , 	cancelButtonTitle: "OK"
+            ).show()
+        }
+    }
+}
+
+extension LinksVC: SwipeableViewDelegate {
+    func didSwipe(swipeDirection: SwipeDirection) {
+        switch swipeDirection {
+        case .LeftToRight:
+            self.performSegueWithIdentifier(self.finalDappSegueID, sender: self)
+            
+            break
+        case .RightToLeft:
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            break
         }
     }
 }

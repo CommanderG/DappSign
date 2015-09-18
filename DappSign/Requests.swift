@@ -48,6 +48,35 @@ class Requests {
         }
     }
     
+    class func uploadLinks(links: [Link], completion: (linkObjs: [PFObject], error: NSError?) -> Void) {
+        var linksUploaded = 0
+        var linksError: NSError? = nil
+        var linksObjs: [PFObject] = []
+        
+        for link in links {
+            var dappLink = PFObject(className: "DappLink")
+            dappLink["Title"] = link.title
+            
+            if let URLString = link.URL.absoluteString {
+                dappLink["URL"] = URLString
+            }
+            
+            dappLink.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                if success {
+                    linksObjs.append(dappLink)
+                } else {
+                    linksError = error
+                }
+                
+                ++linksUploaded
+                
+                if linksUploaded == links.count {
+                    completion(linkObjs: linksObjs, error: linksError)
+                }
+            })
+        }
+    }
+    
     class func downloadHashtagsWithNameWhichContains(nameSubstring: String, completion: (hashtags: [PFObject], error: NSError!) -> Void) {
         let hashtagsQuery = PFQuery(className: "DappHashtag")
         hashtagsQuery.limit = 1000

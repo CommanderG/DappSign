@@ -478,13 +478,13 @@
 				F37246501AD3ED5300AD56E2 /* CustomCell.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
+				27B723301BA8806F009EAC41 /* LinksVC.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				279A31211AB30EA700850508 /* EditDappsTableViewController.swift */,
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
-				27B723301BA8806F009EAC41 /* LinksVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

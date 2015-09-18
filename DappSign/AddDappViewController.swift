@@ -8,6 +8,19 @@
 
 import UIKit
 
+struct Dapp {
+    var dappStatement: String?
+    var lowercaseDappStatement: String?
+    var dappFont: String?
+    var dappBackgroundColor: String?
+    var name: String?
+    var userid: String?
+    var dappScore: Int
+    var isDeleted: Bool
+    var dappTypeId: String?
+    var hashtagNames: [String]
+}
+
 class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableViewDelegate {
     
     //ControlFlow
@@ -44,8 +57,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
     var dappFonts = DappFonts()
     var originalLocation: CGPoint!
     
-    var dapp: PFObject!
-    
     //Button Outlets
     @IBOutlet weak var emeraldButtonOutlet: UIButton!
     @IBOutlet weak var carrotButtonOutlet: UIButton!
@@ -66,6 +77,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
     @IBOutlet weak var printClearlyButtonOutlet: UIButton!
     @IBOutlet weak var sansationButtonOutlet: UIButton!
     @IBOutlet weak var walkwayButtonOutlet: UIButton!
+    
+    private var showDappLinksSegueID = "showDappLinks"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -463,40 +476,30 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
         
     }
     
-    func submitDapp() {
-        let user = PFUser.currentUser()
-        
-        self.dapp = PFObject(className: "Dapps")
-        
-        self.dapp["dappStatement"] = self.dappTextView.text
-        self.dapp["lowercaseDappStatement"] = self.dappTextView.text.lowercaseString
-        
-        if let dappFont = self.dappFontString {
-            self.dapp["dappFont"] = dappFont
-        }
-        
-        if let dappBackgroundColor = self.dappColorString {
-            self.dapp["dappBackgroundColor"] = dappBackgroundColor
-        }
-        
-        if user != nil {
-            if let name = user["name"] as? String {
-                self.dapp["name"] = name
+    func getDapp() -> Dapp {
+        func getDappTypeID() -> String? {
+            let mainBundle = NSBundle.mainBundle()
+            let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String]
+            
+            if let adminUsersIDs = adminUsersIDs {
+                if contains(adminUsersIDs, PFUser.currentUser().objectId) {
+                    return DappTypeId.Secondary.rawValue
+                }
             }
             
-            self.dapp["userid"] = user.objectId
+            return nil
         }
         
-        self.dapp["dappScore"] = 1
-        self.dapp["isDeleted"] = false
-        
-        let mainBundle = NSBundle.mainBundle()
-        
-        if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-            if contains(adminUsersIDs, PFUser.currentUser().objectId) {
-                self.dapp["dappTypeId"] = DappTypeId.Secondary.rawValue
-            }
-        }
+        let user = PFUser.currentUser()
+        let dappStatement = self.dappTextView.text
+        let lowercaseDappStatement = self.dappTextView.text.lowercaseString
+        let dappFont = self.dappFontString
+        let dappBackgroundColor = self.dappColorString
+        let name = user["name"] as? String
+        let userid = user.objectId
+        let dappScore = 1
+        let isDeleted = false
+        let dappTypeId = getDappTypeID()
         
         var hashtagNames = split(self.hashtagTextView.text) { $0 == " " }
         hashtagNames = hashtagNames.map {
@@ -504,72 +507,27 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
             $0[1...count($0) - 1]
         }
         
-        Requests.uploadHashtags(hashtagNames, completion: {
-            (hashtags: [PFObject]?, error: NSError!) -> Void in
-            if error != nil {
-                println("Failed to upload hashtags \(hashtagNames). Error: \(error)")
-            }
-            
-            if let hashtags = hashtags {
-                let hashtagsRelation = self.dapp.relationForKey("hashtags")
-                
-                for hashtag in hashtags {
-                    hashtagsRelation.addObject(hashtag)
-                }
-            }
-            
-            self.dapp.saveInBackgroundWithBlock({
-                (succeeded: Bool, error: NSError!) -> Void in
-                if succeeded {
-                    println("Dapp created with id: \(self.dapp.objectId)")
-                    println(self.dapp)
-                    
-                    if let userId = self.dapp["userid"] as? String {
-                        Requests.incrementDappScoreForUserWithId(userId, completion: {
-                            (succeeded: Bool, error: NSError?) -> Void in
-                            if !succeeded {
-                                if let error = error {
-                                    println(error.localizedDescription)
-                                }
-                            }
-                        })
-                    }
-                    
-                    let currentUserId = PFUser.currentUser().objectId
-                    
-                    Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
-                        (succeeded: Bool, error: NSError?) -> Void in
-                        if !succeeded {
-                            if let error = error {
-                                println(error.localizedDescription)
-                            }
-                        }
-                    })
-                } else {
-                    println("%@" , error)
-                }
-            })
-        })
+        let dapp = Dapp(
+            dappStatement:          dappStatement
+        ,   lowercaseDappStatement: lowercaseDappStatement
+        ,   dappFont:               dappFont
+        ,   dappBackgroundColor:    dappBackgroundColor
+        ,   name:                   name
+        ,   userid:                 userid
+        ,   dappScore:              dappScore
+        ,   isDeleted:              isDeleted
+        ,   dappTypeId:             dappTypeId
+        ,   hashtagNames:           hashtagNames
+        )
+        
+        return dapp
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-      
-        if segue.identifier == "showFinalDappSubmitViewController"{
-            let finalDappSubmitVC:FinalDappSubmitViewController = segue.destinationViewController as! FinalDappSubmitViewController
-            
-            if let name = PFUser.currentUser()["name"] as? String {
-                self.nameString = name
-            } else {
-                self.nameString = ""
-            }
-            
-            finalDappSubmitVC.dappColorString = self.dappColorString
-            finalDappSubmitVC.dappStatementString = self.dappTextView.text
-            finalDappSubmitVC.dappFontString = self.dappFontString
-            finalDappSubmitVC.nameString = self.nameString
-            finalDappSubmitVC.dapp = self.dapp
+        if segue.identifier == self.showDappLinksSegueID {
+            let linksVC = segue.destinationViewController as! LinksVC
+            linksVC.dapp = self.getDapp()
         }
-      
     }
 }
 
@@ -675,8 +633,7 @@ extension AddDappViewController: SwipeableViewDelegate {
                 self.mode = "chooseFont"
                 self.viewDidAppear(true)
             } else if self.mode == "chooseFont" {
-                self.submitDapp()
-                self.performSegueWithIdentifier("showFinalDappSubmitViewController", sender: self)
+                self.performSegueWithIdentifier(self.showDappLinksSegueID, sender: self)
             }
             
             break
