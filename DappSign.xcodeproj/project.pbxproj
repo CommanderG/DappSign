@@ -19,6 +19,8 @@
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
+		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
+		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
 		277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D910D1BA71BD900941C7B /* SwipeableView.swift */; };
 		27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* PrimaryDapps.swift */; };
 		27811A641B9589F8007E97EE /* DappSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A631B9589F8007E97EE /* DappSignView.swift */; };
@@ -32,11 +34,14 @@
 		279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D3F1BA9A2D700408B90 /* HTMLNode.m */; };
 		279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D411BA9A2D700408B90 /* HTMLParser.m */; };
 		279D4D451BA9A7DB00408B90 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 279D4D441BA9A7DB00408B90 /* libxml2.dylib */; };
-		279D4D471BA9B56500408B90 /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D461BA9B56400408B90 /* LinkCell.swift */; };
 		27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */; };
 		27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934F1B949B690017D8D2 /* PercentsView.swift */; };
-		27B723311BA8806F009EAC41 /* LinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B723301BA8806F009EAC41 /* LinksVC.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
+		27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */; };
+		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
+		27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */; };
+		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
+		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
 		27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F134871AE06023004BCF7D /* Crashlytics.framework */; };
 		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
 		4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
@@ -140,6 +145,8 @@
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
+		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
+		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
 		277D910D1BA71BD900941C7B /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
 		27810DF01AB7297300223350 /* PrimaryDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryDapps.swift; sourceTree = "<group>"; };
 		27811A631B9589F8007E97EE /* DappSignView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignView.swift; sourceTree = "<group>"; };
@@ -155,11 +162,14 @@
 		279D4D401BA9A2D700408B90 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
 		279D4D411BA9A2D700408B90 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 		279D4D441BA9A7DB00408B90 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		279D4D461BA9B56400408B90 /* LinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
 		27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapGenerator.swift; sourceTree = "<group>"; };
 		27AF934F1B949B690017D8D2 /* PercentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsView.swift; sourceTree = "<group>"; };
-		27B723301BA8806F009EAC41 /* LinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinksVC.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
+		27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksView.swift; sourceTree = "<group>"; };
+		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
+		27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
+		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
+		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
 		27F134871AE06023004BCF7D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		4C1D14F11AC9476700040DE1 /* Exo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Black.otf"; sourceTree = "<group>"; };
@@ -464,7 +474,10 @@
 				27811A671B959A38007E97EE /* DappSignView.xib */,
 				27811A691B95C6FE007E97EE /* DappMappView.swift */,
 				27811A6B1B95C70D007E97EE /* DappMappView.xib */,
-				279D4D461BA9B56400408B90 /* LinkCell.swift */,
+				27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */,
+				27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */,
+				27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */,
+				27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -478,13 +491,15 @@
 				F37246501AD3ED5300AD56E2 /* CustomCell.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
-				27B723301BA8806F009EAC41 /* LinksVC.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				279A31211AB30EA700850508 /* EditDappsTableViewController.swift */,
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
+				27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */,
+				27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */,
+				27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -682,6 +697,7 @@
 				4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */,
 				271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */,
 				4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */,
+				27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */,
 				4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */,
 				27811A681B959A38007E97EE /* DappSignView.xib in Resources */,
 				F372464F1AD3ED3C00AD56E2 /* Nextbutton@3x.png in Resources */,
@@ -692,6 +708,7 @@
 				F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */,
 				F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */,
 				4CD9C9831AA1D59900046CA2 /* Main.storyboard in Resources */,
+				27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */,
 				4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */,
 				4CD9C9DB1AA21A5100046CA2 /* Elsie-Regular.otf in Resources */,
 				27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */,
@@ -747,11 +764,11 @@
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				F372467C1AD3ED7600AD56E2 /* SDWebImageDecoder.m in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
-				279D4D471BA9B56500408B90 /* LinkCell.swift in Sources */,
 				849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */,
 				F37246541AD3ED5300AD56E2 /* RepresentativesViewController.swift in Sources */,
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */,
+				27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */,
 				F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */,
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -760,24 +777,27 @@
 				F37246811AD3ED7600AD56E2 /* UIButton+WebCache.m in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,
+				27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */,
 				274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
-				27B723311BA8806F009EAC41 /* LinksVC.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
+				27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */,
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
+				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
 				F37246821AD3ED7600AD56E2 /* UIImage+GIF.m in Sources */,
 				84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				F372467F1AD3ED7600AD56E2 /* SDWebImageManager.m in Sources */,

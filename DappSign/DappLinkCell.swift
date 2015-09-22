@@ -1,18 +1,19 @@
-
 //
-//  LinkCell.swift
+//  DappLinkCell.swift
 //  DappSign
 //
-//  Created by Oleksiy Kovtun on 9/16/15.
+//  Created by Oleksiy Kovtun on 9/21/15.
 //  Copyright (c) 2015 DappSign. All rights reserved.
 //
 
 import UIKit
 
-enum State {
+enum DappLinkCellState {
+    case Empty
     case NoLink
     case EnterLink
     case Link
+    case DeleteLink
 }
 
 enum ViewsState {
@@ -20,41 +21,55 @@ enum ViewsState {
     case Disabled
 }
 
-protocol LinkCellDelegate {
-    func didEnterURLString(URLString: String, cell: LinkCell)
+protocol DappLinkCellDelegate {
+    func didEnterURLString(URLString: String, cell: DappLinkCell)
+    func deleteLinkInCell(cell: DappLinkCell)
 }
 
-class LinkCell: UITableViewCell {
+class DappLinkCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var addLinkImageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var linkIndexLabel: UILabel!
     @IBOutlet weak var linkTitleLabel: UILabel!
+    @IBOutlet weak var deleteThisLinkLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet var noLinkViews: [UIView]!
     @IBOutlet var enterLinkViews: [UIView]!
     @IBOutlet var linkViews: [UIView]!
+    @IBOutlet var deleteLinkViews: [UIView]!
     
-    internal var delegate: LinkCellDelegate?
-    internal private(set) var state: State = State.NoLink
+    internal var delegate: DappLinkCellDelegate?
+    internal private(set) var state: DappLinkCellState = DappLinkCellState.Empty
     
     private var containerViewBorderLayer: CAShapeLayer?
     
     internal let selectedBackgroundColor = UIColor(red:0.356, green:0.254, blue:0.448, alpha:1.0)
     internal let unselectedBackgroundColor = UIColor(red:0.458, green:0.360, blue:0.541, alpha:1.0)
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.hideAllViewsExcept(self.viewsForState(self.state))
+    required override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init(coder decoder: NSCoder) {
+        super.init(coder: decoder)
         
         self.backgroundColor = unselectedBackgroundColor
     }
     
+    override func awakeFromNib() {
+        self.hideAllViewsExcept(self.viewsForState(self.state))
+    }
+    
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+        
         let borderColor = UIColor(red:0.509, green:0.45, blue:0.564, alpha:1.0).CGColor
-        
-        
         
         self.containerView.layoutIfNeeded()
         
@@ -62,7 +77,7 @@ class LinkCell: UITableViewCell {
         ,   strokeColor: borderColor
         )
         
-        if state != State.Link {
+        if self.state != DappLinkCellState.Empty && self.state != DappLinkCellState.Link {
             self.containerView.layer.addSublayer(containerViewBorderLayer)
         }
         
@@ -77,10 +92,6 @@ class LinkCell: UITableViewCell {
         )
         
         self.linkIndexLabel.layer.addSublayer(linkIndexLabelBorderLayer)
-        
-        
-        
-        super.layoutSubviews()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -93,9 +104,17 @@ class LinkCell: UITableViewCell {
         self.delegate?.didEnterURLString(self.textField.text, cell: self)
     }
     
+    @IBAction func handleDeleteButtonTap() {
+        self.delegate?.deleteLinkInCell(self)
+    }
+    
+    @IBAction func handleCancelButtonTap() {
+        self.showViewsForState(DappLinkCellState.Link)
+    }
+    
     // MARK: - internal
     
-    internal func showViewsForState(state: State) {
+    internal func showViewsForState(state: DappLinkCellState) {
         if self.state == state {
             return
         }
@@ -150,6 +169,8 @@ class LinkCell: UITableViewCell {
         self.hideViews(self.noLinkViews)
         self.hideViews(self.enterLinkViews)
         self.hideViews(self.linkViews)
+        self.hideViews(self.deleteLinkViews)
+        
         self.showViews(views)
         self.enableViews(views)
         
@@ -200,11 +221,13 @@ class LinkCell: UITableViewCell {
         }
     }
     
-    private func viewsForState(state: State) -> [UIView] {
+    private func viewsForState(state: DappLinkCellState) -> [UIView] {
         switch state {
-        case .NoLink:    return self.noLinkViews
-        case .EnterLink: return self.enterLinkViews
-        case .Link:      return self.linkViews
+        case .Empty:      return []
+        case .NoLink:     return self.noLinkViews
+        case .EnterLink:  return self.enterLinkViews
+        case .Link:       return self.linkViews
+        case .DeleteLink: return self.deleteLinkViews
         }
     }
 }

@@ -27,6 +27,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var dappsCreatedByUserInProfile: [PFObject]? = nil
     var dappsSwipedByUserInProfile: [PFObject]? = nil
     
+    private var editLinksSegueID = "editLinksSegue"
+    private var selectedDappSegue: PFObject?
+    
     enum DappsFilter: Int {
         case DappSigns = 0
         case Dapped = 1
@@ -87,6 +90,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == self.editLinksSegueID {
+            let editDappLinksVC = segue.destinationViewController as? EditDappLinksVC
+            editDappLinksVC?.dapp = self.selectedDappSegue
+        }
     }
     
     // MARK: - @IBActions
@@ -242,6 +252,8 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
         
+        cell.cellDelegate = self
+        
         if let dapps = self.dapps() {
             let dapp = dapps[indexPath.row]
             
@@ -332,5 +344,17 @@ extension ProfileViewController: SWTableViewCellDelegate {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
+    }
+}
+
+extension ProfileViewController: DappProfileCellDelegate {
+    func editLinkInCell(cell: DappProfileCell) {
+        if let indexPath = self.tableView.indexPathForCell(cell), dapps = self.dapps() {
+            if indexPath.row < dapps.count {
+                self.selectedDappSegue = dapps[indexPath.row]
+                
+                self.performSegueWithIdentifier(self.editLinksSegueID, sender: self)
+            }
+        }
     }
 }

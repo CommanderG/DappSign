@@ -525,7 +525,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == self.showDappLinksSegueID {
-            let linksVC = segue.destinationViewController as! LinksVC
+            let linksVC = segue.destinationViewController as! AddDappLinksVC
             linksVC.dapp = self.getDapp()
         }
     }
