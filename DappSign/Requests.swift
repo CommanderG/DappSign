@@ -30,8 +30,8 @@ class Requests {
                 $0["lowercaseName"]! as! String
             })
             
-            var hashtagNamesForUploading = hashtagNames.filter({
-                !contains(hashtagsOnTheServerLowercaseNames, $0.lowercaseString)
+            let hashtagNamesForUploading = hashtagNames.filter({
+                !hashtagsOnTheServerLowercaseNames.contains($0.lowercaseString)
             })
             
             if hashtagNamesForUploading.count > 0 {
@@ -54,7 +54,7 @@ class Requests {
         var linksObjs: [PFObject] = []
         
         for link in links {
-            var dappLink = PFObject(className: "DappLink")
+            let dappLink = PFObject(className: "DappLink")
             dappLink["Title"] = link.title
             dappLink["URL"] = link.URLStr
             
@@ -87,7 +87,7 @@ class Requests {
     }
     
     class func downloadDappsWithStatementWhichContains(statementSubstring: String, notSwipedByUser user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
-        var query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
+        let query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
             dappStatementSubstring: statementSubstring
         )
         query?.limit = 1000
@@ -123,7 +123,7 @@ class Requests {
     }
     
     class func downloadDappsCreatedByUserWithId(userId: String, completion: (dapps: [PFObject], error: NSError!) -> Void) {
-        var query = PFQuery(className: "Dapps")
+        let query = PFQuery(className: "Dapps")
         
         query.whereKey("userid", equalTo: userId)
         query.whereKey("isDeleted", notEqualTo: true)
@@ -137,7 +137,7 @@ class Requests {
     
     class func downloadDappsSwipedByUser(user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         let relation = user.relationForKey("dappsSwiped")
-        var query = relation.query()
+        let query = relation.query()
         
         query.limit = 1000
         
@@ -164,7 +164,7 @@ class Requests {
     class func downloadDappsDappedByUser(user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
         let relation = user.relationForKey("dappsDapped")
         
-        var query = relation.query()
+        let query = relation.query()
         query.whereKey("isDeleted", notEqualTo: true)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -243,7 +243,7 @@ class Requests {
     }
     
     class func downloadDappScoreForUserWithId(userId: String, completion: (dappScore: Int?, error: NSError?) -> Void) {
-        var query = PFQuery(className: "UserIdDappScore")
+        let query = PFQuery(className: "UserIdDappScore")
         
         query.whereKey("userId", equalTo: userId)
         
@@ -283,7 +283,7 @@ class Requests {
                 return
             }
             
-            var userIdDappScore = PFObject(className: "UserIdDappScore")
+            let userIdDappScore = PFObject(className: "UserIdDappScore")
             
             userIdDappScore["userId"] = userId
             userIdDappScore["dappScore"] = 0
@@ -296,7 +296,7 @@ class Requests {
     
     class func addRepresentative(userId: String, imgUrl: String, strName : String, strTitle : String, strParty : String) {
         
-        var userIdDappScore = PFObject(className: "UserRepresentatives")
+        let userIdDappScore = PFObject(className: "UserRepresentatives")
         
         userIdDappScore["UserID"] = userId
         userIdDappScore["imgUrl"] = imgUrl
@@ -357,7 +357,7 @@ class Requests {
             let queue = NSOperationQueue.mainQueue()
             
             NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: {
-                (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                 completion(data: data, error: error)
             })
         }
@@ -383,7 +383,7 @@ class Requests {
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if let err = error {
-                println("error = \(err)")
+                print("error = \(err)")
                 
                 completion(usersDapped: nil, error: error)
                 
@@ -452,8 +452,8 @@ class Requests {
         let request = NSURLRequest(URL: URL)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            if data != nil {
+            (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+            if let data = data {
                 let image = UIImage(data: data)
                 
                 completion(image: image, error: nil)
@@ -467,7 +467,7 @@ class Requests {
         let request = NSURLRequest(URL: URL)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             completion(data: data, error: error)
         }
     }
@@ -509,7 +509,7 @@ class Requests {
                 --hashtagsLeft
                 
                 if error != nil {
-                    println(error)
+                    print(error)
                 } else {
                     if let hashtag = hashtag {
                         successfullyUploadedHashtag(hashtag: hashtag)
@@ -524,7 +524,7 @@ class Requests {
     }
     
     private class func uploadHashtagWithName(hashtagName: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {
-        var hashtag = PFObject(className: "DappHashtag")
+        let hashtag = PFObject(className: "DappHashtag")
         hashtag["name"] = hashtagName
         hashtag["lowercaseName"] = hashtagName.lowercaseString
         

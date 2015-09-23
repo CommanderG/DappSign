@@ -42,8 +42,8 @@ class SearchTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if count(self.searchBar.text) > 0 {
-            self.searchText(self.searchBar.text)
+        if let searchText = self.searchBar.text where searchText.characters.count > 0 {
+            self.searchText(searchText)
         }
     }
     
@@ -102,7 +102,7 @@ class SearchTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier,
-                forIndexPath: indexPath) as! UITableViewCell
+                forIndexPath: indexPath) 
             
             if indexPath.section == Section.Users.rawValue {
                 if let user = self.users?[indexPath.row] {
@@ -241,7 +241,7 @@ class SearchTableViewController: UITableViewController {
         Requests.downloadUsersWithNameWhichContains(searchText, completion: {
             (users: [PFUser], error: NSError!) -> Void in
             if error != nil {
-                println(error)
+                print(error)
                 
                 return
             }
@@ -257,7 +257,7 @@ class SearchTableViewController: UITableViewController {
         Requests.downloadHashtagsWithNameWhichContains(searchText, completion: {
             (hashtags: [PFObject], error: NSError!) -> Void in
             if error != nil {
-                println(error)
+                print(error)
                 
                 return
             }
@@ -274,7 +274,7 @@ class SearchTableViewController: UITableViewController {
             notSwipedByUser: PFUser.currentUser()) {
                 (dapps: [PFObject], error: NSError!) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                     
                     return
                 }
@@ -291,8 +291,8 @@ class SearchTableViewController: UITableViewController {
 
 extension SearchTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if count(searchBar.text) > 0 {
-            self.searchText(searchBar.text)
+        if let searchText = searchBar.text where searchText.characters.count > 0 {
+            self.searchText(searchText)
         }
     }
 }

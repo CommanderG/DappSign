@@ -505,7 +505,7 @@ class CongressionalDistrictsIDs: NSObject {
             if error != nil {
                 let dappStatement = dapp["dappStatement"] as? String
                 
-                println("Failed to download users who dapped the dapp with ID = \(dapp.objectId) and statement = \"\(dappStatement)\". Error = \(error.localizedDescription)")
+                print("Failed to download users who dapped the dapp with ID = \(dapp.objectId) and statement = \"\(dappStatement)\". Error = \(error.localizedDescription)")
                 
                 completion(IDsFreqs: nil)
                 
@@ -517,7 +517,7 @@ class CongressionalDistrictsIDs: NSObject {
                     .map({ return $0["congressionalDistrictID"] as? String })
                     .filter({ return $0 != nil })
                     .map({ return $0! })
-                    .filter({ return contains(self.IDs, $0) })
+                    .filter({ return self.IDs.contains($0) })
                 let congrDistrsIDsFreqs = self.getCongressionalDistrictsIDsFrequencies(congrDistrsIDs)
                 
                 completion(IDsFreqs: congrDistrsIDsFreqs)
@@ -563,10 +563,9 @@ class CongressionalDistrictsIDs: NSObject {
             let index = arc4random_uniform(IDsCount)
             
             if index < IDsCount {
-                let random = IDs.count
                 let ID = IDs[Int(index)]
                 
-                if !contains(randomIDs, ID) {
+                if !randomIDs.contains(ID) {
                     randomIDs.append(ID)
                 }
             }

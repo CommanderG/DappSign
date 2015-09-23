@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
+class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var dappView: UIView!
     @IBOutlet weak var dappHeaderView: UIView!
@@ -40,7 +40,7 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
         self.shareOnFacebookButton?.layer.cornerRadius = 8.0
         self.tweetThisCardButton?.layer.cornerRadius = 8.0
         
-        var user = PFUser.currentUser()
+        let user = PFUser.currentUser()
         
         dappView.alpha = 0
         
@@ -100,20 +100,24 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dappObj = self.dappObj {
-            let currentDappCardAsImage = self.dappView.toImage()
-            
+        if let  dappObj = self.dappObj
+            ,   currentDappCardAsImage = self.dappView.toImage() {
             FacebookHelper.postImageToFacebook(currentDappCardAsImage,
                 dapp: dappObj,
-                completion: {
-                    (success, error) -> Void in
+                completion: { (success, error) -> Void in
                     if success {
-                        self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully posted."
+                        )
                     } else {
                         if error != nil {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Error: \(error)"
+                            )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Unknown error."
+                            )
                         }
                     }
             })
@@ -121,20 +125,24 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let dappObj = self.dappObj {
-            let currentDappCardAsImage = self.dappView.toImage()
-            
+        if let  dappObj = self.dappObj
+            ,   currentDappCardAsImage = self.dappView.toImage() {
             TwitterHelper.tweetDapp(dappObj,
                 image: currentDappCardAsImage,
-                completion: {
-                    (success, error) -> Void in
+                completion: { (success, error) -> Void in
                     if success {
-                        self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully tweeted."
+                        )
                     } else {
                         if error != nil {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Error: \(error)"
+                            )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Unknown error."
+                            )
                         }
                     }
             })
@@ -148,7 +156,7 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
     // MARK: -
     
     func submitDapp(dapp: Dapp) {
-        var dappObj = PFObject(className: "Dapps")
+        let dappObj = PFObject(className: "Dapps")
         
         if let dappStatement = dapp.dappStatement {
             dappObj["dappStatement"] = dappStatement
@@ -183,7 +191,7 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
         
         dappObj.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
             if !succeeded {
-                println("%@" , error)
+                print("%@" , error)
                 
                 return
             }
@@ -192,13 +200,13 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
             
             self.enableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
             
-            println("Dapp created with id: \(dappObj.objectId)")
-            println(dappObj)
+            print("Dapp created with id: \(dappObj.objectId)")
+            print(dappObj)
             
             Requests.uploadHashtags(dapp.hashtagNames, completion: {
                 (hashtags: [PFObject]?, error: NSError!) -> Void in
                 if error != nil {
-                    println("Failed to upload hashtags \(dapp.hashtagNames). Error: \(error)")
+                    print("Failed to upload hashtags \(dapp.hashtagNames). Error: \(error)")
                 }
                 
                 if let hashtags = hashtags {
@@ -210,9 +218,9 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
                     
                     dappObj.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
                         if success {
-                            println("Successfully added hashtags to dapp.")
+                            print("Successfully added hashtags to dapp.")
                         } else {
-                            println("Failed to add hashtags to dapp. Error: \(error)")
+                            print("Failed to add hashtags to dapp. Error: \(error)")
                         }
                     })
                 }
@@ -221,10 +229,10 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
             if let links = self.links {
                 Requests.uploadLinks(links, completion: {
                     (linkObjs: [PFObject], error: NSError?) -> Void in
-                    println("Finished uploading links.")
+                    print("Finished uploading links.")
                     
                     if let error = error {
-                        println("Links uploading error: \(error)")
+                        print("Links uploading error: \(error)")
                     }
                     
                     if linkObjs.count > 0 {
@@ -237,9 +245,9 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
                         dappObj.saveInBackgroundWithBlock({
                             (success: Bool, error: NSError!) -> Void in
                             if success {
-                                println("Successfully added links to dapp.")
+                                print("Successfully added links to dapp.")
                             } else {
-                                println("Failed to add links to dapp. Error: \(error)")
+                                print("Failed to add links to dapp. Error: \(error)")
                             }
                         })
                     }
@@ -251,7 +259,7 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
                     (succeeded: Bool, error: NSError?) -> Void in
                     if !succeeded {
                         if let error = error {
-                            println(error.localizedDescription)
+                            print(error.localizedDescription)
                         }
                     }
                 })
@@ -263,7 +271,7 @@ class FinalDappSubmitViewController: UIViewController, SwipeableViewDelegate {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if !succeeded {
                     if let error = error {
-                        println(error.localizedDescription)
+                        print(error.localizedDescription)
                     }
                 }
             })

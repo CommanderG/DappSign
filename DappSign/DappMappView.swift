@@ -13,7 +13,7 @@ class DappMappView: XIBView {
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var percentsView: PercentsView!
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
         self.backgroundColor = UIColor.clearColor()
@@ -29,22 +29,15 @@ class DappMappView: XIBView {
         }
         
         self.dappsCountLabel.text = str
-        
-        
-        
         self.webView.hidden = true
         
-        if let
-            mapURLPath = SVGMapURLPath,
-            URL        = NSURL(fileURLWithPath: mapURLPath) {
-                let request = NSURLRequest(URL: URL)
-                
-                self.webView.loadRequest(request)
-                
-                self.webView.hidden = false
+        if let mapURLPath = SVGMapURLPath {
+            let URL = NSURL(fileURLWithPath: mapURLPath)
+            let request = NSURLRequest(URL: URL)
+            
+            self.webView.loadRequest(request)
+            self.webView.hidden = false
         }
-        
-        
         
         self.percentsView.showPercents(percents)
     }

@@ -15,7 +15,7 @@ class PrimaryDapps {
         var sortedDapps: [PFObject] = []
         
         // find dapps with correct indexes
-        var dappsWithIndexes = filter(dapps, {
+        var dappsWithIndexes = dapps.filter({
             (dapp: PFObject) -> Bool in
             if let index = dapp["index"] as? Int {
                 if index >= 0 {
@@ -29,13 +29,13 @@ class PrimaryDapps {
         })
         
         // sort by indexes from biggest to lowest
-        sort(&dappsWithIndexes, {
+        dappsWithIndexes.sortInPlace({
             (dapp1, dapp2) -> Bool in
             return dapp2["index"] as? Int > dapp1["index"] as? Int
         })
         
         // dapps without indexes or with incorrect indexes
-        var dappsWithoutIndexes = filter(dapps, {
+        var dappsWithoutIndexes = dapps.filter({
             (dapp: PFObject) -> Bool in
             if let index = dapp["index"] as? Int {
                 if index < 0 {

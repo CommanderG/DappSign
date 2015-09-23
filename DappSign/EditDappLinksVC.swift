@@ -40,7 +40,7 @@ class EditDappLinksVC: UIViewController {
                 }
                 
                 if let error = error {
-                    println("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
+                    print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
                 }
             })
         }
@@ -103,7 +103,7 @@ extension EditDappLinksVC: DappLinksVCDelegate {
         if index < self.links.count {
             let linkObj = self.links[index]
             
-            var linkURLStr = linkObj["URL"] as? String
+            let linkURLStr = linkObj["URL"] as? String
             var linkTitle = linkObj["Title"] as? String
             
             if linkTitle == nil {

@@ -44,13 +44,13 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
         
         for var i = 0; i < 3; i++
         {
-            var ObjectValue: NSDictionary = arrRepresentativeData[i] as! NSDictionary
+            let ObjectValue: NSDictionary = arrRepresentativeData[i] as! NSDictionary
             let strFName : String = ObjectValue.valueForKey("first_name")! as! String
             let strLName : String = ObjectValue.valueForKey("last_name")! as! String
-            var strFullName : String =  "\(strFName) \(strLName)"
+            let strFullName : String =  "\(strFName) \(strLName)"
             
-            var strTitle : String = ObjectValue.valueForKey("title")! as! String
-            var strParty : String = ObjectValue.valueForKey("party")! as! String
+            let strTitle : String = ObjectValue.valueForKey("title")! as! String
+            let strParty : String = ObjectValue.valueForKey("party")! as! String
             
             let strUrl1 : String = "https://theunitedstates.io/images/congress/original/"
             let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
@@ -62,7 +62,7 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
                 arrRepresentativeDataRep.addObject(ObjectValue)
             }
 
-            var strImgUrl : String = strUrl1+strUrl2+strUrl3
+            let strImgUrl : String = strUrl1+strUrl2+strUrl3
 
             Requests.addRepresentative(userID, imgUrl: strImgUrl, strName: strFullName, strTitle: strTitle, strParty: strParty)
         }
@@ -92,15 +92,15 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
             let cell : CustomCell = tableView.dequeueReusableCellWithIdentifier("repreCell", forIndexPath: indexPath)
                 as! CustomCell
             
-            var ObjectValue: NSDictionary = arrRepresentativeData[indexPath.row] as! NSDictionary
+            let ObjectValue: NSDictionary = arrRepresentativeData[indexPath.row] as! NSDictionary
            
             
             let strFName : String = ObjectValue.valueForKey("first_name")! as! String
             let strLName : String = ObjectValue.valueForKey("last_name")! as! String
-            var strFullName : String =  "\(strFName) \(strLName)"
+            let strFullName : String =  "\(strFName) \(strLName)"
             
-            var strTitle : String = ObjectValue.valueForKey("title")! as! String
-            var strParty : String = ObjectValue.valueForKey("party")! as! String
+            let strTitle : String = ObjectValue.valueForKey("title")! as! String
+            let strParty : String = ObjectValue.valueForKey("party")! as! String
 
             cell.setCell(strFullName, strTitle: strTitle, strParty: strParty)
             
@@ -108,7 +108,7 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
             let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
             let strUrl3 : String = ".jpg"
             
-            var strImgUrl : String = strUrl1+strUrl2+strUrl3
+            let strImgUrl : String = strUrl1+strUrl2+strUrl3
             
             let url = NSURL(string: strImgUrl)
             

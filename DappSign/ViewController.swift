@@ -24,23 +24,25 @@ class ViewController: UIViewController {
     
     @IBAction func facebookLoginButton(sender: AnyObject) {
         let loginWithFacebookButton = sender as! UIButton
-        var permissions = ["public_profile", "email"]
+        let permissions = ["public_profile", "email"]
         
         loginWithFacebookButton.userInteractionEnabled = false
         loginWithFacebookButton.alpha = 0.5
         
         PFFacebookUtils.logInWithPermissions(permissions, block: {
             (user: PFUser!, error: NSError!) -> Void in
+            print("error = \(error)")
+            
             if let user = user {
                 if user.isNew {
                     
-                    println("User signed up and logged in through Facebook!")
+                    print("User signed up and logged in through Facebook!")
                     self.bIsZipCode = true
                     self.strUserID = user.objectId
                     self.performSegueWithIdentifier("showZipCode", sender: self)
                     
                 } else {
-                    println("User logged in through Facebook!")
+                    print("User logged in through Facebook!")
                     self.strUserID = user.objectId
                     self.performSegueWithIdentifier("showHomeViewController", sender: self)
                 }
@@ -49,7 +51,7 @@ class ViewController: UIViewController {
                 
                 
             } else {
-                println("Uh oh. The user cancelled the Facebook login.")
+                print("Uh oh. The user cancelled the Facebook login.")
             }
             
             loginWithFacebookButton.userInteractionEnabled = true
@@ -60,7 +62,7 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if bIsZipCode{
-            var ZipCodeVC : ZipCodeViewController = segue.destinationViewController as! ZipCodeViewController
+            let ZipCodeVC : ZipCodeViewController = segue.destinationViewController as! ZipCodeViewController
             ZipCodeVC.strUserID = strUserID
         }
     }

@@ -9,15 +9,19 @@
 import Foundation
 
 extension UIView {
-    func toImage() -> UIImage {
+    func toImage() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.frame.size, self.opaque, 1.0)
         
-        self.layer.renderInContext(UIGraphicsGetCurrentContext())
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.renderInContext(context)
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            return image
+        }
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return image
+        return nil
     }
 }

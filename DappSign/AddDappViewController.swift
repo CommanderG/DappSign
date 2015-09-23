@@ -21,7 +21,7 @@ struct Dapp {
     var hashtagNames: [String]
 }
 
-class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableViewDelegate {
+class AddDappViewController: UIViewController, UITextViewDelegate {
     
     //ControlFlow
     var mode:String = "chooseColor"
@@ -143,32 +143,32 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
             amethystButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
             
             
-            springWithDelay(0.5, 0.02, {
+            springWithDelay(0.5, delay: 0.02, animations: {
                 self.emeraldButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
                 
             })
-            springWithDelay(0.5, 0.04, {
+            springWithDelay(0.5, delay: 0.04, animations: {
                 self.carrotButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.06, {
+            springWithDelay(0.5, delay: 0.06, animations: {
                 self.peterRiverOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.08, {
+            springWithDelay(0.5, delay: 0.08, animations: {
                 self.pomegranateButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.10, {
+            springWithDelay(0.5, delay: 0.10, animations: {
                 self.wisteriaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.12, {
+            springWithDelay(0.5, delay: 0.12, animations: {
                 self.sunflowerButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.14, {
+            springWithDelay(0.5, delay: 0.14, animations: {
                 self.asbestosButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.16, {
+            springWithDelay(0.5, delay: 0.16, animations: {
                 self.turquoiseButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.18, {
+            springWithDelay(0.5, delay: 0.18, animations: {
                 self.amethystButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
         } else if mode == "chooseFont" {
@@ -183,36 +183,36 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
             walkwayButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
             
             
-            springWithDelay(0.5, 0.02, {
+            springWithDelay(0.5, delay: 0.02, animations: {
                 self.banksiaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.04, {
+            springWithDelay(0.5, delay: 0.04, animations: {
                 self.bellotaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.06, {
+            springWithDelay(0.5, delay: 0.06, animations: {
                 self.captureButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.08, {
+            springWithDelay(0.5, delay: 0.08, animations: {
                 self.elsieButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.10, {
+            springWithDelay(0.5, delay: 0.10, animations: {
                 self.exoButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.12, {
+            springWithDelay(0.5, delay: 0.12, animations: {
                 self.klinicButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.14, {
+            springWithDelay(0.5, delay: 0.14, animations: {
                 self.printClearlyButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.16, {
+            springWithDelay(0.5, delay: 0.16, animations: {
                 self.sansationButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
-            springWithDelay(0.5, 0.18, {
+            springWithDelay(0.5, delay: 0.18, animations: {
                 self.walkwayButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
             })
             
         } else if mode == "addText"{
-                println("thisworks")
+                print("thisworks")
         }
     }
 
@@ -465,9 +465,9 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
     //textView delegate function
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
-        var newLength:Int = (textView.text as NSString).length + (text as NSString).length - range.length
+        let newLength:Int = (textView.text as NSString).length + (text as NSString).length - range.length
         
-        var remainingChar:Int = 140 - newLength
+        let remainingChar:Int = 140 - newLength
         
         characterCountLabel.text = "\(remainingChar)"
         
@@ -482,7 +482,7 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
             let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String]
             
             if let adminUsersIDs = adminUsersIDs {
-                if contains(adminUsersIDs, PFUser.currentUser().objectId) {
+                if adminUsersIDs.contains(PFUser.currentUser().objectId) {
                     return DappTypeId.Secondary.rawValue
                 }
             }
@@ -501,10 +501,14 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
         let isDeleted = false
         let dappTypeId = getDappTypeID()
         
-        var hashtagNames = split(self.hashtagTextView.text) { $0 == " " }
-        hashtagNames = hashtagNames.map {
-            // removes #
-            $0[1...count($0) - 1]
+        var hashtagNames: [String] = []
+        
+        if let hashtagsText = self.hashtagTextView.text {
+            hashtagNames = hashtagsText.characters.split(" ").map{ String($0) }
+            hashtagNames = hashtagNames.map {
+                // removes #
+                $0[1...$0.characters.count - 1]
+            }
         }
         
         let dapp = Dapp(
@@ -534,8 +538,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate, SwipeableView
 extension String {
     subscript(r: Range<Int>) -> String {
         get {
-            let rangeStart = advance(self.startIndex, r.startIndex, self.endIndex)
-            let rangeEnd = advance(rangeStart, r.endIndex - r.startIndex, self.endIndex)
+            let rangeStart = self.startIndex.advancedBy(r.startIndex, limit: self.endIndex)
+            let rangeEnd = rangeStart.advancedBy(r.endIndex - r.startIndex, limit: self.endIndex)
             let range = Range(start: rangeStart, end: rangeEnd)
             
             return self.substringWithRange(range)
@@ -562,15 +566,15 @@ extension String {
     }
     
     func isHashtag() -> Bool {
-        if count(self) < 2 {
+        if self.characters.count < 2 {
             return false
         }
         
-        if first(self) != "#" {
+        if self.characters.first != "#" {
             return false
         }
         
-        let rest = self[1...count(self)]
+        let rest = self[1...self.characters.count]
         
         return rest.containsOnlyDigitsOrLetters()
     }
@@ -579,34 +583,35 @@ extension String {
 
 extension AddDappViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text as NSString
-        let newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
-        
-        if count(newText) < 2 {
-            if first(newText) == "#" {
-                return true
-            }
+        if let currText = textField.text as NSString? {
+            let newText = currText.stringByReplacingCharactersInRange(range, withString: string)
             
-            return false
-        }
-        
-        if newText.rangeOfString("  ") != nil {
-            return false
-        }
-        
-        if newText.rangeOfString("# ") != nil {
-            return false
-        }
-        
-        let possibleHashtags = split(newText) { $0 == " " }
-        
-        for possibleHashtag in possibleHashtags {
-            if possibleHashtag == "#" {
-                continue
-            }
-            
-            if !possibleHashtag.isHashtag() {
+            if newText.characters.count < 2 {
+                if newText.characters.first == "#" {
+                    return true
+                }
+                
                 return false
+            }
+            
+            if newText.rangeOfString("  ") != nil {
+                return false
+            }
+            
+            if newText.rangeOfString("# ") != nil {
+                return false
+            }
+            
+            let possibleHashtags = newText.characters.split { $0 == " " }.map { String($0) }
+            
+            for possibleHashtag in possibleHashtags {
+                if possibleHashtag == "#" {
+                    continue
+                }
+                
+                if !possibleHashtag.isHashtag() {
+                    return false
+                }
             }
         }
         

@@ -23,7 +23,7 @@ class DappsDownloader {
     internal func downloadDappsNotSwipedByUser(user: PFUser, completion: downloadCompletionClosureWithDappsAndError) {
         self.dapps = []
         
-        var query = DappQueriesBuilder.queryForAllDapsNotSwipedByUser(self.dappsType, user: user)
+        let query = DappQueriesBuilder.queryForAllDapsNotSwipedByUser(self.dappsType, user: user)
         
         self.downloadDappsWithQuery(query, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in
@@ -34,7 +34,7 @@ class DappsDownloader {
     internal func downloadAllDapps(completion: downloadCompletionClosureWithDappsAndError) {
         self.dapps = []
         
-        var query = DappQueriesBuilder.queryForAllDappsOfType(self.dappsType)
+        let query = DappQueriesBuilder.queryForAllDappsOfType(self.dappsType)
         
         self.downloadDappsWithQuery(query, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in
@@ -79,7 +79,7 @@ class DappsDownloader {
                 self.downloadAllDappsWithQuery(query,completion:  {
                     (error: NSError!) -> Void in
                     
-                    sort(&self.dapps, {
+                    self.dapps.sortInPlace({
                         (dapp1: PFObject, dapp2: PFObject) -> Bool in
                         return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
                     })

@@ -28,7 +28,7 @@ class DappLinksVC: UIViewController {
     
     internal var delegate: DappLinksVCDelegate?
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
     
@@ -51,9 +51,17 @@ class DappLinksVC: UIViewController {
         Requests.downloadDataFromURL(URL, completion: { (data: NSData?, error: NSError?) -> Void in
             if let data = data {
                 var parsingError: NSError? = nil
-                let parser = HTMLParser(data: data, error: &parsingError)
+                let parser: HTMLParser!
+                do {
+                    parser = try HTMLParser(data: data)
+                } catch let error as NSError {
+                    parsingError = error
+                    parser = nil
+                } catch {
+                    fatalError()
+                }
                 
-                if let parsingError = parsingError {
+                if parsingError != nil {
                     let errorMessage = "Parsing error. Failed to get the title from \(URL)."
                     
                     completion(title: nil, errorMessage: errorMessage)
@@ -135,7 +143,7 @@ extension DappLinksVC: DappLinkCellDelegate {
                                     errorStr += " Unknown error."
                                 }
                                 
-                                println(errorStr)
+                                print(errorStr)
                                 
                                 return
                             }
@@ -195,7 +203,7 @@ extension DappLinksVC: DappLinkCellDelegate {
                         errorStr += " Unknown error."
                     }
                     
-                    println(errorStr)
+                    print(errorStr)
                 }
             })
         }

@@ -488,7 +488,7 @@ let congrDstrsCircles = [
 
 class SVGMapGenerator: NSObject {
     /**
-    :returns: Path to the SVG file with the map.
+    - returns: Path to the SVG file with the map.
     */
     class func generate(IDsFreqs: IDsFrequencies, minRadius: Double = 2.0, maxRadius: Double = 40.0, mapFillColor: String = "white", circleFillColor: String = "#3B98D8") -> String? {
         func getPaths() -> String {
@@ -512,19 +512,19 @@ class SVGMapGenerator: NSObject {
         
         func getCircles() -> String? {
             if minRadius < 0.0 {
-                println("Error. minRadius \(minRadius) < 0.0")
+                print("Error. minRadius \(minRadius) < 0.0")
                 
                 return nil
             }
             
             if maxRadius < 0.0 {
-                println("Error. maxRadius \(maxRadius) < 0.0")
+                print("Error. maxRadius \(maxRadius) < 0.0")
                 
                 return nil
             }
             
             if maxRadius <= minRadius {
-                println("Error. maxRadius \(maxRadius) <= minRadius \(minRadius)")
+                print("Error. maxRadius \(maxRadius) <= minRadius \(minRadius)")
                 
                 return nil
             }
@@ -536,9 +536,9 @@ class SVGMapGenerator: NSObject {
             }
             
             let circles = congrDstrsCircles.filter({
-                return contains(IDsFreqs.keys.array, $0.id)
+                return Array(IDsFreqs.keys).contains($0.id)
             })
-            let maxFreq = maxElement(IDsFreqs.values.array)
+            let maxFreq = Array(IDsFreqs.values).maxElement()!
             let radiusFactor = (maxRadius - minRadius) / Double(maxFreq)
             
             for idx in 0 ... circles.count - 1 {
@@ -592,19 +592,22 @@ class SVGMapGenerator: NSObject {
         
         let dirs = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         
-        if let let docsDir = dirs.first as? NSString {
-            let path = docsDir.stringByAppendingPathComponent("map.svg")
+        if let docsDir = dirs.first {
+            let path = docsDir + "/map.svg"
             var error: NSError? = nil
             
-            SVG.writeToFile(
-                path
-            ,   atomically: true
-            ,   encoding: NSUTF8StringEncoding
-            ,   error: &error
-            )
+            do {
+                try SVG.writeToFile(
+                    path
+                ,   atomically: true
+                ,   encoding: NSUTF8StringEncoding
+                )
+            } catch let error1 as NSError {
+                error = error1
+            }
             
             if let err = error {
-                println(err)
+                print(err)
                 
                 return nil
             }

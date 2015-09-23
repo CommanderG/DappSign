@@ -34,25 +34,38 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     
     
     @IBAction func btnCheckZipCode(sender: AnyObject) {
-        if txtZipCode.text.isEmpty{
-            println("Zip code empty!")
-        }else{
-          //  self.performSegueWithIdentifier("showZipCode", sender: self)
-            startConnection()
-
+        if let zipCode = txtZipCode.text {
+            if !zipCode.isEmpty {
+                //  self.performSegueWithIdentifier("showZipCode", sender: self)
+                startConnection()
+            } else {
+                print("Zip code empty!")
+            }
         }
     }
     
     
     
     func startConnection(){
-        let urlPath: String = "http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + txtZipCode.text + "&apikey=a01b4a2e39e044d78d8e5cd18e78fefb"
-        var url: NSURL = NSURL(string: urlPath)!
-        self.data = NSMutableData()
-        
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)!
-        connection.start()
+        if let zipCode = txtZipCode.text {
+            let urlSubPath1 = "http://congress.api.sunlightfoundation.com/legislators/locate?zip="
+            let urlSubPath2 = "&apikey=a01b4a2e39e044d78d8e5cd18e78fefb"
+            let urlPath = urlSubPath1 + zipCode + urlSubPath2
+            
+            if let url = NSURL(string: urlPath) {
+                self.data = NSMutableData()
+                
+                let request = NSURLRequest(URL: url)
+                
+                if let connection = NSURLConnection(
+                    request: request
+                ,   delegate: self
+                ,   startImmediately: false
+                ) {
+                    connection.start()
+                }
+            }
+        }
     }
     
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
@@ -60,34 +73,31 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
     }
     
     func connectionDidFinishLoading(connection: NSURLConnection!) {
-        var err: NSError
-        // throwing an error on the line below (can't figure out where the error message is)
-        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-        var resultCount = jsonResult["count"] as! NSInteger
-
+        let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
         
-        if resultCount > 0{
-            self.downloadAndSetUserCongressionalDistrictIDForZipCode(txtZipCode.text)
-            
-            arrSentData = jsonResult["results"] as! NSMutableArray
-           //  performSegueWithIdentifier("Representative", sender: nil)
-             self.performSegueWithIdentifier("Representative", sender: self)
-            
-            
-        }else{
-            
-            let alert = UIAlertView()
-            alert.title = "Info"
-            alert.message = "No result found! Please try again!"
-            alert.addButtonWithTitle("Ok")
-            alert.show()
-            println("zero result found")
+        if let jsonResult = json, resultCount = jsonResult["count"] as! Int? {
+            if resultCount > 0 {
+                if let  zipCode = txtZipCode.text
+                    ,   results = jsonResult["results"] as! NSMutableArray? {
+                        self.downloadAndSetUserCongressionalDistrictIDForZipCode(zipCode)
+                        
+                        arrSentData = results
+                        
+                        self.performSegueWithIdentifier("Representative", sender: self)
+                }
+            } else {
+                let alert = UIAlertView()
+                alert.title = "Info"
+                alert.message = "No result found! Please try again!"
+                alert.addButtonWithTitle("Ok")
+                alert.show()
+                print("zero result found")
+            }
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var RepresentativeVC : RepresentativesViewController = segue.destinationViewController as! RepresentativesViewController
+        let RepresentativeVC : RepresentativesViewController = segue.destinationViewController as! RepresentativesViewController
         RepresentativeVC.arrRepresentativeData = arrSentData
         RepresentativeVC.userID = strUserID 
     }
@@ -100,7 +110,7 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
         Requests.downloadCongressialDistrictsForZipCode(zipCode, completion: {
             (data: NSData!, error: NSError!) -> Void in
             if let err = error {
-                println("\(err.localizedDescription)")
+                print("\(err.localizedDescription)")
                 
                 return
             }
@@ -113,9 +123,9 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
                 user.saveInBackgroundWithBlock({
                     (success: Bool, error: NSError!) -> Void in
                     if (success) {
-                        println("Successfully set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId)")
+                        print("Successfully set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId)")
                     } else {
-                        println("Failed to set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId). Error = \(error.localizedDescription)")
+                        print("Failed to set value of 'congressialDistrictID' to \(congressialDistrictID) for user with ID \(user.objectId). Error = \(error.localizedDescription)")
                     }
                 })
             }
@@ -131,23 +141,13 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
             return "0\(district)"
         }
         
-        var serializationError: NSError?
-        let result = NSJSONSerialization.JSONObjectWithData(data,
-            options: NSJSONReadingOptions.MutableContainers,
-            error: &serializationError) as? NSDictionary
+        let result = try? NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
         
-        if let serErr = serializationError {
-            println(serErr.localizedDescription)
-            
-            return nil
-        }
-        
-        if let
-            res                   = result,
-            statesAndDistricts    = res["results"] as? [NSDictionary],
-            firstStateAndDistrict = statesAndDistricts.first,
-            state                 = firstStateAndDistrict["state"] as? String,
-            district              = firstStateAndDistrict["district"] as? Int {
+        if let  res                   = result
+            ,   statesAndDistricts    = res["results"] as? [NSDictionary]
+            ,   firstStateAndDistrict = statesAndDistricts.first
+            ,   state                 = firstStateAndDistrict["state"] as? String
+            ,   district              = firstStateAndDistrict["district"] as? Int {
                 let districtStr = getDistrictStr(district)
                 let congressialDistrictID = "\(state)-\(districtStr)"
                 

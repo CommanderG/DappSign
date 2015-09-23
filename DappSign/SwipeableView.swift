@@ -33,7 +33,7 @@ class SwipeableView: UIView {
         self.addPanGesture()
     }
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
         self.addPanGesture()
@@ -106,7 +106,7 @@ class SwipeableView: UIView {
             let rotationMax: CGFloat = 1.0
             let xRotationStrength = min(translation.x / self.frame.size.width, rotationMax)
             let yRotationStrength = min(translation.y / self.frame.size.height, rotationMax)
-            var rotationAngle = defaultRotationAngle * xRotationStrength * yRotationStrength
+            let rotationAngle = defaultRotationAngle * xRotationStrength * yRotationStrength
             
             self.transform = CGAffineTransformMakeRotation(rotationAngle)
             self.center = CGPoint(
@@ -118,7 +118,7 @@ class SwipeableView: UIView {
         case .Ended:
             self.swipeDirection = nil
             
-            if let superview = self.superview, minTranslationX = self.minTranslationX {
+            if let minTranslationX = self.minTranslationX {
                 if translation.x >= minTranslationX {
                     self.swipeDirection = SwipeDirection.LeftToRight
                 } else if translation.x <= -minTranslationX {
@@ -134,9 +134,13 @@ class SwipeableView: UIView {
                     self.gravity?.gravityDirection = CGVectorMake(0.0, 10.0)
                 }
                 
-                self.animator?.addBehavior(self.gravity)
+                if let gravity = self.gravity {
+                    self.animator?.addBehavior(gravity)
+                }
             } else {
-                self.animator?.addBehavior(self.snapBehavior)
+                if let snapBehavior = self.snapBehavior {
+                    self.animator?.addBehavior(snapBehavior)
+                }
             }
             
             break

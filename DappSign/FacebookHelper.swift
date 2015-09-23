@@ -83,7 +83,7 @@ class FacebookHelper {
         let permissions = FBSession.activeSession().permissions as? [String]
         let publishActionsPermission = "publish_actions"
         
-        if permissions != nil && contains(permissions!, publishActionsPermission) {
+        if permissions != nil && (permissions!).contains(publishActionsPermission) {
             action()
             
             return
@@ -97,7 +97,7 @@ class FacebookHelper {
                 } else {
                     failure(error: error)
                     
-                    println("Unable to get permission to post")
+                    print("Unable to get permission to post")
                 }
         }
     }

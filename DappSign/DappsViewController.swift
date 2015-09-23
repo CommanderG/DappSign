@@ -109,7 +109,7 @@ class DappsViewController: UIViewController {
             
             self.animator.removeAllBehaviors()
             
-            var gravity = UIGravityBehavior(items: [self.dappView])
+            let gravity = UIGravityBehavior(items: [self.dappView])
             
             if swipedFromLeftToRight {
                 gravity.gravityDirection = CGVectorMake(0, -10)
@@ -147,14 +147,14 @@ class DappsViewController: UIViewController {
                                     (succeeded: Bool, error: NSError?) -> Void in
                                     if !succeeded {
                                         if let error = error {
-                                            println(error)
+                                            print(error)
                                         }
                                     }
                                 })
                             }
                         } else {
                             if let error = error {
-                                println(error)
+                                print(error)
                             }
                         }
                     })
@@ -189,53 +189,53 @@ class DappsViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDapp = self.dappsInfo?.dapps.first
-        
-        if currentDapp == nil {
-            return
-        }
-        
-        let currentDappCardAsImage = self.dappView.toImage()
-        
-        FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-            dapp: currentDapp!,
-            completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
-                } else {
-                    if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+        if let  currentDapp = self.dappsInfo?.dapps.first
+            ,   currentDappCardAsImage = self.dappView.toImage() {
+                FacebookHelper.postImageToFacebook(currentDappCardAsImage
+                ,   dapp: currentDapp
+                ,   completion: { (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully posted."
+                        )
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                        if let error = error {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Error: \(error)"
+                            )
+                        } else {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Unknown error."
+                            )
+                        }
                     }
-                }
-        })
+                })
+        }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDapp = self.dappsInfo?.dapps.first
-        
-        if currentDapp == nil {
-            return
-        }
-        
-        let currentDappCardAsImage = self.dappView.toImage()
-        
-        TwitterHelper.tweetDapp(currentDapp!,
-            image: currentDappCardAsImage,
-            completion: {
-                (success: Bool, error: NSError?) -> Void in
+        if let 	currentDapp = self.dappsInfo?.dapps.first
+            ,	currentDappCardAsImage = self.dappView.toImage() {
+            TwitterHelper.tweetDapp(currentDapp
+            ,   image: currentDappCardAsImage
+            ,   completion: { (success: Bool, error: NSError?) -> Void in
                 if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
                 } else {
                     if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Error: \(error)"
+                        )
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Unknown error."
+                        )
                     }
                 }
-        })
+            })
+        }
     }
     
     // MARK: -
@@ -310,7 +310,7 @@ class DappsViewController: UIViewController {
                     userQuery.findObjectsInBackgroundWithBlock({
                         (objects: [AnyObject]!, error: NSError!) -> Void in
                         if error != nil {
-                            println(error)
+                            print(error)
                             
                             return
                         }

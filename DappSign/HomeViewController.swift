@@ -89,53 +89,53 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     // MARK: - @IBActions
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
-        let currentDapp = self.dapps.first
-        
-        if currentDapp == nil {
-            return
-        }
-        
-        if let currentDapp = self.dapps.first {
-            FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-                dapp: currentDapp,
-                completion: {
-                    (success: Bool, error: NSError?) -> Void in
+        if let 	currentDappCardAsImage = self.dappViewsContainerView.toImage()
+            ,   currentDapp = self.dapps.first {
+                FacebookHelper.postImageToFacebook(currentDappCardAsImage
+                ,   dapp: currentDapp
+                ,   completion: { (success: Bool, error: NSError?) -> Void in
                     if success {
-                        self.showAlertViewWithOKButtonAndMessage("The card has been successfully posted.")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully posted."
+                        )
                     } else {
                         if let error = error {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Error: \(error)")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Error: \(error)"
+                            )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage("Failed to post the card. Unknown error.")
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to post the card. Unknown error."
+                            )
                         }
                     }
-            })
+                })
         }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let currentDappCardAsImage = self.dappViewsContainerView.toImage()
-        let currentDapp = self.dapps.first
-        
-        if currentDapp == nil {
-            return
-        }
-        
-        TwitterHelper.tweetDapp(currentDapp!,
-            image: currentDappCardAsImage,
-            completion: {
-                (success: Bool, error: NSError?) -> Void in
+        if let  currentDappCardAsImage = self.dappViewsContainerView.toImage()
+            ,   currentDapp = self.dapps.first {
+            TwitterHelper.tweetDapp(currentDapp
+            ,   image: currentDappCardAsImage
+            ,   completion: { (success: Bool, error: NSError?) -> Void in
                 if success {
-                    self.showAlertViewWithOKButtonAndMessage("The card has been successfully tweeted.")
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
                 } else {
                     if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Error: \(error)")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Error: \(error)"
+                        )
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage("Failed to tweet the card. Unknown error.")
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Unknown error."
+                        )
                     }
                 }
-        })
+            })
+        }
     }
     
     // MARK: - 
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             (succeeded: Bool, error: NSError?) -> Void in
             if !succeeded {
                 if let error = error {
-                    println(error)
+                    print(error)
                 }
                 
                 return
@@ -161,9 +161,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if !succeeded {
                     if let error = error {
-                        println("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Error = \(error.localizedDescription)")
+                        print("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Error = \(error.localizedDescription)")
                     } else {
-                        println("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Unknown error.")
+                        print("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Unknown error.")
                     }
                 }
             })
@@ -172,7 +172,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if !succeeded {
                     if let error = error {
-                        println(error)
+                        print(error)
                     }
                     
                     return
@@ -184,9 +184,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                     (succeeded: Bool, error: NSError?) -> Void in
                     if !succeeded {
                         if let error = error {
-                            println("Failed to update dappScore for user with id \(userId). Error: \(error.localizedDescription)")
+                            print("Failed to update dappScore for user with id \(userId). Error: \(error.localizedDescription)")
                         } else {
-                            println("Failed to update dappScore for user with id \(userId). Unknown error")
+                            print("Failed to update dappScore for user with id \(userId). Unknown error")
                         }
                     }
                 })
@@ -198,7 +198,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if !succeeded {
                     if let error = error {
-                        println(error.localizedDescription)
+                        print(error.localizedDescription)
                     }
                 }
             })
@@ -208,7 +208,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     // MARK: - Requests
     
     private func updateUserInformation() {
-        var user = PFUser.currentUser()
+        let user = PFUser.currentUser()
         
         if user == nil {
             return
@@ -228,16 +228,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         let queue = NSOperationQueue.mainQueue()
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) {
-            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             user["image"] = data
             
             user.saveInBackgroundWithBlock({
                 (succeeded: Bool, error: NSError!) -> Void in
                 if succeeded {
-                    println("Successfully saved user's image.")
+                    print("Successfully saved user's image.")
                 } else {
-                    println("Failed to save user's image.")
-                    println("Errro: \(error)")
+                    print("Failed to save user's image.")
+                    print("Errro: \(error)")
                 }
             })
             
@@ -252,10 +252,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                     user.saveInBackgroundWithBlock({
                         (succeeded: Bool, error: NSError!) -> Void in
                         if succeeded {
-                            println("Successfully saved user's name.")
+                            print("Successfully saved user's name.")
                         } else {
-                            println("Failed to save user's name.")
-                            println("Errro: \(error)")
+                            print("Failed to save user's name.")
+                            print("Errro: \(error)")
                         }
                     })
                 }
@@ -266,10 +266,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             user.saveInBackgroundWithBlock({
                 (succeeded: Bool, error: NSError!) -> Void in
                 if succeeded {
-                    println("Successfully set user's dappScore to 0.")
+                    print("Successfully set user's dappScore to 0.")
                 } else {
-                    println("Failed to set user's dappScore to 0.")
-                    println("Errro: \(error)")
+                    print("Failed to set user's dappScore to 0.")
+                    print("Errro: \(error)")
                 }
             })
         }
@@ -291,7 +291,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             completion: {
                 (dapps: [PFObject], error: NSError!) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                     
                     self.initDappView()
                     
@@ -316,7 +316,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         self.dappsDownloader?.downloadDappsNotSwipedByUser(user, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in
             if error != nil {
-                println(error)
+                print(error)
                 
                 self.initDappView()
                 
@@ -332,7 +332,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 
                 var sortedDapps = dapps
                 
-                sort(&sortedDapps, {
+                sortedDapps.sortInPlace({
                     (dapp1: PFObject, dapp2: PFObject) -> Bool in
                     return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
                 })
@@ -370,7 +370,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         Requests.downloadDappScoreForUserWithId(currentUser.objectId, completion: {
             (dappScore: Int?, error: NSError?) -> Void in
             if error != nil {
-                println(error)
+                print(error)
                 
                 self.dappScoreLabel.text = nil
                 
@@ -414,14 +414,13 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.dappSignView.showDapp(dapp)
             
             if let dapp_ = dapp, userID = dapp_["userid"] as? String {
-                Requests.userWithID(userID, completion: {
-                    (user: PFUser?, error: NSError?) -> Void in
+                Requests.userWithID(userID, completion: { (user: PFUser?, error: NSError?) -> Void in
                     if let usr = user {
                         self.dappSignView.showUserInfo(usr)
                     } else if let err = error {
-                        println("Failed to download information about user with ID \(userID). Error = \(error)")
+                        print("Failed to download information about user with ID \(userID). Error = \(err)")
                     } else {
-                        println("Failed to download information about user with ID \(userID). Unknown error.")
+                        print("Failed to download information about user with ID \(userID). Unknown error.")
                     }
                 })
                 
@@ -429,9 +428,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                     (succeeded: Bool, error: NSError!) -> Void in
                     if !succeeded {
                         if let err = error {
-                            println("error = \(err)")
+                            print("error = \(err)")
                         } else {
-                            println("error = unknown")
+                            print("error = unknown")
                         }
                         
                         return
@@ -462,7 +461,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         if let
                             user = PFUser.currentUser(),
                             congrDistrID = user["congressionalDistrictID"] as? String {
-                                var additionalFreq = UInt(1 + arc4random_uniform(4))
+                                let additionalFreq = UInt(1 + arc4random_uniform(4))
                                 var dappTotalViews = 1 as UInt
                                 var dappDapps = 1 as UInt
                                 
@@ -496,8 +495,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     private func downloadDataForMapAndShowIt(usersDapped: [PFObject:Bool], dapp: PFObject) {
-        let users = usersDapped.keys.array
-        let dapps = usersDapped.values.array
+        let dapps = Array(usersDapped.values)
         
         CongressionalDistrictsIDs.getIDsFrequenciesForDapp(dapp, completion: {
             (IDsFreqs: IDsFrequencies?) -> Void in
@@ -509,12 +507,11 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 }
                 
                 let SVGMapURL = SVGMapGenerator.generate(IDsFreqs_)
-                var dappedCount = usersDapped.keys.array.filter({
+                let dappedCount = Array(usersDapped.keys).filter({
                     let currentUser = PFUser.currentUser()
                     
-                    if let
-                        currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String,
-                        userCongrDistrID = $0["congressionalDistrictID"] as? String {
+                    if let  currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String
+                        ,   userCongrDistrID = $0["congressionalDistrictID"] as? String {
                             if $0.objectId == currentUser.objectId {
                                 // the back end hasn't been updated yet
                                 return true
@@ -567,9 +564,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                     completion(URLs: self.representativesImagesURLs)
                 } else {
                     if let err = error {
-                        println("\(err)")
+                        print("\(err)")
                     } else {
-                        println("Unknown error.")
+                        print("Unknown error.")
                     }
                     
                     completion(URLs: nil)
@@ -600,9 +597,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         if let img = image {
                             representativeImageView.image = img
                         } else if let err = error {
-                            println("\(err)")
+                            print("\(err)")
                         } else {
-                            println("Unknown error.")
+                            print("Unknown error.")
                         }
                     })
                 }
@@ -671,8 +668,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         self.animatingPlusOneLabels = true
         
-        var representativesPlusOneLabelsVerticalTopConstraintMax: CGFloat = 46.0
-        var dappsCountPlusOneLabelTopConstraintMax: CGFloat = 34.0
+        let representativesPlusOneLabelsVerticalTopConstraintMax: CGFloat = 46.0
+        let dappsCountPlusOneLabelTopConstraintMax: CGFloat = 34.0
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.showLabels(self.plusOneLabels)

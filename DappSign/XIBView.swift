@@ -11,7 +11,7 @@ import UIKit
 class XIBView: UIView {
     internal private(set) var viewInXIB: UIView? = nil
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
         let dynamicTypeStr = NSStringFromClass(self.dynamicType)
@@ -21,7 +21,7 @@ class XIBView: UIView {
             let views = NSBundle.mainBundle().loadNibNamed(NIBName, owner: self, options: nil)
             
             if let view = views.first as? UIView {
-                view.setTranslatesAutoresizingMaskIntoConstraints(false)
+                view.translatesAutoresizingMaskIntoConstraints = false
                 
                 self.addSubview(view)
                 

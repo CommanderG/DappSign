@@ -54,7 +54,7 @@ class DappLinkCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
         self.backgroundColor = unselectedBackgroundColor
@@ -101,7 +101,9 @@ class DappLinkCell: UITableViewCell {
     // MARK: - IBActions
     
     @IBAction func handleDoneButtonTap() {
-        self.delegate?.didEnterURLString(self.textField.text, cell: self)
+        if let URLStr = self.textField.text {
+        	self.delegate?.didEnterURLString(URLStr, cell: self)
+        }
     }
     
     @IBAction func handleDeleteButtonTap() {
@@ -141,7 +143,7 @@ class DappLinkCell: UITableViewCell {
         }
     }
     
-    internal func showLinkInfo(#linkIndex: Int, linkTitle: String) {
+    internal func showLinkInfo(linkIndex linkIndex: Int, linkTitle: String) {
         self.linkIndexLabel.text = "\(linkIndex)"
         self.linkTitleLabel.text = linkTitle
     }
@@ -187,7 +189,9 @@ class DappLinkCell: UITableViewCell {
             self.containerView.layer.borderColor = layerBorderColor
             self.containerView.layer.borderWidth = 1.0
         } else {
-            self.containerView.layer.addSublayer(self.containerViewBorderLayer)
+            if let containerViewBorderLayer = self.containerViewBorderLayer {
+            	self.containerView.layer.addSublayer(containerViewBorderLayer)
+            }
             
             self.containerView.backgroundColor = self.unselectedBackgroundColor
             self.containerView.layer.borderColor = UIColor.clearColor().CGColor

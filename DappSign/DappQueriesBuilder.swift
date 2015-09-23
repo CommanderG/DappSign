@@ -26,7 +26,7 @@ class DappQueriesBuilder {
     class func queryForAllDapsNotSwipedByUser(dappType: DappType, user: PFUser) -> PFQuery? {
         let dappsSwipedRelation = user.relationForKey("dappsSwiped")
         let dappsSwipedRelationQuery = dappsSwipedRelation.query()
-        var allDappsQuery = self.queryForAllDappsOfType(dappType)
+        let allDappsQuery = self.queryForAllDappsOfType(dappType)
         
         allDappsQuery?.whereKey("objectId",
             doesNotMatchKey: "objectId",
@@ -42,7 +42,7 @@ class DappQueriesBuilder {
         let dappsSwipedRelation = user.relationForKey("dappsSwiped")
         let dappsSwipedRelationQuery = dappsSwipedRelation.query()
         let predicate = NSPredicate(format: "isDeleted != true")
-        var allDappsQuery = PFQuery(className: "Dapps", predicate: predicate)
+        let allDappsQuery = PFQuery(className: "Dapps", predicate: predicate)
         
         allDappsQuery?.whereKey("objectId",
             doesNotMatchKey: "objectId",
@@ -57,7 +57,7 @@ class DappQueriesBuilder {
     }
     
     class func queryForDownloadingDappWithID(dappID: String) -> PFQuery {
-        var query = PFQuery(className: "Dapps")
+        let query = PFQuery(className: "Dapps")
         
         query.whereKey("objectId", equalTo: dappID)
         

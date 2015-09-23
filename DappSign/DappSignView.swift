@@ -20,7 +20,7 @@ class DappSignView: XIBView {
     
     @IBOutlet var arrowImageViewsAndLabels: [UIView]!
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         
         self.dappSignView = self.viewInXIB

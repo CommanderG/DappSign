@@ -58,7 +58,7 @@ class EditDappsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
         let dappType = DappType(rawValue: indexPath.row)
         
@@ -69,7 +69,7 @@ class EditDappsTableViewController: UITableViewController {
         
     // MARK: - Navigation
     
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == SegueIdentifier.ShowPrimaryDapps.rawValue {
             return self.shouldPerformSegueToShowDappsWithType(DappType.Primary)
         } else if identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {

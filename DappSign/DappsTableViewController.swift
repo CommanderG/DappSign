@@ -90,110 +90,8 @@ class DappsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: -
+    // MARK: - UITableViewDataSource
     
-    private func actionSheetWithTitle(title: String) -> UIActionSheet? {
-        if let dappsType = self.dappsType {
-            switch dappsType {
-                case .Primary:
-                    return UIActionSheet(
-                        title: title,
-                        delegate: self,
-                        cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
-                        destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                        otherButtonTitles: UIActionSheetButton.MakeSecondary.rawValue, UIActionSheetButton.SetIndex.rawValue
-                    )
-            case .Secondary:
-                return UIActionSheet(
-                    title: title,
-                    delegate: self,
-                    cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue
-                )
-            case .Unapproved:
-                return UIActionSheet(
-                    title: title,
-                    delegate: self,
-                    cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue, UIActionSheetButton.MakeSecondary.rawValue
-                )
-            }
-        }
-        
-        return nil
-    }
-    
-    private func updatePropertiesForDappAtIndex(dappIndex: Int, properties: [String: AnyObject]) {
-        if var dapp = self.dapps?[dappIndex] {
-            for (key, value) in properties {
-                dapp[key] = value
-            }
-            
-            self.tableView.userInteractionEnabled = false
-            
-            dapp.saveInBackgroundWithBlock({
-                (succeeded: Bool, error: NSError!) -> Void in
-                self.tableView.userInteractionEnabled = true
-                
-                if error != nil {
-                    println(error)
-                    
-                    return
-                }
-                
-                self.dapps?.removeAtIndex(dappIndex)
-                
-                let indexPath = NSIndexPath(
-                    forRow: dappIndex,
-                    inSection: 0
-                )
-                
-                self.tableView.deleteRowsAtIndexPaths([indexPath],
-                    withRowAnimation: .None
-                )
-            })
-        }
-    }
-    
-    private func changeDappIndexTo(dappIndex: Int, dappThatWillBeUpdated dapp: PFObject, completion: (succeeded: Bool) -> Void) -> Void {
-        dapp["index"] = dappIndex
-        
-        dapp.saveInBackgroundWithBlock({
-            (succeeded: Bool, error: NSError!) -> Void in
-            completion(succeeded: true)
-            
-            if error != nil {
-                println(error)
-                
-                return
-            }
-            
-            if let dapps = self.dapps {
-                if let dappIndexInArray = find(dapps, dapp) {
-                    self.dapps?[dappIndexInArray] = dapp
-                }
-            }
-        })
-    }
-    
-    private func dappWithIndex(dappIndex: Int) -> PFObject? {
-        if let dapps = self.dapps {
-            for dapp in dapps {
-                if let index = dapp["index"] as? Int {
-                    if index == dappIndex {
-                        return dapp
-                    }
-                }
-            }
-        }
-        
-        return nil
-    }
-}
-
-extension DappsTableViewController: UITableViewDataSource {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -238,9 +136,10 @@ extension DappsTableViewController: UITableViewDataSource {
         
         return cell
     }
-}
-
-extension DappsTableViewController: UITableViewDelegate {
+    
+    
+    // MARK: - UITableViewDelegate
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -249,6 +148,108 @@ extension DappsTableViewController: UITableViewDelegate {
             actionSheet?.tag = indexPath.row
             actionSheet?.showInView(self.tableView)
         }
+    }
+    
+    // MARK: -
+    
+    private func actionSheetWithTitle(title: String) -> UIActionSheet? {
+        if let dappsType = self.dappsType {
+            switch dappsType {
+                case .Primary:
+                    return UIActionSheet(
+                        title: title,
+                        delegate: self,
+                        cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
+                        destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
+                        otherButtonTitles: UIActionSheetButton.MakeSecondary.rawValue, UIActionSheetButton.SetIndex.rawValue
+                    )
+            case .Secondary:
+                return UIActionSheet(
+                    title: title,
+                    delegate: self,
+                    cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
+                    otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue
+                )
+            case .Unapproved:
+                return UIActionSheet(
+                    title: title,
+                    delegate: self,
+                    cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
+                    otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue, UIActionSheetButton.MakeSecondary.rawValue
+                )
+            }
+        }
+        
+        return nil
+    }
+    
+    private func updatePropertiesForDappAtIndex(dappIndex: Int, properties: [String: AnyObject]) {
+        if let dapp = self.dapps?[dappIndex] {
+            for (key, value) in properties {
+                dapp[key] = value
+            }
+            
+            self.tableView.userInteractionEnabled = false
+            
+            dapp.saveInBackgroundWithBlock({
+                (succeeded: Bool, error: NSError!) -> Void in
+                self.tableView.userInteractionEnabled = true
+                
+                if error != nil {
+                    print(error)
+                    
+                    return
+                }
+                
+                self.dapps?.removeAtIndex(dappIndex)
+                
+                let indexPath = NSIndexPath(
+                    forRow: dappIndex,
+                    inSection: 0
+                )
+                
+                self.tableView.deleteRowsAtIndexPaths([indexPath],
+                    withRowAnimation: .None
+                )
+            })
+        }
+    }
+    
+    private func changeDappIndexTo(dappIndex: Int, dappThatWillBeUpdated dapp: PFObject, completion: (succeeded: Bool) -> Void) -> Void {
+        dapp["index"] = dappIndex
+        
+        dapp.saveInBackgroundWithBlock({
+            (succeeded: Bool, error: NSError!) -> Void in
+            completion(succeeded: true)
+            
+            if error != nil {
+                print(error)
+                
+                return
+            }
+            
+            if let dapps = self.dapps {
+                if let dappIndexInArray = dapps.indexOf(dapp) {
+                    self.dapps?[dappIndexInArray] = dapp
+                }
+            }
+        })
+    }
+    
+    private func dappWithIndex(dappIndex: Int) -> PFObject? {
+        if let dapps = self.dapps {
+            for dapp in dapps {
+                if let index = dapp["index"] as? Int {
+                    if index == dappIndex {
+                        return dapp
+                    }
+                }
+            }
+        }
+        
+        return nil
     }
 }
 
@@ -289,20 +290,19 @@ extension DappsTableViewController: UIActionSheetDelegate {
             )
         } else if buttonTitle == UIActionSheetButton.SetIndex.rawValue {
             let alertView = UIAlertView(
-                title: "Set index",
-                message: "Index must be in range from 0 to \(primaryDappsMaxCount - 1)",
-                delegate: self,
-                cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
-                otherButtonTitles: UIAlertViewButtonTitles.OKButton.rawValue
+                title: "Set index"
+            ,   message: "Index must be in range from 0 to \(primaryDappsMaxCount - 1)"
+            ,   delegate: self
+            ,   cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue
+            ,   otherButtonTitles: UIAlertViewButtonTitles.OKButton.rawValue
             )
-            
             alertView.alertViewStyle = .PlainTextInput
             alertView.tag = UIAlertViewTag.IndexInput.rawValue
             
             if let textField = alertView.textFieldAtIndex(0) {
                 textField.keyboardType = .NumberPad
                 textField.delegate = self
-            
+                
                 alertView.show()
             }
         }
@@ -318,52 +318,41 @@ extension DappsTableViewController: UIAlertViewDelegate {
                 return
             }
             
-            let textField = alertView.textFieldAtIndex(0)
-            self.selectedDappNewIndex = textField?.text.toInt()
-            
-            if self.selectedDappNewIndex == nil {
-                return
-            }
-            
-            self.dappWithTheSameIndex = self.dappWithIndex(self.selectedDappNewIndex!)
-            
-            if self.dappWithTheSameIndex == nil {
-                let selectedDappIndex = self.actionSheet?.tag
+            if let text = alertView.textFieldAtIndex(0)?.text, newIndex = Int(text) {
+                self.selectedDappNewIndex = newIndex
+                self.dappWithTheSameIndex = self.dappWithIndex(newIndex)
                 
-                if selectedDappIndex == nil {
-                    return
-                }
-                
-                if let dapp = self.dapps?[selectedDappIndex!] {
-                    self.tableView.userInteractionEnabled = false
+                if self.dappWithTheSameIndex == nil {
+                    if let  selectedDappIndex = self.actionSheet?.tag
+                        ,   dapp = self.dapps?[selectedDappIndex] {
+                            self.tableView.userInteractionEnabled = false
+                            
+                            self.changeDappIndexTo(newIndex
+                                ,   dappThatWillBeUpdated: dapp
+                                ,   completion: { (succeeded: Bool) -> Void in
+                                    if succeeded {
+                                        self.tableView.userInteractionEnabled = true
+                                        
+                                        if let dapps = self.dapps {
+                                            self.dapps = PrimaryDapps.sortDapps(dapps)
+                                            
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                            })
+                    }
+                } else {
+                    let alertView = UIAlertView(
+                        title: "Warning"
+                        ,   message: "Dapp with the same index already exists. Would you like to overwrite it's index?\n\n\(self.dappWithTheSameIndex![self.dappStatementKey])"
+                        ,   delegate: self
+                        ,   cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue
+                        ,   otherButtonTitles: UIAlertViewButtonTitles.OverwriteButton.rawValue
+                    )
+                    alertView.tag = UIAlertViewTag.IndexAlreadyExists.rawValue
                     
-                    self.changeDappIndexTo(self.selectedDappNewIndex!,
-                        dappThatWillBeUpdated: dapp,
-                        completion: {
-                            (succeeded: Bool) -> Void in
-                            if succeeded {
-                                self.tableView.userInteractionEnabled = true
-                                
-                                if let dapps = self.dapps {
-                                    self.dapps = PrimaryDapps.sortDapps(dapps)
-                                    
-                                    self.tableView.reloadData()
-                                }
-                            }
-                    })
+                    alertView.show()
                 }
-            } else {
-                let alertView = UIAlertView(
-                    title: "Warning",
-                    message: "Dapp with the same index already exists. Would you like to overwrite it's index?\n\n\(self.dappWithTheSameIndex![self.dappStatementKey])",
-                    delegate: self,
-                    cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
-                    otherButtonTitles: UIAlertViewButtonTitles.OverwriteButton.rawValue
-                )
-                
-                alertView.tag = UIAlertViewTag.IndexAlreadyExists.rawValue
-                
-                alertView.show()
             }
         } else if alertView.tag == UIAlertViewTag.IndexAlreadyExists.rawValue {
             if buttonTitle != UIAlertViewButtonTitles.OverwriteButton.rawValue {
@@ -381,7 +370,7 @@ extension DappsTableViewController: UIAlertViewDelegate {
             }
             
             // here we set new index to the selected dapp, and if the request completes successfully,
-            // app will send another request which will set index to -1 for the dapp which has the 
+            // app will send another request which will set index to -1 for the dapp which has the
             // same index as the new one. that way, since it's index will be < 0, it won't be sorted
             // by it's index, instead it will be sorted like any other dapp witout an index - by date
             // it was created
@@ -420,16 +409,17 @@ extension DappsTableViewController: UIAlertViewDelegate {
 
 extension DappsTableViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text as NSString
-        var newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
-        
-        if count(newText) == 0 {
-            return true
-        }
-        
-        if let index = newText.toInt() {
-            if index >= 0 && index < primaryDappsMaxCount {
+        if let currentText = textField.text as NSString? {
+            let newText = currentText.stringByReplacingCharactersInRange(range, withString: string)
+            
+            if newText.characters.count == 0 {
                 return true
+            }
+            
+            if let index = Int(newText) {
+                if index >= 0 && index < primaryDappsMaxCount {
+                    return true
+                }
             }
         }
         

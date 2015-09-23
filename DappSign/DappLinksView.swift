@@ -11,7 +11,7 @@ import UIKit
 class DappLinksView: XIBView {
     @IBOutlet weak var linksTableView: UITableView!
     
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
 }

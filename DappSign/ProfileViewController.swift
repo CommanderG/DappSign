@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             Requests.downloadDappsSwipedByUser(PFUser.currentUser(), completion: {
                 (dapps: [PFObject], error: NSError!) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                     
                     return
                 }
@@ -76,7 +76,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let mainBundle = NSBundle.mainBundle()
             
             if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-                if !contains(adminUsersIDs, currentUser.objectId) || self.user.objectId != currentUser.objectId {
+                if !adminUsersIDs.contains(currentUser.objectId) || self.user.objectId != currentUser.objectId {
                     self.navigationItem.rightBarButtonItem = nil
                 }
             }
@@ -106,11 +106,69 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func dappsFilterSegmentedControlValueChanged(sender: AnyObject) {
-        if let dapps = self.dapps() {
+        if self.dapps() != nil {
             self.tableView.reloadData()
         } else {
             self.downloadDapps()
         }
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let dapps = self.dapps() {
+            return dapps.count
+        }
+        
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
+        
+        cell.cellDelegate = self
+        
+        if let dapps = self.dapps() {
+            let dapp = dapps[indexPath.row]
+            
+            cell.dappSignView.showDapp(dapp)
+            
+            if self.dappsFilterSegmentedControl.selectedSegmentIndex == DappsFilter.DappSigns.rawValue {
+                cell.editLinksView.hidden = false
+            } else {
+                cell.editLinksView.hidden = true
+            }
+            
+            if let userID = dapp["userid"] as? String {
+                Requests.userWithID(userID, completion: {
+                    (user: PFUser?, error: NSError?) -> Void in
+                    if let usr = user {
+                        cell.dappSignView.showUserInfo(usr)
+                    } else if let err = error {
+                        print("Failed to download information about user with ID \(userID). Error = \(err)")
+                    } else {
+                        print("Failed to download information about user with ID \(userID). Unknown error.")
+                    }
+                })
+            }
+            
+            if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
+                let buttons = NSMutableArray(capacity: 1)
+                
+                buttons.sw_addUtilityButtonWithColor(
+                    UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
+                    title: "Dapp"
+                )
+                
+                cell.leftUtilityButtons = buttons as [AnyObject]
+                cell.delegate = self
+            } else {
+                cell.leftUtilityButtons = []
+                cell.delegate = nil
+            }
+        }
+        
+        return cell
     }
     
     // MARK: -
@@ -133,7 +191,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
-            if contains(dappsIdsSwipedByLoggedInUser, dappId) {
+            if dappsIdsSwipedByLoggedInUser.contains(dappId) {
                 return false
             }
         }
@@ -240,64 +298,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 }
 
-extension ProfileViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let dapps = self.dapps() {
-            return dapps.count
-        }
-        
-        return 0
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
-        
-        cell.cellDelegate = self
-        
-        if let dapps = self.dapps() {
-            let dapp = dapps[indexPath.row]
-            
-            cell.dappSignView.showDapp(dapp)
-            
-            if self.dappsFilterSegmentedControl.selectedSegmentIndex == DappsFilter.DappSigns.rawValue {
-                cell.editLinksView.hidden = false
-            } else {
-                cell.editLinksView.hidden = true
-            }
-            
-            if let userID = dapp["userid"] as? String {
-                Requests.userWithID(userID, completion: {
-                    (user: PFUser?, error: NSError?) -> Void in
-                    if let usr = user {
-                        cell.dappSignView.showUserInfo(usr)
-                    } else if let err = error {
-                        println("Failed to download information about user with ID \(userID). Error = \(error)")
-                    } else {
-                        println("Failed to download information about user with ID \(userID). Unknown error.")
-                    }
-                })
-            }
-            
-            if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
-                var buttons = NSMutableArray(capacity: 1)
-                
-                buttons.sw_addUtilityButtonWithColor(
-                    UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
-                    title: "Dapp"
-                )
-                
-                cell.leftUtilityButtons = buttons as [AnyObject]
-                cell.delegate = self
-            } else {
-                cell.leftUtilityButtons = []
-                cell.delegate = nil
-            }
-        }
-        
-        return cell
-    }
-}
-
 extension ProfileViewController: SWTableViewCellDelegate {
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
         return true
@@ -316,7 +316,7 @@ extension ProfileViewController: SWTableViewCellDelegate {
                                 (succeeded: Bool, error: NSError?) -> Void in
                                 if !succeeded {
                                     if let error = error {
-                                        println(error.localizedDescription)
+                                        print(error.localizedDescription)
                                     }
                                 }
                             })
@@ -328,7 +328,7 @@ extension ProfileViewController: SWTableViewCellDelegate {
                             (succeeded: Bool, error: NSError?) -> Void in
                             if !succeeded {
                                 if let error = error {
-                                    println(error.localizedDescription)
+                                    print(error.localizedDescription)
                                 }
                             }
                         })
