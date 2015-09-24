@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270C05891BB42A3E00C11435 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C05881BB42A3E00C11435 /* LinkView.swift */; };
+		270C058B1BB42A5900C11435 /* LinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270C058A1BB42A5900C11435 /* LinkView.xib */; };
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
 		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
 		2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318A1AB0C462002F9527 /* FacebookHelper.swift */; };
@@ -19,6 +21,7 @@
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
+		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
 		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
 		277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D910D1BA71BD900941C7B /* SwipeableView.swift */; };
@@ -133,6 +136,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270C05881BB42A3E00C11435 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		270C058A1BB42A5900C11435 /* LinkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkView.xib; sourceTree = "<group>"; };
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
 		2714318A1AB0C462002F9527 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
+		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
 		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
 		277D910D1BA71BD900941C7B /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
@@ -478,6 +484,8 @@
 				27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */,
 				27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */,
 				27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */,
+				270C05881BB42A3E00C11435 /* LinkView.swift */,
+				270C058A1BB42A5900C11435 /* LinkView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -538,6 +546,7 @@
 				271D0DC61ABAD8E400227DE7 /* Requests.swift */,
 				B37714681ACD5A4200B5AE77 /* FacebookBridge.h */,
 				B37714691ACD5A4200B5AE77 /* FacebookBridge.m */,
+				27696F491BB3EDE800EE391F /* Link.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -699,6 +708,7 @@
 				4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */,
 				271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */,
 				4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */,
+				270C058B1BB42A5900C11435 /* LinkView.xib in Resources */,
 				27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */,
 				4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */,
 				27811A681B959A38007E97EE /* DappSignView.xib in Resources */,
@@ -784,6 +794,7 @@
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
+				270C05891BB42A3E00C11435 /* LinkView.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
@@ -793,6 +804,7 @@
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
+				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
 				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,

@@ -61,7 +61,7 @@ extension AddDappLinksVC: DappLinksVCDelegate {
         }
     }
     
-    func linkAtIndex(index: Int) -> Link? {
+    func getLinkAtIndex(index: Int) -> Link? {
         if index < self.links.count {
             return self.links[index]
         }
@@ -69,12 +69,31 @@ extension AddDappLinksVC: DappLinksVCDelegate {
         return nil
     }
     
-    func linksCount() -> Int {
+    func getLinksCount() -> Int {
         return self.links.count
     }
     
     func canDeleteLinks() -> Bool {
         return true
+    }
+    
+    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
+        switch currentState {
+        case .Empty:
+            return .Empty
+        case .NoLink:
+            return .EnterLink
+        case .EnterLink:
+            return .EnterLink
+        case .Link:
+            return .DeleteLink
+        case .DeleteLink:
+            return .DeleteLink
+        }
+    }
+    
+    func getStateForNoLink() -> DappLinkCellState {
+        return DappLinkCellState.NoLink
     }
 }
 

@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var tweetThisCardButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var dappScoreLabel: UILabel!
+    @IBOutlet weak var linkView: LinkView!
     
     @IBOutlet var representativesImagesViews: [UIImageView]!
     @IBOutlet var plusOneLabels: [UILabel]!
@@ -31,6 +32,11 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
     private var animatingPlusOneLabels = false
+    private var dappLinksVC: DappLinksVC?
+    private var links: [PFObject] = []
+    
+    private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
+    private let flipDuration = 0.5
     
     var dapps: [PFObject] = []
     var dappsDownloader: DappsDownloader?
@@ -65,6 +71,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         )
         
         self.hideLabels(self.plusOneLabels)
+        
+        self.linkView.delegate = self
+        self.linkView.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,6 +96,39 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     // MARK: - @IBActions
+    
+    @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
+        if let dappLinksVCView = self.dappLinksVC?.view {
+            self.flipWithDuration(self.flipDuration
+            ,   view1: self.dappViewsContainerView
+            , 	view2: dappLinksVCView
+            )
+        }
+        
+        if let dapp = self.dapps.first {
+            Requests.downloadLinksForDapp(dapp, completion: {
+                (links: [PFObject]?, error: NSError?) -> Void in
+                if let links = links {
+                    self.links = links
+                    
+                    self.dappLinksVC?.dappLinksView.linksTableView.reloadData()
+                }
+                
+                if let error = error {
+                    print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
+                }
+            })
+        }
+    }
+    
+    @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
+        if let dappLinksVCView = self.dappLinksVC?.view {
+            self.flipWithDuration(self.flipDuration
+            ,   view1: self.dappViewsContainerView
+            ,   view2: dappLinksVCView
+            )
+        }
+    }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
         if let 	currentDappCardAsImage = self.dappViewsContainerView.toImage()
@@ -116,29 +158,45 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
         if let  currentDappCardAsImage = self.dappViewsContainerView.toImage()
             ,   currentDapp = self.dapps.first {
-            TwitterHelper.tweetDapp(currentDapp
-            ,   image: currentDappCardAsImage
-            ,   completion: { (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully tweeted."
-                    )
-                } else {
-                    if let error = error {
+                TwitterHelper.tweetDapp(currentDapp
+                ,   image: currentDappCardAsImage
+                ,   completion: { (success: Bool, error: NSError?) -> Void in
+                    if success {
                         self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Error: \(error)"
+                            "The card has been successfully tweeted."
                         )
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Unknown error."
-                        )
+                        if let error = error {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Error: \(error)"
+                            )
+                        } else {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Unknown error."
+                            )
+                        }
                     }
-                }
-            })
+                })
         }
     }
     
     // MARK: - 
+    
+    private func flipWithDuration(duration: NSTimeInterval, view1: UIView, view2: UIView) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationTransition(.FlipFromLeft, forView: view1, cache: true)
+        UIView.commitAnimations()
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationTransition(.FlipFromLeft, forView: view2, cache: true)
+        
+        view1.hidden = !view1.hidden
+        view2.hidden = !view2.hidden
+        
+        UIView.commitAnimations()
+    }
     
     private func sendRequestsForDapp(dapp: PFObject, dapped: Bool) {
         let currentUser = PFUser.currentUser()
@@ -359,6 +417,17 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             if let profileVC = profileNC.viewControllers.first as? ProfileViewController {
                 profileVC.user = PFUser.currentUser()
             }
+        } else if segue.identifier == "embedDappLinksVCSegue" {
+            self.dappLinksVC = segue.destinationViewController as? DappLinksVC
+            self.dappLinksVC?.view.hidden = true
+            self.dappLinksVC?.delegate = self
+            
+            let tapGR = UITapGestureRecognizer(
+                target: self
+            , 	action: Selector("handleDappLinksTapGesture:")
+            )
+            
+            self.dappLinksVC?.dappLinksView.addGestureRecognizer(tapGR)
         }
     }
     
@@ -458,9 +527,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
                         var percents = 0 as UInt
                         
-                        if let
-                            user = PFUser.currentUser(),
-                            congrDistrID = user["congressionalDistrictID"] as? String {
+                        if let 	user = PFUser.currentUser()
+                            ,   congrDistrID = user["congressionalDistrictID"] as? String {
                                 let additionalFreq = UInt(1 + arc4random_uniform(4))
                                 var dappTotalViews = 1 as UInt
                                 var dappDapps = 1 as UInt
@@ -711,20 +779,47 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
 }
 
-/*
-private func flipWithDuration(duration: NSTimeInterval, view1: UIView, view2: UIView) {
-UIView.beginAnimations(nil, context: nil)
-UIView.setAnimationDuration(duration)
-UIView.setAnimationTransition(.FlipFromLeft, forView: view1, cache: true)
-UIView.commitAnimations()
-
-UIView.beginAnimations(nil, context: nil)
-UIView.setAnimationDuration(duration)
-UIView.setAnimationTransition(.FlipFromLeft, forView: view2, cache: true)
-
-view1.hidden = !view1.hidden
-view2.hidden = !view2.hidden
-
-UIView.commitAnimations()
+extension HomeViewController: DappLinksVCDelegate {
+    func getLinkAtIndex(index: Int) -> Link? {
+        if index < self.links.count {
+            let linkObj = self.links[index]
+            let link = Link(linkObj: linkObj)
+            
+            return link
+        }
+        
+        return nil
+    }
+    
+    func getLinksCount() -> Int {
+        return self.links.count
+    }
+    
+    func canDeleteLinks() -> Bool {
+        return false
+    }
+    
+    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
+        return currentState
+    }
+    
+    func getStateForNoLink() -> DappLinkCellState {
+        return .Empty
+    }
+    
+    func openURL(URL: NSURL) {
+        self.linkView.hidden = false
+        
+        self.linkView.openURL(URL)
+    }
+    
+    func openLinkOnTap() -> Bool {
+        return true
+    }
 }
-*/
+
+extension HomeViewController: LinkViewDelegate {
+    func closeLinkView() {
+        self.linkView.hidden = true
+    }
+}

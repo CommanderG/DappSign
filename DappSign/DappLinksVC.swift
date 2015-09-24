@@ -8,25 +8,24 @@
 
 import UIKit
 
-struct Link {
-    var URLStr: String?
-    var title: String
-}
-
-protocol DappLinksVCDelegate {
-    func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void)
-    func deleteLinkAtIndex(linkIndex: Int, completion: (success: Bool, error: NSError?) -> Void)
-    func linkAtIndex(index: Int) -> Link?
-    func linksCount() -> Int
+@objc protocol DappLinksVCDelegate {
+    optional func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void)
+    optional func deleteLinkAtIndex(linkIndex: Int, completion: (success: Bool, error: NSError?) -> Void)
+    func getLinkAtIndex(index: Int) -> Link?
+    func getLinksCount() -> Int
     func canDeleteLinks() -> Bool
+    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState
+    func getStateForNoLink() -> DappLinkCellState
+    optional func openURL(URL: NSURL) -> Void
+    optional func openLinkOnTap() -> Bool
 }
-
-let cellReuseID = "cell"
 
 class DappLinksVC: UIViewController {
     @IBOutlet weak var dappLinksView: DappLinksView!
     
     internal var delegate: DappLinksVCDelegate?
+    
+    private let cellReuseID = "cell"
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
@@ -83,15 +82,17 @@ class DappLinksVC: UIViewController {
 
 extension DappLinksVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseID) as! DappLinkCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellReuseID) as! DappLinkCell
         
         cell.delegate = self
         
-        if let link = self.delegate?.linkAtIndex(indexPath.row) {
-            cell.showViewsForState(DappLinkCellState.Link)
+        if let link = self.delegate?.getLinkAtIndex(indexPath.row) {
+            cell.goToState(.Link)
             cell.showLinkInfo(linkIndex: indexPath.row + 1, linkTitle: link.title)
+        } else if let state = self.delegate?.getStateForNoLink() {
+            cell.goToState(state)
         } else {
-            cell.showViewsForState(DappLinkCellState.NoLink)
+            cell.goToState(.NoLink)
         }
         
         return cell
@@ -106,14 +107,8 @@ extension DappLinksVC: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! DappLinkCell
         
-        if cell.state == DappLinkCellState.Link {
-            if let delegate = self.delegate {
-                if delegate.canDeleteLinks() {
-                    cell.showViewsForState(DappLinkCellState.DeleteLink)
-                }
-            }
-        } else if cell.state == DappLinkCellState.NoLink {
-            cell.showViewsForState(DappLinkCellState.EnterLink)
+        if let newState = self.delegate?.getNextState(cell.state) {
+            cell.goToState(newState)
         }
     }
 }
@@ -131,7 +126,7 @@ extension DappLinksVC: DappLinkCellDelegate {
                     if let delegate = self.delegate {
                         let link = Link(URLStr: URLString, title: title)
                         
-                        delegate.addLink(link, completion: {
+                        delegate.addLink?(link, completion: {
                             (success: Bool, error: NSError?) -> Void in
                             if !success {
                                 var errorStr =
@@ -148,7 +143,7 @@ extension DappLinksVC: DappLinkCellDelegate {
                                 return
                             }
                             
-                            let linkIndexPath = NSIndexPath(forRow: delegate.linksCount() - 1
+                            let linkIndexPath = NSIndexPath(forRow: delegate.getLinksCount() - 1
                             ,   inSection: 0
                             )
                             
@@ -165,7 +160,7 @@ extension DappLinksVC: DappLinkCellDelegate {
                             }
                         })
                     } else {
-                        cell.showViewsForState(DappLinkCellState.NoLink)
+                        cell.goToState(DappLinkCellState.NoLink)
                     }
                 } else if let errorMessage = errorMessage {
                     UIAlertView(
@@ -175,9 +170,9 @@ extension DappLinksVC: DappLinkCellDelegate {
                     ,   cancelButtonTitle: "OK"
                     ).show()
                     
-                    cell.showViewsForState(DappLinkCellState.NoLink)
+                    cell.goToState(DappLinkCellState.NoLink)
                 } else {
-                    cell.showViewsForState(DappLinkCellState.NoLink)
+                    cell.goToState(DappLinkCellState.NoLink)
                 }
             })
         } else {
@@ -192,7 +187,7 @@ extension DappLinksVC: DappLinkCellDelegate {
     
     func deleteLinkInCell(cell: DappLinkCell) {
         if let indexPath = self.dappLinksView.linksTableView.indexPathForCell(cell) {
-            self.delegate?.deleteLinkAtIndex(indexPath.row, completion: {
+            self.delegate?.deleteLinkAtIndex?(indexPath.row, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if !success {
                     var errorStr = "Failed to delete link at index \(indexPath.row)."
@@ -207,5 +202,22 @@ extension DappLinksVC: DappLinkCellDelegate {
                 }
             })
         }
+    }
+    
+    func openLinkInCell(cell: DappLinkCell) {
+        if let 	indexPath = self.dappLinksView.linksTableView.indexPathForCell(cell)
+            ,   link      = self.delegate?.getLinkAtIndex(indexPath.row)
+            ,   URLStr    = link.URLStr
+            ,   URL       = NSURL(string: URLStr){
+                self.delegate?.openURL?(URL)
+        }
+    }
+    
+    func openLinkOnTap() -> Bool {
+        if let open = self.delegate?.openLinkOnTap?() {
+            return open
+        }
+        
+        return false
     }
 }

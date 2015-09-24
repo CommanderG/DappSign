@@ -99,18 +99,10 @@ extension EditDappLinksVC: DappLinksVCDelegate {
         }
     }
     
-    func linkAtIndex(index: Int) -> Link? {
+    func getLinkAtIndex(index: Int) -> Link? {
         if index < self.links.count {
             let linkObj = self.links[index]
-            
-            let linkURLStr = linkObj["URL"] as? String
-            var linkTitle = linkObj["Title"] as? String
-            
-            if linkTitle == nil {
-                linkTitle = ""
-            }
-            
-            let link = Link(URLStr: linkURLStr, title: linkTitle!)
+            let link = Link(linkObj: linkObj)
             
             return link
         }
@@ -118,11 +110,30 @@ extension EditDappLinksVC: DappLinksVCDelegate {
         return nil
     }
     
-    func linksCount() -> Int {
+    func getLinksCount() -> Int {
         return self.links.count
     }
     
     func canDeleteLinks() -> Bool {
         return true
+    }
+    
+    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
+        switch currentState {
+        case .Empty:
+            return .Empty
+        case .NoLink:
+            return .EnterLink
+        case .EnterLink:
+            return .EnterLink
+        case .Link:
+            return .DeleteLink
+        case .DeleteLink:
+            return .DeleteLink
+        }
+    }
+    
+    func getStateForNoLink() -> DappLinkCellState {
+        return .NoLink
     }
 }

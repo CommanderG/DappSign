@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -396,7 +397,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lQ7-Ig-0M9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LfZ-v8-fqo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-WI-Ejb">
@@ -449,9 +450,10 @@
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="374" id="p9d-h5-kh7" customClass="DappProfileCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="374"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9d-h5-kh7" id="HSn-o5-ezQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAK-fG-IeP" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
@@ -571,24 +573,28 @@
             <objects>
                 <tableViewController id="AnE-wK-30e" customClass="EditDappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="o81-2a-XCA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="aHB-Rr-mlf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="lxw-pz-lxU" detailTextLabel="ZWz-rU-KVv" style="IBUITableViewCellStyleValue1" id="dAG-wb-aV8">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAG-wb-aV8" id="0c7-AN-O2q">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Primary" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lxw-pz-lxU">
+                                                    <rect key="frame" x="15" y="10" width="62" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWz-rU-KVv">
+                                                    <rect key="frame" x="266" y="12" width="19" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -601,17 +607,21 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="UkM-26-cEG" detailTextLabel="t48-o1-nnz" style="IBUITableViewCellStyleValue1" id="VrX-qY-JNe">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VrX-qY-JNe" id="ipE-BO-st0">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Secondary" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UkM-26-cEG">
+                                                    <rect key="frame" x="15" y="10" width="81" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t48-o1-nnz">
+                                                    <rect key="frame" x="260" y="12" width="25" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -624,17 +634,21 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="R8X-MR-Ftn" detailTextLabel="FbZ-SS-z96" style="IBUITableViewCellStyleValue1" id="j2A-5J-iC3">
+                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j2A-5J-iC3" id="F57-ZK-AU8">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Unapproved" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R8X-MR-Ftn">
+                                                    <rect key="frame" x="15" y="10" width="92" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="300" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FbZ-SS-z96">
+                                                    <rect key="frame" x="256" y="12" width="29" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="15"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -666,16 +680,18 @@
             <objects>
                 <tableViewController id="Mdb-Kg-7xy" customClass="DappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z6-LJ-EkI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="44" id="9tV-Ff-7qU" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9tV-Ff-7qU" id="snw-bu-eDm">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-IY-ZG0">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-IY-ZG0">
                                             <rect key="frame" x="8" y="11" width="162" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -736,17 +752,21 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="dps-q4-Vnq">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dps-q4-Vnq" id="kLq-xk-Fo2">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T84-8X-LD8" id="1lD-Lw-W7s">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcb-Tf-DMG">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcb-Tf-DMG">
                                             <rect key="frame" x="8" y="11" width="162" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -887,9 +907,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="repreCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="repreCell" rowHeight="85" id="knL-LB-3M2" customClass="CustomCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="knL-LB-3M2" id="AUH-JC-yed">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRW-n9-jFC">
@@ -1186,6 +1207,12 @@
                                     <constraint firstItem="cFB-X2-e4d" firstAttribute="centerY" secondItem="xpr-bX-n9a" secondAttribute="centerY" id="vYR-Hv-G7O"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKi-D3-2kn">
+                                <rect key="frame" x="30" y="137" width="260" height="347"/>
+                                <connections>
+                                    <segue destination="Qc1-BQ-0Bn" kind="embed" identifier="embedDappLinksVCSegue" id="z5v-mv-0hW"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
                                 <rect key="frame" x="30" y="137" width="260" height="347"/>
                                 <subviews>
@@ -1210,6 +1237,9 @@
                                     <constraint firstItem="CL9-dN-aM0" firstAttribute="leading" secondItem="osF-qS-9VI" secondAttribute="leading" id="p27-LB-iDa"/>
                                     <constraint firstAttribute="bottom" secondItem="CL9-dN-aM0" secondAttribute="bottom" id="z4f-bs-gA9"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="q1g-OL-5Pe" appends="YES" id="5Bq-tI-Jf8"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-Xa-E10">
                                 <rect key="frame" x="74" y="54" width="34" height="54"/>
@@ -1235,13 +1265,22 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OO-wt-4Cc" customClass="LinkView" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="16" id="0ih-64-5mR"/>
+                            <constraint firstItem="jKi-D3-2kn" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="46" id="11g-Eg-6O9"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="UfK-Xm-b3D" secondAttribute="trailing" constant="26" id="1PC-UM-g2m"/>
                             <constraint firstItem="KLc-9D-dpW" firstAttribute="centerY" secondItem="FNt-Hl-eRK" secondAttribute="centerY" constant="0.5" id="1fz-he-IRL"/>
                             <constraint firstItem="oht-H0-5nU" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="79" id="2nQ-zD-kr1"/>
+                            <constraint firstAttribute="trailing" secondItem="1OO-wt-4Cc" secondAttribute="trailing" id="2yu-Nm-KZj"/>
+                            <constraint firstItem="1OO-wt-4Cc" firstAttribute="top" secondItem="y0b-e0-s53" secondAttribute="top" id="3vR-EX-9DT"/>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="1OO-wt-4Cc" secondAttribute="bottom" id="4Gu-Eg-CKX"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="FNt-Hl-eRK" secondAttribute="trailing" constant="4" id="69G-dI-wyF"/>
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="bottom" constant="8" id="79B-Rc-c8d"/>
                             <constraint firstItem="D4k-5R-hYz" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="46" id="8TB-Ui-QAG"/>
@@ -1251,6 +1290,7 @@
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="trailing" secondItem="y0b-e0-s53" secondAttribute="trailingMargin" id="Ghf-Y6-v2e"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="IXL-Dh-WIH"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="46" id="JG6-ML-K4c"/>
+                            <constraint firstItem="1OO-wt-4Cc" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" id="JGD-Gl-nqv"/>
                             <constraint firstItem="FNt-Hl-eRK" firstAttribute="centerY" secondItem="UfK-Xm-b3D" secondAttribute="centerY" constant="-0.5" id="JpC-Q3-8o5"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="18" id="LtK-yw-893"/>
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Mzg-dd-Xpd"/>
@@ -1266,9 +1306,12 @@
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="centerY" secondItem="FNt-Hl-eRK" secondAttribute="centerY" constant="0.5" id="Zp5-z2-Lhe"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="j3T-Dl-xWg" secondAttribute="trailing" constant="3" id="aMh-CK-8EN"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="leading" secondItem="Y9h-U7-mgg" secondAttribute="trailing" constant="4" id="baY-5W-yGj"/>
+                            <constraint firstItem="jKi-D3-2kn" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="fr0-yE-rTJ"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="46" id="g31-6c-XOJ"/>
+                            <constraint firstItem="Yu2-AW-APN" firstAttribute="top" secondItem="jKi-D3-2kn" secondAttribute="bottom" constant="8" id="h4O-sW-e29"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="iR9-rg-teR"/>
                             <constraint firstAttribute="trailing" secondItem="osF-qS-9VI" secondAttribute="trailing" constant="30" id="jKo-fp-hPO"/>
+                            <constraint firstAttribute="trailing" secondItem="jKi-D3-2kn" secondAttribute="trailing" constant="30" id="kAC-Ct-cLM"/>
                             <constraint firstItem="j3T-Dl-xWg" firstAttribute="leading" secondItem="UfK-Xm-b3D" secondAttribute="trailing" constant="4" id="lfC-pG-7qv"/>
                             <constraint firstItem="j3T-Dl-xWg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="46" id="lhJ-RP-iQz"/>
                             <constraint firstItem="UfK-Xm-b3D" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="26" id="nQr-Vd-fij"/>
@@ -1281,6 +1324,7 @@
                         <outlet property="dappSignView" destination="CL9-dN-aM0" id="e5o-um-HDO"/>
                         <outlet property="dappViewsContainerView" destination="osF-qS-9VI" id="VG8-ml-Uw0"/>
                         <outlet property="dappsCountPlusOneLabelTopConstraint" destination="DS7-eE-p6Z" id="puQ-Zn-ytW"/>
+                        <outlet property="linkView" destination="1OO-wt-4Cc" id="YQS-3H-wkg"/>
                         <outlet property="profileButton" destination="Zep-yS-dfF" id="72N-lR-hUr"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
                         <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
@@ -1297,6 +1341,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-gB-rqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="q1g-OL-5Pe">
+                    <connections>
+                        <action selector="handleDappSignTapGesture:" destination="EG5-sL-doW" id="BSo-tJ-ZDY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1043" y="297"/>
         </scene>
@@ -2104,20 +2153,20 @@
                         <viewControllerLayoutGuide type="bottom" id="9Qi-RQ-uuD"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Jtn-T8-fBn">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-Ng-O6s" customClass="DappLinksView" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="1uW-Ng-O6s" secondAttribute="trailing" id="3t7-d0-B2u"/>
-                            <constraint firstItem="1uW-Ng-O6s" firstAttribute="leading" secondItem="Jtn-T8-fBn" secondAttribute="leading" id="Ce3-5b-rd9"/>
-                            <constraint firstItem="1uW-Ng-O6s" firstAttribute="top" secondItem="Bb5-2I-bOg" secondAttribute="bottom" id="Mp0-AM-Ck8"/>
-                            <constraint firstItem="9Qi-RQ-uuD" firstAttribute="top" secondItem="1uW-Ng-O6s" secondAttribute="bottom" id="xHm-tc-XXb"/>
+                            <constraint firstItem="1uW-Ng-O6s" firstAttribute="top" secondItem="Jtn-T8-fBn" secondAttribute="top" id="9gz-Yb-Wjl"/>
+                            <constraint firstAttribute="trailing" secondItem="1uW-Ng-O6s" secondAttribute="trailing" id="kYa-cu-Nmh"/>
+                            <constraint firstItem="9Qi-RQ-uuD" firstAttribute="top" secondItem="1uW-Ng-O6s" secondAttribute="bottom" id="qz3-DL-FbY"/>
+                            <constraint firstItem="1uW-Ng-O6s" firstAttribute="leading" secondItem="Jtn-T8-fBn" secondAttribute="leading" id="u0p-8R-qhf"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -2196,6 +2245,40 @@
             </objects>
             <point key="canvasLocation" x="2765" y="-1114"/>
         </scene>
+        <!--Dapp LinksVC-->
+        <scene sceneID="G5i-Mh-3ib">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Qc1-BQ-0Bn" customClass="DappLinksVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W9U-Tp-VoS"/>
+                        <viewControllerLayoutGuide type="bottom" id="nQJ-hg-zbF"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="x7P-ZT-CMN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gP-LW-p7X" customClass="DappLinksView" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4gP-LW-p7X" firstAttribute="leading" secondItem="x7P-ZT-CMN" secondAttribute="leading" id="0Yi-n2-1ff"/>
+                            <constraint firstItem="4gP-LW-p7X" firstAttribute="top" secondItem="x7P-ZT-CMN" secondAttribute="top" id="AKz-pO-dRU"/>
+                            <constraint firstAttribute="trailing" secondItem="4gP-LW-p7X" secondAttribute="trailing" id="ECc-yJ-nhj"/>
+                            <constraint firstItem="nQJ-hg-zbF" firstAttribute="top" secondItem="4gP-LW-p7X" secondAttribute="bottom" id="cJ5-6m-xVd"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="dappLinksView" destination="4gP-LW-p7X" id="9sg-vb-rhc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9tc-Kv-ts7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1043" y="1012"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Amethyst" width="173" height="84"/>
@@ -2220,11 +2303,6 @@
         <image name="tapp_icon" width="26" height="36"/>
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="mYk-4f-hdk"/>
         <segue reference="xG9-la-u2M"/>

@@ -40,7 +40,9 @@ class SwipeableView: UIView {
     }
     
     private func addPanGesture() {
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:")))
+        let panGR = UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:"))
+        
+        self.addGestureRecognizer(panGR)
     }
     
     override func layoutSubviews() {
@@ -61,8 +63,9 @@ class SwipeableView: UIView {
             if self.gravity == nil {
                 self.gravity = UIGravityBehavior(items: [self])
                 self.gravity?.action = {
-                    if CGRectGetMinY(self.frame) > CGRectGetHeight(superview.frame) || CGRectGetMaxY(self.frame) < 0.0 {
-                        self.show()
+                    if (CGRectGetMinY(self.frame) > CGRectGetHeight(superview.frame) ||
+                        CGRectGetMaxY(self.frame) < 0.0) {
+                            self.show()
                     }
                 }
             }

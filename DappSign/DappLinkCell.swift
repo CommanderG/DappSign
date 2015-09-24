@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum DappLinkCellState {
+@objc enum DappLinkCellState: Int {
     case Empty
     case NoLink
     case EnterLink
@@ -24,6 +24,8 @@ enum ViewsState {
 protocol DappLinkCellDelegate {
     func didEnterURLString(URLString: String, cell: DappLinkCell)
     func deleteLinkInCell(cell: DappLinkCell)
+    func openLinkInCell(cell: DappLinkCell)
+    func openLinkOnTap() -> Bool
 }
 
 class DappLinkCell: UITableViewCell {
@@ -36,6 +38,7 @@ class DappLinkCell: UITableViewCell {
     @IBOutlet weak var deleteThisLinkLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var linkButton: UIButton!
     
     @IBOutlet var noLinkViews: [UIView]!
     @IBOutlet var enterLinkViews: [UIView]!
@@ -43,7 +46,7 @@ class DappLinkCell: UITableViewCell {
     @IBOutlet var deleteLinkViews: [UIView]!
     
     internal var delegate: DappLinkCellDelegate?
-    internal private(set) var state: DappLinkCellState = DappLinkCellState.Empty
+    internal private(set) var state: DappLinkCellState = .Empty
     
     private var containerViewBorderLayer: CAShapeLayer?
     
@@ -77,7 +80,7 @@ class DappLinkCell: UITableViewCell {
         ,   strokeColor: borderColor
         )
         
-        if self.state != DappLinkCellState.Empty && self.state != DappLinkCellState.Link {
+        if self.state != .Empty && self.state != .Link {
             self.containerView.layer.addSublayer(containerViewBorderLayer)
         }
         
@@ -111,21 +114,31 @@ class DappLinkCell: UITableViewCell {
     }
     
     @IBAction func handleCancelButtonTap() {
-        self.showViewsForState(DappLinkCellState.Link)
+        self.goToState(.Link)
+    }
+    
+    @IBAction func openLink() {
+        self.delegate?.openLinkInCell(self)
     }
     
     // MARK: - internal
     
-    internal func showViewsForState(state: DappLinkCellState) {
-        if self.state == state {
+    internal func goToState(newState: DappLinkCellState) {
+        if self.state == newState {
             return
         }
         
-        self.state = state
+        self.state = newState
         
-        let views = self.viewsForState(state)
+        let views = self.viewsForState(newState)
         
         self.hideAllViewsExcept(views)
+        
+        if let open = self.delegate?.openLinkOnTap() {
+            self.linkButton.hidden = !open
+        } else {
+            self.linkButton.hidden = true
+        }
     }
     
     internal func makeViews(viewsState: ViewsState) {
