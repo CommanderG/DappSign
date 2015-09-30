@@ -12,17 +12,11 @@ import TwitterKit
 class TwitterHelper {
     class func tweetDapp(dapp: PFObject, image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
         Twitter.sharedInstance().logInWithCompletion {
-            (session, error) -> Void in
-            if (session == nil) {
-                print("Failed to sign in")
+            (session: TWTRSession?, error: NSError?) -> Void in
+            if let session = session {
+                print("Signed in Twitter as \(session.userName)")
                 
-                completion(success: false, error: error)
-            } else {
-            
-            print("Signed in Twitter as \(session.userName)")
-            
-                self.uploadImageToTwitter(image, completion: {
-                    (mediaID) -> Void in
+                self.uploadImageToTwitter(image, completion: { (mediaID: String?) -> Void in
                     if let _mediaID = mediaID {
                         let hashtagsRelation = dapp.relationForKey("hashtags")
                         
@@ -61,60 +55,59 @@ class TwitterHelper {
                         completion(success: false, error: error)
                     }
                 })
+            } else {
+                print("Failed to sign in")
+                
+                completion(success: false, error: error)
             }
         }
     }
     
     private class func uploadImageToTwitter(image: UIImage, completion: (mediaID: String?) -> Void) -> Void {
-        var requestCreationError: NSError?
-        
         if let imageData = UIImagePNGRepresentation(image) {
             let parameters = ["media": imageData.base64EncodedStringWithOptions([])]
             let twitterAPIClient = Twitter.sharedInstance().APIClient
             
-            let uploadRequest: NSURLRequest!
-            do {
-                uploadRequest = try twitterAPIClient.URLRequestWithMethod("POST",
-                            URL: "https://upload.twitter.com/1.1/media/upload.json",
-                            parameters: parameters)
-            } catch let error as NSError {
-                requestCreationError = error
-                uploadRequest = nil
-            }
+            var requestCreationError: NSError? = nil
+            let uploadRequest = twitterAPIClient.URLRequestWithMethod("POST"
+            ,   URL:        "https://upload.twitter.com/1.1/media/upload.json"
+            ,   parameters: parameters
+            ,   error:      &requestCreationError
+            )
             
-            if uploadRequest == nil {
-                print(requestCreationError)
+            if let error = requestCreationError {
+                print(error)
                 
                 completion(mediaID: nil)
-                
-                return
-            }
-            
-            twitterAPIClient.sendTwitterRequest(uploadRequest) {
-                (response, data, connectionError) -> Void in
-                if (connectionError != nil) {
-                    print(connectionError)
-                    
-                    completion(mediaID: nil)
-                    
-                    return
-                }
-                
-                do {
-                    let responseJSON = try NSJSONSerialization.JSONObjectWithData(data
-                    , 	options: .MutableContainers
-                    )
-                    
-                    let mediaID = responseJSON["media_id_string"] as? String
-                    
-                    completion(mediaID: mediaID)
-                } catch let error as NSError {
-                    print(error)
-                    
-                    completion(mediaID: nil)
-                } catch {
-                    completion(mediaID: nil)
-                }
+            } else {
+                twitterAPIClient.sendTwitterRequest(uploadRequest, completion: {
+                    (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+                    if let data = data {
+                        do {
+                            let responseJSON = try NSJSONSerialization.JSONObjectWithData(data
+                            , 	options: .MutableContainers
+                            )
+                            
+                            let mediaID = responseJSON["media_id_string"] as? String
+                            
+                            completion(mediaID: mediaID)
+                        } catch let error as NSError {
+                            print(error)
+                            
+                            completion(mediaID: nil)
+                        } catch {
+                            completion(mediaID: nil)
+                        }
+                    } else if let error = error {
+                        print(error)
+                        
+                        completion(mediaID: nil)
+                    } else {
+                        print("Unknown error during sending Twitter request.")
+                        
+                        completion(mediaID: nil)
+                    }
+                })
             }
         }
     }
@@ -127,37 +120,29 @@ class TwitterHelper {
         ]
         
         let twitterAPIClient = Twitter.sharedInstance().APIClient
-        var requestCreationError: NSError?
+        var requestCreationError: NSError? = nil
         
-        let tweetRequest: NSURLRequest!
-        do {
-            tweetRequest = try twitterAPIClient.URLRequestWithMethod("POST",
-                        URL: "https://api.twitter.com/1.1/statuses/update.json",
-                        parameters: parameters)
-        } catch let error as NSError {
-            requestCreationError = error
-            tweetRequest = nil
-        }
+        let tweetRequest = twitterAPIClient.URLRequestWithMethod("POST"
+        ,   URL:        "https://api.twitter.com/1.1/statuses/update.json"
+        ,   parameters: parameters
+        ,   error:      &requestCreationError
+        )
         
-        if tweetRequest == nil {
-            print(requestCreationError)
+        if let error = requestCreationError {
+            print(error)
             
             completion(success: false)
-            
-            return
+        } else {
+            twitterAPIClient.sendTwitterRequest(tweetRequest, completion: {
+                (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+                if let error = error {
+                    print(error)
+                    
+                    completion(success: false)
+                } else {
+                    completion(success: true)
+                }
+            })
         }
-        
-        twitterAPIClient.sendTwitterRequest(tweetRequest, completion: {
-            (response, data, connectionError) -> Void in
-            if connectionError != nil {
-                print(connectionError)
-                
-                completion(success: false)
-                
-                return
-            }
-            
-            completion(success: true)
-        })
     }
 }

@@ -13,9 +13,6 @@
 		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
 		2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318A1AB0C462002F9527 /* FacebookHelper.swift */; };
 		2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */; };
-		271431911AB0D181002F9527 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714318E1AB0D181002F9527 /* Fabric.framework */; };
-		271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714318F1AB0D181002F9527 /* TwitterKit.framework */; };
-		271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 271431901AB0D181002F9527 /* TwitterKitResources.bundle */; };
 		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
 		271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D0DC61ABAD8E400227DE7 /* Requests.swift */; };
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
@@ -45,8 +42,6 @@
 		27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
-		27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F134871AE06023004BCF7D /* Crashlytics.framework */; };
-		4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */; };
 		4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
 		4C1D14F31AC9476700040DE1 /* Exo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D14F11AC9476700040DE1 /* Exo-Black.otf */; };
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
@@ -100,6 +95,7 @@
 		84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */; };
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
+		A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
 		F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */; };
@@ -142,9 +138,6 @@
 		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
 		2714318A1AB0C462002F9527 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
 		2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerAlertViewExtension.swift; sourceTree = "<group>"; };
-		2714318E1AB0D181002F9527 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		2714318F1AB0D181002F9527 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
-		271431901AB0D181002F9527 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
 		271D0DC61ABAD8E400227DE7 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
@@ -176,8 +169,6 @@
 		27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
-		27F134871AE06023004BCF7D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		4C1D14F11AC9476700040DE1 /* Exo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Black.otf"; sourceTree = "<group>"; };
 		4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDappSubmitViewController.swift; sourceTree = "<group>"; };
 		4CD9C9751AA1D59900046CA2 /* DappSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DappSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +216,7 @@
 		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DappSign/Pods-DappSign.debug.xcconfig"; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
@@ -244,6 +236,8 @@
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
 		B37714691ACD5A4200B5AE77 /* FacebookBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBridge.m; sourceTree = "<group>"; };
+		BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DappSign.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C886EE679BC1674B59807AAB /* Pods-DappSign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSign.release.xcconfig"; path = "Pods/Target Support Files/Pods-DappSign/Pods-DappSign.release.xcconfig"; sourceTree = "<group>"; };
 		F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nextbutton.png; sourceTree = "<group>"; };
 		F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nextbutton@2x.png"; sourceTree = "<group>"; };
 		F372464C1AD3ED3C00AD56E2 /* Nextbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nextbutton@3x.png"; sourceTree = "<group>"; };
@@ -299,16 +293,13 @@
 				4CD9C9B41AA1DE5F00046CA2 /* StoreKit.framework in Frameworks */,
 				4CD9C9B21AA1DE5500046CA2 /* Security.framework in Frameworks */,
 				4CD9C9B01AA1DE4E00046CA2 /* QuartzCore.framework in Frameworks */,
-				4C1D14F01AC9446A00040DE1 /* Crashlytics.framework in Frameworks */,
 				4CD9C9AE1AA1DE4300046CA2 /* MobileCoreServices.framework in Frameworks */,
-				27F134881AE06023004BCF7D /* Crashlytics.framework in Frameworks */,
 				4CD9C9AC1AA1DE3700046CA2 /* CoreLocation.framework in Frameworks */,
 				4CD9C9AA1AA1DE3000046CA2 /* CoreGraphics.framework in Frameworks */,
-				271431921AB0D182002F9527 /* TwitterKit.framework in Frameworks */,
-				271431911AB0D181002F9527 /* Fabric.framework in Frameworks */,
 				4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */,
 				4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */,
 				4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */,
+				A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +330,8 @@
 				4CD9C9771AA1D59900046CA2 /* DappSign */,
 				4CD9C9901AA1D59900046CA2 /* DappSignTests */,
 				4CD9C9761AA1D59900046CA2 /* Products */,
+				F6D6C2075F2D0C5DBA6DCD66 /* Pods */,
+				67BBEE9B11C81943F78F85FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -403,11 +396,6 @@
 			isa = PBXGroup;
 			children = (
 				279D4D441BA9A7DB00408B90 /* libxml2.dylib */,
-				27F134871AE06023004BCF7D /* Crashlytics.framework */,
-				4C1D14EF1AC9446A00040DE1 /* Crashlytics.framework */,
-				2714318E1AB0D181002F9527 /* Fabric.framework */,
-				2714318F1AB0D181002F9527 /* TwitterKit.framework */,
-				271431901AB0D181002F9527 /* TwitterKitResources.bundle */,
 				2714317F1AB086AB002F9527 /* FacebookSDK.framework */,
 				4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */,
 				4CD9C9B71AA1DE7800046CA2 /* libz.dylib */,
@@ -464,6 +452,14 @@
 			);
 			name = Design;
 			path = Spring;
+			sourceTree = "<group>";
+		};
+		67BBEE9B11C81943F78F85FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		84C3D3811AB5FEC700E0F350 /* Views */ = {
@@ -620,6 +616,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F6D6C2075F2D0C5DBA6DCD66 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */,
+				C886EE679BC1674B59807AAB /* Pods-DappSign.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,10 +632,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CD9C9971AA1D59900046CA2 /* Build configuration list for PBXNativeTarget "DappSign" */;
 			buildPhases = (
+				27E9554F5CD7485C5C5D941A /* Check Pods Manifest.lock */,
 				4CD9C9711AA1D59900046CA2 /* Sources */,
 				4CD9C9721AA1D59900046CA2 /* Frameworks */,
 				4CD9C9731AA1D59900046CA2 /* Resources */,
 				4C1D14EE1AC943E600040DE1 /* ShellScript */,
+				AF138B80AA1237E396FD0B9E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -706,7 +713,6 @@
 				274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */,
 				4CD9C9D91AA21A5100046CA2 /* Bellota-Regular.otf in Resources */,
 				4CD9C9DC1AA21A5100046CA2 /* Exo-Regular.otf in Resources */,
-				271431931AB0D182002F9527 /* TwitterKitResources.bundle in Resources */,
 				4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */,
 				270C058B1BB42A5900C11435 /* LinkView.xib in Resources */,
 				27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */,
@@ -740,6 +746,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		27E9554F5CD7485C5C5D941A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		4C1D14EE1AC943E600040DE1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -751,7 +772,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run d22483edfe701d576bc4ce54b30b66ee9d8dc2dc 95f50e0f2ff2859c379f76a72c321060314f4b052b472b0466ef1a8d32e585a3";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run d22483edfe701d576bc4ce54b30b66ee9d8dc2dc 95f50e0f2ff2859c379f76a72c321060314f4b052b472b0466ef1a8d32e585a3";
+		};
+		AF138B80AA1237E396FD0B9E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSign/Pods-DappSign-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -952,8 +988,10 @@
 		};
 		4CD9C9981AA1D59900046CA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DappSign",
@@ -975,8 +1013,10 @@
 		};
 		4CD9C9991AA1D59900046CA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C886EE679BC1674B59807AAB /* Pods-DappSign.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DappSign",
