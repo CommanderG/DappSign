@@ -743,7 +743,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="H1x-NN-A95">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -752,7 +752,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="dps-q4-Vnq">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dps-q4-Vnq" id="kLq-xk-Fo2">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -760,7 +760,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T84-8X-LD8" id="1lD-Lw-W7s">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1071,6 +1071,20 @@
                                     <segue destination="2Do-FT-vzw" kind="modal" identifier="showProfile" id="ELH-xj-bjC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb6-vv-27X">
+                                <rect key="frame" x="130" y="492" width="60" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Rf4-Nd-6q6"/>
+                                    <constraint firstAttribute="height" constant="60" id="jh0-HK-biA"/>
+                                </constraints>
+                                <state key="normal" title="Link">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLinkView:" destination="EG5-sL-doW" eventType="touchUpInside" id="ZO1-1Q-iDS"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu2-AW-APN">
                                 <rect key="frame" x="244" y="492" width="60" height="60"/>
                                 <constraints>
@@ -1269,6 +1283,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kn1-Iw-Tke" customClass="EmbedDappView" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="30" y="137" width="260" height="347"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.10588235294117647" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -1287,6 +1305,7 @@
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="gal-zO-XBA" secondAttribute="bottom" constant="14" id="BPh-QF-zan"/>
                             <constraint firstItem="D4k-5R-hYz" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="4" id="BuC-Cd-l5T"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="34" id="DS7-eE-p6Z"/>
+                            <constraint firstAttribute="trailing" secondItem="kn1-Iw-Tke" secondAttribute="trailing" constant="30" id="FFH-dh-EjL"/>
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="trailing" secondItem="y0b-e0-s53" secondAttribute="trailingMargin" id="Ghf-Y6-v2e"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="IXL-Dh-WIH"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="46" id="JG6-ML-K4c"/>
@@ -1298,10 +1317,14 @@
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="top" constant="-33" id="P5T-Wi-05a"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="PfJ-Ld-bey"/>
                             <constraint firstItem="FNt-Hl-eRK" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="QpK-KO-mq3"/>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Jb6-vv-27X" secondAttribute="bottom" constant="16" id="Ro3-Bz-8hh"/>
                             <constraint firstItem="5Z8-aq-G7z" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Tkg-CY-p8w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Z8-aq-G7z" secondAttribute="trailing" constant="4" id="UbR-23-TGr"/>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="kn1-Iw-Tke" secondAttribute="bottom" constant="84" id="VOn-Ge-hni"/>
                             <constraint firstAttribute="centerX" secondItem="3O5-Ue-Ctg" secondAttribute="centerX" constant="-0.5" id="VUh-CX-PjU"/>
                             <constraint firstAttribute="trailing" secondItem="Y9h-U7-mgg" secondAttribute="trailing" constant="34" id="WnD-pJ-Ham"/>
+                            <constraint firstItem="Jb6-vv-27X" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="YUi-dQ-XU1"/>
+                            <constraint firstItem="kn1-Iw-Tke" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="117" id="ZPJ-0n-rpj"/>
                             <constraint firstItem="UfK-Xm-b3D" firstAttribute="leading" secondItem="D4k-5R-hYz" secondAttribute="trailing" constant="3" id="Zkg-BM-9un"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="centerY" secondItem="FNt-Hl-eRK" secondAttribute="centerY" constant="0.5" id="Zp5-z2-Lhe"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="j3T-Dl-xWg" secondAttribute="trailing" constant="3" id="aMh-CK-8EN"/>
@@ -1316,6 +1339,7 @@
                             <constraint firstItem="j3T-Dl-xWg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="46" id="lhJ-RP-iQz"/>
                             <constraint firstItem="UfK-Xm-b3D" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="26" id="nQr-Vd-fij"/>
                             <constraint firstAttribute="centerX" secondItem="oht-H0-5nU" secondAttribute="centerX" id="t4A-pl-t7j"/>
+                            <constraint firstItem="kn1-Iw-Tke" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="zFP-34-zRO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1324,6 +1348,7 @@
                         <outlet property="dappSignView" destination="CL9-dN-aM0" id="e5o-um-HDO"/>
                         <outlet property="dappViewsContainerView" destination="osF-qS-9VI" id="VG8-ml-Uw0"/>
                         <outlet property="dappsCountPlusOneLabelTopConstraint" destination="DS7-eE-p6Z" id="puQ-Zn-ytW"/>
+                        <outlet property="embedDappView" destination="kn1-Iw-Tke" id="BJe-be-vyQ"/>
                         <outlet property="linkView" destination="1OO-wt-4Cc" id="YQS-3H-wkg"/>
                         <outlet property="profileButton" destination="Zep-yS-dfF" id="72N-lR-hUr"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
@@ -2153,11 +2178,11 @@
                         <viewControllerLayoutGuide type="bottom" id="9Qi-RQ-uuD"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Jtn-T8-fBn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-Ng-O6s" customClass="DappLinksView" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -2254,11 +2279,11 @@
                         <viewControllerLayoutGuide type="bottom" id="nQJ-hg-zbF"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="x7P-ZT-CMN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gP-LW-p7X" customClass="DappLinksView" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="347"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -2304,7 +2329,7 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mYk-4f-hdk"/>
+        <segue reference="jNM-sC-DFE"/>
         <segue reference="xG9-la-u2M"/>
     </inferredMetricsTieBreakers>
 </document>

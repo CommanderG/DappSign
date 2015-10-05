@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var dappScoreLabel: UILabel!
     @IBOutlet weak var linkView: LinkView!
+    @IBOutlet weak var embedDappView: EmbedDappView!
     
     @IBOutlet var representativesImagesViews: [UIImageView]!
     @IBOutlet var plusOneLabels: [UILabel]!
@@ -177,6 +178,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         }
                     }
                 })
+        }
+    }
+    
+    @IBAction func showLinkView(sender: AnyObject) {
+        if let dapp = self.dapps.first {
+            if self.embedDappView.hidden {
+                self.embedDappView.hidden = false
+                
+                self.embedDappView.initURLAndEmbedCodeForDappWithID(dapp.objectId)
+            }
         }
     }
     

@@ -17,6 +17,8 @@
 		271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D0DC61ABAD8E400227DE7 /* Requests.swift */; };
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
+		274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */; };
+		274C9CC01BBD8FBD0030F543 /* EmbedDappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
@@ -142,6 +144,8 @@
 		271D0DC61ABAD8E400227DE7 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
+		274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappView.swift; sourceTree = "<group>"; };
+		274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbedDappView.xib; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
@@ -482,6 +486,8 @@
 				27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */,
 				270C05881BB42A3E00C11435 /* LinkView.swift */,
 				270C058A1BB42A5900C11435 /* LinkView.xib */,
+				274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */,
+				274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -725,6 +731,7 @@
 				4CD9C9DA1AA21A5100046CA2 /* Capture_it.ttf in Resources */,
 				F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */,
 				F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */,
+				274C9CC01BBD8FBD0030F543 /* EmbedDappView.xib in Resources */,
 				4CD9C9831AA1D59900046CA2 /* Main.storyboard in Resources */,
 				27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */,
 				4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */,
@@ -817,6 +824,7 @@
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */,
 				27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */,
+				274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */,
 				F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */,
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,

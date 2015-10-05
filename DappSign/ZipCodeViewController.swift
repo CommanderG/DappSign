@@ -60,8 +60,7 @@ class ZipCodeViewController: UIViewController,NSURLConnectionDelegate {
                 if let connection = NSURLConnection(
                     request: request
                 ,   delegate: self
-                ,   startImmediately: false
-                ) {
+                ,   startImmediately: false) {
                     connection.start()
                 }
             }
