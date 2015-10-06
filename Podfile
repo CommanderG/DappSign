@@ -7,6 +7,7 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'TwitterCore'
 pod 'TwitterKit'
+pod 'MBProgressHUD'
 
 end
 

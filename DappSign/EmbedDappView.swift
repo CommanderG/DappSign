@@ -21,23 +21,21 @@ class EmbedDappView: XIBView {
     @IBAction func copyDappURL() {
         if let URLStr = self.URLLabel.text {
             UIPasteboard.generalPasteboard().string = URLStr
+            
+            self.showCopiedToClipboardHUD()
         }
-        
-        print("copyDappURL()")
     }
     
     @IBAction func copyDappEmbedCode() {
         if let embedCode = self.embedCodeTextView.text {
             UIPasteboard.generalPasteboard().string = embedCode
+            
+            self.showCopiedToClipboardHUD()
         }
-        
-        print("copyDappEmbedCode()")
     }
     
     @IBAction func hide() {
         self.hidden = true
-        
-        print("hide()")
     }
     
     // MARK: -
@@ -45,5 +43,17 @@ class EmbedDappView: XIBView {
     internal func initURLAndEmbedCodeForDappWithID(dappID: String) {
         self.URLLabel.text = "http://www.dappsign.com/\(dappID)"
         self.embedCodeTextView.text = "<iframe width=\"260\" height=\"420\" src=\"http://www.dappsign.com/embed/\(dappID)\" frameborder=\"0\"></iframe>"
+    }
+    
+    // MARK: - 
+    
+    private func showCopiedToClipboardHUD() {
+        let progressHUD = MBProgressHUD.showHUDAddedTo(self, animated: true)
+        progressHUD.mode = MBProgressHUDMode.Text
+        progressHUD.labelText = "Copied to clipboard"
+        
+        delay(0.75) {
+            progressHUD.hide(true)
+        }
     }
 }
