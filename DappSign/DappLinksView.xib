@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Exo-Black.otf">
@@ -28,10 +28,10 @@
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="98" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bbn-q8-8aQ">
                     <rect key="frame" x="0.0" y="50" width="600" height="500"/>
-                    <color key="backgroundColor" red="0.45700663330000002" green="0.36489793659999997" blue="0.54523342850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.47843137254901957" green="0.74901960784313726" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.41960784313725491" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="bbn-q8-8aQ" secondAttribute="bottom" constant="50" id="3S8-UU-LBP"/>
@@ -48,7 +48,7 @@
                     <integer key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="511" y="549"/>
+            <point key="canvasLocation" x="518" y="547"/>
         </view>
         <tapGestureRecognizer id="fSi-nd-cxO"/>
     </objects>

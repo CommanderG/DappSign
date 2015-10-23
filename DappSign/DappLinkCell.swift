@@ -50,8 +50,8 @@ class DappLinkCell: UITableViewCell {
     
     private var containerViewBorderLayer: CAShapeLayer?
     
-    internal let selectedBackgroundColor = UIColor(red:0.356, green:0.254, blue:0.448, alpha:1.0)
-    internal let unselectedBackgroundColor = UIColor(red:0.458, green:0.360, blue:0.541, alpha:1.0)
+    internal let selectedBackgroundColor = UIColor(red:0, green:0.419, blue:0.705, alpha:1)
+    internal let unselectedBackgroundColor = UIColor.clearColor()
     
     required override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,8 +71,9 @@ class DappLinkCell: UITableViewCell {
         super.layoutSubviews()
         
         
+        self.addLinkImageView.alpha = 0.45
         
-        let borderColor = UIColor(red:0.509, green:0.45, blue:0.564, alpha:1.0).CGColor
+        let borderColor = UIColor(white: 1.0, alpha: 0.25).CGColor
         
         self.containerView.layoutIfNeeded()
         
@@ -194,7 +195,7 @@ class DappLinkCell: UITableViewCell {
         }
         
         if views == self.linkViews {
-            let layerBorderColor = UIColor(red:0.592, green:0.592, blue:0.592, alpha:1.0).CGColor
+            let layerBorderColor = UIColor(white: 1.0, alpha: 0.75).CGColor
             
             self.containerViewBorderLayer?.removeFromSuperlayer()
             

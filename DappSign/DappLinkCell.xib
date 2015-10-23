@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCw-ZY-uI6">
                         <rect key="frame" x="2" y="8" width="596" height="86"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_link_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GyP-Eg-aFu">
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_links_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GyP-Eg-aFu">
                                 <rect key="frame" x="266" y="11" width="64" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -49,7 +49,7 @@
                             </textField>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGj-Oc-IUM">
                                 <rect key="frame" x="499" y="48" width="85" height="32"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.41960784309999999" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cGj-Oc-IUM" secondAttribute="height" multiplier="8:3" id="HaA-lc-1gA"/>
                                 </constraints>
@@ -93,7 +93,7 @@
                             </label>
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA4-iP-dL6">
                                 <rect key="frame" x="499" y="8" width="85" height="32"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.41960784309999999" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="dMc-De-F5v"/>
                                     <constraint firstAttribute="height" constant="32" id="k8R-r8-0Wk"/>
@@ -114,7 +114,7 @@
                             </button>
                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OrS-td-EaQ">
                                 <rect key="frame" x="499" y="46" width="85" height="32"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.1058823529" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.41960784309999999" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="8aL-Cq-N9x"/>
                                     <constraint firstAttribute="height" constant="32" id="hAX-XB-Yw7"/>
@@ -206,6 +206,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="add_link_icon" width="76" height="76"/>
+        <image name="edit_links_icon" width="76" height="76"/>
     </resources>
 </document>
