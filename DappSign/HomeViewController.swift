@@ -24,10 +24,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var embedDappView: EmbedDappView!
     
     @IBOutlet var representativesImagesViews: [UIImageView]!
-    @IBOutlet var plusOneLabels: [UILabel]!
     
-    @IBOutlet var representativesPlusOneLabelsVerticalTopConstraints: [NSLayoutConstraint]!
-    @IBOutlet weak var dappsCountPlusOneLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var plusOneDappsCountLabel: UILabel!
+    @IBOutlet weak var plusOneFirstRepresentativeLabel: UILabel!
+    @IBOutlet weak var plusOneSecondRepresentativeLabel: UILabel!
+    @IBOutlet weak var plusOneThirdRepresentativeLabel: UILabel!
+    
+    @IBOutlet weak var plusOneDappsCountLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var plusOneFirstRepresentativeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var plusOneSecondRepresentativeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var plusOneThirdRepresentativeLabelTopConstraint: NSLayoutConstraint!
     
     private var representativesImagesURLs: [NSURL] = []
     private var visibleDappView: UIView!
@@ -71,7 +77,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             object: nil
         )
         
-        self.hideLabels(self.plusOneLabels)
+        self.hideLabel(plusOneDappsCountLabel)
+        self.hideLabel(plusOneFirstRepresentativeLabel)
+        self.hideLabel(plusOneSecondRepresentativeLabel)
+        self.hideLabel(plusOneThirdRepresentativeLabel)
         
         self.linkView.delegate = self
         self.linkView.hidden = true
@@ -83,13 +92,19 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0
-        ,   target: self
-        ,   selector: Selector("updateDappScore")
-        ,   userInfo: nil
-        ,   repeats: true
+            ,   target: self
+            ,   selector: Selector("updateDappScore")
+            ,   userInfo: nil
+            ,   repeats: true
         )
         
         self.downloadRepresentativesImages()
+    }
+    
+    func loopAnimation() {
+        self.showThenHidePlusOneLabels()
+        
+        self.performSelector(Selector("loopAnimation"), withObject: nil, afterDelay: 3.0)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -101,8 +116,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappLinksVCView = self.dappLinksVC?.view {
             self.flipWithDuration(self.flipDuration
-            ,   view1: self.dappViewsContainerView
-            , 	view2: dappLinksVCView
+                ,   view1: self.dappViewsContainerView
+                , 	view2: dappLinksVCView
             )
         }
         
@@ -125,8 +140,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappLinksVCView = self.dappLinksVC?.view {
             self.flipWithDuration(self.flipDuration
-            ,   view1: self.dappViewsContainerView
-            ,   view2: dappLinksVCView
+                ,   view1: self.dappViewsContainerView
+                ,   view2: dappLinksVCView
             )
         }
     }
@@ -135,23 +150,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         if let 	currentDappCardAsImage = self.dappViewsContainerView.toImage()
             ,   currentDapp = self.dapps.first {
                 FacebookHelper.postImageToFacebook(currentDappCardAsImage
-                ,   dapp: currentDapp
-                ,   completion: { (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully posted."
-                        )
-                    } else {
-                        if let error = error {
+                    ,   dapp: currentDapp
+                    ,   completion: { (success: Bool, error: NSError?) -> Void in
+                        if success {
                             self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Error: \(error)"
+                                "The card has been successfully posted."
                             )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Unknown error."
-                            )
+                            if let error = error {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to post the card. Error: \(error)"
+                                )
+                            } else {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to post the card. Unknown error."
+                                )
+                            }
                         }
-                    }
                 })
         }
     }
@@ -160,23 +175,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         if let  currentDappCardAsImage = self.dappViewsContainerView.toImage()
             ,   currentDapp = self.dapps.first {
                 TwitterHelper.tweetDapp(currentDapp
-                ,   image: currentDappCardAsImage
-                ,   completion: { (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully tweeted."
-                        )
-                    } else {
-                        if let error = error {
+                    ,   image: currentDappCardAsImage
+                    ,   completion: { (success: Bool, error: NSError?) -> Void in
+                        if success {
                             self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to tweet the card. Error: \(error)"
+                                "The card has been successfully tweeted."
                             )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to tweet the card. Unknown error."
-                            )
+                            if let error = error {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to tweet the card. Error: \(error)"
+                                )
+                            } else {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to tweet the card. Unknown error."
+                                )
+                            }
                         }
-                    }
                 })
         }
     }
@@ -191,7 +206,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         }
     }
     
-    // MARK: - 
+    // MARK: -
     
     private func flipWithDuration(duration: NSTimeInterval, view1: UIView, view2: UIView) {
         UIView.beginAnimations(nil, context: nil)
@@ -376,7 +391,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 success()
         })
     }
-
+    
     private func downloadSecondaryDapps() {
         let user = PFUser.currentUser()
         
@@ -409,7 +424,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 for dapp in sortedDapps {
                     self.dapps.append(dapp)
                 }
-
+                
                 if shouldShowCurrentDapp {
                     self.initDappView()
                 }
@@ -435,7 +450,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             
             let tapGR = UITapGestureRecognizer(
                 target: self
-            , 	action: Selector("handleDappLinksTapGesture:")
+                , 	action: Selector("handleDappLinksTapGesture:")
             )
             
             self.dappLinksVC?.dappLinksView.addGestureRecognizer(tapGR)
@@ -747,46 +762,99 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         self.animatingPlusOneLabels = true
         
-        let representativesPlusOneLabelsVerticalTopConstraintMax: CGFloat = 46.0
-        let dappsCountPlusOneLabelTopConstraintMax: CGFloat = 34.0
+        let plusOneLabels =
+        [   plusOneDappsCountLabel
+        ,   plusOneFirstRepresentativeLabel
+        ,   plusOneSecondRepresentativeLabel
+        ,   plusOneThirdRepresentativeLabel
+        ]
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.showLabels(self.plusOneLabels)
+        let labelTopConstraint =
+        [   plusOneDappsCountLabel:           plusOneDappsCountLabelTopConstraint
+        ,   plusOneFirstRepresentativeLabel:  plusOneFirstRepresentativeLabelTopConstraint
+        ,   plusOneSecondRepresentativeLabel: plusOneSecondRepresentativeLabelTopConstraint
+        ,   plusOneThirdRepresentativeLabel:  plusOneThirdRepresentativeLabelTopConstraint
+        ]
+
+        let topConstraintMax =
+        [   plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0)
+        ,   plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(18.0)
+        ,   plusOneSecondRepresentativeLabelTopConstraint: CGFloat(18.0)
+        ,   plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(18.0)
+        ]
+        
+        let topConstraintMin =
+        [   plusOneDappsCountLabelTopConstraint:           CGFloat(-30.0)
+        ,   plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(-2.0)
+        ,   plusOneSecondRepresentativeLabelTopConstraint: CGFloat(-2.0)
+        ,   plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(-2.0)
+        ]
+
+        let animationDuration = 0.4
+        let delayMultiplier = 0.1
+        let allAnimationsDuration = (
+            animationDuration +
+            Double(plusOneLabels.count - 1) *
+            delayMultiplier
+        )
+        
+        for labelIndex in 0 ... plusOneLabels.count - 1 {
+            let label = plusOneLabels[labelIndex]
             
-            for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
-                topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax - 15.0
-            }
-            
-            self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax - 15.0
-            
-            self.view.layoutIfNeeded()
-        }, completion: { (finished: Bool) -> Void in
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.hideLabels(self.plusOneLabels)
-            }, completion: { (finished: Bool) -> Void in
-                for topConstraint in self.representativesPlusOneLabelsVerticalTopConstraints {
-                    topConstraint.constant = representativesPlusOneLabelsVerticalTopConstraintMax
+            if let topConstraint = labelTopConstraint[label] {
+                let animationDelay = Double(labelIndex) * delayMultiplier
+                
+                delay(animationDelay) {
+                    self.showLabel(label)
                 }
                 
-                self.dappsCountPlusOneLabelTopConstraint.constant = dappsCountPlusOneLabelTopConstraintMax
-                
-                self.view.layoutIfNeeded()
-                
-                self.animatingPlusOneLabels = false
-            })
-        })
+                UIView.animateWithDuration(animationDuration
+                ,   delay: animationDelay
+                , 	options: UIViewAnimationOptions.CurveLinear
+                , 	animations: {
+                        if let topConstraintMinVal = topConstraintMin[topConstraint] {
+                            topConstraint.constant = topConstraintMinVal
+                        }
+                    
+                        self.view.layoutIfNeeded()
+                    }
+                ,   completion: nil
+                )
+            }
+        }
+        
+        delay(allAnimationsDuration
+        ,   closure: {
+                for labelIndex in 0 ... plusOneLabels.count - 1 {
+                    let label = plusOneLabels[labelIndex]
+                    
+                    if let topConstraint = labelTopConstraint[label] {
+                        UIView.animateWithDuration(animationDuration
+                        , 	animations: {
+                                self.hideLabel(label)
+                            }
+                        , 	completion: { (finished: Bool) -> Void in
+                                topConstraint.constant = topConstraintMax[topConstraint]!
+                            
+                                self.view.layoutIfNeeded()
+                            }
+                        )
+                    }
+                }
+            
+                delay(animationDuration) {
+                    self.animatingPlusOneLabels = false
+                }
+            }
+        )
     }
     
-    private func showLabels(labels: [UILabel]) {
-        for label in labels {
-            label.alpha = 1.0
-        }
+    private func showLabel(label: UILabel) {
+        label.alpha = 1.0
     }
     
-    private func hideLabels(labels: [UILabel]) {
-        for label in labels {
-            label.alpha = 0.0
-        }
+    private func hideLabel(label: UILabel) {
+        label.alpha = 0.0
     }
 }
 
