@@ -39,6 +39,10 @@ class TwitterHelper {
                             
                             status += "\nwww.dappsign.com";
                             
+                            if let dappSignID = dapp.objectId {
+                                status += "//" + dappSignID
+                            }
+                            
                             self.tweetImageWithMediaID(_mediaID, status: status, completion: {
                                 (success: Bool) -> Void in
                                 if success {
