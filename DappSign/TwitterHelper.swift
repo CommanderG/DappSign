@@ -43,6 +43,8 @@ class TwitterHelper {
                                 status += "//" + dappSignID
                             }
                             
+                            status += "\n#DappSign"
+                            
                             self.tweetImageWithMediaID(_mediaID, status: status, completion: {
                                 (success: Bool) -> Void in
                                 if success {
