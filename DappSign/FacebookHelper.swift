@@ -55,6 +55,12 @@ class FacebookHelper {
                     
                     message += "\nwww.dappsign.com";
                     
+                    if let dappSignID = dapp.objectId {
+                        message += "//" + dappSignID
+                    }
+                    
+                    message += "\n#DappSign"
+                    
                     let parameters = [
                         "message": message,
                         "picture": image
