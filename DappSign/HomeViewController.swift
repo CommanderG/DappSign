@@ -12,6 +12,11 @@ internal let DappSwipedNotification = "dappSwipedNotification"
 internal let dappsSwipedRelationKey = "dappsSwiped"
 internal let dappsDappedRelationKey = "dappsDapped"
 
+enum DappCardType {
+    case DappCardTypeSign;
+    case DappCardTypeMapp
+}
+
 class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var dappViewsContainerView: SwipeableView!
     @IBOutlet weak var dappSignView: DappSignView!
@@ -35,6 +40,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var plusOneSecondRepresentativeLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var plusOneThirdRepresentativeLabelTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var signedLabel: UILabel!
+    
+    @IBOutlet weak var signedLabelBottomConstraint: NSLayoutConstraint!
+    
     private var representativesImagesURLs: [NSURL] = []
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
@@ -51,6 +60,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     var dappColors = DappColors()
     
     var timer: NSTimer? = nil
+    
+    private var currentDappCardType: DappCardType = .DappCardTypeSign
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,10 +88,17 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             object: nil
         )
         
-        self.hideLabel(plusOneDappsCountLabel)
-        self.hideLabel(plusOneFirstRepresentativeLabel)
-        self.hideLabel(plusOneSecondRepresentativeLabel)
-        self.hideLabel(plusOneThirdRepresentativeLabel)
+        let labels = [
+            self.plusOneDappsCountLabel,
+            self.plusOneFirstRepresentativeLabel,
+            self.plusOneSecondRepresentativeLabel,
+            self.plusOneThirdRepresentativeLabel,
+            self.signedLabel
+        ]
+        
+        for label in labels {
+            self.hideLabel(label)
+        }
         
         self.linkView.delegate = self
         self.linkView.hidden = true
@@ -99,12 +117,21 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         )
         
         self.downloadRepresentativesImages()
-    }
-    
-    func loopAnimation() {
-        self.showThenHidePlusOneLabels()
         
-        self.performSelector(Selector("loopAnimation"), withObject: nil, afterDelay: 3.0)
+        self.hideSignedLabel()
+        
+        let topConstraints = [
+            self.plusOneDappsCountLabelTopConstraint,
+            self.plusOneFirstRepresentativeLabelTopConstraint,
+            self.plusOneSecondRepresentativeLabelTopConstraint,
+            self.plusOneThirdRepresentativeLabelTopConstraint
+        ]
+        
+        for topConstraint in topConstraints {
+            if let constant = self.constantMaxForConstraint(topConstraint) {
+                topConstraint.constant = constant
+            }
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -703,6 +730,25 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     // MARK: - SwipeableViewDelegate
     
+    func willShow(swipeDirection: SwipeDirection) {
+        switch self.currentDappCardType {
+        case .DappCardTypeSign:
+            if self.visibleDappView != self.dappSignView {
+                self.showDappView(self.dappSignView)
+            }
+            
+            break
+        case .DappCardTypeMapp:
+            if self.visibleDappView != self.dappMappView {
+                self.showDappView(self.dappMappView)
+            }
+            
+            break
+        }
+        
+        self.initDappView()
+    }
+    
     func didSwipe(swipeDirection: SwipeDirection) {
         if (self.visibleDappView == self.dappSignView) {
             let dapped = (swipeDirection == SwipeDirection.LeftToRight)
@@ -710,10 +756,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             if let currentDapp = self.dapps.first {
                 self.lastDappedDapp = currentDapp
                 
-                self.sendRequestsForDapp(currentDapp, dapped: dapped)
-                
                 if dapped {
-                    self.showThenHidePlusOneLabels()
+                    self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                    
+                    UIView.animateWithDuration(0.4,
+                        animations: {
+                            self.dappViewsContainerView.alpha = 0.0
+                        }, completion: { (finished: Bool) -> Void in
+                            self.performDappAnimationsWithCompletion({
+                                self.dappViewsContainerView.alpha = 1.0
+                                self.currentDappCardType = DappCardType.DappCardTypeMapp
+                                
+                                self.dappViewsContainerView.show()
+                            })
+                        }
+                    )
+                } else {
+                    self.currentDappCardType = DappCardType.DappCardTypeSign
                 }
             } else {
                 self.lastDappedDapp = nil
@@ -723,17 +782,11 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 self.dapps.removeAtIndex(0)
             }
             
-            if (dapped && self.dapps.count > 0) {
-                self.showDappView(self.dappMappView)
+            if self.dapps.count == 0 {
+                self.downloadDapps()
             }
         } else {
-            self.showDappView(self.dappSignView)
-        }
-        
-        self.initDappView()
-        
-        if self.dapps.count == 0 {
-            self.downloadDapps()
+            self.currentDappCardType = DappCardType.DappCardTypeSign
         }
     }
     
@@ -755,96 +808,122 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         return true
     }
     
-    private func showThenHidePlusOneLabels() {
+    private func constantMaxForConstraint(constraint: NSLayoutConstraint) -> CGFloat? {
+        let topConstraintConstMax = [
+            self.plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0 + 80.0),
+            self.plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(30.0 + 80.0),
+            self.plusOneSecondRepresentativeLabelTopConstraint: CGFloat(30.0 + 80.0),
+            self.plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(30.0 + 80.0)
+        ]
+        
+        return topConstraintConstMax[constraint]
+    }
+    
+    private func hideSignedLabel() {
+        let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
+        
+        self.signedLabelBottomConstraint.constant = -signedLabelHeight
+    }
+    
+    private func performDappAnimationsWithCompletion(completion: () -> ()) {
         if self.animatingPlusOneLabels {
             return
         }
         
         self.animatingPlusOneLabels = true
         
-        let plusOneLabels =
-        [   plusOneDappsCountLabel
-        ,   plusOneFirstRepresentativeLabel
-        ,   plusOneSecondRepresentativeLabel
-        ,   plusOneThirdRepresentativeLabel
+        let plusOneLabels = [
+            self.plusOneDappsCountLabel,
+            self.plusOneFirstRepresentativeLabel,
+            self.plusOneSecondRepresentativeLabel,
+            self.plusOneThirdRepresentativeLabel
         ]
         
-        let labelTopConstraint =
-        [   plusOneDappsCountLabel:           plusOneDappsCountLabelTopConstraint
-        ,   plusOneFirstRepresentativeLabel:  plusOneFirstRepresentativeLabelTopConstraint
-        ,   plusOneSecondRepresentativeLabel: plusOneSecondRepresentativeLabelTopConstraint
-        ,   plusOneThirdRepresentativeLabel:  plusOneThirdRepresentativeLabelTopConstraint
-        ]
-
-        let topConstraintMax =
-        [   plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0)
-        ,   plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(18.0)
-        ,   plusOneSecondRepresentativeLabelTopConstraint: CGFloat(18.0)
-        ,   plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(18.0)
+        let labelTopConstraint = [
+            self.plusOneDappsCountLabel:           plusOneDappsCountLabelTopConstraint,
+            self.plusOneFirstRepresentativeLabel:  plusOneFirstRepresentativeLabelTopConstraint,
+            self.plusOneSecondRepresentativeLabel: plusOneSecondRepresentativeLabelTopConstraint,
+            self.plusOneThirdRepresentativeLabel:  plusOneThirdRepresentativeLabelTopConstraint
         ]
         
-        let topConstraintMin =
-        [   plusOneDappsCountLabelTopConstraint:           CGFloat(-30.0)
-        ,   plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(-2.0)
-        ,   plusOneSecondRepresentativeLabelTopConstraint: CGFloat(-2.0)
-        ,   plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(-2.0)
+        let topConstraintMin = [
+            self.plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0),
+            self.plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(30.0),
+            self.plusOneSecondRepresentativeLabelTopConstraint: CGFloat(30.0),
+            self.plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(30.0)
         ]
-
-        let animationDuration = 0.4
-        let delayMultiplier = 0.1
-        let allAnimationsDuration = (
-            animationDuration +
-            Double(plusOneLabels.count - 1) *
-            delayMultiplier
-        )
         
-        for labelIndex in 0 ... plusOneLabels.count - 1 {
-            let label = plusOneLabels[labelIndex]
+        let plusOneLabelsMoveUpAnimationDuration = 0.6
+        let plusOneLabelsDissapearanceAnimationDuration = 0.3
+        
+        for var index = 0; index < plusOneLabels.count; ++index {
+            let animationDelay =
+            (plusOneLabelsMoveUpAnimationDuration / Double(plusOneLabels.count)) * Double(index)
             
-            if let topConstraint = labelTopConstraint[label] {
-                let animationDelay = Double(labelIndex) * delayMultiplier
-                
-                delay(animationDelay) {
-                    self.showLabel(label)
-                }
-                
-                UIView.animateWithDuration(animationDuration
-                ,   delay: animationDelay
-                , 	options: UIViewAnimationOptions.CurveLinear
-                , 	animations: {
-                        if let topConstraintMinVal = topConstraintMin[topConstraint] {
-                            topConstraint.constant = topConstraintMinVal
+            if let label    = plusOneLabels[index],
+                constraint  = labelTopConstraint[label],
+                constantMin = topConstraintMin[constraint],
+                constantMax = constantMaxForConstraint(constraint) {
+                    UIView.animateWithDuration(plusOneLabelsMoveUpAnimationDuration,
+                        delay: animationDelay,
+                        usingSpringWithDamping: 0.4,
+                        initialSpringVelocity: 0.0,
+                        options: .CurveLinear,
+                        animations: { () -> Void in
+                            self.showLabel(label)
+                            
+                            constraint.constant = CGFloat(constantMin)
+                            
+                            self.view.layoutIfNeeded()
+                        }, completion: { (finished: Bool) -> Void in
+                            UIView.animateWithDuration(plusOneLabelsDissapearanceAnimationDuration,
+                                animations: { () -> Void in
+                                    self.hideLabel(label)
+                                }, completion: { (finished: Bool) -> Void in
+                                    constraint.constant = CGFloat(constantMax)
+                                }
+                            )
                         }
-                    
-                        self.view.layoutIfNeeded()
-                    }
-                ,   completion: nil
-                )
+                    )
             }
         }
         
-        delay(allAnimationsDuration
-        ,   closure: {
-                for labelIndex in 0 ... plusOneLabels.count - 1 {
-                    let label = plusOneLabels[labelIndex]
-                    
-                    if let topConstraint = labelTopConstraint[label] {
-                        UIView.animateWithDuration(animationDuration
-                        , 	animations: {
-                                self.hideLabel(label)
-                            }
-                        , 	completion: { (finished: Bool) -> Void in
-                                topConstraint.constant = topConstraintMax[topConstraint]!
-                            
-                                self.view.layoutIfNeeded()
-                            }
-                        )
+        let bottomConst =
+            CGRectGetHeight(self.view.frame) / 2 - CGRectGetHeight(self.signedLabel.frame) / 2
+        
+        self.showLabel(self.signedLabel)
+        
+        let lastPlusOneAnimationsFinishedDelay =
+            (plusOneLabelsMoveUpAnimationDuration / Double(plusOneLabels.count)) *
+            Double(plusOneLabels.count - 1) +
+            plusOneLabelsMoveUpAnimationDuration +
+            plusOneLabelsDissapearanceAnimationDuration
+        
+        UIView.animateWithDuration(0.5,
+            delay: lastPlusOneAnimationsFinishedDelay,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0.0,
+            options: .CurveLinear,
+            animations: { () -> Void in
+                self.signedLabelBottomConstraint.constant = bottomConst
+                self.signedLabel.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                
+                self.view.layoutIfNeeded()
+            }, completion: { (finished: Bool) -> Void in
+                UIView.animateWithDuration(0.3,
+                    delay: 0.15,
+                    options: .CurveLinear,
+                    animations: { () -> Void in
+                        self.hideLabel(self.signedLabel)
+                    }, completion: { (finished: Bool) -> Void in
+                        self.hideSignedLabel()
+                        
+                        self.signedLabel.transform = CGAffineTransformIdentity;
+                        self.animatingPlusOneLabels = false
+                        
+                        completion()
                     }
-                }
-            
-                delay(animationDuration) {
-                    self.animatingPlusOneLabels = false
-                }
+                )
             }
         )
     }

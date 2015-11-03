@@ -98,7 +98,7 @@ extension AddDappLinksVC: DappLinksVCDelegate {
 }
 
 extension AddDappLinksVC: SwipeableViewDelegate {
-    func didSwipe(swipeDirection: SwipeDirection) {
+    func willShow(swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .LeftToRight:
             self.performSegueWithIdentifier(self.finalDappSegueID, sender: self)
@@ -110,4 +110,6 @@ extension AddDappLinksVC: SwipeableViewDelegate {
             break
         }
     }
+    
+    func didSwipe(swipeDirection: SwipeDirection) {}
 }

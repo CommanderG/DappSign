@@ -626,7 +626,7 @@ extension AddDappViewController: UITextFieldDelegate {
 }
 
 extension AddDappViewController: SwipeableViewDelegate {
-    func didSwipe(swipeDirection: SwipeDirection) {
+    func willShow(swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .LeftToRight:
             if self.mode == "chooseColor" {
@@ -659,4 +659,6 @@ extension AddDappViewController: SwipeableViewDelegate {
             break
         }
     }
+    
+    func didSwipe(swipeDirection: SwipeDirection) {}
 }

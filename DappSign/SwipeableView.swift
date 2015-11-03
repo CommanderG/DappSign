@@ -14,6 +14,7 @@ internal enum SwipeDirection {
 }
 
 protocol SwipeableViewDelegate: class {
+    func willShow(swipeDirection: SwipeDirection)
     func didSwipe(swipeDirection: SwipeDirection)
 }
 
@@ -73,6 +74,10 @@ class SwipeableView: UIView {
     }
     
     internal func show() {
+        if let swipeDirection = self.swipeDirection {
+            self.delegate?.willShow(swipeDirection)
+        }
+        
         self.animator?.removeAllBehaviors()
         
         self.center = self.originalCenter
@@ -81,10 +86,6 @@ class SwipeableView: UIView {
         let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
         
         self.transform = CGAffineTransformConcat(scale, translate)
-        
-        if let swipeDirection = self.swipeDirection {
-            self.delegate?.didSwipe(swipeDirection)
-        }
         
         spring(0.5) {
             let scale = CGAffineTransformMakeScale(1.0, 1.0)
@@ -139,6 +140,10 @@ class SwipeableView: UIView {
                 
                 if let gravity = self.gravity {
                     self.animator?.addBehavior(gravity)
+                }
+                
+                if let swipeDirection = self.swipeDirection {
+                    self.delegate?.didSwipe(swipeDirection)
                 }
             } else {
                 if let snapBehavior = self.snapBehavior {

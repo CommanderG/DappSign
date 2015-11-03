@@ -296,7 +296,9 @@ class FinalDappSubmitViewController: UIViewController {
 }
 
 extension FinalDappSubmitViewController: SwipeableViewDelegate {
-    func didSwipe(swipeDirection: SwipeDirection) {
+    func willShow(swipeDirection: SwipeDirection) {
         self.performSegueWithIdentifier("showHomeViewControllerAfterSubmit", sender: self)
     }
+    
+    func didSwipe(swipeDirection: SwipeDirection) {}
 }
