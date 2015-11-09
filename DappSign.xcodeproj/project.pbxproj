@@ -644,6 +644,7 @@
 				4CD9C9731AA1D59900046CA2 /* Resources */,
 				4C1D14EE1AC943E600040DE1 /* ShellScript */,
 				AF138B80AA1237E396FD0B9E /* Copy Pods Resources */,
+				BF4026A887271BBDAEF7749C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -794,6 +795,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSign/Pods-DappSign-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF4026A887271BBDAEF7749C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSign/Pods-DappSign-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
