@@ -484,6 +484,46 @@ class Requests {
         }
     }
     
+    class func downloadProhibitedWords(completion: (prohibitedWords: [String], error: NSError?) -> Void) -> Void {
+        let query = PFQuery(className: "ProhibitedWord")
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            
+            if error != nil {
+                completion(prohibitedWords: [], error: error)
+            } else if objects != nil {
+                let parseObjects = objects as? [PFObject]
+                
+                let prohibitedWordsOptional = parseObjects?.filter({
+                    (parseObject: PFObject) -> Bool in
+                    if let wordStr = parseObject["word"] as? String {
+                        if wordStr.characters.count > 0 {
+                            return true
+                        }
+                    }
+                    
+                    return false
+                }).map({
+                    (parseObject: PFObject) -> String in
+                    return parseObject["word"] as! String
+                })
+                
+                func getProhibitedWords() -> [String] {
+                    if let prohibitedWords = prohibitedWordsOptional {
+                        return prohibitedWords
+                    }
+                    
+                    return []
+                }
+                
+                let prohibitedWords = getProhibitedWords()
+                
+                completion(prohibitedWords: prohibitedWords, error: nil)
+            }
+        }
+    }
+    
     // MARK: -
     
     private class func downloadHashtagWthName(name: String, completion: (hashtag: PFObject?, error: NSError!) -> Void) {

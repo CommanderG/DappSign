@@ -27,22 +27,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebook()
         
-//        var testObject:PFObject = PFObject(className: "TestObject")
-//        
-//        testObject["foo"] = "bar"
-//        
-//        testObject.setObject("user1", forKey: "user")
-//        
-//        testObject.saveInBackgroundWithBlock{
-//            (success:Bool! , error: NSError!) -> Void in
-//            if(success != nil){
-//                NSLog("Object created with id: \(testObject.objectId)")
-//            }else{
-//                NSLog("%@" , error)
-//            }
-//        }
-        
         Fabric.with([Twitter(), Crashlytics()])
+        
+        Requests.downloadProhibitedWords {
+            (prohibitedWords: [String], error: NSError?) -> Void in
+            if error == nil {
+                ProhibitedWords.setProhibitedWords(prohibitedWords)
+                
+                let prohibitedWords = ProhibitedWords.prohibitedWordsInString(
+                    "q12          bestiality asd \n rto  barely legal \n   bastinado    assmunch big \n knockers "
+                )
+                
+                print(prohibitedWords)
+                
+                if prohibitedWords.count > 0 {
+                    let prohibitedWordsString = prohibitedWords.joinWithSeparator(", ")
+                    let errorMessage = "Prohibited words: " + prohibitedWordsString + "."
+                    
+                    print(errorMessage)
+                }
+            }
+        }
         
         return true
     }

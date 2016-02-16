@@ -29,6 +29,7 @@
 		27811A681B959A38007E97EE /* DappSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A671B959A38007E97EE /* DappSignView.xib */; };
 		27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A691B95C6FE007E97EE /* DappMappView.swift */; };
 		27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A6B1B95C70D007E97EE /* DappMappView.xib */; };
+		2788A15F1C738C1D00EBABC7 /* ProhibitedWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */; };
 		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
@@ -156,6 +157,7 @@
 		27811A671B959A38007E97EE /* DappSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappSignView.xib; sourceTree = "<group>"; };
 		27811A691B95C6FE007E97EE /* DappMappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappView.swift; sourceTree = "<group>"; };
 		27811A6B1B95C70D007E97EE /* DappMappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappMappView.xib; sourceTree = "<group>"; };
+		2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedWords.swift; sourceTree = "<group>"; };
 		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
 				2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */,
 				27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */,
+				2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
 				279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */,
 				F372467E1AD3ED7600AD56E2 /* SDWebImageDownloaderOperation.m in Sources */,
+				2788A15F1C738C1D00EBABC7 /* ProhibitedWords.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				F372467C1AD3ED7600AD56E2 /* SDWebImageDecoder.m in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
