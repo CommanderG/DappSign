@@ -29,7 +29,7 @@
 		27811A681B959A38007E97EE /* DappSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A671B959A38007E97EE /* DappSignView.xib */; };
 		27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A691B95C6FE007E97EE /* DappMappView.swift */; };
 		27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A6B1B95C70D007E97EE /* DappMappView.xib */; };
-		2788A15F1C738C1D00EBABC7 /* ProhibitedWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */; };
+		2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */; };
 		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
@@ -100,6 +100,7 @@
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 		A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
+		DC9324174E305177A18694BC /* libPods-DappSignTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */; };
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
 		F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */; };
 		F372464F1AD3ED3C00AD56E2 /* Nextbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464C1AD3ED3C00AD56E2 /* Nextbutton@3x.png */; };
@@ -157,7 +158,7 @@
 		27811A671B959A38007E97EE /* DappSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappSignView.xib; sourceTree = "<group>"; };
 		27811A691B95C6FE007E97EE /* DappMappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappView.swift; sourceTree = "<group>"; };
 		27811A6B1B95C70D007E97EE /* DappMappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappMappView.xib; sourceTree = "<group>"; };
-		2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedWords.swift; sourceTree = "<group>"; };
+		2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedPhrases.swift; sourceTree = "<group>"; };
 		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
@@ -222,7 +223,9 @@
 		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		66EC7BFAEB1D53CB2FF2709D /* Pods-DappSignTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSignTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DappSignTests/Pods-DappSignTests.debug.xcconfig"; sourceTree = "<group>"; };
 		675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DappSign/Pods-DappSign.debug.xcconfig"; sourceTree = "<group>"; };
+		6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DappSignTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
@@ -240,6 +243,7 @@
 		84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		9FFC6B2358C65BC5E5FD6B0A /* Pods-DappSignTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSignTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DappSignTests/Pods-DappSignTests.release.xcconfig"; sourceTree = "<group>"; };
 		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
 		B37714691ACD5A4200B5AE77 /* FacebookBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBridge.m; sourceTree = "<group>"; };
 		BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DappSign.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC9324174E305177A18694BC /* libPods-DappSignTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */,
+				6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -524,7 +530,7 @@
 				271431951AB0D27C002F9527 /* TwitterHelper.swift */,
 				2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */,
 				27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */,
-				2788A15E1C738C1D00EBABC7 /* ProhibitedWords.swift */,
+				2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -630,6 +636,8 @@
 			children = (
 				675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */,
 				C886EE679BC1674B59807AAB /* Pods-DappSign.release.xcconfig */,
+				66EC7BFAEB1D53CB2FF2709D /* Pods-DappSignTests.debug.xcconfig */,
+				9FFC6B2358C65BC5E5FD6B0A /* Pods-DappSignTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -662,9 +670,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CD9C99A1AA1D59900046CA2 /* Build configuration list for PBXNativeTarget "DappSignTests" */;
 			buildPhases = (
+				170738138112BC580D751498 /* Check Pods Manifest.lock */,
 				4CD9C9891AA1D59900046CA2 /* Sources */,
 				4CD9C98A1AA1D59900046CA2 /* Frameworks */,
 				4CD9C98B1AA1D59900046CA2 /* Resources */,
+				9A36180BFBEA404743E3AD10 /* Embed Pods Frameworks */,
+				E6B94A406B81872BF566388C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -757,6 +768,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		170738138112BC580D751498 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		27E9554F5CD7485C5C5D941A /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -784,6 +810,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run d22483edfe701d576bc4ce54b30b66ee9d8dc2dc 95f50e0f2ff2859c379f76a72c321060314f4b052b472b0466ef1a8d32e585a3";
+		};
+		9A36180BFBEA404743E3AD10 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSignTests/Pods-DappSignTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		AF138B80AA1237E396FD0B9E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -815,6 +856,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSign/Pods-DappSign-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E6B94A406B81872BF566388C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DappSignTests/Pods-DappSignTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -835,7 +891,7 @@
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
 				279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */,
 				F372467E1AD3ED7600AD56E2 /* SDWebImageDownloaderOperation.m in Sources */,
-				2788A15F1C738C1D00EBABC7 /* ProhibitedWords.swift in Sources */,
+				2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				F372467C1AD3ED7600AD56E2 /* SDWebImageDecoder.m in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
@@ -1066,6 +1122,7 @@
 		};
 		4CD9C99B1AA1D59900046CA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66EC7BFAEB1D53CB2FF2709D /* Pods-DappSignTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1085,6 +1142,7 @@
 		};
 		4CD9C99C1AA1D59900046CA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FFC6B2358C65BC5E5FD6B0A /* Pods-DappSignTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

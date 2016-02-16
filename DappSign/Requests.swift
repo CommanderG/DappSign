@@ -484,21 +484,23 @@ class Requests {
         }
     }
     
-    class func downloadProhibitedWords(completion: (prohibitedWords: [String], error: NSError?) -> Void) -> Void {
-        let query = PFQuery(className: "ProhibitedWord")
+    class func downloadProhibitedPhrases(completion: (prohibitedPhrases: [String],
+                                                      error: NSError?) -> Void) -> Void {
+        let query = PFQuery(className: "ProhibitedPhrase")
         
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
             if error != nil {
-                completion(prohibitedWords: [], error: error)
+                completion(prohibitedPhrases: [], error: error)
             } else if objects != nil {
                 let parseObjects = objects as? [PFObject]
+                let phraseKey = "phrase"
                 
-                let prohibitedWordsOptional = parseObjects?.filter({
+                let prohibitedPhrasesOptional = parseObjects?.filter({
                     (parseObject: PFObject) -> Bool in
-                    if let wordStr = parseObject["word"] as? String {
-                        if wordStr.characters.count > 0 {
+                    if let phraseString = parseObject[phraseKey] as? String {
+                        if phraseString.characters.count > 0 {
                             return true
                         }
                     }
@@ -506,20 +508,20 @@ class Requests {
                     return false
                 }).map({
                     (parseObject: PFObject) -> String in
-                    return parseObject["word"] as! String
+                    return parseObject[phraseKey] as! String
                 })
                 
-                func getProhibitedWords() -> [String] {
-                    if let prohibitedWords = prohibitedWordsOptional {
-                        return prohibitedWords
+                func getProhibitedPhrases() -> [String] {
+                    if let prohibitedPhrases = prohibitedPhrasesOptional {
+                        return prohibitedPhrases
                     }
                     
                     return []
                 }
                 
-                let prohibitedWords = getProhibitedWords()
+                let prohibitedPhrases = getProhibitedPhrases()
                 
-                completion(prohibitedWords: prohibitedWords, error: nil)
+                completion(prohibitedPhrases: prohibitedPhrases, error: nil)
             }
         }
     }

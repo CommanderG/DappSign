@@ -29,20 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Twitter(), Crashlytics()])
         
-        Requests.downloadProhibitedWords {
-            (prohibitedWords: [String], error: NSError?) -> Void in
+        Requests.downloadProhibitedPhrases {
+            (prohibitedPhrases: [String], error: NSError?) -> Void in
             if error == nil {
-                ProhibitedWords.setProhibitedWords(prohibitedWords)
+                ProhibitedPhrases.setProhibitedPhrases(prohibitedPhrases)
                 
-                let prohibitedWords = ProhibitedWords.prohibitedWordsInString(
-                    "q12          bestiality asd \n rto  barely legal \n   bastinado    assmunch big \n knockers "
+                let prohibitedPhrases = ProhibitedPhrases.prohibitedPhrasesInString(
+                    "q12     \n\n\n     assimilation        bestiality asd \n rto  barely legal \n   bastinado     big \n knockers "
                 )
                 
-                print(prohibitedWords)
+                print(prohibitedPhrases)
                 
-                if prohibitedWords.count > 0 {
-                    let prohibitedWordsString = prohibitedWords.joinWithSeparator(", ")
-                    let errorMessage = "Prohibited words: " + prohibitedWordsString + "."
+                if prohibitedPhrases.count > 0 {
+                    let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
+                    let errorMessage = "Prohibited words: " + prohibitedPhrasesString + "."
                     
                     print(errorMessage)
                 }
