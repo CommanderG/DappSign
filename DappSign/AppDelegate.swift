@@ -33,19 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             (prohibitedPhrases: [String], error: NSError?) -> Void in
             if error == nil {
                 ProhibitedPhrases.setProhibitedPhrases(prohibitedPhrases)
-                
-                let prohibitedPhrases = ProhibitedPhrases.prohibitedPhrasesInString(
-                    "q12     \n\n\n     assimilation        bestiality asd \n rto  barely legal \n   bastinado     big \n knockers "
-                )
-                
-                print(prohibitedPhrases)
-                
-                if prohibitedPhrases.count > 0 {
-                    let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
-                    let errorMessage = "Prohibited words: " + prohibitedPhrasesString + "."
-                    
-                    print(errorMessage)
-                }
             }
         }
         

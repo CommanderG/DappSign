@@ -21,7 +21,7 @@ struct Dapp {
     var hashtagNames: [String]
 }
 
-class AddDappViewController: UIViewController, UITextViewDelegate {
+class AddDappViewController: UIViewController {
     
     //ControlFlow
     var mode:String = "chooseColor"
@@ -78,6 +78,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var sansationButtonOutlet: UIButton!
     @IBOutlet weak var walkwayButtonOutlet: UIButton!
     
+    @IBOutlet weak var prohibitedWordsLabel: UILabel!
+    
     private var showDappLinksSegueID = "showDappLinks"
     
     override func viewDidLoad() {
@@ -99,6 +101,8 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         
         self.containerView.delegate = self
         self.containerView.minTranslationX = 200.0
+        
+        self.prohibitedWordsLabel.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -462,20 +466,6 @@ class AddDappViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    //textView delegate function
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        
-        let newLength:Int = (textView.text as NSString).length + (text as NSString).length - range.length
-        
-        let remainingChar:Int = 140 - newLength
-        
-        characterCountLabel.text = "\(remainingChar)"
-        
-        return(newLength > 140) ? false : true
-        //editable when newLength is less than 140. not editable when it is
-        
-    }
-    
     func getDapp() -> Dapp {
         func getDappTypeID() -> String? {
             let mainBundle = NSBundle.mainBundle()
@@ -661,4 +651,39 @@ extension AddDappViewController: SwipeableViewDelegate {
     }
     
     func didSwipe(swipeDirection: SwipeDirection) {}
+}
+
+extension AddDappViewController: UITextViewDelegate {
+    func textView(textView: UITextView,
+                  shouldChangeTextInRange range: NSRange,
+                  replacementText text: String) -> Bool {
+        let newLength:Int = (textView.text as NSString).length + (text as NSString).length - range.length
+        let remainingChar:Int = 140 - newLength
+        
+        characterCountLabel.text = "\(remainingChar)"
+        
+        return(newLength > 140) ? false : true
+        //editable when newLength is less than 140. not editable when it is
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        let petitionMessage = textView.text
+        let prohibitedPhrases = ProhibitedPhrases.prohibitedPhrasesInString(petitionMessage)
+        
+        if prohibitedPhrases.count > 0 {
+            self.prohibitedWordsLabel.hidden = false
+            self.containerView.canBeDraged = false
+            
+            let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
+            
+            if prohibitedPhrases.count == 1 {
+                self.prohibitedWordsLabel.text = "This petition can not be created because it contains a prohibited word: \(prohibitedPhrasesString)."
+            } else {
+                self.prohibitedWordsLabel.text = "This petition can not be created because it contains following prohibited words: \(prohibitedPhrasesString)."
+            }
+        } else {
+            self.prohibitedWordsLabel.hidden = true
+            self.containerView.canBeDraged = true
+        }
+    }
 }

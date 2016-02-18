@@ -17,6 +17,16 @@ class ProhibitedPhrases {
     
     class func prohibitedPhrasesInString(string: String) -> [String] {
         var lowercaseString = string.lowercaseString
+        
+        let newLineString = "\n"
+        
+        while lowercaseString.containsString(newLineString) {
+            lowercaseString = lowercaseString.stringByReplacingOccurrencesOfString(
+                newLineString
+            ,   withString: " "
+            )
+        }
+        
         let doubleWhitespaceString = "  "
         
         while lowercaseString.containsString(doubleWhitespaceString) {
@@ -26,13 +36,36 @@ class ProhibitedPhrases {
             )
         }
         
-        let newLineString = "\n"
+        if lowercaseString.characters.count > 0 {
+            let firstCharacterIndex = lowercaseString.startIndex
+            let firstCharacter = lowercaseString[firstCharacterIndex]
+            
+            if firstCharacter == " " {
+                if lowercaseString.characters.count > 1 {
+                    let newStartIndex = lowercaseString.startIndex.advancedBy(1)
+                    let newEndIndex = lowercaseString.endIndex.predecessor()
+                    
+                    lowercaseString = lowercaseString[newStartIndex...newEndIndex]
+                } else {
+                    lowercaseString = ""
+                }
+            }
+        }
         
-        while lowercaseString.containsString(newLineString) {
-            lowercaseString = lowercaseString.stringByReplacingOccurrencesOfString(
-                newLineString
-            ,   withString: ""
-            )
+        if lowercaseString.characters.count > 0 {
+            let lastCharacterIndex = lowercaseString.endIndex.predecessor()
+            let lastCharacter = lowercaseString[lastCharacterIndex]
+            
+            if lastCharacter == " " {
+                if lowercaseString.characters.count > 1 {
+                    let newStartIndex = lowercaseString.startIndex
+                    let newEndIndex = lowercaseString.endIndex.predecessor().predecessor()
+                    
+                    lowercaseString = lowercaseString[newStartIndex...newEndIndex]
+                } else {
+                    lowercaseString = ""
+                }
+            }
         }
         
         var prohibitedPhrasesInString: [String] = []
@@ -53,7 +86,7 @@ class ProhibitedPhrases {
             return !prohibitedPhrase.containsString(" ")
         }
         
-        let stringWords = string.componentsSeparatedByString(" ")
+        let stringWords = lowercaseString.componentsSeparatedByString(" ")
         
         for stringWord in stringWords {
             for prohibitedPhrase in singleWordProhibitedPhrases {
@@ -63,6 +96,14 @@ class ProhibitedPhrases {
             }
         }
         
-        return prohibitedPhrasesInString
+        var uniqueProhibitedPhrasesInString: [String] = []
+        
+        for prohibitedPhrase in prohibitedPhrasesInString {
+            if !uniqueProhibitedPhrasesInString.contains(prohibitedPhrase) {
+                uniqueProhibitedPhrasesInString.append(prohibitedPhrase)
+            }
+        }
+        
+        return uniqueProhibitedPhrasesInString
     }
 }

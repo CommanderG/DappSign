@@ -27,6 +27,7 @@ class SwipeableView: UIView {
     
     internal var minTranslationX: CGFloat?
     internal weak var delegate: SwipeableViewDelegate?
+    internal var canBeDraged: Bool = true
     
     required override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,6 +99,10 @@ class SwipeableView: UIView {
     // MARK: - pan gesture recognizer
     
     internal func handlePanGesture(panGR: UIPanGestureRecognizer) {
+        if !self.canBeDraged {
+            return
+        }
+        
         let translation = panGR.translationInView(self)
         
         switch panGR.state {
