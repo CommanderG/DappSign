@@ -664,9 +664,13 @@ extension AddDappViewController: UITextViewDelegate {
             let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
             
             if prohibitedPhrases.count == 1 {
-                self.prohibitedWordsLabel.text = "This petition can not be created because it contains a prohibited word: \(prohibitedPhrasesString)."
+                self.prohibitedWordsLabel.text =
+                "This petition can not be created because " +
+                "it contains a prohibited word: \(prohibitedPhrasesString)."
             } else {
-                self.prohibitedWordsLabel.text = "This petition can not be created because it contains following prohibited words: \(prohibitedPhrasesString)."
+                self.prohibitedWordsLabel.text =
+                "This petition can not be created because " +
+                "it contains following prohibited words: \(prohibitedPhrasesString)."
             }
         } else {
             self.prohibitedWordsLabel.hidden = true
