@@ -53,8 +53,6 @@ class DappsTableViewController: UITableViewController {
                     self.title = "Primary Dapps"
                 case .Secondary:
                     self.title = "Secondary Dapps"
-                case .Unapproved:
-                    self.title = "Unapproved Dapps"
             }
             
             self.dappsDownloader = DappsDownloader(type: dappsType)
@@ -170,14 +168,6 @@ class DappsTableViewController: UITableViewController {
                     cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
                     destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
                     otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue
-                )
-            case .Unapproved:
-                return UIActionSheet(
-                    title: title,
-                    delegate: self,
-                    cancelButtonTitle: UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles: UIActionSheetButton.MakePrimary.rawValue, UIActionSheetButton.MakeSecondary.rawValue
                 )
             }
         }

@@ -12,13 +12,11 @@ class EditDappsTableViewController: UITableViewController {
     var dappsCount: [DappType: Int32] = [
         .Primary: -1,
         .Secondary: -1,
-        .Unapproved: -1
     ]
     
     enum SegueIdentifier: String {
         case ShowPrimaryDapps = "showPrimaryDappsTableViewController"
         case ShowSecondaryDapps = "showSecondaryDappsTableViewController"
-        case ShowUnapprovedDapps = "showUnapprovedDappsTableViewController"
     }
     
     override func viewDidLoad() {
@@ -74,8 +72,6 @@ class EditDappsTableViewController: UITableViewController {
             return self.shouldPerformSegueToShowDappsWithType(DappType.Primary)
         } else if identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {
             return self.shouldPerformSegueToShowDappsWithType(DappType.Secondary)
-        } else if identifier == SegueIdentifier.ShowUnapprovedDapps.rawValue {
-            return self.shouldPerformSegueToShowDappsWithType(DappType.Unapproved)
         }
         
         return true
@@ -86,8 +82,6 @@ class EditDappsTableViewController: UITableViewController {
             (segue.destinationViewController as! DappsTableViewController).dappsType = .Primary
         } else if segue.identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {
             (segue.destinationViewController as! DappsTableViewController).dappsType = .Secondary
-        } else if segue.identifier == SegueIdentifier.ShowUnapprovedDapps.rawValue {
-            (segue.destinationViewController as! DappsTableViewController).dappsType = .Unapproved
         }
     }
     
@@ -135,7 +129,6 @@ class EditDappsTableViewController: UITableViewController {
     private func refreshTableViewContent() -> Void {
         self.refreshTableViewContentForDappType(.Primary)
         self.refreshTableViewContentForDappType(.Secondary)
-        self.refreshTableViewContentForDappType(.Unapproved)
     }
     
     private func refreshTableViewContentForDappType(dappType: DappType) -> Void {
@@ -145,10 +138,7 @@ class EditDappsTableViewController: UITableViewController {
                 if error == nil {
                     self.dappsCount[dappType] = count
                     
-                    let cellIndexPath = NSIndexPath(
-                        forRow: dappType.rawValue,
-                        inSection: 0
-                    )
+                    let cellIndexPath = NSIndexPath(forRow: dappType.rawValue, inSection: 0)
                     
                     self.tableView.reloadRowsAtIndexPaths([cellIndexPath],
                         withRowAnimation: .None

@@ -9,7 +9,6 @@
 internal enum DappType: Int {
     case Primary = 0
     case Secondary = 1
-    case Unapproved = 2
 }
 
 internal enum DappTypeId: String {

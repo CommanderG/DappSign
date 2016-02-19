@@ -86,11 +86,6 @@ class DappsDownloader {
                     
                     completion(dapps: self.dapps, error: error)
                 })
-            case .Unapproved:
-                self.downloadAllDappsWithQuery(query, completion: {
-                    (error: NSError!) -> Void in
-                    completion(dapps: self.dapps, error: error)
-                })
             }
         } else {
             let error = NSError(

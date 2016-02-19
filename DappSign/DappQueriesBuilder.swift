@@ -13,7 +13,7 @@ class DappQueriesBuilder {
         if let predicate = self.predicateForAllDapsOfType(dappType) {
             let query = PFQuery(className: "Dapps", predicate: predicate)
             
-            if dappType == .Primary || dappType == .Unapproved {
+            if dappType == .Primary {
                 query.orderByAscending("createdAt")
             }
             
@@ -92,10 +92,6 @@ class DappQueriesBuilder {
         case .Secondary:
             return NSPredicate(format:
                 "isDeleted != true AND dappTypeId = %@", DappTypeId.Secondary.rawValue
-            )
-        case .Unapproved:
-            return NSPredicate(format:
-                "isDeleted != true AND dappTypeId = nil"
             )
         }
     }
