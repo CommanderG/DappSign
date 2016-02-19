@@ -10,13 +10,15 @@ import UIKit
 
 class EditDappsTableViewController: UITableViewController {
     var dappsCount: [DappType: Int32] = [
-        .Primary: -1,
-        .Secondary: -1,
+        .Primary:      -1,
+        .Secondary:    -1,
+        .Introductory: -1
     ]
     
     enum SegueIdentifier: String {
-        case ShowPrimaryDapps = "showPrimaryDappsTableViewController"
-        case ShowSecondaryDapps = "showSecondaryDappsTableViewController"
+        case ShowPrimaryDapps      = "showPrimaryDappsTableViewController"
+        case ShowSecondaryDapps    = "showSecondaryDappsTableViewController"
+        case ShowIntroductoryDapps = "showIntroductoryDappsTableViewController"
     }
     
     override func viewDidLoad() {
@@ -68,20 +70,38 @@ class EditDappsTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == SegueIdentifier.ShowPrimaryDapps.rawValue {
-            return self.shouldPerformSegueToShowDappsWithType(DappType.Primary)
-        } else if identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {
-            return self.shouldPerformSegueToShowDappsWithType(DappType.Secondary)
+        switch identifier {
+        case SegueIdentifier.ShowPrimaryDapps.rawValue:
+            return self.shouldPerformSegueToShowDappsWithType(.Primary)
+        case SegueIdentifier.ShowSecondaryDapps.rawValue:
+            return self.shouldPerformSegueToShowDappsWithType(.Secondary)
+        case SegueIdentifier.ShowIntroductoryDapps.rawValue:
+            return self.shouldPerformSegueToShowDappsWithType(.Introductory)
+        default:
+            return true
         }
-        
-        return true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.ShowPrimaryDapps.rawValue {
-            (segue.destinationViewController as! DappsTableViewController).dappsType = .Primary
-        } else if segue.identifier == SegueIdentifier.ShowSecondaryDapps.rawValue {
-            (segue.destinationViewController as! DappsTableViewController).dappsType = .Secondary
+        if let segueIdentifier = segue.identifier {
+            var dappsType: DappType?
+            
+            switch segueIdentifier {
+            case SegueIdentifier.ShowPrimaryDapps.rawValue:
+                dappsType = .Primary
+            case SegueIdentifier.ShowSecondaryDapps.rawValue:
+                dappsType = .Secondary
+            case SegueIdentifier.ShowIntroductoryDapps.rawValue:
+                dappsType = .Introductory
+            default:
+                break
+            }
+            
+            if let dappsType = dappsType {
+                let dappsTVC = segue.destinationViewController as! DappsTableViewController
+                
+                dappsTVC.dappsType = dappsType
+            }
         }
     }
     
@@ -102,16 +122,16 @@ class EditDappsTableViewController: UITableViewController {
             if let count = self.dappsCount[dappType] {
                 if count > 0 {
                     cell.detailTextLabel?.text = String(count)
-                    
+                } else if count == 0 {
+                    cell.detailTextLabel?.text = "0"
+                } else {
+                    cell.detailTextLabel?.text = ""
+                }
+                
+                if count > 0 {
                     cell.accessoryType = .DisclosureIndicator
                     cell.selectionStyle = .Default
                 } else {
-                    if count == 0 {
-                        cell.detailTextLabel?.text = "0"
-                    } else {
-                        cell.detailTextLabel?.text = nil
-                    }
-                    
                     cell.accessoryType = .None
                     cell.selectionStyle = .None
                 }
@@ -129,6 +149,7 @@ class EditDappsTableViewController: UITableViewController {
     private func refreshTableViewContent() -> Void {
         self.refreshTableViewContentForDappType(.Primary)
         self.refreshTableViewContentForDappType(.Secondary)
+        self.refreshTableViewContentForDappType(.Introductory)
     }
     
     private func refreshTableViewContentForDappType(dappType: DappType) -> Void {

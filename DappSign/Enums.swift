@@ -7,11 +7,13 @@
 //
 
 internal enum DappType: Int {
-    case Primary = 0
-    case Secondary = 1
+    case Primary      = 0
+    case Secondary    = 1
+    case Introductory = 2
 }
 
 internal enum DappTypeId: String {
-    case Primary = "OTUGpeUV0F"
-    case Secondary = "xljcqCZChU"
+    case Primary      = "OTUGpeUV0F"
+    case Secondary    = "xljcqCZChU"
+    case Introductory = "v7rhAbS0cO"
 }

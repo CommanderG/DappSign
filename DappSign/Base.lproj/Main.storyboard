@@ -48,6 +48,8 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
@@ -669,6 +671,33 @@
                                         <animations/>
                                         <connections>
                                             <segue destination="Mdb-Kg-7xy" kind="push" identifier="showSecondaryDappsTableViewController" id="Tb5-sO-Miv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Y88-Nd-SA3" detailTextLabel="dOI-Kz-okl" style="IBUITableViewCellStyleValue1" id="CS5-gq-k0I">
+                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CS5-gq-k0I" id="Xis-WA-apV">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Introductory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y88-Nd-SA3">
+                                                    <rect key="frame" x="15" y="10" width="96" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dOI-Kz-okl">
+                                                    <rect key="frame" x="267" y="10" width="18" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Mdb-Kg-7xy" kind="push" identifier="showIntroductoryDappsTableViewController" id="rDJ-8j-zWb"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -2479,6 +2508,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XgB-ZI-Ie0"/>
-        <segue reference="D2a-aL-0oF"/>
+        <segue reference="rDJ-8j-zWb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,8 +9,9 @@
 import Foundation
 
 class DappsDownloader {
-    typealias downloadCompletionClosureWithError = (error: NSError!) -> Void
-    typealias downloadCompletionClosureWithDappsAndError = (dapps: [PFObject], error: NSError!) -> Void
+    typealias errorClosure = (error: NSError!) -> Void
+    typealias dappsAndErrorClosure = (dapps: [PFObject], error: NSError!) -> Void
+    typealias dappAndErrorClosue = (dapp: PFObject?, error: NSError!) -> Void
     
     private var dappsType: DappType!
     private var dapps: [PFObject]
@@ -20,7 +21,7 @@ class DappsDownloader {
         self.dapps = []
     }
     
-    internal func downloadDappsNotSwipedByUser(user: PFUser, completion: downloadCompletionClosureWithDappsAndError) {
+    internal func downloadDappsNotSwipedByUser(user: PFUser, completion: dappsAndErrorClosure) {
         self.dapps = []
         
         let query = DappQueriesBuilder.queryForAllDapsNotSwipedByUser(self.dappsType, user: user)
@@ -31,7 +32,7 @@ class DappsDownloader {
         })
     }
     
-    internal func downloadAllDapps(completion: downloadCompletionClosureWithDappsAndError) {
+    internal func downloadAllDapps(completion: dappsAndErrorClosure) {
         self.dapps = []
         
         let query = DappQueriesBuilder.queryForAllDappsOfType(self.dappsType)
@@ -42,7 +43,7 @@ class DappsDownloader {
         })
     }
     
-    internal func downloadDappWithID(dappID: String, completion: (dapp: PFObject?, error: NSError!) -> Void) {
+    internal func downloadDappWithID(dappID: String, completion: dappAndErrorClosue) {
         let query = DappQueriesBuilder.queryForDownloadingDappWithID(dappID)
         
         query.findObjectsInBackgroundWithBlock {
@@ -62,7 +63,7 @@ class DappsDownloader {
     
     // MARK: -
     
-    private func downloadDappsWithQuery(query: PFQuery?, completion: downloadCompletionClosureWithDappsAndError) {
+    private func downloadDappsWithQuery(query: PFQuery?, completion: dappsAndErrorClosure) {
         if let dappsType = self.dappsType {
             switch dappsType {
             case .Primary:
@@ -76,9 +77,8 @@ class DappsDownloader {
                     }
                 )
             case .Secondary:
-                self.downloadAllDappsWithQuery(query,completion:  {
+                self.downloadAllDappsWithQuery(query, completion: {
                     (error: NSError!) -> Void in
-                    
                     self.dapps.sortInPlace({
                         (dapp1: PFObject, dapp2: PFObject) -> Bool in
                         return dapp1["dappScore"] as? Int > dapp2["dappScore"] as? Int
@@ -86,18 +86,24 @@ class DappsDownloader {
                     
                     completion(dapps: self.dapps, error: error)
                 })
+            case .Introductory:
+                self.downloadAllDappsWithQuery(query, completion: {
+                    (error: NSError!) -> Void in
+                    completion(dapps: self.dapps, error: error)
+                })
             }
         } else {
             let error = NSError(
                 domain: "Dapps type",
                 code: 0,
-                userInfo: [NSLocalizedDescriptionKey: "Dapps type is not set."])
+                userInfo: [NSLocalizedDescriptionKey: "Dapps type is not set."]
+            )
             
             completion(dapps: self.dapps, error: error)
         }
     }
     
-    private func downloadDappsWithLimit(limit: Int, query: PFQuery?, completion: downloadCompletionClosureWithError) {
+    private func downloadDappsWithLimit(limit: Int, query: PFQuery?, completion: errorClosure) {
         query?.limit = limit
         
         query?.orderByAscending("createdAt")
@@ -115,7 +121,7 @@ class DappsDownloader {
         })
     }
     
-    private func downloadAllDappsWithQuery(query: PFQuery?, completion: downloadCompletionClosureWithError) {
+    private func downloadAllDappsWithQuery(query: PFQuery?, completion: errorClosure) {
         query?.orderByAscending("createdAt")
         
         query?.skip = self.dapps.count

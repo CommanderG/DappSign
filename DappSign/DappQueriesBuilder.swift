@@ -84,15 +84,21 @@ class DappQueriesBuilder {
     // MARK: -
     
     private class func predicateForAllDapsOfType(dappType: DappType) -> NSPredicate? {
+        var dappTypeId = ""
+        
         switch dappType {
         case .Primary:
-            return NSPredicate(
-                format: "isDeleted != true AND dappTypeId = %@", DappTypeId.Primary.rawValue
-            )
+            dappTypeId = DappTypeId.Primary.rawValue
         case .Secondary:
-            return NSPredicate(format:
-                "isDeleted != true AND dappTypeId = %@", DappTypeId.Secondary.rawValue
-            )
+            dappTypeId = DappTypeId.Secondary.rawValue
+        case .Introductory:
+            dappTypeId = DappTypeId.Introductory.rawValue
         }
+        
+        let predicate = NSPredicate(
+            format: "isDeleted != true AND dappTypeId = %@", dappTypeId
+        )
+        
+        return predicate
     }
 }
