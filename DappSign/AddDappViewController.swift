@@ -467,19 +467,6 @@ class AddDappViewController: UIViewController {
     }
     
     func getDapp() -> Dapp {
-        func getDappTypeID() -> String? {
-            let mainBundle = NSBundle.mainBundle()
-            let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String]
-            
-            if let adminUsersIDs = adminUsersIDs {
-                if adminUsersIDs.contains(PFUser.currentUser().objectId) {
-                    return DappTypeId.Secondary.rawValue
-                }
-            }
-            
-            return nil
-        }
-        
         let user = PFUser.currentUser()
         let dappStatement = self.dappTextView.text
         let lowercaseDappStatement = self.dappTextView.text.lowercaseString
@@ -489,7 +476,7 @@ class AddDappViewController: UIViewController {
         let userid = user.objectId
         let dappScore = 1
         let isDeleted = false
-        let dappTypeId = getDappTypeID()
+        let dappTypeId = DappTypeId.Secondary.rawValue
         
         var hashtagNames: [String] = []
         
