@@ -15,6 +15,7 @@
 		2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */; };
 		271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431951AB0D27C002F9527 /* TwitterHelper.swift */; };
 		271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D0DC61ABAD8E400227DE7 /* Requests.swift */; };
+		271E435D1C7776FD0076DB5F /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271E435C1C7776FD0076DB5F /* Consts.swift */; };
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
 		274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */; };
@@ -24,7 +25,7 @@
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
 		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
 		277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D910D1BA71BD900941C7B /* SwipeableView.swift */; };
-		27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* PrimaryDapps.swift */; };
+		27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* IndexedDapps.swift */; };
 		27811A641B9589F8007E97EE /* DappSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A631B9589F8007E97EE /* DappSignView.swift */; };
 		27811A681B959A38007E97EE /* DappSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A671B959A38007E97EE /* DappSignView.xib */; };
 		27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A691B95C6FE007E97EE /* DappMappView.swift */; };
@@ -144,6 +145,7 @@
 		2714318C1AB0CA62002F9527 /* UIViewControllerAlertViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerAlertViewExtension.swift; sourceTree = "<group>"; };
 		271431951AB0D27C002F9527 /* TwitterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHelper.swift; sourceTree = "<group>"; };
 		271D0DC61ABAD8E400227DE7 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		271E435C1C7776FD0076DB5F /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappView.swift; sourceTree = "<group>"; };
@@ -153,7 +155,7 @@
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
 		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
 		277D910D1BA71BD900941C7B /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
-		27810DF01AB7297300223350 /* PrimaryDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryDapps.swift; sourceTree = "<group>"; };
+		27810DF01AB7297300223350 /* IndexedDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexedDapps.swift; sourceTree = "<group>"; };
 		27811A631B9589F8007E97EE /* DappSignView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignView.swift; sourceTree = "<group>"; };
 		27811A671B959A38007E97EE /* DappSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappSignView.xib; sourceTree = "<group>"; };
 		27811A691B95C6FE007E97EE /* DappMappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappView.swift; sourceTree = "<group>"; };
@@ -551,13 +553,14 @@
 				279D4D3D1BA9A2B300408B90 /* HTML Parser */,
 				F37246491AD3ED3C00AD56E2 /* images */,
 				279A31251AB333AC00850508 /* Enums.swift */,
-				27810DF01AB7297300223350 /* PrimaryDapps.swift */,
+				27810DF01AB7297300223350 /* IndexedDapps.swift */,
 				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
 				278B78291AB86B0500EB39AB /* DappsDownloader.swift */,
 				271D0DC61ABAD8E400227DE7 /* Requests.swift */,
 				B37714681ACD5A4200B5AE77 /* FacebookBridge.h */,
 				B37714691ACD5A4200B5AE77 /* FacebookBridge.m */,
 				27696F491BB3EDE800EE391F /* Link.swift */,
+				271E435C1C7776FD0076DB5F /* Consts.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				F372467C1AD3ED7600AD56E2 /* SDWebImageDecoder.m in Sources */,
+				271E435D1C7776FD0076DB5F /* Consts.swift in Sources */,
 				4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */,
 				849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */,
 				F37246541AD3ED5300AD56E2 /* RepresentativesViewController.swift in Sources */,
@@ -942,7 +946,7 @@
 				279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
-				27810DF11AB7297300223350 /* PrimaryDapps.swift in Sources */,
+				27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */,
 				84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */,
 				F37246801AD3ED7600AD56E2 /* SDWebImagePrefetcher.m in Sources */,
 				84D848811AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m in Sources */,

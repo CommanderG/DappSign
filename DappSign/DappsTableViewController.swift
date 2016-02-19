@@ -111,28 +111,25 @@ class DappsTableViewController: UITableViewController {
         cell.dappStatementLabel.text = dapp[self.dappStatementKey] as? String
         
         if let dappsType = self.dappsType {
-            if dappsType == .Primary {
+            if dappsType != .Secondary {
                 if let index = dapp["index"] as? Int {
                     if index >= 0 {
                         cell.dappIndexLabel.text = String(index)
                     } else {
-                        cell.dappIndexLabel.text = nil
+                        cell.dappIndexLabel.text = ""
                     }
                 } else {
-                    cell.dappIndexLabel.text = nil
+                    cell.dappIndexLabel.text = ""
                 }
-            }
-        }
-        
-        if let dappsType = self.dappsType {
-            if dappsType != .Primary {
+                
+                cell.dappIndexLabel.hidden = false
+            } else {
                 cell.dappIndexLabel.hidden = true
             }
         }
         
         return cell
     }
-    
     
     // MARK: - UITableViewDelegate
     
@@ -177,7 +174,8 @@ class DappsTableViewController: UITableViewController {
                     cancelButtonTitle:      UIActionSheetButton.Cancel.rawValue,
                     destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
                     otherButtonTitles:      UIActionSheetButton.MakePrimary.rawValue,
-                                            UIActionSheetButton.MakeSecondary.rawValue
+                                            UIActionSheetButton.MakeSecondary.rawValue,
+                                            UIActionSheetButton.SetIndex.rawValue
                 )
             }
         }
@@ -289,30 +287,51 @@ extension DappsTableViewController: UIActionSheetDelegate {
                 })
             case UIActionSheetButton.MakeSecondary.rawValue:
                 self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                    properties: ["dappTypeId": DappTypeId.Secondary.rawValue]
+                    properties: [
+                        "index": -1,
+                        "dappTypeId": DappTypeId.Secondary.rawValue
+                    ]
                 )
             case UIActionSheetButton.MakeIntroductory.rawValue:
                 self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                    properties: ["dappTypeId": DappTypeId.Introductory.rawValue]
+                    properties: [
+                        "index": -1,
+                        "dappTypeId": DappTypeId.Introductory.rawValue
+                    ]
                 )
             case UIActionSheetButton.SetIndex.rawValue:
-                let message = "Index must be in range from 0 to \(primaryDappsMaxCount - 1)"
-                let alertView = UIAlertView(
-                    title:             "Set index",
-                    message:           message,
-                    delegate:          self,
-                    cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
-                    otherButtonTitles: UIAlertViewButtonTitles.OKButton.rawValue
-                )
+                var alertViewMessage: String? = nil
                 
-                alertView.alertViewStyle = .PlainTextInput
-                alertView.tag = UIAlertViewTag.IndexInput.rawValue
+                if let dappType = self.dappsType {
+                    switch dappType {
+                    case .Primary:
+                        alertViewMessage =
+                        "Index must be in range from 0 to \(primaryDappsMaxCount - 1)"
+                    case .Introductory:
+                        alertViewMessage = ""
+                    default:
+                        break
+                    }
+                }
                 
-                if let textField = alertView.textFieldAtIndex(0) {
-                    textField.keyboardType = .NumberPad
-                    textField.delegate = self
+                if let message = alertViewMessage {
+                    let alertView = UIAlertView(
+                        title:             "Set index",
+                        message:           message,
+                        delegate:          self,
+                        cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
+                        otherButtonTitles: UIAlertViewButtonTitles.OKButton.rawValue
+                    )
                     
-                    alertView.show()
+                    alertView.alertViewStyle = .PlainTextInput
+                    alertView.tag = UIAlertViewTag.IndexInput.rawValue
+                    
+                    if let textField = alertView.textFieldAtIndex(0) {
+                        textField.keyboardType = .NumberPad
+                        textField.delegate = self
+                        
+                        alertView.show()
+                    }
                 }
             default:
                 break
@@ -347,7 +366,11 @@ extension DappsTableViewController: UIAlertViewDelegate {
                                 if succeeded {
                                     self.tableView.userInteractionEnabled = true
                                     
-                                    self.dapps = PrimaryDapps.sortDapps(self.dapps)
+                                    if let dappsType = self.dappsType {
+                                        self.dapps = IndexedDapps.sortDapps(self.dapps,
+                                            dappsType: dappsType
+                                        )
+                                    }
                                     
                                     self.tableView.reloadData()
                                 }
@@ -413,7 +436,11 @@ extension DappsTableViewController: UIAlertViewDelegate {
                                 (succeeded: Bool) -> Void in
                                 self.tableView.userInteractionEnabled = true
                                 
-                                self.dapps = PrimaryDapps.sortDapps(self.dapps)
+                                if let dappsType = self.dappsType {
+                                    self.dapps = IndexedDapps.sortDapps(self.dapps,
+                                        dappsType: dappsType
+                                    )
+                                }
                                 
                                 self.tableView.reloadData()
                         })

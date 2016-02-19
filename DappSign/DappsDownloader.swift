@@ -71,7 +71,7 @@ class DappsDownloader {
                     query: query,
                     completion: {
                         (error: NSError!) -> Void in
-                        self.dapps = PrimaryDapps.sortDapps(self.dapps)
+                        self.dapps = IndexedDapps.sortDapps(self.dapps, dappsType: dappsType)
                         
                         completion(dapps: self.dapps, error: error)
                     }
@@ -89,6 +89,8 @@ class DappsDownloader {
             case .Introductory:
                 self.downloadAllDappsWithQuery(query, completion: {
                     (error: NSError!) -> Void in
+                    self.dapps = IndexedDapps.sortDapps(self.dapps, dappsType: dappsType)
+                    
                     completion(dapps: self.dapps, error: error)
                 })
             }

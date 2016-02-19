@@ -13,7 +13,7 @@ class DappQueriesBuilder {
         if let predicate = self.predicateForAllDapsOfType(dappType) {
             let query = PFQuery(className: "Dapps", predicate: predicate)
             
-            if dappType == .Primary {
+            if dappType == .Primary || dappType == .Introductory {
                 query.orderByAscending("createdAt")
             }
             

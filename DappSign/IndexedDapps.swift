@@ -8,10 +8,12 @@
 
 import Foundation
 
-internal let primaryDappsMaxCount = 200
-
-class PrimaryDapps {
-    class func sortDapps(dapps: [PFObject]) -> [PFObject] {
+class IndexedDapps {
+    class func sortDapps(dapps: [PFObject], dappsType: DappType) -> [PFObject] {
+        if (dappsType == .Secondary) {
+            return dapps
+        }
+        
         var sortedDapps: [PFObject] = []
         
         // find dapps with correct indexes
@@ -49,11 +51,19 @@ class PrimaryDapps {
         })
         
         var dappWithIndex = dappsWithIndexes.first
+        var dappMaxIndex = 0
+        
+        switch dappsType {
+        case .Primary:
+            dappMaxIndex = primaryDappsMaxCount
+        case .Secondary, .Introductory:
+            dappMaxIndex = dapps.count
+        }
         
         // if there is a dapp with the same index as dappIndex, then it will be added to the 
         // sortedDapps array, otherwise if there is a dapp without an index or with incorrect index,
         // it will be added to sortedDapps array
-        for var dappIndex = 0; dappIndex < primaryDappsMaxCount; ++dappIndex {
+        for var dappIndex = 0; dappIndex < dappMaxIndex; ++dappIndex {
             if dappWithIndex != nil {
                 if let index = dappWithIndex!["index"] as? Int {
                     if dappIndex == index {
@@ -61,20 +71,16 @@ class PrimaryDapps {
                         dappsWithIndexes.removeAtIndex(0)
                         
                         dappWithIndex = dappsWithIndexes.first
-                    } else {
-                        if let dappWithoutIndex = dappsWithoutIndexes.first {
-                            sortedDapps.append(dappWithoutIndex)
-                            
-                            dappsWithoutIndexes.removeAtIndex(0)
-                        }
+                    } else if let dappWithoutIndex = dappsWithoutIndexes.first {
+                        sortedDapps.append(dappWithoutIndex)
+                        
+                        dappsWithoutIndexes.removeAtIndex(0)
                     }
                 }
-            } else {
-                if let dappWithoutIndex = dappsWithoutIndexes.first {
-                    sortedDapps.append(dappWithoutIndex)
-                    
-                    dappsWithoutIndexes.removeAtIndex(0)
-                }
+            } else if let dappWithoutIndex = dappsWithoutIndexes.first {
+                sortedDapps.append(dappWithoutIndex)
+                
+                dappsWithoutIndexes.removeAtIndex(0)
             }
         }
         
