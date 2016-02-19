@@ -9,10 +9,10 @@
 import UIKit
 
 class EditDappsTableViewController: UITableViewController {
-    var dappsCount: [DappType: Int32] = [
-        .Primary:      -1,
-        .Secondary:    -1,
-        .Introductory: -1
+    var dappsCount: [DappType: Int32?] = [
+        .Primary:      nil,
+        .Secondary:    nil,
+        .Introductory: nil
     ]
     
     enum SegueIdentifier: String {
@@ -38,6 +38,10 @@ class EditDappsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        for key in self.dappsCount.keys {
+            self.dappsCount[key] = nil
+        }
         
         self.refreshTableViewContent()
     }
@@ -108,45 +112,45 @@ class EditDappsTableViewController: UITableViewController {
     // MARK: - 
     
     private func shouldPerformSegueToShowDappsWithType(dappType: DappType) -> Bool {
-        let count = self.dappsCount[dappType]
-        
-        if count > 0 {
-            return true
+        if let count = self.dappsCount[dappType] {
+            if count > 0 {
+                return true
+            }
         }
         
         return false
     }
     
     private func showDappCountInCell(cell: UITableViewCell, dappType: DappType?) -> Void {
-        if let dappType = dappType {
-            if let count = self.dappsCount[dappType] {
+        var detailTextLabelText: String? = nil
+        
+        if let
+            dappType = dappType,
+            dappTypeCount = self.dappsCount[dappType],
+            count = dappTypeCount {
                 if count > 0 {
-                    cell.detailTextLabel?.text = String(count)
+                    detailTextLabelText = String(count)
                 } else if count == 0 {
-                    cell.detailTextLabel?.text = "0"
-                } else {
-                    cell.detailTextLabel?.text = ""
+                    detailTextLabelText = "0"
                 }
-                
-                if count > 0 {
-                    cell.accessoryType = .DisclosureIndicator
-                    cell.selectionStyle = .Default
-                } else {
-                    cell.accessoryType = .None
-                    cell.selectionStyle = .None
-                }
-                
-                return
-            }
         }
         
-        cell.detailTextLabel?.text = nil
-        
-        cell.accessoryType = .None
-        cell.selectionStyle = .None
+        if let text = detailTextLabelText {
+            cell.detailTextLabel?.text = text
+            
+            cell.accessoryType = .DisclosureIndicator
+            cell.selectionStyle = .Default
+        } else {
+            cell.detailTextLabel?.text = ""
+            
+            cell.accessoryType = .None
+            cell.selectionStyle = .None
+        }
     }
     
     private func refreshTableViewContent() -> Void {
+        self.tableView.reloadData()
+        
         self.refreshTableViewContentForDappType(.Primary)
         self.refreshTableViewContentForDappType(.Secondary)
         self.refreshTableViewContentForDappType(.Introductory)
