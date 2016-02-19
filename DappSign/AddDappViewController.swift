@@ -35,7 +35,6 @@ class AddDappViewController: UIViewController {
     @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var panelView: UIView!
     @IBOutlet weak var dappTextView: UITextView!
-    @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var characterCountLabel: UILabel!
     @IBOutlet weak var hashtagTextView: UITextField!
     
@@ -90,7 +89,6 @@ class AddDappViewController: UIViewController {
         self.dappTextView.editable = false
         self.currentColor = self.dappColors.dappColorWheel["midnightBlue"]!
         self.currentFont = self.dappFonts.dappFontBook["exo"]!
-        self.instructionLabel.text = "Pick a color. Swipe left to go back. Dapp to continue"
         
         //AddDappText Setup
         dappTextView.delegate = self
@@ -361,7 +359,6 @@ class AddDappViewController: UIViewController {
 
     
     func transitionAddText(){
-        self.instructionLabel.text = "Type your message. Only one rule: Contribute."
         dappTextView.editable = true
         characterCountLabel.hidden = false
         panelView.hidden = true
@@ -372,7 +369,6 @@ class AddDappViewController: UIViewController {
     
     func reverseTransitionAddTextToChooseColor(){
         self.dappTextView.editable = false
-        self.instructionLabel.text = "Pick a color. Swipe left to go back. Dapp to continue."
         characterCountLabel.hidden = true
         hashtagTextView.hidden = true
         panelView.hidden = false
@@ -450,7 +446,6 @@ class AddDappViewController: UIViewController {
         
         hashtagTextView.hidden = true
         
-        self.instructionLabel.text = "Pick your font. Dapp to continue."
         characterCountLabel.hidden = true
         
         dappTextView.resignFirstResponder()
@@ -460,7 +455,6 @@ class AddDappViewController: UIViewController {
     func reverseTransitionChooseFontToAddText(){
         self.panelView.hidden = true
         self.dappTextView.editable = true
-        self.instructionLabel.text = "Type your message. Only one rule: Contribute."
         self.hashtagTextView.hidden = false
         self.dappTextView.becomeFirstResponder()
         
