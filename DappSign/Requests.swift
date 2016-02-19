@@ -9,6 +9,8 @@
 import Foundation
 
 class Requests {
+    typealias prohibitedPhrasesCompletion = (prohibitedPhrases: [String], error: NSError?) -> Void
+    
     class func uploadHashtags(hashtagNames: [String], completion: (hashtags: [PFObject]?, error: NSError!) -> Void) {
         let lowercaseHashtagNames = hashtagNames.map({ $0.lowercaseString })
         let hashtagsQuery = PFQuery(className: "DappHashtag")
@@ -484,10 +486,9 @@ class Requests {
         }
     }
     
-    class func downloadProhibitedPhrases(completion: (prohibitedPhrases: [String],
-                                                      error: NSError?) -> Void) -> Void {
+    class func downloadProhibitedPhrases(completion: prohibitedPhrasesCompletion) -> Void {
         let query = PFQuery(className: "ProhibitedPhrase")
-        
+        query.limit = 1000
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             
