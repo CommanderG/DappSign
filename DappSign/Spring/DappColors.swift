@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum Color: String {
+enum ColorName: String {
     case Red            = "red"
     case White          = "white"
     case Blue           = "blue"
@@ -55,8 +55,8 @@ enum Color: String {
 }
 
 class DappColors {
-    internal class func getColor(color: Color) -> UIColor {
-        switch color {
+    internal class func colorWithColorName(colorName: ColorName) -> UIColor {
+        switch colorName {
         case .Red:
             return UIColor.redColor()
         case .White:

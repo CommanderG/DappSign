@@ -25,10 +25,6 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton: UIButton!
     
-    //design
-    var dappColors = DappColors()
-    var dappFonts = DappFonts()
-    
     internal var dapp: Dapp?
     internal var links: [Link]?
     
@@ -56,8 +52,8 @@ class FinalDappSubmitViewController: UIViewController {
         
         if let
             dappBackgroundColor = self.dapp?.dappBackgroundColor,
-            color = Color(rawValue: dappBackgroundColor) {
-                self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
+            colorName = ColorName(rawValue: dappBackgroundColor) {
+                self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(colorName)
         }
         
         if let dappStatement = self.dapp?.dappStatement {
@@ -66,8 +62,12 @@ class FinalDappSubmitViewController: UIViewController {
             self.dappStatementLabel.text = ""
         }
         
-        if let dappFont = self.dapp?.dappFont {
-            self.dappStatementLabel.font = self.dappFonts.dappFontBook[dappFont]
+        if let
+            dappFont = self.dapp?.dappFont,
+            fontName = FontName(rawValue: dappFont) {
+                let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                
+                self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
         }
         
         self.dappStatementLabel.textColor = UIColor.whiteColor()

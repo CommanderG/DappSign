@@ -48,25 +48,30 @@ class DappSignView: XIBView {
             
             self.dappStatementLabel.text = dapp_["dappStatement"] as? String
             
-            if let dappFontName = dapp_["dappFont"] as? String {
-                let screenSize: CGRect = UIScreen.mainScreen().bounds
-                let screenWidth = screenSize.width
-                let screenHeight = screenSize.height
-                self.dappStatementLabel.font = dappFonts.dappFontBook[dappFontName]
-                
-                if screenWidth == 320 && screenHeight == 480 {
-                    self.dappStatementLabel.font = UIFont(name: dappFontName, size: 22)
-                } else if screenWidth == 320 && screenHeight == 568 {
-                    self.dappStatementLabel.font = UIFont(name: dappFontName, size: 27)
-                }
+            if let
+                dappFontName = dapp_["dappFont"] as? String,
+                fontName = FontName(rawValue: dappFontName) {
+                    let screenSize: CGRect = UIScreen.mainScreen().bounds
+                    let screenWidth = screenSize.width
+                    let screenHeight = screenSize.height
+                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                    
+                    self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+                    
+                    if screenWidth == 320.0 && screenHeight == 480.0 {
+                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 22.0)
+                    } else if screenWidth == 320.0 && screenHeight == 568.0 {
+                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 27.0)
+                    }
             }
             
             self.dappStatementLabel.textColor = UIColor.whiteColor()
             
             if let
                 dappBgColoName = dapp_["dappBackgroundColor"] as? String,
-                color = Color(rawValue: dappBgColoName) {
-                    self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
+                colorName = ColorName(rawValue: dappBgColoName) {
+                    self.dappStatementLabel.backgroundColor =
+                        DappColors.colorWithColorName(colorName)
             }
             
             self.usernameLabel.text = nil
@@ -75,15 +80,17 @@ class DappSignView: XIBView {
             self.showArrowImageViewsAndLabels()
         } else {
             self.dappsSwipesCountLabel.text = nil
+            
             self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
-            
-            if let font = dappFonts.dappFontBook["exo"] {
-                self.dappStatementLabel.font = font
-            }
-            
             self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = DappColors.getColor(.MidnightBlue)
+            self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(.MidnightBlue)
+            
+            let fontFileName = DappFonts.fontFileNameWithName(.Exo)
+            
+            self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+            
             self.usernameLabel.text = nil
+            
             self.userProfileImageView.image = nil
             
             self.hideArrowImageViewsAndLabels()

@@ -289,16 +289,21 @@ class DappsViewController: UIViewController {
                 
                 self.dappStatementLabel.text = dapp["dappStatement"] as? String
                 
-                if let dappFontName = dapp["dappFont"] as? String {
-                    self.dappStatementLabel.font = dappFonts.dappFontBook[dappFontName]
+                if let
+                    dappFontName = dapp["dappFont"] as? String,
+                    fontName = FontName(rawValue: dappFontName) {
+                        let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                        
+                        self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
                 }
                 
                 self.dappStatementLabel.textColor = UIColor.whiteColor()
                 
                 if let
                     dappBgColoName = dapp["dappBackgroundColor"] as? String,
-                    color = Color(rawValue: dappBgColoName) {
-                        self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
+                    colorName = ColorName(rawValue: dappBgColoName) {
+                        self.dappStatementLabel.backgroundColor =
+                            DappColors.colorWithColorName(colorName)
                 }
                 
                 self.usernameLabel.text = nil
@@ -329,15 +334,17 @@ class DappsViewController: UIViewController {
             }
         } else {
             self.dappsSwipesCountLabel.text = nil
+            
             self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
-            
-            if let font = dappFonts.dappFontBook["exo"] {
-                self.dappStatementLabel.font = font
-            }
-            
             self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = DappColors.getColor(.MidnightBlue)
+            self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(.MidnightBlue)
+            
+            let fontFileName = DappFonts.fontFileNameWithName(.Exo)
+            
+            self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+            
             self.usernameLabel.text = nil
+            
             self.userProfileImageView.image = nil
         }
         

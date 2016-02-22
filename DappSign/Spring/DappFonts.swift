@@ -9,53 +9,102 @@
 import Foundation
 import UIKit
 
-class DappFonts{
-    
-    var futura = UIFont(name: "Futura" , size: CGFloat(25.0))
-    var baskerville = UIFont(name: "Baskerville" , size: CGFloat(25.0))
-    var avenir = UIFont(name: "Avenir" , size: CGFloat(25.0))
-    var copperplate = UIFont(name: "Copperplate" , size: CGFloat(25.0))
-    var menlo = UIFont(name: "Menlo" , size: CGFloat(25.0))
-    var verdana = UIFont(name: "Verdana" , size: CGFloat(25.0))
-    var helvetica = UIFont(name: "Helvetica" , size: CGFloat(25.0))
-    var didot = UIFont(name: "Didot" , size: CGFloat(25.0))
-    
-    //new fonts
-    var banksia = UIFont(name:"Banksia" , size: CGFloat(25.0))
-    var bellota = UIFont(name:"Bellota" , size: CGFloat(25.0))
-    var capture = UIFont(name:"Capture it" , size: CGFloat(25.0))
-    var elsie = UIFont(name: "Elsie", size: CGFloat(25.0))
-    var exo = UIFont(name:"Exo", size: CGFloat(25.0))
-    var klinicSlab = UIFont(name:"Klinic Slab", size: CGFloat(25.0))
-    var printClearly = UIFont(name:"Print Clearly" , size: CGFloat(25.0))
-    var sansation = UIFont(name:"Sansation" , size: CGFloat(25.0))
-    var walkwaySemiBold = UIFont(name:"Walkway SemiBold" , size: CGFloat(25.0))
-    //var exoSemiBold = UIFont(name:"DemiBold" , size: CGFloat(29.0))
+enum FontName: String {
+    case Futura          = "futura"
+    case Baskerville     = "baskerville"
+    case Avenir          = "avenir"
+    case Copperplate     = "copperplate"
+    case Menlo           = "menlo"
+    case Verdana         = "verdana"
+    case Helvetica       = "helvetica"
+    case Didot           = "didot"
+    case Banksia         = "banksia"
+    case Bellota         = "bellota"
+    case CaptureIt       = "captureIt"
+    case Elsie           = "elsie"
+    case Exo             = "exo"
+    case KlinicSlab      = "klinicSlab"
+    case PrintClearly    = "printClearly"
+    case Sansation       = "sansation"
+    case WalkwaySemiBold = "walkwaySemiBold"
+}
 
+class DappFonts {
+    internal class func fontFileNameWithName(fontName: FontName) -> String {
+        switch fontName {
+        case .Futura:
+            return "Futura"
+        case .Baskerville:
+            return "Baskerville"
+        case .Avenir:
+            return "Avenir"
+        case .Copperplate:
+            return "Copperplate"
+        case .Menlo:
+            return "Menlo"
+        case .Verdana:
+            return "Verdana"
+        case .Helvetica:
+            return "Helvetica"
+        case .Didot:
+            return "Didot"
+        case .Banksia:
+            return "Banksia"
+        case .Bellota:
+            return "Bellota"
+        case .CaptureIt:
+            return "Capture it"
+        case .Elsie:
+            return "Elsie"
+        case .Exo:
+            return "Exo"
+        case .KlinicSlab:
+            return "Klinic Slab"
+        case .PrintClearly:
+            return "Print Clearly"
+        case .Sansation:
+            return "Sansation"
+        case .WalkwaySemiBold:
+            return "Walkway SemiBold"
+        }
+    }
     
-    var dappFontBook = [String: UIFont]()
-    
-    init(){
-        
-        dappFontBook.updateValue(futura!, forKey: "futura")
-        dappFontBook.updateValue(baskerville!, forKey: "baskerville")
-        dappFontBook.updateValue(avenir!, forKey: "avenir")
-        dappFontBook.updateValue(copperplate!, forKey: "copperplate")
-        dappFontBook.updateValue(menlo!, forKey: "menlo")
-        dappFontBook.updateValue(verdana!, forKey: "verdana")
-        dappFontBook.updateValue(helvetica!, forKey: "helvetica")
-        dappFontBook.updateValue(didot!, forKey: "didot")
-        dappFontBook.updateValue(banksia!, forKey: "banksia")
-        dappFontBook.updateValue(bellota!, forKey: "bellota")
-        dappFontBook.updateValue(capture!, forKey: "captureIt")
-        dappFontBook.updateValue(elsie!, forKey: "elsie")
-        dappFontBook.updateValue(exo!, forKey: "exo")
-        dappFontBook.updateValue(klinicSlab!, forKey: "klinicSlab")
-        dappFontBook.updateValue(printClearly!, forKey: "printClearly")
-        dappFontBook.updateValue(sansation!, forKey: "sansation")
-        dappFontBook.updateValue(walkwaySemiBold!, forKey: "walkwaySemiBold")
-        //dappFontBook.updateValue(exoSemiBold!, forKey: "exoSemiBold")
-        
-    
+    internal class func fontDisplayNameWithFontName(fontName: FontName) -> String {
+        switch fontName {
+        case .Futura:
+            return "Futura"
+        case .Baskerville:
+            return "Baskerville"
+        case .Avenir:
+            return "Avenir"
+        case .Copperplate:
+            return "Copperplate"
+        case .Menlo:
+            return "Menlo"
+        case .Verdana:
+            return "Verdana"
+        case .Helvetica:
+            return "Helvetica"
+        case .Didot:
+            return "Didot"
+        case .Banksia:
+            return "Banksia"
+        case .Bellota:
+            return "Bellota"
+        case .CaptureIt:
+            return "Capture"
+        case .Elsie:
+            return "Elsie"
+        case .Exo:
+            return "Exo"
+        case .KlinicSlab:
+            return "Klinic"
+        case .PrintClearly:
+            return "PrintClearly"
+        case .Sansation:
+            return "Sansation"
+        case .WalkwaySemiBold:
+            return "Walkway"
+        }
     }
 }
