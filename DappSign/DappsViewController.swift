@@ -295,8 +295,10 @@ class DappsViewController: UIViewController {
                 
                 self.dappStatementLabel.textColor = UIColor.whiteColor()
                 
-                if let dappBgColoName = dapp["dappBackgroundColor"] as? String {
-                    self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+                if let
+                    dappBgColoName = dapp["dappBackgroundColor"] as? String,
+                    color = Color(rawValue: dappBgColoName) {
+                        self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
                 }
                 
                 self.usernameLabel.text = nil
@@ -334,7 +336,7 @@ class DappsViewController: UIViewController {
             }
             
             self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+            self.dappStatementLabel.backgroundColor = DappColors.getColor(.MidnightBlue)
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
         }

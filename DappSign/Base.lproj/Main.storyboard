@@ -685,7 +685,7 @@
                                                     <rect key="frame" x="15" y="10" width="96" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dOI-Kz-okl">
@@ -1564,11 +1564,6 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="Run-wI-cqj" id="wlY-6m-ZCC"/>
                                         </connections>
@@ -1611,15 +1606,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlX-dX-PTo">
                                         <rect key="frame" x="8" y="8" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="4Z0-gR-4sq"/>
                                             <constraint firstAttribute="width" constant="98" id="xvT-fx-bNE"/>
                                         </constraints>
-                                        <state key="normal" image="Emerald">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="emeraldButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="bau-cv-4Ph"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="kNS-GB-Izc"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9M-ui-IlI">
@@ -1650,15 +1646,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tr-6T-rtR">
                                         <rect key="frame" x="111" y="8" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="as4-Jd-svk"/>
                                             <constraint firstAttribute="width" constant="98" id="gYo-T6-2Ah"/>
                                         </constraints>
-                                        <state key="normal" image="Carrot">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="carrotButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="Udr-fq-8MR"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="xZL-ME-DOr"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-g4-0Rb">
@@ -1689,15 +1686,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oJ-7O-RZt">
                                         <rect key="frame" x="214" y="8" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="98" id="1m9-yr-wJ3"/>
                                             <constraint firstAttribute="height" constant="52" id="Jrg-Wx-n8S"/>
                                         </constraints>
-                                        <state key="normal" image="PeterRiver">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="peterRiverButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="V66-H8-PhR"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="I7g-2Y-jxE"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3s7-Bl-IPc">
@@ -1728,15 +1726,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Hs-Li-htF">
                                         <rect key="frame" x="8" y="74" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="98" id="ist-mr-mMr"/>
                                             <constraint firstAttribute="height" constant="52" id="yLc-wX-Iso"/>
                                         </constraints>
-                                        <state key="normal" image="Pomegranate">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="pomegranateButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="a5v-ve-69N"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="3xm-KW-mKc"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHM-Gb-pVd">
@@ -1767,15 +1766,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woB-1U-Gjt">
                                         <rect key="frame" x="111" y="74" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="NvM-vx-a8k"/>
                                             <constraint firstAttribute="width" constant="98" id="aV3-bO-nuJ"/>
                                         </constraints>
-                                        <state key="normal" image="Wisteria">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="wisteriaButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="0oJ-cB-mdl"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="D0w-D7-oRz"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnC-eu-TeE">
@@ -1806,15 +1806,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUn-hG-LXM">
                                         <rect key="frame" x="214" y="74" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="98" id="1br-eU-YwM"/>
                                             <constraint firstAttribute="height" constant="52" id="I4M-sg-kV8"/>
                                         </constraints>
-                                        <state key="normal" image="Sunflower">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="sunflowerButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="hcO-Wf-5JH"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="L8H-5a-jNu"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6G-lM-cXJ">
@@ -1845,15 +1846,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tp6-WY-Os3">
                                         <rect key="frame" x="8" y="140" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="hym-uS-UkU"/>
                                             <constraint firstAttribute="width" constant="98" id="nDE-4Z-nzd"/>
                                         </constraints>
-                                        <state key="normal" image="Asbestos">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="asbestosButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="oHs-l4-Y7N"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="oak-j6-ia8"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-8q-m31">
@@ -1884,15 +1886,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKf-IQ-mSH">
                                         <rect key="frame" x="111" y="140" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="5Wn-jr-fRy"/>
                                             <constraint firstAttribute="width" constant="98" id="OWf-1B-ZIE"/>
                                         </constraints>
-                                        <state key="normal" image="Turquoise">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="turqoiseButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="C6Y-IF-lqP"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="ccS-gB-WLt"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-7V-iaO">
@@ -1923,15 +1926,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h77-qb-gOk">
                                         <rect key="frame" x="214" y="140" width="98" height="52"/>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="98" id="MYq-VW-AnY"/>
                                             <constraint firstAttribute="height" constant="52" id="ogq-LP-NTx"/>
                                         </constraints>
-                                        <state key="normal" image="Amethyst">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="amethystButton:" destination="Run-wI-cqj" eventType="touchUpInside" id="nC9-A8-WAf"/>
+                                            <action selector="applyColor:" destination="Run-wI-cqj" eventType="touchUpInside" id="ica-5O-Ivr"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmV-1Q-bW3">
@@ -1961,7 +1965,7 @@
                                     </label>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.011764705882352941" green="0.40392156862745099" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="IkJ-eJ-sfr" firstAttribute="leading" secondItem="gL2-LW-bze" secondAttribute="leading" constant="8" id="3OH-JM-fdI"/>
                                     <constraint firstAttribute="centerX" secondItem="aOV-Lu-GWI" secondAttribute="centerX" id="51x-e4-ICi"/>
@@ -2060,39 +2064,39 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="amethystButtonOutlet" destination="h77-qb-gOk" id="zEi-Xh-XtH"/>
-                        <outlet property="asbestosButtonOutlet" destination="Tp6-WY-Os3" id="ZJZ-47-vAY"/>
                         <outlet property="banksiaButtonOutlet" destination="O9M-ui-IlI" id="Vp3-JJ-XOy"/>
                         <outlet property="banksiaLabel" destination="IkJ-eJ-sfr" id="w5I-8q-cMJ"/>
                         <outlet property="bellotaButtonOutlet" destination="uYW-g4-0Rb" id="skD-3E-79k"/>
                         <outlet property="bellotaLabel" destination="BmW-3p-4sM" id="UqT-v2-SqZ"/>
                         <outlet property="captureButtonOutlet" destination="3s7-Bl-IPc" id="ft9-l5-hRw"/>
                         <outlet property="captureLabel" destination="wYI-xy-NBF" id="zjW-u2-jBv"/>
-                        <outlet property="carrotButtonOutlet" destination="5Tr-6T-rtR" id="w6u-Rk-Af9"/>
                         <outlet property="characterCountLabel" destination="UEu-ba-x1Y" id="KZh-NE-EYS"/>
+                        <outlet property="colorButtonLeftBottom" destination="Tp6-WY-Os3" id="7Aq-uc-2Nf"/>
+                        <outlet property="colorButtonLeftMiddle" destination="7Hs-Li-htF" id="Onx-e0-EHI"/>
+                        <outlet property="colorButtonLeftTop" destination="AlX-dX-PTo" id="PQB-I6-PSw"/>
+                        <outlet property="colorButtonMiddleBottom" destination="bKf-IQ-mSH" id="2kU-pK-0V9"/>
+                        <outlet property="colorButtonMiddleMiddle" destination="woB-1U-Gjt" id="M5k-24-TZ1"/>
+                        <outlet property="colorButtonMiddleTop" destination="5Tr-6T-rtR" id="bQj-9k-uKF"/>
+                        <outlet property="colorButtonRightBottom" destination="h77-qb-gOk" id="3xe-m5-Nzj"/>
+                        <outlet property="colorButtonRightMiddle" destination="tUn-hG-LXM" id="pJS-7E-Q8q"/>
+                        <outlet property="colorButtonRightTop" destination="5oJ-7O-RZt" id="ulp-r0-VRt"/>
                         <outlet property="containerView" destination="hJa-9Z-fOu" id="k0z-Jn-Iom"/>
                         <outlet property="dappTextView" destination="JHT-lw-Hmf" id="tsZ-Lw-CRu"/>
                         <outlet property="elsieButtonOutlet" destination="qHM-Gb-pVd" id="SlV-ET-8WA"/>
                         <outlet property="elsieLabel" destination="MyJ-Mw-B8a" id="gXK-e3-gd6"/>
-                        <outlet property="emeraldButtonOutlet" destination="AlX-dX-PTo" id="rie-dA-Dju"/>
                         <outlet property="exoButtonOutlet" destination="XnC-eu-TeE" id="d3G-We-q1e"/>
                         <outlet property="exoLabel" destination="aOV-Lu-GWI" id="V7g-zX-Vxq"/>
                         <outlet property="hashtagTextView" destination="vCd-np-NGg" id="pHf-aH-0xe"/>
                         <outlet property="klinicButtonOutlet" destination="Z6G-lM-cXJ" id="Bex-Zt-6sS"/>
                         <outlet property="klinicLabel" destination="9Ns-gt-LBG" id="YUp-Wl-G1q"/>
                         <outlet property="panelView" destination="gL2-LW-bze" id="DbV-NQ-fyT"/>
-                        <outlet property="peterRiverOutlet" destination="5oJ-7O-RZt" id="RdI-ue-wRK"/>
-                        <outlet property="pomegranateButtonOutlet" destination="7Hs-Li-htF" id="eQ9-A1-VdA"/>
                         <outlet property="printClearlyButtonOutlet" destination="Vua-8q-m31" id="6qq-Hf-Fyc"/>
                         <outlet property="printClearlyLabel" destination="PH3-vQ-tEp" id="ejh-FD-0gZ"/>
                         <outlet property="prohibitedWordsLabel" destination="LZD-kY-k84" id="yFd-uB-4zd"/>
                         <outlet property="sansationButtonOutlet" destination="ELM-7V-iaO" id="8kL-1d-Z06"/>
                         <outlet property="sansationLabel" destination="ecN-wA-0r7" id="feD-Sr-XVl"/>
-                        <outlet property="sunflowerButtonOutlet" destination="tUn-hG-LXM" id="4jR-yR-YAx"/>
-                        <outlet property="turquoiseButtonOutlet" destination="bKf-IQ-mSH" id="cuK-vr-0DY"/>
                         <outlet property="walkwayButtonOutlet" destination="tmV-1Q-bW3" id="HlP-Mw-Kir"/>
                         <outlet property="walkwayLabel" destination="0zR-ZI-v2U" id="mNV-14-2zM"/>
-                        <outlet property="wisteriaButtonOutlet" destination="woB-1U-Gjt" id="tlw-lX-MaP"/>
                         <segue destination="rgj-nO-uI9" kind="modal" identifier="showDappLinks" id="ve9-6k-XXj"/>
                     </connections>
                 </viewController>
@@ -2540,10 +2544,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Amethyst" width="173" height="84"/>
-        <image name="Asbestos" width="173" height="84"/>
-        <image name="Carrot" width="173" height="84"/>
-        <image name="Emerald" width="173" height="84"/>
         <image name="Facebook" width="513" height="116"/>
         <image name="FilledFontButton" width="173" height="84"/>
         <image name="Link" width="116" height="116"/>
@@ -2552,11 +2552,6 @@
         <image name="New Profile" width="32" height="29"/>
         <image name="New Search" width="48" height="48"/>
         <image name="Nextbutton.png" width="30" height="54"/>
-        <image name="PeterRiver" width="173" height="84"/>
-        <image name="Pomegranate" width="173" height="84"/>
-        <image name="Sunflower" width="173" height="84"/>
-        <image name="Turquoise" width="173" height="84"/>
-        <image name="Wisteria" width="173" height="84"/>
         <image name="dapp_icon" width="31" height="36"/>
         <image name="dapp_left" width="72" height="60"/>
         <image name="dapp_right" width="51" height="57"/>

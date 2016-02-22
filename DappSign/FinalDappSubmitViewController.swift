@@ -54,8 +54,10 @@ class FinalDappSubmitViewController: UIViewController {
             self.dappView.transform = CGAffineTransformConcat(scale, translate)
         }
         
-        if let dappBackgroundColor = self.dapp?.dappBackgroundColor {
-            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBackgroundColor]
+        if let
+            dappBackgroundColor = self.dapp?.dappBackgroundColor,
+            color = Color(rawValue: dappBackgroundColor) {
+                self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
         }
         
         if let dappStatement = self.dapp?.dappStatement {

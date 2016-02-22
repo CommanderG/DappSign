@@ -31,6 +31,8 @@ class AddDappViewController: UIViewController {
     var dappFontString:String! = "exo" // default
     var nameString:String!
     
+    private var buttonsColors: [UIButton: Color] = [:]
+    
     //Storyboard connections
     @IBOutlet weak var containerView: SwipeableView!
     @IBOutlet weak var panelView: UIView!
@@ -52,20 +54,19 @@ class AddDappViewController: UIViewController {
     //Design
     var currentColor = UIColor()
     var currentFont = UIFont()
-    var dappColors = DappColors()
     var dappFonts = DappFonts()
     var originalLocation: CGPoint!
     
     //Button Outlets
-    @IBOutlet weak var emeraldButtonOutlet: UIButton!
-    @IBOutlet weak var carrotButtonOutlet: UIButton!
-    @IBOutlet weak var peterRiverOutlet: UIButton!
-    @IBOutlet weak var pomegranateButtonOutlet: UIButton!
-    @IBOutlet weak var wisteriaButtonOutlet: UIButton!
-    @IBOutlet weak var sunflowerButtonOutlet: UIButton!
-    @IBOutlet weak var asbestosButtonOutlet: UIButton!
-    @IBOutlet weak var turquoiseButtonOutlet: UIButton!
-    @IBOutlet weak var amethystButtonOutlet: UIButton!
+    @IBOutlet weak var colorButtonLeftTop: UIButton!
+    @IBOutlet weak var colorButtonMiddleTop: UIButton!
+    @IBOutlet weak var colorButtonRightTop: UIButton!
+    @IBOutlet weak var colorButtonLeftMiddle: UIButton!
+    @IBOutlet weak var colorButtonMiddleMiddle: UIButton!
+    @IBOutlet weak var colorButtonRightMiddle: UIButton!
+    @IBOutlet weak var colorButtonLeftBottom: UIButton!
+    @IBOutlet weak var colorButtonMiddleBottom: UIButton!
+    @IBOutlet weak var colorButtonRightBottom: UIButton!
     
     @IBOutlet weak var banksiaButtonOutlet: UIButton!
     @IBOutlet weak var bellotaButtonOutlet: UIButton!
@@ -87,7 +88,7 @@ class AddDappViewController: UIViewController {
         self.panelView.hidden = false
         self.dappTextView.backgroundColor = UIColor.whiteColor()
         self.dappTextView.editable = false
-        self.currentColor = self.dappColors.dappColorWheel["midnightBlue"]!
+        self.currentColor = DappColors.getColor(.Cinnabar)
         self.currentFont = self.dappFonts.dappFontBook["exo"]!
         
         //AddDappText Setup
@@ -101,6 +102,19 @@ class AddDappViewController: UIViewController {
         self.containerView.minTranslationX = 200.0
         
         self.prohibitedWordsLabel.hidden = true
+        
+        self.initButtonsColors()
+        
+        for (colorButton, color) in self.buttonsColors {
+            colorButton.layer.cornerRadius = 12.0
+            colorButton.layer.borderColor = UIColor.whiteColor().CGColor
+            colorButton.layer.borderWidth = 2.0
+            colorButton.backgroundColor = DappColors.getColor(color)
+        }
+        
+        self.dappTextView.layer.cornerRadius = 10.0
+        self.dappTextView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.dappTextView.layer.borderWidth = 2.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -128,50 +142,17 @@ class AddDappViewController: UIViewController {
         spring(0.5) {
             self.panelView.alpha = 1
             self.panelView.transform = CGAffineTransformMakeTranslation(0, 0)
-            
         }
-
         
         if mode == "chooseColor" {
-            
-            emeraldButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            carrotButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            asbestosButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            pomegranateButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            wisteriaButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            sunflowerButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            asbestosButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            turquoiseButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            amethystButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            
+            for (colorButton, _) in self.buttonsColors {
+                colorButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
+            }
             
             springWithDelay(0.5, delay: 0.02, animations: {
-                self.emeraldButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-                
-            })
-            springWithDelay(0.5, delay: 0.04, animations: {
-                self.carrotButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.06, animations: {
-                self.peterRiverOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.08, animations: {
-                self.pomegranateButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.10, animations: {
-                self.wisteriaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.12, animations: {
-                self.sunflowerButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.14, animations: {
-                self.asbestosButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.16, animations: {
-                self.turquoiseButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
-            })
-            springWithDelay(0.5, delay: 0.18, animations: {
-                self.amethystButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
+                for (colorButton, _) in self.buttonsColors {
+                    colorButton.transform = CGAffineTransformMakeTranslation(0, 0)
+                }
             })
         } else if mode == "chooseFont" {
             banksiaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 200)
@@ -183,7 +164,6 @@ class AddDappViewController: UIViewController {
             printClearlyButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
             sansationButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
             walkwayButtonOutlet.transform = CGAffineTransformMakeTranslation(0,200)
-            
             
             springWithDelay(0.5, delay: 0.02, animations: {
                 self.banksiaButtonOutlet.transform = CGAffineTransformMakeTranslation(0, 0)
@@ -214,11 +194,10 @@ class AddDappViewController: UIViewController {
             })
             
         } else if mode == "addText"{
-                print("thisworks")
+            print("thisworks")
         }
     }
-
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -228,70 +207,30 @@ class AddDappViewController: UIViewController {
         return true
     }
     
-    //Color Buttons
-    @IBAction func emeraldButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["emerald"]!
-        currentColor = dappColors.dappColorWheel["emerald"]!
-        dappColorString = "emerald"
-        self.viewDidAppear(true)
+    private func initButtonsColors() {
+        self.buttonsColors[self.colorButtonLeftTop]      = .Cinnabar
+        self.buttonsColors[self.colorButtonMiddleTop]    = .SummerSky
+        self.buttonsColors[self.colorButtonRightTop]     = .Saffron
+        self.buttonsColors[self.colorButtonLeftMiddle]   = .Cello
+        self.buttonsColors[self.colorButtonMiddleMiddle] = .MediumCarmine
+        self.buttonsColors[self.colorButtonRightMiddle]  = .MediumSeaGreen
+        self.buttonsColors[self.colorButtonLeftBottom]   = .LightSeaGreen
+        self.buttonsColors[self.colorButtonMiddleBottom] = .DeepLilac
+        self.buttonsColors[self.colorButtonRightBottom]  = .Gamboge
     }
     
-    @IBAction func carrotButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["carrot"]!
-        currentColor = dappColors.dappColorWheel["carrot"]!
-        dappColorString = "carrot"
-        self.viewDidAppear(true)
+    @IBAction func applyColor(sender: AnyObject) {
+        if let
+            colorButton = sender as? UIButton,
+            color = self.buttonsColors[colorButton] {
+                self.currentColor = DappColors.getColor(color)
+                self.dappColorString = color.rawValue
+                
+                self.dappTextView.backgroundColor = self.currentColor
+                
+                self.viewDidAppear(true)
+        }
     }
-    
-    @IBAction func peterRiverButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["peterRiver"]!
-        currentColor = dappColors.dappColorWheel["peterRiver"]!
-        dappColorString = "peterRiver"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func pomegranateButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["pomegranate"]!
-        currentColor = dappColors.dappColorWheel["pomegranate"]!
-        dappColorString = "pomegranate"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func wisteriaButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["wisteria"]!
-        currentColor = dappColors.dappColorWheel["wisteria"]!
-        dappColorString = "wisteria"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func sunflowerButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["sunFlower"]!
-        currentColor = dappColors.dappColorWheel["sunFlower"]!
-        dappColorString = "sunFlower"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func asbestosButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["asbestos"]!
-        currentColor = dappColors.dappColorWheel["asbestos"]!
-        dappColorString = "asbestos"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func turqoiseButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["turquoise"]!
-        currentColor = dappColors.dappColorWheel["turquoise"]!
-        dappColorString = "turquoise"
-        self.viewDidAppear(true)
-    }
-    
-    @IBAction func amethystButton(sender: AnyObject) {
-        self.dappTextView.backgroundColor = dappColors.dappColorWheel["amethyst"]!
-        currentColor = dappColors.dappColorWheel["amethyst"]!
-        dappColorString = "amethyst"
-        self.viewDidAppear(true)
-    }
-    
     
     //font buttons
     @IBAction func banksiaButton(sender: AnyObject) {
@@ -358,7 +297,7 @@ class AddDappViewController: UIViewController {
     }
 
     
-    func transitionAddText(){
+    func transitionAddText() {
         dappTextView.editable = true
         characterCountLabel.hidden = false
         panelView.hidden = true
@@ -367,7 +306,7 @@ class AddDappViewController: UIViewController {
         dappTextView.becomeFirstResponder()
     }
     
-    func reverseTransitionAddTextToChooseColor(){
+    func reverseTransitionAddTextToChooseColor() {
         self.dappTextView.editable = false
         characterCountLabel.hidden = true
         hashtagTextView.hidden = true
@@ -394,33 +333,17 @@ class AddDappViewController: UIViewController {
         sansationLabel.hidden = true
         walkwayLabel.hidden = true
         
-        //unhide the color buttons
-        emeraldButtonOutlet.hidden = false
-        carrotButtonOutlet.hidden = false
-        asbestosButtonOutlet.hidden = false
-        pomegranateButtonOutlet.hidden = false
-        wisteriaButtonOutlet.hidden = false
-        sunflowerButtonOutlet.hidden = false
-        asbestosButtonOutlet.hidden = false
-        turquoiseButtonOutlet.hidden = false
-        amethystButtonOutlet.hidden = false
-
-        
-        
+        for (colorButton, _) in self.buttonsColors {
+            colorButton.hidden = false
+        }
     }
     
-    func transitionChooseFont(){
+    func transitionChooseFont() {
         self.dappTextView.editable = false
-        //hide the color buttons
-        emeraldButtonOutlet.hidden = true
-        carrotButtonOutlet.hidden = true
-        asbestosButtonOutlet.hidden = true
-        pomegranateButtonOutlet.hidden = true
-        wisteriaButtonOutlet.hidden = true
-        sunflowerButtonOutlet.hidden = true
-        asbestosButtonOutlet.hidden = true
-        turquoiseButtonOutlet.hidden = true
-        amethystButtonOutlet.hidden = true
+        
+        for (colorButton, _) in self.buttonsColors {
+            colorButton.hidden = true
+        }
         
         //unhide the font buttons
         banksiaButtonOutlet.hidden = false
@@ -452,12 +375,11 @@ class AddDappViewController: UIViewController {
         hashtagTextView.resignFirstResponder()
     }
     
-    func reverseTransitionChooseFontToAddText(){
+    func reverseTransitionChooseFontToAddText() {
         self.panelView.hidden = true
         self.dappTextView.editable = true
         self.hashtagTextView.hidden = false
         self.dappTextView.becomeFirstResponder()
-        
     }
     
     func getDapp() -> Dapp {
@@ -483,16 +405,16 @@ class AddDappViewController: UIViewController {
         }
         
         let dapp = Dapp(
-            dappStatement:          dappStatement
-        ,   lowercaseDappStatement: lowercaseDappStatement
-        ,   dappFont:               dappFont
-        ,   dappBackgroundColor:    dappBackgroundColor
-        ,   name:                   name
-        ,   userid:                 userid
-        ,   dappScore:              dappScore
-        ,   isDeleted:              isDeleted
-        ,   dappTypeId:             dappTypeId
-        ,   hashtagNames:           hashtagNames
+            dappStatement:          dappStatement,
+            lowercaseDappStatement: lowercaseDappStatement,
+            dappFont:               dappFont,
+            dappBackgroundColor:    dappBackgroundColor,
+            name:                   name,
+            userid:                 userid,
+            dappScore:              dappScore,
+            isDeleted:              isDeleted,
+            dappTypeId:             dappTypeId,
+            hashtagNames:           hashtagNames
         )
         
         return dapp

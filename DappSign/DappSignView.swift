@@ -30,7 +30,6 @@ class DappSignView: XIBView {
     
     func showDapp(dapp: PFObject?) {
         let dappFonts = DappFonts()
-        let dappColors = DappColors()
         
         if let dapp_ = dapp {
             if let dappScore = dapp_["dappScore"] as? Int {
@@ -64,8 +63,10 @@ class DappSignView: XIBView {
             
             self.dappStatementLabel.textColor = UIColor.whiteColor()
             
-            if let dappBgColoName = dapp_["dappBackgroundColor"] as? String {
-                self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel[dappBgColoName]
+            if let
+                dappBgColoName = dapp_["dappBackgroundColor"] as? String,
+                color = Color(rawValue: dappBgColoName) {
+                    self.dappStatementLabel.backgroundColor = DappColors.getColor(color)
             }
             
             self.usernameLabel.text = nil
@@ -81,7 +82,7 @@ class DappSignView: XIBView {
             }
             
             self.dappStatementLabel.textColor = UIColor.whiteColor()
-            self.dappStatementLabel.backgroundColor = dappColors.dappColorWheel["midnightBlue"]
+            self.dappStatementLabel.backgroundColor = DappColors.getColor(.MidnightBlue)
             self.usernameLabel.text = nil
             self.userProfileImageView.image = nil
             
