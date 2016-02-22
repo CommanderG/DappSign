@@ -115,6 +115,9 @@ class AddDappViewController: UIViewController {
         self.dappTextView.layer.cornerRadius = 10.0
         self.dappTextView.layer.borderColor = UIColor.whiteColor().CGColor
         self.dappTextView.layer.borderWidth = 2.0
+        
+        self.panelView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.panelView.layer.borderWidth = 2.0
     }
     
     override func viewDidAppear(animated: Bool) {
