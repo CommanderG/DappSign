@@ -28,7 +28,7 @@ enum Mode {
 }
 
 class AddDappViewController: UIViewController {
-    @IBOutlet weak var containerView:                      SwipeableView!
+    @IBOutlet weak var dappContainerSwipeableView:         SwipeableView!
     @IBOutlet weak var dappTextView:                       UITextView!
     @IBOutlet weak var hashtagTextView:                    UITextField!
     @IBOutlet weak var buttonsContainerViewsContainerView: UIView!
@@ -73,18 +73,13 @@ class AddDappViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.fontButtonsContainerView.hidden = true
         self.dappTextView.editable = false
         
         // AddDappText Setup
         self.dappTextView.delegate = self
         
-        // start with elements hidden to prep for animation
-        self.dappTextView.hidden = true
-        self.buttonsContainerViewsContainerView.hidden = true
-        
-        self.containerView.delegate = self
-        self.containerView.minTranslationX = 200.0
+        self.dappContainerSwipeableView.delegate = self
+        self.dappContainerSwipeableView.minTranslationX = 200.0
         
         self.prohibitedWordsLabel.hidden = true
         
@@ -119,61 +114,23 @@ class AddDappViewController: UIViewController {
         
         self.buttonsContainerViewsContainerView.layer.borderColor = UIColor.whiteColor().CGColor
         self.buttonsContainerViewsContainerView.layer.borderWidth = 2.0
+        
+        self.dappTextView.backgroundColor = DappColors.colorWithColorName(self.dappColorName)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.dappContainerSwipeableView.hidden = true
+        self.hashtagTextView.hidden = true
+        self.buttonsContainerViewsContainerView.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
-        
-        self.dappTextView.hidden = false
-        self.dappTextView.transform = CGAffineTransformConcat(scale, translate)
-        
-        spring(0.5) {
-            let scale = CGAffineTransformMakeScale(1.0, 1.0)
-            let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-            self.dappTextView.transform = CGAffineTransformConcat(scale, translate)
-        }
-        
-        self.dappTextView.backgroundColor = DappColors.colorWithColorName(self.dappColorName)
-        self.dappTextView.alpha = 1
-        
-        self.buttonsContainerViewsContainerView.hidden = false
-        self.buttonsContainerViewsContainerView.alpha = 0.0
-        self.buttonsContainerViewsContainerView.transform =
-            CGAffineTransformMakeTranslation(0.0, 200.0)
-        
-        spring(0.5) {
-            self.buttonsContainerViewsContainerView.alpha = 1
-            self.buttonsContainerViewsContainerView.transform =
-                CGAffineTransformMakeTranslation(0.0, 0.0)
-        }
-        
-        switch self.mode {
-        case .ChooseColor:
-            for (colorButton, _) in self.colorButtonsColorNames {
-                colorButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
-            }
-            
-            springWithDelay(0.5, delay: 0.02, animations: {
-                for (colorButton, _) in self.colorButtonsColorNames {
-                    colorButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
-                }
-            })
-        case .ChooseFont:
-            for (fontButton, _) in self.fontButtonsFontNames {
-                fontButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
-            }
-            
-            springWithDelay(0.5, delay: 0.02, animations: {
-                for (fontButton, _) in self.fontButtonsFontNames {
-                    fontButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
-                }
-            })
-        case .AddText:
-            print("thisworks")
-        }
+        self.prepareViewsForCurrentMode()
+        self.animateViews()
     }
     
     override func didReceiveMemoryWarning() {
@@ -183,6 +140,63 @@ class AddDappViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    private func animateViews() {
+        let springDuration = 0.5
+        let scale = CGAffineTransformMakeScale(0.5, 0.5)
+        let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+        
+        self.dappContainerSwipeableView.transform = CGAffineTransformConcat(scale, translate)
+        self.dappContainerSwipeableView.alpha = 0.0
+        
+        spring(springDuration) {
+            let scale = CGAffineTransformMakeScale(1.0, 1.0)
+            let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
+            
+            self.dappContainerSwipeableView.transform = CGAffineTransformConcat(scale, translate)
+            self.dappContainerSwipeableView.alpha = 1.0
+        }
+        
+        switch self.mode {
+        case .ChooseColor, .ChooseFont:
+            self.buttonsContainerViewsContainerView.alpha = 0.0
+            self.buttonsContainerViewsContainerView.transform =
+                CGAffineTransformMakeTranslation(0.0, 200.0)
+            
+            spring(springDuration) {
+                self.buttonsContainerViewsContainerView.alpha = 1.0
+                self.buttonsContainerViewsContainerView.transform =
+                    CGAffineTransformMakeTranslation(0.0, 0.0)
+            }
+        case _:
+            break
+        }
+        
+        switch self.mode {
+        case .ChooseColor:
+            for (colorButton, _) in self.colorButtonsColorNames {
+                colorButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
+            }
+            
+            springWithDelay(springDuration, delay: 0.02, animations: {
+                for (colorButton, _) in self.colorButtonsColorNames {
+                    colorButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+                }
+            })
+        case .ChooseFont:
+            for (fontButton, _) in self.fontButtonsFontNames {
+                fontButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
+            }
+            
+            springWithDelay(springDuration, delay: 0.02, animations: {
+                for (fontButton, _) in self.fontButtonsFontNames {
+                    fontButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+                }
+            })
+        case _:
+            break
+        }
     }
     
     private func initColorButtonsColors() {
@@ -221,7 +235,7 @@ class AddDappViewController: UIViewController {
                 
                 self.dappTextView.backgroundColor = DappColors.colorWithColorName(colorName)
                 
-                self.viewDidAppear(true)
+                self.animateViews()
         }
     }
     
@@ -236,41 +250,32 @@ class AddDappViewController: UIViewController {
                 
                 self.dappFontName = fontName
                 
-                self.viewDidAppear(true)
+                self.animateViews()
         }
     }
     
-    func transitionAddText() {
-        self.dappTextView.editable = true
-        self.buttonsContainerViewsContainerView.hidden = true
-        self.hashtagTextView.hidden = false
-        
-        self.dappTextView.becomeFirstResponder()
-    }
-    
-    func reverseTransitionAddTextToChooseColor() {
-        self.dappTextView.editable = false
-        self.hashtagTextView.hidden = true
-        self.buttonsContainerViewsContainerView.hidden = false
-        self.fontButtonsContainerView.hidden = true
-        self.colorButtonsContainerView.hidden = false
-    }
-    
-    func transitionChooseFont() {
-        self.dappTextView.editable = false
-        self.colorButtonsContainerView.hidden = true
-        self.fontButtonsContainerView.hidden = false
-        self.hashtagTextView.hidden = true
-        
-        self.dappTextView.resignFirstResponder()
-        self.hashtagTextView.resignFirstResponder()
-    }
-    
-    func reverseTransitionChooseFontToAddText() {
-        self.buttonsContainerViewsContainerView.hidden = true
-        self.dappTextView.editable = true
-        self.hashtagTextView.hidden = false
-        self.dappTextView.becomeFirstResponder()
+    private func prepareViewsForCurrentMode() {
+        switch self.mode {
+        case .ChooseColor:
+            self.dappTextView.editable = false
+            self.dappContainerSwipeableView.hidden = false
+            self.hashtagTextView.hidden = true
+            self.buttonsContainerViewsContainerView.hidden = false
+            self.colorButtonsContainerView.hidden = false
+            self.fontButtonsContainerView.hidden = true
+        case .AddText:
+            self.dappTextView.editable = true
+            self.dappContainerSwipeableView.hidden = false
+            self.hashtagTextView.hidden = false
+            self.buttonsContainerViewsContainerView.hidden = true
+        case .ChooseFont:
+            self.dappTextView.editable = false
+            self.dappContainerSwipeableView.hidden = false
+            self.hashtagTextView.hidden = true
+            self.buttonsContainerViewsContainerView.hidden = false
+            self.colorButtonsContainerView.hidden = true
+            self.fontButtonsContainerView.hidden = false
+        }
     }
     
     func getDapp() -> Dapp {
@@ -415,17 +420,15 @@ extension AddDappViewController: SwipeableViewDelegate {
         case .LeftToRight:
             switch self.mode {
             case .ChooseColor:
-                self.transitionAddText()
-                
                 self.mode = .AddText
                 
-                self.viewDidAppear(true)
+                self.prepareViewsForCurrentMode()
+                self.animateViews()
             case .AddText:
-                self.transitionChooseFont()
-                
                 self.mode = .ChooseFont
                 
-                self.viewDidAppear(true)
+                self.prepareViewsForCurrentMode()
+                self.animateViews()
             case .ChooseFont:
                 self.performSegueWithIdentifier(self.showDappLinksSegueID, sender: self)
             }
@@ -434,17 +437,15 @@ extension AddDappViewController: SwipeableViewDelegate {
             case .ChooseColor:
                 self.dismissViewControllerAnimated(true, completion: nil)
             case .AddText:
-                self.reverseTransitionAddTextToChooseColor()
-                
                 self.mode = .ChooseColor
                 
-                self.viewDidAppear(true)
+                self.prepareViewsForCurrentMode()
+                self.animateViews()
             case .ChooseFont:
-                self.reverseTransitionChooseFontToAddText()
-                
                 self.mode = .AddText
                 
-                self.viewDidAppear(true)
+                self.prepareViewsForCurrentMode()
+                self.animateViews()
             }
         }
     }
@@ -471,7 +472,7 @@ extension AddDappViewController: UITextViewDelegate {
         
         if prohibitedPhrases.count > 0 {
             self.prohibitedWordsLabel.hidden = false
-            self.containerView.canBeDraged = false
+            self.dappContainerSwipeableView.canBeDraged = false
             
             let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
             
@@ -486,7 +487,7 @@ extension AddDappViewController: UITextViewDelegate {
             }
         } else {
             self.prohibitedWordsLabel.hidden = true
-            self.containerView.canBeDraged = true
+            self.dappContainerSwipeableView.canBeDraged = true
         }
     }
 }

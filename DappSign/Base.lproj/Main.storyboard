@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1541,7 +1541,6 @@
                                     </textView>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="JHT-lw-Hmf" secondAttribute="trailing" id="2SJ-cT-PQj"/>
                                     <constraint firstAttribute="bottom" secondItem="JHT-lw-Hmf" secondAttribute="bottom" id="7cc-9D-66W"/>
@@ -1549,7 +1548,7 @@
                                     <constraint firstItem="JHT-lw-Hmf" firstAttribute="top" secondItem="hJa-9Z-fOu" secondAttribute="top" id="EE3-e7-JXf"/>
                                 </constraints>
                             </view>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hashtags" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hashtags" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
                                 <rect key="frame" x="18" y="323" width="284" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1951,7 +1950,7 @@
                         <outlet property="colorButtonRightMiddle" destination="tUn-hG-LXM" id="pJS-7E-Q8q"/>
                         <outlet property="colorButtonRightTop" destination="5oJ-7O-RZt" id="ulp-r0-VRt"/>
                         <outlet property="colorButtonsContainerView" destination="Wu3-VN-tRc" id="QBa-aH-zc1"/>
-                        <outlet property="containerView" destination="hJa-9Z-fOu" id="k0z-Jn-Iom"/>
+                        <outlet property="dappContainerSwipeableView" destination="hJa-9Z-fOu" id="iUE-1J-wuh"/>
                         <outlet property="dappTextView" destination="JHT-lw-Hmf" id="tsZ-Lw-CRu"/>
                         <outlet property="fontButtonLeftBottom" destination="Vua-8q-m31" id="Pmw-90-zFo"/>
                         <outlet property="fontButtonLeftMiddle" destination="qHM-Gb-pVd" id="IWX-pN-2RR"/>
