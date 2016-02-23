@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1473,7 +1473,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaR-Kn-wtt">
-                                <rect key="frame" x="11" y="46" width="298" height="37"/>
+                                <rect key="frame" x="4" y="46" width="312" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApF-Yq-F1c">
                                         <rect key="frame" x="0.0" y="4" width="44" height="26"/>
@@ -1488,20 +1488,20 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to continue. Left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTs-LS-OqP">
-                                        <rect key="frame" x="79" y="8" width="103" height="20"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <rect key="frame" x="79" y="8" width="110" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dapp_left" translatesAutoresizingMaskIntoConstraints="NO" id="bcb-Gi-DLY">
-                                        <rect key="frame" x="184" y="0.0" width="41" height="35"/>
+                                        <rect key="frame" x="191" y="0.0" width="41" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bcb-Gi-DLY" secondAttribute="height" multiplier="41:35" id="QTE-Bi-mIp"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to go back." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71P-fY-lCw">
-                                        <rect key="frame" x="227" y="8" width="71" height="20"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <rect key="frame" x="236" y="8" width="76" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1510,18 +1510,18 @@
                                     <constraint firstItem="ApF-Yq-F1c" firstAttribute="leading" secondItem="iaR-Kn-wtt" secondAttribute="leading" id="06J-3m-Mhv"/>
                                     <constraint firstItem="bcb-Gi-DLY" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" id="1il-eJ-owS"/>
                                     <constraint firstAttribute="bottom" secondItem="bcb-Gi-DLY" secondAttribute="bottom" constant="2" id="2Pl-y2-EOu"/>
+                                    <constraint firstItem="71P-fY-lCw" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" constant="8" id="3dI-ts-JVf"/>
                                     <constraint firstAttribute="bottom" secondItem="pN5-ou-eeB" secondAttribute="bottom" constant="4" id="6pc-Q0-V9t"/>
                                     <constraint firstItem="pN5-ou-eeB" firstAttribute="leading" secondItem="ApF-Yq-F1c" secondAttribute="trailing" constant="2" id="8HA-Xr-YJI"/>
                                     <constraint firstItem="ApF-Yq-F1c" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" constant="4" id="BQV-NM-JnN"/>
+                                    <constraint firstAttribute="trailing" secondItem="71P-fY-lCw" secondAttribute="trailing" id="Ker-TN-tWw"/>
                                     <constraint firstItem="eTs-LS-OqP" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" constant="8" id="MHh-76-In2"/>
+                                    <constraint firstItem="71P-fY-lCw" firstAttribute="leading" secondItem="bcb-Gi-DLY" secondAttribute="trailing" constant="4" id="N2f-BP-DpF"/>
                                     <constraint firstAttribute="height" constant="37" id="RI5-TZ-yW1"/>
+                                    <constraint firstAttribute="bottom" secondItem="71P-fY-lCw" secondAttribute="bottom" constant="8" id="SM8-9V-zP8"/>
                                     <constraint firstItem="bcb-Gi-DLY" firstAttribute="leading" secondItem="eTs-LS-OqP" secondAttribute="trailing" constant="2" id="akj-DO-rbQ"/>
-                                    <constraint firstItem="71P-fY-lCw" firstAttribute="leading" secondItem="bcb-Gi-DLY" secondAttribute="trailing" constant="2" id="dde-PO-qi4"/>
                                     <constraint firstItem="eTs-LS-OqP" firstAttribute="leading" secondItem="pN5-ou-eeB" secondAttribute="trailing" constant="2" id="ey2-6Y-sMZ"/>
-                                    <constraint firstItem="71P-fY-lCw" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" constant="8" id="hw9-34-qUx"/>
                                     <constraint firstItem="pN5-ou-eeB" firstAttribute="top" secondItem="iaR-Kn-wtt" secondAttribute="top" constant="-1" id="mhw-W8-qIr"/>
-                                    <constraint firstAttribute="trailing" secondItem="71P-fY-lCw" secondAttribute="trailing" id="nFs-mK-ZIc"/>
-                                    <constraint firstItem="71P-fY-lCw" firstAttribute="leading" secondItem="bcb-Gi-DLY" secondAttribute="trailing" constant="2" id="txt-mB-d2f"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJa-9Z-fOu" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
@@ -1950,8 +1950,8 @@
                         <outlet property="colorButtonRightMiddle" destination="tUn-hG-LXM" id="pJS-7E-Q8q"/>
                         <outlet property="colorButtonRightTop" destination="5oJ-7O-RZt" id="ulp-r0-VRt"/>
                         <outlet property="colorButtonsContainerView" destination="Wu3-VN-tRc" id="QBa-aH-zc1"/>
-                        <outlet property="dappContainerSwipeableView" destination="hJa-9Z-fOu" id="iUE-1J-wuh"/>
-                        <outlet property="dappTextView" destination="JHT-lw-Hmf" id="tsZ-Lw-CRu"/>
+                        <outlet property="dappMessageContainerSwipeableView" destination="hJa-9Z-fOu" id="Ecs-c2-FIW"/>
+                        <outlet property="dappMessageTextView" destination="JHT-lw-Hmf" id="7Vf-N8-TqY"/>
                         <outlet property="fontButtonLeftBottom" destination="Vua-8q-m31" id="Pmw-90-zFo"/>
                         <outlet property="fontButtonLeftMiddle" destination="qHM-Gb-pVd" id="IWX-pN-2RR"/>
                         <outlet property="fontButtonLeftTop" destination="O9M-ui-IlI" id="2Hd-1Q-cbT"/>
@@ -1964,6 +1964,7 @@
                         <outlet property="fontButtonsContainerView" destination="M8s-uT-gi0" id="NaW-k0-fv0"/>
                         <outlet property="hashtagTextView" destination="vCd-np-NGg" id="pHf-aH-0xe"/>
                         <outlet property="prohibitedWordsLabel" destination="LZD-kY-k84" id="yFd-uB-4zd"/>
+                        <outlet property="titleLabel" destination="VuC-wh-17B" id="YQG-52-T88"/>
                         <segue destination="rgj-nO-uI9" kind="modal" identifier="showDappLinks" id="ve9-6k-XXj"/>
                     </connections>
                 </viewController>

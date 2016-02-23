@@ -28,8 +28,9 @@ enum Mode {
 }
 
 class AddDappViewController: UIViewController {
-    @IBOutlet weak var dappContainerSwipeableView:         SwipeableView!
-    @IBOutlet weak var dappTextView:                       UITextView!
+    @IBOutlet weak var titleLabel:                         UILabel!
+    @IBOutlet weak var dappMessageContainerSwipeableView:  SwipeableView!
+    @IBOutlet weak var dappMessageTextView:                UITextView!
     @IBOutlet weak var hashtagTextView:                    UITextField!
     @IBOutlet weak var buttonsContainerViewsContainerView: UIView!
     @IBOutlet weak var colorButtonsContainerView:          UIView!
@@ -73,13 +74,13 @@ class AddDappViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dappTextView.editable = false
+        self.dappMessageTextView.editable = false
         
         // AddDappText Setup
-        self.dappTextView.delegate = self
+        self.dappMessageTextView.delegate = self
         
-        self.dappContainerSwipeableView.delegate = self
-        self.dappContainerSwipeableView.minTranslationX = 200.0
+        self.dappMessageContainerSwipeableView.delegate = self
+        self.dappMessageContainerSwipeableView.minTranslationX = 200.0
         
         self.prohibitedWordsLabel.hidden = true
         
@@ -108,20 +109,20 @@ class AddDappViewController: UIViewController {
             fontButton.setTitle(title, forState: .Normal)
         }
         
-        self.dappTextView.layer.cornerRadius = 10.0
-        self.dappTextView.layer.borderColor = UIColor.whiteColor().CGColor
-        self.dappTextView.layer.borderWidth = 2.0
+        self.dappMessageTextView.layer.cornerRadius = 10.0
+        self.dappMessageTextView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.dappMessageTextView.layer.borderWidth = 2.0
         
         self.buttonsContainerViewsContainerView.layer.borderColor = UIColor.whiteColor().CGColor
         self.buttonsContainerViewsContainerView.layer.borderWidth = 2.0
         
-        self.dappTextView.backgroundColor = DappColors.colorWithColorName(self.dappColorName)
+        self.dappMessageTextView.backgroundColor = DappColors.colorWithColorName(self.dappColorName)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.dappContainerSwipeableView.hidden = true
+        self.dappMessageContainerSwipeableView.hidden = true
         self.hashtagTextView.hidden = true
         self.buttonsContainerViewsContainerView.hidden = true
     }
@@ -144,30 +145,33 @@ class AddDappViewController: UIViewController {
     
     private func animateViews() {
         let springDuration = 0.5
+        let springDelay = 0.02
+        let translateTo0_0 = CGAffineTransformMakeTranslation(0.0, 0.0)
+        let translateTo0_200 = CGAffineTransformMakeTranslation(0.0, 200.0)
+        
         let scale = CGAffineTransformMakeScale(0.5, 0.5)
         let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+        let transform = CGAffineTransformConcat(scale, translate)
         
-        self.dappContainerSwipeableView.transform = CGAffineTransformConcat(scale, translate)
-        self.dappContainerSwipeableView.alpha = 0.0
+        self.dappMessageContainerSwipeableView.transform = transform
+        self.dappMessageContainerSwipeableView.alpha = 0.0
         
         spring(springDuration) {
             let scale = CGAffineTransformMakeScale(1.0, 1.0)
-            let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
+            let transform = CGAffineTransformConcat(scale, translateTo0_0)
             
-            self.dappContainerSwipeableView.transform = CGAffineTransformConcat(scale, translate)
-            self.dappContainerSwipeableView.alpha = 1.0
+            self.dappMessageContainerSwipeableView.transform = transform
+            self.dappMessageContainerSwipeableView.alpha = 1.0
         }
         
         switch self.mode {
         case .ChooseColor, .ChooseFont:
             self.buttonsContainerViewsContainerView.alpha = 0.0
-            self.buttonsContainerViewsContainerView.transform =
-                CGAffineTransformMakeTranslation(0.0, 200.0)
+            self.buttonsContainerViewsContainerView.transform = translateTo0_200
             
             spring(springDuration) {
                 self.buttonsContainerViewsContainerView.alpha = 1.0
-                self.buttonsContainerViewsContainerView.transform =
-                    CGAffineTransformMakeTranslation(0.0, 0.0)
+                self.buttonsContainerViewsContainerView.transform = translateTo0_0
             }
         case _:
             break
@@ -176,22 +180,22 @@ class AddDappViewController: UIViewController {
         switch self.mode {
         case .ChooseColor:
             for (colorButton, _) in self.colorButtonsColorNames {
-                colorButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
+                colorButton.transform = translateTo0_200
             }
             
-            springWithDelay(springDuration, delay: 0.02, animations: {
+            springWithDelay(springDuration, delay: springDelay, animations: {
                 for (colorButton, _) in self.colorButtonsColorNames {
-                    colorButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+                    colorButton.transform = translateTo0_0
                 }
             })
         case .ChooseFont:
             for (fontButton, _) in self.fontButtonsFontNames {
-                fontButton.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
+                fontButton.transform = translateTo0_200
             }
             
-            springWithDelay(springDuration, delay: 0.02, animations: {
+            springWithDelay(springDuration, delay: springDelay, animations: {
                 for (fontButton, _) in self.fontButtonsFontNames {
-                    fontButton.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+                    fontButton.transform = translateTo0_0
                 }
             })
         case _:
@@ -233,7 +237,7 @@ class AddDappViewController: UIViewController {
             colorName = self.colorButtonsColorNames[colorButton] {
                 self.dappColorName = colorName
                 
-                self.dappTextView.backgroundColor = DappColors.colorWithColorName(colorName)
+                self.dappMessageTextView.backgroundColor = DappColors.colorWithColorName(colorName)
                 
                 self.animateViews()
         }
@@ -246,7 +250,7 @@ class AddDappViewController: UIViewController {
                 let fontFileName = DappFonts.fontFileNameWithName(fontName)
                 let font = UIFont(name: fontFileName, size: 25.0)
                 
-                self.dappTextView.font = font
+                self.dappMessageTextView.font = font
                 
                 self.dappFontName = fontName
                 
@@ -257,31 +261,40 @@ class AddDappViewController: UIViewController {
     private func prepareViewsForCurrentMode() {
         switch self.mode {
         case .ChooseColor:
-            self.dappTextView.editable = false
-            self.dappContainerSwipeableView.hidden = false
+            self.titleLabel.text = "Choose a color"
+            self.dappMessageTextView.editable = false
+            self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagTextView.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = false
             self.fontButtonsContainerView.hidden = true
+            
+            self.dappMessageTextView.resignFirstResponder()
         case .AddText:
-            self.dappTextView.editable = true
-            self.dappContainerSwipeableView.hidden = false
+            self.titleLabel.text = "Choose your message"
+            self.dappMessageTextView.editable = true
+            self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagTextView.hidden = false
             self.buttonsContainerViewsContainerView.hidden = true
+            
+            self.dappMessageTextView.becomeFirstResponder()
         case .ChooseFont:
-            self.dappTextView.editable = false
-            self.dappContainerSwipeableView.hidden = false
+            self.titleLabel.text = "Choose a font"
+            self.dappMessageTextView.editable = false
+            self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagTextView.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = true
             self.fontButtonsContainerView.hidden = false
+            
+            self.dappMessageTextView.resignFirstResponder()
         }
     }
     
     func getDapp() -> Dapp {
         let user                   = PFUser.currentUser()
-        let dappStatement          = self.dappTextView.text
-        let lowercaseDappStatement = self.dappTextView.text.lowercaseString
+        let dappStatement          = self.dappMessageTextView.text
+        let lowercaseDappStatement = self.dappMessageTextView.text.lowercaseString
         let dappFont               = self.dappFontName.rawValue
         let dappBackgroundColor    = self.dappColorName.rawValue
         let name                   = user["name"] as? String
@@ -472,7 +485,7 @@ extension AddDappViewController: UITextViewDelegate {
         
         if prohibitedPhrases.count > 0 {
             self.prohibitedWordsLabel.hidden = false
-            self.dappContainerSwipeableView.canBeDraged = false
+            self.dappMessageContainerSwipeableView.canBeDraged = false
             
             let prohibitedPhrasesString = prohibitedPhrases.joinWithSeparator(", ")
             
@@ -487,7 +500,7 @@ extension AddDappViewController: UITextViewDelegate {
             }
         } else {
             self.prohibitedWordsLabel.hidden = true
-            self.dappContainerSwipeableView.canBeDraged = true
+            self.dappMessageContainerSwipeableView.canBeDraged = true
         }
     }
 }
