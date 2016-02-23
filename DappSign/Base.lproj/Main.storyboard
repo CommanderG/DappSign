@@ -1548,16 +1548,20 @@
                                     <constraint firstItem="JHT-lw-Hmf" firstAttribute="top" secondItem="hJa-9Z-fOu" secondAttribute="top" id="EE3-e7-JXf"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hashtags" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
-                                <rect key="frame" x="18" y="323" width="284" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hashtags" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-np-NGg">
+                                <rect key="frame" x="18" y="323" width="284" height="34"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="yMH-iv-p9h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Run-wI-cqj" id="1kR-Qm-d0T"/>
                                 </connections>
                             </textField>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gL2-LW-bze">
+                            <view hidden="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gL2-LW-bze">
                                 <rect key="frame" x="0.0" y="332" width="320" height="236"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wu3-VN-tRc">
@@ -1963,7 +1967,7 @@
                         <outlet property="fontButtonRightMiddle" destination="Z6G-lM-cXJ" id="N48-pw-CYY"/>
                         <outlet property="fontButtonRightTop" destination="3s7-Bl-IPc" id="Jh5-i5-BiG"/>
                         <outlet property="fontButtonsContainerView" destination="M8s-uT-gi0" id="NaW-k0-fv0"/>
-                        <outlet property="hashtagTextView" destination="vCd-np-NGg" id="pHf-aH-0xe"/>
+                        <outlet property="hashtagsTextView" destination="vCd-np-NGg" id="IS2-dY-COB"/>
                         <outlet property="prohibitedWordsLabel" destination="LZD-kY-k84" id="yFd-uB-4zd"/>
                         <outlet property="titleLabel" destination="VuC-wh-17B" id="YQG-52-T88"/>
                         <segue destination="rgj-nO-uI9" kind="modal" identifier="showDappLinks" id="ve9-6k-XXj"/>

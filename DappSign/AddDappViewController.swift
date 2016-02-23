@@ -32,7 +32,7 @@ class AddDappViewController: UIViewController {
     @IBOutlet weak var titleLabel:                         UILabel!
     @IBOutlet weak var dappMessageContainerSwipeableView:  SwipeableView!
     @IBOutlet weak var dappMessageTextView:                UITextView!
-    @IBOutlet weak var hashtagTextView:                    UITextField!
+    @IBOutlet weak var hashtagsTextView:                   UITextField!
     @IBOutlet weak var buttonsContainerViewsContainerView: UIView!
     @IBOutlet weak var colorButtonsContainerView:          UIView!
     @IBOutlet weak var fontButtonsContainerView:           UIView!
@@ -80,6 +80,8 @@ class AddDappViewController: UIViewController {
         // AddDappText Setup
         self.dappMessageTextView.delegate = self
         
+        self.initHashtagsTextView()
+        
         self.dappMessageContainerSwipeableView.delegate = self
         self.dappMessageContainerSwipeableView.minTranslationX = 200.0
         
@@ -124,7 +126,7 @@ class AddDappViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.dappMessageContainerSwipeableView.hidden = true
-        self.hashtagTextView.hidden = true
+        self.hashtagsTextView.hidden = true
         self.buttonsContainerViewsContainerView.hidden = true
     }
     
@@ -142,6 +144,20 @@ class AddDappViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    private func initHashtagsTextView() {
+        if let placeholder = self.hashtagsTextView.placeholder {
+            let blackColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+            let placeholderAttributes = [NSForegroundColorAttributeName: blackColor]
+            let attributedPlaceholder = NSAttributedString(string: placeholder,
+                attributes: placeholderAttributes
+            )
+            
+            self.hashtagsTextView.attributedPlaceholder = attributedPlaceholder
+        }
+        
+        self.hashtagsTextView.layer.cornerRadius = 6.0
     }
     
     private func animateViews() {
@@ -265,7 +281,7 @@ class AddDappViewController: UIViewController {
             self.titleLabel.text = "Choose a color"
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagTextView.hidden = true
+            self.hashtagsTextView.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = false
             self.fontButtonsContainerView.hidden = true
@@ -275,7 +291,7 @@ class AddDappViewController: UIViewController {
             self.titleLabel.text = "Choose your message"
             self.dappMessageTextView.editable = true
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagTextView.hidden = false
+            self.hashtagsTextView.hidden = false
             self.buttonsContainerViewsContainerView.hidden = true
             
             self.dappMessageTextView.becomeFirstResponder()
@@ -283,7 +299,7 @@ class AddDappViewController: UIViewController {
             self.titleLabel.text = "Choose a font"
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagTextView.hidden = true
+            self.hashtagsTextView.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = true
             self.fontButtonsContainerView.hidden = false
@@ -316,7 +332,7 @@ class AddDappViewController: UIViewController {
         let dappTypeId             = DappTypeId.Secondary.rawValue
         var hashtagNames: [String] = []
         
-        if let hashtagsText = self.hashtagTextView.text {
+        if let hashtagsText = self.hashtagsTextView.text {
             hashtagNames = hashtagsText.characters.split(" ").map{ String($0) }
             hashtagNames = hashtagNames.map {
                 // removes #
