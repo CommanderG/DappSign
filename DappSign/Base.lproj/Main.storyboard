@@ -1951,6 +1951,7 @@
                         <outlet property="colorButtonRightTop" destination="5oJ-7O-RZt" id="ulp-r0-VRt"/>
                         <outlet property="colorButtonsContainerView" destination="Wu3-VN-tRc" id="QBa-aH-zc1"/>
                         <outlet property="dappMessageContainerSwipeableView" destination="hJa-9Z-fOu" id="Ecs-c2-FIW"/>
+                        <outlet property="dappMessageContainerViewBottomConstraint" destination="3S3-SH-2Rk" id="Mtd-mc-Zf8"/>
                         <outlet property="dappMessageTextView" destination="JHT-lw-Hmf" id="7Vf-N8-TqY"/>
                         <outlet property="fontButtonLeftBottom" destination="Vua-8q-m31" id="Pmw-90-zFo"/>
                         <outlet property="fontButtonLeftMiddle" destination="qHM-Gb-pVd" id="IWX-pN-2RR"/>

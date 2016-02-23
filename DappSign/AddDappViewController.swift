@@ -9,16 +9,16 @@
 import UIKit
 
 struct Dapp {
-    var dappStatement: String?
+    var dappStatement:          String?
     var lowercaseDappStatement: String?
-    var dappFont: String?
-    var dappBackgroundColor: String?
-    var name: String?
-    var userid: String?
-    var dappScore: Int
-    var isDeleted: Bool
-    var dappTypeId: String?
-    var hashtagNames: [String]
+    var dappFont:               String?
+    var dappBackgroundColor:    String?
+    var name:                   String?
+    var userid:                 String?
+    var dappScore:              Int
+    var isDeleted:              Bool
+    var dappTypeId:             String?
+    var hashtagNames:           [String]
 }
 
 enum Mode {
@@ -28,6 +28,7 @@ enum Mode {
 }
 
 class AddDappViewController: UIViewController {
+    @IBOutlet weak var prohibitedWordsLabel:               UILabel!
     @IBOutlet weak var titleLabel:                         UILabel!
     @IBOutlet weak var dappMessageContainerSwipeableView:  SwipeableView!
     @IBOutlet weak var dappMessageTextView:                UITextView!
@@ -56,7 +57,7 @@ class AddDappViewController: UIViewController {
     @IBOutlet weak var fontButtonMiddleBottom: UIButton!
     @IBOutlet weak var fontButtonRightBottom:  UIButton!
     
-    @IBOutlet weak var prohibitedWordsLabel: UILabel!
+    @IBOutlet weak var dappMessageContainerViewBottomConstraint: NSLayoutConstraint!
     
     private let showDappLinksSegueID = "showDappLinks"
     
@@ -289,9 +290,20 @@ class AddDappViewController: UIViewController {
             
             self.dappMessageTextView.resignFirstResponder()
         }
+        
+        self.updateDappMessageContainerViewBottomConstraintForCurrentMode()
     }
     
-    func getDapp() -> Dapp {
+    private func updateDappMessageContainerViewBottomConstraintForCurrentMode() {
+        switch self.mode {
+        case .ChooseColor, .ChooseFont:
+            self.dappMessageContainerViewBottomConstraint.constant = 254.0
+        case .AddText:
+            self.dappMessageContainerViewBottomConstraint.constant = 274.0
+        }
+    }
+    
+    private func getDapp() -> Dapp {
         let user                   = PFUser.currentUser()
         let dappStatement          = self.dappMessageTextView.text
         let lowercaseDappStatement = self.dappMessageTextView.text.lowercaseString
