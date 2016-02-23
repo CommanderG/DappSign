@@ -313,9 +313,9 @@ class AddDappViewController: UIViewController {
     private func updateDappMessageContainerViewBottomConstraintForCurrentMode() {
         switch self.mode {
         case .ChooseColor, .ChooseFont:
-            self.dappMessageContainerViewBottomConstraint.constant = 254.0
+            self.dappMessageContainerViewBottomConstraint.constant = 214.0
         case .AddText:
-            self.dappMessageContainerViewBottomConstraint.constant = 274.0
+            self.dappMessageContainerViewBottomConstraint.constant = 276.0
         }
     }
     
@@ -446,12 +446,6 @@ extension AddDappViewController: UITextFieldDelegate {
         }
         
         return true
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        return true;
     }
 }
 

@@ -119,8 +119,8 @@ class SwipeableView: UIView {
             
             self.transform = CGAffineTransformMakeRotation(rotationAngle)
             self.center = CGPoint(
-                x: self.originalCenter.x + translation.x
-            ,   y: self.originalCenter.y + translation.y
+                x: self.originalCenter.x + translation.x,
+                y: self.originalCenter.y + translation.y
             )
             
             break
