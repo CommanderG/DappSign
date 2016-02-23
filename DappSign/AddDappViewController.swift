@@ -278,7 +278,7 @@ class AddDappViewController: UIViewController {
     private func prepareViewsForCurrentMode() {
         switch self.mode {
         case .ChooseColor:
-            self.titleLabel.text = "Choose a color"
+            self.titleLabel.text = "Choose a color."
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagsTextView.hidden = true
@@ -288,7 +288,7 @@ class AddDappViewController: UIViewController {
             
             self.dappMessageTextView.resignFirstResponder()
         case .AddText:
-            self.titleLabel.text = "Choose your message"
+            self.titleLabel.text = "Choose your message."
             self.dappMessageTextView.editable = true
             self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagsTextView.hidden = false
@@ -296,7 +296,7 @@ class AddDappViewController: UIViewController {
             
             self.dappMessageTextView.becomeFirstResponder()
         case .ChooseFont:
-            self.titleLabel.text = "Choose a font"
+            self.titleLabel.text = "Choose a font."
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
             self.hashtagsTextView.hidden = true
