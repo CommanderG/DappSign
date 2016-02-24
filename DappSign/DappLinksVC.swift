@@ -81,14 +81,19 @@ class DappLinksVC: UIViewController {
 }
 
 extension DappLinksVC: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(
+        tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellReuseID) as! DappLinkCell
         
         cell.delegate = self
+        cell.linkIndexLabel.text = "\(indexPath.row + 1)"
         
         if let link = self.delegate?.getLinkAtIndex(indexPath.row) {
             cell.goToState(.Link)
-            cell.showLinkInfo(linkIndex: indexPath.row + 1, linkTitle: link.title)
+            
+            cell.linkTitleLabel.text = link.title
         } else if let state = self.delegate?.getStateForNoLink() {
             cell.goToState(state)
         } else {
@@ -143,18 +148,17 @@ extension DappLinksVC: DappLinkCellDelegate {
                                 return
                             }
                             
-                            let linkIndexPath = NSIndexPath(forRow: delegate.getLinksCount() - 1
-                            ,   inSection: 0
-                            )
+                            let row = delegate.getLinksCount() - 1
+                            let linkIndexPath = NSIndexPath(forRow: row, inSection: 0)
                             
                             if let linksTableView = self.dappLinksView.linksTableView {
-                                linksTableView.reloadRowsAtIndexPaths([linkIndexPath]
-                                ,   withRowAnimation: UITableViewRowAnimation.Automatic
+                                linksTableView.reloadRowsAtIndexPaths([linkIndexPath],
+                                    withRowAnimation: UITableViewRowAnimation.Automatic
                                 )
                                 
                                 if let cellIndexPath = linksTableView.indexPathForCell(cell) {
-                                    linksTableView.reloadRowsAtIndexPaths([cellIndexPath]
-                                    ,   withRowAnimation: UITableViewRowAnimation.Automatic
+                                    linksTableView.reloadRowsAtIndexPaths([cellIndexPath],
+                                        withRowAnimation: UITableViewRowAnimation.Automatic
                                     )
                                 }
                             }
@@ -164,10 +168,10 @@ extension DappLinksVC: DappLinkCellDelegate {
                     }
                 } else if let errorMessage = errorMessage {
                     UIAlertView(
-                        title: nil
-                    ,   message: errorMessage
-                    ,   delegate: nil
-                    ,   cancelButtonTitle: "OK"
+                        title:             nil,
+                        message:           errorMessage,
+                        delegate:          nil,
+                        cancelButtonTitle: "OK"
                     ).show()
                     
                     cell.goToState(DappLinkCellState.NoLink)
@@ -177,10 +181,10 @@ extension DappLinksVC: DappLinkCellDelegate {
             })
         } else {
             UIAlertView(
-                title: nil
-            ,   message: "Incorrect URL."
-            ,   delegate: nil
-            , 	cancelButtonTitle: "OK"
+                title:             nil,
+                message:           "Incorrect URL.",
+                delegate:          nil,
+                cancelButtonTitle: "OK"
             ).show()
         }
     }
@@ -205,10 +209,11 @@ extension DappLinksVC: DappLinkCellDelegate {
     }
     
     func openLinkInCell(cell: DappLinkCell) {
-        if let 	indexPath = self.dappLinksView.linksTableView.indexPathForCell(cell)
-            ,   link      = self.delegate?.getLinkAtIndex(indexPath.row)
-            ,   URLStr    = link.URLStr
-            ,   URL       = NSURL(string: URLStr){
+        if let
+            indexPath = self.dappLinksView.linksTableView.indexPathForCell(cell),
+            link      = self.delegate?.getLinkAtIndex(indexPath.row),
+            URLStr    = link.URLStr,
+            URL       = NSURL(string: URLStr){
                 self.delegate?.openURL?(URL)
         }
     }

@@ -14,4 +14,15 @@ class DappLinksView: XIBView {
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        self.layer.cornerRadius = 12.0
+        self.layer.borderColor = UIColor.whiteColor().CGColor
+        self.layer.borderWidth = 2.0
+        
+        self.linksTableView.estimatedRowHeight = 100.0
+        self.linksTableView.rowHeight = UITableViewAutomaticDimension
+    }
 }

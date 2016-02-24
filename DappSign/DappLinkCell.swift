@@ -29,29 +29,23 @@ protocol DappLinkCellDelegate {
 }
 
 class DappLinkCell: UITableViewCell {
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var addLinkImageView: UIImageView!
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var linkIndexLabel: UILabel!
-    @IBOutlet weak var linkTitleLabel: UILabel!
+    @IBOutlet weak var addLinkImageView:    UIImageView!
+    @IBOutlet weak var textField:           UITextField!
+    @IBOutlet weak var doneButton:          UIButton!
+    @IBOutlet weak var linkIndexLabel:      UILabel!
+    @IBOutlet weak var linkTitleLabel:      UILabel!
     @IBOutlet weak var deleteThisLinkLabel: UILabel!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var deleteButton:        UIButton!
+    @IBOutlet weak var cancelButton:        UIButton!
+    @IBOutlet weak var linkButton:          UIButton!
     
-    @IBOutlet var noLinkViews: [UIView]!
-    @IBOutlet var enterLinkViews: [UIView]!
-    @IBOutlet var linkViews: [UIView]!
+    @IBOutlet var noLinkViews:     [UIView]!
+    @IBOutlet var enterLinkViews:  [UIView]!
+    @IBOutlet var linkViews:       [UIView]!
     @IBOutlet var deleteLinkViews: [UIView]!
     
     internal var delegate: DappLinkCellDelegate?
-    internal private(set) var state: DappLinkCellState = .Empty
-    
-    private var containerViewBorderLayer: CAShapeLayer?
-    
-    internal let selectedBackgroundColor = UIColor(red:0, green:0.419, blue:0.705, alpha:1)
-    internal let unselectedBackgroundColor = UIColor.clearColor()
+    internal private(set) var state = DappLinkCellState.Empty
     
     required override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -59,43 +53,18 @@ class DappLinkCell: UITableViewCell {
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
-        
-        self.backgroundColor = unselectedBackgroundColor
     }
     
     override func awakeFromNib() {
-        self.hideAllViewsExcept(self.viewsForState(self.state))
+        let currentStateViews = self.viewsForState(self.state)
+        
+        self.hideAllViewsExcept(currentStateViews)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
-        self.addLinkImageView.alpha = 0.45
-        
-        let borderColor = UIColor(white: 1.0, alpha: 0.25).CGColor
-        
-        self.containerView.layoutIfNeeded()
-        
-        let containerViewBorderLayer = self.getBorderLayerForView(self.containerView
-        ,   strokeColor: borderColor
-        )
-        
-        if self.state != .Empty && self.state != .Link {
-            self.containerView.layer.addSublayer(containerViewBorderLayer)
-        }
-        
-        self.containerViewBorderLayer = containerViewBorderLayer
-        
-        
-        
         self.linkIndexLabel.layoutIfNeeded()
-        
-        let linkIndexLabelBorderLayer = self.getBorderLayerForView(self.linkIndexLabel
-        ,   strokeColor: UIColor.whiteColor().CGColor
-        )
-        
-        self.linkIndexLabel.layer.addSublayer(linkIndexLabelBorderLayer)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -148,38 +117,12 @@ class DappLinkCell: UITableViewCell {
         switch viewsState {
         case .Enabled:
             self.enableViews(views)
-            
-            break
         case .Disabled:
             self.disableViews(views)
-            
-            break
         }
     }
     
-    internal func showLinkInfo(linkIndex linkIndex: Int, linkTitle: String) {
-        self.linkIndexLabel.text = "\(linkIndex)"
-        self.linkTitleLabel.text = linkTitle
-    }
-    
     // MARK: - private
-    
-    private func getBorderLayerForView(view: UIView, strokeColor: CGColor) -> CAShapeLayer {
-        var roundedRect = view.bounds
-        roundedRect.origin.x += 2.0
-        roundedRect.origin.y += 2.0
-        roundedRect.size.width -= roundedRect.origin.x * 2
-        roundedRect.size.height -= roundedRect.origin.y * 2
-        
-        let borderLayer = CAShapeLayer()
-        borderLayer.fillColor = UIColor.clearColor().CGColor
-        borderLayer.path = UIBezierPath(roundedRect: roundedRect, cornerRadius: 10.0).CGPath
-        borderLayer.frame = view.bounds
-        borderLayer.strokeColor = strokeColor
-        borderLayer.lineWidth = 4.0
-        
-        return borderLayer
-    }
     
     private func hideAllViewsExcept(views: [UIView]) {
         self.hideViews(self.noLinkViews)
@@ -192,24 +135,6 @@ class DappLinkCell: UITableViewCell {
         
         if views == self.enterLinkViews {
             self.textField.text = ""
-        }
-        
-        if views == self.linkViews {
-            let layerBorderColor = UIColor(white: 1.0, alpha: 0.75).CGColor
-            
-            self.containerViewBorderLayer?.removeFromSuperlayer()
-            
-            self.containerView.backgroundColor = self.selectedBackgroundColor
-            self.containerView.layer.borderColor = layerBorderColor
-            self.containerView.layer.borderWidth = 1.0
-        } else {
-            if let containerViewBorderLayer = self.containerViewBorderLayer {
-            	self.containerView.layer.addSublayer(containerViewBorderLayer)
-            }
-            
-            self.containerView.backgroundColor = self.unselectedBackgroundColor
-            self.containerView.layer.borderColor = UIColor.clearColor().CGColor
-            self.containerView.layer.borderWidth = 0.0
         }
     }
     

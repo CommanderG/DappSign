@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Exo-Black.otf">
-            <string>Exo-Black</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappLinksView" customModule="DappSign" customModuleProvider="target">
             <connections>
@@ -20,35 +15,25 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find out more about the issue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmj-MZ-krf">
-                    <rect key="frame" x="8" y="8" width="584" height="34"/>
-                    <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="98" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bbn-q8-8aQ">
-                    <rect key="frame" x="0.0" y="50" width="600" height="500"/>
+                    <rect key="frame" x="0.0" y="40" width="560" height="520"/>
                     <color key="backgroundColor" red="0.47843137254901957" green="0.74901960784313726" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.41960784313725491" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.68081027269363403" green="0.71362251043319702" blue="0.25342258810997009" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="bbn-q8-8aQ" secondAttribute="bottom" constant="50" id="3S8-UU-LBP"/>
-                <constraint firstAttribute="trailing" secondItem="bbn-q8-8aQ" secondAttribute="trailing" id="IlV-Hc-hV1"/>
-                <constraint firstItem="bbn-q8-8aQ" firstAttribute="top" secondItem="Tmj-MZ-krf" secondAttribute="bottom" constant="8" id="Ryv-1N-Fmk"/>
-                <constraint firstItem="bbn-q8-8aQ" firstAttribute="top" secondItem="U2V-yp-HlW" secondAttribute="top" constant="50" id="c4n-O1-hCH"/>
+                <constraint firstAttribute="bottom" secondItem="bbn-q8-8aQ" secondAttribute="bottom" constant="40" id="3S8-UU-LBP"/>
+                <constraint firstAttribute="trailing" secondItem="bbn-q8-8aQ" secondAttribute="trailing" constant="40" id="IlV-Hc-hV1"/>
+                <constraint firstItem="bbn-q8-8aQ" firstAttribute="top" secondItem="U2V-yp-HlW" secondAttribute="top" constant="40" id="c4n-O1-hCH"/>
                 <constraint firstItem="bbn-q8-8aQ" firstAttribute="leading" secondItem="U2V-yp-HlW" secondAttribute="leading" id="ghm-52-7xX"/>
-                <constraint firstItem="Tmj-MZ-krf" firstAttribute="leading" secondItem="U2V-yp-HlW" secondAttribute="leading" constant="8" id="pGq-hT-IFG"/>
-                <constraint firstAttribute="trailing" secondItem="Tmj-MZ-krf" secondAttribute="trailing" constant="8" id="xpp-XJ-rqz"/>
-                <constraint firstItem="Tmj-MZ-krf" firstAttribute="top" secondItem="U2V-yp-HlW" secondAttribute="top" constant="8" id="zqf-h2-u6h"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                     <integer key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="518" y="547"/>
+            <point key="canvasLocation" x="382" y="547"/>
         </view>
         <tapGestureRecognizer id="fSi-nd-cxO"/>
     </objects>
