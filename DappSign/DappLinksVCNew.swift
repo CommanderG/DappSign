@@ -60,12 +60,11 @@ extension DappLinksVCNew: UITableViewDataSource {
                 addLinkCell.linkIndexLabel.text = "\(linkIndex)"
             } else if let enterLinkCell = cell as? EnterLinkCell {
                 enterLinkCell.delegate = self
-                
             } else if let linkCell = cell as? LinkCell {
                 linkCell.linkIndexLabel.text = "\(linkIndex)"
                 linkCell.linkTitleLabel.text = linkCellInfo.link?.title
             } else if let deleteLinkcell = cell as? DeleteLinkCell {
-                
+                deleteLinkcell.delegate = self
             }
             
             return cell
@@ -97,7 +96,28 @@ extension DappLinksVCNew: UITableViewDataSource {
 }
 
 extension DappLinksVCNew: UITableViewDelegate {
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
+            linkCellsInfo: self.linkCellsInfo
+        )
+        
+        if let linkCellInfo = existingLinkCellInfo {
+            if linkCellInfo.type == .Link {
+                let newLinkCellInfo = LinkCellInfo(
+                    row:  linkCellInfo.row,
+                    link: linkCellInfo.link,
+                    type: .DeleteLink
+                )
+                
+                self.linkCellsInfo = LinkCellInfoHelper.replaceLinkCellInfoWithRow(linkCellInfo.row,
+                    withLinkCellInfo: newLinkCellInfo,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+                
+                self.linksTableView.reloadData()
+            }
+        }
+    }
 }
 
 extension DappLinksVCNew: AddLinkCellDelegate {
@@ -191,6 +211,49 @@ extension DappLinksVCNew: EnterLinkCellDelegate {
                     
                     self.linksTableView.reloadData()
                 })
+        }
+    }
+}
+
+extension DappLinksVCNew: DeleteLinkCellDelegate {
+    func didTouchDeleteLinkButtonInCell(cell: DeleteLinkCell) {
+        if let indexPath = self.linksTableView.indexPathForCell(cell) {
+            self.linkCellsInfo = LinkCellInfoHelper.deleteLinkCellInfoWithRow(indexPath.row,
+                linkCellsInfo: self.linkCellsInfo
+            )
+            
+            self.linkCellsInfo = LinkCellInfoHelper.normalizeLinkCellsInfoByRows(self.linkCellsInfo)
+            
+            let newLinkCellInfo = LinkCellInfo(
+                row:  self.linkCellsInfo.count,
+                link: nil,
+                type: .AddLink
+            )
+            
+            self.linkCellsInfo.append(newLinkCellInfo)
+            self.linksTableView.reloadData()
+        }
+    }
+    
+    func didTouchCancelDeletionButtonInCell(cell: DeleteLinkCell) {
+        if let
+            indexPath = self.linksTableView.indexPathForCell(cell),
+            existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
+                linkCellsInfo: self.linkCellsInfo
+            ) {
+                let newLinkCellInfo = LinkCellInfo(
+                    row:  existingLinkCellInfo.row,
+                    link: existingLinkCellInfo.link,
+                    type: .Link
+                )
+                
+                self.linkCellsInfo = LinkCellInfoHelper.replaceLinkCellInfoWithRow(
+                    existingLinkCellInfo.row,
+                    withLinkCellInfo: newLinkCellInfo,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+                
+                self.linksTableView.reloadData()
         }
     }
 }

@@ -8,11 +8,18 @@
 
 import UIKit
 
+protocol DeleteLinkCellDelegate: class {
+    func didTouchDeleteLinkButtonInCell(cell: DeleteLinkCell)
+    func didTouchCancelDeletionButtonInCell(cell: DeleteLinkCell)
+}
+
 class DeleteLinkCell: UITableViewCell {
     static let ID = "deleteLinkCell"
     
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    internal weak var delegate: DeleteLinkCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,10 +40,10 @@ class DeleteLinkCell: UITableViewCell {
     // MARK: - IBActions
     
     @IBAction func deleteLink(sender: AnyObject) {
-        print("deleteLink")
+        self.delegate?.didTouchDeleteLinkButtonInCell(self)
     }
     
     @IBAction func cancelDeletion(sender: AnyObject) {
-        print("cancelDeletion")
+        self.delegate?.didTouchCancelDeletionButtonInCell(self)
     }
 }

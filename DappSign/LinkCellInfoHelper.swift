@@ -93,6 +93,20 @@ class LinkCellInfoHelper {
         return newLinkCellsInfo
     }
     
+    internal class func linkCellInfoWithMinRow(linkCellsInfo: [LinkCellInfo]) -> LinkCellInfo? {
+        var linkCellInfoWithMinRow = linkCellsInfo.first
+        
+        if linkCellInfoWithMinRow != nil {
+            for linkCellInfo in linkCellsInfo {
+                if linkCellInfo.row < linkCellInfoWithMinRow!.row {
+                    linkCellInfoWithMinRow = linkCellInfo
+                }
+            }
+        }
+        
+        return linkCellInfoWithMinRow
+    }
+    
     internal class func linkCellInfoWithMinRowGreaterThan(
         minRow: Int,
         linkCellsInfo: [LinkCellInfo]
@@ -121,19 +135,48 @@ class LinkCellInfoHelper {
     internal class func normalizeLinkCellsInfoByRows(
         linkCellsInfo: [LinkCellInfo]
     ) -> [LinkCellInfo] {
-        var newLinkCellsInfo: [LinkCellInfo] = []
+        // TODO: refactor
+        var updatedLinkCellsInfo = linkCellsInfo
         
-        for row in 0 ... linkCellsInfo.count - 1 {
+        if let linkCellInfoWithMinRow = self.linkCellInfoWithMinRow(linkCellsInfo) {
+            if linkCellInfoWithMinRow.row > 0 {
+                updatedLinkCellsInfo = updatedLinkCellsInfo.map({
+                    linkCellInfo -> LinkCellInfo in
+                    let newLinkCellInfoRow = linkCellInfo.row - linkCellInfoWithMinRow.row
+                    
+                    let newLinkCellInfo = LinkCellInfo(
+                        row:  newLinkCellInfoRow,
+                        link: linkCellInfo.link,
+                        type: linkCellInfo.type
+                    )
+                    
+                    return newLinkCellInfo
+                })
+            }
+        }
+        
+        var newLinkCellsInfo: [LinkCellInfo] = []
+        let maxRow = updatedLinkCellsInfo.count - 1
+        
+        for row in 0 ... maxRow {
             let existingLinkCellInfoWithCurrentRow = linkCellInfoWithRow(row,
-                linkCellsInfo: linkCellsInfo
+                linkCellsInfo: updatedLinkCellsInfo
             )
             let linkCellInfoWithMinRowGreaterThanCurrentRow = linkCellInfoWithMinRowGreaterThan(row,
-                linkCellsInfo: linkCellsInfo
+                linkCellsInfo: updatedLinkCellsInfo
             )
             
             if let existingLinkCellInfoWithCurrentRow = existingLinkCellInfoWithCurrentRow {
                 newLinkCellsInfo.append(existingLinkCellInfoWithCurrentRow)
+                
+                updatedLinkCellsInfo = self.deleteLinkCellInfoWithRow(row,
+                    linkCellsInfo: updatedLinkCellsInfo
+                )
             } else if let existingLinkCellInfo = linkCellInfoWithMinRowGreaterThanCurrentRow {
+                updatedLinkCellsInfo = self.deleteLinkCellInfoWithRow(existingLinkCellInfo.row,
+                    linkCellsInfo: updatedLinkCellsInfo
+                )
+                
                 let newLinkCellInfo = LinkCellInfo(
                     row:  row,
                     link: existingLinkCellInfo.link,
@@ -142,7 +185,7 @@ class LinkCellInfoHelper {
                 
                 newLinkCellsInfo.append(newLinkCellInfo)
             } else {
-                print("???. row = \(row), = \(linkCellsInfo)")
+                print("???. row = \(row), = \(updatedLinkCellsInfo)")
             }
         }
         
