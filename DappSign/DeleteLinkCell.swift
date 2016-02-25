@@ -9,6 +9,8 @@
 import UIKit
 
 class DeleteLinkCell: UITableViewCell {
+    static let ID = "deleteLinkCell"
+    
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     

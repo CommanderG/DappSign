@@ -9,6 +9,8 @@
 import UIKit
 
 class LinkCell: UITableViewCell {
+    static let ID = "linkCell"
+    
     @IBOutlet weak var linkIndexLabel: UILabel!
     @IBOutlet weak var linkTitleLabel: UILabel!
     

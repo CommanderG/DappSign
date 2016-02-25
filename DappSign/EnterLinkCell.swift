@@ -9,6 +9,8 @@
 import UIKit
 
 class EnterLinkCell: UITableViewCell {
+    static let ID = "enterLinkCell"
+    
     @IBOutlet weak var linkAddressTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     

@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol AddLinkCellDelegate: class {
+    func addLink(cell: AddLinkCell)
+}
+
 class AddLinkCell: UITableViewCell {
+    static let ID = "addLinkCell"
+    
     @IBOutlet weak var linkIndexLabel: UILabel!
+    
+    internal weak var delegate: AddLinkCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,5 +25,11 @@ class AddLinkCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func handleAddLinkButtonTouch() {
+        self.delegate?.addLink(self)
     }
 }
