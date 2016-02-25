@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -2500,23 +2500,31 @@
                                                         <constraint firstAttribute="height" constant="2" id="eVD-Xl-O2w"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How corporate lobbyists conquered American democracy" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU7-Jb-EB1">
-                                                    <rect key="frame" x="58" y="0.0" width="182" height="56"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU7-Jb-EB1">
+                                                    <rect key="frame" x="58" y="0.0" width="182" height="54"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="How corporate lobbyists conquered American democracy">
+                                                            <attributes>
+                                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <font key="NSFont" size="13" name="Avenir-Book"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YQL-8T-KoK" firstAttribute="top" secondItem="6ML-F5-cCO" secondAttribute="bottom" constant="-10" id="3XH-oA-NEs"/>
-                                                <constraint firstAttribute="trailing" secondItem="HU7-Jb-EB1" secondAttribute="trailing" id="7Ek-7U-e3y"/>
+                                                <constraint firstItem="6ML-F5-cCO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6kI-fU-Jdl" secondAttribute="top" constant="5" id="9h4-oQ-c1H"/>
                                                 <constraint firstAttribute="trailing" secondItem="YQL-8T-KoK" secondAttribute="trailing" id="9tk-O1-fO3"/>
-                                                <constraint firstItem="YQL-8T-KoK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HU7-Jb-EB1" secondAttribute="bottom" id="Qvk-n5-XBh"/>
-                                                <constraint firstItem="HU7-Jb-EB1" firstAttribute="top" secondItem="6kI-fU-Jdl" secondAttribute="top" id="aZO-R0-1hp"/>
+                                                <constraint firstItem="HU7-Jb-EB1" firstAttribute="leading" secondItem="6ML-F5-cCO" secondAttribute="trailing" constant="20" id="J2p-7d-kv3"/>
+                                                <constraint firstAttribute="trailing" secondItem="HU7-Jb-EB1" secondAttribute="trailing" id="OkI-IC-yOe"/>
+                                                <constraint firstItem="YQL-8T-KoK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HU7-Jb-EB1" secondAttribute="bottom" id="bPl-qO-z8z"/>
                                                 <constraint firstAttribute="bottom" secondItem="YQL-8T-KoK" secondAttribute="bottom" id="esS-1V-ocq"/>
                                                 <constraint firstItem="6ML-F5-cCO" firstAttribute="leading" secondItem="6kI-fU-Jdl" secondAttribute="leading" constant="13" id="ike-0R-9Y4"/>
+                                                <constraint firstItem="HU7-Jb-EB1" firstAttribute="top" secondItem="6kI-fU-Jdl" secondAttribute="top" id="kum-VC-eyR"/>
                                                 <constraint firstItem="YQL-8T-KoK" firstAttribute="leading" secondItem="6kI-fU-Jdl" secondAttribute="leading" id="lj3-5x-lAv"/>
-                                                <constraint firstItem="HU7-Jb-EB1" firstAttribute="leading" secondItem="6ML-F5-cCO" secondAttribute="trailing" constant="20" id="ty7-Qw-kyu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2586,9 +2594,9 @@
                                                         <constraint firstAttribute="height" constant="2" id="Z2a-7b-BZ7"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Delete this link?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44v-SW-g01">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Delete this link?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44v-SW-g01">
                                                     <rect key="frame" x="8" y="30" width="107" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2610,6 +2618,15 @@
                                             <outlet property="cancelButton" destination="P5J-me-kug" id="QL6-ld-2yA"/>
                                             <outlet property="deleteButton" destination="pG0-6s-evb" id="ian-vZ-RQy"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noLinkCell" rowHeight="0.0" id="JYY-31-0Xh">
+                                        <rect key="frame" x="0.0" y="334" width="240" height="0.0"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JYY-31-0Xh" id="bwW-7u-HkD">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

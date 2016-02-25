@@ -24,6 +24,8 @@
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
 		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
+		277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277970F91C7F284E006F70ED /* DappLinkHelper.swift */; };
+		277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */; };
 		277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D910D1BA71BD900941C7B /* SwipeableView.swift */; };
 		27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* IndexedDapps.swift */; };
 		27811A641B9589F8007E97EE /* DappSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A631B9589F8007E97EE /* DappSignView.swift */; };
@@ -159,6 +161,8 @@
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
 		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
+		277970F91C7F284E006F70ED /* DappLinkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkHelper.swift; sourceTree = "<group>"; };
+		277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkCellInfoHelper.swift; sourceTree = "<group>"; };
 		277D910D1BA71BD900941C7B /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
 		27810DF01AB7297300223350 /* IndexedDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexedDapps.swift; sourceTree = "<group>"; };
 		27811A631B9589F8007E97EE /* DappSignView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignView.swift; sourceTree = "<group>"; };
@@ -556,6 +560,8 @@
 				2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */,
 				27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */,
 				2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */,
+				277970F91C7F284E006F70ED /* DappLinkHelper.swift */,
+				277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -953,11 +959,13 @@
 				27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */,
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
+				277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
 				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
+				277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,

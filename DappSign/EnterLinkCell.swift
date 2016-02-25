@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol EnterLinkCellDelegate: class {
+    func addLinkWithAddress(address: String, cell: EnterLinkCell)
+}
+
 class EnterLinkCell: UITableViewCell {
     static let ID = "enterLinkCell"
     
     @IBOutlet weak var linkAddressTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
+    
+    internal weak var delegate: EnterLinkCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +35,8 @@ class EnterLinkCell: UITableViewCell {
     // MARK: - IBActions
     
     @IBAction func handleDoneButtonTouch(sender: AnyObject) {
-        print(self.linkAddressTextField.text)
+        if let linkAddress = self.linkAddressTextField.text {
+            self.delegate?.addLinkWithAddress(linkAddress, cell: self)
+        }
     }
 }

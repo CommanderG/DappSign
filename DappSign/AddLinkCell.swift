@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddLinkCellDelegate: class {
-    func addLink(cell: AddLinkCell)
+    func didTouchAddLinkButtonInCell(cell: AddLinkCell)
 }
 
 class AddLinkCell: UITableViewCell {
@@ -30,6 +30,6 @@ class AddLinkCell: UITableViewCell {
     // MARK: - IBActions
     
     @IBAction func handleAddLinkButtonTouch() {
-        self.delegate?.addLink(self)
+        self.delegate?.didTouchAddLinkButtonInCell(self)
     }
 }
