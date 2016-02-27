@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol DappLinksVCNewDelegate: class {
+    func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void)
+    func deleteLink(linkToDelete: Link, completion: (success: Bool, error: NSError?) -> Void)
+}
+
 class DappLinksVCNew: UIViewController {
     @IBOutlet weak var linksTableView: UITableView!
     
     private var linkCellsInfo: [LinkCellInfo] = []
+    
+    internal weak var delegate: DappLinksVCNewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +104,10 @@ extension DappLinksVCNew: UITableViewDataSource {
 
 extension DappLinksVCNew: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if self.delegate == nil {
+            return
+        }
+        
         let existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
             linkCellsInfo: self.linkCellsInfo
         )
@@ -122,6 +133,10 @@ extension DappLinksVCNew: UITableViewDelegate {
 
 extension DappLinksVCNew: AddLinkCellDelegate {
     func didTouchAddLinkButtonInCell(cell: AddLinkCell) {
+        if self.delegate == nil {
+            return;
+        }
+        
         if let
             indexPath = self.linksTableView.indexPathForCell(cell),
             existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
@@ -163,37 +178,10 @@ extension DappLinksVCNew: EnterLinkCellDelegate {
                     cell.linkAddressTextField.text = ""
                     
                     if let link = link {
-                        self.linkCellsInfo = LinkCellInfoHelper.deleteLinkCellInfoWithRow(
-                            existingLinkCellInfo.row,
-                            linkCellsInfo: self.linkCellsInfo
-                        )
-                        
-                        let linksCount = LinkCellInfoHelper.countLinkCellsInfoWithType(.Link,
-                            linkCellsInfo: self.linkCellsInfo
-                        )
-                        let newLinkCellInfo = LinkCellInfo(
-                            row:  linksCount,
-                            link: link,
-                            type: .Link
-                        )
-                        
-                        self.linkCellsInfo = LinkCellInfoHelper.inserLinkCellInfo(newLinkCellInfo,
-                            linkCellsInfo: self.linkCellsInfo
-                        )
-                        self.linkCellsInfo = LinkCellInfoHelper.normalizeLinkCellsInfoByRows(
-                            self.linkCellsInfo
-                        )
-                        
-                        self.linksTableView.reloadData()
+                        self.addLink(link, existingLinkCellInfo: existingLinkCellInfo)
                     } else {
                         if let errorMessage = errorMessage {
-                            UIAlertView(
-                                title:             "",
-                                message:           errorMessage,
-                                delegate:          nil,
-                                cancelButtonTitle: nil,
-                            	otherButtonTitles: "OK"
-                            ).show()
+                            self.showAlertViewWithOKButtonAndMessage(errorMessage)
                         }
                         
                         let newLinkCellInfo = LinkCellInfo(
@@ -208,30 +196,83 @@ extension DappLinksVCNew: EnterLinkCellDelegate {
                             linkCellsInfo: self.linkCellsInfo
                         )
                     }
-                    
-                    self.linksTableView.reloadData()
                 })
         }
+    }
+    
+    // MARK: - private
+    
+    private func addLink(link: Link, existingLinkCellInfo: LinkCellInfo) {
+        self.delegate?.addLink(link, completion: {
+            (success: Bool, error: NSError?) -> Void in
+            if success {
+                self.linkCellsInfo = LinkCellInfoHelper.deleteLinkCellInfoWithRow(
+                    existingLinkCellInfo.row,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+                
+                let linksCount = LinkCellInfoHelper.countLinkCellsInfoWithType(.Link,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+                let newLinkCellInfo = LinkCellInfo(
+                    row:  linksCount,
+                    link: link,
+                    type: .Link
+                )
+                
+                self.linkCellsInfo = LinkCellInfoHelper.inserLinkCellInfo(newLinkCellInfo,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+                self.linkCellsInfo = LinkCellInfoHelper.normalizeLinkCellsInfoByRows(
+                    self.linkCellsInfo
+                )
+                
+                self.linksTableView.reloadData()
+            } else {
+                var errorMessage =
+                    "Failed to add link with URL: \(link.URLStr) and title: \(link.title)."
+                
+                if let error = error {
+                    errorMessage += " Error: \(error)."
+                } else {
+                    errorMessage += " Unknown error."
+                }
+                
+                self.showAlertViewWithOKButtonAndMessage(errorMessage)
+            }
+            
+            self.linksTableView.reloadData()
+        })
     }
 }
 
 extension DappLinksVCNew: DeleteLinkCellDelegate {
     func didTouchDeleteLinkButtonInCell(cell: DeleteLinkCell) {
-        if let indexPath = self.linksTableView.indexPathForCell(cell) {
-            self.linkCellsInfo = LinkCellInfoHelper.deleteLinkCellInfoWithRow(indexPath.row,
+        if let
+            indexPath = self.linksTableView.indexPathForCell(cell),
+            linkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
                 linkCellsInfo: self.linkCellsInfo
-            )
-            
-            self.linkCellsInfo = LinkCellInfoHelper.normalizeLinkCellsInfoByRows(self.linkCellsInfo)
-            
-            let newLinkCellInfo = LinkCellInfo(
-                row:  self.linkCellsInfo.count,
-                link: nil,
-                type: .AddLink
-            )
-            
-            self.linkCellsInfo.append(newLinkCellInfo)
-            self.linksTableView.reloadData()
+            ),
+            link = linkCellInfo.link {
+                self.delegate?.deleteLink(link, completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    self.linkCellsInfo = LinkCellInfoHelper.deleteLinkCellInfoWithRow(indexPath.row,
+                        linkCellsInfo: self.linkCellsInfo
+                    )
+                    
+                    self.linkCellsInfo = LinkCellInfoHelper.normalizeLinkCellsInfoByRows(
+                        self.linkCellsInfo
+                    )
+                    
+                    let newLinkCellInfo = LinkCellInfo(
+                        row:  self.linkCellsInfo.count,
+                        link: nil,
+                        type: .AddLink
+                    )
+                    
+                    self.linkCellsInfo.append(newLinkCellInfo)
+                    self.linksTableView.reloadData()
+                })
         }
     }
     
