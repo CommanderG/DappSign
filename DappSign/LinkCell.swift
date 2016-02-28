@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol LinkCellDelegate: class {
+    func didTouchLinkButtonInCell(cell: LinkCell)
+}
+
 class LinkCell: UITableViewCell {
     static let ID = "linkCell"
     
     @IBOutlet weak var linkIndexLabel: UILabel!
     @IBOutlet weak var linkTitleLabel: UILabel!
+    
+    internal weak var delegate: LinkCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +27,14 @@ class LinkCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    // MARK: - IBActions
+    
+    @IBAction func handleLinkButtonTouch(sender: AnyObject) {
+        self.delegate?.didTouchLinkButtonInCell(self)
+    }
+    
+    // MARK: -
     
     internal func showLinkTitle(title: String) {
         var range = NSMakeRange(0, 1)

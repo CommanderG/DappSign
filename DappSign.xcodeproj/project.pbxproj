@@ -45,10 +45,9 @@
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */; };
 		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
-		27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
-		27FD3C051C7DED6000826EBA /* DappLinksVCNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVCNew.swift */; };
+		27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVC.swift */; };
 		27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */; };
 		27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */; };
 		27FD3C0C1C7DF51E00826EBA /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C0B1C7DF51E00826EBA /* LinkCell.swift */; };
@@ -184,10 +183,9 @@
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksView.swift; sourceTree = "<group>"; };
 		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
-		27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
-		27FD3C041C7DED6000826EBA /* DappLinksVCNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVCNew.swift; sourceTree = "<group>"; };
+		27FD3C041C7DED6000826EBA /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLinkCell.swift; sourceTree = "<group>"; };
 		27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterLinkCell.swift; sourceTree = "<group>"; };
 		27FD3C0B1C7DF51E00826EBA /* LinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
@@ -543,10 +541,9 @@
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
-				27DAEFF11BAFF57A001DA66D /* DappLinksVC.swift */,
 				27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */,
 				27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */,
-				27FD3C041C7DED6000826EBA /* DappLinksVCNew.swift */,
+				27FD3C041C7DED6000826EBA /* DappLinksVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -933,7 +930,6 @@
 				F37246541AD3ED5300AD56E2 /* RepresentativesViewController.swift in Sources */,
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */,
-				27DAEFF21BAFF57A001DA66D /* DappLinksVC.swift in Sources */,
 				274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */,
 				F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */,
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
@@ -988,7 +984,7 @@
 				4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */,
 				F37246871AD3ED7600AD56E2 /* UIView+WebCacheOperation.m in Sources */,
 				F372467A1AD3ED7600AD56E2 /* SDImageCache.m in Sources */,
-				27FD3C051C7DED6000826EBA /* DappLinksVCNew.swift in Sources */,
+				27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */,
 				27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,

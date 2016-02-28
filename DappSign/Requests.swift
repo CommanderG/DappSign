@@ -474,15 +474,17 @@ class Requests {
         }
     }
     
-    class func downloadLinksForDapp(dapp: PFObject
-    ,   completion: (links: [PFObject]?, error: NSError?) -> Void) -> Void {
+    class func downloadLinksForDapp(
+        dapp: PFObject,
+        completion: (linkObjs: [PFObject]?, error: NSError?) -> Void
+    ) -> Void {
         let query = dapp.relationForKey("links").query()
         query.orderByAscending("createdAt")
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
-            let links = objects as? [PFObject]
+            let linkObjs = objects as? [PFObject]
             
-            completion(links: links, error: error)
+            completion(linkObjs: linkObjs, error: error)
         }
     }
     

@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private var lastDappedDapp: PFObject?
     private var animatingPlusOneLabels = false
     private var dappLinksVC: DappLinksVC?
-    private var links: [PFObject] = []
+    private var links: [Link] = []
     
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
     private let flipDuration = 0.5
@@ -150,14 +150,15 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         if let dapp = self.dapps.first {
             Requests.downloadLinksForDapp(dapp, completion: {
-                (links: [PFObject]?, error: NSError?) -> Void in
-                if let links = links {
-                    self.links = links
-                    
-                    self.dappLinksVC?.dappLinksView.linksTableView.reloadData()
-                }
+                (linkObjs: [PFObject]?, error: NSError?) -> Void in
+                self.links.removeAll()
+                self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
                 
-                if let error = error {
+                if let linkObjs = linkObjs {
+                    self.links = self.linksWithLinkObjs(linkObjs)
+                    
+                    self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
+                } else if let error = error {
                     print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
                 }
             })
@@ -314,6 +315,17 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 }
             })
         })
+    }
+    
+    private func linksWithLinkObjs(linkObjs: [PFObject]) -> [Link] {
+        let links = linkObjs.map({
+            linkObj -> Link in
+            let link = Link(linkObj: linkObj)
+            
+            return link
+        })
+        
+        return links
     }
     
     // MARK: - Requests
@@ -475,12 +487,14 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.dappLinksVC?.view.hidden = true
             self.dappLinksVC?.delegate = self
             
+            self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
+            
             let tapGR = UITapGestureRecognizer(
-                target: self
-                , 	action: Selector("handleDappLinksTapGesture:")
+                target: self,
+                action: Selector("handleDappLinksTapGesture:")
             )
             
-            self.dappLinksVC?.dappLinksView.addGestureRecognizer(tapGR)
+            self.dappLinksVC?.view.addGestureRecognizer(tapGR)
         }
     }
     
@@ -938,41 +952,14 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
 }
 
 extension HomeViewController: DappLinksVCDelegate {
-    func getLinkAtIndex(index: Int) -> Link? {
-        if index < self.links.count {
-            let linkObj = self.links[index]
-            let link = Link(linkObj: linkObj)
-            
-            return link
-        }
-        
-        return nil
-    }
+    func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void) {}
     
-    func getLinksCount() -> Int {
-        return self.links.count
-    }
+    func deleteLink(linkToDelete: Link, completion: (success: Bool, error: NSError?) -> Void) {}
     
-    func canDeleteLinks() -> Bool {
-        return false
-    }
-    
-    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
-        return currentState
-    }
-    
-    func getStateForNoLink() -> DappLinkCellState {
-        return .Empty
-    }
-    
-    func openURL(URL: NSURL) {
+    func openLinkURL(linkURL: NSURL) {
         self.linkView.hidden = false
         
-        self.linkView.openURL(URL)
-    }
-    
-    func openLinkOnTap() -> Bool {
-        return true
+        self.linkView.openURL(linkURL)
     }
 }
 

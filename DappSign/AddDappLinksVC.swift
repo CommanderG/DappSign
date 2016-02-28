@@ -34,10 +34,9 @@ class AddDappLinksVC: UIViewController {
         if let segueID = segue.identifier {
             switch segueID {
             case embedDappLinksVCSegueID:
-//                self.dappLinkVC = segue.destinationViewController as? DappLinksVC
-//                self.dappLinkVC?.delegate = self
+                let dappLinksVC = segue.destinationViewController as? DappLinksVC
                 
-                let dappLinksVC = segue.destinationViewController as? DappLinksVCNew
+                dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
                 
                 dappLinksVC?.delegate = self
             case finalDappSegueID:
@@ -53,62 +52,7 @@ class AddDappLinksVC: UIViewController {
     }
 }
 
-//extension AddDappLinksVC: DappLinksVCDelegate {
-//    func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void) {
-//        self.links.append(link)
-//        
-//        completion(success: true, error: nil)
-//    }
-//    
-//    func deleteLinkAtIndex(linkIndex: Int, completion: (success: Bool, error: NSError?) -> Void) {
-//        if linkIndex < self.links.count {
-//            self.links.removeAtIndex(linkIndex)
-//            
-//            self.dappLinkVC?.dappLinksView.linksTableView.reloadData()
-//            
-//            completion(success: true, error: nil)
-//        } else {
-//            completion(success: false, error: nil)
-//        }
-//    }
-//    
-//    func getLinkAtIndex(index: Int) -> Link? {
-//        if index < self.links.count {
-//            return self.links[index]
-//        }
-//        
-//        return nil
-//    }
-//    
-//    func getLinksCount() -> Int {
-//        return self.links.count
-//    }
-//    
-//    func canDeleteLinks() -> Bool {
-//        return true
-//    }
-//    
-//    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
-//        switch currentState {
-//        case .Empty:
-//            return .Empty
-//        case .NoLink:
-//            return .EnterLink
-//        case .EnterLink:
-//            return .EnterLink
-//        case .Link:
-//            return .DeleteLink
-//        case .DeleteLink:
-//            return .DeleteLink
-//        }
-//    }
-//    
-//    func getStateForNoLink() -> DappLinkCellState {
-//        return DappLinkCellState.NoLink
-//    }
-//}
-
-extension AddDappLinksVC: DappLinksVCNewDelegate {
+extension AddDappLinksVC: DappLinksVCDelegate {
     func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void) {
         self.links.append(link)
         
@@ -126,6 +70,8 @@ extension AddDappLinksVC: DappLinksVCNewDelegate {
         
         completion(success: true, error: nil)
     }
+    
+    func openLinkURL(linkURL: NSURL) {}
 }
 
 extension AddDappLinksVC: SwipeableViewDelegate {

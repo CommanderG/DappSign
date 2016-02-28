@@ -13,7 +13,7 @@ class EditDappLinksVC: UIViewController {
     
     internal var dapp: PFObject?
     
-    private var links: [PFObject] = []
+    private var linkTuples: [(PFObject, Link)] = []
     
     private var dappLinkVC: DappLinksVC?
     
@@ -24,22 +24,32 @@ class EditDappLinksVC: UIViewController {
             self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
         }
         
-        self.dappLinkVC?.dappLinksView.userInteractionEnabled = false
-        self.dappLinkVC?.dappLinksView.alpha = 0.5
+        self.dappLinkVC?.view.userInteractionEnabled = false
+        self.dappLinkVC?.view.alpha = 0.5
         
         if let dapp = self.dapp {
             Requests.downloadLinksForDapp(dapp, completion: {
-                (links: [PFObject]?, error: NSError?) -> Void in
-                self.dappLinkVC?.dappLinksView.userInteractionEnabled = true
-                self.dappLinkVC?.dappLinksView.alpha = 1.0
+                (linkObjs: [PFObject]?, error: NSError?) -> Void in
+                self.dappLinkVC?.view.userInteractionEnabled = true
+                self.dappLinkVC?.view.alpha = 1.0
                 
-                if let links = links {
-                    self.links = links
+                if let linkObjs = linkObjs {
+                    self.linkTuples = linkObjs.map({
+                        linkObj -> (PFObject, Link) in
+                        let link = Link(linkObj: linkObj)
+                        
+                        return (linkObj, link)
+                    })
                     
-                    self.dappLinkVC?.dappLinksView.linksTableView.reloadData()
-                }
-                
-                if let error = error {
+                    let links = self.linkTuples.map({
+                        linkTuple -> Link in
+                        let (_, link) = linkTuple
+                        
+                        return link
+                    })
+                    
+                    self.dappLinkVC?.initWithMode(.AddEdit, andLinks: links)
+                } else if let error = error {
                     print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
                 }
             })
@@ -60,80 +70,54 @@ class EditDappLinksVC: UIViewController {
 
 extension EditDappLinksVC: DappLinksVCDelegate {
     func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void) {
-        Requests.uploadLinks([link], completion: { (linkObjs: [PFObject], error: NSError?) -> Void in
-            if let linkObj = linkObjs.first {
-                let dappLinksRelation = self.dapp?.relationForKey("links")
-                dappLinksRelation?.addObject(linkObj)
-                
-                self.dapp?.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-                    self.links.append(linkObj)
+        if let dapp = self.dapp {
+            Requests.uploadLinks([link]) {
+                (linkObjs: [PFObject], error: NSError?) -> Void in
+                if let linkObj = linkObjs.first {
+                    let dappLinksRelation = dapp.relationForKey("links")
                     
-                    completion(success: success, error: error)
-                })
-            } else {
-                completion(success: false, error: nil)
-            }
-        })
-    }
-    
-    func deleteLinkAtIndex(linkIndex: Int, completion: (success: Bool, error: NSError?) -> Void) {
-        if linkIndex < self.links.count {
-            if let dapp = self.dapp {
-                let linkObj = self.links[linkIndex]
-                
-                let dappLinksRelation = self.dapp?.relationForKey("links")
-                dappLinksRelation?.removeObject(linkObj)
-                
-                dapp.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-                    self.links.removeAtIndex(linkIndex)
-                    
-                    self.dappLinkVC?.dappLinksView.linksTableView.reloadData()
-                    
-                    completion(success: true, error: nil)
-                })
-            } else {
-                completion(success: false, error: nil)
+                    dappLinksRelation?.addObject(linkObj)
+                    dapp.saveInBackgroundWithBlock({
+                        (success: Bool, error: NSError?) -> Void in
+                        let link = Link(linkObj: linkObj)
+                        let linkTuple = (linkObj, link)
+                        
+                        self.linkTuples.append(linkTuple)
+                        
+                        completion(success: success, error: error)
+                    })
+                } else {
+                    completion(success: false, error: error)
+                }
             }
         } else {
             completion(success: false, error: nil)
         }
     }
     
-    func getLinkAtIndex(index: Int) -> Link? {
-        if index < self.links.count {
-            let linkObj = self.links[index]
-            let link = Link(linkObj: linkObj)
-            
-            return link
-        }
-        
-        return nil
-    }
-    
-    func getLinksCount() -> Int {
-        return self.links.count
-    }
-    
-    func canDeleteLinks() -> Bool {
-        return true
-    }
-    
-    func getNextState(currentState: DappLinkCellState) -> DappLinkCellState {
-        switch currentState {
-        case .Empty:
-            return .Empty
-        case .NoLink:
-            return .EnterLink
-        case .EnterLink:
-            return .EnterLink
-        case .Link:
-            return .DeleteLink
-        case .DeleteLink:
-            return .DeleteLink
+    func deleteLink(linkToDelete: Link, completion: (success: Bool, error: NSError?) -> Void) {
+        if let dapp = self.dapp {
+            for linkTupleIndex in 0 ..< self.linkTuples.count {
+                let linkTuple = self.linkTuples[linkTupleIndex]
+                let (linkObj, link) = linkTuple
+                
+                if link == linkToDelete {
+                    let dappLinksRelation = dapp.relationForKey("links")
+                    
+                    dappLinksRelation.removeObject(linkObj)
+                    
+                    dapp.saveInBackgroundWithBlock({
+                        (success: Bool, error: NSError?) -> Void in
+                        self.linkTuples.removeAtIndex(linkTupleIndex)
+                        
+                        completion(success: true, error: nil)
+                    })
+                }
+            }
+        } else {
+            completion(success: false, error: nil)
         }
     }
     
-    func getStateForNoLink() -> DappLinkCellState {
-        return .NoLink
-    }
+    func openLinkURL(linkURL: NSURL) {}
 }
