@@ -14,7 +14,6 @@ class AddDappLinksVC: UIViewController {
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
     private let finalDappSegueID = "finalDappSegue"
     
-    private var dappLinkVC: DappLinksVC?
     private var links: [Link] = []
     
     internal var dapp: Dapp?
@@ -39,6 +38,13 @@ class AddDappLinksVC: UIViewController {
                 dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
                 
                 dappLinksVC?.delegate = self
+                
+                if let
+                    dappBgColoName = dapp?.dappBackgroundColor,
+                    colorName = ColorName(rawValue: dappBgColoName) {
+                        dappLinksVC?.view.backgroundColor =
+                            DappColors.colorWithColorName(colorName)
+                }
             case finalDappSegueID:
                 let finalDappSubmitVC =
                     segue.destinationViewController as? FinalDappSubmitViewController
