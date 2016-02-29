@@ -15,7 +15,7 @@ class EditDappLinksVC: UIViewController {
     
     private var linkTuples: [(PFObject, Link)] = []
     
-    private var dappLinkVC: DappLinksVC?
+    private var dappLinksVC: DappLinksVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +24,14 @@ class EditDappLinksVC: UIViewController {
             self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
         }
         
-        self.dappLinkVC?.view.userInteractionEnabled = false
-        self.dappLinkVC?.view.alpha = 0.5
+        self.dappLinksVC?.view.userInteractionEnabled = false
+        self.dappLinksVC?.view.alpha = 0.5
         
         if let dapp = self.dapp {
             Requests.downloadLinksForDapp(dapp, completion: {
                 (linkObjs: [PFObject]?, error: NSError?) -> Void in
-                self.dappLinkVC?.view.userInteractionEnabled = true
-                self.dappLinkVC?.view.alpha = 1.0
+                self.dappLinksVC?.view.userInteractionEnabled = true
+                self.dappLinksVC?.view.alpha = 1.0
                 
                 if let linkObjs = linkObjs {
                     self.linkTuples = linkObjs.map({
@@ -48,11 +48,18 @@ class EditDappLinksVC: UIViewController {
                         return link
                     })
                     
-                    self.dappLinkVC?.initWithMode(.AddEdit, andLinks: links)
+                    self.dappLinksVC?.initWithMode(.AddEdit, andLinks: links)
                 } else if let error = error {
                     print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
                 }
             })
+            
+            if let
+                dappBgColoName = dapp["dappBackgroundColor"] as? String,
+                colorName = ColorName(rawValue: dappBgColoName) {
+                    self.dappLinksVC?.view.backgroundColor =
+                        DappColors.colorWithColorName(colorName)
+            }
         }
     }
     
@@ -62,8 +69,8 @@ class EditDappLinksVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == embedDappLinksVCSegueID {
-            self.dappLinkVC = segue.destinationViewController as? DappLinksVC
-            self.dappLinkVC?.delegate = self
+            self.dappLinksVC = segue.destinationViewController as? DappLinksVC
+            self.dappLinksVC?.delegate = self
         }
     }
 }
