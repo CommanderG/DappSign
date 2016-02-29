@@ -47,6 +47,7 @@
 		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
+		27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */; };
 		27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVC.swift */; };
 		27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */; };
 		27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */; };
@@ -185,6 +186,7 @@
 		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
+		27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardVC.swift; sourceTree = "<group>"; };
 		27FD3C041C7DED6000826EBA /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLinkCell.swift; sourceTree = "<group>"; };
 		27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterLinkCell.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 				27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */,
 				27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */,
 				27FD3C041C7DED6000826EBA /* DappLinksVC.swift */,
+				27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -963,6 +966,7 @@
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
 				277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
+				27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */,
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
