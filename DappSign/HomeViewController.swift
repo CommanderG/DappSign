@@ -549,6 +549,14 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             
             self.dappSignView.showDapp(dapp)
             
+            if let
+                dapp = dapp,
+                dappBgColoName = dapp["dappBackgroundColor"] as? String,
+                colorName = ColorName(rawValue: dappBgColoName) {
+                    self.dappLinksVC?.view.backgroundColor =
+                        DappColors.colorWithColorName(colorName)
+            }
+            
             if let dapp_ = dapp, userID = dapp_["userid"] as? String {
                 Requests.userWithID(userID, completion: { (user: PFUser?, error: NSError?) -> Void in
                     if let usr = user {
