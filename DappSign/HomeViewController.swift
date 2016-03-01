@@ -778,9 +778,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             if let currentDapp = self.dapps.first {
                 self.lastDappedDapp = currentDapp
                 
+                self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                
                 if dapped {
-                    self.sendRequestsForDapp(currentDapp, dapped: dapped)
-                    
                     UIView.animateWithDuration(0.4,
                         animations: {
                             self.dappViewsContainerView.alpha = 0.0
