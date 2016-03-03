@@ -9,121 +9,109 @@
 import UIKit
 
 class RepresentativesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
-    var arrRepresentativeData = NSMutableArray ()
-    var userID : String = ""
+    var arrRepresentativeData: NSMutableArray = NSMutableArray()
+    var userID = ""
     var arrRepresentativeDataRep = NSMutableArray ()
     var arrRepresentativeDataSen = NSMutableArray ()
-
-    @IBOutlet var tblView: UITableView!
-   
-    @IBAction func onBtnHomeView(sender: AnyObject) {
     
+    @IBOutlet var tblView: UITableView!
+    
+    @IBAction func onBtnHomeView(sender: AnyObject) {
         self.performSegueWithIdentifier("showHomeViewController", sender: self)
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        tblView.backgroundColor=UIColor.clearColor()
-        tblView.backgroundView=nil
-
-        SaveDataToPArse()
+        
+        tblView.backgroundColor = UIColor.clearColor()
+        tblView.backgroundView = nil
+        
+        saveDataToParse()
         
         arrRepresentativeData = NSMutableArray ()
         arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataSen as [AnyObject])
         arrRepresentativeData.addObjectsFromArray(arrRepresentativeDataRep as [AnyObject])
-
+        
         tblView.reloadData()
     }
     
-    
-
-    func SaveDataToPArse(){
-        
-        for var i = 0; i < 3; i++
-        {
-            let ObjectValue: NSDictionary = arrRepresentativeData[i] as! NSDictionary
-            let strFName : String = ObjectValue.valueForKey("first_name")! as! String
-            let strLName : String = ObjectValue.valueForKey("last_name")! as! String
-            let strFullName : String =  "\(strFName) \(strLName)"
-            
-            let strTitle : String = ObjectValue.valueForKey("title")! as! String
-            let strParty : String = ObjectValue.valueForKey("party")! as! String
-            
-            let strUrl1 : String = "https://theunitedstates.io/images/congress/original/"
-            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
-            let strUrl3 : String = ".jpg"
-            
-            if strTitle == "Sen" {
-                arrRepresentativeDataSen.addObject(ObjectValue)
-            }else{
-                arrRepresentativeDataRep.addObject(ObjectValue)
+    func saveDataToParse() {
+        for representativeData in self.arrRepresentativeData {
+            if let
+                representativeData = representativeData as? NSDictionary,
+                strFName           = representativeData["first_name"] as? String,
+                strLName           = representativeData["last_name"] as? String,
+                strTitle           = representativeData["title"] as? String,
+                strParty           = representativeData["party"] as? String,
+                ID                 = representativeData["bioguide_id"] as? String {
+                    if strTitle == "Sen" {
+                        arrRepresentativeDataSen.addObject(representativeData)
+                    } else {
+                        arrRepresentativeDataRep.addObject(representativeData)
+                    }
+                    
+                    let strImgUrl = "https://theunitedstates.io/images/congress/original/\(ID).jpg"
+                    let strFullName =  "\(strFName) \(strLName)"
+                    
+                    Requests.addRepresentative(userID,
+                        imgUrl:   strImgUrl,
+                        strName:  strFullName,
+                        strTitle: strTitle,
+                        strParty: strParty
+                    )
             }
-
-            let strImgUrl : String = strUrl1+strUrl2+strUrl3
-
-            Requests.addRepresentative(userID, imgUrl: strImgUrl, strName: strFullName, strTitle: strTitle, strParty: strParty)
         }
-        
-        
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrRepresentativeData.count
     }
-
-
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)
-        -> UITableViewCell {
-            
-            let cell : CustomCell = tableView.dequeueReusableCellWithIdentifier("repreCell", forIndexPath: indexPath)
-                as! CustomCell
-            
-            let ObjectValue: NSDictionary = arrRepresentativeData[indexPath.row] as! NSDictionary
-           
-            
-            let strFName : String = ObjectValue.valueForKey("first_name")! as! String
-            let strLName : String = ObjectValue.valueForKey("last_name")! as! String
-            let strFullName : String =  "\(strFName) \(strLName)"
-            
-            let strTitle : String = ObjectValue.valueForKey("title")! as! String
-            let strParty : String = ObjectValue.valueForKey("party")! as! String
-
-            cell.setCell(strFullName, strTitle: strTitle, strParty: strParty)
-            
-            let strUrl1 : String = "https://theunitedstates.io/images/congress/original/"
-            let strUrl2 : String = ObjectValue.valueForKey("bioguide_id")! as! String
-            let strUrl3 : String = ".jpg"
-            
-            let strImgUrl : String = strUrl1+strUrl2+strUrl3
-            
-            let url = NSURL(string: strImgUrl)
-            
-            cell.imgView.sd_setImageWithURL(url, completed: {
-                (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, url: NSURL!) -> Void in
-            })
-            cell.imgView.layer.cornerRadius = cell.imgView.frame.size.width/2
-            cell.imgView.clipsToBounds = true
-            
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.backgroundColor=UIColor.clearColor()
-            
-          return cell
-    }
     
+    func tableView(
+        tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            "repreCell",
+            forIndexPath: indexPath
+        ) as! CustomCell
+        if let representativeData = arrRepresentativeData[indexPath.row] as? NSDictionary {
+            if let
+                strFName = representativeData["first_name"] as? String,
+                strLName = representativeData["last_name"] as? String,
+        		strTitle = representativeData["title"] as? String,
+            	strParty = representativeData["party"] as? String {
+                    let strFullName = "\(strFName) \(strLName)"
+                    
+                    cell.setCell(strFullName, strTitle: strTitle, strParty: strParty)
+            }
+            
+            if let ID = representativeData["bioguide_id"] as? String {
+                let strImgUrl = "https://theunitedstates.io/images/congress/original/\(ID).jpg"
+                let url = NSURL(string: strImgUrl)
+                
+                cell.imgView.sd_setImageWithURL(url, completed: {
+                    (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, url: NSURL!) -> Void in
+                })
+            }
+        }
+        
+        cell.imgView.layer.cornerRadius = cell.imgView.frame.size.width / 2
+        cell.imgView.clipsToBounds = true
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.backgroundColor = UIColor.clearColor()
+        
+        return cell
+    }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
@@ -137,10 +125,7 @@ class RepresentativesViewController: UIViewController,UITableViewDelegate,UITabl
         return 80
     }
     
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
-
 }

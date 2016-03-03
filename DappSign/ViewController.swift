@@ -10,17 +10,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var bIsZipCode : Bool = false
-    var strUserID : String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func facebookLoginButton(sender: AnyObject) {
@@ -36,21 +31,16 @@ class ViewController: UIViewController {
             
             if let user = user {
                 if user.isNew {
-                    
                     print("User signed up and logged in through Facebook!")
-                    self.bIsZipCode = true
-                    self.strUserID = user.objectId
-                    self.performSegueWithIdentifier("showZipCode", sender: self)
                     
+                    self.performSegueWithIdentifier("showZipCode", sender: self)
                 } else {
                     print("User logged in through Facebook!")
-                    self.strUserID = user.objectId
-                    self.performSegueWithIdentifier("showHomeViewController", sender: self)
+                    
+                    self.performSegueWithIdentifier("showZipCode", sender: self)
                 }
                 
                 Requests.addUserIdDappScore(user.objectId)
-                
-                
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
@@ -59,19 +49,4 @@ class ViewController: UIViewController {
             loginWithFacebookButton.alpha = 1.0
         })
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if bIsZipCode{
-            let ZipCodeVC : ZipCodeViewController = segue.destinationViewController as! ZipCodeViewController
-            ZipCodeVC.strUserID = strUserID
-        }
-    }
-    
-    
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
 }
-
