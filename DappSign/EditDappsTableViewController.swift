@@ -122,27 +122,27 @@ class EditDappsTableViewController: UITableViewController {
     }
     
     private func showDappCountInCell(cell: UITableViewCell, dappType: DappType?) -> Void {
-        var detailTextLabelText: String? = nil
-        
         if let
             dappType = dappType,
             dappTypeCount = self.dappsCount[dappType],
             count = dappTypeCount {
                 if count > 0 {
-                    detailTextLabelText = String(count)
+                    cell.detailTextLabel?.text = String(count)
                 } else if count == 0 {
-                    detailTextLabelText = "0"
+                    cell.detailTextLabel?.text = "0"
+                } else if count < 0 {
+                    cell.detailTextLabel?.text = "-"
                 }
-        }
-        
-        if let text = detailTextLabelText {
-            cell.detailTextLabel?.text = text
-            
-            cell.accessoryType = .DisclosureIndicator
-            cell.selectionStyle = .Default
+                
+                if count > 0 {
+                    cell.accessoryType = .DisclosureIndicator
+                    cell.selectionStyle = .Default
+                } else {
+                    cell.accessoryType = .None
+                    cell.selectionStyle = .None
+                }
         } else {
-            cell.detailTextLabel?.text = ""
-            
+            cell.detailTextLabel?.text = "-"
             cell.accessoryType = .None
             cell.selectionStyle = .None
         }
