@@ -37,7 +37,7 @@ class ViewController: UIViewController {
                 } else {
                     print("User logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier("showZipCode", sender: self)
+                    self.performSegueWithIdentifier("showHomeViewController", sender: self)
                 }
                 
                 Requests.addUserIdDappScore(user.objectId)
