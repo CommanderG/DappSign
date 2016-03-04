@@ -22,7 +22,7 @@ class ScoreboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initButtons()
-        self.initTimeUntilNextDailyDapp()
+        self.updateTimeUntilNextDailyDapp()
         self.updateTimeUntilNextDailyDappLabel()
         self.initRepresentativeImageView()
         self.initTimers()
@@ -69,7 +69,7 @@ class ScoreboardVC: UIViewController {
         )
         self.timeUntilNextDailyDappUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(5.0,
             target:   self,
-            selector: "initTimeUntilNextDailyDapp",
+            selector: "updateTimeUntilNextDailyDapp",
             userInfo: nil,
             repeats:  true
         )
@@ -101,7 +101,7 @@ class ScoreboardVC: UIViewController {
         }
     }
     
-    internal func initTimeUntilNextDailyDapp() {
+    internal func updateTimeUntilNextDailyDapp() {
         if let timeInterval = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate() {
             self.timeUntilNextDailyDapp = DateHelper.fullHoursAndFullMinutesInTimeInterval(
                 timeInterval
