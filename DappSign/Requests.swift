@@ -296,19 +296,22 @@ class Requests {
         }
     }
     
-    class func addRepresentative(userId: String, imgUrl: String, strName : String, strTitle : String, strParty : String) {
+    class func addRepresentativeWithUserID(userID: String,
+        imageURLString: String,
+        fullName: String,
+        title: String,
+        party: String,
+        completion: (success: Bool, error: NSError?) -> Void
+    ) {
+        let representative = PFObject(className: "UserRepresentatives")
         
-        let userIdDappScore = PFObject(className: "UserRepresentatives")
+        representative["UserID"] = userID
+        representative["imgUrl"] = imageURLString
+        representative["Name"]   = fullName
+        representative["Title"]  = title
+        representative["Party"]  = party
         
-        userIdDappScore["UserID"] = userId
-        userIdDappScore["imgUrl"] = imgUrl
-        userIdDappScore["Name"] = strName
-        userIdDappScore["Title"] = strTitle
-        userIdDappScore["Party"] = strParty
-        
-        userIdDappScore.saveInBackgroundWithBlock({
-            (succeeded: Bool, error: NSError!) -> Void in
-        })
+        representative.saveInBackgroundWithBlock(completion)
     }
     
     class func incrementDappScoreForUserWithId(userId: String, completion: (succeeded: Bool, error: NSError?) -> Void) {

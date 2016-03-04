@@ -16,6 +16,8 @@ class ZipCodeViewController: UIViewController {
     @IBOutlet weak var districtLabel:                UILabel!
     @IBOutlet weak var representativeFullNameLabel:  UILabel!
     
+    private var houseRepresentative: NSDictionary? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,8 +37,31 @@ class ZipCodeViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func downloadRepresentative(sender: AnyObject) {
-        self.performSegueWithIdentifier("showHomeViewController", sender: self)
+    @IBAction func goToHomeViewController(sender: AnyObject) {
+        if let
+            houseRepresentative = self.houseRepresentative,
+            congressionalDistrictID = self.congressionalDistrictID(houseRepresentative) {
+                self.nextButton.alpha = 0.5
+                self.nextButton.userInteractionEnabled = false
+                
+                self.saveCongressionalDistrictID(congressionalDistrictID, completion: {
+                    (success: Bool) -> Void in
+                    if success {
+                        self.saveHouseRepresentativeOnParse(houseRepresentative, completion: {
+                            (success: Bool) -> Void in
+                            if success {
+                                self.performSegueWithIdentifier("showHomeViewController", sender: self)
+                            } else {
+                                self.nextButton.alpha = 1.0
+                                self.nextButton.userInteractionEnabled = true
+                            }
+                        })
+                    } else {
+                        self.nextButton.alpha = 1.0
+                        self.nextButton.userInteractionEnabled = true
+                    }
+                })
+        }
     }
     
     private func requestForDownloadingRepresentativeWithZipCode(zipCode: String) -> NSURLRequest? {
@@ -84,12 +109,12 @@ class ZipCodeViewController: UIViewController {
         return true
     }
     
-    private func saveCongressionalDistrictID(congressionalDistrictID: Int,
+    private func saveCongressionalDistrictID(congressionalDistrictID: String,
         completion: (success: Bool) -> Void
     ) {
         let user = PFUser.currentUser()
         
-        user["congressionalDistrictID"] = "\(congressionalDistrictID)"
+        user["congressionalDistrictID"] = congressionalDistrictID
         
         user.saveInBackgroundWithBlock({
             (success: Bool, error: NSError!) -> Void in
@@ -110,19 +135,14 @@ class ZipCodeViewController: UIViewController {
         })
     }
     
-    private func congressialDistrictIDFromResponseData(data: NSData) -> String? {
-        let result = try? NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
-        
+    private func congressionalDistrictID(houseRepresentative: NSDictionary) -> String? {
         if let
-            result                = result,
-            statesAndDistricts    = result["results"] as? [NSDictionary],
-            firstStateAndDistrict = statesAndDistricts.first,
-            state                 = firstStateAndDistrict["state"] as? String,
-            district              = firstStateAndDistrict["district"] as? Int {
+            state = houseRepresentative["state"] as? String,
+            district = houseRepresentative["district"] as? Int {
                 let districtString = self.distringStringWithInt(district)
-                let congressialDistrictID = "\(state)-\(districtString)"
+                let congressionalDistrictID = "\(state)-\(districtString)"
                 
-                return congressialDistrictID
+                return congressionalDistrictID
         }
         
         return nil
@@ -137,7 +157,7 @@ class ZipCodeViewController: UIViewController {
     }
     
     private func initHouseRepresentativeViews(houseRepresentative: NSDictionary) {
-        if let congressionalDistrictID = houseRepresentative["district"] as? Int {
+        if let congressionalDistrictID = self.congressionalDistrictID(houseRepresentative) {
             self.districtLabel.text = "Your \(congressionalDistrictID) rep"
         } else {
             self.districtLabel.text = "Your ??-?? rep"
@@ -153,13 +173,21 @@ class ZipCodeViewController: UIViewController {
             self.representativeFullNameLabel.text = ""
         }
         
-        if let bioGuideID = houseRepresentative["bioguide_id"] as? String {
+        if let
+            URLString = self.representativeImageURLString(houseRepresentative),
+            URL = NSURL(string: URLString) {
+                self.representativeImageView.sd_setImageWithURL(URL)
+        }
+    }
+    
+    private func representativeImageURLString(representative: NSDictionary) -> String? {
+        if let bioGuideID = representative["bioguide_id"] as? String {
             let URLString = "https://theunitedstates.io/images/congress/original/\(bioGuideID).jpg"
             
-            if let URL = NSURL(string: URLString) {
-                self.representativeImageView.sd_setImageWithURL(URL)
-            }
+            return URLString
         }
+        
+        return nil
     }
     
     private func houseRepresentative(representatives: [NSDictionary]) -> NSDictionary? {
@@ -172,6 +200,30 @@ class ZipCodeViewController: UIViewController {
         }
         
         return nil
+    }
+    
+    private func saveHouseRepresentativeOnParse(houseRepresentative: NSDictionary,
+        completion: (success: Bool) -> Void
+    ) {
+        if let
+            imageURLString = self.representativeImageURLString(houseRepresentative),
+            firstName      = houseRepresentative["first_name"] as? String,
+            lastName       = houseRepresentative["last_name"] as? String,
+            title          = houseRepresentative["title"] as? String,
+            party          = houseRepresentative["party"] as? String {
+                let userID = PFUser.currentUser().objectId
+                let fullName =  "\(firstName) \(lastName)"
+                
+                Requests.addRepresentativeWithUserID(userID,
+                    imageURLString: imageURLString,
+                    fullName: fullName,
+                    title: title,
+                    party: party,
+                    completion: {
+                        (success: Bool, error: NSError?) -> Void in
+                        completion(success: success)
+                })
+        }
     }
 }
 
@@ -199,20 +251,18 @@ extension ZipCodeViewController: UITextFieldDelegate {
                 (representatives: [NSDictionary]?) -> Void in
                 if let
                     representatives = representatives,
-                    houseRepresentative = self.houseRepresentative(representatives),
-                    congressionalDistrictID = houseRepresentative["district"] as? Int {
-                        self.saveCongressionalDistrictID(congressionalDistrictID, completion: {
-                            (success: Bool) -> Void in
-                            if success {
-                                self.nextButton.hidden = false
-                                self.representativeContrainerView.hidden = false
-                                
-                                self.initHouseRepresentativeViews(houseRepresentative)
-                            } else {
-                                self.nextButton.hidden = true
-                                self.representativeContrainerView.hidden = true
-                            }
-                    })
+                    houseRepresentative = self.houseRepresentative(representatives) {
+                        self.houseRepresentative = houseRepresentative
+                        
+                        self.nextButton.hidden = false
+                        self.representativeContrainerView.hidden = false
+                        
+                        self.initHouseRepresentativeViews(houseRepresentative)
+                } else {
+                    self.houseRepresentative = nil
+                    
+                    self.nextButton.hidden = true
+                    self.representativeContrainerView.hidden = true
                 }
             })
         }

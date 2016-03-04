@@ -1211,7 +1211,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewController" modalTransitionStyle="coverVertical" id="jAN-kp-kCK"/>
+                                    <action selector="goToHomeViewController:" destination="b3w-fh-uIK" eventType="touchUpInside" id="Vdg-3I-HgU"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zVZ-1C-d5L">
@@ -1233,7 +1233,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3e-Vz-wZi">
                                 <rect key="frame" x="72" y="289" width="176" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojE-An-Alf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojE-An-Alf">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Ewj-lH-nEt"/>
@@ -1290,6 +1290,7 @@
                         <outlet property="representativeFullNameLabel" destination="Aok-3g-N1C" id="b8a-VR-PHt"/>
                         <outlet property="representativeImageView" destination="ojE-An-Alf" id="WKn-qE-nOb"/>
                         <outlet property="zipCodeTextField" destination="zVZ-1C-d5L" id="hyM-OT-gC6"/>
+                        <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewController" modalTransitionStyle="coverVertical" id="CAe-Fl-ep4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7y-QZ-lCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2908,7 +2909,7 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jAN-kp-kCK"/>
+        <segue reference="CAe-Fl-ep4"/>
         <segue reference="rDJ-8j-zWb"/>
         <segue reference="Ffg-Dq-WrU"/>
     </inferredMetricsTieBreakers>
