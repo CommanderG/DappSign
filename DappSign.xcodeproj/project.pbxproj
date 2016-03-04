@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2702A60A1C89C582002BBBF6 /* DailyDappDatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */; };
 		270C05891BB42A3E00C11435 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C05881BB42A3E00C11435 /* LinkView.swift */; };
 		270C058B1BB42A5900C11435 /* LinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270C058A1BB42A5900C11435 /* LinkView.xib */; };
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
@@ -143,6 +144,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappDatesHelper.swift; sourceTree = "<group>"; };
 		270C05881BB42A3E00C11435 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		270C058A1BB42A5900C11435 /* LinkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkView.xib; sourceTree = "<group>"; };
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */,
 				277970F91C7F284E006F70ED /* DappLinkHelper.swift */,
 				277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */,
+				2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
 				27FD3C0C1C7DF51E00826EBA /* LinkCell.swift in Sources */,
+				2702A60A1C89C582002BBBF6 /* DailyDappDatesHelper.swift in Sources */,
 				F37246821AD3ED7600AD56E2 /* UIImage+GIF.m in Sources */,
 				84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				F372467F1AD3ED7600AD56E2 /* SDWebImageManager.m in Sources */,
