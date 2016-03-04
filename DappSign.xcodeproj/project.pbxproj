@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2702A60A1C89C582002BBBF6 /* DailyDappDatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */; };
+		2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A60B1C89D968002BBBF6 /* DateHelper.swift */; };
 		270C05891BB42A3E00C11435 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C05881BB42A3E00C11435 /* LinkView.swift */; };
 		270C058B1BB42A5900C11435 /* LinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270C058A1BB42A5900C11435 /* LinkView.xib */; };
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
@@ -144,6 +145,7 @@
 
 /* Begin PBXFileReference section */
 		2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappDatesHelper.swift; sourceTree = "<group>"; };
+		2702A60B1C89D968002BBBF6 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		270C05881BB42A3E00C11435 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		270C058A1BB42A5900C11435 /* LinkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkView.xib; sourceTree = "<group>"; };
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				277970F91C7F284E006F70ED /* DappLinkHelper.swift */,
 				277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */,
 				2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */,
+				2702A60B1C89D968002BBBF6 /* DateHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
+				2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */,
 				270C05891BB42A3E00C11435 /* LinkView.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,

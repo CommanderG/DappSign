@@ -21,6 +21,18 @@ class DailyDappDatesHelper {
         return endDate
     }
     
+    internal class func timeIntervalUntilNextDailyDappStartDate() -> NSTimeInterval? {
+        let currentDate = NSDate()
+        
+        if let nextDailyDappStartDate = self.nextDailyDappStartDate() {
+            let timeInterval = nextDailyDappStartDate.timeIntervalSinceDate(currentDate)
+            
+            return timeInterval
+        }
+        
+        return nil
+    }
+    
     // MARK: - 
     
     private class func dateWithDate(date: NSDate, withHour hour: Int) -> NSDate? {
@@ -39,5 +51,25 @@ class DailyDappDatesHelper {
         let newDate = currentCalendar.dateFromComponents(components)
         
         return newDate
+    }
+    
+    private class func nextDailyDappStartDate() -> NSDate? {
+        let currentDate = NSDate()
+        
+        if let todayDailyDappStartDate = self.startDateWithDate(currentDate) {
+            let todayDailyDappHasNotBegun =
+            todayDailyDappStartDate.timeIntervalSince1970 > currentDate.timeIntervalSince1970
+            
+            if todayDailyDappHasNotBegun {
+                return todayDailyDappStartDate
+            } else {
+                let tomorrowDailyDappStartDate =
+                DateHelper.dateWithDaysAddedToDate(todayDailyDappStartDate, days: 1)
+                
+                return tomorrowDailyDappStartDate
+            }
+        }
+        
+        return nil
     }
 }
