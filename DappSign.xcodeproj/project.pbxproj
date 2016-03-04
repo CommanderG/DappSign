@@ -113,7 +113,6 @@
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
 		F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */; };
 		F372464F1AD3ED3C00AD56E2 /* Nextbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464C1AD3ED3C00AD56E2 /* Nextbutton@3x.png */; };
-		F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37246501AD3ED5300AD56E2 /* CustomCell.swift */; };
 		F37246551AD3ED5300AD56E2 /* ZipCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */; };
 		F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F37246581AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m */; };
 		F37246791AD3ED7600AD56E2 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = F372465A1AD3ED7600AD56E2 /* NSData+ImageContentType.m */; };
@@ -268,7 +267,6 @@
 		F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nextbutton.png; sourceTree = "<group>"; };
 		F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nextbutton@2x.png"; sourceTree = "<group>"; };
 		F372464C1AD3ED3C00AD56E2 /* Nextbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nextbutton@3x.png"; sourceTree = "<group>"; };
-		F37246501AD3ED5300AD56E2 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipCodeViewController.swift; sourceTree = "<group>"; };
 		F37246571AD3ED7600AD56E2 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		F37246581AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -533,7 +531,6 @@
 			children = (
 				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
-				F37246501AD3ED5300AD56E2 /* CustomCell.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
@@ -933,7 +930,6 @@
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */,
 				274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */,
-				F37246531AD3ED5300AD56E2 /* CustomCell.swift in Sources */,
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
