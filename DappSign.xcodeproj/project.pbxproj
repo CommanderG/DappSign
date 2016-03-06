@@ -60,7 +60,7 @@
 		4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */; };
 		4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */; };
 		4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97C1AA1D59900046CA2 /* DappSign.xcdatamodeld */; };
-		4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97F1AA1D59900046CA2 /* ViewController.swift */; };
+		4CD9C9801AA1D59900046CA2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */; };
 		4CD9C9831AA1D59900046CA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9811AA1D59900046CA2 /* Main.storyboard */; };
 		4CD9C9851AA1D59900046CA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9841AA1D59900046CA2 /* Images.xcassets */; };
 		4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9861AA1D59900046CA2 /* LaunchScreen.xib */; };
@@ -200,7 +200,7 @@
 		4CD9C9791AA1D59900046CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CD9C97A1AA1D59900046CA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CD9C97D1AA1D59900046CA2 /* DappSign.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DappSign.xcdatamodel; sourceTree = "<group>"; };
-		4CD9C97F1AA1D59900046CA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4CD9C9821AA1D59900046CA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CD9C9841AA1D59900046CA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4CD9C9871AA1D59900046CA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 		84C3D3821AB5FECF00E0F350 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4CD9C97F1AA1D59900046CA2 /* ViewController.swift */,
+				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
@@ -942,7 +942,7 @@
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,
 				27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */,
 				274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */,
-				4CD9C9801AA1D59900046CA2 /* ViewController.swift in Sources */,
+				4CD9C9801AA1D59900046CA2 /* LoginVC.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */,
