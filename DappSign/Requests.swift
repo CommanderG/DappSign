@@ -9,6 +9,8 @@
 import Foundation
 
 class Requests {
+    static let maxQueryLimit = 1000
+    
     typealias prohibitedPhrasesCompletion = (prohibitedPhrases: [String], error: NSError?) -> Void
     
     class func uploadHashtags(hashtagNames: [String], completion: (hashtags: [PFObject]?, error: NSError!) -> Void) {
@@ -514,6 +516,19 @@ class Requests {
                 
                 completion(prohibitedPhrases: prohibitedPhrases, error: nil)
             }
+        }
+    }
+    
+    class func downloadUsers(completion: (users: [PFUser]?, error: NSError?) -> Void) {
+        let query = PFUser.query()
+        
+        query.limit = self.maxQueryLimit
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            let users = objects as? [PFUser]
+            
+            completion(users: users, error: error)
         }
     }
     
