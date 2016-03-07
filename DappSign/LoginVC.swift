@@ -39,8 +39,6 @@ class LoginVC: UIViewController {
                     
                     self.performSegueWithIdentifier("showHomeViewController", sender: self)
                 }
-                
-                Requests.addUserIdDappScore(user.objectId)
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")
             }

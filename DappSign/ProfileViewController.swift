@@ -311,27 +311,7 @@ extension ProfileViewController: SWTableViewCellDelegate {
                 self.dapp(dapp, completion: {
                     (succeeded: Bool) -> Void in
                     if succeeded {
-                        if let userId = dapp["userid"] as? String {
-                            Requests.incrementDappScoreForUserWithId(userId, completion: {
-                                (succeeded: Bool, error: NSError?) -> Void in
-                                if !succeeded {
-                                    if let error = error {
-                                        print(error.localizedDescription)
-                                    }
-                                }
-                            })
-                        }
-                        
-                        let currentUserId = PFUser.currentUser().objectId
-                        
-                        Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
-                            (succeeded: Bool, error: NSError?) -> Void in
-                            if !succeeded {
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        })
+                        self.incrementDappScores(dapp)
                     }
                     
                     self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
@@ -344,6 +324,25 @@ extension ProfileViewController: SWTableViewCellDelegate {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
+    }
+    
+    private func incrementDappScores(dapp: PFObject) {
+        if let userID = dapp["userid"] as? String {
+            self.incrementDappScoreForUserWithID(userID)
+        }
+
+        let currentUserID = PFUser.currentUser().objectId
+        
+        self.incrementDappScoreForUserWithID(currentUserID)
+    }
+    
+    private func incrementDappScoreForUserWithID(userID: String) {
+        UserHelper.incrementDappScoreForUserWithID(userID, completion: {
+            (success: Bool, errorMessage: String?) -> Void in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
+            }
+        })
     }
 }
 

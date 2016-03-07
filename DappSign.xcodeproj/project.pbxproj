@@ -35,6 +35,7 @@
 		27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A691B95C6FE007E97EE /* DappMappView.swift */; };
 		27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A6B1B95C70D007E97EE /* DappMappView.xib */; };
 		2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */; };
+		27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27896E301C8D89F300A6AA4A /* UserHelper.swift */; };
 		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
@@ -172,6 +173,7 @@
 		27811A691B95C6FE007E97EE /* DappMappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappView.swift; sourceTree = "<group>"; };
 		27811A6B1B95C70D007E97EE /* DappMappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappMappView.xib; sourceTree = "<group>"; };
 		2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedPhrases.swift; sourceTree = "<group>"; };
+		27896E301C8D89F300A6AA4A /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				277970FB1C7F6060006F70ED /* LinkCellInfoHelper.swift */,
 				2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */,
 				2702A60B1C89D968002BBBF6 /* DateHelper.swift */,
+				27896E301C8D89F300A6AA4A /* UserHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
+				27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */,
 				279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */,
 				F372467D1AD3ED7600AD56E2 /* SDWebImageDownloader.m in Sources */,
 				F37246841AD3ED7600AD56E2 /* UIImage+WebP.m in Sources */,

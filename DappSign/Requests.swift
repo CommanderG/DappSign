@@ -246,58 +246,6 @@ class Requests {
         }
     }
     
-    class func downloadDappScoreForUserWithId(userId: String, completion: (dappScore: Int?, error: NSError?) -> Void) {
-        let query = PFQuery(className: "UserIdDappScore")
-        
-        query.whereKey("userId", equalTo: userId)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil {
-                completion(dappScore: nil, error: error)
-                
-                return
-            }
-            
-            if let userIdDappScore = objects.first as? PFObject {
-                let dappScore = userIdDappScore["dappScore"] as? Int
-                
-                completion(dappScore: dappScore, error: error)
-            } else {
-                let userInfo = [NSLocalizedDescriptionKey: "UserIdDappScore array is nil or empty."]
-                let error = NSError(
-                    domain: "UserIdDappScore",
-                    code: 0,
-                    userInfo: userInfo
-                )
-                
-                completion(dappScore: nil, error: error)
-            }
-        }
-    }
-    
-    class func addUserIdDappScore(userId: String) {
-        let query = PFQuery(className: "UserIdDappScore")
-        
-        query.whereKey("userId", equalTo: userId)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil || objects.count > 0 {
-                return
-            }
-            
-            let userIdDappScore = PFObject(className: "UserIdDappScore")
-            
-            userIdDappScore["userId"] = userId
-            userIdDappScore["dappScore"] = 0
-            
-            userIdDappScore.saveInBackgroundWithBlock({
-                (succeeded: Bool, error: NSError!) -> Void in
-            })
-        }
-    }
-    
     class func addRepresentativeWithUserID(userID: String,
         imageURLString: String,
         fullName: String,
@@ -314,45 +262,6 @@ class Requests {
         representative["Party"]  = party
         
         representative.saveInBackgroundWithBlock(completion)
-    }
-    
-    class func incrementDappScoreForUserWithId(userId: String, completion: (succeeded: Bool, error: NSError?) -> Void) {
-        let query = PFQuery(className: "UserIdDappScore")
-        
-        query.whereKey("userId", equalTo: userId)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil {
-                completion(succeeded: false, error: error)
-                
-                return
-            }
-            
-            if let userIdDappScore = objects.first as? PFObject {
-                let dappScoreKey = "dappScore"
-                
-                if let dappScore = userIdDappScore[dappScoreKey] as? Int {
-                    userIdDappScore[dappScoreKey] = dappScore + 1
-                } else {
-                    userIdDappScore[dappScoreKey] = 1
-                }
-                
-                userIdDappScore.saveInBackgroundWithBlock({
-                    (succeeded: Bool, error: NSError!) -> Void in
-                    completion(succeeded: succeeded, error: error)
-                })
-            } else {
-                let userInfo = [NSLocalizedDescriptionKey: "UserIdDappScore array is nil."]
-                let error = NSError(
-                    domain: "Users",
-                    code: 0,
-                    userInfo: userInfo
-                )
-                
-                completion(succeeded: false, error: error)
-            }
-        }
     }
     
     class func addUserToUsersWhoSaw(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError!) -> Void) {

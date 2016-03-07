@@ -291,29 +291,26 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 }
             })
             
-            if let userId = dapp["userid"] as? String {
-                Requests.incrementDappScoreForUserWithId(userId, completion: {
-                    (succeeded: Bool, error: NSError?) -> Void in
-                    if !succeeded {
-                        if let error = error {
-                            print("Failed to update dappScore for user with id \(userId). Error: \(error.localizedDescription)")
-                        } else {
-                            print("Failed to update dappScore for user with id \(userId). Unknown error")
-                        }
-                    }
-                })
+            self.incrementDappScores(dapp)
+        })
+    }
+    
+    private func incrementDappScores(dapp: PFObject) {
+        if let userID = dapp["userid"] as? String {
+            self.incrementDappScoreForUserWithID(userID)
+        }
+        
+        let currentUserID = PFUser.currentUser().objectId
+        
+        self.incrementDappScoreForUserWithID(currentUserID)
+    }
+    
+    private func incrementDappScoreForUserWithID(userID: String) {
+        UserHelper.incrementDappScoreForUserWithID(userID, completion: {
+            (success: Bool, errorMessage: String?) -> Void in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
             }
-            
-            let currentUserId = PFUser.currentUser().objectId
-            
-            Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
-                (succeeded: Bool, error: NSError?) -> Void in
-                if !succeeded {
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
         })
     }
     
@@ -501,26 +498,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     // MARK: - Timer
     
     func updateDappScore() {
-        let currentUser = PFUser.currentUser()
+        let currentUserID = PFUser.currentUser().objectId
         
-        Requests.downloadDappScoreForUserWithId(currentUser.objectId, completion: {
-            (dappScore: Int?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-                
-                self.dappScoreLabel.text = nil
-                
-                return
+        Requests.userWithID(currentUserID) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let user = user, dappScore = user["dappScore"] as? Int {
+                self.dappScoreLabel.text = "\(dappScore) Dapp"
+            } else {
+                self.dappScoreLabel.text = "- Dapps"
             }
-            
-            if let dappScore = dappScore {
-                if dappScore == 1 {
-                    self.dappScoreLabel.text = "1 Dapp"
-                } else {
-                    self.dappScoreLabel.text = "\(dappScore) Dapp"
-                }
-            }
-        })
+        }
     }
     
     // MARK: -

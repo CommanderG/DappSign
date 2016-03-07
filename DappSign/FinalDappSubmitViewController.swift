@@ -191,9 +191,10 @@ class FinalDappSubmitViewController: UIViewController {
             dappObj["dappTypeId"] = dappTypeId
         }
         
-        dappObj.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
+        dappObj.saveInBackgroundWithBlock({
+            (succeeded: Bool, error: NSError!) -> Void in
             if !succeeded {
-                print("%@" , error)
+                print(error)
                 
                 return
             }
@@ -256,27 +257,26 @@ class FinalDappSubmitViewController: UIViewController {
                 })
             }
             
-            if let userId = dappObj["userid"] as? String {
-                Requests.incrementDappScoreForUserWithId(userId, completion: {
-                    (succeeded: Bool, error: NSError?) -> Void in
-                    if !succeeded {
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }
-                    }
-                })
+            self.increamentDappScores(dappObj)
+        })
+    }
+    
+    private func increamentDappScores(dappObj: PFObject) {
+        if let userID = dappObj["userid"] as? String {
+            self.incrementDappScoreForUserWithID(userID)
+        }
+        
+        let currentUserID = PFUser.currentUser().objectId
+        
+        self.incrementDappScoreForUserWithID(currentUserID)
+    }
+    
+    private func incrementDappScoreForUserWithID(userID: String) {
+        UserHelper.incrementDappScoreForUserWithID(userID, completion: {
+            (success: Bool, errorMessage: String?) -> Void in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
             }
-            
-            let currentUserId = PFUser.currentUser().objectId
-            
-            Requests.incrementDappScoreForUserWithId(currentUserId, completion: {
-                (succeeded: Bool, error: NSError?) -> Void in
-                if !succeeded {
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
         })
     }
     
