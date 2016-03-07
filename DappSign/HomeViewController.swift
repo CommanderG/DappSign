@@ -109,11 +109,11 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0
-            ,   target: self
-            ,   selector: Selector("updateDappScore")
-            ,   userInfo: nil
-            ,   repeats: true
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+            target:   self,
+            selector: Selector("updateDappScore"),
+            userInfo: nil,
+            repeats:  true
         )
         
         self.downloadRepresentativesImages()
@@ -142,9 +142,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappLinksVCView = self.dappLinksVC?.view {
-            self.flipWithDuration(self.flipDuration
-                ,   view1: self.dappViewsContainerView
-                , 	view2: dappLinksVCView
+            self.flipWithDuration(self.flipDuration,
+                view1: self.dappViewsContainerView,
+                view2: dappLinksVCView
             )
         }
         
@@ -167,19 +167,21 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappLinksVCView = self.dappLinksVC?.view {
-            self.flipWithDuration(self.flipDuration
-                ,   view1: self.dappViewsContainerView
-                ,   view2: dappLinksVCView
+            self.flipWithDuration(self.flipDuration,
+                view1: self.dappViewsContainerView,
+                view2: dappLinksVCView
             )
         }
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let 	currentDappCardAsImage = self.dappViewsContainerView.toImage()
-            ,   currentDapp = self.dapps.first {
-                FacebookHelper.postImageToFacebook(currentDappCardAsImage
-                    ,   dapp: currentDapp
-                    ,   completion: { (success: Bool, error: NSError?) -> Void in
+        if let
+            currentDappCardAsImage = self.dappViewsContainerView.toImage(),
+            currentDapp = self.dapps.first {
+                FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+                    dapp: currentDapp,
+                    completion: {
+                        (success: Bool, error: NSError?) -> Void in
                         if success {
                             self.showAlertViewWithOKButtonAndMessage(
                                 "The card has been successfully posted."
@@ -200,11 +202,13 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let  currentDappCardAsImage = self.dappViewsContainerView.toImage()
-            ,   currentDapp = self.dapps.first {
-                TwitterHelper.tweetDapp(currentDapp
-                    ,   image: currentDappCardAsImage
-                    ,   completion: { (success: Bool, error: NSError?) -> Void in
+        if let
+            currentDappCardAsImage = self.dappViewsContainerView.toImage(),
+            currentDapp = self.dapps.first {
+                TwitterHelper.tweetDapp(currentDapp,
+                    image: currentDappCardAsImage,
+                    completion: {
+                        (success: Bool, error: NSError?) -> Void in
                         if success {
                             self.showAlertViewWithOKButtonAndMessage(
                                 "The card has been successfully tweeted."
@@ -273,9 +277,15 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if !succeeded {
                     if let error = error {
-                        print("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Error = \(error.localizedDescription)")
+                        print(
+                            "Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. " +
+                            "Error = \(error.localizedDescription)"
+                        )
                     } else {
-                        print("Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. Unknown error.")
+                        print(
+                            "Failed to add dapp with ID \(dapp.objectId) to 'dappsDapped' array. " +
+                            "Unknown error."
+                        )
                     }
                 }
             })
@@ -589,8 +599,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
                         var percents = 0 as UInt
                         
-                        if let 	user = PFUser.currentUser()
-                            ,   congrDistrID = user["congressionalDistrictID"] as? String {
+                        if let
+                            user = PFUser.currentUser(),
+                            congrDistrID = user["congressionalDistrictID"] as? String {
                                 let additionalFreq = UInt(1 + arc4random_uniform(4))
                                 var dappTotalViews = 1 as UInt
                                 var dappDapps = 1 as UInt
@@ -613,11 +624,18 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                                     dappDapps = dappTotalViews
                                 }
                                 
-                                percents = UInt(roundf(Float(dappDapps) / Float(dappTotalViews) * 100))
+                                percents = UInt(
+                                    roundf(Float(dappDapps) /
+                                    Float(dappTotalViews) * 100)
+                                )
+                                
                                 dappsCount += additionalFreq
                         }
                         
-                        self.dappMappView.show(dappsCount, SVGMapURLPath: SVGMapURL, percents: percents)
+                        self.dappMappView.show(dappsCount,
+                            SVGMapURLPath: SVGMapURL,
+                            percents: percents
+                        )
                     }
                 })
             }
@@ -640,8 +658,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 let dappedCount = Array(usersDapped.keys).filter({
                     let currentUser = PFUser.currentUser()
                     
-                    if let  currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String
-                        ,   userCongrDistrID = $0["congressionalDistrictID"] as? String {
+                    if let
+                        currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String,
+                        userCongrDistrID = $0["congressionalDistrictID"] as? String {
                             if $0.objectId == currentUser.objectId {
                                 // the back end hasn't been updated yet
                                 return true
