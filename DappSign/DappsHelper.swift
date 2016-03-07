@@ -9,6 +9,9 @@
 import Foundation
 
 class DappsHelper {
+    typealias DappDappScore = (PFObject, Int)
+    typealias UserDappScore = (PFUser, Int)
+    
     internal class func sortSecondaryDapps(
         secondaryDapps: [PFObject],
         completion: (sortedSecondaryDapps: [PFObject]) -> Void
@@ -18,9 +21,22 @@ class DappsHelper {
             if let users = users {
                 let usersDappScores = self.usersDappScoresWithUsers(users)
                 let dappsDappScores = self.dappsDappScores(secondaryDapps)
-                let newDappsDappScores = self.dappsDappScoresWithUsersDappScores(usersDappScores,
+                
+                var newDappsDappScores = self.dappsDappScoresWithUsersDappScores(usersDappScores,
                     addedToDappsDappScores: dappsDappScores
                 )
+                
+                let currentUser = PFUser.currentUser()
+                let userCongressionalDistrictID =
+                currentUser["congressionalDistrictID"] as? String
+                
+                if let userCongressionalDistrictID = userCongressionalDistrictID {
+                    newDappsDappScores = self.doubleDappsDappScores(newDappsDappScores,
+                        userCongressionalDistrictID: userCongressionalDistrictID,
+                        users: users
+                    )
+                }
+                
                 let sortedNewDappsDappScores = newDappsDappScores.sort({
                     (dapp1DappScore, dapp2DappScore) -> Bool in
                     let (_, dappScore1) = dapp1DappScore
@@ -32,6 +48,7 @@ class DappsHelper {
                     
                     return false
                 })
+                
                 let sortedDapps = sortedNewDappsDappScores.map({
                     dappDappScore -> PFObject in
                     let (dapp, _) = dappDappScore
@@ -46,7 +63,7 @@ class DappsHelper {
         })
     }
     
-    private class func usersDappScoresWithUsers(users: [PFUser]) -> [(PFUser, Int)] {
+    private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {
         let usersDappScores = users.map({
             user -> (PFUser, Int?) in
             let dappScore = user["dappScore"] as? Int
@@ -63,7 +80,7 @@ class DappsHelper {
                 return false
             }
         }).map({
-            userDappScore -> (PFUser, Int) in
+            userDappScore -> UserDappScore in
             let (user, dappScore) = userDappScore
             
             return (user, dappScore!)
@@ -72,7 +89,7 @@ class DappsHelper {
         return usersDappScores
     }
     
-    private class func dappsDappScores(dapps: [PFObject]) -> [(PFObject, Int)] {
+    private class func dappsDappScores(dapps: [PFObject]) -> [DappDappScore] {
         let dappsDappScores = dapps.map({
             dapp -> (PFObject, Int?) in
             let dappScore = dapp["dappScore"] as? Int
@@ -89,7 +106,7 @@ class DappsHelper {
                 return false
             }
         }).map({
-            dappDappScore -> (PFObject, Int) in
+            dappDappScore -> DappDappScore in
             let (dapp, dappScore) = dappDappScore
             
             return (dapp, dappScore!)
@@ -99,11 +116,11 @@ class DappsHelper {
     }
     
     private class func dappsDappScoresWithUsersDappScores(
-        usersDappScores: [(PFUser, Int)],
-        addedToDappsDappScores dappsDappScores: [(PFObject, Int)]
-    ) -> [(PFObject, Int)] {
+        usersDappScores: [UserDappScore],
+        addedToDappsDappScores dappsDappScores: [DappDappScore]
+    ) -> [DappDappScore] {
         let newDappsDappScores = dappsDappScores.map({
-            dappDappScore -> (PFObject, Int) in
+            dappDappScore -> DappDappScore in
             let (dapp, _) = dappDappScore
             
             if let
@@ -126,13 +143,51 @@ class DappsHelper {
     
     private class func userDappScoreWithUserWithID(
         userID: String,
-        usersDappScores: [(PFUser, Int)]
-    ) -> (PFUser, Int)? {
+        usersDappScores: [UserDappScore]
+    ) -> UserDappScore? {
         for userDappScore in usersDappScores {
             let (user, _) = userDappScore
             
             if user.objectId == userID {
                 return userDappScore
+            }
+        }
+        
+        return nil
+    }
+    
+    private class func doubleDappsDappScores(
+        dappsDappScores: [DappDappScore],
+        userCongressionalDistrictID: String,
+        users: [PFUser]
+    ) -> [DappDappScore] {
+        let doubleDappsDappScores = dappsDappScores.map({
+            dappDappScore -> DappDappScore in
+            let (dapp, dappScore) = dappDappScore
+            if let
+                userID = dapp["userid"] as? String,
+                user = self.userWithID(userID, users: users),
+                submitterCongressionalDistrictID = user["congressionalDistrictID"] as? String {
+                    if userCongressionalDistrictID == submitterCongressionalDistrictID {
+                        let newDappScore = dappScore * 2
+                        let newDappDappScore = (dapp, newDappScore)
+                        
+                        return newDappDappScore
+                    } else {
+                        return dappDappScore
+                    }
+            } else {
+                return dappDappScore
+            }
+        })
+        
+        return doubleDappsDappScores
+    }
+    
+    private class func userWithID(userID: String, users: [PFUser]) -> PFUser? {
+        for user in users {
+            if user.objectId == userID {
+                return user
             }
         }
         
