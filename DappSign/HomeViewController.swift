@@ -302,6 +302,25 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             })
             
             self.incrementDappScores(dapp)
+            
+            DailyDappHelper.addDapp(dapp, completion: {
+                (error: NSError?) -> Void in
+                let dappID = dapp.objectId
+                let dappStatement = dapp["dappStatement"] as? String ?? ""
+                
+                if let error = error {
+                    print(
+                        "Failed to add dapp with ID \"\(dappID)\" " +
+                        "and statement \"\(dappStatement)\" to DailyDapp. " +
+                        "Error: \(error.localizedDescription)"
+                    )
+                } else {
+                    print(
+                        "Successfully added dapp with ID \"\(dappID)\" " +
+                        "and statement \"\(dappStatement)\" to DailyDapp."
+                    )
+                }
+            })
         })
     }
     
