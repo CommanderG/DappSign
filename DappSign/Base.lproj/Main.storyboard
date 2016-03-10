@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -390,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2x-05-Uay" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="-333"/>
+            <point key="canvasLocation" x="1101" y="-416"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="ufC-wZ-h7g">
@@ -478,7 +478,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKP-BR-v9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="-1114"/>
+            <point key="canvasLocation" x="1534" y="-416"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZY8-BZ-3bG">
@@ -495,7 +495,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3r-he-z8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2018" y="1738"/>
+            <point key="canvasLocation" x="1953" y="1012"/>
         </scene>
         <!--Dapps View Controller-->
         <scene sceneID="Pgl-cl-cad">
@@ -723,7 +723,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2514" y="1738"/>
+            <point key="canvasLocation" x="2406" y="1012"/>
         </scene>
         <!--Profile-->
         <scene sceneID="gWr-LM-htg">
@@ -737,7 +737,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-WI-Ejb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-WI-Ejb">
                                 <rect key="frame" x="6" y="74" width="62" height="59"/>
                                 <animations/>
                                 <constraints>
@@ -750,7 +750,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylj-62-KEJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylj-62-KEJ">
                                 <rect key="frame" x="76" y="74" width="236" height="21"/>
                                 <animations/>
                                 <constraints>
@@ -760,7 +760,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-Mi-XsQ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-Mi-XsQ">
                                 <rect key="frame" x="0.0" y="218" width="320" height="1"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -768,7 +768,7 @@
                                     <constraint firstAttribute="height" constant="1" id="0BX-nZ-Yb5"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CIx-8J-2rR">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CIx-8J-2rR">
                                 <rect key="frame" x="68" y="183" width="184" height="29"/>
                                 <animations/>
                                 <constraints>
@@ -784,7 +784,7 @@
                                     <action selector="dappsFilterSegmentedControlValueChanged:" destination="Q8A-2e-yyY" eventType="valueChanged" id="hBs-yP-v3a"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="374" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="374" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4mG-pu-R2B">
                                 <rect key="frame" x="0.0" y="219" width="320" height="349"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -916,14 +916,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKa-cP-7uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="-1114"/>
+            <point key="canvasLocation" x="2023" y="-416"/>
         </scene>
         <!--Edit Dapps-->
         <scene sceneID="lVc-PM-esS">
             <objects>
                 <tableViewController id="AnE-wK-30e" customClass="EditDappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="o81-2a-XCA">
-                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1032,14 +1032,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvL-tt-a6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2355" y="-1796"/>
+            <point key="canvasLocation" x="2460" y="-1106"/>
         </scene>
         <!--Dapps Table View Controller-->
         <scene sceneID="Hlb-zG-ZSx">
             <objects>
                 <tableViewController id="Mdb-Kg-7xy" customClass="DappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z6-LJ-EkI">
-                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1096,7 +1096,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvy-QZ-SB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2835" y="-1796"/>
+            <point key="canvasLocation" x="2887" y="-1106"/>
         </scene>
         <!--Search-->
         <scene sceneID="fg3-xU-1Bh">
@@ -1108,7 +1108,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="H1x-NN-A95">
-                            <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <textInputTraits key="textInputTraits"/>
@@ -1118,7 +1118,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="dps-q4-Vnq">
-                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dps-q4-Vnq" id="kLq-xk-Fo2">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1128,7 +1128,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="154" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T84-8X-LD8" id="1lD-Lw-W7s">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1174,7 +1174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47c-zB-9bY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013" y="1012"/>
+            <point key="canvasLocation" x="1534" y="1012"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kBy-el-lCE">
@@ -1191,7 +1191,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jml-41-IBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="1012"/>
+            <point key="canvasLocation" x="1101" y="1012"/>
         </scene>
         <!--Zip Code View Controller-->
         <scene sceneID="W0c-qM-8D3">
@@ -1296,7 +1296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7y-QZ-lCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="1012"/>
+            <point key="canvasLocation" x="671" y="1012"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="01m-FC-o7H">
@@ -1685,7 +1685,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1043" y="297"/>
+            <point key="canvasLocation" x="1101" y="297"/>
         </scene>
         <!--Add Dapp View Controller-->
         <scene sceneID="TsA-eP-hJD">
@@ -2207,7 +2207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KV4-ET-l2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="297"/>
+            <point key="canvasLocation" x="1534" y="297"/>
         </scene>
         <!--Add Dapp LinksVC-->
         <scene sceneID="X2g-8d-dnS">
@@ -2545,7 +2545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92c-rD-MDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2463" y="-423"/>
+            <point key="canvasLocation" x="2460" y="-416"/>
         </scene>
         <!--Dapp LinksVC-->
         <scene sceneID="zp8-lC-DXf">
@@ -2556,18 +2556,18 @@
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cUw-5i-dyQ">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xno-ZK-mtp">
-                                <rect key="frame" x="0.0" y="40" width="240" height="312"/>
+                                <rect key="frame" x="0.0" y="40" width="220" height="267"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="240" height="84"/>
+                                        <rect key="frame" x="0.0" y="28" width="220" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euJ-7K-3P7" id="dpn-2j-Ir6">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtU-QY-NAL">
@@ -2576,7 +2576,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkE-SQ-D0U">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkE-SQ-D0U">
                                                     <rect key="frame" x="179" y="18" width="53" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="53" id="J0k-IH-QRf"/>
@@ -2587,7 +2587,7 @@
                                                         <action selector="handleAddLinkButtonTouch" destination="euJ-7K-3P7" eventType="touchUpInside" id="hRZ-E5-uIm"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLs-ua-5Cv">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BLs-ua-5Cv">
                                                     <rect key="frame" x="0.0" y="82" width="240" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2612,20 +2612,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="enterLinkCell" rowHeight="84" id="iAG-7k-JeT" customClass="EnterLinkCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="112" width="240" height="84"/>
+                                        <rect key="frame" x="0.0" y="112" width="220" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iAG-7k-JeT" id="acG-Ob-k0P">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-Dd-2Bn">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-Dd-2Bn">
                                                     <rect key="frame" x="0.0" y="82" width="240" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="lMI-27-L2S"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-sZ-gdP">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-sZ-gdP">
                                                     <rect key="frame" x="8" y="8" width="224" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ObW-9J-lqQ"/>
@@ -2633,7 +2633,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbf-5o-DRq">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbf-5o-DRq">
                                                     <rect key="frame" x="152" y="46" width="80" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="865-gD-BMC"/>
@@ -2673,10 +2673,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="linkCell" rowHeight="58" id="rVO-vc-0KH" customClass="LinkCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="196" width="240" height="58"/>
+                                        <rect key="frame" x="0.0" y="196" width="220" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rVO-vc-0KH" id="6kI-fU-Jdl">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ML-F5-cCO">
@@ -2688,7 +2688,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU7-Jb-EB1">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU7-Jb-EB1">
                                                     <rect key="frame" x="58" y="0.0" width="182" height="54"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="How corporate lobbyists conquered American democracy">
@@ -2701,13 +2701,13 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVT-Q4-4UO">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVT-Q4-4UO">
                                                     <rect key="frame" x="58" y="0.0" width="182" height="54"/>
                                                     <connections>
                                                         <action selector="handleLinkButtonTouch:" destination="rVO-vc-0KH" eventType="touchUpInside" id="F6b-N6-rTY"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQL-8T-KoK">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQL-8T-KoK">
                                                     <rect key="frame" x="0.0" y="56" width="240" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2739,13 +2739,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteLinkCell" rowHeight="80" id="VjQ-QH-e2X" customClass="DeleteLinkCell" customModule="DappSign" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="254" width="240" height="80"/>
+                                        <rect key="frame" x="0.0" y="254" width="220" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VjQ-QH-e2X" id="FiV-Y9-dgt">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-CL-obi">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-CL-obi">
                                                     <rect key="frame" x="152" y="6" width="80" height="68"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG0-6s-evb">
@@ -2792,7 +2792,7 @@
                                                         <constraint firstItem="pG0-6s-evb" firstAttribute="leading" secondItem="ha7-CL-obi" secondAttribute="leading" id="tat-ai-1u2"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzh-V8-8UF">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzh-V8-8UF">
                                                     <rect key="frame" x="0.0" y="78" width="240" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2825,10 +2825,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noLinkCell" rowHeight="0.0" id="JYY-31-0Xh">
-                                        <rect key="frame" x="0.0" y="334" width="240" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="334" width="220" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JYY-31-0Xh" id="bwW-7u-HkD">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2854,7 +2854,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQt-5N-U6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2463" y="297"/>
+            <point key="canvasLocation" x="2887" y="297"/>
         </scene>
         <!--Edit Links-->
         <scene sceneID="Sth-3F-d7h">
@@ -2868,7 +2868,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-kU-6wE">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-kU-6wE">
                                 <rect key="frame" x="20" y="90" width="280" height="388"/>
                                 <animations/>
                                 <connections>
@@ -2889,7 +2889,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQO-0h-MWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2463" y="-1114"/>
+            <point key="canvasLocation" x="2887" y="-434"/>
         </scene>
     </scenes>
     <resources>
@@ -2910,8 +2910,8 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XgB-ZI-Ie0"/>
-        <segue reference="Ffg-Dq-WrU"/>
+        <segue reference="CAe-Fl-ep4"/>
+        <segue reference="Nbj-I3-c5B"/>
         <segue reference="rDJ-8j-zWb"/>
     </inferredMetricsTieBreakers>
 </document>
