@@ -48,6 +48,59 @@ class DailyDappHelper {
         }
     }
     
+    internal class func findDailyDappsWithDate(date: String,
+        completion: (dailyDapps: [PFObject], error: NSError?) -> Void
+    ) {
+        let query = PFQuery(className: dailyDappClass)
+        
+        query.whereKey(dateKey, equalTo: date)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if let dailyDapps = objects as? [PFObject] {
+                completion(dailyDapps: dailyDapps, error: error)
+            } else {
+                completion(dailyDapps: [], error: error)
+            }
+        }
+    }
+    
+    internal class func dappsInDailyDapps(dailyDapps: [PFObject],
+        completion: (dapps: [PFObject], error: NSError?) -> Void
+    ) {
+        self.dappsInDailyDapps(dailyDapps, dapps: [], completion: completion)
+    }
+    
+    // MARK: - private
+    
+    private class func dappsInDailyDapps(dailyDapps: [PFObject],
+        dapps: [PFObject],
+        completion: (dapps: [PFObject], error: NSError?) -> Void
+    ) {
+        if let dailyDapp = dailyDapps.first {
+            let dappsRelation = dailyDapp.relationForKey(dappsRelationKey)
+            let query = dappsRelation.query()
+            
+            query.limit = 1000
+            
+            query.findObjectsInBackgroundWithBlock({
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                if let dailyDappDapps = objects as? [PFObject] {
+                    let remainingDailyDapps = Array(dailyDapps[1 ..< dailyDapps.count])
+                    let newDapps = dapps + dailyDappDapps
+                    
+                    self.dappsInDailyDapps(remainingDailyDapps,
+                        dapps: newDapps,
+                        completion: completion
+                    )
+                } else {
+                    completion(dapps: [], error: error)
+                }
+            })
+        } else {
+            completion(dapps: dapps, error: nil)
+        }
+    }
+    
     private class func currentDateString() -> String {
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
