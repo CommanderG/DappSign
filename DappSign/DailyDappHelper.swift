@@ -9,7 +9,7 @@
 import Foundation
 
 class DailyDappHelper {
-    private static let dailyDappClass   = "DailDapp"
+    private static let dailyDappClass   = "DailyDapp"
     private static let dateKey          = "date"
     private static let timeZoneKey      = "timeZone"
     private static let dappsRelationKey = "dapps"
@@ -18,31 +18,45 @@ class DailyDappHelper {
         dapp: PFObject,
         completion: (error: NSError?) -> Void
     ) {
-        let timeZone = NSTimeZone.localTimeZone().description
+        let localTimeZone = NSTimeZone.localTimeZone()
+        
+        if let localTimeZoneName = localTimeZone.localizedName(.ShortStandard, locale: nil) {
+            let dateString = self.currentDateString()
+            
+            self.findDailyDappWithDate(dateString, timeZone: localTimeZoneName) {
+                (dailyDapp: PFObject?, error: NSError?) -> Void in
+                if let dailyDapp = dailyDapp {
+                    self.addDapp(dapp, toDailyDapp: dailyDapp, completion: completion)
+                } else if let error = error {
+                    completion(error: error)
+                } else {
+                    self.addDailyDappWithDate(dateString, timeZone: localTimeZoneName) {
+                        (dailyDapp: PFObject?, error: NSError?) -> Void in
+                        if let dailyDapp = dailyDapp {
+                            self.addDapp(dapp, toDailyDapp: dailyDapp, completion: completion)
+                        } else {
+                            completion(error: error)
+                        }
+                    }
+                }
+            }
+        } else {
+            let userInfo = [NSLocalizedDescriptionKey: "Unknown time zone."]
+            let error = NSError(domain: "DailyDapp", code: 0, userInfo: userInfo)
+            
+            completion(error: error)
+        }
+    }
+    
+    private class func currentDateString() -> String {
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
         
-        dateFormatter.dateFormat = "mm.dd.yyyy"
+        dateFormatter.dateFormat = "MM/dd/yyyy"
         
         let dateString = dateFormatter.stringFromDate(date)
         
-        self.dailyDappWithDate(dateString, timeZone: timeZone) {
-            (dailyDapp: PFObject?, error: NSError?) -> Void in
-            if let dailyDapp = dailyDapp {
-                self.addDapp(dapp, toDailyDapp: dailyDapp, completion: completion)
-            } else if let error = error {
-                completion(error: error)
-            } else {
-                self.addDailyDappWithDate(dateString, timeZone: timeZone, completion: {
-                    (dailyDapp: PFObject?, error: NSError?) -> Void in
-                    if let dailyDapp = dailyDapp {
-                        self.addDapp(dapp, toDailyDapp: dailyDapp, completion: completion)
-                    } else {
-                        completion(error: error)
-                    }
-                })
-            }
-        }
+        return dateString
     }
     
     private class func addDapp(
@@ -64,7 +78,7 @@ class DailyDappHelper {
         }
     }
     
-    private class func dailyDappWithDate(
+    private class func findDailyDappWithDate(
         date: String,
         timeZone: String,
         completion: (dailyDapp: PFObject?, error: NSError?) -> Void
