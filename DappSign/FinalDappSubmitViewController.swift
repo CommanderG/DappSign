@@ -9,21 +9,10 @@
 import UIKit
 
 class FinalDappSubmitViewController: UIViewController {
-    @IBOutlet weak var containerView: SwipeableView!
-    @IBOutlet weak var dappView: UIView!
-    @IBOutlet weak var dappHeaderView: UIView!
-    @IBOutlet weak var headerImage: UIImageView!
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var dappFooterView: UIView!
-    @IBOutlet weak var footerImage: UIImageView!
-    @IBOutlet weak var footerLabel: UILabel!
-    @IBOutlet weak var dappScoreView: UIView!
-    @IBOutlet weak var dappLogoView: UIView!
-    @IBOutlet weak var scoreLabelText: UILabel!
-    @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var dappStatementLabel: UILabel!
+    @IBOutlet weak var containerView:         SwipeableView!
+    @IBOutlet weak var dappSignView:          DappSignView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
-    @IBOutlet weak var tweetThisCardButton: UIButton!
+    @IBOutlet weak var tweetThisCardButton:   UIButton!
     
     internal var dapp: Dapp?
     internal var links: [Link]?
@@ -36,56 +25,21 @@ class FinalDappSubmitViewController: UIViewController {
         self.shareOnFacebookButton?.layer.cornerRadius = 8.0
         self.tweetThisCardButton?.layer.cornerRadius = 8.0
         
-        let user = PFUser.currentUser()
-        
-        dappView.alpha = 0
+        self.dappSignView.alpha = 0
         
         let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0, -200)
-        dappView.transform = CGAffineTransformConcat(scale, translate)
+        let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
+        
+        self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
         
         spring(0.5) {
             let scale = CGAffineTransformMakeScale(1, 1)
             let translate = CGAffineTransformMakeTranslation(0, 0)
-            self.dappView.transform = CGAffineTransformConcat(scale, translate)
+            
+            self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
         }
         
-        if let
-            dappBackgroundColor = self.dapp?.dappBackgroundColor,
-            colorName = ColorName(rawValue: dappBackgroundColor) {
-                self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(colorName)
-        }
-        
-        if let dappStatement = self.dapp?.dappStatement {
-            self.dappStatementLabel.text = dappStatement
-        } else {
-            self.dappStatementLabel.text = ""
-        }
-        
-        if let
-            dappFont = self.dapp?.dappFont,
-            fontName = FontName(rawValue: dappFont) {
-                let fontFileName = DappFonts.fontFileNameWithName(fontName)
-                
-                self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
-        }
-        
-        self.dappStatementLabel.textColor = UIColor.whiteColor()
-        self.dappScoreView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.dappLogoView.backgroundColor = self.dappStatementLabel.backgroundColor
-        self.dappView.backgroundColor = self.dappStatementLabel.backgroundColor
-        
-        if let name = self.dapp?.name {
-            self.footerLabel.text = name
-        } else {
-            self.footerLabel.text = ""
-        }
-        
-        if let imageData = user["image"] as? NSData {
-            self.footerImage.image = UIImage(data: imageData)
-        }
-        
-        self.dappView.alpha = 1
+        self.dappSignView.alpha = 1
         
         self.containerView.minTranslationX = 150.0
         self.containerView.delegate = self
@@ -102,52 +56,55 @@ class FinalDappSubmitViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let  dappObj = self.dappObj
-            ,   currentDappCardAsImage = self.dappView.toImage() {
-            FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-                dapp: dappObj,
-                completion: { (success, error) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully posted."
-                        )
-                    } else {
-                        if error != nil {
+        if let
+            dappObj = self.dappObj,
+            currentDappCardAsImage = self.dappSignView.toImage() {
+                FacebookHelper.postImageToFacebook(currentDappCardAsImage,
+                    dapp: dappObj,
+                    completion: {
+                        (success: Bool, error: NSError?) -> Void in
+                        if success {
                             self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Error: \(error)"
+                                "The card has been successfully posted."
                             )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Unknown error."
-                            )
+                            if error != nil {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to post the card. Error: \(error)"
+                                )
+                            } else {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to post the card. Unknown error."
+                                )
+                            }
                         }
-                    }
-            })
-        }
+                })
+            }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let  dappObj = self.dappObj
-            ,   currentDappCardAsImage = self.dappView.toImage() {
-            TwitterHelper.tweetDapp(dappObj,
-                image: currentDappCardAsImage,
-                completion: { (success, error) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully tweeted."
-                        )
-                    } else {
-                        if error != nil {
+        if let
+            dappObj = self.dappObj,
+            currentDappCardAsImage = self.dappSignView.toImage() {
+                TwitterHelper.tweetDapp(dappObj,
+                    image: currentDappCardAsImage,
+                    completion: { (success, error) -> Void in
+                        if success {
                             self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to tweet the card. Error: \(error)"
+                                "The card has been successfully tweeted."
                             )
                         } else {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to tweet the card. Unknown error."
-                            )
+                            if error != nil {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to tweet the card. Error: \(error)"
+                                )
+                            } else {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "Failed to tweet the card. Unknown error."
+                                )
+                            }
                         }
-                    }
-            })
+                })
         }
     }
     
