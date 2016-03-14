@@ -12,15 +12,15 @@ class DappsHelper {
     typealias DappDappScore = (PFObject, Int)
     typealias UserDappScore = (PFUser, Int)
     
-    internal class func sortSecondaryDapps(
-        secondaryDapps: [PFObject],
-        completion: (sortedSecondaryDapps: [PFObject]) -> Void
+    internal class func sortDappsByDappScore(
+        dapps: [PFObject],
+        completion: (sortedDapps: [PFObject]) -> Void
     ) {
         Requests.downloadUsers({
             (users: [PFUser]?, error: NSError?) -> Void in
             if let users = users {
                 let usersDappScores = self.usersDappScoresWithUsers(users)
-                let dappsDappScores = self.dappsDappScores(secondaryDapps)
+                let dappsDappScores = self.dappsDappScores(dapps)
                 
                 var newDappsDappScores = self.dappsDappScoresWithUsersDappScores(usersDappScores,
                     addedToDappsDappScores: dappsDappScores
@@ -56,9 +56,9 @@ class DappsHelper {
                     return dapp
                 })
                 
-                completion(sortedSecondaryDapps: sortedDapps)
+                completion(sortedDapps: sortedDapps)
             } else {
-                completion(sortedSecondaryDapps: secondaryDapps)
+                completion(sortedDapps: dapps)
             }
         })
     }

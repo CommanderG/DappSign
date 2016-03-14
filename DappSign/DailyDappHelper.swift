@@ -64,15 +64,15 @@ class DailyDappHelper {
         }
     }
     
-    internal class func dappsInDailyDapps(dailyDapps: [PFObject],
+    internal class func downloadDappsInDailyDapps(dailyDapps: [PFObject],
         completion: (dapps: [PFObject], error: NSError?) -> Void
     ) {
-        self.dappsInDailyDapps(dailyDapps, dapps: [], completion: completion)
+        self.downloadDappsInDailyDapps(dailyDapps, dapps: [], completion: completion)
     }
     
     // MARK: - private
     
-    private class func dappsInDailyDapps(dailyDapps: [PFObject],
+    private class func downloadDappsInDailyDapps(dailyDapps: [PFObject],
         dapps: [PFObject],
         completion: (dapps: [PFObject], error: NSError?) -> Void
     ) {
@@ -88,7 +88,7 @@ class DailyDappHelper {
                     let remainingDailyDapps = Array(dailyDapps[1 ..< dailyDapps.count])
                     let newDapps = dapps + dailyDappDapps
                     
-                    self.dappsInDailyDapps(remainingDailyDapps,
+                    self.downloadDappsInDailyDapps(remainingDailyDapps,
                         dapps: newDapps,
                         completion: completion
                     )

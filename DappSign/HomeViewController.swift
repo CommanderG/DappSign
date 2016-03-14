@@ -479,9 +479,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                     shouldShowCurrentDapp = true
                 }
                 
-                DappsHelper.sortSecondaryDapps(dapps, completion: {
-                    (sortedSecondaryDapps: [PFObject]) -> Void in
-                    self.dapps += sortedSecondaryDapps
+                DappsHelper.sortDappsByDappScore(dapps, completion: {
+                    (sortedDapps: [PFObject]) -> Void in
+                    self.dapps += sortedDapps
                     
                     if shouldShowCurrentDapp {
                         self.initDappView()

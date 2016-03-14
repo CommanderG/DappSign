@@ -11,6 +11,7 @@
 		2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A60B1C89D968002BBBF6 /* DateHelper.swift */; };
 		270C05891BB42A3E00C11435 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C05881BB42A3E00C11435 /* LinkView.swift */; };
 		270C058B1BB42A5900C11435 /* LinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270C058A1BB42A5900C11435 /* LinkView.xib */; };
+		270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FBCBF1C96DADF00BE3019 /* ScoreboardHelper.swift */; };
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
 		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
 		2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714318A1AB0C462002F9527 /* FacebookHelper.swift */; };
@@ -99,7 +100,7 @@
 		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
 		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
-		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
 		84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */; };
@@ -151,6 +152,7 @@
 		2702A60B1C89D968002BBBF6 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		270C05881BB42A3E00C11435 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		270C058A1BB42A5900C11435 /* LinkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkView.xib; sourceTree = "<group>"; };
+		270FBCBF1C96DADF00BE3019 /* ScoreboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardHelper.swift; sourceTree = "<group>"; };
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
 		2714318A1AB0C462002F9527 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				27896E301C8D89F300A6AA4A /* UserHelper.swift */,
 				272187DD1C8DCD3700D61E37 /* DappsHelper.swift */,
 				8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */,
+				270FBCBF1C96DADF00BE3019 /* ScoreboardHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */,
+				270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
 				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
