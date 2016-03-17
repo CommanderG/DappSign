@@ -557,7 +557,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         if (self.visibleDappView == self.dappSignView) {
             let dapp = dapps.first
             
-            self.dappSignView.showDapp(dapp)
+            self.dappSignView.showDappObject(dapp)
             
             if let
                 dapp = dapp,
@@ -567,17 +567,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         DappColors.colorWithColorName(colorName)
             }
             
-            if let dapp_ = dapp, userID = dapp_["userid"] as? String {
-                Requests.userWithID(userID, completion: { (user: PFUser?, error: NSError?) -> Void in
-                    if let usr = user {
-                        self.dappSignView.showUserInfo(usr)
-                    } else if let err = error {
-                        print("Failed to download information about user with ID \(userID). Error = \(err)")
-                    } else {
-                        print("Failed to download information about user with ID \(userID). Unknown error.")
-                    }
-                })
-                
+            if let dapp_ = dapp {
                 Requests.addUserToUsersWhoSaw(dapp_, user: PFUser.currentUser(), completion: {
                     (succeeded: Bool, error: NSError!) -> Void in
                     if !succeeded {

@@ -11,12 +11,8 @@ import UIKit
 class DappSignView: XIBView {
     private var dappSignView: UIView? = nil
     
-    @IBOutlet weak var scoreView: UIView!
-    @IBOutlet weak var dappsSwipesCountLabel: UILabel!
     @IBOutlet weak var dappStatementLabel: UILabel!
-    @IBOutlet weak var logoView: UIView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var dappSubmitterLabel: UILabel!
     
     @IBOutlet var arrowImageViewsAndLabels: [UIView]!
     
@@ -30,98 +26,67 @@ class DappSignView: XIBView {
         self.dappSignView?.layer.borderWidth = 2.0
     }
     
-    // MARK: -
+    // MARK: - internal
     
-    func showDapp(dapp: PFObject?) {
-//        if let dapp_ = dapp {
-//            if let dappScore = dapp_["dappScore"] as? Int {
-//                var text: String
-//                
-//                if dappScore == 1 {
-//                    text = "1 Dapp"
-//                } else {
-//                    text = "\(dappScore) Dapp"
-//                }
-//                
-//                self.dappsSwipesCountLabel.text = text
-//            } else {
-//                self.dappsSwipesCountLabel.text = nil
-//            }
-//            
-//            self.dappStatementLabel.text = dapp_["dappStatement"] as? String
-//            
-//            if let
-//                dappFontName = dapp_["dappFont"] as? String,
-//                fontName = FontName(rawValue: dappFontName) {
-//                    let screenSize: CGRect = UIScreen.mainScreen().bounds
-//                    let screenWidth = screenSize.width
-//                    let screenHeight = screenSize.height
-//                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
-//                    
-//                    self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
-//                    
-//                    if screenWidth == 320.0 && screenHeight == 480.0 {
-//                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 22.0)
-//                    } else if screenWidth == 320.0 && screenHeight == 568.0 {
-//                        self.dappStatementLabel.font = UIFont(name: dappFontName, size: 27.0)
-//                    }
-//            }
-//            
-//            self.dappStatementLabel.textColor = UIColor.whiteColor()
-//            
-//            if let
-//                dappBgColoName = dapp_["dappBackgroundColor"] as? String,
-//                colorName = ColorName(rawValue: dappBgColoName) {
-//                    self.dappStatementLabel.backgroundColor =
-//                        DappColors.colorWithColorName(colorName)
-//            }
-//            
-//            self.usernameLabel.text = nil
-//            self.userProfileImageView.image = nil
-//            
-//            self.showArrowImageViewsAndLabels()
-//        } else {
-//            self.dappsSwipesCountLabel.text = nil
-//            
-//            self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
-//            self.dappStatementLabel.textColor = UIColor.whiteColor()
-//            self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(.MidnightBlue)
-//            
-//            let fontFileName = DappFonts.fontFileNameWithName(.Exo)
-//            
-//            self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
-//            
-//            self.usernameLabel.text = nil
-//            
-//            self.userProfileImageView.image = nil
-//            
-//            self.hideArrowImageViewsAndLabels()
-//        }
-//        
-//        self.scoreView.backgroundColor = self.dappStatementLabel.backgroundColor
-//        self.logoView.backgroundColor = self.dappStatementLabel.backgroundColor
-//        self.dappSignView?.backgroundColor = self.dappStatementLabel.backgroundColor
+    internal func showDappObject(dapp: PFObject?) {
+        if let dapp = dapp {
+            self.dappStatementLabel.text = dapp["dappStatement"] as? String
+            
+            if let
+                dappFontName = dapp["dappFont"] as? String,
+                fontName = FontName(rawValue: dappFontName) {
+                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                    
+                    self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+            }
+            
+            if let
+                dappBgColoName = dapp["dappBackgroundColor"] as? String,
+                colorName = ColorName(rawValue: dappBgColoName) {
+                    self.dappStatementLabel.backgroundColor =
+                        DappColors.colorWithColorName(colorName)
+            }
+        } else {
+            self.dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"
+            
+            let fontFileName = DappFonts.fontFileNameWithName(.Exo)
+            
+            self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+        }
+        
+        self.dappSignView?.backgroundColor = self.dappStatementLabel.backgroundColor
+        self.initDappSubmitterLabelTextWithDapp(dapp)
     }
     
-    func showUserInfo(user: PFObject?) {
-//        if let user_ = user {
-//            self.usernameLabel.text = user_["name"] as? String
-//            self.userProfileImageView.image = UIImage(data: user_["image"] as! NSData)
-//        } else {
-//            self.usernameLabel.text = nil
-//            self.userProfileImageView.image = nil
-//        }
+    internal func showDapp(dapp: Dapp?) {
+        self.dappStatementLabel.text = dapp?.dappStatement ?? ""
+        
+        if let dappFontName = dapp?.dappFont, fontName = FontName(rawValue: dappFontName) {
+            let fontFileName = DappFonts.fontFileNameWithName(fontName)
+            
+            self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+        }
+        
+        if let
+            dappBgColoName = dapp?.dappBackgroundColor,
+            colorName = ColorName(rawValue: dappBgColoName) {
+                self.dappSignView?.backgroundColor = DappColors.colorWithColorName(colorName)
+        }
+        
+        if let userName = dapp?.name {
+            self.dappSubmitterLabel.text = "From \(userName)"
+        } else {
+            self.dappSubmitterLabel.text = ""
+        }
     }
     
-    private func showArrowImageViewsAndLabels() {
-//        for view in self.arrowImageViewsAndLabels {
-//            view.hidden = false
-//        }
-    }
+    // MARK: - private
     
-    private func hideArrowImageViewsAndLabels() {
-//        for view in self.arrowImageViewsAndLabels {
-//            view.hidden = true
-//        }
+    private func initDappSubmitterLabelTextWithDapp(dapp: PFObject?) {
+        if let userName = dapp?["name"] as? String {
+            self.dappSubmitterLabel.text = "From \(userName)"
+        } else {
+            self.dappSubmitterLabel.text = ""
+        }
     }
 }

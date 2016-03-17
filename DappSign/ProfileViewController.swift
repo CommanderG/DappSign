@@ -131,25 +131,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if let dapps = self.dapps() {
             let dapp = dapps[indexPath.row]
             
-            cell.dappSignView.showDapp(dapp)
+            cell.dappSignView.showDappObject(dapp)
             
             if self.dappsFilterSegmentedControl.selectedSegmentIndex == DappsFilter.DappSigns.rawValue {
                 cell.editLinksView.hidden = false
             } else {
                 cell.editLinksView.hidden = true
-            }
-            
-            if let userID = dapp["userid"] as? String {
-                Requests.userWithID(userID, completion: {
-                    (user: PFUser?, error: NSError?) -> Void in
-                    if let usr = user {
-                        cell.dappSignView.showUserInfo(usr)
-                    } else if let err = error {
-                        print("Failed to download information about user with ID \(userID). Error = \(err)")
-                    } else {
-                        print("Failed to download information about user with ID \(userID). Unknown error.")
-                    }
-                })
             }
             
             if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {

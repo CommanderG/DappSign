@@ -49,6 +49,8 @@ class FinalDappSubmitViewController: UIViewController {
         if let dapp = self.dapp {
             self.submitDapp(dapp)
         }
+        
+        self.dappSignView.showDapp(self.dapp)
     }
 
     override func didReceiveMemoryWarning() {
