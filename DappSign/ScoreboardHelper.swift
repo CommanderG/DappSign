@@ -13,12 +13,10 @@ class ScoreboardHelper {
         date: String,
         completion: (scoreboardDapps: [PFObject], error: NSError?) -> Void
     ) {
-        DailyDappHelper.findDailyDappsWithDate(date) {
-            (dailyDapps: [PFObject], error: NSError?) -> Void in
-            if let error = error {
-                completion(scoreboardDapps: [], error: error)
-            } else {
-                DailyDappHelper.downloadDappsInDailyDapps(dailyDapps, completion: {
+        DailyDappHelper.findDailyDappWithDate(date) {
+            (dailyDapp: PFObject?, error: NSError?) -> Void in
+            if let dailyDapp = dailyDapp {
+                DailyDappHelper.downloadDappsInDailyDapp(dailyDapp, completion: {
                     (dapps: [PFObject], error: NSError?) -> Void in
                     if let error = error {
                         completion(scoreboardDapps: [], error: error)
@@ -31,6 +29,8 @@ class ScoreboardHelper {
                         })
                     }
                 })
+            } else if let error = error {
+                completion(scoreboardDapps: [], error: error)
             }
         }
     }
