@@ -434,7 +434,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private func downloadPrimaryDappsWithSuccessClosure(success: () -> Void) {
         let user = PFUser.currentUser()
         
-        self.dappsDownloader = DappsDownloader(type: .Primary)
+        self.dappsDownloader = DappsDownloader(array: .Primary)
         
         self.dappsDownloader?.downloadDappsNotSwipedByUser(user,
             completion: {
@@ -460,7 +460,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private func downloadSecondaryDapps() {
         let user = PFUser.currentUser()
         
-        self.dappsDownloader = DappsDownloader(type: .Secondary)
+        self.dappsDownloader = DappsDownloader(array: .Secondary)
         
         self.dappsDownloader?.downloadDappsNotSwipedByUser(user, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in

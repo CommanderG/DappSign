@@ -6,14 +6,9 @@
 //  Copyright (c) 2015 DappSign. All rights reserved.
 //
 
-internal enum DappType: Int {
-    case Primary      = 0
-    case Secondary    = 1
-    case Introductory = 2
-}
-
-internal enum DappTypeId: String {
-    case Primary      = "OTUGpeUV0F"
-    case Secondary    = "xljcqCZChU"
-    case Introductory = "v7rhAbS0cO"
+internal enum DappArray: String {
+    case Primary      = "Primary"
+    case Secondary    = "Secondary"
+    case Introductory = "Introductory"
+    case Scoreboard   = "Scoreboard"
 }

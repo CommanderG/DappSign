@@ -8,36 +8,36 @@
 
 import UIKit
 
-enum UIActionSheetButton: String {
-    case Delete           = "Delete"
-    case MakePrimary      = "Make primary"
-    case MakeSecondary    = "Make secondary"
-    case MakeIntroductory = "Make introductory"
-    case SetIndex         = "Set index"
-    case Cancel           = "Cancel"
-}
-
-enum UIAlertViewTag: Int {
-    case IndexInput         = 0
-    case IndexAlreadyExists = 1
-}
-
-enum UIAlertViewButtonTitles: String {
-    case OKButton        = "OK"
-    case CancelButton    = "Cancel"
-    case OverwriteButton = "Overwrite"
-}
-
 class DappsTableViewController: UITableViewController {
+    enum DappActionSheetButton: String {
+        case RemoveFromThisArray     = "Remove from this array"
+        case MoveToPrimaryArray      = "Move to Primary array"
+        case MoveToSecondaryArray    = "Move to Secondary array"
+        case MoveToIntroductoryArray = "Move to Introductory array"
+        case AddToScoreboardArray    = "Add to Scoreboard array"
+        case SetIndex                = "Set index"
+        case Cancel                  = "Cancel"
+    }
+    
+    enum DappAlertViewTag: Int {
+        case IndexInput         = 0
+        case IndexAlreadyExists = 1
+    }
+    
+    enum DappAlertViewButtonTitles: String {
+        case OKButton        = "OK"
+        case CancelButton    = "Cancel"
+        case OverwriteButton = "Overwrite"
+    }
+    
     let cellIdentifier = "cell"
     let dappStatementKey = "dappStatement"
     
-    var dappsType:            DappType?
+    var dappsArray:           DappArray?
     var dapps:                [PFObject] = []
     var actionSheet:          UIActionSheet?
     var dappWithTheSameIndex: PFObject?
     var selectedDappNewIndex: Int?
-    var dappsDownloader:      DappsDownloader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,36 +49,42 @@ class DappsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let dappsType = self.dappsType {
-            switch dappsType {
+        if let dappsArray = self.dappsArray {
+            switch dappsArray {
             case .Primary:
                 self.title = "Primary Dapps"
             case .Secondary:
                 self.title = "Secondary Dapps"
             case .Introductory:
                 self.title = "Introductory Dapps"
+            case .Scoreboard:
+                self.title = "Scoreboard Dapps"
             }
             
-            self.dappsDownloader = DappsDownloader(type: dappsType)
-            
-            self.dappsDownloader.downloadAllDapps({
-                (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
+            DappArraysHelper.downloadDappsInArray(dappsArray, completion: {
+                (dapps: [PFObject]?, error: NSError?) -> Void in
+                if let dapps = dapps {
+                    self.dapps = dapps
+                    
+                    self.tableView.reloadData()
+                } else {
+                    var errorMessage = ""
+                    
+                    if let error = error {
+                        errorMessage = "Error: \(error.localizedDescription)"
+                    } else {
+                        errorMessage = "Unknown error"
+                    }
+                    
                     let alertView = UIAlertView(
-                        title: nil,
-                        message: error.localizedDescription,
-                        delegate: nil,
+                        title:             "Failed to download \(dappsArray.rawValue) dapps",
+                        message:           errorMessage,
+                        delegate:          nil,
                         cancelButtonTitle: "OK"
                     )
                     
                     alertView.show()
-                    
-                    return
                 }
-                
-                self.dapps = dapps
-                
-                self.tableView.reloadData()
             })
         }
     }
@@ -102,7 +108,9 @@ class DappsTableViewController: UITableViewController {
         return dapps.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier,
             forIndexPath: indexPath) as! DappCardCell
         
@@ -110,7 +118,7 @@ class DappsTableViewController: UITableViewController {
         
         cell.dappStatementLabel.text = dapp[self.dappStatementKey] as? String
         
-        if let dappsType = self.dappsType {
+        if let dappsType = self.dappsArray {
             if dappsType != .Secondary {
                 if let index = dapp["index"] as? Int {
                     if index >= 0 {
@@ -146,36 +154,47 @@ class DappsTableViewController: UITableViewController {
     // MARK: -
     
     private func actionSheetWithTitle(title: String) -> UIActionSheet? {
-        if let dappsType = self.dappsType {
+        if let dappsType = self.dappsArray {
             switch dappsType {
             case .Primary:
                 return UIActionSheet(
                     title:                  title,
                     delegate:               self,
-                    cancelButtonTitle:      UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles:      UIActionSheetButton.MakeSecondary.rawValue,
-                                            UIActionSheetButton.MakeIntroductory.rawValue,
-                                            UIActionSheetButton.SetIndex.rawValue
+                    cancelButtonTitle:      DappActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: DappActionSheetButton.RemoveFromThisArray.rawValue,
+                    otherButtonTitles:      DappActionSheetButton.MoveToSecondaryArray.rawValue,
+                                            DappActionSheetButton.MoveToIntroductoryArray.rawValue,
+                                            DappActionSheetButton.AddToScoreboardArray.rawValue,
+                                            DappActionSheetButton.SetIndex.rawValue
                 )
             case .Secondary:
                 return UIActionSheet(
                     title:                  title,
                     delegate:               self,
-                    cancelButtonTitle:      UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles:      UIActionSheetButton.MakePrimary.rawValue,
-                                            UIActionSheetButton.MakeIntroductory.rawValue
+                    cancelButtonTitle:      DappActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: DappActionSheetButton.RemoveFromThisArray.rawValue,
+                    otherButtonTitles:      DappActionSheetButton.MoveToPrimaryArray.rawValue,
+                                            DappActionSheetButton.MoveToIntroductoryArray.rawValue,
+                                            DappActionSheetButton.AddToScoreboardArray.rawValue
                 )
             case .Introductory:
                 return UIActionSheet(
                     title:                  title,
                     delegate:               self,
-                    cancelButtonTitle:      UIActionSheetButton.Cancel.rawValue,
-                    destructiveButtonTitle: UIActionSheetButton.Delete.rawValue,
-                    otherButtonTitles:      UIActionSheetButton.MakePrimary.rawValue,
-                                            UIActionSheetButton.MakeSecondary.rawValue,
-                                            UIActionSheetButton.SetIndex.rawValue
+                    cancelButtonTitle:      DappActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: DappActionSheetButton.RemoveFromThisArray.rawValue,
+                    otherButtonTitles:      DappActionSheetButton.MoveToPrimaryArray.rawValue,
+                                            DappActionSheetButton.MoveToSecondaryArray.rawValue,
+                                            DappActionSheetButton.AddToScoreboardArray.rawValue,
+                                            DappActionSheetButton.SetIndex.rawValue
+                )
+            case .Scoreboard:
+                return UIActionSheet(
+                    title:                  title,
+                    delegate:               self,
+                    cancelButtonTitle:      DappActionSheetButton.Cancel.rawValue,
+                    destructiveButtonTitle: DappActionSheetButton.RemoveFromThisArray.rawValue,
+                    otherButtonTitles:      DappActionSheetButton.SetIndex.rawValue
                 )
             }
         }
@@ -255,54 +274,55 @@ extension DappsTableViewController: UIActionSheetDelegate {
         
         if let buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex) {
             switch buttonTitle {
-            case UIActionSheetButton.Delete.rawValue:
-                self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                    properties: ["isDeleted": true]
-                )
-            case UIActionSheetButton.MakePrimary.rawValue:
-                let query = DappQueriesBuilder.queryForAllDappsOfType(.Primary)
-                
-                query?.countObjectsInBackgroundWithBlock({
-                    (count: Int32, error: NSError!) -> Void in
-                    if Int(count) == primaryDappsMaxCount {
-                        let message =
-                        "Can't make this Dapp primary because maximum number " +
-                        "of primary Dapps (\(primaryDappsMaxCount)) has been reached."
-                        
-                        let alertView = UIAlertView(
-                            title:             "Error",
-                            message:           message,
-                            delegate:          nil,
-                            cancelButtonTitle: "OK"
-                        )
-                        
-                        alertView.show()
-                        
-                        return
-                    }
-                    
-                    self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                        properties: ["dappTypeId": DappTypeId.Primary.rawValue]
-                    )
-                })
-            case UIActionSheetButton.MakeSecondary.rawValue:
-                self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                    properties: [
-                        "index": -1,
-                        "dappTypeId": DappTypeId.Secondary.rawValue
-                    ]
-                )
-            case UIActionSheetButton.MakeIntroductory.rawValue:
-                self.updatePropertiesForDappAtIndex(selectedDappIndex,
-                    properties: [
-                        "index": -1,
-                        "dappTypeId": DappTypeId.Introductory.rawValue
-                    ]
-                )
-            case UIActionSheetButton.SetIndex.rawValue:
+            case DappActionSheetButton.RemoveFromThisArray.rawValue:
+                break
+            case DappActionSheetButton.MoveToPrimaryArray.rawValue:
+//                let query = DappQueriesBuilder.queryForAllDappsOfType(.Primary)
+//                
+//                query?.countObjectsInBackgroundWithBlock({
+//                    (count: Int32, error: NSError!) -> Void in
+//                    if Int(count) == primaryDappsMaxCount {
+//                        let message =
+//                        "Can't make this Dapp primary because maximum number " +
+//                        "of primary Dapps (\(primaryDappsMaxCount)) has been reached."
+//                        
+//                        let alertView = UIAlertView(
+//                            title:             "Error",
+//                            message:           message,
+//                            delegate:          nil,
+//                            cancelButtonTitle: "OK"
+//                        )
+//                        
+//                        alertView.show()
+//                        
+//                        return
+//                    }
+//                    
+//                    self.updatePropertiesForDappAtIndex(selectedDappIndex,
+//                        properties: ["dappTypeId": DappTypeId.Primary.rawValue]
+//                    )
+//                })
+                break
+            case DappActionSheetButton.MoveToSecondaryArray.rawValue:
+                break
+//                self.updatePropertiesForDappAtIndex(selectedDappIndex,
+//                    properties: [
+//                        "index": -1,
+//                        "dappTypeId": DappTypeId.Secondary.rawValue
+//                    ]
+//                )
+            case DappActionSheetButton.MoveToIntroductoryArray.rawValue:
+                break
+//                self.updatePropertiesForDappAtIndex(selectedDappIndex,
+//                    properties: [
+//                        "index": -1,
+//                        "dappTypeId": DappTypeId.Introductory.rawValue
+//                    ]
+//                )
+            case DappActionSheetButton.SetIndex.rawValue:
                 var alertViewMessage: String? = nil
                 
-                if let dappType = self.dappsType {
+                if let dappType = self.dappsArray {
                     switch dappType {
                     case .Primary:
                         alertViewMessage =
@@ -319,12 +339,12 @@ extension DappsTableViewController: UIActionSheetDelegate {
                         title:             "Set index",
                         message:           message,
                         delegate:          self,
-                        cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
-                        otherButtonTitles: UIAlertViewButtonTitles.OKButton.rawValue
+                        cancelButtonTitle: DappAlertViewButtonTitles.CancelButton.rawValue,
+                        otherButtonTitles: DappAlertViewButtonTitles.OKButton.rawValue
                     )
                     
                     alertView.alertViewStyle = .PlainTextInput
-                    alertView.tag = UIAlertViewTag.IndexInput.rawValue
+                    alertView.tag = DappAlertViewTag.IndexInput.rawValue
                     
                     if let textField = alertView.textFieldAtIndex(0) {
                         textField.keyboardType = .NumberPad
@@ -344,8 +364,8 @@ extension DappsTableViewController: UIAlertViewDelegate {
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         let buttonTitle = alertView.buttonTitleAtIndex(buttonIndex)
         
-        if alertView.tag == UIAlertViewTag.IndexInput.rawValue {
-            if buttonTitle != UIAlertViewButtonTitles.OKButton.rawValue {
+        if alertView.tag == DappAlertViewTag.IndexInput.rawValue {
+            if buttonTitle != DappAlertViewButtonTitles.OKButton.rawValue {
                 return
             }
             
@@ -366,7 +386,7 @@ extension DappsTableViewController: UIAlertViewDelegate {
                                 if succeeded {
                                     self.tableView.userInteractionEnabled = true
                                     
-                                    if let dappsType = self.dappsType {
+                                    if let dappsType = self.dappsArray {
                                         self.dapps = IndexedDapps.sortDapps(self.dapps,
                                             dappsType: dappsType
                                         )
@@ -386,17 +406,17 @@ extension DappsTableViewController: UIAlertViewDelegate {
                         title:             "Warning",
                         message:           message,
                         delegate:          self,
-                        cancelButtonTitle: UIAlertViewButtonTitles.CancelButton.rawValue,
-                        otherButtonTitles: UIAlertViewButtonTitles.OverwriteButton.rawValue
+                        cancelButtonTitle: DappAlertViewButtonTitles.CancelButton.rawValue,
+                        otherButtonTitles: DappAlertViewButtonTitles.OverwriteButton.rawValue
                     )
                     
-                    alertView.tag = UIAlertViewTag.IndexAlreadyExists.rawValue
+                    alertView.tag = DappAlertViewTag.IndexAlreadyExists.rawValue
                     
                     alertView.show()
                 }
             }
-        } else if alertView.tag == UIAlertViewTag.IndexAlreadyExists.rawValue {
-            if buttonTitle != UIAlertViewButtonTitles.OverwriteButton.rawValue {
+        } else if alertView.tag == DappAlertViewTag.IndexAlreadyExists.rawValue {
+            if buttonTitle != DappAlertViewButtonTitles.OverwriteButton.rawValue {
                 return
             }
             
@@ -436,7 +456,7 @@ extension DappsTableViewController: UIAlertViewDelegate {
                                 (succeeded: Bool) -> Void in
                                 self.tableView.userInteractionEnabled = true
                                 
-                                if let dappsType = self.dappsType {
+                                if let dappsType = self.dappsArray {
                                     self.dapps = IndexedDapps.sortDapps(self.dapps,
                                         dappsType: dappsType
                                     )

@@ -9,23 +9,34 @@
 import UIKit
 
 class EditDappsTableViewController: UITableViewController {
-    var dappsCount: [DappType: Int32?] = [
+    var dappArrayDappsCount: [DappArray: Int32?] = [
         .Primary:      nil,
         .Secondary:    nil,
-        .Introductory: nil
+        .Introductory: nil,
+        .Scoreboard:   nil
+    ]
+    
+    let rowDappArray: [Int: DappArray] = [
+        0: .Primary,
+        1: .Secondary,
+        2: .Introductory,
+        3: .Scoreboard
     ]
     
     enum SegueIdentifier: String {
-        case ShowPrimaryDapps      = "showPrimaryDappsTableViewController"
-        case ShowSecondaryDapps    = "showSecondaryDappsTableViewController"
-        case ShowIntroductoryDapps = "showIntroductoryDappsTableViewController"
+        case ShowPrimaryDapps      = "showPrimaryDapps"
+        case ShowSecondaryDapps    = "showSecondaryDapps"
+        case ShowIntroductoryDapps = "showIntroductoryDapps"
+        case ShowScoreboardDapps   = "showScoreboardDapps"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let font = UIFont(name: "Exo-Regular", size: 18.0) {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSFontAttributeName: font
+            ]
         }
         
         if let font = UIFont(name: "Exo-Regular", size: 16.0) {
@@ -39,8 +50,8 @@ class EditDappsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        for key in self.dappsCount.keys {
-            self.dappsCount[key] = nil
+        for (dappArray, _) in self.dappArrayDappsCount {
+            self.dappArrayDappsCount[dappArray] = nil
         }
         
         self.refreshTableViewContent()
@@ -61,12 +72,14 @@ class EditDappsTableViewController: UITableViewController {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath
+    ) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        let dappType = DappType(rawValue: indexPath.row)
-        
-        self.showDappCountInCell(cell, dappType: dappType)
+        if let dappArray = self.rowDappArray[indexPath.row] {
+            self.showDappCountInCell(cell, dappArray: dappArray)
+        }
         
         return cell
     }
@@ -88,7 +101,7 @@ class EditDappsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let segueIdentifier = segue.identifier {
-            var dappsType: DappType?
+            var dappsType: DappArray?
             
             switch segueIdentifier {
             case SegueIdentifier.ShowPrimaryDapps.rawValue:
@@ -97,6 +110,8 @@ class EditDappsTableViewController: UITableViewController {
                 dappsType = .Secondary
             case SegueIdentifier.ShowIntroductoryDapps.rawValue:
                 dappsType = .Introductory
+            case SegueIdentifier.ShowScoreboardDapps.rawValue:
+                dappsType = .Scoreboard
             default:
                 break
             }
@@ -104,15 +119,15 @@ class EditDappsTableViewController: UITableViewController {
             if let dappsType = dappsType {
                 let dappsTVC = segue.destinationViewController as! DappsTableViewController
                 
-                dappsTVC.dappsType = dappsType
+                dappsTVC.dappsArray = dappsType
             }
         }
     }
     
     // MARK: - 
     
-    private func shouldPerformSegueToShowDappsWithType(dappType: DappType) -> Bool {
-        if let count = self.dappsCount[dappType] {
+    private func shouldPerformSegueToShowDappsWithType(dappType: DappArray) -> Bool {
+        if let count = self.dappArrayDappsCount[dappType] {
             if count > 0 {
                 return true
             }
@@ -121,11 +136,11 @@ class EditDappsTableViewController: UITableViewController {
         return false
     }
     
-    private func showDappCountInCell(cell: UITableViewCell, dappType: DappType?) -> Void {
+    private func showDappCountInCell(cell: UITableViewCell, dappArray: DappArray?) -> Void {
         if let
-            dappType = dappType,
-            dappTypeCount = self.dappsCount[dappType],
-            count = dappTypeCount {
+            dappArray = dappArray,
+            dappsCount = self.dappArrayDappsCount[dappArray],
+            count = dappsCount {
                 if count > 0 {
                     cell.detailTextLabel?.text = String(count)
                 } else if count == 0 {
@@ -151,25 +166,36 @@ class EditDappsTableViewController: UITableViewController {
     private func refreshTableViewContent() -> Void {
         self.tableView.reloadData()
         
-        self.refreshTableViewContentForDappType(.Primary)
-        self.refreshTableViewContentForDappType(.Secondary)
-        self.refreshTableViewContentForDappType(.Introductory)
+        self.refreshTableViewContentForDappArray(.Primary)
+        self.refreshTableViewContentForDappArray(.Secondary)
+        self.refreshTableViewContentForDappArray(.Introductory)
+        self.refreshTableViewContentForDappArray(.Scoreboard)
     }
     
-    private func refreshTableViewContentForDappType(dappType: DappType) -> Void {
-        if let query = DappQueriesBuilder.queryForAllDappsOfType(dappType) {
-            query.countObjectsInBackgroundWithBlock {
-                (count: Int32, error: NSError!) -> Void in
-                if error == nil {
-                    self.dappsCount[dappType] = count
+    private func refreshTableViewContentForDappArray(dappArray: DappArray) -> Void {
+        DappArraysHelper.countDappsInArray(dappArray) {
+            (dappsCount: Int32?, error: NSError?) -> Void in
+            if let dappsCount = dappsCount {
+                self.dappArrayDappsCount[dappArray] = dappsCount
+                
+                if let row = self.rowForDappArray(dappArray) {
+                    let cellIndexPath = NSIndexPath(forRow: row, inSection: 0)
                     
-                    let cellIndexPath = NSIndexPath(forRow: dappType.rawValue, inSection: 0)
-                    
-                    self.tableView.reloadRowsAtIndexPaths([cellIndexPath],
-                        withRowAnimation: .None
-                    )
+                    self.tableView.reloadRowsAtIndexPaths([cellIndexPath], withRowAnimation: .None)
                 }
+            } else {
+                print(error)
             }
         }
+    }
+    
+    private func rowForDappArray(dappArray: DappArray) -> Int? {
+        for (rowKey, dappArrayValue) in rowDappArray {
+            if dappArrayValue == dappArray {
+                return rowKey
+            }
+        }
+        
+        return nil
     }
 }

@@ -13,18 +13,18 @@ class DappsDownloader {
     typealias dappsAndErrorClosure = (dapps: [PFObject], error: NSError!) -> Void
     typealias dappAndErrorClosue = (dapp: PFObject?, error: NSError!) -> Void
     
-    private var dappsType: DappType!
+    private var dappsArray: DappArray!
     private var dapps: [PFObject]
     
-    init(type: DappType) {
-        self.dappsType = type
+    init(array: DappArray) {
+        self.dappsArray = array
         self.dapps = []
     }
     
     internal func downloadDappsNotSwipedByUser(user: PFUser, completion: dappsAndErrorClosure) {
         self.dapps = []
         
-        let query = DappQueriesBuilder.queryForAllDapsNotSwipedByUser(self.dappsType, user: user)
+        let query = DappQueriesBuilder.queryForAllDapsNotSwipedByUser(self.dappsArray, user: user)
         
         self.downloadDappsWithQuery(query, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in
@@ -35,7 +35,7 @@ class DappsDownloader {
     internal func downloadAllDapps(completion: dappsAndErrorClosure) {
         self.dapps = []
         
-        let query = DappQueriesBuilder.queryForAllDappsOfType(self.dappsType)
+        let query = DappQueriesBuilder.queryForAllDappsOfType(self.dappsArray)
         
         self.downloadDappsWithQuery(query, completion: {
             (dapps: [PFObject], error: NSError!) -> Void in
@@ -64,7 +64,7 @@ class DappsDownloader {
     // MARK: -
     
     private func downloadDappsWithQuery(query: PFQuery?, completion: dappsAndErrorClosure) {
-        if let dappsType = self.dappsType {
+        if let dappsType = self.dappsArray {
             switch dappsType {
             case .Primary:
                 self.downloadDappsWithLimit(primaryDappsMaxCount,
@@ -86,7 +86,7 @@ class DappsDownloader {
                     
                     completion(dapps: self.dapps, error: error)
                 })
-            case .Introductory:
+            case .Introductory, .Scoreboard:
                 self.downloadAllDappsWithQuery(query, completion: {
                     (error: NSError!) -> Void in
                     self.dapps = IndexedDapps.sortDapps(self.dapps, dappsType: dappsType)

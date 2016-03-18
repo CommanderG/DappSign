@@ -319,48 +319,48 @@ class AddDappViewController: UIViewController {
         }
     }
     
-    private func getDapp() -> Dapp {
-        let user                   = PFUser.currentUser()
-        let dappStatement          = self.dappMessageTextView.text
-        let lowercaseDappStatement = self.dappMessageTextView.text.lowercaseString
-        let dappFont               = self.dappFontName.rawValue
-        let dappBackgroundColor    = self.dappColorName.rawValue
-        let name                   = user["name"] as? String
-        let userid                 = user.objectId
-        let dappScore              = 1
-        let isDeleted              = false
-        let dappTypeId             = DappTypeId.Secondary.rawValue
-        var hashtagNames: [String] = []
-        
-        if let hashtagsText = self.hashtagsTextView.text {
-            hashtagNames = hashtagsText.characters.split(" ").map{ String($0) }
-            hashtagNames = hashtagNames.map {
-                // removes #
-                $0[1...$0.characters.count - 1]
-            }
-        }
-        
-        let dapp = Dapp(
-            dappStatement:          dappStatement,
-            lowercaseDappStatement: lowercaseDappStatement,
-            dappFont:               dappFont,
-            dappBackgroundColor:    dappBackgroundColor,
-            name:                   name,
-            userid:                 userid,
-            dappScore:              dappScore,
-            isDeleted:              isDeleted,
-            dappTypeId:             dappTypeId,
-            hashtagNames:           hashtagNames
-        )
-        
-        return dapp
-    }
+//    private func getDapp() -> Dapp {
+//        let user                   = PFUser.currentUser()
+//        let dappStatement          = self.dappMessageTextView.text
+//        let lowercaseDappStatement = self.dappMessageTextView.text.lowercaseString
+//        let dappFont               = self.dappFontName.rawValue
+//        let dappBackgroundColor    = self.dappColorName.rawValue
+//        let name                   = user["name"] as? String
+//        let userid                 = user.objectId
+//        let dappScore              = 1
+//        let isDeleted              = false
+//        let dappTypeId             = DappTypeId.Secondary.rawValue
+//        var hashtagNames: [String] = []
+//        
+//        if let hashtagsText = self.hashtagsTextView.text {
+//            hashtagNames = hashtagsText.characters.split(" ").map{ String($0) }
+//            hashtagNames = hashtagNames.map {
+//                // removes #
+//                $0[1...$0.characters.count - 1]
+//            }
+//        }
+//        
+//        let dapp = Dapp(
+//            dappStatement:          dappStatement,
+//            lowercaseDappStatement: lowercaseDappStatement,
+//            dappFont:               dappFont,
+//            dappBackgroundColor:    dappBackgroundColor,
+//            name:                   name,
+//            userid:                 userid,
+//            dappScore:              dappScore,
+//            isDeleted:              isDeleted,
+//            dappTypeId:             dappTypeId,
+//            hashtagNames:           hashtagNames
+//        )
+//        
+//        return dapp
+//    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == self.showDappLinksSegueID {
-            let linksVC = segue.destinationViewController as! AddDappLinksVC
-            linksVC.dapp = self.getDapp()
-        }
+//        if segue.identifier == self.showDappLinksSegueID {
+//            let linksVC = segue.destinationViewController as! AddDappLinksVC
+//            linksVC.dapp = self.getDapp()
+//        }
     }
 }
 

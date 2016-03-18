@@ -9,7 +9,7 @@
 import Foundation
 
 class DappQueriesBuilder {
-    class func queryForAllDappsOfType(dappType: DappType) -> PFQuery? {
+    class func queryForAllDappsOfType(dappType: DappArray) -> PFQuery? {
         if let predicate = self.predicateForAllDapsOfType(dappType) {
             let query = PFQuery(className: "Dapps", predicate: predicate)
             
@@ -23,7 +23,7 @@ class DappQueriesBuilder {
         return nil
     }
     
-    class func queryForAllDapsNotSwipedByUser(dappType: DappType, user: PFUser) -> PFQuery? {
+    class func queryForAllDapsNotSwipedByUser(dappType: DappArray, user: PFUser) -> PFQuery? {
         let dappsSwipedRelation = user.relationForKey("dappsSwiped")
         let dappsSwipedRelationQuery = dappsSwipedRelation.query()
         let allDappsQuery = self.queryForAllDappsOfType(dappType)
@@ -83,17 +83,8 @@ class DappQueriesBuilder {
     
     // MARK: -
     
-    private class func predicateForAllDapsOfType(dappType: DappType) -> NSPredicate? {
+    private class func predicateForAllDapsOfType(dappType: DappArray) -> NSPredicate? {
         var dappTypeId = ""
-        
-        switch dappType {
-        case .Primary:
-            dappTypeId = DappTypeId.Primary.rawValue
-        case .Secondary:
-            dappTypeId = DappTypeId.Secondary.rawValue
-        case .Introductory:
-            dappTypeId = DappTypeId.Introductory.rawValue
-        }
         
         let predicate = NSPredicate(
             format: "isDeleted != true AND dappTypeId = %@", dappTypeId

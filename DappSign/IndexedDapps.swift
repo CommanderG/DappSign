@@ -9,7 +9,7 @@
 import Foundation
 
 class IndexedDapps {
-    class func sortDapps(dapps: [PFObject], dappsType: DappType) -> [PFObject] {
+    class func sortDapps(dapps: [PFObject], dappsType: DappArray) -> [PFObject] {
         if (dappsType == .Secondary) {
             return dapps
         }
@@ -54,7 +54,7 @@ class IndexedDapps {
         var dappMaxIndex = 0
         
         switch dappsType {
-        case .Primary:
+        case .Primary, .Scoreboard:
             dappMaxIndex = primaryDappsMaxCount
         case .Secondary, .Introductory:
             dappMaxIndex = dapps.count
