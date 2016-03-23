@@ -23,17 +23,27 @@ class DappIndexHelper {
     internal class func downloadDappIndexes(
         completion: (dappIndexes: [DappIndex]?, error: NSError?) -> Void
     ) {
-        self.downloadDappIndexesWithDownloadedDappIndexes([], completion: completion)
+        let query = PFQuery(className: dappIndexClassName)
+        
+        self.downloadDappIndexesWithQuery(query, downloadedDappIndexes: [], completion: completion)
     }
     
-    // MARK: - private
-    
-    private class func downloadDappIndexesWithDownloadedDappIndexes(
-        downloadedDappIndexes: [DappIndex],
+    internal class func downloadDappIndexesForArrayWithName(arrayName: String,
         completion: (dappIndexes: [DappIndex]?, error: NSError?) -> Void
     ) {
         let query = PFQuery(className: dappIndexClassName)
         
+        query.whereKey(dappsArrayNameColumn, equalTo: arrayName)
+        
+        self.downloadDappIndexesWithQuery(query, downloadedDappIndexes: [], completion: completion)
+    }
+    
+    // MARK: - private
+    
+    private class func downloadDappIndexesWithQuery(query: PFQuery,
+        downloadedDappIndexes: [DappIndex],
+        completion: (dappIndexes: [DappIndex]?, error: NSError?) -> Void
+    ) {
         query.skip = downloadedDappIndexes.count
         query.limit = 1000
         
@@ -43,8 +53,8 @@ class DappIndexHelper {
                 if dappIndexObjects.count > 0 {
                     let dappIndexes = self.dappIndexesWithDappIndexObjects(dappIndexObjects)
                     
-                    self.downloadDappIndexesWithDownloadedDappIndexes(
-                        downloadedDappIndexes + dappIndexes,
+                    self.downloadDappIndexesWithQuery(query,
+                        downloadedDappIndexes: downloadedDappIndexes + dappIndexes,
                         completion: completion
                     )
                 } else {
