@@ -38,6 +38,24 @@ class DappIndexHelper {
         self.downloadDappIndexesWithQuery(query, downloadedDappIndexes: [], completion: completion)
     }
     
+    internal class func addDappIndex(dappIndex: DappIndex, completion: (error: NSError?) -> Void
+    ) {
+        let dappIndexObject = PFObject(className: dappIndexClassName)
+        
+        dappIndexObject[dappIDColumn] = dappIndex.dappID
+        dappIndexObject[dappsArrayNameColumn] = dappIndex.dappsArrayName
+        dappIndexObject[indexColumn] = dappIndex.index
+        
+        dappIndexObject.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if success {
+                completion(error: nil)
+            } else {
+                completion(error: error)
+            }
+        }
+    }
+    
     // MARK: - private
     
     private class func downloadDappIndexesWithQuery(query: PFQuery,
