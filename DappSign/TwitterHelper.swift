@@ -10,14 +10,18 @@ import Foundation
 import TwitterKit
 
 class TwitterHelper {
-    class func tweetDapp(dapp: PFObject, image: UIImage, completion: (success: Bool, error: NSError?) -> Void) -> Void {
+    class func tweetDapp(dapp: PFObject,
+        image: UIImage,
+        completion: (success: Bool, error: NSError?) -> Void
+    ) -> Void {
         Twitter.sharedInstance().logInWithCompletion {
             (session: TWTRSession?, error: NSError?) -> Void in
             if let session = session {
                 print("Signed in Twitter as \(session.userName)")
                 
-                self.uploadImageToTwitter(image, completion: { (mediaID: String?) -> Void in
-                    if let _mediaID = mediaID {
+                self.uploadImageToTwitterWithUserID(session.userID, image: image, completion: {
+                    (mediaID: String?) -> Void in
+                    if let mediaID = mediaID {
                         let hashtagsRelation = dapp.relationForKey("hashtags")
                         
                         hashtagsRelation.query().findObjectsInBackgroundWithBlock({
@@ -45,18 +49,28 @@ class TwitterHelper {
                             
                             status += "\n#DappSign"
                             
-                            self.tweetImageWithMediaID(_mediaID, status: status, completion: {
-                                (success: Bool) -> Void in
-                                if success {
-                                    completion(success: true, error: nil)
-                                } else {
-                                    completion(success: false, error: nil)
-                                }
+                            self.tweetImageWithUserID(session.userID,
+                                mediaID: mediaID,
+                                status: status,
+                                completion: {
+                                    (success: Bool) -> Void in
+                                    if success {
+                                        completion(success: true, error: nil)
+                                    } else {
+                                        completion(success: false, error: nil)
+                                    }
                             })
                         })
                     } else {
-                        let errorUserInfo = [NSLocalizedDescriptionKey: "Failed to upload image of the card to Twitter"]
-                        let error = NSError(domain: "Twitter image upload", code: 0, userInfo: errorUserInfo)
+                        let errorUserInfo = [
+                            NSLocalizedDescriptionKey:
+                            "Failed to upload image of the card to Twitter"
+                        ]
+                        let error = NSError(
+                            domain: "Twitter image upload",
+                            code: 0,
+                            userInfo: errorUserInfo
+                        )
                         
                         completion(success: false, error: error)
                     }
@@ -69,16 +83,20 @@ class TwitterHelper {
         }
     }
     
-    private class func uploadImageToTwitter(image: UIImage, completion: (mediaID: String?) -> Void) -> Void {
+    private class func uploadImageToTwitterWithUserID(
+        userID: String,
+        image: UIImage,
+        completion: (mediaID: String?) -> Void
+    ) -> Void {
         if let imageData = UIImagePNGRepresentation(image) {
             let parameters = ["media": imageData.base64EncodedStringWithOptions([])]
-            let twitterAPIClient = Twitter.sharedInstance().APIClient
+            let twitterAPIClient = TWTRAPIClient(userID: userID)
             
             var requestCreationError: NSError? = nil
-            let uploadRequest = twitterAPIClient.URLRequestWithMethod("POST"
-            ,   URL:        "https://upload.twitter.com/1.1/media/upload.json"
-            ,   parameters: parameters
-            ,   error:      &requestCreationError
+            let uploadRequest = twitterAPIClient.URLRequestWithMethod("POST",
+                URL:        "https://upload.twitter.com/1.1/media/upload.json",
+                parameters: parameters,
+                error:      &requestCreationError
             )
             
             if let error = requestCreationError {
@@ -90,10 +108,9 @@ class TwitterHelper {
                     (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                     if let data = data {
                         do {
-                            let responseJSON = try NSJSONSerialization.JSONObjectWithData(data
-                            , 	options: .MutableContainers
+                            let responseJSON = try NSJSONSerialization.JSONObjectWithData(data,
+                                options: .MutableContainers
                             )
-                            
                             let mediaID = responseJSON["media_id_string"] as? String
                             
                             completion(mediaID: mediaID)
@@ -118,20 +135,25 @@ class TwitterHelper {
         }
     }
     
-    private class func tweetImageWithMediaID(mediaID: String, status: String, completion: (success: Bool) -> Void) -> Void {
+    private class func tweetImageWithUserID(
+        userID: String,
+        mediaID: String,
+        status: String,
+        completion: (success: Bool) -> Void
+    ) -> Void {
         let parameters = [
-            "status": status,
+            "status":     status,
             "wrap_links": "true",
-            "media_ids": mediaID
+            "media_ids":  mediaID
         ]
         
-        let twitterAPIClient = Twitter.sharedInstance().APIClient
+        let twitterAPIClient = TWTRAPIClient(userID: userID)
         var requestCreationError: NSError? = nil
         
-        let tweetRequest = twitterAPIClient.URLRequestWithMethod("POST"
-        ,   URL:        "https://api.twitter.com/1.1/statuses/update.json"
-        ,   parameters: parameters
-        ,   error:      &requestCreationError
+        let tweetRequest = twitterAPIClient.URLRequestWithMethod("POST",
+            URL:        "https://api.twitter.com/1.1/statuses/update.json",
+            parameters: parameters,
+            error:      &requestCreationError
         )
         
         if let error = requestCreationError {
