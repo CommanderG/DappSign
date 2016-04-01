@@ -62,26 +62,11 @@ class DappsTableViewController: UITableViewController {
                             
                             self.tableView.reloadData()
                         } else {
-                            
+                            self.showFailedToDownloadDappsError(error, dappsArray: dappsArray)
                         }
                     })
                 } else {
-                    var errorMessage = ""
-                    
-                    if let error = error {
-                        errorMessage = "Error: \(error.localizedDescription)"
-                    } else {
-                        errorMessage = "Unknown error"
-                    }
-                    
-                    let alertView = UIAlertView(
-                        title:             "Failed to download \(dappsArray.rawValue) dapps",
-                        message:           errorMessage,
-                        delegate:          nil,
-                        cancelButtonTitle: "OK"
-                    )
-                    
-                    alertView.show()
+                    self.showFailedToDownloadDappsError(error, dappsArray: dappsArray)
                 }
             })
         }
@@ -94,6 +79,27 @@ class DappsTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: -
+    
+    private func showFailedToDownloadDappsError(error: NSError?, dappsArray: DappArray) {
+        var errorMessage = ""
+        
+        if let error = error {
+            errorMessage = "Error: \(error.localizedDescription)"
+        } else {
+            errorMessage = "Unknown error"
+        }
+        
+        let alertView = UIAlertView(
+            title:             "Failed to download \(dappsArray.rawValue) dapps",
+            message:           errorMessage,
+            delegate:          nil,
+            cancelButtonTitle: "OK"
+        )
+        
+        alertView.show()
     }
     
     // MARK: - Navigation bar
