@@ -9,6 +9,7 @@
 import Foundation
 
 struct DappIndex {
+    let parseObjectID: String
     let dappID: String
     let dappsArrayName: String
     let index: Int
@@ -192,6 +193,7 @@ class DappIndexHelper {
             dappsArrayName = dappIndexObject[dappsArrayNameColumn] as? String,
             index = dappIndexObject[indexColumn] as? Int {
                 let dappIndex = DappIndex(
+                    parseObjectID: dappIndexObject.objectId,
                     dappID: dappID,
                     dappsArrayName: dappsArrayName,
                     index: index

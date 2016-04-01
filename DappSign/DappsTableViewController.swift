@@ -20,6 +20,7 @@ class DappsTableViewController: UITableViewController {
     
     var dappsArray:           DappArray?
     var dapps:                [PFObject] = []
+    var dappIndexes:          [DappIndex] = []
     var actionSheet:          UIActionSheet?
     var dappWithTheSameIndex: PFObject?
     var selectedDappNewIndex: Int?
@@ -59,6 +60,7 @@ class DappsTableViewController: UITableViewController {
                                 dappIndexes: dappIndexes,
                                 dappArray: dappsArray
                             )
+                            self.dappIndexes = dappIndexes
                             
                             self.tableView.reloadData()
                         } else {
@@ -137,7 +139,59 @@ class DappsTableViewController: UITableViewController {
     internal func savePositions(sender: AnyObject) {
         self.tableView.setEditing(false, animated: true)
         
-        self.showEditButton()
+        var newDappIndexes: [DappIndex] = []
+        var newDappIndexObjects: [PFObject] = []
+        
+        for index in 0 ..< self.dapps.count {
+            let dapp = self.dapps[index]
+            let dappIndex = ArrayUtil.findElement({
+                dappIndex -> Bool in
+                return dappIndex.dappID == dapp.objectId
+            }, inArray: self.dappIndexes)
+            
+            if let dappIndex = dappIndex {
+                let newDappIndex = DappIndex(
+                    parseObjectID: dappIndex.parseObjectID,
+                    dappID: dappIndex.dappID,
+                    dappsArrayName: dappIndex.dappsArrayName,
+                    index: index
+                )
+                
+                newDappIndexes.append(newDappIndex)
+                
+                let newDappIndexObject = PFObject(className: "DappIndex")
+                
+                newDappIndexObject.objectId = newDappIndex.parseObjectID
+                newDappIndexObject["dappID"] = newDappIndex.dappID
+                newDappIndexObject["dappsArrayName"] = newDappIndex.dappsArrayName
+                newDappIndexObject["index"] = newDappIndex.index
+                
+                newDappIndexObjects.append(newDappIndexObject)
+            }
+        }
+        
+        self.navigationItem.leftBarButtonItem = nil
+        self.tableView.userInteractionEnabled = false
+        
+        PFObject.saveAllInBackground(newDappIndexObjects) {
+            (success: Bool, error: NSError?) -> Void in
+            self.showEditButton()
+            
+            self.tableView.userInteractionEnabled = true
+            
+            if success {
+                self.dappIndexes = newDappIndexes
+            } else {
+                if let dappsArray = self.dappsArray {
+                    self.dapps = DappsHelper.orderDappsByIndex(self.dapps,
+                        dappIndexes: self.dappIndexes,
+                        dappArray: dappsArray
+                    )
+                    
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     // MARK: - UITableViewDataSource
