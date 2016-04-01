@@ -51,9 +51,20 @@ class DappsTableViewController: UITableViewController {
             DappArraysHelper.downloadDappsInArray(dappsArray, completion: {
                 (dapps: [PFObject]?, error: NSError?) -> Void in
                 if let dapps = dapps {
-                    self.dapps = dapps
-                    
-                    self.tableView.reloadData()
+                    let arrayName = dappsArray.rawValue
+                    DappIndexHelper.downloadDappIndexesForArrayWithName(arrayName, completion: {
+                        (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
+                        if let dappIndexes = dappIndexes {
+                            self.dapps = DappsHelper.orderDappsByIndex(dapps,
+                                dappIndexes: dappIndexes,
+                                dappArray: dappsArray
+                            )
+                            
+                            self.tableView.reloadData()
+                        } else {
+                            
+                        }
+                    })
                 } else {
                     var errorMessage = ""
                     

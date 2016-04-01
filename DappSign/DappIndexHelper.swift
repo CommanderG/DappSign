@@ -56,6 +56,87 @@ class DappIndexHelper {
         }
     }
     
+    // MARK: -
+    
+    internal class func removeDappIndexesWithNonUniqueDappIDs(
+        dappIndexes: [DappIndex],
+        dappArray: DappArray
+    ) -> [DappIndex] {
+        let dappIDs = dappIndexes.map {
+            dappIndex -> String in
+            return dappIndex.dappID
+        }
+        let uniqueDappIDs = ArrayUtil.removeDuplicatesIn(dappIDs)
+        let dappIndexesFilteredByArrayName = dappIndexes.filter {
+            dappIndex -> Bool in
+            return dappIndex.dappsArrayName == dappArray.rawValue
+        }
+        var newDappIndexes: [DappIndex] = []
+        
+        for uniqueDappID in uniqueDappIDs {
+            let dappIndex = ArrayUtil.findElement({
+                dappIndex -> Bool in
+                return dappIndex.dappID == uniqueDappID
+            }, inArray: dappIndexesFilteredByArrayName)
+            
+            if let dappIndex = dappIndex {
+                newDappIndexes.append(dappIndex)
+            }
+        }
+        
+        return newDappIndexes
+    }
+    
+    internal class func removeDappIndexesWithNonUniqueIndexes(
+        dappIndexes: [DappIndex],
+        dappArray: DappArray
+    ) -> [DappIndex] {
+        let indexes = dappIndexes.map {
+            dappIndex -> Int in
+            return dappIndex.index
+        }
+        let uniqueIndexes = ArrayUtil.removeDuplicatesIn(indexes)
+        let dappIndexesFilteredByArrayName = dappIndexes.filter {
+            dappIndex -> Bool in
+            return dappIndex.dappsArrayName == dappArray.rawValue
+        }
+        var newDappIndexes: [DappIndex] = []
+        
+        for uniqueIndex in uniqueIndexes {
+            let dappIndex = ArrayUtil.findElement({
+                dappIndex -> Bool in
+                return dappIndex.index == uniqueIndex
+            }, inArray: dappIndexesFilteredByArrayName)
+            
+            if let dappIndex = dappIndex {
+                newDappIndexes.append(dappIndex)
+            }
+        }
+        
+        return newDappIndexes
+    }
+    
+    internal class func dappIndexesInSequence(dappIndexes: [DappIndex]) -> [DappIndex] {
+        let sortedDappIndexes = dappIndexes.sort {
+            (dappIndex1, dappIndex2) -> Bool in
+            return dappIndex1.index < dappIndex2.index
+        }
+        var dappIndexesSequence: [DappIndex] = []
+        var expectedIndex = 0
+        
+        for dappIndex in sortedDappIndexes {
+            if dappIndex.index == expectedIndex {
+                dappIndexesSequence.append(dappIndex)
+                
+                ++expectedIndex
+            } else {
+                break
+            }
+        }
+        
+        return dappIndexesSequence
+    }
+    
     // MARK: - private
     
     private class func downloadDappIndexesWithQuery(query: PFQuery,

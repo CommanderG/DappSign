@@ -63,6 +63,39 @@ class DappsHelper {
         })
     }
     
+    internal class func orderDappsByIndex(
+        dapps: [PFObject],
+        dappIndexes: [DappIndex],
+        dappArray: DappArray
+    ) -> [PFObject] {
+        var newDappIndexes = DappIndexHelper.removeDappIndexesWithNonUniqueDappIDs(dappIndexes,
+            dappArray: dappArray
+        )
+        
+        newDappIndexes = DappIndexHelper.removeDappIndexesWithNonUniqueIndexes(newDappIndexes,
+            dappArray: dappArray
+        )
+        
+        newDappIndexes = DappIndexHelper.dappIndexesInSequence(dappIndexes)
+        
+        var newDapps: [PFObject] = []
+        
+        for dappIndex in newDappIndexes {
+            let dapp = ArrayUtil.findElement({
+                dapp -> Bool in
+                return dapp.objectId == dappIndex.dappID
+                }, inArray: dapps)
+            
+            if let dapp = dapp {
+                newDapps.append(dapp)
+            }
+        }
+        
+        return newDapps
+    }
+    
+    // MARK: -
+    
     private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {
         let usersDappScores = users.map({
             user -> (PFUser, Int?) in

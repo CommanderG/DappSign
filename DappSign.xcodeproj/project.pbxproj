@@ -29,6 +29,7 @@
 		274C9CC01BBD8FBD0030F543 /* EmbedDappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
+		2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */; };
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
 		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
 		277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277970F91C7F284E006F70ED /* DappLinkHelper.swift */; };
@@ -174,6 +175,7 @@
 		274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbedDappView.xib; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtil.swift; sourceTree = "<group>"; };
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
 		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
 		277970F91C7F284E006F70ED /* DappLinkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkHelper.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				B37714691ACD5A4200B5AE77 /* FacebookBridge.m */,
 				27696F491BB3EDE800EE391F /* Link.swift */,
 				271E435C1C7776FD0076DB5F /* Consts.swift */,
+				2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */,
+				2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */,
 				270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
 				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
