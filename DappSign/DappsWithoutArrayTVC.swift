@@ -13,13 +13,11 @@ class DappsWithoutArrayTVC: UITableViewController {
     private var selectedDapp:      PFObject? = nil
     private var actionSheet:       UIActionSheet? = nil
     
-    enum DappActionSheetButton: String {
-        case Cancel                 = "Cancel"
-        case AddToPrimaryArray      = "Add to Primary array"
-        case AddToSecondaryArray    = "Add to Secondary array"
-        case AddToIntroductoryArray = "Add to Introductory array"
-        case AddToScoreboardArray   = "Add to Scoreboard array"
-    }
+    private let actionSheetButtonCancel                  = "Cancel"
+    private let actionSheetButtonMoveToPrimaryArray      = "Move to Primary array"
+    private let actionSheetButtonMoveToSecondaryArray    = "Move to Secondary array"
+    private let actionSheetButtonMoveToIntroductoryArray = "Move to Introductory array"
+    private let actionSheetButtonMoveToScoreboardArray   = "Move to Scoreboard array"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,12 +75,12 @@ class DappsWithoutArrayTVC: UITableViewController {
         self.actionSheet = UIActionSheet(
             title:                  actionSheetTitle,
             delegate:               self,
-            cancelButtonTitle:      DappActionSheetButton.Cancel.rawValue,
+            cancelButtonTitle:      actionSheetButtonCancel,
             destructiveButtonTitle: nil,
-            otherButtonTitles:      DappActionSheetButton.AddToPrimaryArray.rawValue,
-                                    DappActionSheetButton.AddToSecondaryArray.rawValue,
-                                    DappActionSheetButton.AddToIntroductoryArray.rawValue,
-                                    DappActionSheetButton.AddToScoreboardArray.rawValue
+            otherButtonTitles:      actionSheetButtonMoveToPrimaryArray,
+                                    actionSheetButtonMoveToSecondaryArray,
+                                    actionSheetButtonMoveToIntroductoryArray,
+                                    actionSheetButtonMoveToScoreboardArray
         )
         
         self.actionSheet?.showInView(self.view)
@@ -94,38 +92,73 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
         if let
             selectedDapp = self.selectedDapp,
             buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex),
-            button = DappActionSheetButton(rawValue: buttonTitle) {
-                var dappArray: DappArray? = nil
-                
-                switch button {
-                case .Cancel:
-                    break
-                case .AddToPrimaryArray:
-                    dappArray = .Primary
-                case .AddToSecondaryArray:
-                    dappArray = .Secondary
-                case .AddToIntroductoryArray:
-                    dappArray = .Introductory
-                case .AddToScoreboardArray:
-                    dappArray = .Scoreboard
-                }
-                
-                if let dappArray = dappArray {
-                    DappArraysHelper.addDapp(selectedDapp, toArray: dappArray, completion: {
-                        (error: NSError?) -> Void in
-                        if let error = error {
-                            let errorMessage =
-                            "Failed to add dapp to \(dappArray.rawValue) array. " +
-                            "Error: \(error.localizedDescription)"
-                            
-                            self.showAlertViewWithOKButtonAndMessage(errorMessage)
-                        } else if let
-                            selectedDappIndex = self.dappsWithoutArray.indexOf(selectedDapp) {
-                                self.dappsWithoutArray.removeAtIndex(selectedDappIndex)
-                                self.tableView.reloadData()
-                        }
-                    })
-                }
+            dappArray = self.dappArrayFromButtonTitle(buttonTitle) {
+                self.addDapp(selectedDapp, toArray: dappArray, success: {
+                    if let selectedDappIndex = self.dappsWithoutArray.indexOf(selectedDapp) {
+                        self.dappsWithoutArray.removeAtIndex(selectedDappIndex)
+                        self.tableView.reloadData()
+                    }
+                    
+                    self.addDappIndexForDapp(selectedDapp, dappArray: dappArray)
+                })
         }
+    }
+    
+    private func dappArrayFromButtonTitle(buttonTitle: String) -> DappArray? {
+        var dappArray: DappArray? = nil
+        
+        switch buttonTitle {
+        case actionSheetButtonMoveToPrimaryArray:
+            dappArray = .Primary
+        case actionSheetButtonMoveToSecondaryArray:
+            dappArray = .Secondary
+        case actionSheetButtonMoveToIntroductoryArray:
+            dappArray = .Introductory
+        case actionSheetButtonMoveToScoreboardArray:
+            dappArray = .Scoreboard
+        case _:
+            dappArray = nil
+        }
+        
+        return dappArray
+    }
+    
+    private func addDapp(dapp: PFObject,
+        toArray dappArray: DappArray,
+        success: () -> Void
+    ) {
+        DappArraysHelper.addDapp(dapp, toArray: dappArray, completion: {
+            (error: NSError?) -> Void in
+            if let error = error {
+                let errorMessage =
+                "Failed to add dapp to \(dappArray.rawValue) array. " +
+                "Error: \(error.localizedDescription)"
+                
+                self.showAlertViewWithOKButtonAndMessage(errorMessage)
+            } else {
+                success()
+            }
+        })
+    }
+    
+    private func addDappIndexForDapp(dapp: PFObject, dappArray: DappArray) {
+        DappIndexHelper.downloadDappIndexesForArrayWithName(dappArray.rawValue, completion: {
+            (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
+            if let
+                dappIndexes = dappIndexes,
+                maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
+                    let index = maxIndex + 1
+                    let dappIndex = DappIndex(
+                        parseObjectID:  "",
+                        dappID:         dapp.objectId,
+                        dappsArrayName: dappArray.rawValue,
+                        index:          index
+                    )
+                    
+                    DappIndexHelper.addDappIndex(dappIndex, completion: {
+                        (error: NSError?) -> Void in
+                    })
+            }
+        })
     }
 }

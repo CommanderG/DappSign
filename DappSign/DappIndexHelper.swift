@@ -138,6 +138,22 @@ class DappIndexHelper {
         return dappIndexesSequence
     }
     
+    internal class func maxIndexInDappIndexes(dappIndexes: [DappIndex]) -> Int? {
+        var maxIndex: Int? = nil
+        
+        for dappIndex in dappIndexes {
+            if let _ = maxIndex {
+                if maxIndex < dappIndex.index {
+                    maxIndex = dappIndex.index
+                }
+            } else {
+                maxIndex = dappIndex.index
+            }
+        }
+        
+        return maxIndex
+    }
+    
     // MARK: - private
     
     private class func downloadDappIndexesWithQuery(query: PFQuery,
