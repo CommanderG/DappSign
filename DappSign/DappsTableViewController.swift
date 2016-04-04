@@ -399,69 +399,19 @@ extension DappsTableViewController: UIActionSheetDelegate {
         if let buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex), dappsArray = dappsArray {
             switch buttonTitle {
             case actionSheetButtonRemoveFromThisArray:
-                self.removeDapp(selectedDapp, fromArray: dappsArray, success: {
-                    self.dapps.removeAtIndex(selectedDappIndex)
-                    self.tableView.reloadData()
-                    
-                    self.deleteDappIndexForDapp(selectedDapp, success: {
-                        let dappIndex = DappIndexHelper.dappIndexForDappWithID(
-                            selectedDapp.objectId,
-                            dappIndexes: self.dappIndexes
-                        )
-                        
-                        if let dappIndex = dappIndex {
-                            let newDappIndexes = DappIndexHelper.removeDappIndexForDappWithID(
-                                selectedDapp.objectId,
-                                fromDappIndexes: self.dappIndexes
-                            )
-                            
-                            let updatedDappIndexes =
-                            DappIndexHelper.decrementByOneIndexesSmallerThan(dappIndex.index,
-                                dappIndexes: newDappIndexes
-                            )
-                            
-                            self.saveDappIndexes(updatedDappIndexes, success: {
-                                self.dappIndexes = updatedDappIndexes
-                            })
-                        }
-                    })
-                })
+                self.removeDapp(selectedDapp,
+                    fromArray: dappsArray,
+                    dappIndex: selectedDappIndex,
+                    success: nil
+                )
             case actionSheetButtonMoveToPrimaryArray:
                 break
             case actionSheetButtonMoveToSecondaryArray:
-                self.removeDapp(selectedDapp, fromArray: dappsArray, success: {
-                    self.dapps.removeAtIndex(selectedDappIndex)
-                    self.tableView.reloadData()
-                    
-                    self.deleteDappIndexForDapp(selectedDapp, success: {
-                        let dappIndex = DappIndexHelper.dappIndexForDappWithID(
-                            selectedDapp.objectId,
-                            dappIndexes: self.dappIndexes
-                        )
-                        
-                        if let dappIndex = dappIndex {
-                            let newDappIndexes = DappIndexHelper.removeDappIndexForDappWithID(
-                                selectedDapp.objectId,
-                                fromDappIndexes: self.dappIndexes
-                            )
-                            
-                            let updatedDappIndexes =
-                            DappIndexHelper.decrementByOneIndexesSmallerThan(dappIndex.index,
-                                dappIndexes: newDappIndexes
-                            )
-                            
-                            self.saveDappIndexes(updatedDappIndexes, success: {
-                                self.dappIndexes = updatedDappIndexes
-                                
-                                let dappArray = DappArray.Secondary
-                                
-                                self.addDapp(selectedDapp, toArray: dappArray, success: {
-                                    self.addDappIndexForDapp(selectedDapp, dappArray: dappArray)
-                                })
-                            })
-                        }
-                    })
-                })
+                self.moveDapp(selectedDapp,
+                    withIndex: selectedDappIndex,
+                    toArray: .Secondary,
+                    afterRemovingItFromArray: dappsArray
+                )
             case actionSheetButtonMoveToIntroductoryArray:
                 break
             default:
@@ -471,75 +421,49 @@ extension DappsTableViewController: UIActionSheetDelegate {
     }
     
     private func removeDapp(dapp: PFObject,
-        fromArray dappsArray: DappArray,
-        success: Void -> Void
+        fromArray dappArray: DappArray,
+        dappIndex: Int,
+        success: (Void -> Void)?
     ) {
-        DappArraysHelper.removeDappWithID(dapp.objectId, fromArray: dappsArray, completion: {
+        DappTransferHelper.removeDapp(dapp, fromArray: dappArray, completion: {
             (error: NSError?) -> Void in
             if let error = error {
-                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-            } else {
-                success()
-            }
-        })
-    }
-    
-    private func deleteDappIndexForDapp(dapp: PFObject, success: Void -> Void) {
-        DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId) {
-            (error: NSError?) -> Void in
-            if let error = error {
-                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-            } else {
-                success()
-            }
-        }
-    }
-    
-    private func saveDappIndexes(dappIndexes: [DappIndex], success: Void -> Void) {
-        DappIndexHelper.saveDappIndexes(dappIndexes) {
-            (error: NSError?) -> Void in
-            if let error = error {
-                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-            } else {
-                success()
-            }
-        }
-    }
-    
-    private func addDapp(dapp: PFObject, toArray: DappArray, success: Void -> Void) {
-        DappArraysHelper.addDapp(dapp, toArray: .Secondary, completion: {
-            (error: NSError?) -> Void in
-            if let error = error {
-                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-            } else {
-                success()
-            }
-        })
-    }
-    
-    private func addDappIndexForDapp(dapp: PFObject, dappArray: DappArray) {
-        DappIndexHelper.downloadDappIndexesForArrayWithName(dappArray.rawValue, completion: {
-            (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
-            if let dappIndexes = dappIndexes {
-                var index: Int = 0
+                self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
                 
-                if let maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
-                    index = maxIndex + 1
-                } else {
-                    index = 0
+                return
+            }
+            
+            self.dapps.removeAtIndex(dappIndex)
+            self.tableView.reloadData()
+            DappIndexHelper.updateDappIndexes(self.dappIndexes,
+                byDeletingDappIndexForDeletedDapp: dapp,
+                completion: {
+                    (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void in
+                    if let updatedDappIndexes = updatedDappIndexes {
+                        self.dappIndexes = updatedDappIndexes
+                        
+                        success?()
+                    } else if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "\(error.localizedDescription)"
+                        )
+                    }
+            })
+        })
+    }
+    
+    private func moveDapp(dapp: PFObject,
+        withIndex dappIndex: Int,
+        toArray dappArrayToAddTo: DappArray,
+        afterRemovingItFromArray dappArrayToRemoveFrom: DappArray
+    ) {
+        self.removeDapp(dapp, fromArray: dappArrayToRemoveFrom, dappIndex: dappIndex, success: {
+            DappTransferHelper.addDapp(dapp, toArray: .Secondary, completion: {
+                (error: NSError?) -> Void in
+                if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
                 }
-                
-                let dappIndex = DappIndex(
-                    parseObjectID:  "",
-                    dappID:         dapp.objectId,
-                    dappsArrayName: dappArray.rawValue,
-                    index:          index
-                )
-                
-                DappIndexHelper.addDappIndex(dappIndex, completion: {
-                    (error: NSError?) -> Void in
-                })
-            }
+            })
         })
     }
 }

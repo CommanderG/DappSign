@@ -93,13 +93,14 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
             selectedDapp = self.selectedDapp,
             buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex),
             dappArray = self.dappArrayFromButtonTitle(buttonTitle) {
-                self.addDapp(selectedDapp, toArray: dappArray, success: {
-                    if let selectedDappIndex = self.dappsWithoutArray.indexOf(selectedDapp) {
+                DappTransferHelper.addDapp(selectedDapp, toArray: dappArray, completion: {
+                    (error: NSError?) -> Void in
+                    if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
+                    } else if let selectedDappIndex = self.dappsWithoutArray.indexOf(selectedDapp) {
                         self.dappsWithoutArray.removeAtIndex(selectedDappIndex)
                         self.tableView.reloadData()
                     }
-                    
-                    self.addDappIndexForDapp(selectedDapp, dappArray: dappArray)
                 })
         }
     }
@@ -121,46 +122,5 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
         }
         
         return dappArray
-    }
-    
-    private func addDapp(dapp: PFObject, toArray dappArray: DappArray, success: () -> Void) {
-        DappArraysHelper.addDapp(dapp, toArray: dappArray, completion: {
-            (error: NSError?) -> Void in
-            if let error = error {
-                let errorMessage =
-                "Failed to add dapp to \(dappArray.rawValue) array. " +
-                "Error: \(error.localizedDescription)"
-                
-                self.showAlertViewWithOKButtonAndMessage(errorMessage)
-            } else {
-                success()
-            }
-        })
-    }
-    
-    private func addDappIndexForDapp(dapp: PFObject, dappArray: DappArray) {
-        DappIndexHelper.downloadDappIndexesForArrayWithName(dappArray.rawValue, completion: {
-            (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
-            if let dappIndexes = dappIndexes {
-                var index: Int = 0
-                
-                if let maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
-                    index = maxIndex + 1
-                } else {
-                    index = 0
-                }
-                
-                let dappIndex = DappIndex(
-                    parseObjectID:  "",
-                    dappID:         dapp.objectId,
-                    dappsArrayName: dappArray.rawValue,
-                    index:          index
-                )
-                
-                DappIndexHelper.addDappIndex(dappIndex, completion: {
-                    (error: NSError?) -> Void in
-                })
-            }
-        })
     }
 }

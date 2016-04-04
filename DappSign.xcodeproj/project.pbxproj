@@ -27,6 +27,7 @@
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
 		274C9CBE1BBD8FB20030F543 /* EmbedDappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */; };
 		274C9CC01BBD8FBD0030F543 /* EmbedDappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */; };
+		2756D1971CB2909100C9A41A /* DappTransferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2756D1961CB2909000C9A41A /* DappTransferHelper.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */; };
@@ -173,6 +174,7 @@
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		274C9CBD1BBD8FB20030F543 /* EmbedDappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappView.swift; sourceTree = "<group>"; };
 		274C9CBF1BBD8FBD0030F543 /* EmbedDappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbedDappView.xib; sourceTree = "<group>"; };
+		2756D1961CB2909000C9A41A /* DappTransferHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappTransferHelper.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtil.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				274B33441C9C3AAA00FA1FDF /* DappArraysHelper.swift */,
 				274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */,
 				2719C9801C9C52E40092BC0A /* DappsWithoutArrayHelper.swift */,
+				2756D1961CB2909000C9A41A /* DappTransferHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */,
+				2756D1971CB2909100C9A41A /* DappTransferHelper.swift in Sources */,
 				84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */,
 				F37246801AD3ED7600AD56E2 /* SDWebImagePrefetcher.m in Sources */,
 				84D848811AC726D000D1B3F9 /* SWLongPressGestureRecognizer.m in Sources */,

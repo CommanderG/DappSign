@@ -97,6 +97,31 @@ class DappIndexHelper {
         })
     }
     
+    internal class func updateDappIndexes(dappIndexes: [DappIndex],
+        byDeletingDappIndexForDeletedDapp dapp: PFObject,
+        completion: (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void
+    ) {
+        let dappIndex = self.dappIndexForDappWithID(dapp.objectId, dappIndexes: dappIndexes)
+        
+        if let dappIndex = dappIndex {
+            let newDappIndexes = self.removeDappIndexForDappWithID(dapp.objectId,
+                fromDappIndexes: dappIndexes
+            )
+            let updatedDappIndexes = self.decrementByOneIndexesSmallerThan(dappIndex.index,
+                dappIndexes: newDappIndexes
+            )
+            
+            self.saveDappIndexes(updatedDappIndexes, completion: {
+                (error: NSError?) -> Void in
+                if let error = error {
+                    completion(updatedDappIndexes: nil, error: error)
+                } else {
+                    completion(updatedDappIndexes: updatedDappIndexes, error: nil)
+                }
+            })
+        }
+    }
+    
     // MARK: - processors
     
     internal class func removeDappIndexesWithNonUniqueDappIDs(
