@@ -405,7 +405,11 @@ extension DappsTableViewController: UIActionSheetDelegate {
                     success: nil
                 )
             case actionSheetButtonMoveToPrimaryArray:
-                break
+                self.moveDapp(selectedDapp,
+                    withIndex: selectedDappIndex,
+                    toArray: .Primary,
+                    afterRemovingItFromArray: dappsArray
+                )
             case actionSheetButtonMoveToSecondaryArray:
                 self.moveDapp(selectedDapp,
                     withIndex: selectedDappIndex,
@@ -413,7 +417,37 @@ extension DappsTableViewController: UIActionSheetDelegate {
                     afterRemovingItFromArray: dappsArray
                 )
             case actionSheetButtonMoveToIntroductoryArray:
-                break
+                self.moveDapp(selectedDapp,
+                    withIndex: selectedDappIndex,
+                    toArray: .Introductory,
+                    afterRemovingItFromArray: dappsArray
+                )
+            case actionSheetButtonAddToScoreboardArray:
+                self.checkIfDappWithID(selectedDapp.objectId,
+                    existsInArray: .Scoreboard,
+                    completion: {
+                        (exists: Bool?, error: NSError?) -> Void in
+                        if let exists = exists {
+                            if exists {
+                                self.showAlertViewWithOKButtonAndMessage(
+                                    "This dapp has already been added to Scoreboard array."
+                                )
+                                
+                                return
+                            }
+                            
+                            DappTransferHelper.addDapp(selectedDapp,
+                                toArray: .Scoreboard,
+                                completion: {
+                                    (error: NSError?) -> Void in
+                                    if let error = error {
+                                        self.showAlertViewWithOKButtonAndError(error)
+                                    }
+                            })
+                        } else if let error = error {
+                            self.showAlertViewWithOKButtonAndError(error)
+                        }
+                })
             default:
                 break
             }
@@ -428,7 +462,7 @@ extension DappsTableViewController: UIActionSheetDelegate {
         DappTransferHelper.removeDapp(dapp, fromArray: dappArray, completion: {
             (error: NSError?) -> Void in
             if let error = error {
-                self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
+                self.showAlertViewWithOKButtonAndError(error)
                 
                 return
             }
@@ -444,9 +478,7 @@ extension DappsTableViewController: UIActionSheetDelegate {
                         
                         success?()
                     } else if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "\(error.localizedDescription)"
-                        )
+                        self.showAlertViewWithOKButtonAndError(error)
                     }
             })
         })
@@ -458,12 +490,38 @@ extension DappsTableViewController: UIActionSheetDelegate {
         afterRemovingItFromArray dappArrayToRemoveFrom: DappArray
     ) {
         self.removeDapp(dapp, fromArray: dappArrayToRemoveFrom, dappIndex: dappIndex, success: {
-            DappTransferHelper.addDapp(dapp, toArray: .Secondary, completion: {
+            DappTransferHelper.addDapp(dapp, toArray: dappArrayToAddTo, completion: {
                 (error: NSError?) -> Void in
                 if let error = error {
-                    self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
+                    self.showAlertViewWithOKButtonAndError(error)
                 }
             })
+        })
+    }
+    
+    private func showAlertViewWithOKButtonAndError(error: NSError) {
+        self.showAlertViewWithOKButtonAndMessage("\(error.localizedDescription)")
+    }
+    
+    private func checkIfDappWithID(dappID: String,
+        existsInArray: DappArray,
+        completion: (exists: Bool?, error: NSError?) -> Void
+    ) {
+        DappArraysHelper.downloadDappsInArray(.Scoreboard, completion: {
+            (dapps: [PFObject]?, error: NSError?) -> Void in
+            if let dapps = dapps {
+                for dapp in dapps {
+                    if dapp.objectId == dappID {
+                        completion(exists: true, error: nil)
+                        
+                        return
+                    }
+                }
+                
+                completion(exists: false, error: nil)
+            } else {
+                completion(exists: nil, error: error)
+            }
         })
     }
 }

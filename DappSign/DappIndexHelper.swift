@@ -60,11 +60,13 @@ class DappIndexHelper {
     }
     
     internal class func deleteDappIndexForDappWithID(dappID: String,
+        dappArray: DappArray,
         completion: (error: NSError?) -> Void
     ) {
         let query = PFQuery(className: dappIndexClassName)
         
         query.whereKey(dappIDColumn, equalTo: dappID)
+        query.whereKey(dappsArrayNameColumn, equalTo: dappArray.rawValue)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
             if let dappObject = objects?.first as? PFObject {

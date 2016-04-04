@@ -39,7 +39,10 @@ class DappTransferHelper {
                 return
             }
             
-            DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId, completion: completion)
+            DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId,
+                dappArray: dappArray,
+                completion: completion
+            )
         }
     }
     
