@@ -60,23 +60,44 @@ class DappIndexHelper {
     }
     
     internal class func deleteDappIndexForDappWithID(dappID: String,
-        andUpdateIndexes dappIndexes: [DappIndex],
-        completion: (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void
+        completion: (error: NSError?) -> Void
     ) {
-        self.deleteDappIndexWithDappID(dappID) {
-            (error: NSError?) -> Void in
-            if let error = error {
-                completion(updatedDappIndexes: nil, error: error)
+        let query = PFQuery(className: dappIndexClassName)
+        
+        query.whereKey(dappIDColumn, equalTo: dappID)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if let dappObject = objects?.first as? PFObject {
+                dappObject.deleteInBackgroundWithBlock({
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        completion(error: nil)
+                    } else {
+                        completion(error: error)
+                    }
+                })
             } else {
-                self.updateIndexesDappIndexes(dappIndexes,
-                    deleteDappWithID: dappID,
-                    completion: completion
-                )
+                completion(error: error)
             }
         }
     }
     
-    // MARK: -
+    internal class func saveDappIndexes(dappIndexes: [DappIndex],
+        completion: (error: NSError?) -> Void
+    ) {
+        let dappIndexObjects = self.dappIndexObjectsWithDappIndexes(dappIndexes)
+        
+        PFObject.saveAllInBackground(dappIndexObjects, block: {
+            (success: Bool, error: NSError?) -> Void in
+            if success {
+                completion(error: nil)
+            } else {
+                completion(error: error)
+            }
+        })
+    }
+    
+    // MARK: - processors
     
     internal class func removeDappIndexesWithNonUniqueDappIDs(
         dappIndexes: [DappIndex],
@@ -173,6 +194,71 @@ class DappIndexHelper {
         return maxIndex
     }
     
+    internal class func dappIndexForDappWithID(dappID: String,
+        dappIndexes: [DappIndex]
+    ) -> DappIndex? {
+        for dappIndex in dappIndexes {
+            if dappIndex.dappID == dappID {
+                return dappIndex
+            }
+        }
+        
+        return nil
+    }
+    
+    internal class func removeDappIndexForDappWithID(dappID: String,
+        fromDappIndexes dappIndexes: [DappIndex]
+    ) -> [DappIndex] {
+        let newDappIndexes = dappIndexes.filter({
+            (dappIndex) -> Bool in
+            if dappIndex.dappID == dappID {
+                return false
+            }
+            
+            return true
+        })
+        
+        return newDappIndexes
+    }
+    
+    internal class func decrementByOneIndexesSmallerThan(indexToCompareWith: Int,
+        dappIndexes: [DappIndex]
+    ) -> [DappIndex] {
+        let updatedDappIndexes = dappIndexes.map({
+            (dappIndex) -> DappIndex in
+            if dappIndex.index > indexToCompareWith {
+                let newDappIndex = DappIndex(
+                    parseObjectID:  dappIndex.parseObjectID,
+                    dappID:         dappIndex.dappID,
+                    dappsArrayName: dappIndex.dappsArrayName,
+                    index:          dappIndex.index - 1
+                )
+                
+                return newDappIndex
+            }
+            
+            return dappIndex
+        })
+        
+        return updatedDappIndexes
+    }
+    
+    internal class func dappIndexObjectsWithDappIndexes(dappIndexes: [DappIndex]) -> [PFObject] {
+        let dappIndexObjects = dappIndexes.map({
+            (dappIndex) -> PFObject in
+            let dappIndexObject = PFObject(className: dappIndexClassName)
+            
+            dappIndexObject.objectId = dappIndex.parseObjectID
+            dappIndexObject[dappIDColumn] = dappIndex.dappID
+            dappIndexObject[dappsArrayNameColumn] = dappIndex.dappsArrayName
+            dappIndexObject[indexColumn] = dappIndex.index
+            
+            return dappIndexObject
+        })
+        
+        return dappIndexObjects
+    }
+    
     // MARK: - private
     
     private class func downloadDappIndexesWithQuery(query: PFQuery,
@@ -238,89 +324,5 @@ class DappIndexHelper {
         }
         
         return nil
-    }
-    
-    private class func deleteDappIndexWithDappID(dappID: String,
-        completion: (error: NSError?) -> Void
-    ) {
-        let query = PFQuery(className: dappIndexClassName)
-        
-        query.whereKey(dappIDColumn, equalTo: dappID)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            if let dappObject = objects?.first as? PFObject {
-                dappObject.deleteInBackgroundWithBlock({
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        completion(error: nil)
-                    } else {
-                        completion(error: error)
-                    }
-                })
-            } else {
-                completion(error: error)
-            }
-        }
-    }
-    
-    private class func updateIndexesDappIndexes(dappIndexes: [DappIndex],
-        deleteDappWithID dappID: String,
-        completion: (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void
-    ) {
-        var deletedDappIndex: Int?
-        
-        for dappIndex in dappIndexes {
-            if dappIndex.dappID == dappID {
-                deletedDappIndex = dappIndex.index
-            }
-        }
-        
-        if let deletedDappIndex = deletedDappIndex {
-            let updatedDappIndexes = dappIndexes.filter({
-                (dappIndex) -> Bool in
-                if dappIndex.dappID == dappID {
-                    return false
-                }
-                
-                return true
-            }).map({
-                (dappIndex) -> DappIndex in
-                if dappIndex.index > deletedDappIndex {
-                    let newDappIndex = DappIndex(
-                        parseObjectID:  dappIndex.parseObjectID,
-                        dappID:         dappIndex.dappID,
-                        dappsArrayName: dappIndex.dappsArrayName,
-                        index:          dappIndex.index - 1
-                    )
-                    
-                    return newDappIndex
-                }
-                
-                return dappIndex
-            })
-            
-            let updatedDappIndexObjects = updatedDappIndexes.map({
-                (dappIndex) -> PFObject in
-                let dappIndexObject = PFObject(className: dappIndexClassName)
-                
-                dappIndexObject.objectId = dappIndex.parseObjectID
-                dappIndexObject[dappIDColumn] = dappIndex.dappID
-                dappIndexObject[dappsArrayNameColumn] = dappIndex.dappsArrayName
-                dappIndexObject[indexColumn] = dappIndex.index
-                
-                return dappIndexObject
-            })
-            
-            PFObject.saveAllInBackground(updatedDappIndexObjects, block: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    completion(updatedDappIndexes: updatedDappIndexes, error: nil)
-                } else {
-                    completion(updatedDappIndexes: nil, error: error)
-                }
-            })
-        } else {
-            completion(updatedDappIndexes: nil, error: nil)
-        }
     }
 }

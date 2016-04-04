@@ -394,11 +394,38 @@ class DappsTableViewController: UITableViewController {
 extension DappsTableViewController: UIActionSheetDelegate {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         let selectedDappIndex = actionSheet.tag
+        let selectedDapp = self.dapps[selectedDappIndex]
         
         if let buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex), dappsArray = dappsArray {
             switch buttonTitle {
             case actionSheetButtonRemoveFromThisArray:
-                self.deleteIndexForDappWithIndex(selectedDappIndex, andFromArray: dappsArray)
+                self.removeDapp(selectedDapp, fromArray: dappsArray, success: {
+                    self.dapps.removeAtIndex(selectedDappIndex)
+                    self.tableView.reloadData()
+                    
+                    self.deleteDappIndexForDapp(selectedDapp, success: {
+                        let dappIndex = DappIndexHelper.dappIndexForDappWithID(
+                            selectedDapp.objectId,
+                            dappIndexes: self.dappIndexes
+                        )
+                        
+                        if let dappIndex = dappIndex {
+                            let newDappIndexes = DappIndexHelper.removeDappIndexForDappWithID(
+                                selectedDapp.objectId,
+                                fromDappIndexes: self.dappIndexes
+                            )
+                            
+                            let updatedDappIndexes =
+                            DappIndexHelper.decrementByOneIndexesSmallerThan(dappIndex.index,
+                                dappIndexes: newDappIndexes
+                            )
+                            
+                            self.saveDappIndexes(updatedDappIndexes, success: {
+                                self.dappIndexes = updatedDappIndexes
+                            })
+                        }
+                    })
+                })
             case actionSheetButtonMoveToPrimaryArray:
                 break
             case actionSheetButtonMoveToSecondaryArray:
@@ -411,28 +438,39 @@ extension DappsTableViewController: UIActionSheetDelegate {
         }
     }
     
-    private func deleteIndexForDappWithIndex(dappIndex: Int, andFromArray dappsArray: DappArray) {
-        let dapp = self.dapps[dappIndex]
-        
+    private func removeDapp(dapp: PFObject,
+        fromArray dappsArray: DappArray,
+        success: Void -> Void
+    ) {
         DappArraysHelper.removeDappWithID(dapp.objectId, fromArray: dappsArray, completion: {
             (error: NSError?) -> Void in
             if let error = error {
                 self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-                
-                return
+            } else {
+                success()
             }
-            
-            self.dapps.removeAtIndex(dappIndex)
-            self.tableView.reloadData()
-            
-            DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId,
-                andUpdateIndexes: self.dappIndexes,
-                completion: {
-                    (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void in
-                    if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
-                    }
-            })
         })
+    }
+    
+    private func deleteDappIndexForDapp(dapp: PFObject, success: Void -> Void) {
+        DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId) {
+            (error: NSError?) -> Void in
+            if let error = error {
+                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
+    private func saveDappIndexes(dappIndexes: [DappIndex], success: Void -> Void) {
+        DappIndexHelper.saveDappIndexes(dappIndexes) {
+            (error: NSError?) -> Void in
+            if let error = error {
+                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
+            } else {
+                success()
+            }
+        }
     }
 }
