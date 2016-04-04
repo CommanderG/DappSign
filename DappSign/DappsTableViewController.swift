@@ -395,56 +395,44 @@ extension DappsTableViewController: UIActionSheetDelegate {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         let selectedDappIndex = actionSheet.tag
         
-        if let buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex) {
+        if let buttonTitle = actionSheet.buttonTitleAtIndex(buttonIndex), dappsArray = dappsArray {
             switch buttonTitle {
             case actionSheetButtonRemoveFromThisArray:
-                break
+                self.deleteIndexForDappWithIndex(selectedDappIndex, andFromArray: dappsArray)
             case actionSheetButtonMoveToPrimaryArray:
-//                let query = DappQueriesBuilder.queryForAllDappsOfType(.Primary)
-//                
-//                query?.countObjectsInBackgroundWithBlock({
-//                    (count: Int32, error: NSError!) -> Void in
-//                    if Int(count) == primaryDappsMaxCount {
-//                        let message =
-//                        "Can't make this Dapp primary because maximum number " +
-//                        "of primary Dapps (\(primaryDappsMaxCount)) has been reached."
-//                        
-//                        let alertView = UIAlertView(
-//                            title:             "Error",
-//                            message:           message,
-//                            delegate:          nil,
-//                            cancelButtonTitle: "OK"
-//                        )
-//                        
-//                        alertView.show()
-//                        
-//                        return
-//                    }
-//                    
-//                    self.updatePropertiesForDappAtIndex(selectedDappIndex,
-//                        properties: ["dappTypeId": DappTypeId.Primary.rawValue]
-//                    )
-//                })
                 break
             case actionSheetButtonMoveToSecondaryArray:
                 break
-//                self.updatePropertiesForDappAtIndex(selectedDappIndex,
-//                    properties: [
-//                        "index": -1,
-//                        "dappTypeId": DappTypeId.Secondary.rawValue
-//                    ]
-//                )
             case actionSheetButtonMoveToIntroductoryArray:
                 break
-//                self.updatePropertiesForDappAtIndex(selectedDappIndex,
-//                    properties: [
-//                        "index": -1,
-//                        "dappTypeId": DappTypeId.Introductory.rawValue
-//                    ]
-//                )
             default:
                 break
             }
         }
+    }
+    
+    private func deleteIndexForDappWithIndex(dappIndex: Int, andFromArray dappsArray: DappArray) {
+        let dapp = self.dapps[dappIndex]
+        
+        DappArraysHelper.removeDappWithID(dapp.objectId, fromArray: dappsArray, completion: {
+            (error: NSError?) -> Void in
+            if let error = error {
+                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
+                
+                return
+            }
+            
+            self.dapps.removeAtIndex(dappIndex)
+            self.tableView.reloadData()
+            
+            DappIndexHelper.deleteDappIndexForDappWithID(dapp.objectId,
+                andUpdateIndexes: self.dappIndexes,
+                completion: {
+                    (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void in
+                    if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
+                    }
+            })
+        })
     }
 }

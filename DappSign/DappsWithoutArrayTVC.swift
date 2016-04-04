@@ -144,20 +144,25 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
     private func addDappIndexForDapp(dapp: PFObject, dappArray: DappArray) {
         DappIndexHelper.downloadDappIndexesForArrayWithName(dappArray.rawValue, completion: {
             (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
-            if let
-                dappIndexes = dappIndexes,
-                maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
-                    let index = maxIndex + 1
-                    let dappIndex = DappIndex(
-                        parseObjectID:  "",
-                        dappID:         dapp.objectId,
-                        dappsArrayName: dappArray.rawValue,
-                        index:          index
-                    )
-                    
-                    DappIndexHelper.addDappIndex(dappIndex, completion: {
-                        (error: NSError?) -> Void in
-                    })
+            if let dappIndexes = dappIndexes {
+                var index: Int = 0
+                
+                if let maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
+                    index = maxIndex + 1
+                } else {
+                    index = 0
+                }
+                
+                let dappIndex = DappIndex(
+                    parseObjectID:  "",
+                    dappID:         dapp.objectId,
+                    dappsArrayName: dappArray.rawValue,
+                    index:          index
+                )
+                
+                DappIndexHelper.addDappIndex(dappIndex, completion: {
+                    (error: NSError?) -> Void in
+                })
             }
         })
     }

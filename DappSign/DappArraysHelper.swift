@@ -13,6 +13,8 @@ class DappArraysHelper {
     private static let dappsRelationKey = "dapps"
     private static let arrayNameKey = "arrayName"
     
+    // MARK: - requests
+    
     internal class func downloadDappsInArray(dappArray: DappArray,
         completion: (dapps: [PFObject]?, error: NSError?) -> Void
     ) {
@@ -92,6 +94,27 @@ class DappArraysHelper {
                 })
             } else {
                 completion(dappsCount: nil, error: error)
+            }
+        }
+    }
+    
+    internal class func removeDappWithID(dappID: String,
+        fromArray dappArray: DappArray,
+        completion: (error: NSError?) -> Void
+    ) {
+        self.downloadDappArrayObject(dappArray) {
+            (dappArrayObject: PFObject?, error: NSError?) -> Void in
+            if let dappArrayObject = dappArrayObject {
+                let dappsRelation = dappArrayObject.relationForKey(dappsRelationKey)
+                let dappObject = PFObject(withoutDataWithClassName: "Dapps", objectId: dappID)
+                
+                dappsRelation.removeObject(dappObject)
+                dappArrayObject.saveInBackgroundWithBlock({
+                    (success: Bool, error: NSError?) -> Void in
+                    completion(error: error)
+                })
+            } else {
+                completion(error: error)
             }
         }
     }

@@ -21,6 +21,8 @@ class DappIndexHelper {
     private static let dappsArrayNameColumn = "dappsArrayName"
     private static let indexColumn          = "index"
     
+    // MARK: - requests
+    
     internal class func downloadDappIndexes(
         completion: (dappIndexes: [DappIndex]?, error: NSError?) -> Void
     ) {
@@ -53,6 +55,23 @@ class DappIndexHelper {
                 completion(error: nil)
             } else {
                 completion(error: error)
+            }
+        }
+    }
+    
+    internal class func deleteDappIndexForDappWithID(dappID: String,
+        andUpdateIndexes dappIndexes: [DappIndex],
+        completion: (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void
+    ) {
+        self.deleteDappIndexWithDappID(dappID) {
+            (error: NSError?) -> Void in
+            if let error = error {
+                completion(updatedDappIndexes: nil, error: error)
+            } else {
+                self.deleteDappIndexForDappWithID(dappID,
+                    andUpdateIndexes: dappIndexes,
+                    completion: completion
+                )
             }
         }
     }
@@ -219,5 +238,89 @@ class DappIndexHelper {
         }
         
         return nil
+    }
+    
+    private class func deleteDappIndexWithDappID(dappID: String,
+        completion: (error: NSError?) -> Void
+    ) {
+        let query = PFQuery(className: dappIndexClassName)
+        
+        query.whereKey(dappIDColumn, equalTo: dappID)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if let dappObject = objects?.first as? PFObject {
+                dappObject.deleteInBackgroundWithBlock({
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        completion(error: nil)
+                    } else {
+                        completion(error: error)
+                    }
+                })
+            } else {
+                completion(error: error)
+            }
+        }
+    }
+    
+    private class func updateIndexesDappIndexes(dappIndexes: [DappIndex],
+        deleteDappWithID dappID: String,
+        completion: (updatedDappIndexes: [DappIndex]?, error: NSError?) -> Void
+    ) {
+        var deletedDappIndex: Int?
+        
+        for dappIndex in dappIndexes {
+            if dappIndex.dappID == dappID {
+                deletedDappIndex = dappIndex.index
+            }
+        }
+        
+        if let deletedDappIndex = deletedDappIndex {
+            let updatedDappIndexes = dappIndexes.filter({
+                (dappIndex) -> Bool in
+                if dappIndex.dappID == dappID {
+                    return false
+                }
+                
+                return true
+            }).map({
+                (dappIndex) -> DappIndex in
+                if dappIndex.index > deletedDappIndex {
+                    let newDappIndex = DappIndex(
+                        parseObjectID:  dappIndex.parseObjectID,
+                        dappID:         dappIndex.dappID,
+                        dappsArrayName: dappIndex.dappsArrayName,
+                        index:          dappIndex.index - 1
+                    )
+                    
+                    return newDappIndex
+                }
+                
+                return dappIndex
+            })
+            
+            let updatedDappIndexObjects = updatedDappIndexes.map({
+                (dappIndex) -> PFObject in
+                let dappIndexObject = PFObject(className: dappIndexClassName)
+                
+                dappIndexObject.objectId = dappIndex.parseObjectID
+                dappIndexObject[dappIDColumn] = dappIndex.dappID
+                dappIndexObject[dappsArrayNameColumn] = dappIndex.dappsArrayName
+                dappIndexObject[indexColumn] = dappIndex.index
+                
+                return dappIndexObject
+            })
+            
+            PFObject.saveAllInBackground(updatedDappIndexObjects, block: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    completion(updatedDappIndexes: updatedDappIndexes, error: nil)
+                } else {
+                    completion(updatedDappIndexes: nil, error: error)
+                }
+            })
+        } else {
+            completion(updatedDappIndexes: nil, error: nil)
+        }
     }
 }
