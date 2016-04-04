@@ -68,8 +68,8 @@ class DappIndexHelper {
             if let error = error {
                 completion(updatedDappIndexes: nil, error: error)
             } else {
-                self.deleteDappIndexForDappWithID(dappID,
-                    andUpdateIndexes: dappIndexes,
+                self.updateIndexesDappIndexes(dappIndexes,
+                    deleteDappWithID: dappID,
                     completion: completion
                 )
             }

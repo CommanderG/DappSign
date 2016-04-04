@@ -123,10 +123,7 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
         return dappArray
     }
     
-    private func addDapp(dapp: PFObject,
-        toArray dappArray: DappArray,
-        success: () -> Void
-    ) {
+    private func addDapp(dapp: PFObject, toArray dappArray: DappArray, success: () -> Void) {
         DappArraysHelper.addDapp(dapp, toArray: dappArray, completion: {
             (error: NSError?) -> Void in
             if let error = error {
