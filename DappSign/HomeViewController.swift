@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var plusOneDappsCountLabel:     UILabel!
     @IBOutlet weak var plusOneRepresentativeLabel: UILabel!
     @IBOutlet weak var signedLabel:                UILabel!
+    @IBOutlet weak var hashtagsLabel:              UILabel!
     
     @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
@@ -161,56 +162,48 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let
-            currentDappCardAsImage = self.dappViewsContainerView.toImage(),
-            currentDapp = self.dapps.first {
-                FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-                    dapp: currentDapp,
-                    completion: {
-                        (success: Bool, error: NSError?) -> Void in
-                        if success {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "The card has been successfully posted."
-                            )
-                        } else {
-                            if let error = error {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to post the card. Error: \(error)"
-                                )
-                            } else {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to post the card. Unknown error."
-                                )
-                            }
-                        }
-                })
+        let dappImage = self.dappViewsContainerView.toImage()
+        
+        if let dappImage = dappImage, currentDapp = self.dapps.first {
+            FacebookHelper.postImageToFacebook(dappImage, dapp: currentDapp, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully posted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Unknown error."
+                    )
+                }
+            })
         }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let
-            currentDappCardAsImage = self.dappViewsContainerView.toImage(),
-            currentDapp = self.dapps.first {
-                TwitterHelper.tweetDapp(currentDapp,
-                    image: currentDappCardAsImage,
-                    completion: {
-                        (success: Bool, error: NSError?) -> Void in
-                        if success {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "The card has been successfully tweeted."
-                            )
-                        } else {
-                            if let error = error {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to tweet the card. Error: \(error)"
-                                )
-                            } else {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to tweet the card. Unknown error."
-                                )
-                            }
-                        }
-                })
+        let dappImage = self.dappViewsContainerView.toImage()
+        
+        if let dappImage = dappImage, currentDapp = self.dapps.first {
+            TwitterHelper.tweetDapp(currentDapp, image: dappImage, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Unknown error."
+                    )
+                }
+            })
         }
     }
     
@@ -539,6 +532,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             
             self.dappViewsContainerView.show()
         }
+        
+        self.hashtagsLabel.text = ""
         
         if (self.visibleDappView == self.dappSignView) {
             let dapp = dapps.first
