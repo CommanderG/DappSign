@@ -429,7 +429,39 @@ extension DappsTableViewController: UIActionSheetDelegate {
             case actionSheetButtonMoveToPrimaryArray:
                 break
             case actionSheetButtonMoveToSecondaryArray:
-                break
+                self.removeDapp(selectedDapp, fromArray: dappsArray, success: {
+                    self.dapps.removeAtIndex(selectedDappIndex)
+                    self.tableView.reloadData()
+                    
+                    self.deleteDappIndexForDapp(selectedDapp, success: {
+                        let dappIndex = DappIndexHelper.dappIndexForDappWithID(
+                            selectedDapp.objectId,
+                            dappIndexes: self.dappIndexes
+                        )
+                        
+                        if let dappIndex = dappIndex {
+                            let newDappIndexes = DappIndexHelper.removeDappIndexForDappWithID(
+                                selectedDapp.objectId,
+                                fromDappIndexes: self.dappIndexes
+                            )
+                            
+                            let updatedDappIndexes =
+                            DappIndexHelper.decrementByOneIndexesSmallerThan(dappIndex.index,
+                                dappIndexes: newDappIndexes
+                            )
+                            
+                            self.saveDappIndexes(updatedDappIndexes, success: {
+                                self.dappIndexes = updatedDappIndexes
+                                
+                                let dappArray = DappArray.Secondary
+                                
+                                self.addDapp(selectedDapp, toArray: dappArray, success: {
+                                    self.addDappIndexForDapp(selectedDapp, dappArray: dappArray)
+                                })
+                            })
+                        }
+                    })
+                })
             case actionSheetButtonMoveToIntroductoryArray:
                 break
             default:
@@ -472,5 +504,42 @@ extension DappsTableViewController: UIActionSheetDelegate {
                 success()
             }
         }
+    }
+    
+    private func addDapp(dapp: PFObject, toArray: DappArray, success: Void -> Void) {
+        DappArraysHelper.addDapp(dapp, toArray: .Secondary, completion: {
+            (error: NSError?) -> Void in
+            if let error = error {
+                self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
+            } else {
+                success()
+            }
+        })
+    }
+    
+    private func addDappIndexForDapp(dapp: PFObject, dappArray: DappArray) {
+        DappIndexHelper.downloadDappIndexesForArrayWithName(dappArray.rawValue, completion: {
+            (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
+            if let dappIndexes = dappIndexes {
+                var index: Int = 0
+                
+                if let maxIndex = DappIndexHelper.maxIndexInDappIndexes(dappIndexes) {
+                    index = maxIndex + 1
+                } else {
+                    index = 0
+                }
+                
+                let dappIndex = DappIndex(
+                    parseObjectID:  "",
+                    dappID:         dapp.objectId,
+                    dappsArrayName: dappArray.rawValue,
+                    index:          index
+                )
+                
+                DappIndexHelper.addDappIndex(dappIndex, completion: {
+                    (error: NSError?) -> Void in
+                })
+            }
+        })
     }
 }
