@@ -27,8 +27,6 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
-            <string>Exo-Black</string>
-            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -1487,34 +1485,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KLc-9D-dpW">
-                                <rect key="frame" x="144" y="66" width="30" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="HfL-yK-NfQ"/>
-                                    <constraint firstAttribute="height" constant="30" id="ZAL-PS-upj"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfK-Xm-b3D">
-                                <rect key="frame" x="200" y="66" width="30" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="3CZ-AY-7ls"/>
-                                    <constraint firstAttribute="height" constant="30" id="MF2-Rx-ScP"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y9h-U7-mgg">
                                 <rect key="frame" x="256" y="66" width="30" height="30"/>
                                 <animations/>
@@ -1641,20 +1611,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-5R-hYz">
-                                <rect key="frame" x="142" y="50" width="40" height="63"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="47"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3T-Dl-xWg">
-                                <rect key="frame" x="198" y="50" width="40" height="63"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="47"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-nL-AF9">
                                 <rect key="frame" x="254" y="50" width="40" height="63"/>
                                 <animations/>
@@ -1686,10 +1642,7 @@
                         <constraints>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="16" id="0ih-64-5mR"/>
                             <constraint firstItem="jKi-D3-2kn" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="46" id="11g-Eg-6O9"/>
-                            <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="UfK-Xm-b3D" secondAttribute="trailing" constant="26" id="1PC-UM-g2m"/>
-                            <constraint firstItem="KLc-9D-dpW" firstAttribute="centerY" secondItem="FNt-Hl-eRK" secondAttribute="centerY" constant="0.5" id="1fz-he-IRL"/>
                             <constraint firstItem="oht-H0-5nU" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="79" id="2nQ-zD-kr1"/>
-                            <constraint firstItem="D4k-5R-hYz" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="30" id="2wU-co-HCt"/>
                             <constraint firstAttribute="trailing" secondItem="1OO-wt-4Cc" secondAttribute="trailing" id="2yu-Nm-KZj"/>
                             <constraint firstItem="1OO-wt-4Cc" firstAttribute="top" secondItem="y0b-e0-s53" secondAttribute="top" id="3vR-EX-9DT"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="1OO-wt-4Cc" secondAttribute="bottom" id="4Gu-Eg-CKX"/>
@@ -1701,7 +1654,6 @@
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="trailing" secondItem="y0b-e0-s53" secondAttribute="trailingMargin" id="Ghf-Y6-v2e"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="IXL-Dh-WIH"/>
                             <constraint firstItem="1OO-wt-4Cc" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" id="JGD-Gl-nqv"/>
-                            <constraint firstItem="FNt-Hl-eRK" firstAttribute="centerY" secondItem="UfK-Xm-b3D" secondAttribute="centerY" constant="-0.5" id="JpC-Q3-8o5"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="18" id="LtK-yw-893"/>
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="17" id="Mzg-dd-Xpd"/>
                             <constraint firstItem="3O5-Ue-Ctg" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="top" constant="-33" id="P5T-Wi-05a"/>
@@ -1715,21 +1667,17 @@
                             <constraint firstAttribute="centerX" secondItem="3O5-Ue-Ctg" secondAttribute="centerX" constant="-0.5" id="VUh-CX-PjU"/>
                             <constraint firstAttribute="trailing" secondItem="Y9h-U7-mgg" secondAttribute="trailing" constant="34" id="WnD-pJ-Ham"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="rvm-Fb-8NV" secondAttribute="bottom" constant="250" id="XUR-GO-sGp"/>
-                            <constraint firstItem="j3T-Dl-xWg" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="30" id="YCg-Ym-0fN"/>
                             <constraint firstItem="Jb6-vv-27X" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="YUi-dQ-XU1"/>
                             <constraint firstItem="kn1-Iw-Tke" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="117" id="ZPJ-0n-rpj"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="centerY" secondItem="FNt-Hl-eRK" secondAttribute="centerY" constant="0.5" id="Zp5-z2-Lhe"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="leading" secondItem="Y9h-U7-mgg" secondAttribute="trailing" constant="-32" id="ejT-2N-axU"/>
                             <constraint firstItem="jKi-D3-2kn" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="fr0-yE-rTJ"/>
-                            <constraint firstItem="D4k-5R-hYz" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="-32" id="fwO-oe-Eji"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="top" secondItem="FNt-Hl-eRK" secondAttribute="bottom" constant="46" id="g31-6c-XOJ"/>
                             <constraint firstItem="Yu2-AW-APN" firstAttribute="top" secondItem="jKi-D3-2kn" secondAttribute="bottom" constant="8" id="h4O-sW-e29"/>
                             <constraint firstItem="Zep-yS-dfF" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leadingMargin" constant="4" id="iR9-rg-teR"/>
                             <constraint firstAttribute="trailing" secondItem="osF-qS-9VI" secondAttribute="trailing" constant="30" id="jKo-fp-hPO"/>
                             <constraint firstAttribute="trailing" secondItem="jKi-D3-2kn" secondAttribute="trailing" constant="30" id="kAC-Ct-cLM"/>
-                            <constraint firstItem="UfK-Xm-b3D" firstAttribute="leading" secondItem="KLc-9D-dpW" secondAttribute="trailing" constant="26" id="nQr-Vd-fij"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="38" id="pfp-Y2-hxD"/>
-                            <constraint firstItem="j3T-Dl-xWg" firstAttribute="leading" secondItem="UfK-Xm-b3D" secondAttribute="trailing" constant="-32" id="pkQ-GU-Z5P"/>
                             <constraint firstAttribute="centerX" secondItem="oht-H0-5nU" secondAttribute="centerX" id="t4A-pl-t7j"/>
                             <constraint firstItem="kn1-Iw-Tke" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="zFP-34-zRO"/>
                         </constraints>
@@ -1743,20 +1691,14 @@
                         <outlet property="linkView" destination="1OO-wt-4Cc" id="YQS-3H-wkg"/>
                         <outlet property="plusOneDappsCountLabel" destination="GdT-Xa-E10" id="7kG-X4-zAa"/>
                         <outlet property="plusOneDappsCountLabelTopConstraint" destination="FTP-6t-8xA" id="BG8-Ej-5ui"/>
-                        <outlet property="plusOneFirstRepresentativeLabel" destination="D4k-5R-hYz" id="vtt-xk-De6"/>
-                        <outlet property="plusOneFirstRepresentativeLabelTopConstraint" destination="2wU-co-HCt" id="MgO-hs-HO4"/>
-                        <outlet property="plusOneSecondRepresentativeLabel" destination="j3T-Dl-xWg" id="nDZ-Ex-5zG"/>
-                        <outlet property="plusOneSecondRepresentativeLabelTopConstraint" destination="YCg-Ym-0fN" id="gPq-5S-zpC"/>
-                        <outlet property="plusOneThirdRepresentativeLabel" destination="ayB-nL-AF9" id="Cq9-k5-iNV"/>
-                        <outlet property="plusOneThirdRepresentativeLabelTopConstraint" destination="6DC-IQ-KAl" id="gic-WU-OBU"/>
+                        <outlet property="plusOneRepresentativeLabel" destination="ayB-nL-AF9" id="sEz-V7-ttL"/>
+                        <outlet property="plusOneRepresentativeLabelTopConstraint" destination="6DC-IQ-KAl" id="5pU-Xg-yaK"/>
                         <outlet property="profileButton" destination="Zep-yS-dfF" id="72N-lR-hUr"/>
+                        <outlet property="representativeImageView" destination="Y9h-U7-mgg" id="2WZ-eL-jh1"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
                         <outlet property="signedLabel" destination="rvm-Fb-8NV" id="wEr-FR-YNX"/>
                         <outlet property="signedLabelBottomConstraint" destination="XUR-GO-sGp" id="iaZ-mH-f15"/>
                         <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
-                        <outletCollection property="representativesImagesViews" destination="KLc-9D-dpW" collectionClass="NSMutableArray" id="jHf-bi-Z6K"/>
-                        <outletCollection property="representativesImagesViews" destination="UfK-Xm-b3D" collectionClass="NSMutableArray" id="ond-3j-2Tt"/>
-                        <outletCollection property="representativesImagesViews" destination="Y9h-U7-mgg" collectionClass="NSMutableArray" id="2Sj-BP-0sC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhB-gB-rqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2944,7 +2886,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mYk-4f-hdk"/>
+        <segue reference="Nbj-I3-c5B"/>
         <segue reference="D2a-aL-0oF"/>
-        <segue reference="sqW-Bo-68U"/>
     </inferredMetricsTieBreakers>
 </document>

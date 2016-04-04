@@ -18,38 +18,29 @@ enum DappCardType {
 }
 
 class HomeViewController: UIViewController, SwipeableViewDelegate {
-    @IBOutlet weak var dappViewsContainerView: SwipeableView!
-    @IBOutlet weak var dappSignView: DappSignView!
-    @IBOutlet weak var dappMappView: DappMappView!
-    @IBOutlet weak var shareOnFacebookButton: UIButton!
-    @IBOutlet weak var tweetThisCardButton: UIButton!
-    @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var dappScoreLabel: UILabel!
-    @IBOutlet weak var linkView: LinkView!
-    @IBOutlet weak var embedDappView: EmbedDappView!
+    @IBOutlet weak var dappViewsContainerView:     SwipeableView!
+    @IBOutlet weak var dappSignView:               DappSignView!
+    @IBOutlet weak var dappMappView:               DappMappView!
+    @IBOutlet weak var shareOnFacebookButton:      UIButton!
+    @IBOutlet weak var tweetThisCardButton:        UIButton!
+    @IBOutlet weak var profileButton:              UIButton!
+    @IBOutlet weak var dappScoreLabel:             UILabel!
+    @IBOutlet weak var linkView:                   LinkView!
+    @IBOutlet weak var embedDappView:              EmbedDappView!
+    @IBOutlet weak var representativeImageView:    UIImageView!
+    @IBOutlet weak var plusOneDappsCountLabel:     UILabel!
+    @IBOutlet weak var plusOneRepresentativeLabel: UILabel!
+    @IBOutlet weak var signedLabel:                UILabel!
     
-    @IBOutlet var representativesImagesViews: [UIImageView]!
+    @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
+    @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var signedLabelBottomConstraint:             NSLayoutConstraint!
     
-    @IBOutlet weak var plusOneDappsCountLabel: UILabel!
-    @IBOutlet weak var plusOneFirstRepresentativeLabel: UILabel!
-    @IBOutlet weak var plusOneSecondRepresentativeLabel: UILabel!
-    @IBOutlet weak var plusOneThirdRepresentativeLabel: UILabel!
-    
-    @IBOutlet weak var plusOneDappsCountLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var plusOneFirstRepresentativeLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var plusOneSecondRepresentativeLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var plusOneThirdRepresentativeLabelTopConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var signedLabel: UILabel!
-    
-    @IBOutlet weak var signedLabelBottomConstraint: NSLayoutConstraint!
-    
-    private var representativesImagesURLs: [NSURL] = []
     private var visibleDappView: UIView!
-    private var lastDappedDapp: PFObject?
+    private var lastDappedDapp:  PFObject?
+    private var dappLinksVC:     DappLinksVC?
+    private var links:           [Link] = []
     private var animatingPlusOneLabels = false
-    private var dappLinksVC: DappLinksVC?
-    private var links: [Link] = []
     
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
     private let flipDuration = 0.5
@@ -90,9 +81,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         let labels = [
             self.plusOneDappsCountLabel,
-            self.plusOneFirstRepresentativeLabel,
-            self.plusOneSecondRepresentativeLabel,
-            self.plusOneThirdRepresentativeLabel,
+            self.plusOneRepresentativeLabel,
             self.signedLabel
         ]
         
@@ -116,15 +105,12 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             repeats:  true
         )
         
-        self.downloadRepresentativesImages()
-        
+        self.showRepresentativeImage()
         self.hideSignedLabel()
         
         let topConstraints = [
             self.plusOneDappsCountLabelTopConstraint,
-            self.plusOneFirstRepresentativeLabelTopConstraint,
-            self.plusOneSecondRepresentativeLabelTopConstraint,
-            self.plusOneThirdRepresentativeLabelTopConstraint
+            self.plusOneRepresentativeLabelTopConstraint
         ]
         
         for topConstraint in topConstraints {
@@ -690,73 +676,34 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         })
     }
     
-    func downloadRepresentativesImages() {
-        func representativesImagesURLs(completion: (URLs: [NSURL]?) -> Void) {
-            if self.representativesImagesURLs.count > 0 {
-                completion(URLs: self.representativesImagesURLs)
-                
-                return
+    func showRepresentativeImage() {
+        self.downloadRepresentativeImagesURL {
+            (imageURL: NSURL?) -> Void in
+            if let imageURL = imageURL {
+                Requests.downloadImageFromURL(imageURL, completion: {
+                    (image: UIImage?, error: NSError?) -> Void in
+                    if let image = image {
+                        self.representativeImageView.image = image
+                    }
+                })
             }
-            
-            self.representativesImagesURLs = []
-            
-            let currentUser = PFUser.currentUser()
-            
-            Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
-                (representatives: [PFObject]?, error: NSError?) -> Void in
-                if let representatives_ = representatives {
-                    for representative in representatives_ {
-                        if let
-                            imgURLStr = representative["imgUrl"] as? String,
-                            imgURL = NSURL(string: imgURLStr) {
-                                self.representativesImagesURLs.append(imgURL)
-                        }
-                    }
-                    
-                    completion(URLs: self.representativesImagesURLs)
-                } else {
-                    if let err = error {
-                        print("\(err)")
-                    } else {
-                        print("Unknown error.")
-                    }
-                    
-                    completion(URLs: nil)
-                }
-            })
         }
+    }
+    
+    private func downloadRepresentativeImagesURL(completion: (imageURL: NSURL?) -> Void) {
+        let currentUser = PFUser.currentUser()
         
-        representativesImagesURLs { (URLs: [NSURL]?) -> Void in
-            if let URLs_ = URLs {
-                self.representativesImagesURLs = URLs_
-                
-                for index in 0 ... self.representativesImagesURLs.count {
-                    if (index == self.representativesImagesURLs.count ||
-                        index == self.representativesImagesViews.count) {
-                            break
-                    }
-                    
-                    let representativeImageView = self.representativesImagesViews[index]
-                    
-                    if representativeImageView.image != nil {
-                        continue
-                    }
-                    
-                    let URL = URLs_[index]
-                    
-                    Requests.downloadImageFromURL(URL, completion: {
-                        (image: UIImage?, error: NSError?) -> Void in
-                        if let img = image {
-                            representativeImageView.image = img
-                        } else if let err = error {
-                            print("\(err)")
-                        } else {
-                            print("Unknown error.")
-                        }
-                    })
-                }
+        Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
+            (representatives: [PFObject]?, error: NSError?) -> Void in
+            if let
+                representative = representatives?.first,
+                imageURLStr = representative["imgUrl"] as? String,
+                imageURL = NSURL(string: imageURLStr) {
+                    completion(imageURL: imageURL)
+            } else {
+                completion(imageURL: nil)
             }
-        }
+        })
     }
     
     // MARK: - SwipeableViewDelegate
@@ -841,10 +788,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     private func constantMaxForConstraint(constraint: NSLayoutConstraint) -> CGFloat? {
         let topConstraintConstMax = [
-            self.plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0 + 80.0),
-            self.plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(30.0 + 80.0),
-            self.plusOneSecondRepresentativeLabelTopConstraint: CGFloat(30.0 + 80.0),
-            self.plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(30.0 + 80.0)
+            self.plusOneDappsCountLabelTopConstraint:     CGFloat(-16.0 + 80.0),
+            self.plusOneRepresentativeLabelTopConstraint: CGFloat(30.0 + 80.0)
         ]
         
         return topConstraintConstMax[constraint]
@@ -865,23 +810,17 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         let plusOneLabels = [
             self.plusOneDappsCountLabel,
-            self.plusOneFirstRepresentativeLabel,
-            self.plusOneSecondRepresentativeLabel,
-            self.plusOneThirdRepresentativeLabel
+            self.plusOneRepresentativeLabel
         ]
         
         let labelTopConstraint = [
-            self.plusOneDappsCountLabel:           plusOneDappsCountLabelTopConstraint,
-            self.plusOneFirstRepresentativeLabel:  plusOneFirstRepresentativeLabelTopConstraint,
-            self.plusOneSecondRepresentativeLabel: plusOneSecondRepresentativeLabelTopConstraint,
-            self.plusOneThirdRepresentativeLabel:  plusOneThirdRepresentativeLabelTopConstraint
+            self.plusOneDappsCountLabel:     plusOneDappsCountLabelTopConstraint,
+            self.plusOneRepresentativeLabel: plusOneRepresentativeLabelTopConstraint
         ]
         
         let topConstraintMin = [
-            self.plusOneDappsCountLabelTopConstraint:           CGFloat(-16.0),
-            self.plusOneFirstRepresentativeLabelTopConstraint:  CGFloat(30.0),
-            self.plusOneSecondRepresentativeLabelTopConstraint: CGFloat(30.0),
-            self.plusOneThirdRepresentativeLabelTopConstraint:  CGFloat(30.0)
+            self.plusOneDappsCountLabelTopConstraint:     CGFloat(-16.0),
+            self.plusOneRepresentativeLabelTopConstraint: CGFloat(30.0)
         ]
         
         let plusOneLabelsMoveUpAnimationDuration = 0.6
