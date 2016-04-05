@@ -301,8 +301,9 @@ class DappsTableViewController: UITableViewController {
                     title:                  title,
                     delegate:               self,
                     cancelButtonTitle:      actionSheetButtonCancel,
-                    destructiveButtonTitle: nil,
-                    otherButtonTitles:      actionSheetButtonAddToScoreboardArray
+                    destructiveButtonTitle: actionSheetButtonRemoveFromThisArray,
+                    otherButtonTitles:      actionSheetButtonMoveToPrimaryArray,
+                                            actionSheetButtonAddToScoreboardArray
                 )
             case .Introductory:
                 return UIActionSheet(
