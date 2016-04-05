@@ -117,6 +117,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         self.linkView.delegate = self
         self.linkView.hidden = true
+        
+        self.hashtagsLabel.text = ""
     }
     
     override func didReceiveMemoryWarning() {
