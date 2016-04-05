@@ -18,20 +18,22 @@ enum DappCardType {
 }
 
 class HomeViewController: UIViewController, SwipeableViewDelegate {
-    @IBOutlet weak var dappViewsContainerView:     SwipeableView!
-    @IBOutlet weak var dappSignView:               DappSignView!
-    @IBOutlet weak var dappMappView:               DappMappView!
-    @IBOutlet weak var shareOnFacebookButton:      UIButton!
-    @IBOutlet weak var tweetThisCardButton:        UIButton!
-    @IBOutlet weak var profileButton:              UIButton!
-    @IBOutlet weak var dappScoreLabel:             UILabel!
-    @IBOutlet weak var linkView:                   LinkView!
-    @IBOutlet weak var embedDappView:              EmbedDappView!
-    @IBOutlet weak var representativeImageView:    UIImageView!
-    @IBOutlet weak var plusOneDappsCountLabel:     UILabel!
-    @IBOutlet weak var plusOneRepresentativeLabel: UILabel!
-    @IBOutlet weak var signedLabel:                UILabel!
-    @IBOutlet weak var hashtagsLabel:              UILabel!
+    @IBOutlet weak var dappViewsContainerView:      SwipeableView!
+    @IBOutlet weak var dappSignView:                DappSignView!
+    @IBOutlet weak var dappMappView:                DappMappView!
+    @IBOutlet weak var shareOnFacebookButton:       UIButton!
+    @IBOutlet weak var tweetThisCardButton:         UIButton!
+    @IBOutlet weak var profileButton:               UIButton!
+    @IBOutlet weak var dappScoreLabel:              UILabel!
+    @IBOutlet weak var linkView:                    LinkView!
+    @IBOutlet weak var embedDappView:               EmbedDappView!
+    @IBOutlet weak var representativeImageView:     UIImageView!
+    @IBOutlet weak var plusOneDappsCountLabel:      UILabel!
+    @IBOutlet weak var plusOneRepresentativeLabel:  UILabel!
+    @IBOutlet weak var signedLabel:                 UILabel!
+    @IBOutlet weak var hashtagsLabel:               UILabel!
+    @IBOutlet weak var representativeFullNameLabel: UILabel!
+    @IBOutlet weak var representativeDistrictLabel: UILabel!
     
     @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
@@ -57,7 +59,11 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.dappTextView.TextAlignment
+        
+        self.representativeImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.representativeImageView.layer.borderWidth = 2.0
+        self.representativeImageView.layer.cornerRadius =
+            CGRectGetWidth(self.representativeImageView.frame) / 2;
         
         self.dappScoreLabel.text = nil;
         
@@ -98,6 +104,21 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let currentUser = PFUser.currentUser()
+        
+        Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
+            (representatives: [PFObject]?, error: NSError?) -> Void in
+            let representative = representatives?.first
+            
+            self.initRepresentativeFullNameLabelWithRepresentative(representative)
+            self.initRepresentativeDistrictLabelWithRepresentative(representative)
+            self.initRepresentativeImageViewWithRepresentative(representative)
+        })
+    }
+    
     override func viewDidAppear(animated: Bool) {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
@@ -106,7 +127,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             repeats:  true
         )
         
-        self.showRepresentativeImage()
         self.hideSignedLabel()
         
         let topConstraints = [
@@ -123,6 +143,38 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func viewDidDisappear(animated: Bool) {
         self.timer?.invalidate()
+    }
+    
+    // MARK: - UI initialization
+    
+    private func initRepresentativeFullNameLabelWithRepresentative(representative: PFObject?) {
+        if let
+            representative = representative,
+            fullName = RepresentativeHelper.fullNameForRepresentative(representative) {
+                self.representativeFullNameLabel.text = fullName
+        } else {
+            self.representativeFullNameLabel.text = ""
+        }
+    }
+    
+    private func initRepresentativeDistrictLabelWithRepresentative(representative: PFObject?) {
+        if let
+            representative = representative,
+            district = RepresentativeHelper.districtForRepresentative(representative) {
+                self.representativeDistrictLabel.text = district
+        } else {
+            self.representativeDistrictLabel.text = ""
+        }
+    }
+    
+    private func initRepresentativeImageViewWithRepresentative(representative: PFObject?) {
+        if let
+            representative = representative,
+            imageURL = RepresentativeHelper.imageURLForRepresentative(representative) {
+                self.representativeImageView.sd_setImageWithURL(imageURL)
+        } else {
+            self.representativeImageView.image = nil
+        }
     }
     
     // MARK: - @IBActions
@@ -667,36 +719,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 }
                 
                 self.dappMappView.show(dappScore, SVGMapURLPath: SVGMapURL, percents: percents)
-            }
-        })
-    }
-    
-    func showRepresentativeImage() {
-        self.downloadRepresentativeImagesURL {
-            (imageURL: NSURL?) -> Void in
-            if let imageURL = imageURL {
-                Requests.downloadImageFromURL(imageURL, completion: {
-                    (image: UIImage?, error: NSError?) -> Void in
-                    if let image = image {
-                        self.representativeImageView.image = image
-                    }
-                })
-            }
-        }
-    }
-    
-    private func downloadRepresentativeImagesURL(completion: (imageURL: NSURL?) -> Void) {
-        let currentUser = PFUser.currentUser()
-        
-        Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
-            (representatives: [PFObject]?, error: NSError?) -> Void in
-            if let
-                representative = representatives?.first,
-                imageURLStr = representative["imgUrl"] as? String,
-                imageURL = NSURL(string: imageURLStr) {
-                    completion(imageURL: imageURL)
-            } else {
-                completion(imageURL: nil)
             }
         })
     }

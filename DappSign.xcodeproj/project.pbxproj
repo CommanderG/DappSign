@@ -44,6 +44,7 @@
 		2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */; };
 		27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27896E301C8D89F300A6AA4A /* UserHelper.swift */; };
 		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
+		27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
@@ -191,6 +192,7 @@
 		2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedPhrases.swift; sourceTree = "<group>"; };
 		27896E301C8D89F300A6AA4A /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
+		27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeHelper.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 				274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */,
 				2719C9801C9C52E40092BC0A /* DappsWithoutArrayHelper.swift */,
 				2756D1961CB2909000C9A41A /* DappTransferHelper.swift */,
+				27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
+				27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */,
 				27FD3C0C1C7DF51E00826EBA /* LinkCell.swift in Sources */,
 				2702A60A1C89C582002BBBF6 /* DailyDappDatesHelper.swift in Sources */,
 				F37246821AD3ED7600AD56E2 /* UIImage+GIF.m in Sources */,
