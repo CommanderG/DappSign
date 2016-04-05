@@ -31,7 +31,11 @@ class DappsTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        self.showEditButton()
+        if let dappsArray = self.dappsArray {
+            if dappsArray != .Secondary {
+                self.showEditButton()
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -297,10 +301,8 @@ class DappsTableViewController: UITableViewController {
                     title:                  title,
                     delegate:               self,
                     cancelButtonTitle:      actionSheetButtonCancel,
-                    destructiveButtonTitle: actionSheetButtonRemoveFromThisArray,
-                    otherButtonTitles:      actionSheetButtonMoveToPrimaryArray,
-                                            actionSheetButtonMoveToIntroductoryArray,
-                                            actionSheetButtonAddToScoreboardArray
+                    destructiveButtonTitle: nil,
+                    otherButtonTitles:      actionSheetButtonAddToScoreboardArray
                 )
             case .Introductory:
                 return UIActionSheet(
