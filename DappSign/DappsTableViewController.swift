@@ -53,7 +53,7 @@ class DappsTableViewController: UITableViewController {
                 self.title = "Scoreboard Dapps"
             }
             
-            DappArraysHelper.downloadDappsInArray(dappsArray, completion: {
+            DappArraysHelper.downloadAllDappsInArray(dappsArray, completion: {
                 (dapps: [PFObject]?, error: NSError?) -> Void in
                 if let dapps = dapps {
                     let arrayName = dappsArray.rawValue
@@ -509,7 +509,7 @@ extension DappsTableViewController: UIActionSheetDelegate {
         existsInArray: DappArray,
         completion: (exists: Bool?, error: NSError?) -> Void
     ) {
-        DappArraysHelper.downloadDappsInArray(.Scoreboard, completion: {
+        DappArraysHelper.downloadAllDappsInArray(.Scoreboard, completion: {
             (dapps: [PFObject]?, error: NSError?) -> Void in
             if let dapps = dapps {
                 for dapp in dapps {

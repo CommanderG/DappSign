@@ -90,18 +90,25 @@ class Requests {
         }
     }
     
-    class func downloadDappsWithStatementWhichContains(statementSubstring: String, notSwipedByUser user: PFUser, completion: (dapps: [PFObject], error: NSError!) -> Void) {
-        let query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
-            dappStatementSubstring: statementSubstring
-        )
-        query?.limit = 1000
+    class func downloadDappsWithStatementWhichContains(statementSubstring: String,
+        notSwipedByUser user: PFUser,
+        completion: (dapps: [PFObject], error: NSError!) -> Void
+    ) {
+//        let query = DappQueriesBuilder.queryForAllDappsNotSwipedByUser(user,
+//            dappStatementSubstring: statementSubstring
+//        )
+//        query?.limit = 1000
+//        
+//        query?.whereKey("lowercaseDappStatement", containsString: statementSubstring.lowercaseString)
+//        
+//        query?.findObjectsInBackgroundWithBlock {
+//            (objects: [AnyObject]!, error: NSError!) -> Void in
+//            completion(dapps: objects as! [PFObject], error: error)
+//        }
         
-        query?.whereKey("lowercaseDappStatement", containsString: statementSubstring.lowercaseString)
+        // TODO: implement
         
-        query?.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            completion(dapps: objects as! [PFObject], error: error)
-        }
+        completion(dapps: [], error: nil)
     }
     
     class func downloadUsersWithNameWhichContains(nameSubstring: String, completion: (users: [PFUser], error: NSError!) -> Void) {
@@ -211,39 +218,46 @@ class Requests {
         })
     }
     
-    class func downloadDappsNotSwipedByUser(user: PFUser, hashtag: PFObject, completion: (dapps: [PFObject]?, error: NSError?) -> Void) {
-        if let dappsQuery = DappQueriesBuilder.queryForDownloadingDappsNotSwipedByUser(user, withHashtag: hashtag) {
-            dappsQuery.whereKey("hashtags", containedIn: [hashtag])
-            
-            dappsQuery.findObjectsInBackgroundWithBlock({
-                (objects: [AnyObject]!, error: NSError!) -> Void in
-                if error != nil {
-                    completion(dapps: nil, error: error)
-                    
-                    return
-                }
-                
-                let dapps = objects as! [PFObject]
-                
-                completion(dapps: dapps, error: nil)
-            })
-        } else {
-            var userInfo: [String: String]
-            
-            if let hashtagName = hashtag["name"] as? String {
-                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #\(hashtagName)."]
-            } else {
-                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #<unknown name>."]
-            }
-            
-            let error = NSError(
-                domain: "Dapps type",
-                code: 0,
-                userInfo: userInfo
-            )
-            
-            completion(dapps: nil, error: error)
-        }
+    class func downloadDappsNotSwipedByUser(user: PFUser,
+        hashtag: PFObject,
+        completion: (dapps: [PFObject]?, error: NSError?) -> Void
+    ) {
+//        if let dappsQuery = DappQueriesBuilder.queryForDownloadingDappsNotSwipedByUser(user, withHashtag: hashtag) {
+//            dappsQuery.whereKey("hashtags", containedIn: [hashtag])
+//            
+//            dappsQuery.findObjectsInBackgroundWithBlock({
+//                (objects: [AnyObject]!, error: NSError!) -> Void in
+//                if error != nil {
+//                    completion(dapps: nil, error: error)
+//                    
+//                    return
+//                }
+//                
+//                let dapps = objects as! [PFObject]
+//                
+//                completion(dapps: dapps, error: nil)
+//            })
+//        } else {
+//            var userInfo: [String: String]
+//            
+//            if let hashtagName = hashtag["name"] as? String {
+//                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #\(hashtagName)."]
+//            } else {
+//                userInfo = [NSLocalizedDescriptionKey: "Failed to create query for downloading dapps with hashtag #<unknown name>."]
+//            }
+//            
+//            let error = NSError(
+//                domain: "Dapps type",
+//                code: 0,
+//                userInfo: userInfo
+//            )
+//            
+//            completion(dapps: nil, error: error)
+//        }
+        
+        // TODO: implement
+        
+        completion(dapps: nil, error: nil)
     }
     
     class func addRepresentativeWithUserID(userID: String,

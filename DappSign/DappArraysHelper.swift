@@ -15,7 +15,7 @@ class DappArraysHelper {
     
     // MARK: - requests
     
-    internal class func downloadDappsInArray(dappArray: DappArray,
+    internal class func downloadAllDappsInArray(dappArray: DappArray,
         completion: (dapps: [PFObject]?, error: NSError?) -> Void
     ) {
         self.downloadDappArrayObject(dappArray) {
@@ -25,6 +25,31 @@ class DappArraysHelper {
                     downloadedDapps: [],
                     completion: completion
                 )
+            } else {
+                completion(dapps: nil, error: error)
+            }
+        }
+    }
+    
+    internal class func downloadDappsInArray(dappArray: DappArray,
+        notSwipedByUser user: PFUser,
+        completion: (dapps: [PFObject]? , error: NSError?) -> Void
+    ) {
+        self.downloadAllDappsInArray(dappArray) {
+            (dapps: [PFObject]?, error: NSError?) -> Void in
+            if let allDapps = dapps {
+                self.downloadDappsSwipedByUser(user, completion: {
+                    (dapps: [PFObject]?, error: NSError?) -> Void in
+                    if let dappsSwipedByUser = dapps {
+                        let dappsNotSwipedByUser = self.dappsNotSwipedByUserWithAllDapps(allDapps,
+                            andDappsSwipedByUser: dappsSwipedByUser
+                        )
+                        
+                        completion(dapps: dappsNotSwipedByUser, error: nil)
+                    } else {
+                        completion(dapps: nil, error: error)
+                    }
+                })
             } else {
                 completion(dapps: nil, error: error)
             }
@@ -145,23 +170,46 @@ class DappArraysHelper {
         let dappsRelation = dappArrayObject.relationForKey(dappsRelationKey)
         let dappsRelationQuery = dappsRelation.query()
         
-        dappsRelationQuery.skip = downloadedDapps.count
-        dappsRelationQuery.limit = 1000
+        ParseHelper.downloadAllObjectsWithQuery(dappsRelationQuery,
+            downloadedObjects: [],
+            completion: completion
+        )
+    }
+    
+    private class func downloadDappsSwipedByUser(user: PFUser,
+        completion: (dapps: [PFObject]?, error: NSError?) -> Void
+    ) {
+        let dappsSwipedRelation = user.relationForKey("dappsSwiped")
+        let dappsSwipedRelationQuery = dappsSwipedRelation.query()
         
-        dappsRelationQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            if let dapps = objects as? [PFObject] {
-                if dapps.count > 0 {
-                    self.downloadDappsInDappArrayObject(dappArrayObject,
-                        downloadedDapps: downloadedDapps + dapps,
-                        completion: completion
-                    )
-                } else {
-                    completion(dapps: downloadedDapps, error: error)
-                }
-            } else {
-                completion(dapps: downloadedDapps, error: error)
+        ParseHelper.downloadAllObjectsWithQuery(dappsSwipedRelationQuery,
+            downloadedObjects: [],
+            completion: completion
+        )
+    }
+    
+    private class func dappsNotSwipedByUserWithAllDapps(allDapps: [PFObject],
+        andDappsSwipedByUser dappsSwipedByUser: [PFObject]
+    ) -> [PFObject] {
+        let dappsNotSwipedByUser = allDapps.filter {
+            dapp -> Bool in
+            if self.dapps(dappsSwipedByUser, containDappWithID: dapp.objectId) {
+                return false
+            }
+            
+            return true
+        }
+        
+        return dappsNotSwipedByUser
+    }
+    
+    private class func dapps(dapps: [PFObject], containDappWithID dappID: String) -> Bool {
+        for dapp in dapps {
+            if dapp.objectId == dappID {
+                return true
             }
         }
+        
+        return false
     }
 }

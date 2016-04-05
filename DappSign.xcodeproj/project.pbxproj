@@ -43,8 +43,8 @@
 		27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A6B1B95C70D007E97EE /* DappMappView.xib */; };
 		2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */; };
 		27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27896E301C8D89F300A6AA4A /* UserHelper.swift */; };
-		278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B78291AB86B0500EB39AB /* DappsDownloader.swift */; };
 		27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */; };
+		27979D541CB41BF8002816A6 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D531CB41BF8002816A6 /* ParseHelper.swift */; };
 		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
@@ -110,7 +110,6 @@
 		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
-		84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
 		84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */; };
 		84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */; };
@@ -191,8 +190,8 @@
 		27811A6B1B95C70D007E97EE /* DappMappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappMappView.xib; sourceTree = "<group>"; };
 		2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedPhrases.swift; sourceTree = "<group>"; };
 		27896E301C8D89F300A6AA4A /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
-		278B78291AB86B0500EB39AB /* DappsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsDownloader.swift; sourceTree = "<group>"; };
 		27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeHelper.swift; sourceTree = "<group>"; };
+		27979D531CB41BF8002816A6 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -268,7 +267,6 @@
 		8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappHelper.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappQueriesBuilder.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
 		84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappProfileCell.swift; sourceTree = "<group>"; };
 		84D848731AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
@@ -594,6 +592,7 @@
 				2719C9801C9C52E40092BC0A /* DappsWithoutArrayHelper.swift */,
 				2756D1961CB2909000C9A41A /* DappTransferHelper.swift */,
 				27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */,
+				27979D531CB41BF8002816A6 /* ParseHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -615,8 +614,6 @@
 				F37246491AD3ED3C00AD56E2 /* images */,
 				279A31251AB333AC00850508 /* Enums.swift */,
 				27810DF01AB7297300223350 /* IndexedDapps.swift */,
-				84C3D34D1AB4D4DD00E0F350 /* DappQueriesBuilder.swift */,
-				278B78291AB86B0500EB39AB /* DappsDownloader.swift */,
 				271D0DC61ABAD8E400227DE7 /* Requests.swift */,
 				B37714681ACD5A4200B5AE77 /* FacebookBridge.h */,
 				B37714691ACD5A4200B5AE77 /* FacebookBridge.m */,
@@ -990,7 +987,6 @@
 				27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */,
-				278B782A1AB86B0500EB39AB /* DappsDownloader.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
 				27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */,
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
@@ -1002,12 +998,12 @@
 				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
 				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
+				27979D541CB41BF8002816A6 /* ParseHelper.swift in Sources */,
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
 				277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */,
 				274B33451C9C3AAB00FA1FDF /* DappArraysHelper.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
 				27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */,
-				84C3D34E1AB4D4DD00E0F350 /* DappQueriesBuilder.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
 				27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */,

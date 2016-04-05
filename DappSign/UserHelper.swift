@@ -25,7 +25,8 @@ class UserHelper {
                 
                 completion(success: false, errorMessage: errorMessage)
             } else {
-                let errorMessage = "Failed to download user with ID \(userID). Unknown error."
+                let errorMessage = "Failed to download user with ID \(userID). " +
+                                   "Unknown error (this user may not exist in the database)."
                 
                 completion(success: false, errorMessage: errorMessage)
             }

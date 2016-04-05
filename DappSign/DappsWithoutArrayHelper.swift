@@ -48,7 +48,7 @@ class DappsWithoutArrayHelper {
         completion: (dappsInArrays: [PFObject]?, error: NSError?) -> Void
     ) {
         if let dappArray = dappArrays.first {
-            DappArraysHelper.downloadDappsInArray(dappArray, completion: {
+            DappArraysHelper.downloadAllDappsInArray(dappArray, completion: {
                 (dapps: [PFObject]?, error: NSError?) -> Void in
                 if let dapps = dapps {
                     let remainingArrays = Array(dappArrays[1 ..< dappArrays.count])

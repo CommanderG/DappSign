@@ -56,7 +56,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private var dailyDappTimeLeft: (Int, Int)? = nil
     
     var dapps: [PFObject] = []
-    var dappsDownloader: DappsDownloader?
     var dappFonts = DappFonts()
     var dappColors = DappColors()
     
@@ -99,7 +98,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         }
         
         self.updateUserInformation()
-        self.downloadDapps()
         
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: Selector("handleDappSwipedNotification:"),
@@ -142,6 +140,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         self.initTimers()
         self.updateDailyDappTimeLeftLabel()
         self.updateDailyDappTimeLeft()
+        self.downloadDapps()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -507,45 +506,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     private func downloadDapps() {
-        self.downloadPrimaryDappsWithSuccessClosure {
-            () -> Void in
+        self.downloadPrimaryDapps {
             self.downloadSecondaryDapps()
         }
     }
     
-    private func downloadPrimaryDappsWithSuccessClosure(success: () -> Void) {
+    private func downloadPrimaryDapps(success: Void -> Void) {
         let user = PFUser.currentUser()
         
-        self.dappsDownloader = DappsDownloader(array: .Primary)
-        
-        self.dappsDownloader?.downloadDappsNotSwipedByUser(user,
-            completion: {
-                (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
-                    print(error)
-                    
-                    self.initDappView()
-                    
-                    return
-                }
-                
-                self.dapps = dapps
-                
-                if self.dapps.count > 0 {
-                    self.initDappView()
-                }
-                
-                success()
-        })
-    }
-    
-    private func downloadSecondaryDapps() {
-        let user = PFUser.currentUser()
-        
-        self.dappsDownloader = DappsDownloader(array: .Secondary)
-        
-        self.dappsDownloader?.downloadDappsNotSwipedByUser(user, completion: {
-            (dapps: [PFObject], error: NSError!) -> Void in
+        DappArraysHelper.downloadDappsInArray(.Primary, notSwipedByUser: user) {
+            (dapps: [PFObject]?, error: NSError?) -> Void in
             if error != nil {
                 print(error)
                 
@@ -554,25 +524,54 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 return
             }
             
-            if dapps.count > 0 {
-                var shouldShowCurrentDapp = false;
-                
-                if self.dapps.count == 0 {
-                    shouldShowCurrentDapp = true
-                }
-                
-                DappsHelper.sortDappsByDappScore(dapps, completion: {
-                    (sortedDapps: [PFObject]) -> Void in
-                    self.dapps += sortedDapps
-                    
-                    if shouldShowCurrentDapp {
-                        self.initDappView()
-                    }
-                })
-            } else if self.dapps.count == 0 {
+            if let dapps = dapps {
+                self.dapps = dapps
+            } else {
+                self.dapps = []
+            }
+            
+            if self.dapps.count > 0 {
                 self.initDappView()
             }
-        })
+            
+            success()
+        }
+    }
+    
+    private func downloadSecondaryDapps() {
+        let user = PFUser.currentUser()
+        
+        DappArraysHelper.downloadDappsInArray(.Secondary, notSwipedByUser: user) {
+            (dapps: [PFObject]?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+                
+                self.initDappView()
+                
+                return
+            }
+            
+            if let dapps = dapps {
+                if dapps.count > 0 {
+                    var shouldShowCurrentDapp = false;
+                    
+                    if self.dapps.count == 0 {
+                        shouldShowCurrentDapp = true
+                    }
+                    
+                    DappsHelper.sortDappsByDappScore(dapps, completion: {
+                        (sortedDapps: [PFObject]) -> Void in
+                        self.dapps += sortedDapps
+                        
+                        if shouldShowCurrentDapp {
+                            self.initDappView()
+                        }
+                    })
+                } else if self.dapps.count == 0 {
+                    self.initDappView()
+                }
+            }
+        }
     }
     
     // MARK: - Navigation
@@ -624,12 +623,13 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         show.colon = !show.colon
         
         if let (minutes, seconds) = self.dailyDappTimeLeft {
-            let minutesString = self.minutesStringWithMinutes(minutes)
+            let minutesString = self.stringForDoubleDigitInt(minutes)
+            let secondsString = self.stringForDoubleDigitInt(seconds)
             
             if show.colon {
-                self.dailyDappTimeLeftLabel.text = "\(minutes):\(seconds)"
+                self.dailyDappTimeLeftLabel.text = "\(minutesString):\(secondsString)"
             } else {
-                self.dailyDappTimeLeftLabel.text = "\(minutes) \(seconds)"
+                self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
             }
         } else {
             if show.colon {
@@ -1009,12 +1009,12 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     // MARK: -
     
-    private func minutesStringWithMinutes(minutes: Int) -> String {
-        if minutes < 10 {
-            return "0\(minutes)"
+    private func stringForDoubleDigitInt(doubleDigitInt: Int) -> String {
+        if doubleDigitInt < 10 {
+            return "0\(doubleDigitInt)"
         }
         
-        return "\(minutes)"
+        return "\(doubleDigitInt)"
     }
 }
 
