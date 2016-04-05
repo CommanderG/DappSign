@@ -210,7 +210,8 @@ class ZipCodeViewController: UIViewController {
             firstName      = houseRepresentative["first_name"] as? String,
             lastName       = houseRepresentative["last_name"] as? String,
             title          = houseRepresentative["title"] as? String,
-            party          = houseRepresentative["party"] as? String {
+            party          = houseRepresentative["party"] as? String,
+            district       = self.congressionalDistrictID(houseRepresentative) {
                 let userID = PFUser.currentUser().objectId
                 let fullName =  "\(firstName) \(lastName)"
                 
@@ -219,6 +220,7 @@ class ZipCodeViewController: UIViewController {
                     fullName: fullName,
                     title: title,
                     party: party,
+                    district: district,
                     completion: {
                         (success: Bool, error: NSError?) -> Void in
                         completion(success: success)

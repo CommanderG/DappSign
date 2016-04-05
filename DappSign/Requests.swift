@@ -251,15 +251,17 @@ class Requests {
         fullName: String,
         title: String,
         party: String,
+        district: String,
         completion: (success: Bool, error: NSError?) -> Void
     ) {
         let representative = PFObject(className: "UserRepresentatives")
         
-        representative["UserID"] = userID
-        representative["imgUrl"] = imageURLString
-        representative["Name"]   = fullName
-        representative["Title"]  = title
-        representative["Party"]  = party
+        representative["UserID"]                  = userID
+        representative["imgUrl"]                  = imageURLString
+        representative["Name"]                    = fullName
+        representative["Title"]                   = title
+        representative["Party"]                   = party
+        representative["congressionalDistrictID"] = district
         
         representative.saveInBackgroundWithBlock(completion)
     }
