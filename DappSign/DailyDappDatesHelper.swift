@@ -33,6 +33,26 @@ class DailyDappDatesHelper {
         return nil
     }
     
+    internal class func timeIntervalBeforeCurrentDailyDappEnd() -> NSTimeInterval? {
+        let currentDate = NSDate()
+        
+        if let currentDailyDappStartDate = self.startDateWithDate(currentDate) {
+            let timeIntervalBeforeCurrentDailyDappEnd =
+            currentDailyDappStartDate.timeIntervalSince1970 - currentDate.timeIntervalSince1970
+            
+            let oneHour = 1.0 * 60.0 * 60.0
+            
+            if timeIntervalBeforeCurrentDailyDappEnd > 0.0 &&
+                timeIntervalBeforeCurrentDailyDappEnd <= oneHour {
+                    return timeIntervalBeforeCurrentDailyDappEnd
+            }
+            
+            return 0.0
+        }
+        
+        return nil
+    }
+    
     // MARK: - 
     
     private class func dateWithDate(date: NSDate, withHour hour: Int) -> NSDate? {

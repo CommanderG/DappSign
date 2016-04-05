@@ -24,6 +24,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var shareOnFacebookButton:       UIButton!
     @IBOutlet weak var tweetThisCardButton:         UIButton!
     @IBOutlet weak var profileButton:               UIButton!
+    @IBOutlet weak var composeButton:               UIButton!
+    @IBOutlet weak var searchButton:                UIButton!
     @IBOutlet weak var dappScoreLabel:              UILabel!
     @IBOutlet weak var linkView:                    LinkView!
     @IBOutlet weak var embedDappView:               EmbedDappView!
@@ -34,6 +36,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var hashtagsLabel:               UILabel!
     @IBOutlet weak var representativeFullNameLabel: UILabel!
     @IBOutlet weak var representativeDistrictLabel: UILabel!
+    @IBOutlet weak var dailyDappTimeLeftLabel:      UILabel!
     
     @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
@@ -47,6 +50,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
     private let flipDuration = 0.5
+    
+    private var dailyDappTimeLeftLabelUpdateTimer: NSTimer? = nil
+    private var dailyDappTimeLeftUpdateTimer: NSTimer? = nil
+    private var dailyDappTimeLeft: (Int, Int)? = nil
     
     var dapps: [PFObject] = []
     var dappsDownloader: DappsDownloader?
@@ -63,9 +70,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         self.representativeImageView.layer.borderColor = UIColor.whiteColor().CGColor
         self.representativeImageView.layer.borderWidth = 2.0
         self.representativeImageView.layer.cornerRadius =
-            CGRectGetWidth(self.representativeImageView.frame) / 2;
+            CGRectGetWidth(self.representativeImageView.frame) / 2
         
-        self.dappScoreLabel.text = nil;
+        let buttons = [
+            self.profileButton,
+            self.composeButton,
+            self.searchButton
+        ]
+        
+        for button in buttons {
+            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.layer.borderWidth = 2.0
+            button.layer.cornerRadius = 6.0
+        }
+        
+        self.searchButton.hidden = true
+        
+        self.dappScoreLabel.text = nil
         
         self.dappViewsContainerView.hidden = true
         self.dappViewsContainerView.delegate = self
@@ -117,6 +138,19 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.initRepresentativeDistrictLabelWithRepresentative(representative)
             self.initRepresentativeImageViewWithRepresentative(representative)
         })
+        
+        self.initTimers()
+        self.updateDailyDappTimeLeftLabel()
+        self.updateDailyDappTimeLeft()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.dailyDappTimeLeftLabelUpdateTimer?.invalidate()
+        self.dailyDappTimeLeftUpdateTimer?.invalidate()
+        
+        self.dailyDappTimeLeft = nil
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -143,6 +177,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func viewDidDisappear(animated: Bool) {
         self.timer?.invalidate()
+    }
+    
+    // MARK: -
+    
+    private func initTimers() {
+        self.dailyDappTimeLeftLabelUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+            target:   self,
+            selector: "updateDailyDappTimeLeftLabel",
+            userInfo: nil,
+            repeats:  true
+        )
+        self.dailyDappTimeLeftUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
+            target:   self,
+            selector: "updateDailyDappTimeLeft",
+            userInfo: nil,
+            repeats:  true
+        )
     }
     
     // MARK: - UI initialization
@@ -528,11 +579,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showProfile" {
-            let profileNC = segue.destinationViewController as! UINavigationController
+            let profileNC = segue.destinationViewController as? UINavigationController
+            let profileVC = profileNC?.viewControllers.first as? ProfileViewController
             
-            if let profileVC = profileNC.viewControllers.first as? ProfileViewController {
-                profileVC.user = PFUser.currentUser()
-            }
+            profileVC?.user = PFUser.currentUser()
         } else if segue.identifier == "embedDappLinksVCSegue" {
             self.dappLinksVC = segue.destinationViewController as? DappLinksVC
             self.dappLinksVC?.view.hidden = true
@@ -561,6 +611,40 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             } else {
                 self.dappScoreLabel.text = "- Dapps"
             }
+        }
+    }
+    
+    // MARK: - timer functions
+    
+    internal func updateDailyDappTimeLeftLabel() {
+        struct show {
+            static var colon = false
+        }
+        
+        show.colon = !show.colon
+        
+        if let (minutes, seconds) = self.dailyDappTimeLeft {
+            let minutesString = self.minutesStringWithMinutes(minutes)
+            
+            if show.colon {
+                self.dailyDappTimeLeftLabel.text = "\(minutes):\(seconds)"
+            } else {
+                self.dailyDappTimeLeftLabel.text = "\(minutes) \(seconds)"
+            }
+        } else {
+            if show.colon {
+                self.dailyDappTimeLeftLabel.text = "--:--"
+            } else {
+                self.dailyDappTimeLeftLabel.text = "-- --"
+            }
+        }
+    }
+    
+    internal func updateDailyDappTimeLeft() {
+        if let timeInterval = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd() {
+            self.dailyDappTimeLeft = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
+        } else {
+            self.dailyDappTimeLeft = nil
         }
     }
     
@@ -921,6 +1005,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     private func hideLabel(label: UILabel) {
         label.alpha = 0.0
+    }
+    
+    // MARK: -
+    
+    private func minutesStringWithMinutes(minutes: Int) -> String {
+        if minutes < 10 {
+            return "0\(minutes)"
+        }
+        
+        return "\(minutes)"
     }
 }
 

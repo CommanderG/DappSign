@@ -32,4 +32,16 @@ class DateHelper {
         
         return (Int(fullHours), Int(fullMinutes))
     }
+    
+    internal class func minutesAndSecondsInTimeInterval(
+        timeInterval: NSTimeInterval
+    ) -> (Int, Int) {
+        let minuteInSeconds      = 60.0
+        let minutes              = timeInterval / minuteInSeconds
+        let (fullMinutes, _)     = modf(minutes)
+        let fullMinutesInSeconds = fullMinutes * minuteInSeconds
+        let seconds              = timeInterval - fullMinutesInSeconds
+        
+        return (Int(fullMinutes), Int(seconds))
+    }
 }
