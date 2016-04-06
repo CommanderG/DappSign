@@ -39,8 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Requests.downloadProhibitedPhrases {
             (prohibitedPhrases: [String], error: NSError?) -> Void in
-            if error == nil {
+            if prohibitedPhrases.count > 0 {
                 ProhibitedPhrases.setProhibitedPhrases(prohibitedPhrases)
+            } else {
+                let defaultProhibitedPhrases = ProhibitedPhrases.defaultProhibitedPhrases()
+                
+                ProhibitedPhrases.setProhibitedPhrases(defaultProhibitedPhrases)
             }
         }
         
