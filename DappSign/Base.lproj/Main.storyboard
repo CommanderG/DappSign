@@ -1387,10 +1387,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OO-wt-4Cc" customClass="LinkView" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <animations/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRV-8I-LT2">
                                 <rect key="frame" x="25" y="68" width="11" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
@@ -1617,6 +1613,10 @@
                                     <constraint firstItem="dch-Ht-a2o" firstAttribute="top" secondItem="9Aa-jo-Gkt" secondAttribute="bottom" constant="-5" id="oMq-cz-Tpt"/>
                                     <constraint firstItem="dch-Ht-a2o" firstAttribute="width" secondItem="iXB-gx-DWe" secondAttribute="width" id="t1V-iG-tap"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OO-wt-4Cc" customClass="LinkView" customModule="DappSign" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <animations/>
                             </view>
                         </subviews>
                         <animations/>
