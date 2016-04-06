@@ -56,21 +56,30 @@ class DappsTableViewController: UITableViewController {
             DappArraysHelper.downloadAllDappsInArray(dappsArray, completion: {
                 (dapps: [PFObject]?, error: NSError?) -> Void in
                 if let dapps = dapps {
-                    let arrayName = dappsArray.rawValue
-                    DappIndexHelper.downloadDappIndexesForArrayWithName(arrayName, completion: {
-                        (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
-                        if let dappIndexes = dappIndexes {
-                            self.dapps = DappsHelper.orderDappsByIndex(dapps,
-                                dappIndexes: dappIndexes,
-                                dappArray: dappsArray
-                            )
-                            self.dappIndexes = dappIndexes
+                    if dappsArray == .Secondary {
+                        DappsHelper.sortDappsByDappScore(dapps, completion: {
+                            (sortedDapps: [PFObject]) -> Void in
+                            self.dapps = sortedDapps
                             
                             self.tableView.reloadData()
-                        } else {
-                            self.showFailedToDownloadDappsError(error, dappsArray: dappsArray)
-                        }
-                    })
+                        })
+                    } else {
+                        let arrayName = dappsArray.rawValue
+                        DappIndexHelper.downloadDappIndexesForArrayWithName(arrayName, completion: {
+                            (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
+                            if let dappIndexes = dappIndexes {
+                                self.dapps = DappsHelper.orderDappsByIndex(dapps,
+                                    dappIndexes: dappIndexes,
+                                    dappArray: dappsArray
+                                )
+                                self.dappIndexes = dappIndexes
+                                
+                                self.tableView.reloadData()
+                            } else {
+                                self.showFailedToDownloadDappsError(error, dappsArray: dappsArray)
+                            }
+                        })
+                    }
                 } else {
                     self.showFailedToDownloadDappsError(error, dappsArray: dappsArray)
                 }

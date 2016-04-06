@@ -23,7 +23,11 @@ class DappTransferHelper {
                 return
             }
             
-            self.addDappIndexForDapp(dapp, dappArray: dappArray, completion: completion)
+            if dappArray == .Secondary {
+                completion(error: nil)
+            } else {
+                self.addDappIndexForDapp(dapp, dappArray: dappArray, completion: completion)
+            }
         }
     }
     
