@@ -94,6 +94,18 @@ class DappsHelper {
         return newDapps
     }
     
+    internal class func downloadHashtagsForDapp(dapp: PFObject,
+        completion: (hashtags: [PFObject]?, error: NSError?) -> Void
+    ) {
+        let hashtagsRelation = dapp.relationForKey("hashtags")
+        let hashtagsRelationQuery = hashtagsRelation.query()
+        
+        ParseHelper.downloadAllObjectsWithQuery(hashtagsRelationQuery, downloadedObjects: []) {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            completion(hashtags: objects, error: error)
+        }
+    }
+    
     // MARK: -
     
     private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {
