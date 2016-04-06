@@ -106,6 +106,29 @@ class DappsHelper {
         }
     }
     
+    internal class func hashtagNamesStringWithHashtags(hashtags: [PFObject]) -> String {
+        let hashtagNames = hashtags.map {
+            (hashtag: PFObject) -> String? in
+            let hashtagName = hashtag["name"] as? String
+            
+            return hashtagName
+        }.filter {
+            (hashtagName: String?) -> Bool in
+            if let _ = hashtagName {
+                return true
+            }
+            
+            return false
+        }.map {
+            (hashtagName: String?) -> String in
+            return "#" + hashtagName!
+        }
+        
+        let hashtagNamesString = hashtagNames.joinWithSeparator(" ")
+        
+        return hashtagNamesString
+    }
+    
     // MARK: -
     
     private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {

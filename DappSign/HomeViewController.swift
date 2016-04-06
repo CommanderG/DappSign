@@ -671,10 +671,23 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.dappViewsContainerView.show()
         }
         
-        self.hashtagsLabel.text = ""
-        
         if (self.visibleDappView == self.dappSignView) {
             let dapp = dapps.first
+            
+            if let dapp = dapp {
+                DappsHelper.downloadHashtagsForDapp(dapp, completion: {
+                    (hashtags: [PFObject]?, error: NSError?) -> Void in
+                    if let hashtags = hashtags {
+                        let hashtagNames = DappsHelper.hashtagNamesStringWithHashtags(hashtags)
+                        
+                        self.hashtagsLabel.text = hashtagNames
+                    } else {
+                        self.hashtagsLabel.text = ""
+                    }
+                })
+            } else {
+                self.hashtagsLabel.text = ""
+            }
             
             self.dappSignView.showDappObject(dapp)
             

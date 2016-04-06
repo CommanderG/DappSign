@@ -24,14 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // production
-//        Parse.setApplicationId("cDeJlDRgoAyGETx9QNNx8Dif22QnLLsuHmgbGjLN",
-//            clientKey: "uanRP24yCqZPpCNoYR0nfiN2dzJyvd42fuYl6mB3"
-//        )
+        Parse.setApplicationId("cDeJlDRgoAyGETx9QNNx8Dif22QnLLsuHmgbGjLN",
+            clientKey: "uanRP24yCqZPpCNoYR0nfiN2dzJyvd42fuYl6mB3"
+        )
         
         // dev
-        Parse.setApplicationId("8lMJvq1reHvZkcsLPXulJjGYyiBo1JwckOjNu2WI",
-            clientKey: "muSDBjY0PRs6qBIJADjFgmPF0mhY9hxNRSMaRoUS"
-        )
+//        Parse.setApplicationId("8lMJvq1reHvZkcsLPXulJjGYyiBo1JwckOjNu2WI",
+//            clientKey: "muSDBjY0PRs6qBIJADjFgmPF0mhY9hxNRSMaRoUS"
+//        )
         
         PFFacebookUtils.initializeFacebook()
         
