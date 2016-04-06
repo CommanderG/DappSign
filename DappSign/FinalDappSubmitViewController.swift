@@ -154,6 +154,16 @@ class FinalDappSubmitViewController: UIViewController {
             print("Dapp created with id: \(dappObj.objectId)")
             print(dappObj)
             
+            DappArraysHelper.addDapp(dappObj, toArray: .Secondary, completion: {
+                (error: NSError?) -> Void in
+                if let error = error {
+                    print(
+                        "Failed to add dapp with ID \(dappObj.objectId) to Secondary array. " +
+                        "Error: \(error.localizedDescription)"
+                    )
+                }
+            })
+            
             Requests.uploadHashtags(dapp.hashtagNames, completion: {
                 (hashtags: [PFObject]?, error: NSError!) -> Void in
                 if error != nil {
