@@ -52,61 +52,54 @@ class FinalDappSubmitViewController: UIViewController {
         
         self.dappSignView.showDapp(self.dapp)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let
-            dappObj = self.dappObj,
-            currentDappCardAsImage = self.dappSignView.toImage() {
-                FacebookHelper.postImageToFacebook(currentDappCardAsImage,
-                    dapp: dappObj,
-                    completion: {
-                        (success: Bool, error: NSError?) -> Void in
-                        if success {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "The card has been successfully posted."
-                            )
-                        } else {
-                            if error != nil {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to post the card. Error: \(error)"
-                                )
-                            } else {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to post the card. Unknown error."
-                                )
-                            }
-                        }
-                })
-            }
+        let dappImage = self.dappSignView.toImage()
+        
+        if let dappObj = self.dappObj, dappImage = dappImage {
+            FacebookHelper.postImageToFacebook(dappImage, dapp: dappObj, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully posted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Unknown error."
+                    )
+                }
+            })
+        }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let
-            dappObj = self.dappObj,
-            currentDappCardAsImage = self.dappSignView.toImage() {
-                TwitterHelper.tweetDapp(dappObj,
-                    image: currentDappCardAsImage,
-                    completion: { (success, error) -> Void in
-                        if success {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "The card has been successfully tweeted."
-                            )
-                        } else {
-                            if error != nil {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to tweet the card. Error: \(error)"
-                                )
-                            } else {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "Failed to tweet the card. Unknown error."
-                                )
-                            }
-                        }
-                })
+        let dappImage = self.dappSignView.toImage()
+        
+        if let dappObj = self.dappObj, dappImage = dappImage {
+            TwitterHelper.tweetDapp(dappObj, image: dappImage, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully tweeted."
+                        )
+                    } else if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Error: \(error)"
+                        )
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Unknown error."
+                        )
+                    }
+            })
         }
     }
     
@@ -145,10 +138,6 @@ class FinalDappSubmitViewController: UIViewController {
         
         dappObj["dappScore"] = dapp.dappScore
         dappObj["isDeleted"] = dapp.isDeleted
-        
-        if let dappTypeId = dapp.dappTypeId {
-            dappObj["dappTypeId"] = dappTypeId
-        }
         
         dappObj.saveInBackgroundWithBlock({
             (succeeded: Bool, error: NSError!) -> Void in

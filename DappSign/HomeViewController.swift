@@ -608,9 +608,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         Requests.userWithID(currentUserID) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user, dappScore = user["dappScore"] as? Int {
-                self.dappScoreLabel.text = "\(dappScore) Dapp"
+                self.dappScoreLabel.text = "\(dappScore)"
             } else {
-                self.dappScoreLabel.text = "- Dapps"
+                self.dappScoreLabel.text = "-"
             }
         }
     }
