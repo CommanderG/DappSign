@@ -516,7 +516,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private func downloadPrimaryDapps(success: Void -> Void) {
         let user = PFUser.currentUser()
         
-        DappArraysHelper.downloadDappsInArray(.Primary, notSwipedByUser: user) {
+        DappArraysHelper.downloadDappsInArray(.Primary, notSwipedAndNotCreatedByUser: user) {
             (dapps: [PFObject]?, error: NSError?) -> Void in
             if error != nil {
                 print(error)
@@ -543,7 +543,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private func downloadSecondaryDapps() {
         let user = PFUser.currentUser()
         
-        DappArraysHelper.downloadDappsInArray(.Secondary, notSwipedByUser: user) {
+        DappArraysHelper.downloadDappsInArray(.Secondary, notSwipedAndNotCreatedByUser: user) {
             (dapps: [PFObject]?, error: NSError?) -> Void in
             if error != nil {
                 print(error)

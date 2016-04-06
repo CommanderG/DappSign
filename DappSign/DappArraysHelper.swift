@@ -32,7 +32,7 @@ class DappArraysHelper {
     }
     
     internal class func downloadDappsInArray(dappArray: DappArray,
-        notSwipedByUser user: PFUser,
+        notSwipedAndNotCreatedByUser user: PFUser,
         completion: (dapps: [PFObject]? , error: NSError?) -> Void
     ) {
         self.downloadAllDappsInArray(dappArray) {
@@ -44,8 +44,18 @@ class DappArraysHelper {
                         let dappsNotSwipedByUser = self.dappsNotSwipedByUserWithAllDapps(allDapps,
                             andDappsSwipedByUser: dappsSwipedByUser
                         )
+                        let dappsNotSwipedAndNotCreatedByUser = dappsNotSwipedByUser.filter({
+                            dapp -> Bool in
+                            let userID = dapp["userid"] as? String
+                            
+                            if user.objectId == userID {
+                                return false
+                            }
+                            
+                            return true
+                        })
                         
-                        completion(dapps: dappsNotSwipedByUser, error: nil)
+                        completion(dapps: dappsNotSwipedAndNotCreatedByUser, error: nil)
                     } else {
                         completion(dapps: nil, error: error)
                     }
