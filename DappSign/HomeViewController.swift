@@ -27,13 +27,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var searchButton:                UIButton!
     @IBOutlet weak var dappScoreLabel:              UILabel!
-    @IBOutlet weak var representativeImageView:     UIImageView!
     @IBOutlet weak var plusOneDappsCountLabel:      UILabel!
     @IBOutlet weak var plusOneRepresentativeLabel:  UILabel!
     @IBOutlet weak var signedLabel:                 UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
-    @IBOutlet weak var representativeFullNameLabel: UILabel!
-    @IBOutlet weak var representativeDistrictLabel: UILabel!
     @IBOutlet weak var dailyDappTimeLeftLabel:      UILabel!
     
     @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
@@ -41,6 +38,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var signedLabelBottomConstraint:             NSLayoutConstraint!
     
     private var embedDappVC: EmbedDappVC? = nil
+    private var representativeVC: RepresentativeVC? = nil
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
     private var dappLinksVC: DappLinksVC?
@@ -57,11 +55,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.representativeImageView.layer.borderColor = UIColor.whiteColor().CGColor
-        self.representativeImageView.layer.borderWidth = 2.0
-        self.representativeImageView.layer.cornerRadius =
-            CGRectGetWidth(self.representativeImageView.frame) / 2
         
         let buttons = [
             self.profileButton,
@@ -117,16 +110,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let currentUser = PFUser.currentUser()
-        
-        Requests.downloadRepresentativesForUserWithID(currentUser.objectId, completion: {
-            (representatives: [PFObject]?, error: NSError?) -> Void in
-            let representative = representatives?.first
-            
-            self.initRepresentativeFullNameLabelWithRepresentative(representative)
-            self.initRepresentativeDistrictLabelWithRepresentative(representative)
-            self.initRepresentativeImageViewWithRepresentative(representative)
-        })
+        self.representativeVC?.reload()
         
         self.initTimers()
         self.updateDailyDappTimeLeftLabel()
@@ -184,38 +168,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             userInfo: nil,
             repeats:  true
         )
-    }
-    
-    // MARK: - UI initialization
-    
-    private func initRepresentativeFullNameLabelWithRepresentative(representative: PFObject?) {
-        if let
-            representative = representative,
-            fullName = RepresentativeHelper.fullNameForRepresentative(representative) {
-                self.representativeFullNameLabel.text = fullName
-        } else {
-            self.representativeFullNameLabel.text = ""
-        }
-    }
-    
-    private func initRepresentativeDistrictLabelWithRepresentative(representative: PFObject?) {
-        if let
-            representative = representative,
-            district = RepresentativeHelper.districtForRepresentative(representative) {
-                self.representativeDistrictLabel.text = district
-        } else {
-            self.representativeDistrictLabel.text = ""
-        }
-    }
-    
-    private func initRepresentativeImageViewWithRepresentative(representative: PFObject?) {
-        if let
-            representative = representative,
-            imageURL = RepresentativeHelper.imageURLForRepresentative(representative) {
-                self.representativeImageView.sd_setImageWithURL(imageURL)
-        } else {
-            self.representativeImageView.image = nil
-        }
     }
     
     // MARK: - @IBActions
@@ -605,6 +557,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 self.embedDappVC = segue.destinationViewController as? EmbedDappVC
                 
                 self.embedDappVC?.view.hidden = true
+            case "embedRepresentativeVC":
+                self.representativeVC = segue.destinationViewController as? RepresentativeVC
             case _:
                 break
             }
@@ -682,7 +636,18 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.dappViewsContainerView.show()
         }
         
-        self.hashtagsLabel.text = ""
+        if let dapp = self.dapps.first {
+            DappsHelper.downloadHashtagsForDapp(dapp, completion: {
+                (hashtags: [PFObject]?, error: NSError?) -> Void in
+                if let hashtags = hashtags {
+                    let hashtagNames = DappsHelper.hashtagNamesStringWithHashtags(hashtags)
+                    
+                    self.hashtagsLabel.text = hashtagNames
+                }
+            })
+        } else {
+            self.hashtagsLabel.text = ""
+        }
         
         if (self.visibleDappView == self.dappSignView) {
             let dapp = dapps.first

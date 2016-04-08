@@ -53,6 +53,7 @@
 		27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */; };
 		27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */; };
 		27D3C2A41CB7F61A009CDB2C /* LinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A31CB7F619009CDB2C /* LinkVC.swift */; };
+		27D3C2A61CB7FB97009CDB2C /* RepresentativeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */; };
 		27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */; };
 		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
@@ -200,6 +201,7 @@
 		27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsWithoutArrayTVC.swift; sourceTree = "<group>"; };
 		27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappVC.swift; sourceTree = "<group>"; };
 		27D3C2A31CB7F619009CDB2C /* LinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVC.swift; sourceTree = "<group>"; };
+		27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeVC.swift; sourceTree = "<group>"; };
 		27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksView.swift; sourceTree = "<group>"; };
 		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */,
 				27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */,
 				27D3C2A31CB7F619009CDB2C /* LinkVC.swift */,
+				27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -970,6 +973,7 @@
 				27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */,
 				274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* LoginVC.swift in Sources */,
+				27D3C2A61CB7FB97009CDB2C /* RepresentativeVC.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */,
