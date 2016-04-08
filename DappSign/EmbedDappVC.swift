@@ -1,0 +1,86 @@
+//
+//  EmbedDappVC.swift
+//  DappSign
+//
+//  Created by Oleksiy Kovtun on 4/8/16.
+//  Copyright © 2016 DappSign. All rights reserved.
+//
+
+import UIKit
+
+class EmbedDappVC: UIViewController {
+    internal static let storyboardID = "embedDappVC"
+    
+    @IBOutlet weak var dappURLLabel:                    UILabel!
+    @IBOutlet weak var dappURLLabelContainerView:       UIView!
+    @IBOutlet weak var iframeCodeTextView:              UITextView!
+    @IBOutlet weak var iframeCodeTextViewContainerView: UIView!
+    @IBOutlet weak var doneButton:                      UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.layer.borderColor = UIColor.whiteColor().CGColor
+        self.view.layer.borderWidth = 2.0
+        self.view.layer.cornerRadius = 20.0
+        
+        self.dappURLLabelContainerView.layer.cornerRadius = 8.0
+        self.iframeCodeTextViewContainerView.layer.cornerRadius = 8.0
+        self.doneButton.layer.cornerRadius = 8.0
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: -
+    
+    internal func showURLAndIFrameCodeForDappWithID(dappID: String) {
+        self.dappURLLabel.text = "http://www.dappsign.com/\(dappID)"
+        self.iframeCodeTextView.text = "<iframe width=\"260\" height=\"420\" " +
+                                       "src=\"http://www.dappsign.com/embed/\(dappID)\" " +
+                                       "frameborder=\"0\"></iframe>"
+    }
+    
+    // MARK: - IBAction
+    
+    @IBAction func copyDappURL() {
+        if let link = self.dappURLLabel.text {
+            let pasteboard = UIPasteboard.generalPasteboard()
+            
+            pasteboard.string = link
+            
+            self.showHUDWithTextCopiedToClipboard()
+        }
+    }
+    
+    @IBAction func copyIFrameCode() {
+        if let iframeCode = self.iframeCodeTextView.text {
+            let pasteboard = UIPasteboard.generalPasteboard()
+            
+            pasteboard.string = iframeCode
+            
+            self.showHUDWithTextCopiedToClipboard()
+        }
+    }
+    
+    @IBAction func done() {
+        self.willMoveToParentViewController(nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
+    }
+    
+    // MARK: -
+    
+    private func showHUDWithTextCopiedToClipboard() {
+        let progressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        progressHUD.mode = MBProgressHUDMode.Text
+        progressHUD.labelText = "Copied to clipboard"
+        
+        delay(0.75) {
+            progressHUD.hide(true)
+        }
+    }
+    
+}

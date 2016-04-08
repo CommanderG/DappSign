@@ -28,7 +28,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var searchButton:                UIButton!
     @IBOutlet weak var dappScoreLabel:              UILabel!
     @IBOutlet weak var linkView:                    LinkView!
-    @IBOutlet weak var embedDappView:               EmbedDappView!
     @IBOutlet weak var representativeImageView:     UIImageView!
     @IBOutlet weak var plusOneDappsCountLabel:      UILabel!
     @IBOutlet weak var plusOneRepresentativeLabel:  UILabel!
@@ -42,26 +41,22 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var signedLabelBottomConstraint:             NSLayoutConstraint!
     
+    private var embedDappVC: EmbedDappVC? = nil
     private var visibleDappView: UIView!
-    private var lastDappedDapp:  PFObject?
-    private var dappLinksVC:     DappLinksVC?
-    private var links:           [Link] = []
-    private var animatingPlusOneLabels = false
-    
-    private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
-    private let flipDuration = 0.5
-    
+    private var lastDappedDapp: PFObject?
+    private var dappLinksVC: DappLinksVC?
+    private var links: [Link] = []
     private var dailyDappTimeLeftLabelUpdateTimer: NSTimer? = nil
     private var dailyDappTimeLeftUpdateTimer: NSTimer? = nil
     private var dailyDappTimeLeft: (Int, Int)? = nil
-    
-    var dapps: [PFObject] = []
-    var dappFonts = DappFonts()
-    var dappColors = DappColors()
-    
-    var timer: NSTimer? = nil
-    
+    private var animatingPlusOneLabels = false
+    private var dapps: [PFObject] = []
+    private var dappFonts = DappFonts()
+    private var dappColors = DappColors()
+    private var timer: NSTimer? = nil
     private var currentDappCardType: DappCardType = .DappCardTypeSign
+    
+    private let flipDuration = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -312,12 +307,27 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func showLinkView(sender: AnyObject) {
-        if let dapp = self.dapps.first {
-            if self.embedDappView.hidden {
-                self.embedDappView.hidden = false
-                
-                self.embedDappView.initURLAndEmbedCodeForDappWithID(dapp.objectId)
-            }
+        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
+            EmbedDappVC.storyboardID
+        ) as? EmbedDappVC
+        
+        if let dapp = self.dapps.first, embedDappVC = embedDappVC {
+            self.addChildViewController(embedDappVC)
+            
+            let dx: CGFloat = 1.5
+            var frame = self.dappViewsContainerView.frame
+            
+            frame.origin.x -= dx
+            frame.origin.y += 16.0
+            frame.size.width += dx * 2
+            frame.size.height -= 58.0
+            
+            embedDappVC.view.frame = frame
+            
+            self.view.addSubview(embedDappVC.view)
+            
+            embedDappVC.didMoveToParentViewController(self)
+            embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
         }
     }
     
@@ -394,7 +404,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 if let error = error {
                     print(
                         "Failed to add dapp with ID \"\(dappID)\" " +
-                        "and statement \"\(dappStatement)\" to DailyDapp. " +
+                            "and statement \"\(dappStatement)\" to DailyDapp. " +
                         "Error: \(error.localizedDescription)"
                     )
                 } else {
@@ -454,8 +464,12 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         
         let FBSession = PFFacebookUtils.session()
         let accessToken = FBSession.accessTokenData.accessToken
+        let URLString = "https://graph.facebook.com/me/picture?" +
+                        "type=large"                             +
+                        "&return_ssl_resources+1"                +
+                        "&access_token=\(accessToken)"
         
-        let url = NSURL(string: "https://graph.facebook.com/me/picture?type=large&return_ssl_resources+1&access_token=\(accessToken)")
+        let url = NSURL(string: URLString)
         let urlRequest = NSURLRequest(URL: url!)
         let queue = NSOperationQueue.mainQueue()
         
@@ -579,24 +593,33 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showProfile" {
-            let profileNC = segue.destinationViewController as? UINavigationController
-            let profileVC = profileNC?.viewControllers.first as? ProfileViewController
-            
-            profileVC?.user = PFUser.currentUser()
-        } else if segue.identifier == "embedDappLinksVCSegue" {
-            self.dappLinksVC = segue.destinationViewController as? DappLinksVC
-            self.dappLinksVC?.view.hidden = true
-            self.dappLinksVC?.delegate = self
-            
-            self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
-            
-            let tapGR = UITapGestureRecognizer(
-                target: self,
-                action: Selector("handleDappLinksTapGesture:")
-            )
-            
-            self.dappLinksVC?.view.addGestureRecognizer(tapGR)
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case "showProfile":
+                let profileNC = segue.destinationViewController as? UINavigationController
+                let profileVC = profileNC?.viewControllers.first as? ProfileViewController
+                
+                profileVC?.user = PFUser.currentUser()
+            case "embedDappLinksVCSegue":
+                self.dappLinksVC = segue.destinationViewController as? DappLinksVC
+                self.dappLinksVC?.view.hidden = true
+                self.dappLinksVC?.delegate = self
+                
+                self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
+                
+                let tapGR = UITapGestureRecognizer(
+                    target: self,
+                    action: Selector("handleDappLinksTapGesture:")
+                )
+                
+                self.dappLinksVC?.view.addGestureRecognizer(tapGR)
+            case "embedEmbedDappVCSegue":
+                self.embedDappVC = segue.destinationViewController as? EmbedDappVC
+                
+                self.embedDappVC?.view.hidden = true
+            case _:
+                break
+            }
         }
     }
     
@@ -671,23 +694,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             self.dappViewsContainerView.show()
         }
         
+        self.hashtagsLabel.text = ""
+        
         if (self.visibleDappView == self.dappSignView) {
             let dapp = dapps.first
-            
-            if let dapp = dapp {
-                DappsHelper.downloadHashtagsForDapp(dapp, completion: {
-                    (hashtags: [PFObject]?, error: NSError?) -> Void in
-                    if let hashtags = hashtags {
-                        let hashtagNames = DappsHelper.hashtagNamesStringWithHashtags(hashtags)
-                        
-                        self.hashtagsLabel.text = hashtagNames
-                    } else {
-                        self.hashtagsLabel.text = ""
-                    }
-                })
-            } else {
-                self.hashtagsLabel.text = ""
-            }
             
             self.dappSignView.showDappObject(dapp)
             
@@ -761,7 +771,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                                 
                                 percents = UInt(
                                     roundf(Float(dappDapps) /
-                                    Float(dappTotalViews) * 100)
+                                        Float(dappTotalViews) * 100)
                                 )
                                 
                                 dappsCount += additionalFreq
@@ -946,8 +956,9 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             let animationDelay =
             (plusOneLabelsMoveUpAnimationDuration / Double(plusOneLabels.count)) * Double(index)
             
-            if let label    = plusOneLabels[index],
-                constraint  = labelTopConstraint[label],
+            if let
+                label = plusOneLabels[index],
+                constraint = labelTopConstraint[label],
                 constantMin = topConstraintMin[constraint],
                 constantMax = constantMaxForConstraint(constraint) {
                     UIView.animateWithDuration(plusOneLabelsMoveUpAnimationDuration,
@@ -955,15 +966,16 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                         usingSpringWithDamping: 0.4,
                         initialSpringVelocity: 0.0,
                         options: .CurveLinear,
-                        animations: { () -> Void in
+                        animations: {
                             self.showLabel(label)
                             
                             constraint.constant = CGFloat(constantMin)
                             
                             self.view.layoutIfNeeded()
-                        }, completion: { (finished: Bool) -> Void in
+                        }, completion: {
+                            (finished: Bool) -> Void in
                             UIView.animateWithDuration(plusOneLabelsDissapearanceAnimationDuration,
-                                animations: { () -> Void in
+                                animations: {
                                     self.hideLabel(label)
                                 }, completion: { (finished: Bool) -> Void in
                                     constraint.constant = CGFloat(constantMax)
@@ -975,22 +987,22 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         }
         
         let bottomConst =
-            CGRectGetHeight(self.view.frame) / 2 - CGRectGetHeight(self.signedLabel.frame) / 2
+        CGRectGetHeight(self.view.frame) / 2 - CGRectGetHeight(self.signedLabel.frame) / 2
         
         self.showLabel(self.signedLabel)
         
         let lastPlusOneAnimationsFinishedDelay =
-            (plusOneLabelsMoveUpAnimationDuration / Double(plusOneLabels.count)) *
+        (plusOneLabelsMoveUpAnimationDuration / Double(plusOneLabels.count)) *
             Double(plusOneLabels.count - 1) +
             plusOneLabelsMoveUpAnimationDuration +
-            plusOneLabelsDissapearanceAnimationDuration
+        plusOneLabelsDissapearanceAnimationDuration
         
         UIView.animateWithDuration(0.5,
             delay: lastPlusOneAnimationsFinishedDelay,
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.0,
             options: .CurveLinear,
-            animations: { () -> Void in
+            animations: {
                 self.signedLabelBottomConstraint.constant = bottomConst
                 self.signedLabel.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 
@@ -999,7 +1011,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 UIView.animateWithDuration(0.3,
                     delay: 0.15,
                     options: .CurveLinear,
-                    animations: { () -> Void in
+                    animations: {
                         self.hideLabel(self.signedLabel)
                     }, completion: { (finished: Bool) -> Void in
                         self.hideSignedLabel()
