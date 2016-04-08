@@ -86,20 +86,39 @@ class FinalDappSubmitViewController: UIViewController {
         if let dappObj = self.dappObj, dappImage = dappImage {
             TwitterHelper.tweetDapp(dappObj, image: dappImage, completion: {
                 (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully tweeted."
-                        )
-                    } else if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Error: \(error)"
-                        )
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Unknown error."
-                        )
-                    }
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Unknown error."
+                    )
+                }
             })
+        }
+    }
+    
+    @IBAction func showLinks(sender: AnyObject) {
+        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
+            EmbedDappVC.storyboardID
+        ) as? EmbedDappVC
+        
+        if let dapp = self.dappObj, embedDappVC = embedDappVC {
+            self.addChildViewController(embedDappVC)
+            
+            let frame = embedDappVC.frameWithDappViewFrame(self.containerView.frame)
+            
+            embedDappVC.view.frame = frame
+            
+            self.view.addSubview(embedDappVC.view)
+            
+            embedDappVC.didMoveToParentViewController(self)
+            embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
         }
     }
     

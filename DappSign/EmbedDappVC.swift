@@ -42,6 +42,19 @@ class EmbedDappVC: UIViewController {
                                        "frameborder=\"0\"></iframe>"
     }
     
+    internal func frameWithDappViewFrame(dappViewFrame: CGRect) -> CGRect {
+        let dx: CGFloat = 1.5
+        
+        var frame = dappViewFrame
+        
+        frame.origin.x -= dx
+        frame.origin.y += 16.0
+        frame.size.width += dx * 2
+        frame.size.height -= 58.0
+        
+        return frame
+    }
+    
     // MARK: - IBAction
     
     @IBAction func copyDappURL() {
@@ -82,5 +95,4 @@ class EmbedDappVC: UIViewController {
             progressHUD.hide(true)
         }
     }
-    
 }

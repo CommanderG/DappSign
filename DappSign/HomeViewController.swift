@@ -314,13 +314,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         if let dapp = self.dapps.first, embedDappVC = embedDappVC {
             self.addChildViewController(embedDappVC)
             
-            let dx: CGFloat = 1.5
-            var frame = self.dappViewsContainerView.frame
-            
-            frame.origin.x -= dx
-            frame.origin.y += 16.0
-            frame.size.width += dx * 2
-            frame.size.height -= 58.0
+            let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
             
             embedDappVC.view.frame = frame
             

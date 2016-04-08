@@ -2395,7 +2395,7 @@
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="showLinkView:" destination="EG5-sL-doW" eventType="touchUpInside" id="gVV-Ye-sZx"/>
+                                            <action selector="showLinks:" destination="TpI-xw-hu0" eventType="touchUpInside" id="Mjd-8E-7bh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52N-Q2-5Y5">
