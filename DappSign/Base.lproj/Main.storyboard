@@ -399,7 +399,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
                                 <rect key="frame" x="68" y="204" width="185" height="26"/>
                                 <animations/>
                                 <constraints>
@@ -410,7 +410,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DappSign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DappSign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
                                 <rect key="frame" x="51" y="117" width="218" height="64"/>
                                 <animations/>
                                 <constraints>
@@ -442,7 +442,7 @@
                             <constraint firstItem="A9c-HG-7TN" firstAttribute="top" secondItem="mUe-E1-ZtY" secondAttribute="bottom" constant="23" id="21P-eN-fRR"/>
                             <constraint firstItem="A9c-HG-7TN" firstAttribute="centerX" secondItem="mUe-E1-ZtY" secondAttribute="centerX" constant="0.5" id="7qe-eg-wJq"/>
                             <constraint firstAttribute="centerX" secondItem="Dc7-Lr-jcy" secondAttribute="centerX" constant="-0.5" id="G5i-X4-v3e"/>
-                            <constraint firstItem="mUe-E1-ZtY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="97" id="PPK-xD-xwY"/>
+                            <constraint firstItem="mUe-E1-ZtY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="117" id="PPK-xD-xwY"/>
                             <constraint firstAttribute="centerX" secondItem="mUe-E1-ZtY" secondAttribute="centerX" id="Vet-oY-Caq"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Dc7-Lr-jcy" secondAttribute="bottom" constant="64" id="kEF-MA-PF7"/>
                         </constraints>

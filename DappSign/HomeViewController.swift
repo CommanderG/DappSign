@@ -51,8 +51,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private var dailyDappTimeLeft: (Int, Int)? = nil
     private var animatingPlusOneLabels = false
     private var dapps: [PFObject] = []
-    private var dappFonts = DappFonts()
-    private var dappColors = DappColors()
     private var timer: NSTimer? = nil
     private var currentDappCardType: DappCardType = .DappCardTypeSign
     
