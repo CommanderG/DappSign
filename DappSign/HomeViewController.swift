@@ -27,7 +27,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var searchButton:                UIButton!
     @IBOutlet weak var dappScoreLabel:              UILabel!
-    @IBOutlet weak var linkView:                    LinkView!
     @IBOutlet weak var representativeImageView:     UIImageView!
     @IBOutlet weak var plusOneDappsCountLabel:      UILabel!
     @IBOutlet weak var plusOneRepresentativeLabel:  UILabel!
@@ -107,9 +106,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         for label in labels {
             self.hideLabel(label)
         }
-        
-        self.linkView.delegate = self
-        self.linkView.hidden = true
         
         self.hashtagsLabel.text = ""
     }
@@ -1043,14 +1039,19 @@ extension HomeViewController: DappLinksVCDelegate {
     func deleteLink(linkToDelete: Link, completion: (success: Bool, error: NSError?) -> Void) {}
     
     func openLinkURL(linkURL: NSURL) {
-        self.linkView.hidden = false
+        let linkVC = self.storyboard?.instantiateViewControllerWithIdentifier(
+            LinkVC.storyboardID
+        ) as? LinkVC
         
-        self.linkView.openURL(linkURL)
-    }
-}
-
-extension HomeViewController: LinkViewDelegate {
-    func closeLinkView() {
-        self.linkView.hidden = true
+        if let linkVC = linkVC {
+            self.addChildViewController(linkVC)
+            
+            linkVC.view.frame = self.view.bounds
+            
+            self.view.addSubview(linkVC.view)
+            
+            linkVC.didMoveToParentViewController(self)
+            linkVC.openURL(linkURL)
+        }
     }
 }

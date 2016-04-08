@@ -1,38 +1,38 @@
 //
-//  LinkView.swift
+//  LinkVC.swift
 //  DappSign
 //
-//  Created by Oleksiy Kovtun on 9/24/15.
-//  Copyright © 2015 DappSign. All rights reserved.
+//  Created by Oleksiy Kovtun on 4/8/16.
+//  Copyright © 2016 DappSign. All rights reserved.
 //
 
 import UIKit
 
-protocol LinkViewDelegate {
-    func closeLinkView()
-}
-
-class LinkView: XIBView {
+class LinkVC: UIViewController {
+    internal static let storyboardID = "linkVC"
+    
     @IBOutlet private var closeButton: UIButton!
     @IBOutlet private var webView: UIWebView!
     
-    internal var delegate: LinkViewDelegate?
-    
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-    }
-    
-    override func awakeFromNib() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let borderColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0).CGColor
         
         self.closeButton.layer.borderWidth = 1.0
         self.closeButton.layer.borderColor = borderColor
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     // MARK: - @IBActions
     
     @IBAction func close() {
-        self.delegate?.closeLinkView()
+        self.willMoveToParentViewController(nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
     
     // MARK: -

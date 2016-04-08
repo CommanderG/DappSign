@@ -36,6 +36,7 @@
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
+            <string>Exo-Regular</string>
         </mutableArray>
         <mutableArray key="Exo-SemiBold.otf">
             <string>Exo-DemiBold</string>
@@ -456,6 +457,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="129" y="297"/>
+        </scene>
+        <!--LinkVC-->
+        <scene sceneID="Yrn-Ur-Cja">
+            <objects>
+                <viewController storyboardIdentifier="linkVC" id="RoV-uS-VGX" customClass="LinkVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z5g-LK-ljs"/>
+                        <viewControllerLayoutGuide type="bottom" id="liN-kt-W0J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qjb-N8-b4h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf8-P8-47g">
+                                <rect key="frame" x="22" y="22" width="276" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RoV-uS-VGX" id="nDm-HK-g9q"/>
+                                </connections>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-dP-tZf">
+                                <rect key="frame" x="282" y="8" width="30" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2U0-Uk-8e8"/>
+                                    <constraint firstAttribute="width" constant="30" id="H36-6N-KLc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="26"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" red="0.17907102690000001" green="0.17907102690000001" blue="0.17907102690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="close" destination="RoV-uS-VGX" eventType="touchUpInside" id="ceQ-2q-Q7V"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kf8-P8-47g" secondAttribute="trailing" constant="22" id="C7g-E1-Cqz"/>
+                            <constraint firstAttribute="trailing" secondItem="IzY-dP-tZf" secondAttribute="trailing" constant="8" id="HU7-JV-uoR"/>
+                            <constraint firstItem="kf8-P8-47g" firstAttribute="leading" secondItem="qjb-N8-b4h" secondAttribute="leading" constant="22" id="Uot-Ln-ZjA"/>
+                            <constraint firstItem="kf8-P8-47g" firstAttribute="top" secondItem="z5g-LK-ljs" secondAttribute="bottom" constant="22" id="cyh-yu-H1j"/>
+                            <constraint firstItem="IzY-dP-tZf" firstAttribute="top" secondItem="z5g-LK-ljs" secondAttribute="bottom" constant="8" id="qeT-Te-vBM"/>
+                            <constraint firstItem="liN-kt-W0J" firstAttribute="top" secondItem="kf8-P8-47g" secondAttribute="bottom" constant="22" id="ztk-aq-El0"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="closeButton" destination="IzY-dP-tZf" id="enf-pe-eH6"/>
+                        <outlet property="webView" destination="kf8-P8-47g" id="1yl-o0-fCw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3C-Cg-TR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="355" y="-416"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TDV-Lk-0ci">
@@ -1617,10 +1678,6 @@
                                     <constraint firstItem="dch-Ht-a2o" firstAttribute="width" secondItem="iXB-gx-DWe" secondAttribute="width" id="t1V-iG-tap"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OO-wt-4Cc" customClass="LinkView" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <animations/>
-                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980392156862" green="0.60392156862745094" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1631,7 +1688,6 @@
                             <constraint firstAttribute="trailing" secondItem="1s5-eb-nyT" secondAttribute="trailing" constant="31" id="31i-Wl-xM1"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="bottom" constant="-2" id="4mK-tV-dEK"/>
                             <constraint firstItem="em8-PH-oFr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FNt-Hl-eRK" secondAttribute="trailing" id="6sy-wb-eJl"/>
-                            <constraint firstItem="1OO-wt-4Cc" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" id="8xS-36-dtU"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="width" secondItem="jKi-D3-2kn" secondAttribute="width" id="8xV-Je-Eda"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="centerX" secondItem="jKi-D3-2kn" secondAttribute="centerX" id="AtA-xm-nPd"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="height" secondItem="Y9h-U7-mgg" secondAttribute="height" id="BMI-hu-8kM"/>
@@ -1639,8 +1695,6 @@
                             <constraint firstAttribute="trailing" secondItem="jKi-D3-2kn" secondAttribute="trailing" constant="30" id="Cm2-OO-rOr"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="2" id="Cyi-tJ-ZpM"/>
                             <constraint firstItem="osF-qS-9VI" firstAttribute="height" secondItem="jKi-D3-2kn" secondAttribute="height" id="F1E-jV-f0Q"/>
-                            <constraint firstItem="1OO-wt-4Cc" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" id="IaY-D2-O4R"/>
-                            <constraint firstAttribute="trailing" secondItem="1OO-wt-4Cc" secondAttribute="trailing" id="K4n-bF-eaL"/>
                             <constraint firstItem="kSv-5s-8f3" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="15" id="K9N-yT-v2G"/>
                             <constraint firstAttribute="trailing" secondItem="Y9h-U7-mgg" secondAttribute="trailing" constant="25" id="KTH-DH-kNc"/>
                             <constraint firstItem="Y9h-U7-mgg" firstAttribute="leading" secondItem="em8-PH-oFr" secondAttribute="trailing" constant="4" id="LId-we-ijT"/>
@@ -1666,7 +1720,6 @@
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="20" id="q9Z-eg-Dvm"/>
                             <constraint firstItem="FNt-Hl-eRK" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="bottom" constant="2" id="qeW-dZ-IUq"/>
                             <constraint firstItem="jKi-D3-2kn" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="qwZ-dY-J0n"/>
-                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="1OO-wt-4Cc" secondAttribute="bottom" id="yPH-YC-W8f"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="38" id="yVX-II-mav"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="centerX" secondItem="Y9h-U7-mgg" secondAttribute="centerX" id="zW2-WQ-GY3"/>
                         </constraints>
@@ -1679,7 +1732,6 @@
                         <outlet property="dappSignView" destination="CL9-dN-aM0" id="e5o-um-HDO"/>
                         <outlet property="dappViewsContainerView" destination="osF-qS-9VI" id="VG8-ml-Uw0"/>
                         <outlet property="hashtagsLabel" destination="1s5-eb-nyT" id="TWp-9H-nTm"/>
-                        <outlet property="linkView" destination="1OO-wt-4Cc" id="YQS-3H-wkg"/>
                         <outlet property="plusOneDappsCountLabel" destination="GdT-Xa-E10" id="7kG-X4-zAa"/>
                         <outlet property="plusOneDappsCountLabelTopConstraint" destination="Cyi-tJ-ZpM" id="Yl8-la-wg4"/>
                         <outlet property="plusOneRepresentativeLabel" destination="ayB-nL-AF9" id="sEz-V7-ttL"/>
