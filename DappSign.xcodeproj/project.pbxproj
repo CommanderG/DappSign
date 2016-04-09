@@ -35,8 +35,6 @@
 		27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27810DF01AB7297300223350 /* IndexedDapps.swift */; };
 		27811A641B9589F8007E97EE /* DappSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A631B9589F8007E97EE /* DappSignView.swift */; };
 		27811A681B959A38007E97EE /* DappSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A671B959A38007E97EE /* DappSignView.xib */; };
-		27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27811A691B95C6FE007E97EE /* DappMappView.swift */; };
-		27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27811A6B1B95C70D007E97EE /* DappMappView.xib */; };
 		2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */; };
 		27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27896E301C8D89F300A6AA4A /* UserHelper.swift */; };
 		27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */; };
@@ -109,6 +107,7 @@
 		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
+		84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */; settings = {ASSET_TAGS = (); }; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
 		84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */; };
 		84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */; };
@@ -181,8 +180,6 @@
 		27810DF01AB7297300223350 /* IndexedDapps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexedDapps.swift; sourceTree = "<group>"; };
 		27811A631B9589F8007E97EE /* DappSignView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignView.swift; sourceTree = "<group>"; };
 		27811A671B959A38007E97EE /* DappSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappSignView.xib; sourceTree = "<group>"; };
-		27811A691B95C6FE007E97EE /* DappMappView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappView.swift; sourceTree = "<group>"; };
-		27811A6B1B95C70D007E97EE /* DappMappView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappMappView.xib; sourceTree = "<group>"; };
 		2788A15E1C738C1D00EBABC7 /* ProhibitedPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProhibitedPhrases.swift; sourceTree = "<group>"; };
 		27896E301C8D89F300A6AA4A /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeHelper.swift; sourceTree = "<group>"; };
@@ -265,6 +262,7 @@
 		8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappHelper.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappVC.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
 		84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappProfileCell.swift; sourceTree = "<group>"; };
 		84D848731AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
@@ -531,8 +529,6 @@
 				274BB0C61B99C3A300D6DC44 /* PercentsView.xib */,
 				27811A631B9589F8007E97EE /* DappSignView.swift */,
 				27811A671B959A38007E97EE /* DappSignView.xib */,
-				27811A691B95C6FE007E97EE /* DappMappView.swift */,
-				27811A6B1B95C70D007E97EE /* DappMappView.xib */,
 				27DAEFED1BAFF4DF001DA66D /* DappLinksView.swift */,
 				27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */,
 				27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */,
@@ -563,6 +559,7 @@
 				27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */,
 				27D3C2A31CB7F619009CDB2C /* LinkVC.swift */,
 				27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */,
+				84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -808,7 +805,6 @@
 				27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */,
 				4CD9C9881AA1D59900046CA2 /* LaunchScreen.xib in Resources */,
 				4CD9C9DB1AA21A5100046CA2 /* Elsie-Regular.otf in Resources */,
-				27811A6C1B95C70D007E97EE /* DappMappView.xib in Resources */,
 				4C1D14F21AC9476700040DE1 /* Exo-Black.otf in Resources */,
 				4CD9C9851AA1D59900046CA2 /* Images.xcassets in Resources */,
 			);
@@ -990,6 +986,7 @@
 				2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */,
 				270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,
+				84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */,
 				27696F4A1BB3EDE800EE391F /* Link.swift in Sources */,
 				27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */,
 				4CD9C97E1AA1D59900046CA2 /* DappSign.xcdatamodeld in Sources */,
@@ -1025,7 +1022,6 @@
 				F37246871AD3ED7600AD56E2 /* UIView+WebCacheOperation.m in Sources */,
 				F372467A1AD3ED7600AD56E2 /* SDImageCache.m in Sources */,
 				27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */,
-				27811A6A1B95C6FE007E97EE /* DappMappView.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
 				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,
 			);

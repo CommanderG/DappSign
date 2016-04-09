@@ -20,7 +20,7 @@ enum DappCardType {
 class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var dappViewsContainerView:      SwipeableView!
     @IBOutlet weak var dappSignView:                DappSignView!
-    @IBOutlet weak var dappMappView:                DappMappView!
+    @IBOutlet weak var dappMappView:                UIView!
     @IBOutlet weak var shareOnFacebookButton:       UIButton!
     @IBOutlet weak var tweetThisCardButton:         UIButton!
     @IBOutlet weak var profileButton:               UIButton!
@@ -39,6 +39,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     
     private var embedDappVC: EmbedDappVC? = nil
     private var representativeVC: RepresentativeVC? = nil
+    private var dappMappVC: DappMappVC? = nil
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
     private var dappLinksVC: DappLinksVC?
@@ -559,6 +560,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 self.embedDappVC?.view.hidden = true
             case "embedRepresentativeVC":
                 self.representativeVC = segue.destinationViewController as? RepresentativeVC
+            case "embedDappMappVC":
+                self.dappMappVC = segue.destinationViewController as? DappMappVC
             case _:
                 break
             }
@@ -650,7 +653,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         }
         
         if (self.visibleDappView == self.dappSignView) {
-            let dapp = dapps.first
+            let dapp = self.dapps.first
             
             self.dappSignView.showDappObject(dapp)
             
@@ -677,112 +680,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 })
             }
         } else if (self.visibleDappView == self.dappMappView) {
-            let SVGMapURL = SVGMapGenerator.generate([:])
-            
-            // placeholders
-            self.dappMappView.show(0, SVGMapURLPath: SVGMapURL, percents: 0)
-            
-            if let dapp = self.lastDappedDapp {
-                Requests.percents(dapp, completion: {
-                    (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
-                    if let usersDapped_ = usersDapped {
-                        if usersDapped_.count >= 20 {
-                            self.downloadDataForMapAndShowIt(usersDapped_, dapp: dapp)
-                            
-                            return
-                        }
-                        
-                        var dappsCount = UInt(10 + arc4random_uniform(20))
-                        var IDsFreqs = CongressionalDistrictsIDs.getRandomIDsFreqs(dappsCount)
-                        let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
-                        var percents = 0 as UInt
-                        
-                        if let
-                            user = PFUser.currentUser(),
-                            congrDistrID = user["congressionalDistrictID"] as? String {
-                                let additionalFreq = UInt(1 + arc4random_uniform(4))
-                                var dappTotalViews = 1 as UInt
-                                var dappDapps = 1 as UInt
-                                
-                                if let freq = IDsFreqs[congrDistrID] as UInt? {
-                                    IDsFreqs[congrDistrID] = freq + additionalFreq
-                                    
-                                    dappTotalViews = freq + additionalFreq
-                                } else {
-                                    IDsFreqs[congrDistrID] = additionalFreq
-                                    
-                                    dappTotalViews = additionalFreq
-                                }
-                                
-                                dappDapps = UInt(arc4random_uniform(UInt32(dappTotalViews)))
-                                
-                                if dappDapps == 0 {
-                                    dappDapps = 1
-                                } else if dappDapps > dappTotalViews {
-                                    dappDapps = dappTotalViews
-                                }
-                                
-                                percents = UInt(
-                                    roundf(Float(dappDapps) /
-                                        Float(dappTotalViews) * 100)
-                                )
-                                
-                                dappsCount += additionalFreq
-                        }
-                        
-                        self.dappMappView.show(dappsCount,
-                            SVGMapURLPath: SVGMapURL,
-                            percents: percents
-                        )
-                    }
-                })
+            if let dapp = self.dapps.first {
+                self.dappMappVC?.showInformationAboutDapp(dapp)
             }
         }
-    }
-    
-    private func downloadDataForMapAndShowIt(usersDapped: [PFObject:Bool], dapp: PFObject) {
-        let dapps = Array(usersDapped.values)
-        
-        CongressionalDistrictsIDs.getIDsFrequenciesForDapp(dapp, completion: {
-            (IDsFreqs: IDsFrequencies?) -> Void in
-            if let IDsFreqs_ = IDsFreqs {
-                var dappScore = 0 as UInt
-                
-                if let dappScore_ = dapp["dappScore"] as? UInt {
-                    dappScore = dappScore_
-                }
-                
-                let SVGMapURL = SVGMapGenerator.generate(IDsFreqs_)
-                let dappedCount = Array(usersDapped.keys).filter({
-                    let currentUser = PFUser.currentUser()
-                    
-                    if let
-                        currentUserCongrDistrID = currentUser["congressionalDistrictID"] as? String,
-                        userCongrDistrID = $0["congressionalDistrictID"] as? String {
-                            if $0.objectId == currentUser.objectId {
-                                // the back end hasn't been updated yet
-                                return true
-                            } else if currentUserCongrDistrID == userCongrDistrID {
-                                if let dapped = usersDapped[$0] as Bool? {
-                                    if dapped == true {
-                                        return true
-                                    }
-                                }
-                            }
-                    }
-                    
-                    return false
-                }).count
-                
-                var percents = 0 as UInt
-                
-                if dappedCount > 0 && dapps.count > 0 {
-                    percents = UInt(roundf(Float(dappedCount) / Float(dapps.count) * 100))
-                }
-                
-                self.dappMappView.show(dappScore, SVGMapURLPath: SVGMapURL, percents: percents)
-            }
-        })
     }
     
     // MARK: - SwipeableViewDelegate

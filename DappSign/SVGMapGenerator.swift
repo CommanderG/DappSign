@@ -617,4 +617,8 @@ class SVGMapGenerator: NSObject {
         
         return nil
     }
+    
+    internal class func districtsCount() -> Int {
+        return congrDstrsCircles.count
+    }
 }
