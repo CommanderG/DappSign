@@ -286,6 +286,7 @@ class AddDappViewController: UIViewController {
             self.fontButtonsContainerView.hidden = true
             
             self.dappMessageTextView.resignFirstResponder()
+            self.hashtagsTextView.resignFirstResponder()
         case .AddText:
             self.titleLabel.text = "Choose your message."
             self.dappMessageTextView.editable = true
@@ -304,6 +305,7 @@ class AddDappViewController: UIViewController {
             self.fontButtonsContainerView.hidden = false
             
             self.dappMessageTextView.resignFirstResponder()
+            self.hashtagsTextView.resignFirstResponder()
         }
         
         self.updateDappMessageContainerViewBottomConstraintForCurrentMode()
