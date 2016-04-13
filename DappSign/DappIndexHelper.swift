@@ -63,6 +63,12 @@ class DappIndexHelper {
         dappArray: DappArray,
         completion: (error: NSError?) -> Void
     ) {
+        if dappArray == .Secondary {
+            completion(error: nil)
+            
+            return
+        }
+        
         let query = PFQuery(className: dappIndexClassName)
         
         query.whereKey(dappIDColumn, equalTo: dappID)

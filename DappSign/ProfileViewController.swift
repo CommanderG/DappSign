@@ -72,17 +72,17 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         nameLabel.text = user["name"] as? String
         
-        if let currentUser = PFUser.currentUser() {
-            let mainBundle = NSBundle.mainBundle()
-            
-            if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-                if !adminUsersIDs.contains(currentUser.objectId) || self.user.objectId != currentUser.objectId {
-                    self.navigationItem.rightBarButtonItem = nil
-                }
-            }
-        } else {
-            self.navigationItem.rightBarButtonItem = nil
-        }
+//        if let currentUser = PFUser.currentUser() {
+//            let mainBundle = NSBundle.mainBundle()
+//            
+//            if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
+//                if !adminUsersIDs.contains(currentUser.objectId) || self.user.objectId != currentUser.objectId {
+//                    self.navigationItem.rightBarButtonItem = nil
+//                }
+//            }
+//        } else {
+//            self.navigationItem.rightBarButtonItem = nil
+//        }
         
         self.downloadDapps()
     }

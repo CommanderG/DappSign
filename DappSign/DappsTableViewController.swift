@@ -481,6 +481,13 @@ extension DappsTableViewController: UIActionSheetDelegate {
             
             self.dapps.removeAtIndex(dappIndex)
             self.tableView.reloadData()
+            
+            if (dappArray == .Secondary) {
+                success?()
+                
+                return
+            }
+            
             DappIndexHelper.updateDappIndexes(self.dappIndexes,
                 byDeletingDappIndexForDeletedDapp: dapp,
                 completion: {
@@ -501,6 +508,9 @@ extension DappsTableViewController: UIActionSheetDelegate {
         toArray dappArrayToAddTo: DappArray,
         afterRemovingItFromArray dappArrayToRemoveFrom: DappArray
     ) {
+        let dappStatement = dapp["dappStatement"]
+        print(" - moveDapp \(dappStatement)")
+        
         self.removeDapp(dapp, fromArray: dappArrayToRemoveFrom, dappIndex: dappIndex, success: {
             DappTransferHelper.addDapp(dapp, toArray: dappArrayToAddTo, completion: {
                 (error: NSError?) -> Void in
