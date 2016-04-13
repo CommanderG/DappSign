@@ -42,8 +42,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     private var dappMappVC: DappMappVC? = nil
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
-    private var dappLinksVC: DappLinksVC?
-    private var links: [Link] = []
+    private var dappBackSideLinksVC: DappBackSideLinksVC?
     private var dailyDappTimeLeftLabelUpdateTimer: NSTimer? = nil
     private var dailyDappTimeLeftUpdateTimer: NSTimer? = nil
     private var dailyDappTimeLeft: (Int, Int)? = nil
@@ -174,35 +173,21 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     // MARK: - @IBActions
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappLinksVCView = self.dappLinksVC?.view {
+        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.dapps.first {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
-                view2: dappLinksVCView
+                view2: dappBackSideLinksVC.view
             )
-        }
-        
-        if let dapp = self.dapps.first {
-            Requests.downloadLinksForDapp(dapp, completion: {
-                (linkObjs: [PFObject]?, error: NSError?) -> Void in
-                self.links.removeAll()
-                self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
-                
-                if let linkObjs = linkObjs {
-                    self.links = self.linksWithLinkObjs(linkObjs)
-                    
-                    self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
-                } else if let error = error {
-                    print("Error downloading links for dapp with ID \(dapp.objectId): \(error)")
-                }
-            })
+            
+            dappBackSideLinksVC.showLinksForDapp(dapp)
         }
     }
     
     @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappLinksVCView = self.dappLinksVC?.view {
+        if let dappBackSideLinksView = self.dappBackSideLinksVC?.view {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
-                view2: dappLinksVCView
+                view2: dappBackSideLinksView
             )
         }
     }
@@ -377,17 +362,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
         })
     }
     
-    private func linksWithLinkObjs(linkObjs: [PFObject]) -> [Link] {
-        let links = linkObjs.map({
-            linkObj -> Link in
-            let link = Link(linkObj: linkObj)
-            
-            return link
-        })
-        
-        return links
-    }
-    
     // MARK: - Requests
     
     private func updateUserInformation() {
@@ -541,19 +515,18 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 let profileVC = profileNC?.viewControllers.first as? ProfileViewController
                 
                 profileVC?.user = PFUser.currentUser()
-            case "embedDappLinksVCSegue":
-                self.dappLinksVC = segue.destinationViewController as? DappLinksVC
-                self.dappLinksVC?.view.hidden = true
-                self.dappLinksVC?.delegate = self
+            case "embedDappBackSideLinksVC":
+                self.dappBackSideLinksVC = segue.destinationViewController as? DappBackSideLinksVC
                 
-                self.dappLinksVC?.initWithMode(.Read, andLinks: self.links)
+                self.dappBackSideLinksVC?.view.hidden = true
+                self.dappBackSideLinksVC?.delegate = self
                 
                 let tapGR = UITapGestureRecognizer(
                     target: self,
                     action: Selector("handleDappLinksTapGesture:")
                 )
                 
-                self.dappLinksVC?.view.addGestureRecognizer(tapGR)
+                self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
             case "embedEmbedDappVCSegue":
                 self.embedDappVC = segue.destinationViewController as? EmbedDappVC
                 
@@ -656,14 +629,6 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
             let dapp = self.dapps.first
             
             self.dappSignView.showDappObject(dapp)
-            
-            if let
-                dapp = dapp,
-                dappBgColoName = dapp["dappBackgroundColor"] as? String,
-                colorName = ColorName(rawValue: dappBgColoName) {
-                    self.dappLinksVC?.view.backgroundColor =
-                        DappColors.colorWithColorName(colorName)
-            }
             
             if let dapp_ = dapp {
                 Requests.addUserToUsersWhoSaw(dapp_, user: PFUser.currentUser(), completion: {
@@ -899,12 +864,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
 }
 
-extension HomeViewController: DappLinksVCDelegate {
-    func addLink(link: Link, completion: (success: Bool, error: NSError?) -> Void) {}
-    
-    func deleteLink(linkToDelete: Link, completion: (success: Bool, error: NSError?) -> Void) {}
-    
-    func openLinkURL(linkURL: NSURL) {
+extension HomeViewController: DappBackSideLinksVCDelegate {
+    func openLinkWithURL(linkURL: NSURL) {
         let linkVC = self.storyboard?.instantiateViewControllerWithIdentifier(
             LinkVC.storyboardID
         ) as? LinkVC

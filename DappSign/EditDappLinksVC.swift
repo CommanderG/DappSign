@@ -27,6 +27,8 @@ class EditDappLinksVC: UIViewController {
         self.dappLinksVC?.view.userInteractionEnabled = false
         self.dappLinksVC?.view.alpha = 0.5
         
+        self.dappLinksVC?.addBorder()
+        
         if let dapp = self.dapp {
             Requests.downloadLinksForDapp(dapp, completion: {
                 (linkObjs: [PFObject]?, error: NSError?) -> Void in

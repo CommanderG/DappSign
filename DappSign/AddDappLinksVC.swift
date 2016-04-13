@@ -36,6 +36,7 @@ class AddDappLinksVC: UIViewController {
                 let dappLinksVC = segue.destinationViewController as? DappLinksVC
                 
                 dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
+                dappLinksVC?.addBorder()
                 
                 dappLinksVC?.delegate = self
                 

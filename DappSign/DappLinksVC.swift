@@ -21,6 +21,8 @@ enum DappLinksVCMode {
 
 class DappLinksVC: UIViewController {
     @IBOutlet weak var linksTableView: UITableView!
+    @IBOutlet weak var tableViewTopLC: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomLC: NSLayoutConstraint!
     
     private var linkCellsInfo: [LinkCellInfo] = []
     private var mode = DappLinksVCMode.AddEdit
@@ -29,10 +31,6 @@ class DappLinksVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.layer.cornerRadius = 12.0
-        self.view.layer.borderColor = UIColor.whiteColor().CGColor
-        self.view.layer.borderWidth = 2.0
         
         self.linksTableView.estimatedRowHeight = 100.0
         self.linksTableView.rowHeight = UITableViewAutomaticDimension
@@ -75,6 +73,12 @@ class DappLinksVC: UIViewController {
         if self.linksTableView != nil {
             self.linksTableView.reloadData()
         }
+    }
+    
+    internal func addBorder() {
+        self.view.layer.cornerRadius = 12.0
+        self.view.layer.borderColor = UIColor.whiteColor().CGColor
+        self.view.layer.borderWidth = 2.0
     }
 }
 
