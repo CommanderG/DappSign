@@ -37,7 +37,7 @@ class LoginVC: UIViewController {
                 } else {
                     print("User logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier("showHomeViewController", sender: self)
+                    self.performSegueWithIdentifier("showMainVC", sender: self)
                 }
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")

@@ -361,6 +361,7 @@ class AddDappViewController: UIViewController {
             let linksVC = segue.destinationViewController as? AddDappLinksVC
             
             linksVC?.dapp = dapp
+            linksVC?.addDappVC = self
         }
     }
 }

@@ -49,7 +49,7 @@
         <!--ScoreboardVC-->
         <scene sceneID="wTc-DD-CRb">
             <objects>
-                <viewController id="PwR-Zb-Hy4" customClass="ScoreboardVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scoreboardVC" id="PwR-Zb-Hy4" customClass="ScoreboardVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oUj-zD-NFi"/>
                         <viewControllerLayoutGuide type="bottom" id="Rji-im-Yxj"/>
@@ -71,6 +71,9 @@
                                         <state key="normal" title="Profile">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="2Do-FT-vzw" kind="modal" id="8GL-5h-4zG"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCc-zy-45M">
                                         <rect key="frame" x="85" y="0.0" width="122" height="40"/>
@@ -88,6 +91,9 @@
                                         <state key="normal" title="Compose">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="Run-wI-cqj" kind="modal" id="fu7-hF-c08"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -388,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2x-05-Uay" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="-416"/>
+            <point key="canvasLocation" x="1121" y="-512"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="ufC-wZ-h7g">
@@ -452,8 +458,8 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewController" id="XgB-ZI-Ie0"/>
                         <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="iW7-1y-626"/>
+                        <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="4GY-aV-x4s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -623,6 +629,24 @@
             </objects>
             <point key="canvasLocation" x="1534" y="910.5"/>
         </scene>
+        <!--MainVC-->
+        <scene sceneID="5ma-5g-yJf">
+            <objects>
+                <viewController id="Hgo-sM-Fqq" customClass="MainVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8D2-Tw-27Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="SDD-CH-ZAW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XAL-AS-iAw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yYY-oY-Rtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="567" y="297"/>
+        </scene>
         <!--LinkVC-->
         <scene sceneID="Yrn-Ur-Cja">
             <objects>
@@ -681,7 +705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3C-Cg-TR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="355" y="-416"/>
+            <point key="canvasLocation" x="167" y="-552"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TDV-Lk-0ci">
@@ -699,7 +723,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKP-BR-v9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534" y="-416"/>
+            <point key="canvasLocation" x="1558" y="-512"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZY8-BZ-3bG">
@@ -716,7 +740,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3r-he-z8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="1592"/>
+            <point key="canvasLocation" x="2449" y="1452"/>
         </scene>
         <!--Dapps View Controller-->
         <scene sceneID="Pgl-cl-cad">
@@ -944,7 +968,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2414" y="1592"/>
+            <point key="canvasLocation" x="2902" y="1452"/>
         </scene>
         <!--Profile-->
         <scene sceneID="gWr-LM-htg">
@@ -1137,7 +1161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKa-cP-7uM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="-416"/>
+            <point key="canvasLocation" x="2031" y="-512"/>
         </scene>
         <!--Admin-->
         <scene sceneID="lVc-PM-esS">
@@ -1315,7 +1339,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvL-tt-a6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-1805"/>
+            <point key="canvasLocation" x="2472" y="-1905"/>
         </scene>
         <!--No Array Dapps-->
         <scene sceneID="06S-ss-Qab">
@@ -1353,7 +1377,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKR-Dp-yaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2915" y="-1093"/>
+            <point key="canvasLocation" x="2927" y="-1193"/>
         </scene>
         <!--Dapps Table View Controller-->
         <scene sceneID="Hlb-zG-ZSx">
@@ -1413,7 +1437,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvy-QZ-SB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887" y="-1805"/>
+            <point key="canvasLocation" x="2899" y="-1905"/>
         </scene>
         <!--Search-->
         <scene sceneID="fg3-xU-1Bh">
@@ -1425,7 +1449,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="H1x-NN-A95">
-                            <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <textInputTraits key="textInputTraits"/>
@@ -1435,7 +1459,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="dps-q4-Vnq">
-                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dps-q4-Vnq" id="kLq-xk-Fo2">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1445,7 +1469,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="154" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T84-8X-LD8" id="1lD-Lw-W7s">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1491,7 +1515,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47c-zB-9bY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534" y="1574"/>
+            <point key="canvasLocation" x="1546" y="1574"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kBy-el-lCE">
@@ -1509,7 +1533,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jml-41-IBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="1574"/>
+            <point key="canvasLocation" x="1121" y="1574"/>
         </scene>
         <!--Zip Code View Controller-->
         <scene sceneID="W0c-qM-8D3">
@@ -1609,12 +1633,12 @@
                         <outlet property="representativeFullNameLabel" destination="Aok-3g-N1C" id="b8a-VR-PHt"/>
                         <outlet property="representativeImageView" destination="ojE-An-Alf" id="WKn-qE-nOb"/>
                         <outlet property="zipCodeTextField" destination="zVZ-1C-d5L" id="hyM-OT-gC6"/>
-                        <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewController" modalTransitionStyle="coverVertical" id="CAe-Fl-ep4"/>
+                        <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="JZT-Iw-ftM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7y-QZ-lCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="1012"/>
+            <point key="canvasLocation" x="129" y="1029"/>
         </scene>
         <!--Dapp Back Side LinksVC-->
         <scene sceneID="fGF-c1-anh">
@@ -1698,7 +1722,7 @@
         <!--Home View Controller-->
         <scene sceneID="01m-FC-o7H">
             <objects>
-                <viewController id="EG5-sL-doW" customClass="HomeViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeVC" id="EG5-sL-doW" customClass="HomeViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1wQ-Gn-sef"/>
                         <viewControllerLayoutGuide type="bottom" id="9LT-gV-9QU"/>
@@ -1707,7 +1731,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSv-5s-8f3">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSv-5s-8f3">
                                 <rect key="frame" x="19" y="15" width="282" height="51"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vml-Hd-jrV">
@@ -1799,7 +1823,7 @@
                                     <constraint firstItem="dch-Ht-a2o" firstAttribute="width" secondItem="iXB-gx-DWe" secondAttribute="width" id="t1V-iG-tap"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-ni-urr">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-ni-urr">
                                 <rect key="frame" x="90" y="64" width="205" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sH5-im-F6I"/>
@@ -1808,27 +1832,27 @@
                                     <segue destination="8KN-fy-Qhr" kind="embed" identifier="embedRepresentativeVC" id="Xgp-T8-7r8"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRV-8I-LT2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRV-8I-LT2">
                                 <rect key="frame" x="25" y="69" width="11" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNt-Hl-eRK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dapp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNt-Hl-eRK">
                                 <rect key="frame" x="38" y="68" width="44" height="26"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-Xa-E10">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-Xa-E10">
                                 <rect key="frame" x="38" y="2" width="101" height="160"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="120"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-nL-AF9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-nL-AF9">
                                 <rect key="frame" x="263" y="66" width="40" height="40"/>
                                 <animations/>
                                 <constraints>
@@ -1838,7 +1862,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="hashtags" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1s5-eb-nyT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="hashtags" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1s5-eb-nyT">
                                 <rect key="frame" x="31" y="106" width="258" height="20"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1886,21 +1910,21 @@
                                     <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="8ce-ju-qMi"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-Tb-bMp">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-Tb-bMp">
                                 <rect key="frame" x="30" y="131" width="260" height="363"/>
                                 <connections>
                                     <segue destination="uCZ-4j-vJ6" kind="embed" identifier="embedDappBackSideLinksVC" id="VIb-Ct-6ma"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
                                 <rect key="frame" x="30" y="131" width="260" height="363"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CL9-dN-aM0" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CL9-dN-aM0" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
                                         <animations/>
                                         <gestureRecognizers/>
                                     </view>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-hP-uaa">
+                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-hP-uaa">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
                                         <connections>
                                             <segue destination="KpH-yQ-AVM" kind="embed" identifier="embedDappMappVC" id="Kqc-ii-ahC"/>
@@ -1996,7 +2020,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1101" y="297"/>
+            <point key="canvasLocation" x="1121" y="297"/>
         </scene>
         <!--Add Dapp View Controller-->
         <scene sceneID="TsA-eP-hJD">
@@ -2519,7 +2543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KV4-ET-l2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534" y="297"/>
+            <point key="canvasLocation" x="1558" y="297"/>
         </scene>
         <!--Add Dapp LinksVC-->
         <scene sceneID="X2g-8d-dnS">
@@ -2803,12 +2827,11 @@
                         <outlet property="dappSignView" destination="fce-Bw-mDk" id="toH-pc-g2A"/>
                         <outlet property="shareOnFacebookButton" destination="52N-Q2-5Y5" id="xWT-iV-6Eg"/>
                         <outlet property="tweetThisCardButton" destination="4hu-Hr-qjl" id="GGD-hb-SnJ"/>
-                        <segue destination="EG5-sL-doW" kind="modal" identifier="showHomeViewControllerAfterSubmit" id="mYk-4f-hdk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92c-rD-MDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-416"/>
+            <point key="canvasLocation" x="2492" y="297"/>
         </scene>
         <!--Dapp LinksVC-->
         <scene sceneID="zp8-lC-DXf">
@@ -3119,7 +3142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQt-5N-U6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887" y="297"/>
+            <point key="canvasLocation" x="2893" y="911"/>
         </scene>
         <!--DailyDapp Start Time-->
         <scene sceneID="saj-wb-Kq1">
@@ -3161,7 +3184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ual-FL-apy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-1093"/>
+            <point key="canvasLocation" x="2472" y="-1193"/>
         </scene>
         <!--Edit Links-->
         <scene sceneID="Sth-3F-d7h">
@@ -3196,7 +3219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQO-0h-MWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887" y="-416"/>
+            <point key="canvasLocation" x="2887" y="-512"/>
         </scene>
         <!--Embed DappVC-->
         <scene sceneID="l9f-t8-zCf">
@@ -3326,7 +3349,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDz-Pf-nhh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="710" y="-416"/>
+            <point key="canvasLocation" x="522" y="-552"/>
         </scene>
     </scenes>
     <resources>
@@ -3344,8 +3367,10 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XgB-ZI-Ie0"/>
+        <segue reference="8GL-5h-4zG"/>
+        <segue reference="fu7-hF-c08"/>
         <segue reference="Ffg-Dq-WrU"/>
         <segue reference="D2a-aL-0oF"/>
+        <segue reference="JZT-Iw-ftM"/>
     </inferredMetricsTieBreakers>
 </document>

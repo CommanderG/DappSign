@@ -37,6 +37,8 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var signedLabelBottomConstraint:             NSLayoutConstraint!
     
+    internal var transitionDelegate: TransitionDelegate? = nil
+    
     private var embedDappVC: EmbedDappVC? = nil
     private var representativeVC: RepresentativeVC? = nil
     private var dappMappVC: DappMappVC? = nil
@@ -573,6 +575,10 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
                 self.dailyDappTimeLeftLabel.text = "\(minutesString):\(secondsString)"
             } else {
                 self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
+            }
+            
+            if minutes == 0 && seconds == 0 {
+                self.transitionDelegate?.transitionFromViewController(self)
             }
         } else {
             if show.colon {

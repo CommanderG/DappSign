@@ -15,6 +15,8 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var representativeImageView:     UIImageView!
     @IBOutlet weak var representativeNameLabel:     UILabel!
     
+    internal var transitionDelegate: TransitionDelegate? = nil
+    
     private var timeUntilNextDailyDappLabelUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDapp: (Int, Int)? = nil
@@ -67,7 +69,7 @@ class ScoreboardVC: UIViewController {
             userInfo: nil,
             repeats:  true
         )
-        self.timeUntilNextDailyDappUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(5.0,
+        self.timeUntilNextDailyDappUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
             target:   self,
             selector: "updateTimeUntilNextDailyDapp",
             userInfo: nil,
@@ -91,6 +93,12 @@ class ScoreboardVC: UIViewController {
                 self.timeUntilNextDailyDappLabel.text = "\(hours):\(minutesString)"
             } else {
                 self.timeUntilNextDailyDappLabel.text = "\(hours) \(minutesString)"
+            }
+            
+            let lessThanOneHourLeft = hours == 23 && minutes > 0
+            
+            if lessThanOneHourLeft {
+                self.transitionDelegate?.transitionFromViewController(self)
             }
         } else {
             if show.colon {

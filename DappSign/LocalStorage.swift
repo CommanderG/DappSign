@@ -17,8 +17,6 @@ class LocalStorage {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         if let timeString = userDefaults.objectForKey(_KeyDailyDappStartTime) as? String {
-            print(timeString)
-            
             let components = timeString.componentsSeparatedByString(":")
             
             if components.count == 2 {

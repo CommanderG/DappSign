@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    internal var user: PFUser!
+    internal var user: PFUser?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var privateSwitch: UISwitch!
@@ -38,17 +38,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.user.objectId != PFUser.currentUser().objectId {
-            Requests.downloadDappsSwipedByUser(PFUser.currentUser(), completion: {
-                (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
-                    print(error)
+        if let user = self.user {
+            let currentUser = PFUser.currentUser()
+            
+            if user.objectId != currentUser.objectId {
+                Requests.downloadDappsSwipedByUser(PFUser.currentUser(), completion: {
+                    (dapps: [PFObject], error: NSError!) -> Void in
+                    if error != nil {
+                        print(error)
+                        
+                        return
+                    }
                     
-                    return
-                }
-                
-                self.dappsIdsSwipedByLoggedInUser = dapps.map({ $0.objectId })
-            })
+                    self.dappsIdsSwipedByLoggedInUser = dapps.map({ $0.objectId })
+                })
+            }
         }
         
         if let font = UIFont(name: "Exo-Regular", size: 18.0) {
@@ -66,11 +70,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             )
         }
         
-        if let imageData = user["image"] as? NSData {
+        if let imageData = user?["image"] as? NSData {
             profilePic.image = UIImage(data: imageData)
         }
         
-        nameLabel.text = user["name"] as? String
+        nameLabel.text = user?["name"] as? String
         
 //        if let currentUser = PFUser.currentUser() {
 //            let mainBundle = NSBundle.mainBundle()
@@ -173,7 +177,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     private func canShowDappButtonInCellWithDappWithId(dappId: String) -> Bool {
-        if self.user.objectId == PFUser.currentUser().objectId {
+        if self.user?.objectId == PFUser.currentUser().objectId {
             return false
         }
         
@@ -199,47 +203,51 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     private func downloadDappsCreatedByUser() {
-        Requests.downloadDappsCreatedByUserWithId(self.user.objectId, completion: {
-            (dapps: [PFObject], error: NSError!) -> Void in
-            if error != nil {
-                let alertView = UIAlertView(
-                    title: "Error",
-                    message: error.localizedDescription,
-                    delegate: nil,
-                    cancelButtonTitle: "OK"
-                )
+        if let user = self.user {
+            Requests.downloadDappsCreatedByUserWithId(user.objectId, completion: {
+                (dapps: [PFObject], error: NSError!) -> Void in
+                if error != nil {
+                    let alertView = UIAlertView(
+                        title: "Error",
+                        message: error.localizedDescription,
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+                    
+                    return
+                }
                 
-                alertView.show()
+                self.dappsCreatedByUserInProfile = dapps
                 
-                return
-            }
-            
-            self.dappsCreatedByUserInProfile = dapps
-            
-            self.tableView.reloadData()
-        })
+                self.tableView.reloadData()
+            })
+        }
     }
     
     private func downloadDappsSwipedByUser() {
-        Requests.downloadDappsSwipedByUser(self.user, completion: {
-            (dapps: [PFObject], error: NSError!) -> Void in
-            if error != nil {
-                let alertView = UIAlertView(
-                    title: "Error",
-                    message: error.localizedDescription,
-                    delegate: nil,
-                    cancelButtonTitle: "OK"
-                )
+        if let user = self.user {
+            Requests.downloadDappsSwipedByUser(user, completion: {
+                (dapps: [PFObject], error: NSError!) -> Void in
+                if error != nil {
+                    let alertView = UIAlertView(
+                        title: "Error",
+                        message: error.localizedDescription,
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+                    
+                    return
+                }
                 
-                alertView.show()
+                self.dappsSwipedByUserInProfile = dapps
                 
-                return
-            }
-            
-            self.dappsSwipedByUserInProfile = dapps
-            
-            self.tableView.reloadData()
-        })
+                self.tableView.reloadData()
+            })
+        }
     }
     
     private func dapp(dapp: PFObject, completion: (succeeded: Bool) -> Void) {

@@ -50,7 +50,7 @@ class ZipCodeViewController: UIViewController {
                         self.saveHouseRepresentativeOnParse(houseRepresentative, completion: {
                             (success: Bool) -> Void in
                             if success {
-                                self.performSegueWithIdentifier("showHomeViewController", sender: self)
+                                self.performSegueWithIdentifier("showMainVC", sender: self)
                             } else {
                                 self.nextButton.alpha = 1.0
                                 self.nextButton.userInteractionEnabled = true

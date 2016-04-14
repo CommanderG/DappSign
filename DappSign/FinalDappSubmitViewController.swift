@@ -16,6 +16,8 @@ class FinalDappSubmitViewController: UIViewController {
     
     internal var dapp: Dapp?
     internal var links: [Link]?
+    internal var addDappVC: AddDappViewController?
+    internal var addDappLinksVC: AddDappLinksVC?
     
     private var dappObj: PFObject?
     
@@ -276,7 +278,11 @@ class FinalDappSubmitViewController: UIViewController {
 
 extension FinalDappSubmitViewController: SwipeableViewDelegate {
     func willShow(swipeDirection: SwipeDirection) {
-        self.performSegueWithIdentifier("showHomeViewControllerAfterSubmit", sender: self)
+        self.dismissViewControllerAnimated(true, completion: {
+            self.addDappLinksVC?.dismissViewControllerAnimated(true, completion: {
+                self.addDappVC?.dismissViewControllerAnimated(true, completion: nil)
+            })
+        })
     }
     
     func didSwipe(swipeDirection: SwipeDirection) {}

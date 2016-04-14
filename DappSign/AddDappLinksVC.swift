@@ -17,6 +17,7 @@ class AddDappLinksVC: UIViewController {
     private var links: [Link] = []
     
     internal var dapp: Dapp?
+    internal var addDappVC: AddDappViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,8 @@ class AddDappLinksVC: UIViewController {
                 
                 finalDappSubmitVC?.dapp = self.dapp
                 finalDappSubmitVC?.links = self.links
+                finalDappSubmitVC?.addDappVC = self.addDappVC
+                finalDappSubmitVC?.addDappLinksVC = self
             case _:
                 break
             }
