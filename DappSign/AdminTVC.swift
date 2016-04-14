@@ -1,5 +1,5 @@
 //
-//  EditDappsTableViewController.swift
+//  AdminTVC.swift
 //  DappSign
 //
 //  Created by Oleksiy Kovtun on 3/13/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditDappsTableViewController: UITableViewController {
+class AdminTVC: UITableViewController {
     var dappArrayDappsCount: [DappArray: Int32?] = [
         .Primary:      nil,
         .Secondary:    nil,
@@ -28,6 +28,11 @@ class EditDappsTableViewController: UITableViewController {
         case ShowSecondaryDapps    = "showSecondaryDapps"
         case ShowIntroductoryDapps = "showIntroductoryDapps"
         case ShowScoreboardDapps   = "showScoreboardDapps"
+    }
+    
+    enum Section: Int {
+        case Dapps = 0
+        case DailyDappTime = 1
     }
     
     override func viewDidLoad() {
@@ -77,11 +82,29 @@ class EditDappsTableViewController: UITableViewController {
     ) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        if let dappArray = self.rowDappArray[indexPath.row] {
-            self.showDappCountInCell(cell, dappArray: dappArray)
+        if (indexPath.section == Section.Dapps.rawValue) {
+            if let dappArray = self.rowDappArray[indexPath.row] {
+                self.showDappCountInCell(cell, dappArray: dappArray)
+            }
+        } else {
+            cell.textLabel?.text = "Time"
         }
         
         return cell
+    }
+    
+    // MARK: - <UITableViewDelegate>
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if (indexPath.section == Section.DailyDappTime.rawValue) {
+            let dp = UIDatePicker()
+            
+            dp.datePickerMode = UIDatePickerMode.Time
+            
+            self.view.addSubview(dp)
+        }
     }
         
     // MARK: - Navigation

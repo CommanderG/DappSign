@@ -10,13 +10,29 @@ import Foundation
 
 class DailyDappDatesHelper {
     internal class func startDateWithDate(date: NSDate) -> NSDate? {
-        let startDate = self.dateWithDate(date, withHour: 12)
+        if let startTime = LocalStorage.dailyDappStartTime() {
+            let (hour, minute) = startTime
+            
+            if let startDate = self.dateWithDate(date, hour: hour, minute: minute) {
+                return startDate
+            }
+        }
+        
+        let startDate = self.dateWithDate(date, hour: 12, minute: 0)
         
         return startDate
     }
     
     internal class func endDateWithDate(date: NSDate) -> NSDate? {
-        let endDate = self.dateWithDate(date, withHour: 13)
+        if let startTime = LocalStorage.dailyDappStartTime() {
+            let (hour, minute) = startTime
+            
+            if let endDate = self.dateWithDate(date, hour: hour + 1, minute: minute) {
+                return endDate
+            }
+        }
+        
+        let endDate = self.dateWithDate(date, hour: 13, minute: 0)
         
         return endDate
     }
@@ -55,8 +71,8 @@ class DailyDappDatesHelper {
     
     // MARK: - 
     
-    private class func dateWithDate(date: NSDate, withHour hour: Int) -> NSDate? {
-        if hour < 0 || hour > 23 {
+    private class func dateWithDate(date: NSDate, hour: Int, minute: Int) -> NSDate? {
+        if hour < 0 || hour > 23 || minute < 0 || minute > 59 {
             return nil
         }
         
@@ -65,7 +81,7 @@ class DailyDappDatesHelper {
         let components = currentCalendar.components(unitFlags, fromDate: date)
         
         components.hour   = hour
-        components.minute = 0
+        components.minute = minute
         components.second = 0
         
         let newDate = currentCalendar.dateFromComponents(components)

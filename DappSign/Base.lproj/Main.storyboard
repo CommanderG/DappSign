@@ -1121,7 +1121,7 @@
                                 <action selector="close:" destination="Q8A-2e-yyY" id="tMB-bB-225"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit Dapps" id="EFc-bg-oi9">
+                        <barButtonItem key="rightBarButtonItem" title="Admin" id="EFc-bg-oi9">
                             <connections>
                                 <segue destination="AnE-wK-30e" kind="push" id="sbk-D3-qRX"/>
                             </connections>
@@ -1139,20 +1139,20 @@
             </objects>
             <point key="canvasLocation" x="2023" y="-416"/>
         </scene>
-        <!--Edit Dapps-->
+        <!--Admin-->
         <scene sceneID="lVc-PM-esS">
             <objects>
-                <tableViewController id="AnE-wK-30e" customClass="EditDappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="AnE-wK-30e" customClass="AdminTVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="o81-2a-XCA">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection id="aHB-Rr-mlf">
+                            <tableViewSection headerTitle="Dapps" id="aHB-Rr-mlf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="lxw-pz-lxU" detailTextLabel="ZWz-rU-KVv" style="IBUITableViewCellStyleValue1" id="dAG-wb-aV8">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAG-wb-aV8" id="0c7-AN-O2q">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1183,7 +1183,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="UkM-26-cEG" detailTextLabel="t48-o1-nnz" style="IBUITableViewCellStyleValue1" id="VrX-qY-JNe">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VrX-qY-JNe" id="ipE-BO-st0">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1214,7 +1214,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Y88-Nd-SA3" detailTextLabel="dOI-Kz-okl" style="IBUITableViewCellStyleValue1" id="CS5-gq-k0I">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CS5-gq-k0I" id="Xis-WA-apV">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1241,7 +1241,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Kba-1v-oTr" detailTextLabel="rvK-3d-8eY" style="IBUITableViewCellStyleValue1" id="bnW-2H-bZI">
-                                        <rect key="frame" x="0.0" y="132" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="154" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bnW-2H-bZI" id="E9G-iz-Z8R">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1268,7 +1268,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="S2t-dh-rd0" style="IBUITableViewCellStyleDefault" id="qqX-sS-PTJ">
-                                        <rect key="frame" x="0.0" y="176" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="198" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qqX-sS-PTJ" id="Djg-KN-G83">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1289,13 +1289,25 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="DailyDapp time" id="8rY-PT-kxV">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kcj-8a-MNc">
+                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kcj-8a-MNc" id="AE7-Si-wTW">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="AnE-wK-30e" id="2o9-cw-6m1"/>
                             <outlet property="delegate" destination="AnE-wK-30e" id="ihf-cl-dEg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Dapps" id="6D8-38-KJI"/>
+                    <navigationItem key="navigationItem" title="Admin" id="6D8-38-KJI"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvL-tt-a6c" userLabel="First Responder" sceneMemberID="firstResponder"/>

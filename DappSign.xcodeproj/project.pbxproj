@@ -39,7 +39,7 @@
 		27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27896E301C8D89F300A6AA4A /* UserHelper.swift */; };
 		27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */; };
 		27979D541CB41BF8002816A6 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27979D531CB41BF8002816A6 /* ParseHelper.swift */; };
-		279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* EditDappsTableViewController.swift */; };
+		279A31221AB30EA700850508 /* AdminTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31211AB30EA700850508 /* AdminTVC.swift */; };
 		279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31231AB31CE700850508 /* DappsTableViewController.swift */; };
 		279A31261AB333AC00850508 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279A31251AB333AC00850508 /* Enums.swift */; };
 		279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 279D4D3F1BA9A2D700408B90 /* HTMLNode.m */; };
@@ -107,6 +107,7 @@
 		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; settings = {ASSET_TAGS = (); }; };
+		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; settings = {ASSET_TAGS = (); }; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
 		84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */; settings = {ASSET_TAGS = (); }; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
@@ -185,7 +186,7 @@
 		27896E301C8D89F300A6AA4A /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeHelper.swift; sourceTree = "<group>"; };
 		27979D531CB41BF8002816A6 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
-		279A31211AB30EA700850508 /* EditDappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappsTableViewController.swift; sourceTree = "<group>"; };
+		279A31211AB30EA700850508 /* AdminTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminTVC.swift; sourceTree = "<group>"; };
 		279A31231AB31CE700850508 /* DappsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsTableViewController.swift; sourceTree = "<group>"; };
 		279A31251AB333AC00850508 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		279D4D3E1BA9A2D700408B90 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
@@ -263,6 +264,7 @@
 		8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappHelper.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
+		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappVC.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
@@ -549,7 +551,7 @@
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
-				279A31211AB30EA700850508 /* EditDappsTableViewController.swift */,
+				279A31211AB30EA700850508 /* AdminTVC.swift */,
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
 				27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
@@ -617,6 +619,7 @@
 				27696F491BB3EDE800EE391F /* Link.swift */,
 				271E435C1C7776FD0076DB5F /* Consts.swift */,
 				2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */,
+				848B651A1CBF78FB00E6D155 /* LocalStorage.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1014,7 +1017,8 @@
 				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
 				F372467B1AD3ED7600AD56E2 /* SDWebImageCompat.m in Sources */,
 				274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */,
-				279A31221AB30EA700850508 /* EditDappsTableViewController.swift in Sources */,
+				848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */,
+				279A31221AB30EA700850508 /* AdminTVC.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */,
