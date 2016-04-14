@@ -70,7 +70,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tapp" translatesAutoresizingMaskIntoConstraints="NO" id="uUk-Ak-95d">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="uUk-Ak-95d">
                             <rect key="frame" x="133" y="54" width="15" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="jkt-Nk-VaV"/>
@@ -83,7 +83,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dapp_right1" translatesAutoresizingMaskIntoConstraints="NO" id="RAC-xX-5Ya">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RAC-xX-5Ya">
                             <rect key="frame" x="47" y="55" width="19" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="dgk-VO-RV7"/>
@@ -177,7 +177,7 @@
         </view>
     </objects>
     <resources>
-        <image name="dapp_right1" width="39" height="44"/>
-        <image name="tapp" width="31" height="43"/>
+        <image name="dapp_icon" width="31" height="36"/>
+        <image name="tapp_icon" width="26" height="36"/>
     </resources>
 </document>
