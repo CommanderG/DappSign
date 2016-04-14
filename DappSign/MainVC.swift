@@ -13,7 +13,7 @@ protocol TransitionDelegate {
 }
 
 class MainVC: UIViewController {
-    private var homeVC: HomeViewController? = nil
+    private var dailyDappVC: DailyDappVC? = nil
     private var scoreboardVC: ScoreboardVC? = nil
     private var childVC: UIViewController? = nil
     
@@ -29,17 +29,17 @@ class MainVC: UIViewController {
     // MARK: - initial child view controller
     
     private func initChildViewController() {
-        self.homeVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            "homeVC") as? HomeViewController
+        self.dailyDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
+            "dailyDappVC") as? DailyDappVC
         
         self.scoreboardVC = self.storyboard?.instantiateViewControllerWithIdentifier(
             "scoreboardVC") as? ScoreboardVC
         
-        if let homeVC = self.homeVC {
-            homeVC.transitionDelegate = self
+        if let dailyDappVC = self.dailyDappVC {
+            dailyDappVC.transitionDelegate = self
             
-            self.addChildViewController(homeVC)
-            self.initInitialChildViewControllerWith(homeVC)
+            self.addChildViewController(dailyDappVC)
+            self.initInitialChildViewControllerWith(dailyDappVC)
         }
         
         if let scoreboardVC = self.scoreboardVC {
@@ -59,18 +59,18 @@ class MainVC: UIViewController {
     
     // MARK: - transitions
     
-    private func transitionToHomeVC() {
-        if let homeVC = self.homeVC, scoreboardVC = self.scoreboardVC, childVC = self.childVC {
+    private func transitionToDailyDappVC() {
+        if let dailyDappVC = self.dailyDappVC, scoreboardVC = self.scoreboardVC {
             if childVC == scoreboardVC {
-                self.transitionFromViewController(scoreboardVC, toViewController: homeVC)
+                self.transitionFromViewController(scoreboardVC, toViewController: dailyDappVC)
             }
         }
     }
     
     private func transitionToScoreboardVC() {
-        if let homeVC = self.homeVC, scoreboardVC = self.scoreboardVC {
-            if childVC == homeVC {
-                self.transitionFromViewController(homeVC, toViewController: scoreboardVC)
+        if let dailyDappVC = self.dailyDappVC, scoreboardVC = self.scoreboardVC {
+            if childVC == dailyDappVC {
+                self.transitionFromViewController(dailyDappVC, toViewController: scoreboardVC)
             }
         }
     }
@@ -94,11 +94,11 @@ class MainVC: UIViewController {
 
 extension MainVC: TransitionDelegate {
     func transitionFromViewController(viewController: UIViewController) {
-        if let homeVC = self.homeVC, scoreboardVC = self.scoreboardVC {
-            if viewController == homeVC {
+        if let dailyDappVC = self.dailyDappVC, scoreboardVC = self.scoreboardVC {
+            if viewController == dailyDappVC {
                 self.transitionToScoreboardVC()
             } else if viewController == scoreboardVC {
-                self.transitionToHomeVC()
+                self.transitionToDailyDappVC()
             }
         }
     }

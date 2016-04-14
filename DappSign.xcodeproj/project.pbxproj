@@ -87,7 +87,7 @@
 		4CD9C9B81AA1DE7800046CA2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9B71AA1DE7800046CA2 /* libz.dylib */; };
 		4CD9C9BA1AA1DEB300046CA2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9B91AA1DEB300046CA2 /* ParseFacebookUtils.framework */; };
 		4CD9C9BC1AA1DED900046CA2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */; };
-		4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */; };
+		4CD9C9BE1AA1EBBD00046CA2 /* DailyDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */; };
 		4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */; };
 		4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */; };
 		4CD9C9C91AA1EC1A00046CA2 /* DappFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */; };
@@ -242,7 +242,7 @@
 		4CD9C9B71AA1DE7800046CA2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4CD9C9B91AA1DEB300046CA2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		4CD9C9BB1AA1DED900046CA2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappVC.swift; sourceTree = "<group>"; };
 		4CD9C9C01AA1EC1A00046CA2 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		4CD9C9C11AA1EC1A00046CA2 /* DappColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappColors.swift; sourceTree = "<group>"; };
 		4CD9C9C21AA1EC1A00046CA2 /* DappFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappFonts.swift; sourceTree = "<group>"; };
@@ -552,7 +552,7 @@
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				27EE61121CBFC319009CBF0B /* MainVC.swift */,
-				4CD9C9BD1AA1EBBD00046CA2 /* HomeViewController.swift */,
+				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
@@ -1022,7 +1022,7 @@
 				F372467F1AD3ED7600AD56E2 /* SDWebImageManager.m in Sources */,
 				279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */,
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
-				4CD9C9BE1AA1EBBD00046CA2 /* HomeViewController.swift in Sources */,
+				4CD9C9BE1AA1EBBD00046CA2 /* DailyDappVC.swift in Sources */,
 				F372467B1AD3ED7600AD56E2 /* SDWebImageCompat.m in Sources */,
 				274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */,
 				848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */,

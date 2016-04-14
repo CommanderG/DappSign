@@ -17,7 +17,7 @@ enum DappCardType {
     case DappCardTypeMapp
 }
 
-class HomeViewController: UIViewController, SwipeableViewDelegate {
+class DailyDappVC: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var dappViewsContainerView:      SwipeableView!
     @IBOutlet weak var dappSignView:                DappSignView!
     @IBOutlet weak var dappMappView:                UIView!
@@ -870,7 +870,7 @@ class HomeViewController: UIViewController, SwipeableViewDelegate {
     }
 }
 
-extension HomeViewController: DappBackSideLinksVCDelegate {
+extension DailyDappVC: DappBackSideLinksVCDelegate {
     func openLinkWithURL(linkURL: NSURL) {
         let linkVC = self.storyboard?.instantiateViewControllerWithIdentifier(
             LinkVC.storyboardID
