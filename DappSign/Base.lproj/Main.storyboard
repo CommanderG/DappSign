@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1291,13 +1291,16 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="DailyDapp time" id="8rY-PT-kxV">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kcj-8a-MNc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kcj-8a-MNc">
                                         <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kcj-8a-MNc" id="AE7-Si-wTW">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="VAw-yF-NTF" kind="push" id="dHm-iK-6ms"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1312,7 +1315,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvL-tt-a6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-1106"/>
+            <point key="canvasLocation" x="2460" y="-1805"/>
         </scene>
         <!--No Array Dapps-->
         <scene sceneID="06S-ss-Qab">
@@ -1350,7 +1353,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKR-Dp-yaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2897" y="-1048"/>
+            <point key="canvasLocation" x="2915" y="-1093"/>
         </scene>
         <!--Dapps Table View Controller-->
         <scene sceneID="Hlb-zG-ZSx">
@@ -1410,7 +1413,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvy-QZ-SB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2897" y="-1669"/>
+            <point key="canvasLocation" x="2887" y="-1805"/>
         </scene>
         <!--Search-->
         <scene sceneID="fg3-xU-1Bh">
@@ -3117,6 +3120,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQt-5N-U6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2887" y="297"/>
+        </scene>
+        <!--DailyDapp Start Time-->
+        <scene sceneID="saj-wb-Kq1">
+            <objects>
+                <viewController id="VAw-yF-NTF" customClass="DailyDappStartTimeVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Und-et-bqn"/>
+                        <viewControllerLayoutGuide type="bottom" id="mjm-ym-ydX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ccn-qB-I5C">
+                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="QYB-8n-JKh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <date key="date" timeIntervalSinceReferenceDate="482319040.019786">
+                                    <!--2016-04-14 09:30:40 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QYB-8n-JKh" firstAttribute="leading" secondItem="Ccn-qB-I5C" secondAttribute="leading" id="13M-bn-23S"/>
+                            <constraint firstItem="mjm-ym-ydX" firstAttribute="top" secondItem="QYB-8n-JKh" secondAttribute="bottom" id="C4K-FC-xAL"/>
+                            <constraint firstAttribute="trailing" secondItem="QYB-8n-JKh" secondAttribute="trailing" id="ItT-lZ-upR"/>
+                            <constraint firstItem="QYB-8n-JKh" firstAttribute="top" secondItem="Und-et-bqn" secondAttribute="bottom" id="uKi-bw-d7X"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="DailyDapp Start Time" id="FtM-6V-Teq">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="v6W-i5-ouf">
+                            <connections>
+                                <action selector="save:" destination="VAw-yF-NTF" id="KtG-nf-SZN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="QYB-8n-JKh" id="qbi-ZL-zei"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ual-FL-apy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2460" y="-1093"/>
         </scene>
         <!--Edit Links-->
         <scene sceneID="Sth-3F-d7h">

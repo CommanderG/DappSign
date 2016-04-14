@@ -87,26 +87,30 @@ class AdminTVC: UITableViewController {
                 self.showDappCountInCell(cell, dappArray: dappArray)
             }
         } else {
-            cell.textLabel?.text = "Time"
+            if let dailyDappStartTime = LocalStorage.dailyDappStartTime() {
+                let (hour, minute) = dailyDappStartTime
+                
+                let dateFormatter = NSDateFormatter()
+                
+                dateFormatter.dateFormat = "HH:mm"
+                
+                if let date = dateFormatter.dateFromString("\(hour):\(minute)") {
+                    dateFormatter.dateFormat = "hh:mm a"
+                    
+                    let dateString = dateFormatter.stringFromDate(date)
+                    
+                    cell.textLabel?.text = "\(dateString) (\(hour):\(minute))"
+                } else {
+                    cell.textLabel?.text = "\(hour):\(minute)"
+                }
+            } else {
+                cell.textLabel?.text = "12:00"
+            }
         }
         
         return cell
     }
     
-    // MARK: - <UITableViewDelegate>
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        if (indexPath.section == Section.DailyDappTime.rawValue) {
-            let dp = UIDatePicker()
-            
-            dp.datePickerMode = UIDatePickerMode.Time
-            
-            self.view.addSubview(dp)
-        }
-    }
-        
     // MARK: - Navigation
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
