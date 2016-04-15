@@ -577,7 +577,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
             }
             
-            if minutes == 0 && seconds == 0 {
+            if minutes <= 0 && seconds <= 0 {
                 self.transitionDelegate?.transitionFromViewController(self)
             }
         } else {
