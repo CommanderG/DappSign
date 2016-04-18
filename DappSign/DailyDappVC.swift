@@ -536,7 +536,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.embedDappVC?.view.hidden = true
             case "embedRepresentativeVC":
                 self.representativeVC = segue.destinationViewController as? RepresentativeVC
-            case "embedDappSignVC":
+            case DappSignVC.embedSegueID:
                 self.dappSignVC = segue.destinationViewController as? DappSignVC
             case "embedDappMappVC":
                 self.dappMappVC = segue.destinationViewController as? DappMappVC

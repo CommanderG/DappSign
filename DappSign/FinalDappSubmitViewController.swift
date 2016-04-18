@@ -10,7 +10,7 @@ import UIKit
 
 class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var containerView:         SwipeableView!
-    @IBOutlet weak var dappSignView:          DappSignView!
+    @IBOutlet weak var dappSignView:          UIView!
     @IBOutlet weak var shareOnFacebookButton: UIButton!
     @IBOutlet weak var tweetThisCardButton:   UIButton!
     
@@ -20,6 +20,7 @@ class FinalDappSubmitViewController: UIViewController {
     internal var addDappLinksVC: AddDappLinksVC?
     
     private var dappObj: PFObject?
+    private var dappSignVC: DappSignVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,7 @@ class FinalDappSubmitViewController: UIViewController {
             self.submitDapp(dapp)
         }
         
-        self.dappSignView.showDapp(self.dapp)
+        self.dappSignVC?.showDapp(self.dapp)
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,6 +127,19 @@ class FinalDappSubmitViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case DappSignVC.embedSegueID:
+                self.dappSignVC = segue.destinationViewController as? DappSignVC
+            case _:
+                break
+            }
+        }
     }
     
     // MARK: -

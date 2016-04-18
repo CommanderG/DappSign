@@ -12,6 +12,8 @@ class DappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var dappSubmitterLabel: UILabel!
     
+    internal static let embedSegueID: String = "embedDappSignVC"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
