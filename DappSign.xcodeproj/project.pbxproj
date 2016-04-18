@@ -47,6 +47,7 @@
 		279D4D451BA9A7DB00408B90 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 279D4D441BA9A7DB00408B90 /* libxml2.dylib */; };
 		27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */; };
 		27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934F1B949B690017D8D2 /* PercentsView.swift */; };
+		27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5291CC52369008E3560 /* DappSignVC.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */; };
 		27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */; };
@@ -198,6 +199,7 @@
 		279D4D441BA9A7DB00408B90 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapGenerator.swift; sourceTree = "<group>"; };
 		27AF934F1B949B690017D8D2 /* PercentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsView.swift; sourceTree = "<group>"; };
+		27B4E5291CC52369008E3560 /* DappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignVC.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsWithoutArrayTVC.swift; sourceTree = "<group>"; };
 		27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappVC.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */,
 				848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */,
 				27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */,
+				27B4E5291CC52369008E3560 /* DappSignVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -977,6 +980,7 @@
 				2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */,
 				F37246811AD3ED7600AD56E2 /* UIButton+WebCache.m in Sources */,
 				8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */,
+				27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */,
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,

@@ -19,7 +19,7 @@ enum DappCardType {
 
 class DailyDappVC: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var dappViewsContainerView:      SwipeableView!
-    @IBOutlet weak var dappSignView:                DappSignView!
+    @IBOutlet weak var dappSignView:                UIView!
     @IBOutlet weak var dappMappView:                UIView!
     @IBOutlet weak var shareOnFacebookButton:       UIButton!
     @IBOutlet weak var tweetThisCardButton:         UIButton!
@@ -41,6 +41,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     
     private var embedDappVC: EmbedDappVC? = nil
     private var representativeVC: RepresentativeVC? = nil
+    private var dappSignVC: DappSignVC? = nil
     private var dappMappVC: DappMappVC? = nil
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
@@ -535,6 +536,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.embedDappVC?.view.hidden = true
             case "embedRepresentativeVC":
                 self.representativeVC = segue.destinationViewController as? RepresentativeVC
+            case "embedDappSignVC":
+                self.dappSignVC = segue.destinationViewController as? DappSignVC
             case "embedDappMappVC":
                 self.dappMappVC = segue.destinationViewController as? DappMappVC
             case _:
@@ -634,10 +637,10 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         if (self.visibleDappView == self.dappSignView) {
             let dapp = self.dapps.first
             
-            self.dappSignView.showDappObject(dapp)
+            self.dappSignVC?.showDappObject(dapp)
             
-            if let dapp_ = dapp {
-                Requests.addUserToUsersWhoSaw(dapp_, user: PFUser.currentUser(), completion: {
+            if let dapp = dapp {
+                Requests.addUserToUsersWhoSaw(dapp, user: PFUser.currentUser(), completion: {
                     (succeeded: Bool, error: NSError!) -> Void in
                     if !succeeded {
                         if let err = error {
