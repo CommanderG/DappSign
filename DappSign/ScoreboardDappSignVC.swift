@@ -1,5 +1,5 @@
 //
-//  DappSignVC.swift
+//  ScoreboardDappSignVC.swift
 //  DappSign
 //
 //  Created by Oleksiy Kovtun on 4/18/16.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class DappSignVC: UIViewController {
+class ScoreboardDappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var dappSubmitterLabel: UILabel!
     
-    internal static let embedSegueID: String = "embedDappSignVC"
+    internal static let embedSegueID: String = "embedScoreboardDappSignVC"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +27,6 @@ class DappSignVC: UIViewController {
     
     internal func showDappObject(dapp: PFObject?) {
         DappSignViewsHelper.showDappObject(dapp,
-            dappStatementLabel: self.dappStatementLabel,
-            dappSubmitterLabel: self.dappSubmitterLabel,
-            view: self.view
-        )
-    }
-    
-    internal func showDapp(dapp: Dapp?) {
-        DappSignViewsHelper.showDapp(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
             view: self.view
