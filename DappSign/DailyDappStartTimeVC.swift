@@ -43,6 +43,8 @@ class DailyDappStartTimeVC: UIViewController {
             if let date = dateFormatter.dateFromString(dateString) {
                 self.datePicker.date = date
             }
+        } else if let date = dateFormatter.dateFromString("12:00") {
+            self.datePicker.date = date
         }
     }
     
