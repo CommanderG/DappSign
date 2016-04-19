@@ -44,14 +44,35 @@ class ScoreboardDappSignVC: UIViewController {
             view: self.view
         )
         self.secondsLeft = self.maxSeconds
+        
+        self.countdownTimer?.invalidate()
+        
         self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
             selector: "countDown",
             userInfo: nil,
             repeats:  true
         )
+        
         self.countdownTimer?.fire()
         AnimationHelper.animateDappSignView(self.view)
+    }
+    
+    // MARK: - animation
+    
+    internal func moveRighOffTheScreen(completion: Void -> Void) {
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        let animationDuration = 0.5
+        
+        spring(animationDuration) {
+            let translateRightOffTheScreen = CGAffineTransformMakeTranslation(screenWidth, 0.0)
+            
+            self.view.transform = translateRightOffTheScreen
+        }
+        
+        delay(animationDuration) {
+            completion()
+        }
     }
     
     // MARK: - timer functions

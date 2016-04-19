@@ -337,6 +337,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpF-Q4-G6C">
                                 <rect key="frame" x="12" y="280" width="296" height="267"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-9z-cqi">
+                                        <rect key="frame" x="189" y="0.0" width="107" height="267"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
+                                        </constraints>
+                                    </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVT-5U-Ecl">
                                         <rect key="frame" x="0.0" y="0.0" width="189" height="267"/>
                                         <constraints>
@@ -346,13 +353,6 @@
                                             <segue destination="icw-bs-bQo" kind="embed" identifier="embedScoreboardDappSignVC" id="EI0-Js-iZK"/>
                                         </connections>
                                     </containerView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-9z-cqi">
-                                        <rect key="frame" x="189" y="0.0" width="107" height="267"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="C8D-9z-cqi" firstAttribute="leading" secondItem="CVT-5U-Ecl" secondAttribute="trailing" id="0rH-EH-ia7"/>
