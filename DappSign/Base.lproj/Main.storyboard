@@ -343,7 +343,7 @@
                                             <constraint firstAttribute="width" secondItem="CVT-5U-Ecl" secondAttribute="height" multiplier="63:89" id="gww-zB-X3p"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="icw-bs-bQo" kind="embed" id="EI0-Js-iZK"/>
+                                            <segue destination="icw-bs-bQo" kind="embed" identifier="embedScoreboardDappSignVC" id="EI0-Js-iZK"/>
                                         </connections>
                                     </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-9z-cqi">
@@ -3532,6 +3532,10 @@
         <scene sceneID="4B4-iG-jDW">
             <objects>
                 <viewController id="Uue-b6-oPt" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fA6-L0-BaW"/>
+                        <viewControllerLayoutGuide type="bottom" id="nEt-rq-4lK"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rQJ-Gh-c82">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

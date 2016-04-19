@@ -20,14 +20,31 @@ class ScoreboardVC: UIViewController {
     private var timeUntilNextDailyDappLabelUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDapp: (Int, Int)? = nil
+    private var scoreboardDapps: [PFObject] = []
+    private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
     
     override func viewDidLoad() {
+        print("viewDidLoad()")
         super.viewDidLoad()
         self.initButtons()
         self.updateTimeUntilNextDailyDapp()
         self.updateTimeUntilNextDailyDappLabel()
         self.initRepresentativeImageView()
         self.initTimers()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print("viewWillAppear()")
+        super.viewWillAppear(animated)
+        
+        ScoreboardHelper.downloadScoreboardDapps {
+            (scoreboardDapps: [PFObject], error: NSError?) -> Void in
+            self.scoreboardDapps = scoreboardDapps
+            
+            if let dapp = self.scoreboardDapps.first {
+                self.scoreboardDappSignVC?.showDappObject(dapp)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -116,6 +133,20 @@ class ScoreboardVC: UIViewController {
             )
         } else {
             self.timeUntilNextDailyDapp = nil
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("prepareForSegue()")
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case ScoreboardDappSignVC.embedSegueID:
+                self.scoreboardDappSignVC = segue.destinationViewController as? ScoreboardDappSignVC
+            case _:
+                break
+            }
         }
     }
     
