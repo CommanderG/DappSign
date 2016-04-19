@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ScoreboardDappSignCountdownDelegate {
+protocol CountdownDelegate {
     func didFinishCountingDown()
 }
 
@@ -17,9 +17,10 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
     @IBOutlet weak var dappSubmitterLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
     
-    internal static let embedSegueID: String = "embedScoreboardDappSignFrontSideVC"
+    internal static let embedSegueID = "embedScoreboardDappSignFrontSideVC"
+    internal static let storyboardID = "ScoreboardDappSignFrontSideVC"
     
-    internal var countdownDelegate: ScoreboardDappSignCountdownDelegate? = nil
+    internal var countdownDelegate: CountdownDelegate? = nil
     
     private let maxSeconds = 10
     
@@ -55,24 +56,6 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
         )
         
         self.countdownTimer?.fire()
-        AnimationHelper.animateDappSignView(self.view)
-    }
-    
-    // MARK: - animation
-    
-    internal func moveRighOffTheScreen(completion: (Void -> Void)? = nil) {
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
-        let animationDuration = 0.5
-        
-        spring(animationDuration) {
-            let translateRightOffTheScreen = CGAffineTransformMakeTranslation(screenWidth, 0.0)
-            
-            self.view.transform = translateRightOffTheScreen
-        }
-        
-        delay(animationDuration) {
-            completion?()
-        }
     }
     
     // MARK: - timer functions
