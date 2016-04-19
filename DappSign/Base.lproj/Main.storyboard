@@ -350,7 +350,7 @@
                                             <constraint firstAttribute="width" secondItem="CVT-5U-Ecl" secondAttribute="height" multiplier="63:89" id="gww-zB-X3p"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="icw-bs-bQo" kind="embed" identifier="embedScoreboardDappSignVC" id="EI0-Js-iZK"/>
+                                            <segue destination="icw-bs-bQo" kind="embed" identifier="embedScoreboardDappSignFrontSideVC" id="EI0-Js-iZK"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -3528,10 +3528,10 @@
             </objects>
             <point key="canvasLocation" x="522" y="-552"/>
         </scene>
-        <!--Scoreboard Dapp SignVC-->
+        <!--Scoreboard Dapp Sign Front SideVC-->
         <scene sceneID="MNf-m5-cEC">
             <objects>
-                <viewController id="icw-bs-bQo" customClass="ScoreboardDappSignVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="icw-bs-bQo" customClass="ScoreboardDappSignFrontSideVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zli-P7-0lr"/>
                         <viewControllerLayoutGuide type="bottom" id="FTe-ZS-XXj"/>

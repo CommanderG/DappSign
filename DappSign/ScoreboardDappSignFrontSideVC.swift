@@ -1,5 +1,5 @@
 //
-//  ScoreboardDappSignVC.swift
+//  ScoreboardDappSignFrontSideVC.swift
 //  DappSign
 //
 //  Created by Oleksiy Kovtun on 4/18/16.
@@ -12,12 +12,12 @@ protocol ScoreboardDappSignCountdownDelegate {
     func didFinishCountingDown()
 }
 
-class ScoreboardDappSignVC: UIViewController {
+class ScoreboardDappSignFrontSideVC: UIViewController {
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var dappSubmitterLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
     
-    internal static let embedSegueID: String = "embedScoreboardDappSignVC"
+    internal static let embedSegueID: String = "embedScoreboardDappSignFrontSideVC"
     
     internal var countdownDelegate: ScoreboardDappSignCountdownDelegate? = nil
     

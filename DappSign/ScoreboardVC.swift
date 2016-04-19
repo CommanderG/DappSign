@@ -21,7 +21,7 @@ class ScoreboardVC: UIViewController {
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDapp: (Int, Int)? = nil
     private var dapps: [PFObject] = []
-    private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
+    private var scoreboardDappSignFrontSideVC: ScoreboardDappSignFrontSideVC? = nil
     private var currentDappIndex = 0
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class ScoreboardVC: UIViewController {
         self.initRepresentativeImageView()
         self.initTimers()
         
-        self.scoreboardDappSignVC?.view.hidden = true
+        self.scoreboardDappSignFrontSideVC?.view.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -43,10 +43,10 @@ class ScoreboardVC: UIViewController {
             self.dapps = scoreboardDapps
             
             if let dapp = self.dapps.first {
-                self.scoreboardDappSignVC?.view.hidden = false
+                self.scoreboardDappSignFrontSideVC?.view.hidden = false
                 self.currentDappIndex = 0
                 
-                self.scoreboardDappSignVC?.showDappObject(dapp)
+                self.scoreboardDappSignFrontSideVC?.showDappObject(dapp)
             }
         }
     }
@@ -145,10 +145,11 @@ class ScoreboardVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let segueIdentifier = segue.identifier {
             switch segueIdentifier {
-            case ScoreboardDappSignVC.embedSegueID:
-                self.scoreboardDappSignVC = segue.destinationViewController as? ScoreboardDappSignVC
+            case ScoreboardDappSignFrontSideVC.embedSegueID:
+                self.scoreboardDappSignFrontSideVC =
+                    segue.destinationViewController as? ScoreboardDappSignFrontSideVC
                 
-                self.scoreboardDappSignVC?.countdownDelegate = self
+                self.scoreboardDappSignFrontSideVC?.countdownDelegate = self
             case _:
                 break
             }
@@ -174,8 +175,8 @@ class ScoreboardVC: UIViewController {
         
         let dapp = self.dapps[self.currentDappIndex]
         
-        self.scoreboardDappSignVC?.moveRighOffTheScreen {
-            self.scoreboardDappSignVC?.showDappObject(dapp)
+        self.scoreboardDappSignFrontSideVC?.moveRighOffTheScreen {
+            self.scoreboardDappSignFrontSideVC?.showDappObject(dapp)
         }
     }
 }
