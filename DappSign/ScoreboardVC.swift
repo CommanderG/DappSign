@@ -20,8 +20,9 @@ class ScoreboardVC: UIViewController {
     private var timeUntilNextDailyDappLabelUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDapp: (Int, Int)? = nil
-    private var scoreboardDapps: [PFObject] = []
+    private var dapps: [PFObject] = []
     private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
+    private var currentDappIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +40,11 @@ class ScoreboardVC: UIViewController {
         
         ScoreboardHelper.downloadScoreboardDapps {
             (scoreboardDapps: [PFObject], error: NSError?) -> Void in
-            self.scoreboardDapps = scoreboardDapps
+            self.dapps = scoreboardDapps
             
-            if let dapp = self.scoreboardDapps.first {
+            if let dapp = self.dapps.first {
                 self.scoreboardDappSignVC?.view.hidden = false
+                self.currentDappIndex = 0
                 
                 self.scoreboardDappSignVC?.showDappObject(dapp)
             }
@@ -145,6 +147,8 @@ class ScoreboardVC: UIViewController {
             switch segueIdentifier {
             case ScoreboardDappSignVC.embedSegueID:
                 self.scoreboardDappSignVC = segue.destinationViewController as? ScoreboardDappSignVC
+                
+                self.scoreboardDappSignVC?.countdownDelegate = self
             case _:
                 break
             }
@@ -159,5 +163,25 @@ class ScoreboardVC: UIViewController {
         }
         
         return "\(minutes)"
+    }
+    
+    private func showNextDapp() {
+        self.currentDappIndex = (self.currentDappIndex + 1) % self.dapps.count
+        
+        if (self.currentDappIndex < 0 || self.currentDappIndex >= self.dapps.count) {
+            return
+        }
+        
+        let dapp = self.dapps[self.currentDappIndex]
+        
+        self.scoreboardDappSignVC?.moveRighOffTheScreen {
+            self.scoreboardDappSignVC?.showDappObject(dapp)
+        }
+    }
+}
+
+extension ScoreboardVC: ScoreboardDappSignCountdownDelegate {
+    func didFinishCountingDown() {
+        self.showNextDapp()
     }
 }

@@ -60,7 +60,7 @@ class ScoreboardDappSignVC: UIViewController {
     
     // MARK: - animation
     
-    internal func moveRighOffTheScreen(completion: Void -> Void) {
+    internal func moveRighOffTheScreen(completion: (Void -> Void)? = nil) {
         let screenWidth = UIScreen.mainScreen().bounds.size.width
         let animationDuration = 0.5
         
@@ -71,7 +71,7 @@ class ScoreboardDappSignVC: UIViewController {
         }
         
         delay(animationDuration) {
-            completion()
+            completion?()
         }
     }
     
