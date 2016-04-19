@@ -51,6 +51,7 @@
 		27B4E5301CC54666008E3560 /* ScoreboardDappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E52F1CC54666008E3560 /* ScoreboardDappSignVC.swift */; };
 		27B4E5321CC546AB008E3560 /* DappSignViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
+		27BB68D01CC6781100B3E2BE /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */; };
 		27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */; };
 		27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */; };
 		27D3C2A41CB7F61A009CDB2C /* LinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A31CB7F619009CDB2C /* LinkVC.swift */; };
@@ -205,6 +206,7 @@
 		27B4E52F1CC54666008E3560 /* ScoreboardDappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappSignVC.swift; sourceTree = "<group>"; };
 		27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignViewsHelper.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
+		27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsWithoutArrayTVC.swift; sourceTree = "<group>"; };
 		27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappVC.swift; sourceTree = "<group>"; };
 		27D3C2A31CB7F619009CDB2C /* LinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVC.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				27979D511CB3E35E002816A6 /* RepresentativeHelper.swift */,
 				27979D531CB41BF8002816A6 /* ParseHelper.swift */,
 				27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */,
+				27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1004,6 +1007,7 @@
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
+				27BB68D01CC6781100B3E2BE /* AnimationHelper.swift in Sources */,
 				27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */,
 				279A31261AB333AC00850508 /* Enums.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,

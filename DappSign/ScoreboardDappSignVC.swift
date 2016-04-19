@@ -51,6 +51,7 @@ class ScoreboardDappSignVC: UIViewController {
             repeats:  true
         )
         self.countdownTimer?.fire()
+        AnimationHelper.animateDappSignView(self.view)
     }
     
     // MARK: - timer functions

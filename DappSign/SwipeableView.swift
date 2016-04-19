@@ -83,17 +83,7 @@ class SwipeableView: UIView {
         
         self.center = self.originalCenter
         
-        let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
-        
-        self.transform = CGAffineTransformConcat(scale, translate)
-        
-        spring(0.5) {
-            let scale = CGAffineTransformMakeScale(1.0, 1.0)
-            let translate = CGAffineTransformMakeTranslation(0.0, 0.0)
-            
-            self.transform = CGAffineTransformConcat(scale, translate)
-        }
+        AnimationHelper.animateDappSignView(self)
     }
     
     // MARK: - pan gesture recognizer

@@ -30,16 +30,20 @@ class ScoreboardVC: UIViewController {
         self.updateTimeUntilNextDailyDappLabel()
         self.initRepresentativeImageView()
         self.initTimers()
+        
+        self.scoreboardDappSignVC?.view.hidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         ScoreboardHelper.downloadScoreboardDapps {
             (scoreboardDapps: [PFObject], error: NSError?) -> Void in
             self.scoreboardDapps = scoreboardDapps
             
             if let dapp = self.scoreboardDapps.first {
+                self.scoreboardDappSignVC?.view.hidden = false
+                
                 self.scoreboardDappSignVC?.showDappObject(dapp)
             }
         }

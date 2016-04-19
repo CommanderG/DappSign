@@ -653,7 +653,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYY-oY-Rtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="567" y="297"/>
+            <point key="canvasLocation" x="561" y="297"/>
         </scene>
         <!--LinkVC-->
         <scene sceneID="Yrn-Ur-Cja">
@@ -3527,23 +3527,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDz-Pf-nhh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="522" y="-552"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="4B4-iG-jDW">
-            <objects>
-                <viewController id="Uue-b6-oPt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fA6-L0-BaW"/>
-                        <viewControllerLayoutGuide type="bottom" id="nEt-rq-4lK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rQJ-Gh-c82">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hBt-S1-eBm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
         <!--Scoreboard Dapp SignVC-->
         <scene sceneID="MNf-m5-cEC">

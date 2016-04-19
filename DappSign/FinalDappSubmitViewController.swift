@@ -30,17 +30,7 @@ class FinalDappSubmitViewController: UIViewController {
         
         self.dappSignView.alpha = 0
         
-        let scale = CGAffineTransformMakeScale(0.5, 0.5)
-        let translate = CGAffineTransformMakeTranslation(0.0, -200.0)
-        
-        self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
-        
-        spring(0.5) {
-            let scale = CGAffineTransformMakeScale(1, 1)
-            let translate = CGAffineTransformMakeTranslation(0, 0)
-            
-            self.dappSignView.transform = CGAffineTransformConcat(scale, translate)
-        }
+        AnimationHelper.animateDappSignView(self.dappSignView)
         
         self.dappSignView.alpha = 1
         
