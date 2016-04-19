@@ -8,11 +8,23 @@
 
 import UIKit
 
+protocol ScoreboardDappSignCountdownDelegate {
+    func didFinishCountingDown()
+}
+
 class ScoreboardDappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var dappSubmitterLabel: UILabel!
+    @IBOutlet weak var secondsLabel: UILabel!
     
     internal static let embedSegueID: String = "embedScoreboardDappSignVC"
+    
+    internal var countdownDelegate: ScoreboardDappSignCountdownDelegate? = nil
+    
+    private let maxSeconds = 10
+    
+    private var countdownTimer: NSTimer? = nil
+    private var secondsLeft = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,5 +43,31 @@ class ScoreboardDappSignVC: UIViewController {
             dappSubmitterLabel: self.dappSubmitterLabel,
             view: self.view
         )
+        self.secondsLeft = self.maxSeconds
+        self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+            target:   self,
+            selector: "countDown",
+            userInfo: nil,
+            repeats:  true
+        )
+        self.countdownTimer?.fire()
+    }
+    
+    // MARK: - timer functions
+    
+    internal func countDown() {
+        self.secondsLabel.text = "\(self.secondsLeft)"
+        
+        if self.secondsLeft > 0 {
+            --self.secondsLeft
+        } else {
+            if self.secondsLeft == 0 {
+                self.countdownDelegate?.didFinishCountingDown()
+            }
+            
+            self.countdownTimer?.invalidate()
+            
+            self.countdownTimer = nil
+        }
     }
 }

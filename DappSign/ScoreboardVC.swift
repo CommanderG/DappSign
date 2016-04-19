@@ -24,7 +24,6 @@ class ScoreboardVC: UIViewController {
     private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
     
     override func viewDidLoad() {
-        print("viewDidLoad()")
         super.viewDidLoad()
         self.initButtons()
         self.updateTimeUntilNextDailyDapp()
@@ -34,7 +33,6 @@ class ScoreboardVC: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear()")
         super.viewWillAppear(animated)
         
         ScoreboardHelper.downloadScoreboardDapps {
@@ -139,7 +137,6 @@ class ScoreboardVC: UIViewController {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("prepareForSegue()")
         if let segueIdentifier = segue.identifier {
             switch segueIdentifier {
             case ScoreboardDappSignVC.embedSegueID:
