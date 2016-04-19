@@ -24,6 +24,7 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
     
     private let maxSeconds = 10
     
+    private var dapp: PFObject? = nil
     private var countdownTimer: NSTimer? = nil
     private var secondsLeft = 0
     
@@ -36,16 +37,37 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let _ = self.dapp {
+            self.initAndFireCountdownTimer()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.countdownTimer?.invalidate()
+    }
+    
     // MARK: - internal
     
     internal func showDappObject(dapp: PFObject?) {
+        self.dapp = dapp
+        
         DappSignViewsHelper.showDappObject(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
             view: self.view
         )
         self.secondsLeft = self.maxSeconds
-        
+        self.initAndFireCountdownTimer()
+    }
+    
+    // MARK: - timer functions
+    
+    private func initAndFireCountdownTimer() {
         self.countdownTimer?.invalidate()
         
         self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
@@ -57,8 +79,6 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
         
         self.countdownTimer?.fire()
     }
-    
-    // MARK: - timer functions
     
     internal func countDown() {
         self.secondsLabel.text = "\(self.secondsLeft)"
