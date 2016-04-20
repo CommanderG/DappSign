@@ -106,6 +106,10 @@ class ScoreboardDappSignVC: UIViewController {
     internal func showDappObject(dapp: PFObject?) {
         AnimationHelper.animateDappSignView(self.view)
         self.scoreboardDappSignFrontSideVC?.showDappObject(dapp)
+        
+        if let dapp = dapp {
+            self.dappBackSideLinksVC?.showLinksForDapp(dapp)
+        }
     }
     
     // MARK: - animation
