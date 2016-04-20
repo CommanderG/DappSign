@@ -49,6 +49,7 @@ class ScoreboardVC: UIViewController {
                 
                 self.initHashtagsLabelWithHashtagsForDapp(dapp)
                 self.scoreboardDappSignVC?.showDappObject(dapp)
+                self.scoreboardDappMappVC?.showDappMappDataForDapp(dapp)
             }
         }
     }

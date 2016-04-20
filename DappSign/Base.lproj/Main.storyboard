@@ -3768,7 +3768,7 @@
                                     <constraint firstAttribute="width" secondItem="ojm-vd-Yh9" secondAttribute="height" multiplier="107:63" id="st7-8K-bts"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="delegate" destination="KpH-yQ-AVM" id="jCC-zd-Nx2"/>
+                                    <outlet property="delegate" destination="6iX-fb-apt" id="RRa-s7-MyV"/>
                                 </connections>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Majority support in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIS-4U-QIu">
