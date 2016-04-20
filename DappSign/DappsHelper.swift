@@ -129,6 +129,38 @@ class DappsHelper {
         return hashtagNamesString
     }
     
+    internal class func downloadAllDapps(
+        completion: (dapps: [PFObject]?, error: NSError?) -> Void
+    ) {
+        let query = PFQuery(className: "Dapps")
+        
+        ParseHelper.downloadAllObjectsWithQuery(query,
+            downloadedObjects: [],
+            completion: completion
+        )
+    }
+    
+    internal class func sumDappScoreOfDapps(dapps: [PFObject]) -> Int {
+        let dappScore = dapps.map {
+            (dapp: PFObject) -> Int? in
+            let dappScore = dapp["dappScore"] as? Int
+            
+            return dappScore
+        }.filter {
+            (dappScore: Int?) -> Bool in
+            if let _ = dappScore {
+                return true
+            }
+            
+            return false
+        }.map {
+            (dappScore: Int?) -> Int in
+            return dappScore!
+        }.reduce(0, combine: +)
+        
+        return dappScore
+    }
+    
     // MARK: -
     
     private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {

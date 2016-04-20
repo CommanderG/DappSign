@@ -15,7 +15,7 @@ class RepresentativeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initImageViewLayer()
+        ViewHelper.initRepresentativeImageViewLayer(self.imageView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,14 +38,6 @@ class RepresentativeVC: UIViewController {
     }
     
     // MARK: - private
-    
-    private func initImageViewLayer() {
-        let cornerRadius = CGRectGetWidth(self.imageView.frame) / 2
-        
-        self.imageView.layer.borderColor = UIColor.whiteColor().CGColor
-        self.imageView.layer.borderWidth = 2.0
-        self.imageView.layer.cornerRadius = cornerRadius
-    }
     
     private func initFullNameLabelWithRepresentative(representative: PFObject?) {
         if let

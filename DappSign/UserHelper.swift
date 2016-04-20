@@ -60,4 +60,19 @@ class UserHelper {
             })
         }
     }
+    
+    internal class func downloadAllUsersWithDistrict(district: String,
+        completion: (users: [PFUser]?, error: NSError?) -> Void
+    ) {
+        let query = PFUser.query()
+        
+        query.whereKey("congressionalDistrictID", equalTo: district)
+        
+        ParseHelper.downloadAllObjectsWithQuery(query, downloadedObjects: []) {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            let users = objects as? [PFUser]
+            
+            completion(users: users, error: error)
+        }
+    }
 }

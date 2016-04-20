@@ -12,8 +12,6 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var profileButton:               UIButton!
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
-    @IBOutlet weak var representativeImageView:     UIImageView!
-    @IBOutlet weak var representativeNameLabel:     UILabel!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -26,10 +24,10 @@ class ScoreboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initButtons()
+        ViewHelper.initButtonLayer(self.profileButton)
+        ViewHelper.initButtonLayer(self.composeButton)
         self.updateTimeUntilNextDailyDapp()
         self.updateTimeUntilNextDailyDappLabel()
-        self.initRepresentativeImageView()
         self.initTimers()
         
         self.scoreboardDappSignVC?.view.hidden = true
@@ -53,32 +51,6 @@ class ScoreboardVC: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: - UI
-    
-    private func initButtons() {
-        self.addBordersToView(self.profileButton)
-        self.addBordersToView(self.composeButton)
-        
-        let cornerRadius: CGFloat = 6.0
-        
-        self.profileButton.layer.cornerRadius = cornerRadius
-        self.composeButton.layer.cornerRadius = cornerRadius
-    }
-    
-    private func initRepresentativeImageView() {
-        self.addBordersToView(self.representativeImageView)
-        
-        let representativeImageViewWidth = CGRectGetWidth(self.representativeImageView.frame)
-        let cornerRadius = representativeImageViewWidth / 2
-        
-        self.representativeImageView.layer.cornerRadius = cornerRadius
-    }
-    
-    private func addBordersToView(view: UIView) {
-        view.layer.borderColor = UIColor.whiteColor().CGColor
-        view.layer.borderWidth = 2.0
     }
     
     // MARK: - init
