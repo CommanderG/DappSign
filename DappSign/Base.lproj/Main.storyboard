@@ -281,8 +281,8 @@
                                     <constraint firstItem="zPY-gB-LfT" firstAttribute="top" secondItem="Iwi-17-ofS" secondAttribute="top" id="V8V-Ii-tgN"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#solar #sunshinesforfree" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIh-5R-3Yh">
-                                <rect key="frame" x="56" y="241" width="209" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#solar #sunshinesforfree" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIh-5R-3Yh">
+                                <rect key="frame" x="0.0" y="241" width="320" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -327,6 +327,7 @@
                             <constraint firstItem="fyd-Yt-8Bd" firstAttribute="centerX" secondItem="7Pu-g8-guX" secondAttribute="centerX" id="3x4-ez-qfb"/>
                             <constraint firstItem="Iwi-17-ofS" firstAttribute="centerX" secondItem="7Pu-g8-guX" secondAttribute="centerX" id="5Rb-Mw-2Ey"/>
                             <constraint firstAttribute="trailing" secondItem="LpF-Q4-G6C" secondAttribute="trailing" constant="12" id="F5e-af-BUV"/>
+                            <constraint firstAttribute="trailing" secondItem="bIh-5R-3Yh" secondAttribute="trailing" id="Hvd-cO-1h1"/>
                             <constraint firstAttribute="trailing" secondItem="fE4-BT-gVI" secondAttribute="trailing" constant="14" id="MQo-Lv-6od"/>
                             <constraint firstItem="LpF-Q4-G6C" firstAttribute="leading" secondItem="7Pu-g8-guX" secondAttribute="leading" constant="12" id="Mna-8F-C0f"/>
                             <constraint firstItem="Iwi-17-ofS" firstAttribute="top" secondItem="fyd-Yt-8Bd" secondAttribute="bottom" constant="-3" id="PPW-x3-jlP"/>
@@ -334,7 +335,6 @@
                             <constraint firstItem="fE4-BT-gVI" firstAttribute="top" secondItem="oUj-zD-NFi" secondAttribute="bottom" constant="13" id="Vs1-Pj-0Kv"/>
                             <constraint firstAttribute="trailing" secondItem="rnU-Yr-ln0" secondAttribute="trailing" constant="12" id="bbN-TE-upG"/>
                             <constraint firstItem="9rm-nh-Ovl" firstAttribute="top" secondItem="fE4-BT-gVI" secondAttribute="bottom" id="fYw-Bz-Qhb"/>
-                            <constraint firstItem="bIh-5R-3Yh" firstAttribute="centerX" secondItem="7Pu-g8-guX" secondAttribute="centerX" id="g9q-Qr-ffX"/>
                             <constraint firstItem="WUv-AJ-nyq" firstAttribute="leading" secondItem="rnU-Yr-ln0" secondAttribute="leading" id="h54-40-vE7"/>
                             <constraint firstItem="WUv-AJ-nyq" firstAttribute="centerX" secondItem="7Pu-g8-guX" secondAttribute="centerX" id="jlL-UQ-XZs"/>
                             <constraint firstItem="rnU-Yr-ln0" firstAttribute="top" secondItem="WUv-AJ-nyq" secondAttribute="bottom" constant="3" id="jyr-DI-OjR"/>
@@ -343,11 +343,13 @@
                             <constraint firstItem="fyd-Yt-8Bd" firstAttribute="top" secondItem="rnU-Yr-ln0" secondAttribute="bottom" id="pW2-2Q-WfE"/>
                             <constraint firstItem="LpF-Q4-G6C" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bIh-5R-3Yh" secondAttribute="bottom" constant="14" id="vf2-Xc-8XE"/>
                             <constraint firstItem="bIh-5R-3Yh" firstAttribute="top" secondItem="Iwi-17-ofS" secondAttribute="bottom" constant="-3" id="xDJ-rI-MT2"/>
+                            <constraint firstItem="bIh-5R-3Yh" firstAttribute="leading" secondItem="7Pu-g8-guX" secondAttribute="leading" id="yJQ-65-D1r"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="composeButton" destination="fgP-Oq-XmK" id="trO-pn-wDM"/>
+                        <outlet property="hashtagsLabel" destination="bIh-5R-3Yh" id="H4x-zh-KK7"/>
                         <outlet property="profileButton" destination="xOG-aK-No2" id="zhp-GI-WMa"/>
                         <outlet property="timeUntilNextDailyDappLabel" destination="JCc-zy-45M" id="edM-Lb-pl4"/>
                     </connections>

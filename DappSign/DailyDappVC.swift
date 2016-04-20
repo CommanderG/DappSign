@@ -625,7 +625,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
             DappsHelper.downloadHashtagsForDapp(dapp, completion: {
                 (hashtags: [PFObject]?, error: NSError?) -> Void in
                 if let hashtags = hashtags {
-                    let hashtagNames = DappsHelper.hashtagNamesStringWithHashtags(hashtags)
+                    let hashtagNames = HashtagHelper.hashtagNamesStringWithHashtags(hashtags)
                     
                     self.hashtagsLabel.text = hashtagNames
                 }

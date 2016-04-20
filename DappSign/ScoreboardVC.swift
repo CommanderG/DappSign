@@ -12,6 +12,7 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var profileButton:               UIButton!
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
+    @IBOutlet weak var hashtagsLabel:               UILabel!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -31,6 +32,7 @@ class ScoreboardVC: UIViewController {
         self.initTimers()
         
         self.scoreboardDappSignVC?.view.hidden = true
+        self.hashtagsLabel.text = ""
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +46,7 @@ class ScoreboardVC: UIViewController {
                 self.scoreboardDappSignVC?.view.hidden = false
                 self.currentDappIndex = 0
                 
+                self.initHashtagsLabelWithHashtagsForDapp(dapp)
                 self.scoreboardDappSignVC?.showDappObject(dapp)
             }
         }
@@ -140,14 +143,42 @@ class ScoreboardVC: UIViewController {
     private func showNextDapp() {
         self.currentDappIndex = (self.currentDappIndex + 1) % self.dapps.count
         
+        if let currentDapp = self.currentDapp() {
+            self.scoreboardDappSignVC?.moveRighOffTheScreen {
+                self.initHashtagsLabelWithHashtagsForDapp(currentDapp)
+                self.scoreboardDappSignVC?.showDappObject(currentDapp)
+            }
+        }
+    }
+    
+    private func currentDapp() -> PFObject? {
         if (self.currentDappIndex < 0 || self.currentDappIndex >= self.dapps.count) {
-            return
+            return nil
         }
         
         let dapp = self.dapps[self.currentDappIndex]
         
-        self.scoreboardDappSignVC?.moveRighOffTheScreen {
-            self.scoreboardDappSignVC?.showDappObject(dapp)
+        return dapp
+    }
+    
+    private func initHashtagsLabelWithHashtagsForDapp(dapp: PFObject) {
+        self.hashtagsLabel.text = ""
+        
+        DappsHelper.downloadHashtagsForDapp(dapp) {
+            (hashtags: [PFObject]?, error: NSError?) -> Void in
+            if let
+                hashtags = hashtags,
+                currentDapp = self.currentDapp() {
+                    if dapp.objectId == currentDapp.objectId {
+                        let hashtagsString = HashtagHelper.hashtagNamesStringWithHashtags(hashtags)
+                        
+                        self.hashtagsLabel.text = hashtagsString
+                        
+                        return
+                    }
+            }
+            
+            self.hashtagsLabel.text = ""
         }
     }
 }
