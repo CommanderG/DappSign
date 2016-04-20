@@ -24,6 +24,7 @@
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
 		2756D1971CB2909100C9A41A /* DappTransferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2756D1961CB2909000C9A41A /* DappTransferHelper.swift */; };
+		275955811CC7AF0100080D63 /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955801CC7AF0100080D63 /* ViewControllerHelper.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */; };
@@ -178,6 +179,7 @@
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		2756D1961CB2909000C9A41A /* DappTransferHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappTransferHelper.swift; sourceTree = "<group>"; };
+		275955801CC7AF0100080D63 /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtil.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				27979D531CB41BF8002816A6 /* ParseHelper.swift */,
 				27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */,
 				27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */,
+				275955801CC7AF0100080D63 /* ViewControllerHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1000,6 +1003,7 @@
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,
 				27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */,
 				274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */,
+				275955811CC7AF0100080D63 /* ViewControllerHelper.swift in Sources */,
 				4CD9C9801AA1D59900046CA2 /* LoginVC.swift in Sources */,
 				27D3C2A61CB7FB97009CDB2C /* RepresentativeVC.swift in Sources */,
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,

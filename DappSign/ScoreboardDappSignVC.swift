@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol ScoreboardDappSignDelegate {
+    func didFinishCountingDown()
+    func openLinkWithURL(linkURL: NSURL)
+}
+
 class ScoreboardDappSignVC: UIViewController {
     internal static let embedSegueID: String = "embedScoreboardDappSignVC"
     
-    internal var countdownDelegate: CountdownDelegate? = nil
+    internal var delegate: ScoreboardDappSignDelegate? = nil
     
     private var scoreboardDappSignFrontSideVC: ScoreboardDappSignFrontSideVC? = nil
     private var dappBackSideLinksVC: DappBackSideLinksVC? = nil
@@ -51,6 +56,8 @@ class ScoreboardDappSignVC: UIViewController {
         ) as? DappBackSideLinksVC
         
         if let dappBackSideLinksVC = self.dappBackSideLinksVC {
+            dappBackSideLinksVC.delegate = self
+            
             self.addChildViewController(dappBackSideLinksVC)
         }
     }
@@ -152,6 +159,12 @@ class ScoreboardDappSignVC: UIViewController {
 
 extension ScoreboardDappSignVC: CountdownDelegate {
     func didFinishCountingDown() {
-        self.countdownDelegate?.didFinishCountingDown()
+        self.delegate?.didFinishCountingDown()
+    }
+}
+
+extension ScoreboardDappSignVC: DappBackSideLinksVCDelegate {
+    func openLinkWithURL(linkURL: NSURL) {
+        self.delegate?.openLinkWithURL(linkURL)
     }
 }

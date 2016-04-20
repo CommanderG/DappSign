@@ -658,7 +658,7 @@
         <!--LinkVC-->
         <scene sceneID="Yrn-Ur-Cja">
             <objects>
-                <viewController storyboardIdentifier="linkVC" id="RoV-uS-VGX" customClass="LinkVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LinkVC" id="RoV-uS-VGX" customClass="LinkVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z5g-LK-ljs"/>
                         <viewControllerLayoutGuide type="bottom" id="liN-kt-W0J"/>

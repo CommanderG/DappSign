@@ -875,19 +875,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
 
 extension DailyDappVC: DappBackSideLinksVCDelegate {
     func openLinkWithURL(linkURL: NSURL) {
-        let linkVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            LinkVC.storyboardID
-        ) as? LinkVC
-        
-        if let linkVC = linkVC {
-            self.addChildViewController(linkVC)
-            
-            linkVC.view.frame = self.view.bounds
-            
-            self.view.addSubview(linkVC.view)
-            
-            linkVC.didMoveToParentViewController(self)
-            linkVC.openURL(linkURL)
-        }
+        ViewControllerHelper.openLinkWithURL(linkURL, inViewController: self)
     }
 }

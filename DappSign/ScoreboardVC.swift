@@ -148,7 +148,7 @@ class ScoreboardVC: UIViewController {
             case ScoreboardDappSignVC.embedSegueID:
                 self.scoreboardDappSignVC = segue.destinationViewController as? ScoreboardDappSignVC
                 
-                self.scoreboardDappSignVC?.countdownDelegate = self
+                self.scoreboardDappSignVC?.delegate = self
             case _:
                 break
             }
@@ -180,8 +180,12 @@ class ScoreboardVC: UIViewController {
     }
 }
 
-extension ScoreboardVC: CountdownDelegate {
+extension ScoreboardVC: ScoreboardDappSignDelegate {
     func didFinishCountingDown() {
         self.showNextDapp()
+    }
+    
+    func openLinkWithURL(linkURL: NSURL) {
+        ViewControllerHelper.openLinkWithURL(linkURL, inViewController: self)
     }
 }
