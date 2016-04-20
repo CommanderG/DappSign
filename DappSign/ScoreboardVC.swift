@@ -21,6 +21,7 @@ class ScoreboardVC: UIViewController {
     private var timeUntilNextDailyDapp: (Int, Int)? = nil
     private var dapps: [PFObject] = []
     private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
+    private var scoreboardDappMappVC: ScoreboardDappMappVC? = nil
     private var currentDappIndex = 0
     
     override func viewDidLoad() {
@@ -124,6 +125,8 @@ class ScoreboardVC: UIViewController {
                 self.scoreboardDappSignVC = segue.destinationViewController as? ScoreboardDappSignVC
                 
                 self.scoreboardDappSignVC?.delegate = self
+            case ScoreboardDappMappVC.embedSegueID:
+                self.scoreboardDappMappVC = segue.destinationViewController as? ScoreboardDappMappVC
             case _:
                 break
             }
@@ -143,12 +146,16 @@ class ScoreboardVC: UIViewController {
     private func showNextDapp() {
         self.currentDappIndex = (self.currentDappIndex + 1) % self.dapps.count
         
-        if let currentDapp = self.currentDapp() {
+        let currentDapp = self.currentDapp()
+        
+        if let currentDapp = currentDapp {
             self.scoreboardDappSignVC?.moveRighOffTheScreen {
                 self.initHashtagsLabelWithHashtagsForDapp(currentDapp)
                 self.scoreboardDappSignVC?.showDappObject(currentDapp)
             }
         }
+        
+        self.scoreboardDappMappVC?.showDappMappDataForDapp(currentDapp)
     }
     
     private func currentDapp() -> PFObject? {

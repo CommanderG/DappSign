@@ -29,6 +29,7 @@
 		275955851CC7BB5100080D63 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955841CC7BB5100080D63 /* ViewHelper.swift */; };
 		275955871CC7C6B900080D63 /* DistrictHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955861CC7C6B900080D63 /* DistrictHelper.swift */; };
 		275955891CC7D7FC00080D63 /* HashtagHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955881CC7D7FC00080D63 /* HashtagHelper.swift */; };
+		2759558B1CC7DF3000080D63 /* ScoreboardDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */; };
@@ -188,6 +189,7 @@
 		275955841CC7BB5100080D63 /* ViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		275955861CC7C6B900080D63 /* DistrictHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistrictHelper.swift; sourceTree = "<group>"; };
 		275955881CC7D7FC00080D63 /* HashtagHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagHelper.swift; sourceTree = "<group>"; };
+		2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappMappVC.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtil.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */,
 				27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */,
 				27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */,
+				2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
@@ -1026,6 +1029,7 @@
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
 				27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
+				2759558B1CC7DF3000080D63 /* ScoreboardDappMappVC.swift in Sources */,
 				27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
 				275955851CC7BB5100080D63 /* ViewHelper.swift in Sources */,
