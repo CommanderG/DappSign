@@ -291,7 +291,9 @@ class Requests {
         }
     }
     
-    class func percents(dapp: PFObject, completion: (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void) {
+    class func percents(dapp: PFObject,
+        completion: (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void
+    ) {
         let relation = dapp.relationForKey("usersWhoSawIt")
         
         let query = relation.query()
@@ -308,9 +310,13 @@ class Requests {
             }
             
             if let users = objects as? [PFUser] {
-                self.downloadDappsDapped(dapp, users: users, userIndex: 0, usersDapped: [:], completion: {
-                    (usersDapped: [PFUser:Bool]) -> Void in
-                    completion(usersDapped: usersDapped, error: nil)
+                self.downloadDappsDapped(dapp,
+                    users: users,
+                    userIndex: 0,
+                    usersDapped: [:],
+                    completion: {
+                        (usersDapped: [PFUser:Bool]) -> Void in
+                        completion(usersDapped: usersDapped, error: nil)
                 })
             } else {
                 completion(usersDapped: nil, error: nil)
