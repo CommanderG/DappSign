@@ -19,6 +19,8 @@ class ScoreboardDappMappVC: UIViewController {
     
     internal static let embedSegueID = "embedScoreboardDappMappVC"
     
+    private var percentsVC: PercentsVC? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,7 +110,7 @@ class ScoreboardDappMappVC: UIViewController {
         
         // placeholders
         self.showMapWithURL(SVGMapURL)
-//        self.percentsView.showPercents(0)
+        self.percentsVC?.showPercents(0)
         
         Requests.percents(dapp, completion: {
             (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
@@ -159,7 +161,7 @@ class ScoreboardDappMappVC: UIViewController {
                 }
                 
                 self.showMapWithURL(SVGMapURL)
-//                self.percentsView.showPercents(percents)
+                self.percentsVC?.showPercents(percents)
             }
         })
     }
@@ -202,7 +204,7 @@ class ScoreboardDappMappVC: UIViewController {
         }
         
         self.showMapWithURL(SVGMapURL)
-//        self.percentsView.showPercents(percents)
+        self.percentsVC?.showPercents(percents)
     }
     
     private func showMapWithURL(SVGMapURLPath: String?) {
@@ -214,6 +216,19 @@ class ScoreboardDappMappVC: UIViewController {
             
             self.mapWebView.loadRequest(request)
             self.mapWebView.hidden = false
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case PercentsVC.embedSegueID:
+                self.percentsVC = segue.destinationViewController as? PercentsVC
+            case _:
+                break
+            }
         }
     }
 }
