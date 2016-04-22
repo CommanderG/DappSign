@@ -39,9 +39,9 @@ class ScoreboardDappMappVC: UIViewController {
     internal func showDappMappDataForDapp(dapp: PFObject?) {
         self.initMapWebViewWithMapURLString(nil)
         self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(nil)
-        self.initTopDistrictLabelWithDapp(dapp)
-        self.initSecondTopDistrictLabelWithDapp(dapp)
-        self.initThirdTopDistrictLabelWithDapp(dapp)
+        self.initDistrictLabel(self.topDistrictLabel, districtIndex: 1, district: nil)
+        self.initDistrictLabel(self.secondTopDistrictLabel, districtIndex: 2, district: nil)
+        self.initDistrictLabel(self.thirdTopDistrictLabel, districtIndex: 3, district: nil)
         self.initUserDistrictRankLabelWithDapp(dapp)
         self.initTotalDistrictsCountLabelWithDapp(dapp)
         self.percentsVC?.showPercents(0)
@@ -52,6 +52,18 @@ class ScoreboardDappMappVC: UIViewController {
                 self.initMapWebViewWithMapURLString(dappMappInfo?.mapURLString)
                 self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(
                     dappMappInfo?.districtsWithMajoritySupportCount
+                )
+                self.initDistrictLabel(self.topDistrictLabel,
+                    districtIndex: 1,
+                    district: dappMappInfo?.topDistrict
+                )
+                self.initDistrictLabel(self.secondTopDistrictLabel,
+                    districtIndex: 2,
+                    district: dappMappInfo?.secondTopDistrict
+                )
+                self.initDistrictLabel(self.thirdTopDistrictLabel,
+                    districtIndex: 3,
+                    district: dappMappInfo?.thirdTopDistrict
                 )
                 
                 if let percents = dappMappInfo?.percents {
@@ -96,27 +108,12 @@ class ScoreboardDappMappVC: UIViewController {
         }
     }
     
-    private func initTopDistrictLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
+    private func initDistrictLabel(districtLabel: UILabel, districtIndex: Int, district: String?) {
+        if let district = district {
+            districtLabel.hidden = false
+            districtLabel.text = "\(districtIndex). \(district)"
         } else {
-            
-        }
-    }
-    
-    private func initSecondTopDistrictLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
-        } else {
-            
-        }
-    }
-    
-    private func initThirdTopDistrictLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
-        } else {
-            
+            districtLabel.hidden = true
         }
     }
     

@@ -13,6 +13,9 @@ struct DappMappInfo {
     let mapURLString:                      String?
     let percents:                          UInt
     let districtsWithMajoritySupportCount: Int
+    let topDistrict:                       String?
+    let secondTopDistrict:                 String?
+    let thirdTopDistrict:                  String?
 }
 
 class DappMappHelper {
@@ -29,6 +32,8 @@ class DappMappHelper {
                     )
                 } else {
                     let dappMappInfo = self.generateRandomDappMappInfo()
+                    
+                    self.findTop3DistrictsWithIDsFrequencies(dappMappInfo.IDsFreqs)
                     
                     completion(dappMappInfo: dappMappInfo)
                 }
@@ -59,11 +64,17 @@ class DappMappHelper {
                 let districtsWithMajoritySupportCount =
                 self.countDistrictsWithMajoritySupport(usersDapped)
                 
+                let (topDistrict, secondTopDistrict, thirdTopDistrict) =
+                    self.findTop3DistrictsWithIDsFrequencies(IDsFreqs)
+                
                 let dappMappInfo = DappMappInfo(
                     IDsFreqs:                          IDsFreqs,
                     mapURLString:                      SVGMapURL,
                     percents:                          percents,
-                    districtsWithMajoritySupportCount: districtsWithMajoritySupportCount
+                    districtsWithMajoritySupportCount: districtsWithMajoritySupportCount,
+                    topDistrict:                       topDistrict,
+                    secondTopDistrict:                 secondTopDistrict,
+                    thirdTopDistrict:                  thirdTopDistrict
                 )
                 
                 completion(dappMappInfo: dappMappInfo)
@@ -112,11 +123,18 @@ class DappMappHelper {
         
         let maxRandom = UInt32(roundf(Float(IDsFreqs.count) / 2))
         let districtsWithMajoritySupportCount = Int(1 + arc4random_uniform(maxRandom))
+        
+        let (topDistrict, secondTopDistrict, thirdTopDistrict) =
+            self.findTop3DistrictsWithIDsFrequencies(IDsFreqs)
+        
         let dappMappInfo = DappMappInfo(
             IDsFreqs:                          IDsFreqs,
             mapURLString:                      SVGMapURL,
             percents:                          percents,
-            districtsWithMajoritySupportCount: districtsWithMajoritySupportCount
+            districtsWithMajoritySupportCount: districtsWithMajoritySupportCount,
+            topDistrict:                       topDistrict,
+            secondTopDistrict:                 secondTopDistrict,
+            thirdTopDistrict:                  thirdTopDistrict
         )
         
         return dappMappInfo
@@ -182,5 +200,44 @@ class DappMappHelper {
         }
         
         return count
+    }
+    
+    private class func findTop3DistrictsWithIDsFrequencies(
+        IDsFreqs: IDsFrequencies
+    ) -> (String?, String?, String?) {
+        var districtDappsCounts: [(UInt, String)] = []
+        
+        for (district, dappsCount) in IDsFreqs {
+            let element = (dappsCount, district)
+            
+            districtDappsCounts.append(element)
+        }
+        
+        districtDappsCounts.sortInPlace {
+            (element1: (UInt, String), element2: (UInt, String)) -> Bool in
+            return element1.0 > element2.0
+        }
+        
+        var topDistrict: String? = nil
+        var secondTopDistrict: String? = nil
+        var thirdTopDistrict: String? = nil
+        
+        for index in 0 ..< 3 {
+            if index >= districtDappsCounts.count {
+                break
+            }
+            
+            let (_, district) = districtDappsCounts[index]
+            
+            if index == 0 {
+                topDistrict = district
+            } else if index == 1 {
+                secondTopDistrict = district
+            } else if index == 2 {
+                thirdTopDistrict = district
+            }
+        }
+        
+        return (topDistrict, secondTopDistrict, thirdTopDistrict)
     }
 }
