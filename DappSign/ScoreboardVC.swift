@@ -13,6 +13,7 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
+    @IBOutlet weak var tweetButton:                 UIButton!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -34,6 +35,8 @@ class ScoreboardVC: UIViewController {
         
         self.scoreboardDappSignVC?.view.hidden = true
         self.hashtagsLabel.text = ""
+        
+        self.disableTweetButton()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,12 +53,38 @@ class ScoreboardVC: UIViewController {
                 self.initHashtagsLabelWithHashtagsForDapp(dapp)
                 self.scoreboardDappSignVC?.showDappObject(dapp)
                 self.scoreboardDappMappVC?.showDappMappDataForDapp(dapp)
+                self.enableTweetButton()
             }
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - @IBActions
+    
+    @IBAction func tweet() {
+        if let
+            currentDapp = self.currentDapp(),
+            dappSignImage = self.scoreboardDappSignVC?.frontSideImage() {
+                TwitterHelper.tweetDapp(currentDapp, image: dappSignImage, completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully tweeted."
+                        )
+                    } else if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Error: \(error)"
+                        )
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to tweet the card. Unknown error."
+                        )
+                    }
+                })
+        }
     }
     
     // MARK: - init
@@ -149,10 +178,13 @@ class ScoreboardVC: UIViewController {
         
         let currentDapp = self.currentDapp()
         
+        self.disableTweetButton()
+        
         if let currentDapp = currentDapp {
             self.scoreboardDappSignVC?.moveRighOffTheScreen {
                 self.initHashtagsLabelWithHashtagsForDapp(currentDapp)
                 self.scoreboardDappSignVC?.showDappObject(currentDapp)
+                self.enableTweetButton()
             }
         }
         
@@ -189,9 +221,37 @@ class ScoreboardVC: UIViewController {
             self.hashtagsLabel.text = ""
         }
     }
+    
+    private func disableTweetButton() {
+        self.tweetButton.alpha = 0.5
+        self.tweetButton.userInteractionEnabled = false
+    }
+    
+    private func enableTweetButton() {
+        self.tweetButton.alpha = 1.0
+        self.tweetButton.userInteractionEnabled = true
+    }
 }
 
 extension ScoreboardVC: ScoreboardDappSignDelegate {
+    func willFlipToSide(side: DappSignSide) {
+        switch side {
+        case .Front:
+            break;
+        case .Back:
+            self.disableTweetButton()
+        }
+    }
+    
+    func didFlipToSide(side: DappSignSide) {
+        switch side {
+        case .Front:
+            self.enableTweetButton()
+        case .Back:
+            break;
+        }
+    }
+    
     func didFinishCountingDown() {
         self.showNextDapp()
     }

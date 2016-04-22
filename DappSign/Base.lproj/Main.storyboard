@@ -291,25 +291,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpF-Q4-G6C">
                                 <rect key="frame" x="12" y="280" width="296" height="267"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-9z-cqi">
-                                        <rect key="frame" x="189" y="0.0" width="107" height="267"/>
-                                        <subviews>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFA-iL-rX8">
-                                                <rect key="frame" x="0.0" y="0.0" width="107" height="213"/>
-                                                <connections>
-                                                    <segue destination="6iX-fb-apt" kind="embed" identifier="embedScoreboardDappMappVC" id="nUZ-GH-D7e"/>
-                                                </connections>
-                                            </containerView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="OFA-iL-rX8" secondAttribute="trailing" id="9IU-AP-fVv"/>
-                                            <constraint firstAttribute="bottom" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="54" id="JXY-Ug-aCQ"/>
-                                            <constraint firstItem="OFA-iL-rX8" firstAttribute="top" secondItem="C8D-9z-cqi" secondAttribute="top" id="h0w-eo-tTo"/>
-                                            <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
-                                            <constraint firstItem="OFA-iL-rX8" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="yma-HD-KL7"/>
-                                        </constraints>
-                                    </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVT-5U-Ecl">
                                         <rect key="frame" x="0.0" y="0.0" width="189" height="267"/>
                                         <constraints>
@@ -319,6 +300,37 @@
                                             <segue destination="aw4-Wj-Yab" kind="embed" identifier="embedScoreboardDappSignVC" id="RYZ-eh-2cO"/>
                                         </connections>
                                     </containerView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-9z-cqi">
+                                        <rect key="frame" x="189" y="0.0" width="107" height="267"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFA-iL-rX8">
+                                                <rect key="frame" x="0.0" y="0.0" width="107" height="213"/>
+                                                <connections>
+                                                    <segue destination="6iX-fb-apt" kind="embed" identifier="embedScoreboardDappMappVC" id="nUZ-GH-D7e"/>
+                                                </connections>
+                                            </containerView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vx-7V-wml">
+                                                <rect key="frame" x="0.0" y="234" width="38" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="3Vx-7V-wml" secondAttribute="height" multiplier="38:33" id="sX8-Rp-A7z"/>
+                                                </constraints>
+                                                <state key="normal" image="twitterIcon"/>
+                                                <connections>
+                                                    <action selector="tweet" destination="PwR-Zb-Hy4" eventType="touchUpInside" id="OZt-9P-4iv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="3Vx-7V-wml" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="61w-gT-QVv"/>
+                                            <constraint firstAttribute="trailing" secondItem="OFA-iL-rX8" secondAttribute="trailing" id="9IU-AP-fVv"/>
+                                            <constraint firstAttribute="bottom" secondItem="3Vx-7V-wml" secondAttribute="bottom" id="AbD-K5-bfV"/>
+                                            <constraint firstAttribute="bottom" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="54" id="JXY-Ug-aCQ"/>
+                                            <constraint firstItem="3Vx-7V-wml" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="21" id="cW1-ue-Rlc"/>
+                                            <constraint firstItem="OFA-iL-rX8" firstAttribute="top" secondItem="C8D-9z-cqi" secondAttribute="top" id="h0w-eo-tTo"/>
+                                            <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
+                                            <constraint firstItem="OFA-iL-rX8" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="yma-HD-KL7"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="C8D-9z-cqi" firstAttribute="leading" secondItem="CVT-5U-Ecl" secondAttribute="trailing" id="0rH-EH-ia7"/>
@@ -365,6 +377,7 @@
                         <outlet property="hashtagsLabel" destination="bIh-5R-3Yh" id="H4x-zh-KK7"/>
                         <outlet property="profileButton" destination="xOG-aK-No2" id="zhp-GI-WMa"/>
                         <outlet property="timeUntilNextDailyDappLabel" destination="JCc-zy-45M" id="edM-Lb-pl4"/>
+                        <outlet property="tweetButton" destination="3Vx-7V-wml" id="jXL-a0-A21"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2x-05-Uay" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4008,11 +4021,11 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jeY-SL-Q8Z"/>
         <segue reference="bpX-mN-qEi"/>
-        <segue reference="IfF-6V-hkZ"/>
-        <segue reference="D2a-aL-0oF"/>
         <segue reference="bkt-29-1zK"/>
+        <segue reference="8GL-5h-4zG"/>
+        <segue reference="fu7-hF-c08"/>
+        <segue reference="D2a-aL-0oF"/>
         <segue reference="4GY-aV-x4s"/>
     </inferredMetricsTieBreakers>
 </document>

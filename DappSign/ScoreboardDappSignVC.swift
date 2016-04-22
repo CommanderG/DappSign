@@ -8,7 +8,14 @@
 
 import UIKit
 
+enum DappSignSide {
+    case Front
+    case Back
+}
+
 protocol ScoreboardDappSignDelegate {
+    func willFlipToSide(side: DappSignSide)
+    func didFlipToSide(side: DappSignSide)
     func didFinishCountingDown()
     func openLinkWithURL(linkURL: NSURL)
 }
@@ -89,8 +96,12 @@ class ScoreboardDappSignVC: UIViewController {
             if let
                 dappBackSideLinksVC = self.dappBackSideLinksVC,
                 scoreboardDappSignFrontSideVC = self.scoreboardDappSignFrontSideVC {
+                    self.delegate?.willFlipToSide(.Front)
                     self.transitionFromViewController(dappBackSideLinksVC,
-                        toViewController: scoreboardDappSignFrontSideVC
+                        toViewController: scoreboardDappSignFrontSideVC,
+                        completion: {
+                            self.delegate?.didFlipToSide(.Front)
+                        }
                     )
             }
         }
@@ -101,8 +112,12 @@ class ScoreboardDappSignVC: UIViewController {
             if let
                 scoreboardDappSignFrontSideVC = self.scoreboardDappSignFrontSideVC,
                 dappBackSideLinksVC = self.dappBackSideLinksVC {
+                    self.delegate?.willFlipToSide(.Back)
                     self.transitionFromViewController(scoreboardDappSignFrontSideVC,
-                        toViewController: dappBackSideLinksVC
+                        toViewController: dappBackSideLinksVC,
+                        completion: {
+                            self.delegate?.didFlipToSide(.Back)
+                        }
                     )
             }
         }
@@ -117,6 +132,16 @@ class ScoreboardDappSignVC: UIViewController {
         if let dapp = dapp {
             self.dappBackSideLinksVC?.showLinksForDapp(dapp)
         }
+    }
+    
+    internal func frontSideImage() -> UIImage? {
+        if self.visibleChildVC == self.scoreboardDappSignFrontSideVC {
+            let frontSideImage = self.scoreboardDappSignFrontSideVC?.view.toImage()
+            
+            return frontSideImage
+        }
+        
+        return nil
     }
     
     // MARK: - animation
@@ -139,7 +164,8 @@ class ScoreboardDappSignVC: UIViewController {
     // MARK: - private
     
     private func transitionFromViewController(fromViewController: UIViewController,
-        toViewController: UIViewController
+        toViewController: UIViewController,
+        completion: Void -> Void
     ) {
         toViewController.view.frame = self.view.bounds
         
@@ -153,6 +179,8 @@ class ScoreboardDappSignVC: UIViewController {
                 toViewController.didMoveToParentViewController(self)
                 
                 self.visibleChildVC = toViewController
+                
+                completion()
         })
     }
 }
