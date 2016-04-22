@@ -324,7 +324,12 @@ class Requests {
         }
     }
     
-    class func downloadDappsDapped(dapp: PFObject, users: [PFUser], userIndex: Int, var usersDapped: [PFUser:Bool], completion: (usersDapped: [PFUser:Bool]) -> Void) {
+    class func downloadDappsDapped(dapp: PFObject,
+        users: [PFUser],
+        userIndex: Int,
+        var usersDapped: [PFUser:Bool],
+        completion: (usersDapped: [PFUser:Bool]) -> Void
+    ) {
         if (userIndex > users.count - 1 || userIndex < 0) {
             completion(usersDapped: usersDapped)
             
@@ -352,11 +357,11 @@ class Requests {
             usersDapped[user] = dappSwiped
             
             self.downloadDappsDapped(
-                dapp
-            ,   users: users
-            ,   userIndex: userIndex + 1
-            ,   usersDapped: usersDapped
-            ,   completion: completion
+                dapp,
+                users: users,
+                userIndex: userIndex + 1,
+                usersDapped: usersDapped,
+                completion: completion
             )
         })
     }

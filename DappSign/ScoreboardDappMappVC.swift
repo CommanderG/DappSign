@@ -37,30 +37,62 @@ class ScoreboardDappMappVC: UIViewController {
     // MARK: - internal
     
     internal func showDappMappDataForDapp(dapp: PFObject?) {
-        self.initMapWebViewWithDapp(dapp)
-        self.initMajoritySupportDistrictsCountLabelWithDapp(dapp)
+        self.initMapWebViewWithMapURLString(nil)
+        self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(nil)
         self.initTopDistrictLabelWithDapp(dapp)
         self.initSecondTopDistrictLabelWithDapp(dapp)
         self.initThirdTopDistrictLabelWithDapp(dapp)
         self.initUserDistrictRankLabelWithDapp(dapp)
         self.initTotalDistrictsCountLabelWithDapp(dapp)
+        self.percentsVC?.showPercents(0)
+        
+        if let dapp = dapp {
+            DappMappHelper.dappMappInfoForDapp(dapp) {
+                (dappMappInfo: DappMappInfo?) -> Void in
+                self.initMapWebViewWithMapURLString(dappMappInfo?.mapURLString)
+                self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(
+                    dappMappInfo?.districtsWithMajoritySupportCount
+                )
+                
+                if let percents = dappMappInfo?.percents {
+                    self.percentsVC?.showPercents(percents)
+                }
+            }
+        }
     }
     
     // MARK: - private
     
-    private func initMapWebViewWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            self.showInformationAboutDapp(dapp)
+    private func initMapWebViewWithMapURLString(mapURLString: String?) {
+        self.mapWebView.hidden = true
+        
+        var URLString: String? = nil
+        
+        if let mapURLString = mapURLString {
+            URLString = mapURLString
         } else {
-            self.showMapWithURL(nil)
+            URLString = SVGMapGenerator.generateEmptyMap()
+        }
+        
+        if let URLString = URLString {
+            self.mapWebView.hidden = false
+            
+            let URL = NSURL(fileURLWithPath: URLString)
+            let request = NSURLRequest(URL: URL)
+            
+            self.mapWebView.loadRequest(request)
         }
     }
     
-    private func initMajoritySupportDistrictsCountLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
+    private func initMajoritySupportDistrictsCountLabelWithDistrictsCount(districtsCount: Int?) {
+        if let districtsCount = districtsCount {
+            if districtsCount == 1 {
+                self.majoritySupportDistrictsCountLabel.text = "\(districtsCount) district."
+            } else {
+                self.majoritySupportDistrictsCountLabel.text = "\(districtsCount) districts."
+            }
         } else {
-            
+            self.majoritySupportDistrictsCountLabel.text = "0 districts"
         }
     }
     
@@ -101,35 +133,6 @@ class ScoreboardDappMappVC: UIViewController {
             
         } else {
             
-        }
-    }
-    
-    // MARK: - map
-    
-    internal func showInformationAboutDapp(dapp: PFObject) {
-        let emptyMapURLString = SVGMapGenerator.generateEmptyMap()
-        
-        self.showMapWithURL(emptyMapURLString)
-        self.percentsVC?.showPercents(0)
-        
-        DappMappHelper.dappMappInfoForDapp(dapp) {
-            (dappMappInfo: DappMappInfo?) -> Void in
-            if let dappMappInfo = dappMappInfo {
-                self.showMapWithURL(dappMappInfo.mapURLString)
-                self.percentsVC?.showPercents(dappMappInfo.percents)
-            }
-        }
-    }
-    
-    private func showMapWithURL(SVGMapURLPath: String?) {
-        self.mapWebView.hidden = true
-        
-        if let mapURLPath = SVGMapURLPath {
-            let URL = NSURL(fileURLWithPath: mapURLPath)
-            let request = NSURLRequest(URL: URL)
-            
-            self.mapWebView.loadRequest(request)
-            self.mapWebView.hidden = false
         }
     }
     
