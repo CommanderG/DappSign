@@ -14,6 +14,7 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
     @IBOutlet weak var tweetButton:                 UIButton!
+    @IBOutlet weak var postToFacebookButton:        UIButton!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -36,7 +37,7 @@ class ScoreboardVC: UIViewController {
         self.scoreboardDappSignVC?.view.hidden = true
         self.hashtagsLabel.text = ""
         
-        self.disableTweetButton()
+        self.disableSharingButtons()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,7 +54,7 @@ class ScoreboardVC: UIViewController {
                 self.initHashtagsLabelWithHashtagsForDapp(dapp)
                 self.scoreboardDappSignVC?.showDappObject(dapp)
                 self.scoreboardDappMappVC?.showDappMappDataForDapp(dapp)
-                self.enableTweetButton()
+                self.enableSharingButtons()
             }
         }
     }
@@ -65,25 +66,48 @@ class ScoreboardVC: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func tweet() {
-        if let
-            currentDapp = self.currentDapp(),
-            dappSignImage = self.scoreboardDappSignVC?.frontSideImage() {
-                TwitterHelper.tweetDapp(currentDapp, image: dappSignImage, completion: {
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully tweeted."
-                        )
-                    } else if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Error: \(error)"
-                        )
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Unknown error."
-                        )
-                    }
-                })
+        let dappSignImage = self.scoreboardDappSignVC?.frontSideImage()
+        
+        if let currentDapp = self.currentDapp(), dappSignImage = dappSignImage {
+            TwitterHelper.tweetDapp(currentDapp, image: dappSignImage, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Unknown error."
+                    )
+                }
+            })
+        }
+    }
+    
+    @IBAction func postToFacebook() {
+        let dappSignImage = self.scoreboardDappSignVC?.frontSideImage()
+        
+        if let currentDapp = self.currentDapp(), dappSignImage = dappSignImage {
+            FacebookHelper.postImageToFacebook(dappSignImage, dapp: currentDapp, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully posted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Unknown error."
+                    )
+                }
+            })
         }
     }
     
@@ -178,13 +202,13 @@ class ScoreboardVC: UIViewController {
         
         let currentDapp = self.currentDapp()
         
-        self.disableTweetButton()
+        self.disableSharingButtons()
         
         if let currentDapp = currentDapp {
             self.scoreboardDappSignVC?.moveRighOffTheScreen {
                 self.initHashtagsLabelWithHashtagsForDapp(currentDapp)
                 self.scoreboardDappSignVC?.showDappObject(currentDapp)
-                self.enableTweetButton()
+                self.enableSharingButtons()
             }
         }
         
@@ -222,14 +246,18 @@ class ScoreboardVC: UIViewController {
         }
     }
     
-    private func disableTweetButton() {
+    private func disableSharingButtons() {
         self.tweetButton.alpha = 0.5
+        self.postToFacebookButton.alpha = 0.5
         self.tweetButton.userInteractionEnabled = false
+        self.postToFacebookButton.userInteractionEnabled = false
     }
     
-    private func enableTweetButton() {
+    private func enableSharingButtons() {
         self.tweetButton.alpha = 1.0
+        self.postToFacebookButton.alpha = 1.0
         self.tweetButton.userInteractionEnabled = true
+        self.postToFacebookButton.userInteractionEnabled = true
     }
 }
 
@@ -239,14 +267,14 @@ extension ScoreboardVC: ScoreboardDappSignDelegate {
         case .Front:
             break;
         case .Back:
-            self.disableTweetButton()
+            self.disableSharingButtons()
         }
     }
     
     func didFlipToSide(side: DappSignSide) {
         switch side {
         case .Front:
-            self.enableTweetButton()
+            self.enableSharingButtons()
         case .Back:
             break;
         }

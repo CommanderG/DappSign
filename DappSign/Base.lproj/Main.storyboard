@@ -319,12 +319,25 @@
                                                     <action selector="tweet" destination="PwR-Zb-Hy4" eventType="touchUpInside" id="OZt-9P-4iv"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfu-Qv-KOL">
+                                                <rect key="frame" x="87" y="232" width="20" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Dfu-Qv-KOL" secondAttribute="height" multiplier="4:7" id="Yik-P9-980"/>
+                                                </constraints>
+                                                <state key="normal" image="facebookIcon"/>
+                                                <connections>
+                                                    <action selector="postToFacebook" destination="PwR-Zb-Hy4" eventType="touchUpInside" id="q1H-yO-ZEd"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="3Vx-7V-wml" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="61w-gT-QVv"/>
                                             <constraint firstAttribute="trailing" secondItem="OFA-iL-rX8" secondAttribute="trailing" id="9IU-AP-fVv"/>
                                             <constraint firstAttribute="bottom" secondItem="3Vx-7V-wml" secondAttribute="bottom" id="AbD-K5-bfV"/>
+                                            <constraint firstItem="Dfu-Qv-KOL" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="19" id="D7j-wd-owd"/>
                                             <constraint firstAttribute="bottom" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="54" id="JXY-Ug-aCQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dfu-Qv-KOL" secondAttribute="trailing" id="MSc-Iy-9up"/>
+                                            <constraint firstAttribute="bottom" secondItem="Dfu-Qv-KOL" secondAttribute="bottom" id="Yhq-at-UP1"/>
                                             <constraint firstItem="3Vx-7V-wml" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="21" id="cW1-ue-Rlc"/>
                                             <constraint firstItem="OFA-iL-rX8" firstAttribute="top" secondItem="C8D-9z-cqi" secondAttribute="top" id="h0w-eo-tTo"/>
                                             <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
@@ -375,6 +388,7 @@
                     <connections>
                         <outlet property="composeButton" destination="fgP-Oq-XmK" id="trO-pn-wDM"/>
                         <outlet property="hashtagsLabel" destination="bIh-5R-3Yh" id="H4x-zh-KK7"/>
+                        <outlet property="postToFacebookButton" destination="Dfu-Qv-KOL" id="FHw-a2-eUu"/>
                         <outlet property="profileButton" destination="xOG-aK-No2" id="zhp-GI-WMa"/>
                         <outlet property="timeUntilNextDailyDappLabel" destination="JCc-zy-45M" id="edM-Lb-pl4"/>
                         <outlet property="tweetButton" destination="3Vx-7V-wml" id="jXL-a0-A21"/>
