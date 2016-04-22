@@ -42,8 +42,8 @@ class ScoreboardDappMappVC: UIViewController {
         self.initDistrictLabel(self.topDistrictLabel, districtIndex: 1, district: nil)
         self.initDistrictLabel(self.secondTopDistrictLabel, districtIndex: 2, district: nil)
         self.initDistrictLabel(self.thirdTopDistrictLabel, districtIndex: 3, district: nil)
-        self.initUserDistrictRankLabelWithDapp(dapp)
-        self.initTotalDistrictsCountLabelWithDapp(dapp)
+        self.initUserDistrictRankLabelWithRank(nil)
+        self.initTotalDistrictsCountLabelWithDistrictsCount(nil)
         self.percentsVC?.showPercents(0)
         
         if let dapp = dapp {
@@ -64,6 +64,11 @@ class ScoreboardDappMappVC: UIViewController {
                 self.initDistrictLabel(self.thirdTopDistrictLabel,
                     districtIndex: 3,
                     district: dappMappInfo?.thirdTopDistrict
+                )
+                
+                self.initUserDistrictRankLabelWithRank(dappMappInfo?.userDistrictRank)
+                self.initTotalDistrictsCountLabelWithDistrictsCount(
+                    dappMappInfo?.districtsTotalCount
                 )
                 
                 if let percents = dappMappInfo?.percents {
@@ -117,19 +122,19 @@ class ScoreboardDappMappVC: UIViewController {
         }
     }
     
-    private func initUserDistrictRankLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
+    private func initUserDistrictRankLabelWithRank(rank: Int?) {
+        if let rank = rank {
+            self.userDistrictRankLabel.text = "\(rank)"
         } else {
-            
+            self.userDistrictRankLabel.text = "0"
         }
     }
     
-    private func initTotalDistrictsCountLabelWithDapp(dapp: PFObject?) {
-        if let dapp = dapp {
-            
+    private func initTotalDistrictsCountLabelWithDistrictsCount(districtCount: Int?) {
+        if let districtCount = districtCount {
+            self.totalDistrictsCountLabel.text = "\(districtCount)"
         } else {
-            
+            self.totalDistrictsCountLabel.text = "0"
         }
     }
     

@@ -16,6 +16,8 @@ struct DappMappInfo {
     let topDistrict:                       String?
     let secondTopDistrict:                 String?
     let thirdTopDistrict:                  String?
+    let userDistrictRank:                  Int
+    let districtsTotalCount:               Int
 }
 
 class DappMappHelper {
@@ -67,6 +69,9 @@ class DappMappHelper {
                 let (topDistrict, secondTopDistrict, thirdTopDistrict) =
                     self.findTop3DistrictsWithIDsFrequencies(IDsFreqs)
                 
+                let userDistrictRank = self.calculateRankForUserDistrict(IDsFreqs)
+                let districtsTotalCount = SVGMapGenerator.districtsCount()
+                
                 let dappMappInfo = DappMappInfo(
                     IDsFreqs:                          IDsFreqs,
                     mapURLString:                      SVGMapURL,
@@ -74,7 +79,9 @@ class DappMappHelper {
                     districtsWithMajoritySupportCount: districtsWithMajoritySupportCount,
                     topDistrict:                       topDistrict,
                     secondTopDistrict:                 secondTopDistrict,
-                    thirdTopDistrict:                  thirdTopDistrict
+                    thirdTopDistrict:                  thirdTopDistrict,
+                    userDistrictRank:                  userDistrictRank,
+                    districtsTotalCount:               districtsTotalCount
                 )
                 
                 completion(dappMappInfo: dappMappInfo)
@@ -127,6 +134,9 @@ class DappMappHelper {
         let (topDistrict, secondTopDistrict, thirdTopDistrict) =
             self.findTop3DistrictsWithIDsFrequencies(IDsFreqs)
         
+        let userDistrictRank = self.calculateRankForUserDistrict(IDsFreqs)
+        let districtsTotalCount = SVGMapGenerator.districtsCount()
+        
         let dappMappInfo = DappMappInfo(
             IDsFreqs:                          IDsFreqs,
             mapURLString:                      SVGMapURL,
@@ -134,7 +144,9 @@ class DappMappHelper {
             districtsWithMajoritySupportCount: districtsWithMajoritySupportCount,
             topDistrict:                       topDistrict,
             secondTopDistrict:                 secondTopDistrict,
-            thirdTopDistrict:                  thirdTopDistrict
+            thirdTopDistrict:                  thirdTopDistrict,
+            userDistrictRank:                  userDistrictRank,
+            districtsTotalCount:               districtsTotalCount
         )
         
         return dappMappInfo
@@ -205,29 +217,17 @@ class DappMappHelper {
     private class func findTop3DistrictsWithIDsFrequencies(
         IDsFreqs: IDsFrequencies
     ) -> (String?, String?, String?) {
-        var districtDappsCounts: [(UInt, String)] = []
-        
-        for (district, dappsCount) in IDsFreqs {
-            let element = (dappsCount, district)
-            
-            districtDappsCounts.append(element)
-        }
-        
-        districtDappsCounts.sortInPlace {
-            (element1: (UInt, String), element2: (UInt, String)) -> Bool in
-            return element1.0 > element2.0
-        }
-        
+        let dappCountsDistricts = self.sortedDappCountsDistrictsWithDistrictsDappCounts(IDsFreqs)
         var topDistrict: String? = nil
         var secondTopDistrict: String? = nil
         var thirdTopDistrict: String? = nil
         
         for index in 0 ..< 3 {
-            if index >= districtDappsCounts.count {
+            if index >= dappCountsDistricts.count {
                 break
             }
             
-            let (_, district) = districtDappsCounts[index]
+            let (_, district) = dappCountsDistricts[index]
             
             if index == 0 {
                 topDistrict = district
@@ -239,5 +239,47 @@ class DappMappHelper {
         }
         
         return (topDistrict, secondTopDistrict, thirdTopDistrict)
+    }
+    
+    private class func calculateRankForUserDistrict(districtsDappCounts: IDsFrequencies) -> Int {
+        if let
+            user = PFUser.currentUser(),
+            userDistrict = user["congressionalDistrictID"] as? String {
+                let dappCountsDistricts =
+                    self.sortedDappCountsDistrictsWithDistrictsDappCounts(districtsDappCounts)
+                
+                for index in 0 ..< dappCountsDistricts.count {
+                    let (_, district) = dappCountsDistricts[index]
+                    
+                    if userDistrict == district {
+                        let districtRank = index + 1
+                        
+                        return districtRank
+                    }
+                }
+        }
+        
+        let districtRank = SVGMapGenerator.districtsCount()
+        
+        return districtRank
+    }
+    
+    private class func sortedDappCountsDistrictsWithDistrictsDappCounts(
+        IDsFreqs: IDsFrequencies
+    ) -> [(UInt, String)] {
+        var dappCountsDistricts: [(UInt, String)] = []
+        
+        for (district, dappsCount) in IDsFreqs {
+            let element = (dappsCount, district)
+            
+            dappCountsDistricts.append(element)
+        }
+        
+        dappCountsDistricts.sortInPlace {
+            (element1: (UInt, String), element2: (UInt, String)) -> Bool in
+            return element1.0 > element2.0
+        }
+        
+        return dappCountsDistricts
     }
 }
