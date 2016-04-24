@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EmbedDappDelegate {
+    func didRemoveFromParentViewController()
+}
+
 class EmbedDappVC: UIViewController {
     internal static let storyboardID = "embedDappVC"
     
@@ -16,6 +20,8 @@ class EmbedDappVC: UIViewController {
     @IBOutlet weak var iframeCodeTextView:              UITextView!
     @IBOutlet weak var iframeCodeTextViewContainerView: UIView!
     @IBOutlet weak var doneButton:                      UIButton!
+    
+    internal var delegate: EmbedDappDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +87,8 @@ class EmbedDappVC: UIViewController {
         self.willMoveToParentViewController(nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
+        
+        self.delegate?.didRemoveFromParentViewController()
     }
     
     // MARK: -

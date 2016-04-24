@@ -18,6 +18,7 @@ protocol ScoreboardDappSignDelegate {
     func didFlipToSide(side: DappSignSide)
     func didFinishCountingDown()
     func openLinkWithURL(linkURL: NSURL)
+    func didCloseLinksView()
 }
 
 class ScoreboardDappSignVC: UIViewController {
@@ -144,6 +145,37 @@ class ScoreboardDappSignVC: UIViewController {
         return nil
     }
     
+    internal func showLinksForDapp(dapp: PFObject) -> Bool {
+        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
+            EmbedDappVC.storyboardID
+        ) as? EmbedDappVC
+        
+        if let embedDappVC = embedDappVC {
+            embedDappVC.delegate = self
+            
+            self.addChildViewController(embedDappVC)
+            
+            let frame = embedDappVC.frameWithDappViewFrame(self.view.frame)
+            
+            embedDappVC.view.frame = frame
+            
+            self.view.addSubview(embedDappVC.view)
+            
+            embedDappVC.didMoveToParentViewController(self)
+            embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
+            
+            self.scoreboardDappSignFrontSideVC?.pauseCountdown()
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    internal func resumeCountdown() {
+        self.scoreboardDappSignFrontSideVC?.resumeCountdown()
+    }
+    
     // MARK: - animation
     
     internal func moveRighOffTheScreen(completion: (Void -> Void)? = nil) {
@@ -194,5 +226,11 @@ extension ScoreboardDappSignVC: CountdownDelegate {
 extension ScoreboardDappSignVC: DappBackSideLinksVCDelegate {
     func openLinkWithURL(linkURL: NSURL) {
         self.delegate?.openLinkWithURL(linkURL)
+    }
+}
+
+extension ScoreboardDappSignVC: EmbedDappDelegate {
+    func didRemoveFromParentViewController() {
+        self.delegate?.didCloseLinksView()
     }
 }

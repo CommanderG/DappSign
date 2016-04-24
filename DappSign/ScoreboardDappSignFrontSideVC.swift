@@ -39,16 +39,12 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let _ = self.dapp {
-            self.initAndFireCountdownTimer()
-        }
+        self.resumeCountdown()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        self.countdownTimer?.invalidate()
+        self.pauseCountdown()
     }
     
     // MARK: - internal
@@ -63,6 +59,16 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
         )
         self.secondsLeft = self.maxSeconds
         self.initAndFireCountdownTimer()
+    }
+    
+    internal func pauseCountdown() {
+        self.countdownTimer?.invalidate()
+    }
+    
+    internal func resumeCountdown() {
+        if let _ = self.dapp {
+            self.initAndFireCountdownTimer()
+        }
     }
     
     // MARK: - timer functions

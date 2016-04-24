@@ -319,6 +319,16 @@
                                                     <action selector="tweet" destination="PwR-Zb-Hy4" eventType="touchUpInside" id="OZt-9P-4iv"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGJ-15-RYX">
+                                                <rect key="frame" x="42" y="227" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="SGJ-15-RYX" secondAttribute="height" multiplier="1:1" id="ycZ-zD-qOH"/>
+                                                </constraints>
+                                                <state key="normal" image="Link"/>
+                                                <connections>
+                                                    <action selector="showLinks" destination="PwR-Zb-Hy4" eventType="touchUpInside" id="3HJ-Pv-2Ca"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfu-Qv-KOL">
                                                 <rect key="frame" x="87" y="232" width="20" height="35"/>
                                                 <constraints>
@@ -331,17 +341,21 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="SGJ-15-RYX" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="14" id="5hJ-sj-Ijr"/>
                                             <constraint firstItem="3Vx-7V-wml" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="61w-gT-QVv"/>
                                             <constraint firstAttribute="trailing" secondItem="OFA-iL-rX8" secondAttribute="trailing" id="9IU-AP-fVv"/>
                                             <constraint firstAttribute="bottom" secondItem="3Vx-7V-wml" secondAttribute="bottom" id="AbD-K5-bfV"/>
                                             <constraint firstItem="Dfu-Qv-KOL" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="19" id="D7j-wd-owd"/>
                                             <constraint firstAttribute="bottom" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="54" id="JXY-Ug-aCQ"/>
+                                            <constraint firstItem="Dfu-Qv-KOL" firstAttribute="leading" secondItem="SGJ-15-RYX" secondAttribute="trailing" constant="5" id="KC8-I1-eBe"/>
                                             <constraint firstAttribute="trailing" secondItem="Dfu-Qv-KOL" secondAttribute="trailing" id="MSc-Iy-9up"/>
                                             <constraint firstAttribute="bottom" secondItem="Dfu-Qv-KOL" secondAttribute="bottom" id="Yhq-at-UP1"/>
                                             <constraint firstItem="3Vx-7V-wml" firstAttribute="top" secondItem="OFA-iL-rX8" secondAttribute="bottom" constant="21" id="cW1-ue-Rlc"/>
                                             <constraint firstItem="OFA-iL-rX8" firstAttribute="top" secondItem="C8D-9z-cqi" secondAttribute="top" id="h0w-eo-tTo"/>
                                             <constraint firstAttribute="width" secondItem="C8D-9z-cqi" secondAttribute="height" multiplier="107:267" id="twW-mU-WuV"/>
+                                            <constraint firstItem="SGJ-15-RYX" firstAttribute="leading" secondItem="3Vx-7V-wml" secondAttribute="trailing" constant="4" id="xpc-kQ-tnA"/>
                                             <constraint firstItem="OFA-iL-rX8" firstAttribute="leading" secondItem="C8D-9z-cqi" secondAttribute="leading" id="yma-HD-KL7"/>
+                                            <constraint firstAttribute="bottom" secondItem="SGJ-15-RYX" secondAttribute="bottom" id="zLZ-Fb-hiF"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -390,6 +404,7 @@
                         <outlet property="hashtagsLabel" destination="bIh-5R-3Yh" id="H4x-zh-KK7"/>
                         <outlet property="postToFacebookButton" destination="Dfu-Qv-KOL" id="FHw-a2-eUu"/>
                         <outlet property="profileButton" destination="xOG-aK-No2" id="zhp-GI-WMa"/>
+                        <outlet property="showLinksButton" destination="SGJ-15-RYX" id="wZU-Gc-LDO"/>
                         <outlet property="timeUntilNextDailyDappLabel" destination="JCc-zy-45M" id="edM-Lb-pl4"/>
                         <outlet property="tweetButton" destination="3Vx-7V-wml" id="jXL-a0-A21"/>
                     </connections>
@@ -3404,20 +3419,23 @@
                         <viewControllerLayoutGuide type="bottom" id="4Ff-qO-pe1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AEI-DY-Wz7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy the link to this DailyDapp Petition to share anywhere!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOG-Gr-U4u">
-                                <rect key="frame" x="8" y="10" width="304" height="33"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Copy the link to this DailyDapp Petition to share anywhere!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOG-Gr-U4u">
+                                <rect key="frame" x="8" y="10" width="284" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="qFI-lI-Ze0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azO-gG-6Il">
-                                <rect key="frame" x="14" y="57" width="292" height="36"/>
+                                <rect key="frame" x="14" y="27" width="272" height="26"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://www.dappsign.com/3a96e9f2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wic-o8-veB">
-                                        <rect key="frame" x="8" y="0.0" width="276" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://www.dappsign.com/3a96e9f2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wic-o8-veB">
+                                        <rect key="frame" x="8" y="0.0" width="256" height="26"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3425,24 +3443,34 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.16862745100000001" green="0.59607843140000005" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Wic-o8-veB" secondAttribute="trailing" constant="8" id="4JX-Iv-9Ca"/>
-                                    <constraint firstItem="Wic-o8-veB" firstAttribute="top" secondItem="azO-gG-6Il" secondAttribute="top" id="Pg0-zC-5nu"/>
-                                    <constraint firstAttribute="bottom" secondItem="Wic-o8-veB" secondAttribute="bottom" id="l3V-EE-JKs"/>
-                                    <constraint firstAttribute="height" constant="36" id="mw1-G0-vh5"/>
-                                    <constraint firstItem="Wic-o8-veB" firstAttribute="leading" secondItem="azO-gG-6Il" secondAttribute="leading" constant="8" id="r4F-NR-OoR"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="741-AQ-2tg"/>
+                                    <constraint firstAttribute="height" priority="750" constant="36" id="TUT-3M-GdT"/>
+                                    <constraint firstItem="Wic-o8-veB" firstAttribute="leading" secondItem="azO-gG-6Il" secondAttribute="leading" constant="8" id="Usi-KR-ubH"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wic-o8-veB" secondAttribute="bottom" id="e3k-ra-i8B"/>
+                                    <constraint firstItem="Wic-o8-veB" firstAttribute="top" secondItem="azO-gG-6Il" secondAttribute="top" id="ehT-ME-0P4"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wic-o8-veB" secondAttribute="trailing" constant="8" id="mkf-Su-tTW"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-T0-jrX">
-                                <rect key="frame" x="14" y="57" width="292" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ne9-9n-kpE">
+                                <rect key="frame" x="14" y="27" width="272" height="26"/>
                                 <connections>
-                                    <action selector="copyDappURL" destination="w2R-OH-fci" eventType="touchUpInside" id="RlO-nd-lVv"/>
+                                    <action selector="copyDappURL" destination="w2R-OH-fci" eventType="touchUpInside" id="Gwh-z3-Hsj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="249" text="Copy the code to embed this DailyDapp Petition in your blog or website." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZO-yx-jbV">
+                                <rect key="frame" x="8" y="69" width="284" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="ChN-9h-ASK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQF-FS-6k5">
-                                <rect key="frame" x="14" y="158" width="292" height="350"/>
+                                <rect key="frame" x="14" y="102" width="272" height="36"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-Gm-67S">
-                                        <rect key="frame" x="4" y="-4" width="284" height="350"/>
+                                        <rect key="frame" x="4" y="0.0" width="264" height="32"/>
                                         <string key="text">&lt;blockquote class="DappSign-Dapp" lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;A breakdown of which presidential candidates have raised the most money and from how many donors &lt;a href="http://d.co/cANjYQlSFX"&gt;http://t.co/cANjYQlSFX&lt;/a&gt;&lt;/p&gt;&amp;mdash; National Journal (@nationaljournal) &lt;a href="https://twitter.com/nationaljournal/status/628391685626667009"&gt;August 4, 2015&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -3451,68 +3479,67 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.16862745100000001" green="0.59607843140000005" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="0zY-Gm-67S" firstAttribute="leading" secondItem="sQF-FS-6k5" secondAttribute="leading" constant="4" id="9e4-nz-365"/>
-                                    <constraint firstAttribute="trailing" secondItem="0zY-Gm-67S" secondAttribute="trailing" constant="4" id="EHw-bH-p7k"/>
-                                    <constraint firstAttribute="bottom" secondItem="0zY-Gm-67S" secondAttribute="bottom" constant="4" id="RNE-8Y-f9f"/>
-                                    <constraint firstItem="0zY-Gm-67S" firstAttribute="top" secondItem="sQF-FS-6k5" secondAttribute="top" constant="-4" id="z7f-Bn-9Oe"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="4YK-S1-hne"/>
+                                    <constraint firstAttribute="bottom" secondItem="0zY-Gm-67S" secondAttribute="bottom" constant="4" id="7qh-2L-hIf"/>
+                                    <constraint firstItem="0zY-Gm-67S" firstAttribute="top" secondItem="sQF-FS-6k5" secondAttribute="top" id="Dbd-AF-4jb"/>
+                                    <constraint firstAttribute="trailing" secondItem="0zY-Gm-67S" secondAttribute="trailing" constant="4" id="GW3-zo-L9F"/>
+                                    <constraint firstItem="0zY-Gm-67S" firstAttribute="leading" secondItem="sQF-FS-6k5" secondAttribute="leading" constant="4" id="eon-kd-kcE"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfS-YB-hff">
-                                <rect key="frame" x="14" y="158" width="292" height="350"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imt-uO-bgQ">
+                                <rect key="frame" x="14" y="102" width="272" height="36"/>
                                 <connections>
-                                    <action selector="copyIFrameCode" destination="w2R-OH-fci" eventType="touchUpInside" id="ean-sO-HC7"/>
+                                    <action selector="copyIFrameCode" destination="w2R-OH-fci" eventType="touchUpInside" id="BlK-yo-NdY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-wl-1sg">
-                                <rect key="frame" x="230" y="520" width="76" height="36"/>
+                                <rect key="frame" x="208" y="152" width="80" height="36"/>
                                 <color key="backgroundColor" red="0.16862745100000001" green="0.59607843140000005" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="76" id="euX-gG-cGH"/>
-                                    <constraint firstAttribute="height" constant="36" id="udm-2k-DKG"/>
+                                    <constraint firstAttribute="width" constant="80" id="ZfQ-BX-iDE"/>
+                                    <constraint firstAttribute="height" constant="36" id="y6p-UJ-pv9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="copyIFrameCode" destination="w2R-OH-fci" eventType="touchUpInside" id="dLq-uS-njd"/>
                                     <action selector="done" destination="w2R-OH-fci" eventType="touchUpInside" id="Je9-Ea-00w"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy the code to embed this DailyDapp Petition in your blog or website." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZO-yx-jbV">
-                                <rect key="frame" x="8" y="109" width="304" height="33"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.01176470588" green="0.4039215686" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Edr-wl-1sg" firstAttribute="top" secondItem="sQF-FS-6k5" secondAttribute="bottom" constant="12" id="05f-vM-75n"/>
-                            <constraint firstItem="yfS-YB-hff" firstAttribute="centerY" secondItem="sQF-FS-6k5" secondAttribute="centerY" id="0dO-dC-LHs"/>
-                            <constraint firstAttribute="trailing" secondItem="zZO-yx-jbV" secondAttribute="trailing" constant="8" id="1Ks-9R-bwj"/>
-                            <constraint firstItem="Cms-T0-jrX" firstAttribute="centerX" secondItem="azO-gG-6Il" secondAttribute="centerX" id="1rj-vR-i6b"/>
-                            <constraint firstItem="azO-gG-6Il" firstAttribute="top" secondItem="JOG-Gr-U4u" secondAttribute="bottom" constant="14" id="5ZV-KR-8NN"/>
-                            <constraint firstAttribute="trailing" secondItem="Edr-wl-1sg" secondAttribute="trailing" constant="14" id="5s1-zc-zAj"/>
-                            <constraint firstItem="yfS-YB-hff" firstAttribute="width" secondItem="sQF-FS-6k5" secondAttribute="width" id="7Pv-8i-sTh"/>
-                            <constraint firstAttribute="trailing" secondItem="azO-gG-6Il" secondAttribute="trailing" constant="14" id="83G-sr-Zfd"/>
-                            <constraint firstAttribute="trailing" secondItem="JOG-Gr-U4u" secondAttribute="trailing" constant="8" id="8Vd-uD-xvl"/>
-                            <constraint firstItem="Cms-T0-jrX" firstAttribute="width" secondItem="azO-gG-6Il" secondAttribute="width" id="C0u-9l-9Ex"/>
-                            <constraint firstItem="zZO-yx-jbV" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="8" id="Cd2-Ar-24W"/>
-                            <constraint firstItem="zZO-yx-jbV" firstAttribute="top" secondItem="azO-gG-6Il" secondAttribute="bottom" constant="16" id="JP9-uR-n8P"/>
-                            <constraint firstItem="JOG-Gr-U4u" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="8" id="K1m-lR-0aQ"/>
-                            <constraint firstItem="yfS-YB-hff" firstAttribute="centerX" secondItem="sQF-FS-6k5" secondAttribute="centerX" id="PHR-yj-FaP"/>
-                            <constraint firstItem="Cms-T0-jrX" firstAttribute="centerY" secondItem="azO-gG-6Il" secondAttribute="centerY" id="QS1-Qw-c9G"/>
-                            <constraint firstItem="sQF-FS-6k5" firstAttribute="top" secondItem="zZO-yx-jbV" secondAttribute="bottom" constant="16" id="Y8z-Kb-qZj"/>
-                            <constraint firstItem="Cms-T0-jrX" firstAttribute="height" secondItem="azO-gG-6Il" secondAttribute="height" id="Z91-Cs-0cP"/>
-                            <constraint firstItem="4Ff-qO-pe1" firstAttribute="top" secondItem="Edr-wl-1sg" secondAttribute="bottom" constant="12" id="f7l-Dp-On4"/>
-                            <constraint firstAttribute="trailing" secondItem="sQF-FS-6k5" secondAttribute="trailing" constant="14" id="fqN-bq-ZLx"/>
-                            <constraint firstItem="sQF-FS-6k5" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="14" id="g61-Yh-da5"/>
-                            <constraint firstItem="azO-gG-6Il" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="14" id="uub-fW-9ld"/>
-                            <constraint firstItem="JOG-Gr-U4u" firstAttribute="top" secondItem="dcy-6V-USl" secondAttribute="bottom" constant="10" id="wVi-Uc-YB5"/>
-                            <constraint firstItem="yfS-YB-hff" firstAttribute="height" secondItem="sQF-FS-6k5" secondAttribute="height" id="yCd-yu-R0Q"/>
+                            <constraint firstItem="ne9-9n-kpE" firstAttribute="width" secondItem="azO-gG-6Il" secondAttribute="width" id="5rQ-u0-OjF"/>
+                            <constraint firstItem="imt-uO-bgQ" firstAttribute="height" secondItem="sQF-FS-6k5" secondAttribute="height" id="Bb6-tN-PHX"/>
+                            <constraint firstItem="azO-gG-6Il" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="14" id="CPk-YM-oAt"/>
+                            <constraint firstItem="Edr-wl-1sg" firstAttribute="top" secondItem="sQF-FS-6k5" secondAttribute="bottom" constant="14" id="I5M-cZ-0AO"/>
+                            <constraint firstItem="ne9-9n-kpE" firstAttribute="centerY" secondItem="azO-gG-6Il" secondAttribute="centerY" id="OK6-tH-9OY"/>
+                            <constraint firstAttribute="trailing" secondItem="zZO-yx-jbV" secondAttribute="trailing" constant="8" id="Pni-cz-Bfx"/>
+                            <constraint firstItem="zZO-yx-jbV" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="8" id="SHH-jQ-s1e"/>
+                            <constraint firstItem="azO-gG-6Il" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JOG-Gr-U4u" secondAttribute="bottom" id="VAl-fh-CWy"/>
+                            <constraint firstItem="imt-uO-bgQ" firstAttribute="centerY" secondItem="sQF-FS-6k5" secondAttribute="centerY" id="WH0-Jt-3kB"/>
+                            <constraint firstItem="JOG-Gr-U4u" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="8" id="YLI-hb-9Jb"/>
+                            <constraint firstItem="JOG-Gr-U4u" firstAttribute="top" secondItem="dcy-6V-USl" secondAttribute="bottom" constant="10" id="eBY-Q8-8Mn"/>
+                            <constraint firstItem="azO-gG-6Il" firstAttribute="top" secondItem="JOG-Gr-U4u" secondAttribute="bottom" priority="750" constant="14" id="fJE-uj-ALX"/>
+                            <constraint firstAttribute="trailing" secondItem="Edr-wl-1sg" secondAttribute="trailing" constant="12" id="fLG-2Z-S3C"/>
+                            <constraint firstItem="imt-uO-bgQ" firstAttribute="width" secondItem="sQF-FS-6k5" secondAttribute="width" id="gZ9-8c-uX7"/>
+                            <constraint firstItem="imt-uO-bgQ" firstAttribute="centerX" secondItem="sQF-FS-6k5" secondAttribute="centerX" id="iIg-ts-fjD"/>
+                            <constraint firstItem="sQF-FS-6k5" firstAttribute="leading" secondItem="AEI-DY-Wz7" secondAttribute="leading" constant="14" id="kJ4-W4-j7b"/>
+                            <constraint firstAttribute="trailing" secondItem="azO-gG-6Il" secondAttribute="trailing" constant="14" id="kxs-VK-EBj"/>
+                            <constraint firstItem="ne9-9n-kpE" firstAttribute="height" secondItem="azO-gG-6Il" secondAttribute="height" id="lL2-d0-FDS"/>
+                            <constraint firstItem="4Ff-qO-pe1" firstAttribute="top" secondItem="Edr-wl-1sg" secondAttribute="bottom" constant="12" id="lcO-ZJ-BHa"/>
+                            <constraint firstItem="ne9-9n-kpE" firstAttribute="centerX" secondItem="azO-gG-6Il" secondAttribute="centerX" id="qKL-MW-F5X"/>
+                            <constraint firstAttribute="trailing" secondItem="sQF-FS-6k5" secondAttribute="trailing" constant="14" id="rDU-vh-3ZO"/>
+                            <constraint firstItem="sQF-FS-6k5" firstAttribute="top" secondItem="zZO-yx-jbV" secondAttribute="bottom" constant="16" id="uoq-vs-0vx"/>
+                            <constraint firstAttribute="trailing" secondItem="JOG-Gr-U4u" secondAttribute="trailing" constant="8" id="vwk-18-8SR"/>
+                            <constraint firstItem="zZO-yx-jbV" firstAttribute="top" secondItem="azO-gG-6Il" secondAttribute="bottom" constant="16" id="xeS-xf-A9k"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="200"/>
                     <connections>
                         <outlet property="dappURLLabel" destination="Wic-o8-veB" id="cFU-GL-2uD"/>
                         <outlet property="dappURLLabelContainerView" destination="azO-gG-6Il" id="J09-Fq-t70"/>
@@ -3523,7 +3550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDz-Pf-nhh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="-552"/>
+            <point key="canvasLocation" x="523" y="-552"/>
         </scene>
         <!--Scoreboard Dapp SignVC-->
         <scene sceneID="L7V-Kh-fFz">

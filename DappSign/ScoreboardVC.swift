@@ -14,6 +14,7 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
     @IBOutlet weak var tweetButton:                 UIButton!
+    @IBOutlet weak var showLinksButton:             UIButton!
     @IBOutlet weak var postToFacebookButton:        UIButton!
     
     internal var transitionDelegate: TransitionDelegate? = nil
@@ -37,7 +38,7 @@ class ScoreboardVC: UIViewController {
         self.scoreboardDappSignVC?.view.hidden = true
         self.hashtagsLabel.text = ""
         
-        self.disableSharingButtons()
+        self.disableSharingAndLinkButtons()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,7 +55,7 @@ class ScoreboardVC: UIViewController {
                 self.initHashtagsLabelWithHashtagsForDapp(dapp)
                 self.scoreboardDappSignVC?.showDappObject(dapp)
                 self.scoreboardDappMappVC?.showDappMappDataForDapp(dapp)
-                self.enableSharingButtons()
+                self.enableSharingAndLinkButtons()
             }
         }
     }
@@ -85,6 +86,14 @@ class ScoreboardVC: UIViewController {
                     )
                 }
             })
+        }
+    }
+    
+    @IBAction func showLinks() {
+        if let scoreboardDappSignVC = self.scoreboardDappSignVC, dapp = self.dapps.first {
+            if scoreboardDappSignVC.showLinksForDapp(dapp) {
+                self.disableSharingAndLinkButtons()
+            }
         }
     }
     
@@ -202,13 +211,13 @@ class ScoreboardVC: UIViewController {
         
         let currentDapp = self.currentDapp()
         
-        self.disableSharingButtons()
+        self.disableSharingAndLinkButtons()
         
         if let currentDapp = currentDapp {
             self.scoreboardDappSignVC?.moveRighOffTheScreen {
                 self.initHashtagsLabelWithHashtagsForDapp(currentDapp)
                 self.scoreboardDappSignVC?.showDappObject(currentDapp)
-                self.enableSharingButtons()
+                self.enableSharingAndLinkButtons()
             }
         }
         
@@ -246,18 +255,26 @@ class ScoreboardVC: UIViewController {
         }
     }
     
-    private func disableSharingButtons() {
-        self.tweetButton.alpha = 0.5
-        self.postToFacebookButton.alpha = 0.5
-        self.tweetButton.userInteractionEnabled = false
-        self.postToFacebookButton.userInteractionEnabled = false
+    private func disableSharingAndLinkButtons() {
+        self.disableButton(self.tweetButton)
+        self.disableButton(self.showLinksButton)
+        self.disableButton(self.postToFacebookButton)
     }
     
-    private func enableSharingButtons() {
-        self.tweetButton.alpha = 1.0
-        self.postToFacebookButton.alpha = 1.0
-        self.tweetButton.userInteractionEnabled = true
-        self.postToFacebookButton.userInteractionEnabled = true
+    private func enableSharingAndLinkButtons() {
+        self.enableButton(self.tweetButton)
+        self.enableButton(self.showLinksButton)
+        self.enableButton(self.postToFacebookButton)
+    }
+    
+    private func disableButton(button: UIButton) {
+        button.alpha = 0.5
+        button.userInteractionEnabled = false
+    }
+    
+    private func enableButton(button: UIButton) {
+        button.alpha = 1.0
+        button.userInteractionEnabled = true
     }
 }
 
@@ -267,14 +284,14 @@ extension ScoreboardVC: ScoreboardDappSignDelegate {
         case .Front:
             break;
         case .Back:
-            self.disableSharingButtons()
+            self.disableSharingAndLinkButtons()
         }
     }
     
     func didFlipToSide(side: DappSignSide) {
         switch side {
         case .Front:
-            self.enableSharingButtons()
+            self.enableSharingAndLinkButtons()
         case .Back:
             break;
         }
@@ -286,5 +303,9 @@ extension ScoreboardVC: ScoreboardDappSignDelegate {
     
     func openLinkWithURL(linkURL: NSURL) {
         ViewControllerHelper.openLinkWithURL(linkURL, inViewController: self)
+    }
+    
+    func didCloseLinksView() {
+        self.enableSharingAndLinkButtons()
     }
 }
