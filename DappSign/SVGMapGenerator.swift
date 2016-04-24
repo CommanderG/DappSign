@@ -21,7 +21,7 @@ class SVGMapGenerator: NSObject {
         minRadius: Double = 2.0,
         maxRadius: Double = 40.0,
         mapFillColor: String = "white",
-        circleFillColor: String = "#3B98D8"
+        circleFillColor: String = "#0367B4"
     ) -> String? {
         func getPaths() -> String {
             var str = ""
