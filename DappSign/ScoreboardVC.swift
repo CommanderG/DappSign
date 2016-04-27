@@ -12,6 +12,7 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var profileButton:               UIButton!
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var timeUntilNextDailyDappLabel: UILabel!
+    @IBOutlet weak var descriptionLabel:            UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
     @IBOutlet weak var tweetButton:                 UIButton!
     @IBOutlet weak var showLinksButton:             UIButton!
@@ -34,6 +35,7 @@ class ScoreboardVC: UIViewController {
         self.updateTimeUntilNextDailyDapp()
         self.updateTimeUntilNextDailyDappLabel()
         self.initTimers()
+        self.initDescriptionLabelText()
         
         self.scoreboardDappSignVC?.view.hidden = true
         self.hashtagsLabel.text = ""
@@ -135,6 +137,69 @@ class ScoreboardVC: UIViewController {
             userInfo: nil,
             repeats:  true
         )
+    }
+    
+    private func initDescriptionLabelText() {
+        let attachment = NSTextAttachment()
+        
+        attachment.image = UIImage(named: "dapp_icon")
+        attachment.bounds = CGRectMake(0.0, -5.0, 17.0, 19.0)
+        
+        let checkInAnyTimeBetweenStr = NSAttributedString(string: "Check in any time between ")
+        let noon1pmStr = NSMutableAttributedString(string: "noon-1pm")
+        let forTheStr = NSAttributedString(string: " for the ")
+        let dailyNewsStr = NSMutableAttributedString(string: "daily news")
+        let deliveredAsStr = NSAttributedString(string: " delivered as ")
+        let petitionsStr = NSMutableAttributedString(string: "petitions")
+        let aimedAtYourDistrictRepInCongressJustStr = NSAttributedString(
+            string: " aimed at your district rep in congress. Just "
+        )
+        let dappStr = NSMutableAttributedString(string: "Dapp ")
+        let dappIconStr = NSAttributedString(attachment: attachment)
+        let toSignStr = NSAttributedString(string: "to sign.")
+        
+        if let fontAvenirHeavy = UIFont(name: "Avenir-Heavy", size: 12.0) {
+            let strs = [
+                noon1pmStr,
+                dailyNewsStr,
+                petitionsStr
+            ]
+            
+            for str in strs {
+                str.addAttribute(NSFontAttributeName,
+                    value: fontAvenirHeavy,
+                    range: NSMakeRange(0, str.string.characters.count)
+                )
+            }
+        }
+        
+        if let fontExoBlack = UIFont(name: "Exo-Black", size: 12.0) {
+            dappStr.addAttribute(NSFontAttributeName,
+                value: fontExoBlack,
+                range: NSMakeRange(0, dappStr.string.characters.count)
+            )
+        }
+        
+        let strs = [
+            checkInAnyTimeBetweenStr,
+            noon1pmStr,
+            forTheStr,
+            dailyNewsStr,
+            deliveredAsStr,
+            petitionsStr,
+            aimedAtYourDistrictRepInCongressJustStr,
+            dappStr,
+            dappIconStr,
+            toSignStr
+        ]
+        
+        let str = NSMutableAttributedString()
+        
+        for str_ in strs {
+            str.appendAttributedString(str_)
+        }
+        
+        self.descriptionLabel.attributedText = str
     }
     
     // MARK: - timer functions
