@@ -225,17 +225,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iwi-17-ofS">
-                                <rect key="frame" x="23" y="216" width="275" height="25"/>
+                                <rect key="frame" x="1" y="204" width="318" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights from the last" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPY-gB-LfT">
-                                        <rect key="frame" x="0.0" y="0.0" width="187" height="25"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="221" height="31"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcO-Ml-VLR">
-                                        <rect key="frame" x="191" y="2" width="84" height="21"/>
-                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="18"/>
+                                        <rect key="frame" x="225" y="2" width="93" height="27"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -252,7 +252,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#solar #sunshinesforfree" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIh-5R-3Yh">
-                                <rect key="frame" x="0.0" y="238" width="320" height="25"/>
+                                <rect key="frame" x="0.0" y="232" width="320" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -347,7 +347,7 @@
                             <constraint firstItem="WUv-AJ-nyq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Pu-g8-guX" secondAttribute="leading" constant="12" id="Qv3-sy-b54"/>
                             <constraint firstItem="fE4-BT-gVI" firstAttribute="top" secondItem="oUj-zD-NFi" secondAttribute="bottom" constant="13" id="Vs1-Pj-0Kv"/>
                             <constraint firstAttribute="trailing" secondItem="rnU-Yr-ln0" secondAttribute="trailing" constant="12" id="bbN-TE-upG"/>
-                            <constraint firstItem="Iwi-17-ofS" firstAttribute="top" secondItem="rnU-Yr-ln0" secondAttribute="bottom" constant="18" id="cj9-vO-6r6"/>
+                            <constraint firstItem="Iwi-17-ofS" firstAttribute="top" secondItem="rnU-Yr-ln0" secondAttribute="bottom" constant="6" id="cj9-vO-6r6"/>
                             <constraint firstItem="9rm-nh-Ovl" firstAttribute="top" secondItem="fE4-BT-gVI" secondAttribute="bottom" id="fYw-Bz-Qhb"/>
                             <constraint firstItem="WUv-AJ-nyq" firstAttribute="leading" secondItem="rnU-Yr-ln0" secondAttribute="leading" id="h54-40-vE7"/>
                             <constraint firstItem="WUv-AJ-nyq" firstAttribute="centerX" secondItem="7Pu-g8-guX" secondAttribute="centerX" id="jlL-UQ-XZs"/>
