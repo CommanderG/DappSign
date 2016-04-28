@@ -19,18 +19,21 @@ class DateHelper {
         return newDate
     }
     
-    internal class func fullHoursAndFullMinutesInTimeInterval(
+    internal class func hoursMinutesSecondsInTimeInterval(
         timeInterval: NSTimeInterval
-    ) -> (Int, Int) {
-        let minuteInSeconds    = 60.0
-        let hourInSecounds     = minuteInSeconds * 60.0
-        let hours              = timeInterval / hourInSecounds
-        let (fullHours, _)     = modf(hours)
-        let fullHoursInSeconds = fullHours * hourInSecounds
-        let minutes            = (timeInterval - fullHoursInSeconds) / minuteInSeconds
-        let (fullMinutes, _)   = modf(minutes)
+    ) -> (Int, Int, Int) {
+        let minuteInSeconds      = 60.0
+        let hourInSecounds       = minuteInSeconds * 60.0
+        let hours                = timeInterval / hourInSecounds
+        let (fullHours, _)       = modf(hours)
+        let fullHoursInSeconds   = fullHours * hourInSecounds
+        let minutes              = (timeInterval - fullHoursInSeconds) / minuteInSeconds
+        let (fullMinutes, _)     = modf(minutes)
+        let fullMinutesInSeconds = fullMinutes * minuteInSeconds
+        let seconds              = timeInterval - fullHoursInSeconds - fullMinutesInSeconds
+        let (fullSeconds, _)     = modf(seconds)
         
-        return (Int(fullHours), Int(fullMinutes))
+        return (Int(fullHours), Int(fullMinutes), Int(fullSeconds))
     }
     
     internal class func minutesAndSecondsInTimeInterval(

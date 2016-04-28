@@ -22,7 +22,7 @@ class ScoreboardVC: UIViewController {
     
     private var timeUntilNextDailyDappLabelUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
-    private var timeUntilNextDailyDapp: (Int, Int)? = nil
+    private var timeUntilNextDailyDapp: (Int, Int, Int)? = nil
     private var dapps: [PFObject] = []
     private var scoreboardDappSignVC: ScoreboardDappSignVC? = nil
     private var scoreboardDappMappVC: ScoreboardDappMappVC? = nil
@@ -211,13 +211,17 @@ class ScoreboardVC: UIViewController {
         
         show.colon = !show.colon
         
-        if let (hours, minutes) = self.timeUntilNextDailyDapp {
-            let minutesString = self.minutesStringWithMinutes(minutes)
+        if let (hours, minutes, seconds) = self.timeUntilNextDailyDapp {
+            let hoursString = self.twoDigitNumberString(hours)
+            let minutesString = self.twoDigitNumberString(minutes)
+            let secondsString = self.twoDigitNumberString(seconds)
             
             if show.colon {
-                self.timeUntilNextDailyDappLabel.text = "\(hours):\(minutesString)"
+                self.timeUntilNextDailyDappLabel.text =
+                "\(hoursString):\(minutesString):\(secondsString)"
             } else {
-                self.timeUntilNextDailyDappLabel.text = "\(hours) \(minutesString)"
+                self.timeUntilNextDailyDappLabel.text =
+                "\(hoursString) \(minutesString) \(secondsString)"
             }
             
             let lessThanOneHourLeft = hours == 23 && minutes > 0
@@ -227,18 +231,16 @@ class ScoreboardVC: UIViewController {
             }
         } else {
             if show.colon {
-                self.timeUntilNextDailyDappLabel.text = "--:--"
+                self.timeUntilNextDailyDappLabel.text = "--:--:--"
             } else {
-                self.timeUntilNextDailyDappLabel.text = "-- --"
+                self.timeUntilNextDailyDappLabel.text = "-- -- --"
             }
         }
     }
     
     internal func updateTimeUntilNextDailyDapp() {
         if let timeInterval = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate() {
-            self.timeUntilNextDailyDapp = DateHelper.fullHoursAndFullMinutesInTimeInterval(
-                timeInterval
-            )
+            self.timeUntilNextDailyDapp = DateHelper.hoursMinutesSecondsInTimeInterval(timeInterval)
         } else {
             self.timeUntilNextDailyDapp = nil
         }
@@ -263,12 +265,12 @@ class ScoreboardVC: UIViewController {
     
     // MARK: - 
     
-    private func minutesStringWithMinutes(minutes: Int) -> String {
-        if minutes < 10 {
-            return "0\(minutes)"
+    private func twoDigitNumberString(twoDigitNumber: Int) -> String {
+        if twoDigitNumber < 10 {
+            return "0\(twoDigitNumber)"
         }
         
-        return "\(minutes)"
+        return "\(twoDigitNumber)"
     }
     
     private func showNextDapp() {
