@@ -257,6 +257,11 @@ class ScoreboardVC: UIViewController {
                 self.scoreboardDappSignVC?.delegate = self
             case ScoreboardDappMappVC.embedSegueID:
                 self.scoreboardDappMappVC = segue.destinationViewController as? ScoreboardDappMappVC
+            case "showProfile":
+                let profileNC = segue.destinationViewController as? UINavigationController
+                let profileVC = profileNC?.viewControllers.first as? ProfileViewController
+                
+                profileVC?.user = PFUser.currentUser()
             case _:
                 break
             }
