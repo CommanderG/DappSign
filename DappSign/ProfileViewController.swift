@@ -13,10 +13,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var privateSwitch: UISwitch!
-    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var publicPrivateLabel: UILabel!
     @IBOutlet weak var numDappsLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
     
     //design
@@ -69,12 +67,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 forState: .Normal
             )
         }
-        
-        if let imageData = user?["image"] as? NSData {
-            profilePic.image = UIImage(data: imageData)
-        }
-        
-        nameLabel.text = user?["name"] as? String
         
 //        if let currentUser = PFUser.currentUser() {
 //            let mainBundle = NSBundle.mainBundle()
