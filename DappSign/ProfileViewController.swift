@@ -12,9 +12,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     internal var user: PFUser?
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var privateSwitch: UISwitch!
-    @IBOutlet weak var publicPrivateLabel: UILabel!
-    @IBOutlet weak var numDappsLabel: UILabel!
+    @IBOutlet weak var dappScoreLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
     
     //design
@@ -67,6 +66,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 forState: .Normal
             )
         }
+        
+        nameLabel.text = user?["name"] as? String
+        
+        self.dappScoreLabel.text = "0 Dapp"
+        
+        let currentUserID = PFUser.currentUser().objectId
+        
+        Requests.userWithID(currentUserID) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let user = user, dappScore = user["dappScore"] as? Int {
+                self.dappScoreLabel.text = "\(dappScore) Dapp"
+            } else {
+                self.dappScoreLabel.text = "0 Dapp"
+            }
+        }
+        
         
 //        if let currentUser = PFUser.currentUser() {
 //            let mainBundle = NSBundle.mainBundle()
