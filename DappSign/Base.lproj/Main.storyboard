@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1145,6 +1145,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jw8-v7-fdY">
+                                <rect key="frame" x="198" y="201" width="64" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="Q8r-yZ-0RN"/>
+                                    <constraint firstAttribute="width" constant="64" id="Zas-6L-fy1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                <state key="normal" title="Change">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.60392156860000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -1156,6 +1167,7 @@
                             <constraint firstItem="lQ7-Ig-0M9" firstAttribute="top" secondItem="4mG-pu-R2B" secondAttribute="bottom" id="5x2-sE-IdC"/>
                             <constraint firstAttribute="trailing" secondItem="T2K-NT-6L8" secondAttribute="trailing" constant="23" id="7z0-bM-TEd"/>
                             <constraint firstItem="mOB-N3-9uB" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="10" id="7zA-0E-gg6"/>
+                            <constraint firstItem="jw8-v7-fdY" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="32" id="Gf0-hi-8GI"/>
                             <constraint firstAttribute="trailing" secondItem="qWd-fV-Llh" secondAttribute="trailing" constant="26" id="JZA-yd-7M5"/>
                             <constraint firstItem="0df-ZJ-knT" firstAttribute="top" secondItem="mOB-N3-9uB" secondAttribute="bottom" constant="3" id="LUX-7R-j1i"/>
                             <constraint firstAttribute="trailing" secondItem="Ylj-62-KEJ" secondAttribute="trailing" constant="74" id="Lu5-w2-5ET"/>
@@ -1175,6 +1187,7 @@
                             <constraint firstAttribute="trailing" secondItem="Kyh-qi-u7D" secondAttribute="trailing" constant="80" id="jXY-LL-u8Q"/>
                             <constraint firstItem="Kyh-qi-u7D" firstAttribute="top" secondItem="LAM-48-Y6k" secondAttribute="bottom" constant="4" id="kR6-8n-Lmz"/>
                             <constraint firstItem="ukS-ZI-L22" firstAttribute="leading" secondItem="0df-ZJ-knT" secondAttribute="trailing" id="oep-wT-YuV"/>
+                            <constraint firstItem="jw8-v7-fdY" firstAttribute="leading" secondItem="ukS-ZI-L22" secondAttribute="trailing" constant="22" id="rb3-nH-nv6"/>
                             <constraint firstAttribute="trailing" secondItem="DK8-vZ-zto" secondAttribute="trailing" id="wZS-xM-pov"/>
                             <constraint firstItem="CIx-8J-2rR" firstAttribute="centerX" secondItem="LfZ-v8-fqo" secondAttribute="centerX" id="xrn-qe-Jbs"/>
                             <constraint firstItem="LAM-48-Y6k" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="12" id="z5t-cG-SQm"/>
@@ -1183,6 +1196,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="WdX-uV-PeL"/>
                     <connections>
                         <outlet property="adminButton" destination="DK8-vZ-zto" id="vxW-Xf-3KW"/>
+                        <outlet property="changeButton" destination="jw8-v7-fdY" id="q2D-tw-J3f"/>
                         <outlet property="dappScoreLabel" destination="LAM-48-Y6k" id="5Je-eg-IPF"/>
                         <outlet property="dappsFilterSegmentedControl" destination="CIx-8J-2rR" id="UmL-3O-oTY"/>
                         <outlet property="nameLabel" destination="Ylj-62-KEJ" id="KTO-lN-Pon"/>
@@ -4131,10 +4145,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4GY-aV-x4s"/>
-        <segue reference="IfF-6V-hkZ"/>
-        <segue reference="jeY-SL-Q8Z"/>
-        <segue reference="bpX-mN-qEi"/>
-        <segue reference="bkt-29-1zK"/>
+        <segue reference="fu7-hF-c08"/>
+        <segue reference="8GL-5h-4zG"/>
         <segue reference="D2a-aL-0oF"/>
+        <segue reference="bkt-29-1zK"/>
+        <segue reference="bpX-mN-qEi"/>
     </inferredMetricsTieBreakers>
 </document>

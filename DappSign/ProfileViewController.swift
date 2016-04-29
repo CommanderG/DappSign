@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var nameLabel:                   UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
     @IBOutlet weak var adminButton:                 UIButton!
+    @IBOutlet weak var changeButton:                UIButton!
     
     private var dappsIdsSwipedByLoggedInUser: [String]? = nil
     private var dappsCreatedByUserInProfile: [PFObject]? = nil
@@ -32,6 +33,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ViewHelper.initButtonLayer(self.changeButton)
         
         if let user = self.user {
             let currentUser = PFUser.currentUser()
