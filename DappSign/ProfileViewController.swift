@@ -131,7 +131,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - @IBActions
     
     @IBAction func close(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func dappsFilterSegmentedControlValueChanged(sender: AnyObject) {

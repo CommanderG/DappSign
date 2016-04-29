@@ -1097,14 +1097,28 @@
                                     <segue destination="6dF-JK-tmE" kind="embed" identifier="embedRepresentativeVC" id="4rd-vx-zWb"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2K-NT-6L8">
+                                <rect key="frame" x="255" y="67" width="42" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Eot-a7-Lh7"/>
+                                    <constraint firstAttribute="width" constant="42" id="RU2-ai-JWf"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" image="profile_close_icon"/>
+                                <connections>
+                                    <action selector="close:" destination="Q8A-2e-yyY" eventType="touchUpInside" id="d6I-va-OeH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.60392156860000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Kyh-qi-u7D" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="292-0g-8oA"/>
                             <constraint firstItem="p0L-jf-3nF" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="8" id="3Vd-vs-YHq"/>
+                            <constraint firstItem="T2K-NT-6L8" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="23" id="4Tc-7N-U6H"/>
                             <constraint firstAttribute="trailing" secondItem="4mG-pu-R2B" secondAttribute="trailing" id="5Zz-TN-uGI"/>
                             <constraint firstItem="lQ7-Ig-0M9" firstAttribute="top" secondItem="4mG-pu-R2B" secondAttribute="bottom" id="5x2-sE-IdC"/>
+                            <constraint firstAttribute="trailing" secondItem="T2K-NT-6L8" secondAttribute="trailing" constant="23" id="7z0-bM-TEd"/>
                             <constraint firstAttribute="trailing" secondItem="qWd-fV-Llh" secondAttribute="trailing" constant="26" id="JZA-yd-7M5"/>
                             <constraint firstAttribute="trailing" secondItem="Ylj-62-KEJ" secondAttribute="trailing" constant="74" id="Lu5-w2-5ET"/>
                             <constraint firstItem="LAM-48-Y6k" firstAttribute="top" secondItem="Ylj-62-KEJ" secondAttribute="bottom" id="O7O-qj-CXl"/>
@@ -4077,6 +4091,7 @@
         <image name="dapp_right1" width="39" height="44"/>
         <image name="edit_links_icon" width="76" height="76"/>
         <image name="facebookIcon" width="30" height="55"/>
+        <image name="profile_close_icon" width="44" height="79"/>
         <image name="tapp_icon" width="26" height="36"/>
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
