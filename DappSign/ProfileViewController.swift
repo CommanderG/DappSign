@@ -11,10 +11,11 @@ import UIKit
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     internal var user: PFUser?
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dappScoreLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var tableView:                   UITableView!
+    @IBOutlet weak var dappScoreLabel:              UILabel!
+    @IBOutlet weak var nameLabel:                   UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var adminButton:                 UIButton!
     
     private var dappsIdsSwipedByLoggedInUser: [String]? = nil
     private var dappsCreatedByUserInProfile: [PFObject]? = nil
@@ -69,19 +70,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         nameLabel.text = user?["name"] as? String
         
         self.initDappScoreLabel()
-        
-//        if let currentUser = PFUser.currentUser() {
-//            let mainBundle = NSBundle.mainBundle()
-//            
-//            if let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String] {
-//                if !adminUsersIDs.contains(currentUser.objectId) || self.user.objectId != currentUser.objectId {
-//                    self.navigationItem.rightBarButtonItem = nil
-//                }
-//            }
-//        } else {
-//            self.navigationItem.rightBarButtonItem = nil
-//        }
-        
+        self.initAdminButton()
         self.downloadDapps()
     }
     
@@ -109,6 +98,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.dappScoreLabel.text = "0 Dapp"
             }
         }
+    }
+    
+    private func initAdminButton() {
+//        if let currentUser = PFUser.currentUser() {
+//            let mainBundle = NSBundle.mainBundle()
+//            let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String]
+//            
+//            if let adminUsersIDs = adminUsersIDs, user = self.user {
+//                if !adminUsersIDs.contains(currentUser.objectId) ||
+//                    user.objectId != currentUser.objectId {
+//                        self.adminButton.hidden = true
+//                }
+//            } else {
+//                self.adminButton.hidden = true
+//            }
+//        } else {
+//            self.adminButton.hidden = true
+//        }
     }
     
     // MARK: -
