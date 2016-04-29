@@ -13,8 +13,13 @@ class RepresentativeVC: UIViewController {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var districtLabel: UILabel!
     
+    internal static let embedSegueID = "embedRepresentativeVC"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.clearColor()
+        
         ViewHelper.initRepresentativeImageViewLayer(self.imageView)
     }
     

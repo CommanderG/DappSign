@@ -16,13 +16,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
     
-    //design
-    var dappColors = DappColors()
-    var dappFonts = DappFonts()
-    
-    var dappsIdsSwipedByLoggedInUser: [String]? = nil
-    var dappsCreatedByUserInProfile: [PFObject]? = nil
-    var dappsSwipedByUserInProfile: [PFObject]? = nil
+    private var dappsIdsSwipedByLoggedInUser: [String]? = nil
+    private var dappsCreatedByUserInProfile: [PFObject]? = nil
+    private var dappsSwipedByUserInProfile: [PFObject]? = nil
+    private var representativeVC: RepresentativeVC? = nil
     
     private var editLinksSegueID = "editLinksSegue"
     private var selectedDappSegue: PFObject?
@@ -53,7 +50,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         if let font = UIFont(name: "Exo-Regular", size: 18.0) {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+            let attributes = [NSFontAttributeName: font]
+            
+            self.navigationController?.navigationBar.titleTextAttributes = attributes
         }
         
         if let font = UIFont(name: "Exo-Regular", size: 16.0) {
@@ -69,19 +68,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         nameLabel.text = user?["name"] as? String
         
-        self.dappScoreLabel.text = "0 Dapp"
-        
-        let currentUserID = PFUser.currentUser().objectId
-        
-        Requests.userWithID(currentUserID) {
-            (user: PFUser?, error: NSError?) -> Void in
-            if let user = user, dappScore = user["dappScore"] as? Int {
-                self.dappScoreLabel.text = "\(dappScore) Dapp"
-            } else {
-                self.dappScoreLabel.text = "0 Dapp"
-            }
-        }
-        
+        self.initDappScoreLabel()
         
 //        if let currentUser = PFUser.currentUser() {
 //            let mainBundle = NSBundle.mainBundle()
@@ -98,15 +85,46 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.downloadDapps()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.representativeVC?.reload()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - init
+    
+    private func initDappScoreLabel() {
+        self.dappScoreLabel.text = "0 Dapp"
+        
+        let currentUserID = PFUser.currentUser().objectId
+        
+        Requests.userWithID(currentUserID) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let user = user, dappScore = user["dappScore"] as? Int {
+                self.dappScoreLabel.text = "\(dappScore) Dapp"
+            } else {
+                self.dappScoreLabel.text = "0 Dapp"
+            }
+        }
+    }
+    
+    // MARK: -
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == self.editLinksSegueID {
-            let editDappLinksVC = segue.destinationViewController as? EditDappLinksVC
-            editDappLinksVC?.dapp = self.selectedDappSegue
+        if let segueID = segue.identifier {
+            switch segueID {
+            case self.editLinksSegueID:
+                let editDappLinksVC = segue.destinationViewController as? EditDappLinksVC
+                
+                editDappLinksVC?.dapp = self.selectedDappSegue
+            case RepresentativeVC.embedSegueID:
+                self.representativeVC = segue.destinationViewController as? RepresentativeVC
+            case _:
+                break;
+            }
         }
     }
     
@@ -134,7 +152,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
         
         cell.cellDelegate = self
@@ -305,7 +325,9 @@ extension ProfileViewController: SWTableViewCellDelegate {
         return true
     }
     
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
+    func swipeableTableViewCell(cell: SWTableViewCell!,
+        didTriggerLeftUtilityButtonWithIndex index: Int
+    ) {
         if let indexPath = self.tableView.indexPathForCell(cell) {
             if let dapps = self.dapps() {
                 let dapp = dapps[indexPath.row];
@@ -316,7 +338,7 @@ extension ProfileViewController: SWTableViewCellDelegate {
                         self.incrementDappScores(dapp)
                     }
                     
-                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 })
                 
                 cell.hideUtilityButtonsAnimated(true)
