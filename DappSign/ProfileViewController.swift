@@ -50,23 +50,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         
-        if let font = UIFont(name: "Exo-Regular", size: 18.0) {
-            let attributes = [NSFontAttributeName: font]
-            
-            self.navigationController?.navigationBar.titleTextAttributes = attributes
-        }
-        
-        if let font = UIFont(name: "Exo-Regular", size: 16.0) {
-            self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(
-                [NSFontAttributeName: font],
-                forState: .Normal
-            )
-            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(
-                [NSFontAttributeName: font],
-                forState: .Normal
-            )
-        }
-        
         nameLabel.text = user?["name"] as? String
         
         self.initDappScoreLabel()
@@ -77,6 +60,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.representativeVC?.reload()
+        
+        self.navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {

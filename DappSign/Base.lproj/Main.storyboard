@@ -1151,13 +1151,7 @@
                             <constraint firstItem="LAM-48-Y6k" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="12" id="z5t-cG-SQm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="WdX-uV-PeL">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="ofV-Br-hAH">
-                            <connections>
-                                <action selector="close:" destination="Q8A-2e-yyY" id="tMB-bB-225"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Profile" id="WdX-uV-PeL"/>
                     <connections>
                         <outlet property="adminButton" destination="DK8-vZ-zto" id="vxW-Xf-3KW"/>
                         <outlet property="dappScoreLabel" destination="LAM-48-Y6k" id="5Je-eg-IPF"/>
