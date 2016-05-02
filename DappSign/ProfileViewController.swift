@@ -8,23 +8,21 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController {
     internal var user: PFUser?
     
-    @IBOutlet weak var tableView:                   UITableView!
     @IBOutlet weak var dappScoreLabel:              UILabel!
     @IBOutlet weak var nameLabel:                   UILabel!
     @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
     @IBOutlet weak var adminButton:                 UIButton!
     @IBOutlet weak var changeButton:                UIButton!
     
-    private var dappsIdsSwipedByLoggedInUser: [String]? = nil
-    private var dappsCreatedByUserInProfile: [PFObject]? = nil
-    private var dappsSwipedByUserInProfile: [PFObject]? = nil
+    private var dapps: [PFObject] = []
     private var representativeVC: RepresentativeVC? = nil
+    private var petitionsTVC: PetitionsTVC? = nil
     
     private var editLinksSegueID = "editLinksSegue"
-    private var selectedDappSegue: PFObject?
+    private var dappLinkEdit: PFObject?
     
     enum DappsFilter: Int {
         case DappSigns = 0
@@ -36,28 +34,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         ViewHelper.initButtonLayer(self.changeButton)
         
-        if let user = self.user {
-            let currentUser = PFUser.currentUser()
-            
-            if user.objectId != currentUser.objectId {
-                Requests.downloadDappsSwipedByUser(PFUser.currentUser(), completion: {
-                    (dapps: [PFObject], error: NSError!) -> Void in
-                    if error != nil {
-                        print(error)
-                        
-                        return
-                    }
-                    
-                    self.dappsIdsSwipedByLoggedInUser = dapps.map({ $0.objectId })
-                })
-            }
-        }
-        
-        nameLabel.text = user?["name"] as? String
+        nameLabel.text = self.user?["name"] as? String
         
         self.initDappScoreLabel()
         self.initAdminButton()
         self.downloadDapps()
+        self.petitionsTVC?.showDapps([], showEditLinksButton: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -120,9 +102,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             case self.editLinksSegueID:
                 let editDappLinksVC = segue.destinationViewController as? EditDappLinksVC
                 
-                editDappLinksVC?.dapp = self.selectedDappSegue
+                editDappLinksVC?.dapp = self.dappLinkEdit
             case RepresentativeVC.embedSegueID:
                 self.representativeVC = segue.destinationViewController as? RepresentativeVC
+            case PetitionsTVC.embedSegueID:
+                self.petitionsTVC = segue.destinationViewController as? PetitionsTVC
+                
+                self.petitionsTVC?.delegate = self
+                self.petitionsTVC?.user = self.user
             case _:
                 break;
             }
@@ -136,86 +123,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func dappsFilterSegmentedControlValueChanged(sender: AnyObject) {
-        if self.dapps() != nil {
-            self.tableView.reloadData()
-        } else {
-            self.downloadDapps()
-        }
-    }
-    
-    // MARK: - UITableViewDataSource
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let dapps = self.dapps() {
-            return dapps.count
-        }
-        
-        return 0
-    }
-    
-    func tableView(tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath
-    ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
-        
-        cell.cellDelegate = self
-        
-        if let dapps = self.dapps() {
-            let dapp = dapps[indexPath.row]
-            
-            cell.dappSignView.showDappObject(dapp)
-            
-            if self.dappsFilterSegmentedControl.selectedSegmentIndex == DappsFilter.DappSigns.rawValue {
-                cell.editLinksView.hidden = false
-            } else {
-                cell.editLinksView.hidden = true
-            }
-            
-            if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
-                let buttons = NSMutableArray(capacity: 1)
-                
-                buttons.sw_addUtilityButtonWithColor(
-                    UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
-                    title: "Dapp"
-                )
-                
-                cell.leftUtilityButtons = buttons as [AnyObject]
-                cell.delegate = self
-            } else {
-                cell.leftUtilityButtons = []
-                cell.delegate = nil
-            }
-        }
-        
-        return cell
-    }
-    
-    // MARK: -
-    
-    private func dapps() -> [PFObject]? {
-        let index = self.dappsFilterSegmentedControl.selectedSegmentIndex
-        
-        if index == DappsFilter.DappSigns.rawValue {
-            return self.dappsCreatedByUserInProfile
-        } else if index == DappsFilter.Dapped.rawValue {
-            return self.dappsSwipedByUserInProfile
-        }
-        
-        return nil
-    }
-    
-    private func canShowDappButtonInCellWithDappWithId(dappId: String) -> Bool {
-        if self.user?.objectId == PFUser.currentUser().objectId {
-            return false
-        }
-        
-        if let dappsIdsSwipedByLoggedInUser = self.dappsIdsSwipedByLoggedInUser {
-            if dappsIdsSwipedByLoggedInUser.contains(dappId) {
-                return false
-            }
-        }
-        
-        return true
+        self.downloadDapps()
     }
     
     // MARK: - Requests
@@ -223,162 +131,65 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     private func downloadDapps() {
         let index = self.dappsFilterSegmentedControl.selectedSegmentIndex
         
-        if index == DappsFilter.DappSigns.rawValue {
-            self.downloadDappsCreatedByUser()
-        } else if index == DappsFilter.Dapped.rawValue {
-            self.downloadDappsSwipedByUser()
+        switch index {
+        case DappsFilter.DappSigns.rawValue:
+            self.downloadDappsCreatedByUser {
+                (dapps: [PFObject]) -> Void in
+                self.dapps = dapps
+                
+                self.petitionsTVC?.showDapps(dapps, showEditLinksButton: true)
+            }
+        case DappsFilter.Dapped.rawValue:
+            self.downloadDappsSwipedByUser {
+                (dapps: [PFObject]) -> Void in
+                self.dapps = dapps
+                
+                self.petitionsTVC?.showDapps(dapps, showEditLinksButton: false)
+            }
+        case _:
+            break
         }
     }
     
-    private func downloadDappsCreatedByUser() {
+    private func downloadDappsCreatedByUser(completion: (dapps: [PFObject]) -> Void) {
         if let user = self.user {
             Requests.downloadDappsCreatedByUserWithId(user.objectId, completion: {
                 (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
-                    let alertView = UIAlertView(
-                        title: "Error",
-                        message: error.localizedDescription,
-                        delegate: nil,
-                        cancelButtonTitle: "OK"
-                    )
+                if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
                     
-                    alertView.show()
-                    
-                    return
+                    completion(dapps: [])
+                } else {
+                    completion(dapps: dapps)
                 }
-                
-                self.dappsCreatedByUserInProfile = dapps
-                
-                self.tableView.reloadData()
             })
+        } else {
+            completion(dapps: [])
         }
     }
     
-    private func downloadDappsSwipedByUser() {
+    private func downloadDappsSwipedByUser(completion: (dapps: [PFObject]) -> Void) {
         if let user = self.user {
             Requests.downloadDappsSwipedByUser(user, completion: {
                 (dapps: [PFObject], error: NSError!) -> Void in
-                if error != nil {
-                    let alertView = UIAlertView(
-                        title: "Error",
-                        message: error.localizedDescription,
-                        delegate: nil,
-                        cancelButtonTitle: "OK"
-                    )
-                    
-                    alertView.show()
-                    
-                    return
-                }
-                
-                self.dappsSwipedByUserInProfile = dapps
-                
-                self.tableView.reloadData()
-            })
-        }
-    }
-    
-    private func dapp(dapp: PFObject, completion: (succeeded: Bool) -> Void) {
-        let currentUser = PFUser.currentUser()
-        
-        Requests.addDappToDappsSwipedArray(dapp, user: currentUser, completion: {
-            (succeeded: Bool, error: NSError?) -> Void in
-            var message: String
-            
-            if succeeded {
-                message = "You have successfully dapped this card."
-                
-                self.dappsIdsSwipedByLoggedInUser?.append(dapp.objectId)
-                
-                let notificationCenter = NSNotificationCenter.defaultCenter()
-                
-                notificationCenter.postNotificationName(DappSwipedNotification,
-                    object: dapp.objectId
-                )
-                
-                Requests.incrementScoreOfTheDapp(dapp, completion: {
-                    (succeeded: Bool, error: NSError?) -> Void in
-                })
-            } else {
                 if let error = error {
-                    message = "Failed to dapp this card. Error: \(error.localizedDescription)"
-                } else {
-                    message = "Failed to dapp this card. Unknown error."
-                }
-            }
-            
-            let alertView = UIAlertView(
-                title: nil,
-                message: message,
-                delegate: nil,
-                cancelButtonTitle: "OK"
-            )
-            
-            alertView.show()
-            
-            completion(succeeded: succeeded)
-        })
-    }
-}
-
-extension ProfileViewController: SWTableViewCellDelegate {
-    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
-        return true
-    }
-    
-    func swipeableTableViewCell(cell: SWTableViewCell!,
-        didTriggerLeftUtilityButtonWithIndex index: Int
-    ) {
-        if let indexPath = self.tableView.indexPathForCell(cell) {
-            if let dapps = self.dapps() {
-                let dapp = dapps[indexPath.row];
-                
-                self.dapp(dapp, completion: {
-                    (succeeded: Bool) -> Void in
-                    if succeeded {
-                        self.incrementDappScores(dapp)
-                    }
+                    self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
                     
-                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                })
-                
-                cell.hideUtilityButtonsAnimated(true)
-            }
+                    completion(dapps: [])
+                } else {
+                    completion(dapps: dapps)
+                }
+            })
+        } else {
+            completion(dapps: [])
         }
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent;
-    }
-    
-    private func incrementDappScores(dapp: PFObject) {
-        if let userID = dapp["userid"] as? String {
-            self.incrementDappScoreForUserWithID(userID)
-        }
-
-        let currentUserID = PFUser.currentUser().objectId
-        
-        self.incrementDappScoreForUserWithID(currentUserID)
-    }
-    
-    private func incrementDappScoreForUserWithID(userID: String) {
-        UserHelper.incrementDappScoreForUserWithID(userID, completion: {
-            (success: Bool, errorMessage: String?) -> Void in
-            if let errorMessage = errorMessage {
-                print(errorMessage)
-            }
-        })
     }
 }
 
-extension ProfileViewController: DappProfileCellDelegate {
-    func editLinkInCell(cell: DappProfileCell) {
-        if let indexPath = self.tableView.indexPathForCell(cell), dapps = self.dapps() {
-            if indexPath.row < dapps.count {
-                self.selectedDappSegue = dapps[indexPath.row]
-                
-                self.performSegueWithIdentifier(self.editLinksSegueID, sender: self)
-            }
-        }
+extension ProfileViewController: PetitionsDelegate {
+    func editLinks(dapp: PFObject) {
+        self.dappLinkEdit = dapp
+        
+        self.performSegueWithIdentifier(self.editLinksSegueID, sender: self)
     }
 }
