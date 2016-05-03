@@ -56,9 +56,11 @@ class PetitionsTVC: UITableViewController {
         cell.dappSignView.showDappObject(dapp)
         
         if self.showEditLinksButton {
-            cell.editLinksView.hidden = false
+            cell.resubmitButton.hidden = false
+            cell.editLinksButton.hidden = false
         } else {
-            cell.editLinksView.hidden = true
+            cell.resubmitButton.hidden = true
+            cell.editLinksButton.hidden = true
         }
         
         if self.canShowDappButtonInCellWithDappWithId(dapp.objectId) {
@@ -155,6 +157,10 @@ extension PetitionsTVC: DappProfileCellDelegate {
                 self.delegate?.editLinks(dapp)
             }
         }
+    }
+    
+    func resubmitDappInCell(cell: DappProfileCell) {
+        
     }
 }
 

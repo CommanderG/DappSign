@@ -10,16 +10,20 @@ import UIKit
 
 protocol DappProfileCellDelegate {
     func editLinkInCell(cell: DappProfileCell)
+    func resubmitDappInCell(cell: DappProfileCell)
 }
 
 class DappProfileCell: SWTableViewCell {
     @IBOutlet weak var dappSignView: DappSignView!
-    @IBOutlet weak var editLinksView: UIView!
+    @IBOutlet weak var resubmitButton: UIButton!
+    @IBOutlet weak var editLinksButton: UIButton!
     
     internal var cellDelegate: DappProfileCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        ViewHelper.initButtonLayer(self.resubmitButton)
+        ViewHelper.initButtonLayer(self.editLinksButton)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -28,5 +32,9 @@ class DappProfileCell: SWTableViewCell {
     
     @IBAction func editLinks() {
         self.cellDelegate?.editLinkInCell(self)
+    }
+    
+    @IBAction func resubmit() {
+        self.cellDelegate?.resubmitDappInCell(self)
     }
 }
