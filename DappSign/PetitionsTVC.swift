@@ -139,14 +139,7 @@ class PetitionsTVC: UITableViewController {
                 message = "Failed to dapp this card. Unknown error."
             }
             
-            let alertView = UIAlertView(
-                title: nil,
-                message: message,
-                delegate: nil,
-                cancelButtonTitle: "OK"
-            )
-            
-            alertView.show()
+            self.showAlertViewWithOKButtonAndMessage(message)
             
             completion(succeeded: succeeded)
         })

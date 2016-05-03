@@ -11,23 +11,18 @@ import UIKit
 class ProfileViewController: UIViewController {
     internal var user: PFUser?
     
-    @IBOutlet weak var dappScoreLabel:              UILabel!
-    @IBOutlet weak var nameLabel:                   UILabel!
-    @IBOutlet weak var dappsFilterSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var adminButton:                 UIButton!
-    @IBOutlet weak var changeButton:                UIButton!
+    @IBOutlet weak var dappScoreLabel: UILabel!
+    @IBOutlet weak var nameLabel:      UILabel!
+    @IBOutlet weak var adminButton:    UIButton!
+    @IBOutlet weak var changeButton:   UIButton!
     
     private var dapps: [PFObject] = []
     private var representativeVC: RepresentativeVC? = nil
     private var petitionsTVC: PetitionsTVC? = nil
+    private var segmentsVC: SegmentsVC? = nil
     
     private var editLinksSegueID = "editLinksSegue"
     private var dappLinkEdit: PFObject?
-    
-    enum DappsFilter: Int {
-        case DappSigns = 0
-        case Dapped = 1
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +105,10 @@ class ProfileViewController: UIViewController {
                 
                 self.petitionsTVC?.delegate = self
                 self.petitionsTVC?.user = self.user
+            case SegmentsVC.embedSegueID:
+                self.segmentsVC = segue.destinationViewController as? SegmentsVC
+                
+                self.segmentsVC?.delegate = self
             case _:
                 break;
             }
@@ -122,32 +121,26 @@ class ProfileViewController: UIViewController {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func dappsFilterSegmentedControlValueChanged(sender: AnyObject) {
-        self.downloadDapps()
-    }
-    
     // MARK: - Requests
     
     private func downloadDapps() {
-        let index = self.dappsFilterSegmentedControl.selectedSegmentIndex
-        
-        switch index {
-        case DappsFilter.DappSigns.rawValue:
-            self.downloadDappsCreatedByUser {
-                (dapps: [PFObject]) -> Void in
-                self.dapps = dapps
-                
-                self.petitionsTVC?.showDapps(dapps, showEditLinksButton: true)
+        if let segmentsVC = self.segmentsVC {
+            switch segmentsVC.selectedSegment {
+            case Segment.PetitionsSubmitted:
+                self.downloadDappsCreatedByUser {
+                    (dapps: [PFObject]) -> Void in
+                    self.dapps = dapps
+                    
+                    self.petitionsTVC?.showDapps(dapps, showEditLinksButton: true)
+                }
+            case Segment.PetitionsSigned:
+                self.downloadDappsSwipedByUser {
+                    (dapps: [PFObject]) -> Void in
+                    self.dapps = dapps
+                    
+                    self.petitionsTVC?.showDapps(dapps, showEditLinksButton: false)
+                }
             }
-        case DappsFilter.Dapped.rawValue:
-            self.downloadDappsSwipedByUser {
-                (dapps: [PFObject]) -> Void in
-                self.dapps = dapps
-                
-                self.petitionsTVC?.showDapps(dapps, showEditLinksButton: false)
-            }
-        case _:
-            break
         }
     }
     
@@ -191,5 +184,11 @@ extension ProfileViewController: PetitionsDelegate {
         self.dappLinkEdit = dapp
         
         self.performSegueWithIdentifier(self.editLinksSegueID, sender: self)
+    }
+}
+
+extension ProfileViewController: SegmentsDelegate {
+    func didSelectSegment(segment: Segment) {
+        self.downloadDapps()
     }
 }
