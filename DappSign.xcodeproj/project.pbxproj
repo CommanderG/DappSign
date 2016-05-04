@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2702A60A1C89C582002BBBF6 /* DailyDappDatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */; };
 		2702A60C1C89D968002BBBF6 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A60B1C89D968002BBBF6 /* DateHelper.swift */; };
+		270B8C081CDA682400B8725F /* DappMappViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B8C071CDA682400B8725F /* DappMappViewHelper.swift */; };
 		270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FBCBF1C96DADF00BE3019 /* ScoreboardHelper.swift */; };
 		271431811AB08741002F9527 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2714317F1AB086AB002F9527 /* FacebookSDK.framework */; };
 		271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */; };
@@ -118,17 +119,17 @@
 		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
 		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
-		8459C3501CC9086400421769 /* SVGMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C34F1CC9086400421769 /* SVGMapData.swift */; settings = {ASSET_TAGS = (); }; };
-		8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C3511CC9168200421769 /* DappMappHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		8459C3501CC9086400421769 /* SVGMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C34F1CC9086400421769 /* SVGMapData.swift */; };
+		8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C3511CC9168200421769 /* DappMappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
 		84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */; };
-		84AFF9531CC819E300F97FEE /* PercentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFF9521CC819E300F97FEE /* PercentsVC.swift */; settings = {ASSET_TAGS = (); }; };
-		84C066221CD9324B00A5D724 /* ProfileDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */; settings = {ASSET_TAGS = (); }; };
+		84AFF9531CC819E300F97FEE /* PercentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFF9521CC819E300F97FEE /* PercentsVC.swift */; };
+		84C066221CD9324B00A5D724 /* ProfileDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
-		84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */; settings = {ASSET_TAGS = (); }; };
+		84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */; };
 		84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C648B61ABDA85300C1B4D8 /* DappProfileCell.swift */; };
 		84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848741AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m */; };
 		84D848801AC726D000D1B3F9 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D848761AC726D000D1B3F9 /* SWCellScrollView.m */; };
@@ -136,7 +137,7 @@
 		84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487A1AC726D000D1B3F9 /* SWTableViewCell.m */; };
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
-		84EA16371CD3FCEE002CC952 /* PetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */; settings = {ASSET_TAGS = (); }; };
+		84EA16371CD3FCEE002CC952 /* PetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */; };
 		A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 		DC9324174E305177A18694BC /* libPods-DappSignTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */; };
@@ -175,6 +176,7 @@
 /* Begin PBXFileReference section */
 		2702A6091C89C582002BBBF6 /* DailyDappDatesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappDatesHelper.swift; sourceTree = "<group>"; };
 		2702A60B1C89D968002BBBF6 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		270B8C071CDA682400B8725F /* DappMappViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappViewHelper.swift; sourceTree = "<group>"; };
 		270FBCBF1C96DADF00BE3019 /* ScoreboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardHelper.swift; sourceTree = "<group>"; };
 		2714317F1AB086AB002F9527 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		271431881AB0C318002F9527 /* UIViewToUIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewToUIImageExtension.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				275955861CC7C6B900080D63 /* DistrictHelper.swift */,
 				275955881CC7D7FC00080D63 /* HashtagHelper.swift */,
 				8459C3511CC9168200421769 /* DappMappHelper.swift */,
+				270B8C071CDA682400B8725F /* DappMappViewHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */,
 				27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */,
 				277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */,
+				270B8C081CDA682400B8725F /* DappMappViewHelper.swift in Sources */,
 				274B33451C9C3AAB00FA1FDF /* DappArraysHelper.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
 				27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */,

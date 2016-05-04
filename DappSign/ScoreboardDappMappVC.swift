@@ -37,11 +37,14 @@ class ScoreboardDappMappVC: UIViewController {
     // MARK: - internal
     
     internal func showDappMappDataForDapp(dapp: PFObject?) {
-        self.initMapWebViewWithMapURLString(nil)
+        DappMappViewHelper.initMapWebView(self.mapWebView, mapURLString: nil)
         self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(nil)
-        self.initDistrictLabel(self.topDistrictLabel, districtIndex: 1, district: nil)
-        self.initDistrictLabel(self.secondTopDistrictLabel, districtIndex: 2, district: nil)
-        self.initDistrictLabel(self.thirdTopDistrictLabel, districtIndex: 3, district: nil)
+        DappMappViewHelper.initDistrictLabels(
+            topDistrictLabel: self.topDistrictLabel,
+            secondTopDistrictLabel: self.secondTopDistrictLabel,
+            thirdTopDistrictLabel: self.thirdTopDistrictLabel,
+            dappMappInfo: nil
+        )
         self.initUserDistrictRankLabelWithRank(nil)
         self.initTotalDistrictsCountLabelWithDistrictsCount(nil)
         self.percentsVC?.showPercents(0)
@@ -49,23 +52,18 @@ class ScoreboardDappMappVC: UIViewController {
         if let dapp = dapp {
             DappMappHelper.dappMappInfoForDapp(dapp) {
                 (dappMappInfo: DappMappInfo?) -> Void in
-                self.initMapWebViewWithMapURLString(dappMappInfo?.mapURLString)
+                DappMappViewHelper.initMapWebView(self.mapWebView,
+                    mapURLString: dappMappInfo?.mapURLString
+                )
                 self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(
                     dappMappInfo?.districtsWithMajoritySupportCount
                 )
-                self.initDistrictLabel(self.topDistrictLabel,
-                    districtIndex: 1,
-                    district: dappMappInfo?.topDistrict
+                DappMappViewHelper.initDistrictLabels(
+                    topDistrictLabel: self.topDistrictLabel,
+                    secondTopDistrictLabel: self.secondTopDistrictLabel,
+                    thirdTopDistrictLabel: self.thirdTopDistrictLabel,
+                    dappMappInfo: dappMappInfo
                 )
-                self.initDistrictLabel(self.secondTopDistrictLabel,
-                    districtIndex: 2,
-                    district: dappMappInfo?.secondTopDistrict
-                )
-                self.initDistrictLabel(self.thirdTopDistrictLabel,
-                    districtIndex: 3,
-                    district: dappMappInfo?.thirdTopDistrict
-                )
-                
                 self.initUserDistrictRankLabelWithRank(dappMappInfo?.userDistrictRank)
                 self.initTotalDistrictsCountLabelWithDistrictsCount(
                     dappMappInfo?.districtsTotalCount
@@ -80,27 +78,6 @@ class ScoreboardDappMappVC: UIViewController {
     
     // MARK: - private
     
-    private func initMapWebViewWithMapURLString(mapURLString: String?) {
-        self.mapWebView.hidden = true
-        
-        var URLString: String? = nil
-        
-        if let mapURLString = mapURLString {
-            URLString = mapURLString
-        } else {
-            URLString = SVGMapGenerator.generateEmptyMap()
-        }
-        
-        if let URLString = URLString {
-            self.mapWebView.hidden = false
-            
-            let URL = NSURL(fileURLWithPath: URLString)
-            let request = NSURLRequest(URL: URL)
-            
-            self.mapWebView.loadRequest(request)
-        }
-    }
-    
     private func initMajoritySupportDistrictsCountLabelWithDistrictsCount(districtsCount: Int?) {
         if let districtsCount = districtsCount {
             if districtsCount == 1 {
@@ -110,15 +87,6 @@ class ScoreboardDappMappVC: UIViewController {
             }
         } else {
             self.majoritySupportDistrictsCountLabel.text = "0 districts"
-        }
-    }
-    
-    private func initDistrictLabel(districtLabel: UILabel, districtIndex: Int, district: String?) {
-        if let district = district {
-            districtLabel.hidden = false
-            districtLabel.text = "\(districtIndex). \(district)"
-        } else {
-            districtLabel.hidden = true
         }
     }
     
@@ -154,13 +122,6 @@ class ScoreboardDappMappVC: UIViewController {
 
 extension ScoreboardDappMappVC: UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView) {
-        let scaleX = CGRectGetWidth(webView.bounds) / webView.scrollView.contentSize.width
-        let scaleY = CGRectGetHeight(webView.bounds) / webView.scrollView.contentSize.height
-        let scale = max(scaleX, scaleY)
-        
-        webView.scrollView.minimumZoomScale = scale
-        webView.scrollView.maximumZoomScale = scale
-        webView.scrollView.zoomScale = scale
-        webView.scrollView.scrollEnabled = false
+        DappMappViewHelper.handleWebViewDidFinishLoad(webView)
     }
 }
