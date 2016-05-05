@@ -33,6 +33,7 @@
 		2759558B1CC7DF3000080D63 /* ScoreboardDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
+		276D26231CDB4FB60036DCAF /* StoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */; };
 		2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */; };
 		27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */; };
 		27769C1A1BB179FF00FD34AA /* EditDappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */; };
@@ -200,6 +201,7 @@
 		2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappMappVC.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardHelper.swift; sourceTree = "<group>"; };
 		2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtil.swift; sourceTree = "<group>"; };
 		27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappLinksVC.swift; sourceTree = "<group>"; };
 		27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDappLinksVC.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				275955881CC7D7FC00080D63 /* HashtagHelper.swift */,
 				8459C3511CC9168200421769 /* DappMappHelper.swift */,
 				270B8C071CDA682400B8725F /* DappMappViewHelper.swift */,
+				276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */,
 				F37246551AD3ED5300AD56E2 /* ZipCodeViewController.swift in Sources */,
 				F37246791AD3ED7600AD56E2 /* NSData+ImageContentType.m in Sources */,
+				276D26231CDB4FB60036DCAF /* StoryboardHelper.swift in Sources */,
 				27D3C2A41CB7F61A009CDB2C /* LinkVC.swift in Sources */,
 				27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */,
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,

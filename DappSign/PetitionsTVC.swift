@@ -78,6 +78,8 @@ class PetitionsTVC: UITableViewController {
             cell.delegate = nil
         }
         
+        cell.showDappMappDataForDapp(dapp)
+        
         return cell
     }
     
