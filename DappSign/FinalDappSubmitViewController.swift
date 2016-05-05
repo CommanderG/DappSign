@@ -97,11 +97,7 @@ class FinalDappSubmitViewController: UIViewController {
     }
     
     @IBAction func showLinks(sender: AnyObject) {
-        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            EmbedDappVC.storyboardID
-        ) as? EmbedDappVC
-        
-        if let dapp = self.dappObj, embedDappVC = embedDappVC {
+        if let dapp = self.dappObj, embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
             self.addChildViewController(embedDappVC)
             
             let frame = embedDappVC.frameWithDappViewFrame(self.containerView.frame)

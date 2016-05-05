@@ -9,8 +9,6 @@
 import UIKit
 
 class LinkVC: UIViewController {
-    internal static let storyboardID = "LinkVC"
-    
     @IBOutlet private var closeButton: UIButton!
     @IBOutlet private var webView: UIWebView!
     

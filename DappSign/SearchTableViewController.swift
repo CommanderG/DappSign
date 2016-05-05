@@ -125,13 +125,10 @@ class SearchTableViewController: UITableViewController {
         
         if indexPath.section == Section.Users.rawValue {
             let profileNavigationController =
-                self.storyboard?.instantiateViewControllerWithIdentifier("profileNavigationController") as? UINavigationController
+            StoryboardHelper.instantiateProfileNavigationController()
             
-            if profileNavigationController == nil {
-                return
-            }
-            
-            let profileViewController = profileNavigationController?.viewControllers.first as? ProfileViewController
+            let profileViewController =
+            profileNavigationController?.viewControllers.first as? ProfileViewController
             
             if profileViewController == nil {
                 return
@@ -143,14 +140,10 @@ class SearchTableViewController: UITableViewController {
                 self.presentViewController(profileNavigationController!, animated: true, completion: nil)
             }
         } else {
-            let dappsNavigationController =
-                self.storyboard?.instantiateViewControllerWithIdentifier("dappsNavigationController") as? UINavigationController
+            let dappsNavigationController = StoryboardHelper.instantiateDappsNavigationController()
             
-            if dappsNavigationController == nil {
-                return
-            }
-            
-            let dappsViewController = dappsNavigationController!.viewControllers.first as? DappsViewController
+            let dappsViewController =
+            dappsNavigationController?.viewControllers.first as? DappsViewController
             
             if dappsViewController == nil {
                 return

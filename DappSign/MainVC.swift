@@ -29,11 +29,8 @@ class MainVC: UIViewController {
     // MARK: - initial child view controller
     
     private func initChildViewController() {
-        self.dailyDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            "dailyDappVC") as? DailyDappVC
-        
-        self.scoreboardVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            "scoreboardVC") as? ScoreboardVC
+        self.dailyDappVC = StoryboardHelper.instantiateDailyDappVC()
+        self.scoreboardVC = StoryboardHelper.instantiateScoreboardVC()
         
         if let dailyDappVC = self.dailyDappVC {
             dailyDappVC.transitionDelegate = self

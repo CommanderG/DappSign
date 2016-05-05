@@ -13,8 +13,6 @@ protocol DappBackSideLinksVCDelegate {
 }
 
 class DappBackSideLinksVC: UIViewController {
-    internal static var storyboardID = "DappBackSideLinksVC"
-    
     internal var delegate: DappBackSideLinksVCDelegate? = nil
     
     private var dappLinksVC: DappLinksVC? = nil

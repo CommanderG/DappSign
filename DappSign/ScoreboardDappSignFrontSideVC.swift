@@ -18,7 +18,6 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
     @IBOutlet weak var secondsLabel: UILabel!
     
     internal static let embedSegueID = "embedScoreboardDappSignFrontSideVC"
-    internal static let storyboardID = "ScoreboardDappSignFrontSideVC"
     
     internal var countdownDelegate: CountdownDelegate? = nil
     

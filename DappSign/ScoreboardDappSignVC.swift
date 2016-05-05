@@ -45,9 +45,7 @@ class ScoreboardDappSignVC: UIViewController {
     
     private func initChildViewControllers() {
         self.scoreboardDappSignFrontSideVC =
-            self.storyboard?.instantiateViewControllerWithIdentifier(
-                ScoreboardDappSignFrontSideVC.storyboardID
-            ) as? ScoreboardDappSignFrontSideVC
+            StoryboardHelper.instantiateScoreboardDappSignFrontSideVC()
         
         if let scoreboardDappSignFrontSideVC = self.scoreboardDappSignFrontSideVC {
             scoreboardDappSignFrontSideVC.countdownDelegate = self
@@ -59,9 +57,7 @@ class ScoreboardDappSignVC: UIViewController {
             self.visibleChildVC = scoreboardDappSignFrontSideVC
         }
         
-        self.dappBackSideLinksVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            DappBackSideLinksVC.storyboardID
-        ) as? DappBackSideLinksVC
+        self.dappBackSideLinksVC = StoryboardHelper.instantiateDappBackSideLinksVC()
         
         if let dappBackSideLinksVC = self.dappBackSideLinksVC {
             dappBackSideLinksVC.delegate = self
@@ -146,11 +142,7 @@ class ScoreboardDappSignVC: UIViewController {
     }
     
     internal func showLinksForDapp(dapp: PFObject) -> Bool {
-        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            EmbedDappVC.storyboardID
-        ) as? EmbedDappVC
-        
-        if let embedDappVC = embedDappVC {
+        if let embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
             embedDappVC.delegate = self
             
             self.addChildViewController(embedDappVC)

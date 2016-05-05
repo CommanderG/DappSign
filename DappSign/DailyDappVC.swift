@@ -242,11 +242,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     }
     
     @IBAction func showLinkView(sender: AnyObject) {
-        let embedDappVC = self.storyboard?.instantiateViewControllerWithIdentifier(
-            EmbedDappVC.storyboardID
-        ) as? EmbedDappVC
-        
-        if let dapp = self.dapps.first, embedDappVC = embedDappVC {
+        if let dapp = self.dapps.first, embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
             self.addChildViewController(embedDappVC)
             
             let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)

@@ -12,11 +12,7 @@ class ViewControllerHelper {
     internal class func openLinkWithURL(linkURL: NSURL,
         inViewController viewController: UIViewController
     ) {
-        let linkVC = viewController.storyboard?.instantiateViewControllerWithIdentifier(
-            LinkVC.storyboardID
-        ) as? LinkVC
-        
-        if let linkVC = linkVC {
+        if let linkVC = StoryboardHelper.instantiateLinkVC() {
             viewController.addChildViewController(linkVC)
             
             linkVC.view.frame = viewController.view.bounds

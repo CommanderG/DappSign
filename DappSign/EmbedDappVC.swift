@@ -13,8 +13,6 @@ protocol EmbedDappDelegate {
 }
 
 class EmbedDappVC: UIViewController {
-    internal static let storyboardID = "embedDappVC"
-    
     @IBOutlet weak var dappURLLabel:                    UILabel!
     @IBOutlet weak var dappURLLabelContainerView:       UIView!
     @IBOutlet weak var iframeCodeTextView:              UITextView!
