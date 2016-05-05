@@ -37,46 +37,38 @@ class ScoreboardDappMappVC: UIViewController {
     // MARK: - internal
     
     internal func showDappMappDataForDapp(dapp: PFObject?) {
-        DappMappViewHelper.initMapWebView(self.mapWebView, mapURLString: nil)
-        self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(nil)
-        DappMappViewHelper.initDistrictLabels(
-            topDistrictLabel: self.topDistrictLabel,
-            secondTopDistrictLabel: self.secondTopDistrictLabel,
-            thirdTopDistrictLabel: self.thirdTopDistrictLabel,
-            dappMappInfo: nil
-        )
-        self.initUserDistrictRankLabelWithRank(nil)
-        self.initTotalDistrictsCountLabelWithDistrictsCount(nil)
-        self.percentsVC?.showPercents(0)
+        self.initUIWithDappMappInfo(nil)
         
         if let dapp = dapp {
             DappMappHelper.dappMappInfoForDapp(dapp) {
                 (dappMappInfo: DappMappInfo?) -> Void in
-                DappMappViewHelper.initMapWebView(self.mapWebView,
-                    mapURLString: dappMappInfo?.mapURLString
-                )
-                self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(
-                    dappMappInfo?.districtsWithMajoritySupportCount
-                )
-                DappMappViewHelper.initDistrictLabels(
-                    topDistrictLabel: self.topDistrictLabel,
-                    secondTopDistrictLabel: self.secondTopDistrictLabel,
-                    thirdTopDistrictLabel: self.thirdTopDistrictLabel,
-                    dappMappInfo: dappMappInfo
-                )
-                self.initUserDistrictRankLabelWithRank(dappMappInfo?.userDistrictRank)
-                self.initTotalDistrictsCountLabelWithDistrictsCount(
-                    dappMappInfo?.districtsTotalCount
-                )
-                
-                if let percents = dappMappInfo?.percents {
-                    self.percentsVC?.showPercents(percents)
-                }
+                self.initUIWithDappMappInfo(dappMappInfo)
             }
         }
     }
     
     // MARK: - private
+    
+    private func initUIWithDappMappInfo(dappMappInfo: DappMappInfo?) {
+        DappMappViewHelper.initMapWebView(self.mapWebView, mapURLString: dappMappInfo?.mapURLString)
+        self.initMajoritySupportDistrictsCountLabelWithDistrictsCount(
+            dappMappInfo?.districtsWithMajoritySupportCount
+        )
+        DappMappViewHelper.initDistrictLabels(
+            topDistrictLabel: self.topDistrictLabel,
+            secondTopDistrictLabel: self.secondTopDistrictLabel,
+            thirdTopDistrictLabel: self.thirdTopDistrictLabel,
+            dappMappInfo: dappMappInfo
+        )
+        self.initUserDistrictRankLabelWithRank(dappMappInfo?.userDistrictRank)
+        self.initTotalDistrictsCountLabelWithDistrictsCount(dappMappInfo?.districtsTotalCount)
+        
+        if let percents = dappMappInfo?.percents {
+            self.percentsVC?.showPercents(percents)
+        } else {
+            self.percentsVC?.showPercents(0)
+        }
+    }
     
     private func initMajoritySupportDistrictsCountLabelWithDistrictsCount(districtsCount: Int?) {
         if let districtsCount = districtsCount {
