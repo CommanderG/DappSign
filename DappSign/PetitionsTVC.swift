@@ -187,7 +187,24 @@ extension PetitionsTVC: DappProfileCellDelegate {
     }
     
     func postToFacebookPetitionInCell(cell: DappProfileCell) {
-        
+        if let dapp = self.dappInCell(cell), dappSignImage = cell.dappSignView.toImage() {
+            FacebookHelper.postImageToFacebook(dappSignImage, dapp: dapp, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully posted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to post the card. Unknown error."
+                    )
+                }
+            })
+        }
     }
     
     // MARK: - private
