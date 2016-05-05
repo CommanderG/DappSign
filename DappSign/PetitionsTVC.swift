@@ -164,6 +164,45 @@ extension PetitionsTVC: DappProfileCellDelegate {
     func resubmitDappInCell(cell: DappProfileCell) {
         
     }
+    
+    func tweetPetitionInCell(cell: DappProfileCell) {
+        if let dapp = self.dappInCell(cell), dappSignImage = cell.dappSignView.toImage() {
+            TwitterHelper.tweetDapp(dapp, image: dappSignImage, completion: {
+                (success: Bool, error: NSError?) -> Void in
+                if success {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "The card has been successfully tweeted."
+                    )
+                } else if let error = error {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Error: \(error)"
+                    )
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(
+                        "Failed to tweet the card. Unknown error."
+                    )
+                }
+            })
+        }
+    }
+    
+    func postToFacebookPetitionInCell(cell: DappProfileCell) {
+        
+    }
+    
+    // MARK: - private
+    
+    private func dappInCell(cell: DappProfileCell) -> PFObject? {
+        if let indexPath = self.tableView.indexPathForCell(cell) {
+            if indexPath.row < dapps.count {
+                let dapp = self.dapps[indexPath.row]
+                
+                return dapp
+            }
+        }
+        
+        return nil
+    }
 }
 
 extension PetitionsTVC: SWTableViewCellDelegate {

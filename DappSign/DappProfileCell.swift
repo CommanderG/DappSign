@@ -11,6 +11,8 @@ import UIKit
 protocol DappProfileCellDelegate {
     func editLinkInCell(cell: DappProfileCell)
     func resubmitDappInCell(cell: DappProfileCell)
+    func tweetPetitionInCell(cell: DappProfileCell)
+    func postToFacebookPetitionInCell(cell: DappProfileCell)
 }
 
 class DappProfileCell: SWTableViewCell {
@@ -49,7 +51,7 @@ class DappProfileCell: SWTableViewCell {
     }
     
     @IBAction func tweet() {
-        
+        self.cellDelegate?.tweetPetitionInCell(self)
     }
     
     @IBAction func showLinks() {
@@ -57,7 +59,7 @@ class DappProfileCell: SWTableViewCell {
     }
     
     @IBAction func postToFacebook() {
-        
+        self.cellDelegate?.postToFacebookPetitionInCell(self)
     }
     
     // MARK: - internal
