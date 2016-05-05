@@ -36,10 +36,6 @@ class ProfileDappMappVC: UIViewController {
     internal func showDappMappDataForDapp(dapp: PFObject?) {
         self.initUIWithDappMappInfo(self.dappMappInfo)
         
-        if self.dappMappInfo != nil {
-            return
-        }
-        
         if let dapp = dapp {
             DappMappHelper.dappMappInfoForDapp(dapp) {
                 (dappMappInfo: DappMappInfo?) -> Void in

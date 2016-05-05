@@ -3523,7 +3523,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11F-wy-cPw">
-                                            <rect key="frame" x="198" y="8" width="122" height="200"/>
+                                            <rect key="frame" x="198" y="8" width="122" height="247"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubP-M1-ixF">
                                                     <rect key="frame" x="11" y="0.0" width="100" height="22"/>
@@ -3570,11 +3570,47 @@
                                                         <constraint firstAttribute="width" constant="106" id="qoU-km-Gex"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJx-ap-isb">
+                                                    <rect key="frame" x="11" y="216" width="100" height="31"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yb-uH-XOt">
+                                                            <rect key="frame" x="0.0" y="2" width="32" height="27"/>
+                                                            <animations/>
+                                                            <state key="normal" image="twitterIcon"/>
+                                                            <connections>
+                                                                <action selector="tweet" destination="DRt-IW-ePf" eventType="touchUpInside" id="AdJ-MN-ebe"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdY-xr-nH7">
+                                                            <rect key="frame" x="38" y="0.0" width="31" height="31"/>
+                                                            <animations/>
+                                                            <state key="normal" image="Link"/>
+                                                            <connections>
+                                                                <action selector="showLinks" destination="DRt-IW-ePf" eventType="touchUpInside" id="1Up-dv-Een"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOV-jA-yjT">
+                                                            <rect key="frame" x="81" y="0.0" width="16" height="30"/>
+                                                            <animations/>
+                                                            <state key="normal" image="facebookIcon"/>
+                                                            <connections>
+                                                                <action selector="postToFacebook" destination="DRt-IW-ePf" eventType="touchUpInside" id="WoZ-Gc-2R9"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="Bag-lK-PC9"/>
+                                                        <constraint firstAttribute="width" constant="100" id="dEI-bv-gbK"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <animations/>
                                             <constraints>
+                                                <constraint firstItem="dJx-ap-isb" firstAttribute="centerX" secondItem="11F-wy-cPw" secondAttribute="centerX" id="Hwq-JT-dw8"/>
+                                                <constraint firstItem="dJx-ap-isb" firstAttribute="top" secondItem="5z5-Jb-9m0" secondAttribute="bottom" constant="8" id="Or8-JF-Cjd"/>
                                                 <constraint firstItem="5z5-Jb-9m0" firstAttribute="top" secondItem="ubP-M1-ixF" secondAttribute="bottom" constant="4" id="b1G-zd-kjz"/>
-                                                <constraint firstAttribute="height" constant="200" id="dkY-ld-gTU"/>
+                                                <constraint firstAttribute="height" constant="247" id="dkY-ld-gTU"/>
                                                 <constraint firstItem="ubP-M1-ixF" firstAttribute="centerX" secondItem="11F-wy-cPw" secondAttribute="centerX" id="gfO-nV-KWY"/>
                                                 <constraint firstItem="5z5-Jb-9m0" firstAttribute="centerX" secondItem="11F-wy-cPw" secondAttribute="centerX" id="hlO-R4-WNN"/>
                                                 <constraint firstItem="ubP-M1-ixF" firstAttribute="top" secondItem="11F-wy-cPw" secondAttribute="top" id="lZA-Lh-be9"/>
@@ -3598,7 +3634,10 @@
                                     <outlet property="dappMappViewContainer" destination="5z5-Jb-9m0" id="Fnp-Yv-waR"/>
                                     <outlet property="dappSignView" destination="qdp-fm-fHV" id="eK2-iL-iMU"/>
                                     <outlet property="editLinksButton" destination="mhb-7N-b4o" id="LW0-9L-c4n"/>
+                                    <outlet property="postToFacebookButton" destination="sOV-jA-yjT" id="7Y6-Vm-yFp"/>
                                     <outlet property="resubmitButton" destination="zHl-gU-Efg" id="Iec-vx-gcM"/>
+                                    <outlet property="showLinksButton" destination="sdY-xr-nH7" id="qpT-mN-Lng"/>
+                                    <outlet property="tweetButton" destination="6Yb-uH-XOt" id="yPX-GJ-uGr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

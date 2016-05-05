@@ -14,10 +14,13 @@ protocol DappProfileCellDelegate {
 }
 
 class DappProfileCell: SWTableViewCell {
-    @IBOutlet weak var dappSignView: DappSignView!
-    @IBOutlet weak var resubmitButton: UIButton!
-    @IBOutlet weak var editLinksButton: UIButton!
+    @IBOutlet weak var dappSignView:          DappSignView!
+    @IBOutlet weak var resubmitButton:        UIButton!
+    @IBOutlet weak var editLinksButton:       UIButton!
     @IBOutlet weak var dappMappViewContainer: UIView!
+    @IBOutlet weak var tweetButton:           UIButton!
+    @IBOutlet weak var showLinksButton:       UIButton!
+    @IBOutlet weak var postToFacebookButton:  UIButton!
     
     private var profileDappMappVC: ProfileDappMappVC? = nil
     
@@ -43,6 +46,18 @@ class DappProfileCell: SWTableViewCell {
     
     @IBAction func resubmit() {
         self.cellDelegate?.resubmitDappInCell(self)
+    }
+    
+    @IBAction func tweet() {
+        
+    }
+    
+    @IBAction func showLinks() {
+        
+    }
+    
+    @IBAction func postToFacebook() {
+        
     }
     
     // MARK: - internal
