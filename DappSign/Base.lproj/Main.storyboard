@@ -1677,7 +1677,6 @@
                         <outlet property="representativeFullNameLabel" destination="Aok-3g-N1C" id="b8a-VR-PHt"/>
                         <outlet property="representativeImageView" destination="ojE-An-Alf" id="WKn-qE-nOb"/>
                         <outlet property="zipCodeTextField" destination="zVZ-1C-d5L" id="hyM-OT-gC6"/>
-                        <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="JZT-Iw-ftM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7y-QZ-lCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4664,12 +4663,11 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fu7-hF-c08"/>
         <segue reference="8GL-5h-4zG"/>
+        <segue reference="fu7-hF-c08"/>
         <segue reference="LI8-Zz-DGc"/>
         <segue reference="Tb5-sO-Miv"/>
         <segue reference="sqW-Bo-68U"/>
         <segue reference="032-in-2ND"/>
-        <segue reference="4GY-aV-x4s"/>
     </inferredMetricsTieBreakers>
 </document>

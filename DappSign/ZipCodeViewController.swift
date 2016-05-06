@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ZipCodeDelegate {
+    func didSaveRepresentativeAndDistrictInformation(success: Bool)
+}
+
 class ZipCodeViewController: UIViewController {
     @IBOutlet weak var nextButton:                   UIButton!
     @IBOutlet weak var zipCodeTextField:             UITextField!
@@ -15,6 +19,8 @@ class ZipCodeViewController: UIViewController {
     @IBOutlet weak var representativeImageView:      UIImageView!
     @IBOutlet weak var districtLabel:                UILabel!
     @IBOutlet weak var representativeFullNameLabel:  UILabel!
+    
+    internal var delegate: ZipCodeDelegate? = nil
     
     private var houseRepresentative: NSDictionary? = nil
     
@@ -41,25 +47,23 @@ class ZipCodeViewController: UIViewController {
         if let
             houseRepresentative = self.houseRepresentative,
             congressionalDistrictID = self.congressionalDistrictID(houseRepresentative) {
-                self.nextButton.alpha = 0.5
-                self.nextButton.userInteractionEnabled = false
-                
+                ViewHelper.disableButtons([ self.nextButton ])
                 self.saveCongressionalDistrictID(congressionalDistrictID, completion: {
                     (success: Bool) -> Void in
-                    if success {
-                        self.saveHouseRepresentativeOnParse(houseRepresentative, completion: {
-                            (success: Bool) -> Void in
-                            if success {
-                                self.performSegueWithIdentifier("showMainVC", sender: self)
-                            } else {
-                                self.nextButton.alpha = 1.0
-                                self.nextButton.userInteractionEnabled = true
-                            }
-                        })
-                    } else {
-                        self.nextButton.alpha = 1.0
-                        self.nextButton.userInteractionEnabled = true
+                    if !success {
+                        ViewHelper.enableButtons([ self.nextButton ])
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.delegate?.didSaveRepresentativeAndDistrictInformation(false)
+                        
+                        return
                     }
+                    
+                    self.saveHouseRepresentativeOnParse(houseRepresentative, completion: {
+                        (success: Bool) -> Void in
+                        ViewHelper.enableButtons([ self.nextButton ])
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.delegate?.didSaveRepresentativeAndDistrictInformation(success)
+                    })
                 })
         }
     }

@@ -10,6 +10,11 @@
 import UIKit
 
 class LoginVC: UIViewController {
+    private let segueShowZipCode = "showZipCode"
+    private let segueShowMainVC = "showMainVC"
+    
+    private var shouldShowMainScene = false
+    
     @IBOutlet weak var logInWithFacebookButton: UIButton!
     
     override func viewDidLoad() {
@@ -18,6 +23,18 @@ class LoginVC: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.shouldShowMainScene {
+            self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
+        }
     }
     
     @IBAction func logInWithFacebook(sender: AnyObject) {
@@ -32,11 +49,11 @@ class LoginVC: UIViewController {
                 if user.isNew {
                     print("User signed up and logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier("showZipCode", sender: self)
+                    self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
                 } else {
                     print("User logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier("showMainVC", sender: self)
+                    self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
                 }
             } else if let error = error {
                 print("Failed to log in on Facebook. Error: \(error)")
@@ -44,5 +61,26 @@ class LoginVC: UIViewController {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
         })
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let segueID = segue.identifier {
+            switch segueID {
+            case segueShowZipCode:
+                let zipCodeVC = segue.destinationViewController as? ZipCodeViewController
+                
+                zipCodeVC?.delegate = self
+            case _:
+                break
+            }
+        }
+    }
+}
+
+extension LoginVC: ZipCodeDelegate {
+    func didSaveRepresentativeAndDistrictInformation(success: Bool) {
+        self.shouldShowMainScene = success
     }
 }
