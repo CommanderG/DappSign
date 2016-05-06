@@ -443,7 +443,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="facebookLoginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Cr8-Bi-Iuz"/>
+                                    <action selector="logInWithFacebook:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="my0-yy-Pyy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -460,6 +460,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="logInWithFacebookButton" destination="Dc7-Lr-jcy" id="D2m-aB-KB4"/>
                         <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="iW7-1y-626"/>
                         <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="4GY-aV-x4s"/>
                     </connections>
@@ -4663,11 +4664,11 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8GL-5h-4zG"/>
         <segue reference="fu7-hF-c08"/>
+        <segue reference="8GL-5h-4zG"/>
         <segue reference="LI8-Zz-DGc"/>
-        <segue reference="sqW-Bo-68U"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="sqW-Bo-68U"/>
         <segue reference="032-in-2ND"/>
         <segue reference="4GY-aV-x4s"/>
     </inferredMetricsTieBreakers>

@@ -10,6 +10,8 @@
 import UIKit
 
 class LoginVC: UIViewController {
+    @IBOutlet weak var logInWithFacebookButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,16 +20,13 @@ class LoginVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func facebookLoginButton(sender: AnyObject) {
-        let loginWithFacebookButton = sender as! UIButton
-        let permissions = ["public_profile", "email"]
+    @IBAction func logInWithFacebook(sender: AnyObject) {
+        let permissions = [ "public_profile", "email" ]
         
-        loginWithFacebookButton.userInteractionEnabled = false
-        loginWithFacebookButton.alpha = 0.5
-        
+        ViewHelper.disableButtons([ self.logInWithFacebookButton ])
         PFFacebookUtils.logInWithPermissions(permissions, block: {
-            (user: PFUser!, error: NSError!) -> Void in
-            print("error = \(error)")
+            (user: PFUser?, error: NSError?) -> Void in
+            ViewHelper.enableButtons([ self.logInWithFacebookButton ])
             
             if let user = user {
                 if user.isNew {
@@ -39,12 +38,11 @@ class LoginVC: UIViewController {
                     
                     self.performSegueWithIdentifier("showMainVC", sender: self)
                 }
+            } else if let error = error {
+                print("Failed to log in on Facebook. Error: \(error)")
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
-            
-            loginWithFacebookButton.userInteractionEnabled = true
-            loginWithFacebookButton.alpha = 1.0
         })
     }
 }
