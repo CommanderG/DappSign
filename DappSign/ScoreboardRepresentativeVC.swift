@@ -21,6 +21,14 @@ class ScoreboardRepresentativeVC: UIViewController {
         
         ViewHelper.initRepresentativeImageViewLayer(self.representativeImageView)
         self.initViewsWithRepresentative(nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         if let user = PFUser.currentUser() {
             Requests.downloadRepresentativesForUserWithID(user.objectId, completion: {
@@ -30,10 +38,6 @@ class ScoreboardRepresentativeVC: UIViewController {
                 self.initViewsWithRepresentative(representative)
             })
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: -

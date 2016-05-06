@@ -17,7 +17,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var changeButton:   UIButton!
     
     private var dapps: [PFObject] = []
-    private var representativeVC: RepresentativeVC? = nil
     private var petitionsTVC: PetitionsTVC? = nil
     private var segmentsVC: SegmentsVC? = nil
     
@@ -39,7 +38,6 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.representativeVC?.reload()
         
         self.navigationController?.navigationBarHidden = true
     }
@@ -98,8 +96,6 @@ class ProfileViewController: UIViewController {
                 let editDappLinksVC = segue.destinationViewController as? EditDappLinksVC
                 
                 editDappLinksVC?.dapp = self.dappLinkEdit
-            case RepresentativeVC.embedSegueID:
-                self.representativeVC = segue.destinationViewController as? RepresentativeVC
             case PetitionsTVC.embedSegueID:
                 self.petitionsTVC = segue.destinationViewController as? PetitionsTVC
                 

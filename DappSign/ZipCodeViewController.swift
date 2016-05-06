@@ -215,20 +215,38 @@ class ZipCodeViewController: UIViewController {
             lastName       = houseRepresentative["last_name"] as? String,
             title          = houseRepresentative["title"] as? String,
             party          = houseRepresentative["party"] as? String,
-            district       = self.congressionalDistrictID(houseRepresentative) {
-                let userID = PFUser.currentUser().objectId
-                let fullName =  "\(firstName) \(lastName)"
+            district       = self.congressionalDistrictID(houseRepresentative),
+            user           = PFUser.currentUser() {
+                let userID = user.objectId
                 
-                Requests.addRepresentativeWithUserID(userID,
-                    imageURLString: imageURLString,
-                    fullName: fullName,
-                    title: title,
-                    party: party,
-                    district: district,
-                    completion: {
-                        (success: Bool, error: NSError?) -> Void in
-                        completion(success: success)
+                self.deleteRepresentativesWithUserID(userID) {
+                    let fullName =  "\(firstName) \(lastName)"
+                    
+                    Requests.addRepresentativeWithUserID(userID,
+                        imageURLString: imageURLString,
+                        fullName: fullName,
+                        title: title,
+                        party: party,
+                        district: district,
+                        completion: {
+                            (success: Bool, error: NSError?) -> Void in
+                            completion(success: success)
+                    })
+                }
+        }
+    }
+    
+    private func deleteRepresentativesWithUserID(userID: String, completion: Void -> Void) {
+        Requests.downloadRepresentativesForUserWithID(userID) {
+            (representatives: [PFObject]?, error: NSError?) -> Void in
+            if let representatives = representatives {
+                PFObject.deleteAllInBackground(representatives, block: {
+                    (success: Bool, error: NSError?) -> Void in
+                    completion()
                 })
+            } else {
+                completion()
+            }
         }
     }
 }

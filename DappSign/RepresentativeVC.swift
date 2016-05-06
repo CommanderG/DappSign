@@ -27,9 +27,9 @@ class RepresentativeVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: -
-    
-    internal func reload() {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if let user = PFUser.currentUser() {
             Requests.downloadRepresentativesForUserWithID(user.objectId, completion: {
                 (representatives: [PFObject]?, error: NSError?) -> Void in

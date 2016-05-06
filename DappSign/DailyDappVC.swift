@@ -40,7 +40,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     internal var transitionDelegate: TransitionDelegate? = nil
     
     private var embedDappVC: EmbedDappVC? = nil
-    private var representativeVC: RepresentativeVC? = nil
     private var dappSignVC: DappSignVC? = nil
     private var dappMappVC: DappMappVC? = nil
     private var visibleDappView: UIView!
@@ -112,8 +111,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.representativeVC?.reload()
         
         self.initTimers()
         self.updateDailyDappTimeLeftLabel()
@@ -530,8 +527,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.embedDappVC = segue.destinationViewController as? EmbedDappVC
                 
                 self.embedDappVC?.view.hidden = true
-            case RepresentativeVC.embedSegueID:
-                self.representativeVC = segue.destinationViewController as? RepresentativeVC
             case DappSignVC.embedSegueID:
                 self.dappSignVC = segue.destinationViewController as? DappSignVC
             case "embedDappMappVC":
