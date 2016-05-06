@@ -123,15 +123,15 @@ class DappProfileCell: SWTableViewCell {
     }
     
     private func disableSharingButtons() {
-        ViewHelper.disableButton(self.tweetButton)
-        ViewHelper.disableButton(self.showLinksButton)
-        ViewHelper.disableButton(self.postToFacebookButton)
+        let buttons = [ self.tweetButton, self.showLinksButton, self.postToFacebookButton ]
+        
+        ViewHelper.disableButtons(buttons)
     }
     
     private func enableSharingButtons() {
-        ViewHelper.enableButton(self.tweetButton)
-        ViewHelper.enableButton(self.showLinksButton)
-        ViewHelper.enableButton(self.postToFacebookButton)
+        let buttons = [ self.tweetButton, self.showLinksButton, self.postToFacebookButton ]
+        
+        ViewHelper.enableButtons(buttons)
     }
 }
 

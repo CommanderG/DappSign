@@ -116,9 +116,9 @@ class DappLinkCell: UITableViewCell {
         
         switch viewsState {
         case .Enabled:
-            self.enableViews(views)
+            ViewHelper.enableViews(views)
         case .Disabled:
-            self.disableViews(views)
+            ViewHelper.disableViews(views)
         }
     }
     
@@ -131,24 +131,10 @@ class DappLinkCell: UITableViewCell {
         self.hideViews(self.deleteLinkViews)
         
         self.showViews(views)
-        self.enableViews(views)
+        ViewHelper.enableViews(views)
         
         if views == self.enterLinkViews {
             self.textField.text = ""
-        }
-    }
-    
-    private func enableViews(views: [UIView]) {
-        for view in views {
-            view.userInteractionEnabled = true
-            view.alpha = 1.0
-        }
-    }
-    
-    private func disableViews(views: [UIView]) {
-        for view in views {
-            view.userInteractionEnabled = false
-            view.alpha = 0.5
         }
     }
     

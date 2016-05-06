@@ -37,7 +37,7 @@ class FinalDappSubmitViewController: UIViewController {
         self.containerView.minTranslationX = 150.0
         self.containerView.delegate = self
         
-        self.disableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
+        ViewHelper.disableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
         
         if let dapp = self.dapp {
             self.submitDapp(dapp)
@@ -170,7 +170,7 @@ class FinalDappSubmitViewController: UIViewController {
             
             self.dappObj = dappObj
             
-            self.enableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
+            ViewHelper.enableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
             
             print("Dapp created with id: \(dappObj.objectId)")
             print(dappObj)
@@ -257,22 +257,6 @@ class FinalDappSubmitViewController: UIViewController {
                 print(errorMessage)
             }
         })
-    }
-    
-    // MARK: - UI
-    
-    private func disableViews(views: [UIView]) {
-        for view in views {
-            view.userInteractionEnabled = false
-            view.alpha = 0.5
-        }
-    }
-    
-    private func enableViews(views: [UIView]) {
-        for view in views {
-            view.userInteractionEnabled = true
-            view.alpha = 1.0
-        }
     }
 }
 
