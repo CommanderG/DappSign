@@ -25,6 +25,7 @@ class DappProfileCell: SWTableViewCell {
     @IBOutlet weak var postToFacebookButton:  UIButton!
     
     private var profileDappMappVC: ProfileDappMappVC? = nil
+    private var embedDappVC: EmbedDappVC? = nil
     
     internal var cellDelegate: DappProfileCellDelegate?
     
@@ -55,7 +56,22 @@ class DappProfileCell: SWTableViewCell {
     }
     
     @IBAction func showLinks() {
+        if self.embedDappVC == nil {
+            self.embedDappVC = StoryboardHelper.instantiateEmbedDappVC()
+            
+            self.embedDappVC?.delegate = self
+        }
         
+        if let embedDappVC = self.embedDappVC {
+            var frame = embedDappVC.frameWithDappViewFrame(self.dappSignView.bounds)
+            
+            frame.size.height += 12.0
+            
+            embedDappVC.view.frame = frame
+            
+            self.dappSignView.addSubview(embedDappVC.view)
+            self.disableSharingButtons()
+        }
     }
     
     @IBAction func postToFacebook() {
@@ -66,6 +82,12 @@ class DappProfileCell: SWTableViewCell {
     
     internal func showDappMappDataForDapp(dapp: PFObject) {
         self.profileDappMappVC?.showDappMappDataForDapp(dapp)
+        self.hideLinks()
+    }
+    
+    private func hideLinks() {
+        self.embedDappVC?.view.removeFromSuperview()
+        self.enableSharingButtons()
     }
     
     // MARK: - UI
@@ -98,5 +120,23 @@ class DappProfileCell: SWTableViewCell {
             
             self.dappMappViewContainer.addSubview(profileDappMappView)
         }
+    }
+    
+    private func disableSharingButtons() {
+        ViewHelper.disableButton(self.tweetButton)
+        ViewHelper.disableButton(self.showLinksButton)
+        ViewHelper.disableButton(self.postToFacebookButton)
+    }
+    
+    private func enableSharingButtons() {
+        ViewHelper.enableButton(self.tweetButton)
+        ViewHelper.enableButton(self.showLinksButton)
+        ViewHelper.enableButton(self.postToFacebookButton)
+    }
+}
+
+extension DappProfileCell: EmbedDappDelegate {
+    func didRemoveFromParentViewController() {
+        self.enableSharingButtons()
     }
 }

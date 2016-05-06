@@ -24,6 +24,16 @@ class ViewHelper {
         imageView.layer.cornerRadius = cornerRadius
     }
     
+    internal class func disableButton(button: UIButton) {
+        button.alpha = 0.5
+        button.userInteractionEnabled = false
+    }
+    
+    internal class func enableButton(button: UIButton) {
+        button.alpha = 1.0
+        button.userInteractionEnabled = true
+    }
+    
     // MARK: - private
     
     private class func addBorderToView(view: UIView) {

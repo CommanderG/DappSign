@@ -328,25 +328,15 @@ class ScoreboardVC: UIViewController {
     }
     
     private func disableSharingAndLinkButtons() {
-        self.disableButton(self.tweetButton)
-        self.disableButton(self.showLinksButton)
-        self.disableButton(self.postToFacebookButton)
+        ViewHelper.disableButton(self.tweetButton)
+        ViewHelper.disableButton(self.showLinksButton)
+        ViewHelper.disableButton(self.postToFacebookButton)
     }
     
     private func enableSharingAndLinkButtons() {
-        self.enableButton(self.tweetButton)
-        self.enableButton(self.showLinksButton)
-        self.enableButton(self.postToFacebookButton)
-    }
-    
-    private func disableButton(button: UIButton) {
-        button.alpha = 0.5
-        button.userInteractionEnabled = false
-    }
-    
-    private func enableButton(button: UIButton) {
-        button.alpha = 1.0
-        button.userInteractionEnabled = true
+        ViewHelper.enableButton(self.tweetButton)
+        ViewHelper.enableButton(self.showLinksButton)
+        ViewHelper.enableButton(self.postToFacebookButton)
     }
 }
 
