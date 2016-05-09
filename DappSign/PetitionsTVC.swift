@@ -9,6 +9,7 @@
 import UIKit
 
 protocol PetitionsDelegate {
+    func resubmitDapp(dapp: PFObject)
     func editLinks(dapp: PFObject)
 }
 
@@ -152,17 +153,15 @@ class PetitionsTVC: UITableViewController {
 
 extension PetitionsTVC: DappProfileCellDelegate {
     func editLinkInCell(cell: DappProfileCell) {
-        if let indexPath = self.tableView.indexPathForCell(cell) {
-            if indexPath.row < dapps.count {
-                let dapp = self.dapps[indexPath.row]
-                
-                self.delegate?.editLinks(dapp)
-            }
+        if let dapp = self.dappInCell(cell) {
+            self.delegate?.editLinks(dapp)
         }
     }
     
     func resubmitDappInCell(cell: DappProfileCell) {
-        
+        if let dapp = self.dappInCell(cell) {
+            self.delegate?.resubmitDapp(dapp)
+        }
     }
     
     func tweetPetitionInCell(cell: DappProfileCell) {

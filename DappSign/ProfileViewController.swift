@@ -181,6 +181,24 @@ extension ProfileViewController: PetitionsDelegate {
         
         self.performSegueWithIdentifier(self.editLinksSegueID, sender: self)
     }
+    
+    func resubmitDapp(dapp: PFObject) {
+        DappArraysHelper.addDapp(dapp, toArray: .Secondary) {
+            (error: NSError?) -> Void in
+            if let error = error {
+                print(error)
+            } else {
+                let progressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                
+                progressHUD.mode = MBProgressHUDMode.Text
+                progressHUD.labelText = "Resubmitted"
+                
+                delay(0.75) {
+                    progressHUD.hide(true)
+                }
+            }
+        }
+    }
 }
 
 extension ProfileViewController: SegmentsDelegate {

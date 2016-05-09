@@ -599,6 +599,7 @@
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
+				84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */,
 				84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */,
 				279A31211AB30EA700850508 /* AdminTVC.swift */,
 				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
@@ -617,7 +618,6 @@
 				27B4E5291CC52369008E3560 /* DappSignVC.swift */,
 				84AFF9521CC819E300F97FEE /* PercentsVC.swift */,
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
-				84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
