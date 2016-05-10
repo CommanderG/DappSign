@@ -9,8 +9,6 @@
 import UIKit
 
 internal let DappSwipedNotification = "dappSwipedNotification"
-internal let dappsSwipedRelationKey = "dappsSwiped"
-internal let dappsDappedRelationKey = "dappsDapped"
 
 enum DappCardType {
     case DappCardTypeSign;
@@ -50,6 +48,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     private var dailyDappTimeLeft: (Int, Int)? = nil
     private var animatingPlusOneLabels = false
     private var dapps: [PFObject] = []
+    private var lastIntroductoryDappID: String? = nil
     private var timer: NSTimer? = nil
     private var currentDappCardType: DappCardType = .DappCardTypeSign
     
@@ -437,111 +436,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         }
     }
     
-    private func downloadDapps() {
-        self.dapps = []
-        
-        let dappsArrays = self.dappsArrays()
-        
-        self.downloadDappsHelper(dappsArrays) {
-            self.initDappView()
-        }
-    }
-    
-    private func downloadDappsHelper(dappsArrays: [DappArray], completion: Void -> Void) {
-        if let dappArray = dappsArrays.first {
-            let user = PFUser.currentUser()
-            
-            DappArraysHelper.downloadDappsInArray(dappArray,
-                notSwipedAndNotCreatedByUser: user,
-                completion: {
-                    (dapps: [PFObject]?, error: NSError?) -> Void in
-                    if let dapps = dapps {
-                        switch dappArray {
-                        case .Introductory:
-                            self.dapps += dapps
-                            
-                            break
-                        case .Secondary:
-                            break
-                        case _:
-                            self.dapps += dapps
-                        }
-                        
-                        let remainingDappsArrays = Array(dappsArrays.dropFirst())
-                        
-                        self.downloadDappsHelper(remainingDappsArrays, completion: completion)
-                    } else {
-                        completion()
-                    }
-            })
-        } else {
-            completion()
-        }
-    }
-    
-    private func downloadPrimaryDapps(success: Void -> Void) {
-        let user = PFUser.currentUser()
-        
-        DappArraysHelper.downloadDappsInArray(.Primary, notSwipedAndNotCreatedByUser: user) {
-            (dapps: [PFObject]?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-                
-                self.initDappView()
-                
-                return
-            }
-            
-            if let dapps = dapps {
-                self.dapps = dapps
-            } else {
-                self.dapps = []
-            }
-            
-            if self.dapps.count > 0 {
-                self.initDappView()
-            }
-            
-            success()
-        }
-    }
-    
-    private func downloadSecondaryDapps() {
-        let user = PFUser.currentUser()
-        
-        DappArraysHelper.downloadDappsInArray(.Secondary, notSwipedAndNotCreatedByUser: user) {
-            (dapps: [PFObject]?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-                
-                self.initDappView()
-                
-                return
-            }
-            
-            if let dapps = dapps {
-                if dapps.count > 0 {
-                    var shouldShowCurrentDapp = false;
-                    
-                    if self.dapps.count == 0 {
-                        shouldShowCurrentDapp = true
-                    }
-                    
-                    DappsHelper.sortDappsByDappScore(dapps, completion: {
-                        (sortedDapps: [PFObject]) -> Void in
-                        self.dapps += sortedDapps
-                        
-                        if shouldShowCurrentDapp {
-                            self.initDappView()
-                        }
-                    })
-                } else if self.dapps.count == 0 {
-                    self.initDappView()
-                }
-            }
-        }
-    }
-    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -737,6 +631,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                     )
                 } else {
                     self.currentDappCardType = DappCardType.DappCardTypeSign
+                    
+                    self.initTimersAfterCheckingLastIntroductoryDappID()
                 }
             } else {
                 self.lastDappedDapp = nil
@@ -751,10 +647,42 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
             }
         } else {
             self.currentDappCardType = DappCardType.DappCardTypeSign
+            
+            self.initTimersAfterCheckingLastIntroductoryDappID()
         }
     }
     
     // MARK: -
+    
+    private func initTimersAfterCheckingLastIntroductoryDappID() {
+        if let lastIntroductoryDappID = self.lastIntroductoryDappID {
+            if self.lastDappedDapp?.objectId == lastIntroductoryDappID || self.dapps.count == 0 {
+                self.initTimers()
+                
+                self.lastIntroductoryDappID = nil
+            }
+        }
+    }
+    
+    private func downloadDapps() {
+        self.dapps = []
+        
+        DailyDappHelper.downloadDapps {
+            (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void in
+            self.dapps = dapps
+            self.lastIntroductoryDappID = lastIntroductoryDappID
+            
+            self.initDappView()
+            
+            let userIsNew = LocalStorage.userIsNew()
+            
+            if userIsNew && lastIntroductoryDappID == nil {
+                self.initTimers()
+            }
+            
+            LocalStorage.saveUserIsNew(false)
+        }
+    }
     
     private func showDappView(dappView: UIView) {
         if (dappView == self.dappSignView) {
@@ -902,19 +830,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         }
         
         return "\(doubleDigitInt)"
-    }
-    
-    private func dappsArrays() -> [DappArray] {
-        var dappsArrays: [DappArray] = []
-        let userIsNew = LocalStorage.userIsNew()
-        
-        if userIsNew {
-            dappsArrays = [ .Introductory, .Primary, .Secondary ]
-        } else {
-            dappsArrays = [ .Primary, .Secondary ]
-        }
-        
-        return dappsArrays
     }
 }
 

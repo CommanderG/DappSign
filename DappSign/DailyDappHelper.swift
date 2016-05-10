@@ -70,6 +70,22 @@ class DailyDappHelper {
         })
     }
     
+    internal class func downloadDapps(
+        completion: (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void
+    ) {
+        let dappsArrays = self.dappsArrays()
+        
+        self.downloadDappsHelper(dappsArrays, dappsArraysDapps: [:]) {
+            (dappsArraysDapps: [DappArray: [PFObject]]) -> Void in
+            self.processAndJoinDapps(dappsArraysDapps,
+                dappsArrays: dappsArrays,
+                dapps: [],
+                lastIntroductoryDappID: nil,
+                completion: completion
+            )
+        }
+    }
+    
     // MARK: - private
     
     private class func currentDateString() -> String {
@@ -118,5 +134,120 @@ class DailyDappHelper {
                 completion(dailyDapp: nil, error: error)
             }
         }
+    }
+    
+    private class func downloadDappsHelper(
+        dappsArrays: [DappArray],
+        dappsArraysDapps: [DappArray: [PFObject]],
+        completion: (dappArraysDapps: [DappArray: [PFObject]]) -> Void
+    ) {
+        if let dappArray = dappsArrays.first {
+            let user = PFUser.currentUser()
+            
+            DappArraysHelper.downloadDappsInArray(dappArray,
+                notSwipedAndNotCreatedByUser: user,
+                completion: {
+                    (dapps: [PFObject]?, error: NSError?) -> Void in
+                    if let dapps = dapps {
+                        var newDappsArraysDapps = dappsArraysDapps
+                        
+                        newDappsArraysDapps[dappArray] = dapps
+                        
+                        let remainingDappsArrays = Array(dappsArrays.dropFirst())
+                        
+                        self.downloadDappsHelper(remainingDappsArrays,
+                            dappsArraysDapps: newDappsArraysDapps,
+                            completion: completion
+                        )
+                    } else {
+                        completion(dappArraysDapps: dappsArraysDapps)
+                    }
+            })
+        } else {
+            completion(dappArraysDapps: dappsArraysDapps)
+        }
+    }
+    
+    private class func processAndJoinDapps(
+        dappsArraysDapps: [DappArray: [PFObject]],
+        dappsArrays: [DappArray],
+        dapps: [PFObject],
+        lastIntroductoryDappID: String?,
+        completion: (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void
+    ) {
+        if let dappsArray = dappsArrays.first, currentArrayDapps = dappsArraysDapps[dappsArray] {
+            let remainingDappsArrays = Array(dappsArrays.dropFirst())
+            
+            self.processDapps(currentArrayDapps, dappsArray: dappsArray, completion: {
+                (processedDapps: [PFObject]) -> Void in
+                let newDapps = dapps + processedDapps
+                
+                if dappsArray == .Introductory {
+                    let lastIntroductoryDappID = processedDapps.last?.objectId
+                    
+                    self.processAndJoinDapps(dappsArraysDapps,
+                        dappsArrays: remainingDappsArrays,
+                        dapps: newDapps,
+                        lastIntroductoryDappID: lastIntroductoryDappID,
+                        completion: completion
+                    )
+                } else {
+                    self.processAndJoinDapps(dappsArraysDapps,
+                        dappsArrays: remainingDappsArrays,
+                        dapps: newDapps,
+                        lastIntroductoryDappID: lastIntroductoryDappID,
+                        completion: completion
+                    )
+                }
+            })
+        } else {
+            completion(dapps: dapps, lastIntroductoryDappID: lastIntroductoryDappID)
+        }
+    }
+    
+    private class func processDapps(dapps: [PFObject],
+        dappsArray: DappArray,
+        completion: (processedDapps: [PFObject]) -> Void
+    ) {
+        switch dappsArray {
+        case .Secondary:
+            DappsHelper.sortDappsByDappScore(dapps, completion: {
+                (sortedDapps: [PFObject]) -> Void in
+                let newDapps = dapps + sortedDapps
+                
+                completion(processedDapps: newDapps)
+            })
+            
+            break
+        case _:
+            DappIndexHelper.downloadDappIndexesForArrayWithName(dappsArray.rawValue) {
+                (dappIndexes: [DappIndex]?, error: NSError?) -> Void in
+                if let dappIndexes = dappIndexes {
+                    let orderedDapps = DappsHelper.orderDappsByIndex(dapps,
+                        dappIndexes: dappIndexes,
+                        dappArray: dappsArray
+                    )
+                    
+                    completion(processedDapps: orderedDapps)
+                } else {
+                    completion(processedDapps: dapps)
+                }
+            }
+            
+            break
+        }
+    }
+    
+    private class func dappsArrays() -> [DappArray] {
+        var dappsArrays: [DappArray] = []
+        let userIsNew = LocalStorage.userIsNew()
+        
+        if userIsNew {
+            dappsArrays = [ .Introductory, .Primary, .Secondary ]
+        } else {
+            dappsArrays = [ .Primary, .Secondary ]
+        }
+        
+        return dappsArrays
     }
 }

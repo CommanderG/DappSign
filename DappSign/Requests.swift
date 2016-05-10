@@ -184,6 +184,7 @@ class Requests {
     }
     
     class func addDappToDappsSwipedArray(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+        let dappsSwipedRelationKey = "dappsSwiped"
         let dappsSwipedRelation = user.relationForKey(dappsSwipedRelationKey)
         
         dappsSwipedRelation.addObject(dapp)
@@ -195,6 +196,7 @@ class Requests {
     }
     
     class func addDappToDappsDappedArray(dapp: PFObject, user: PFUser, completion: (succeeded: Bool, error: NSError?) -> Void) -> Void {
+        let dappsDappedRelationKey = "dappsDapped"
         let dappsDappedRelation = user.relationForKey(dappsDappedRelationKey)
         
         dappsDappedRelation.addObject(dapp)

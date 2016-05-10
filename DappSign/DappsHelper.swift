@@ -84,7 +84,7 @@ class DappsHelper {
             let dapp = ArrayUtil.findElement({
                 dapp -> Bool in
                 return dapp.objectId == dappIndex.dappID
-                }, inArray: dapps)
+            }, inArray: dapps)
             
             if let dapp = dapp {
                 newDapps.append(dapp)
