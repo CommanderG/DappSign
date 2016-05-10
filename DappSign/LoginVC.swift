@@ -46,6 +46,8 @@ class LoginVC: UIViewController {
             ViewHelper.enableButtons([ self.logInWithFacebookButton ])
             
             if let user = user {
+                LocalStorage.saveUserIsNew(user.isNew)
+                
                 if user.isNew {
                     print("User signed up and logged in through Facebook!")
                     

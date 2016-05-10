@@ -12,6 +12,7 @@ typealias Time = (Int, Int)
 
 class LocalStorage {
     private static let _KeyDailyDappStartTime = "dailyDappStartTime"
+    private static let _KeyUserIsNew = "userIsNew"
     
     internal class func dailyDappStartTime() -> Time? {
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -40,6 +41,20 @@ class LocalStorage {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         userDefaults.setObject(timeString, forKey: _KeyDailyDappStartTime)
+        userDefaults.synchronize()
+    }
+    
+    internal class func userIsNew() -> Bool {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userIsNew = userDefaults.boolForKey(_KeyUserIsNew)
+        
+        return userIsNew
+    }
+    
+    internal class func saveUserIsNew(userIsNew: Bool) {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        userDefaults.setBool(userIsNew, forKey: _KeyUserIsNew)
         userDefaults.synchronize()
     }
 }

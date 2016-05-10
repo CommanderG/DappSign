@@ -112,7 +112,12 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.initTimers()
+        let userIsNew = LocalStorage.userIsNew()
+        
+        if !userIsNew {
+            self.initTimers()
+        }
+        
         self.updateDailyDappTimeLeftLabel()
         self.updateDailyDappTimeLeft()
         self.downloadDapps()
@@ -433,8 +438,44 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     }
     
     private func downloadDapps() {
-        self.downloadPrimaryDapps {
-            self.downloadSecondaryDapps()
+        self.dapps = []
+        
+        let dappsArrays = self.dappsArrays()
+        
+        self.downloadDappsHelper(dappsArrays) {
+            self.initDappView()
+        }
+    }
+    
+    private func downloadDappsHelper(dappsArrays: [DappArray], completion: Void -> Void) {
+        if let dappArray = dappsArrays.first {
+            let user = PFUser.currentUser()
+            
+            DappArraysHelper.downloadDappsInArray(dappArray,
+                notSwipedAndNotCreatedByUser: user,
+                completion: {
+                    (dapps: [PFObject]?, error: NSError?) -> Void in
+                    if let dapps = dapps {
+                        switch dappArray {
+                        case .Introductory:
+                            self.dapps += dapps
+                            
+                            break
+                        case .Secondary:
+                            break
+                        case _:
+                            self.dapps += dapps
+                        }
+                        
+                        let remainingDappsArrays = Array(dappsArrays.dropFirst())
+                        
+                        self.downloadDappsHelper(remainingDappsArrays, completion: completion)
+                    } else {
+                        completion()
+                    }
+            })
+        } else {
+            completion()
         }
     }
     
@@ -861,6 +902,19 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         }
         
         return "\(doubleDigitInt)"
+    }
+    
+    private func dappsArrays() -> [DappArray] {
+        var dappsArrays: [DappArray] = []
+        let userIsNew = LocalStorage.userIsNew()
+        
+        if userIsNew {
+            dappsArrays = [ .Introductory, .Primary, .Secondary ]
+        } else {
+            dappsArrays = [ .Primary, .Secondary ]
+        }
+        
+        return dappsArrays
     }
 }
 
