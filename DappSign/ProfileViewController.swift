@@ -130,7 +130,7 @@ class ProfileViewController: UIViewController {
                     self.petitionsTVC?.showDapps(dapps, showEditLinksButton: true)
                 }
             case Segment.PetitionsSigned:
-                self.downloadDappsSwipedByUser {
+                self.downloadDappsDappedByUser {
                     (dapps: [PFObject]) -> Void in
                     self.dapps = dapps
                     
@@ -157,9 +157,9 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private func downloadDappsSwipedByUser(completion: (dapps: [PFObject]) -> Void) {
+    private func downloadDappsDappedByUser(completion: (dapps: [PFObject]) -> Void) {
         if let user = self.user {
-            Requests.downloadDappsSwipedByUser(user, completion: {
+            Requests.downloadDappsDappedByUser(user, completion: {
                 (dapps: [PFObject], error: NSError!) -> Void in
                 if let error = error {
                     self.showAlertViewWithOKButtonAndMessage(error.localizedDescription)
