@@ -30,7 +30,7 @@ class FinalDappSubmitViewController: UIViewController {
         
         self.dappSignView.alpha = 0
         
-        AnimationHelper.animateDappSignView(self.dappSignView)
+        AnimationHelper.showView(self.dappSignView, completion: nil)
         
         self.dappSignView.alpha = 1
         

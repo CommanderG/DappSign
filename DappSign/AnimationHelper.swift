@@ -9,19 +9,44 @@
 import UIKit
 
 class AnimationHelper {
-    internal class func animateDappSignView(dappSignView: UIView) {
+    internal class func showView(view: UIView, completion: (Void -> Void)?) {
+        self.halfSizeAndMoveUp(view)
+        
+        let animationDuration = self.getAnimationDuration()
+        
+        spring(animationDuration, animations: {
+            self.restoreSizeAndCenter(view)
+        }, completion: completion)
+    }
+    
+    internal class func hideView(view: UIView, completion: (Void -> Void)?) {
+        self.restoreSizeAndCenter(view)
+        
+        let animationDuration = self.getAnimationDuration()
+        
+        spring(animationDuration, animations: {
+            self.halfSizeAndMoveUp(view)
+            view.alpha = 0.0
+        }, completion: completion)
+    }
+    
+    // MARK: - 
+    
+    private class func halfSizeAndMoveUp(view: UIView) {
         let halfSizeScale = CGAffineTransformMakeScale(0.5, 0.5)
         let translateUpBy200px = CGAffineTransformMakeTranslation(0.0, -200.0)
         
-        dappSignView.transform = CGAffineTransformConcat(halfSizeScale, translateUpBy200px)
+        view.transform = CGAffineTransformConcat(halfSizeScale, translateUpBy200px)
+    }
+    
+    private class func restoreSizeAndCenter(view: UIView) {
+        let fullSizeScale = CGAffineTransformMakeScale(1.0, 1.0)
+        let translateToOriginalPosition = CGAffineTransformMakeTranslation(0.0, 0.0)
         
-        spring(0.5) {
-            let fullSizeScale = CGAffineTransformMakeScale(1.0, 1.0)
-            let translateToOriginalPosition = CGAffineTransformMakeTranslation(0.0, 0.0)
-            
-            dappSignView.transform = CGAffineTransformConcat(
-                fullSizeScale, translateToOriginalPosition
-            )
-        }
+        view.transform = CGAffineTransformConcat(fullSizeScale, translateToOriginalPosition)
+    }
+    
+    private class func getAnimationDuration() -> Double {
+        return 0.5
     }
 }

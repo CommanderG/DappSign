@@ -13,6 +13,19 @@ var delay = 0.0
 var damping = 0.7
 var velocity = 0.7
 
+func spring(duration: NSTimeInterval, animations: () -> Void, completion: (Void -> Void)?) {
+    UIView.animateWithDuration(duration,
+        delay: delay,
+        usingSpringWithDamping: 0.7,
+        initialSpringVelocity: 0.7,
+        options: [],
+        animations: animations,
+        completion: { (finished: Bool) -> Void in
+            completion?()
+        }
+    )
+}
+
 func spring(duration: NSTimeInterval, animations: (() -> Void)!) {
     
     UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: [], animations: {

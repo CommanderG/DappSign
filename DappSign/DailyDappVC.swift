@@ -254,6 +254,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
             
             embedDappVC.didMoveToParentViewController(self)
             embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
+            embedDappVC.show()
         }
     }
     

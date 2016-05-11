@@ -21,6 +21,8 @@ class EmbedDappVC: UIViewController {
     
     internal var delegate: EmbedDappDelegate? = nil
     
+    private var hideWithAnimation = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +61,12 @@ class EmbedDappVC: UIViewController {
         return frame
     }
     
+    internal func show() {
+        self.hideWithAnimation = true
+        
+        AnimationHelper.showView(self.view, completion: nil)
+    }
+    
     // MARK: - IBAction
     
     @IBAction func copyDappURL() {
@@ -82,14 +90,23 @@ class EmbedDappVC: UIViewController {
     }
     
     @IBAction func done() {
-        self.willMoveToParentViewController(nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
-        
-        self.delegate?.didRemoveFromParentViewController()
+        if self.hideWithAnimation {
+            AnimationHelper.hideView(self.view) {
+                self.hide()
+            }
+        } else {
+            self.hide()
+        }
     }
     
     // MARK: -
+    
+    private func hide() {
+        self.willMoveToParentViewController(nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
+        self.delegate?.didRemoveFromParentViewController()
+    }
     
     private func showHUDWithTextCopiedToClipboard() {
         let progressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
