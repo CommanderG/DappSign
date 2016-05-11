@@ -106,20 +106,11 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         
         self.hashtagsLabel.text = ""
         
-        self.animateableViews = [
-            self.profileButton,
-            self.composeButton
-        ]
+        self.initAnimateableViews()
         
-        if let representativeView = self.representativeVC?.view {
-            self.animateableViews.append(representativeView)
+        if let representativeVC = self.representativeVC {
+            representativeVC.view.alpha = 0.0
         }
-        
-        self.animateableViews.appendContentsOf([
-            self.tweetThisCardButton,
-            self.showLinksButton,
-            self.shareOnFacebookButton
-        ])
     }
     
     override func didReceiveMemoryWarning() {
@@ -174,17 +165,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
             }
         }
         
-        var delaySeconds = 0.0
-        
-        for view in self.animateableViews {
-            delaySeconds += 0.1
-            
-            delay(delaySeconds) {
-                view.alpha = 1.0
-                
-                AnimationHelper.showView(view, delay: delay)
-            }
-        }
+        self.animateAnimateableViews()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -503,6 +484,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.dappMappVC = segue.destinationViewController as? DappMappVC
             case RepresentativeVC.embedSegueID:
                 self.representativeVC = segue.destinationViewController as? RepresentativeVC
+                
+                self.representativeVC?.delegate = self
             case _:
                 break
             }
@@ -861,6 +844,41 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     
     // MARK: -
     
+    private func animateAnimateableViews() {
+        var delaySeconds = 0.0
+        
+        for view in self.animateableViews {
+            delaySeconds += 0.1
+            
+            delay(delaySeconds) {
+                view.alpha = 1.0
+                
+                AnimationHelper.showView(view, delay: delay)
+            }
+        }
+    }
+    
+    private func initAnimateableViews() {
+        self.animateableViews = [
+            self.profileButton,
+            self.composeButton
+        ]
+        
+        if let representativeVC = self.representativeVC {
+            if representativeVC.downloaded {
+                self.animateableViews.append(representativeVC.view)
+            }
+        }
+        
+        let sharingButtons: [UIView]! = [
+            self.tweetThisCardButton,
+            self.showLinksButton,
+            self.shareOnFacebookButton
+        ]
+        
+        self.animateableViews.appendContentsOf(sharingButtons)
+    }
+    
     private func stringForDoubleDigitInt(doubleDigitInt: Int) -> String {
         if doubleDigitInt < 10 {
             return "0\(doubleDigitInt)"
@@ -873,5 +891,17 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
 extension DailyDappVC: DappBackSideLinksVCDelegate {
     func openLinkWithURL(linkURL: NSURL) {
         ViewControllerHelper.openLinkWithURL(linkURL, inViewController: self)
+    }
+}
+
+extension DailyDappVC: RepresentativeDelegate {
+    func didDownloadRepresentative() {
+        if let representativeVC = self.representativeVC {
+            representativeVC.view.alpha = 1.0
+            
+            AnimationHelper.showView(representativeVC.view)
+        }
+        
+        self.initAnimateableViews()
     }
 }

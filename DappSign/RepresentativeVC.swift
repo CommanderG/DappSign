@@ -8,10 +8,18 @@
 
 import UIKit
 
+protocol RepresentativeDelegate {
+    func didDownloadRepresentative()
+}
+
 class RepresentativeVC: UIViewController {
     @IBOutlet weak var imageView:     UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var districtLabel: UILabel!
+    
+    private(set) internal var downloaded = false
+    
+    internal var delegate: RepresentativeDelegate? = nil
     
     internal static let embedSegueID = "embedRepresentativeVC"
     
@@ -38,6 +46,10 @@ class RepresentativeVC: UIViewController {
                 self.initFullNameLabelWithRepresentative(representative)
                 self.initDistrictLabelWithRepresentative(representative)
                 self.initImageViewWithRepresentative(representative)
+                
+                self.downloaded = true
+                
+                self.delegate?.didDownloadRepresentative()
             })
         }
     }
