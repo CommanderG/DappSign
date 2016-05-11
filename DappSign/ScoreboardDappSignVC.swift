@@ -123,7 +123,7 @@ class ScoreboardDappSignVC: UIViewController {
     // MARK: - internal
     
     internal func showDappObject(dapp: PFObject?) {
-        AnimationHelper.showView(self.view, completion: nil)
+        AnimationHelper.showView(self.view)
         self.scoreboardDappSignFrontSideVC?.showDappObject(dapp)
         
         if let dapp = dapp {

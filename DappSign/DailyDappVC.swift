@@ -19,8 +19,9 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     @IBOutlet weak var dappViewsContainerView:      SwipeableView!
     @IBOutlet weak var dappSignView:                UIView!
     @IBOutlet weak var dappMappView:                UIView!
-    @IBOutlet weak var shareOnFacebookButton:       UIButton!
     @IBOutlet weak var tweetThisCardButton:         UIButton!
+    @IBOutlet weak var showLinksButton:             UIButton!
+    @IBOutlet weak var shareOnFacebookButton:       UIButton!
     @IBOutlet weak var profileButton:               UIButton!
     @IBOutlet weak var composeButton:               UIButton!
     @IBOutlet weak var searchButton:                UIButton!
@@ -40,6 +41,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     private var embedDappVC: EmbedDappVC? = nil
     private var dappSignVC: DappSignVC? = nil
     private var dappMappVC: DappMappVC? = nil
+    private var representativeVC: RepresentativeVC? = nil
     private var visibleDappView: UIView!
     private var lastDappedDapp: PFObject?
     private var dappBackSideLinksVC: DappBackSideLinksVC?
@@ -51,6 +53,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     private var lastIntroductoryDappID: String? = nil
     private var timer: NSTimer? = nil
     private var currentDappCardType: DappCardType = .DappCardTypeSign
+    private var animateableViews: [UIView]! = []
     
     private let flipDuration = 0.5
     
@@ -102,6 +105,21 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         }
         
         self.hashtagsLabel.text = ""
+        
+        self.animateableViews = [
+            self.profileButton,
+            self.composeButton
+        ]
+        
+        if let representativeView = self.representativeVC?.view {
+            self.animateableViews.append(representativeView)
+        }
+        
+        self.animateableViews.appendContentsOf([
+            self.tweetThisCardButton,
+            self.showLinksButton,
+            self.shareOnFacebookButton
+        ])
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,6 +138,10 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         self.updateDailyDappTimeLeftLabel()
         self.updateDailyDappTimeLeft()
         self.downloadDapps()
+        
+        for view in self.animateableViews {
+            view.alpha = 0.0
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -149,6 +171,18 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         for topConstraint in topConstraints {
             if let constant = self.constantMaxForConstraint(topConstraint) {
                 topConstraint.constant = constant
+            }
+        }
+        
+        var delaySeconds = 0.0
+        
+        for view in self.animateableViews {
+            delaySeconds += 0.1
+            
+            delay(delaySeconds) {
+                view.alpha = 1.0
+                
+                AnimationHelper.showView(view, delay: delay)
             }
         }
     }
@@ -467,6 +501,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
                 self.dappSignVC = segue.destinationViewController as? DappSignVC
             case "embedDappMappVC":
                 self.dappMappVC = segue.destinationViewController as? DappMappVC
+            case RepresentativeVC.embedSegueID:
+                self.representativeVC = segue.destinationViewController as? RepresentativeVC
             case _:
                 break
             }

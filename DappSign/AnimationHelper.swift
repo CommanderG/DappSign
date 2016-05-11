@@ -9,14 +9,30 @@
 import UIKit
 
 class AnimationHelper {
+    internal class func showView(view: UIView) {
+        self.showView(view, delay: 0.0, completion: nil)
+    }
+    
+    internal class func showView(view: UIView, delay: Double) {
+        self.showView(view, delay: delay, completion: nil)
+    }
+    
     internal class func showView(view: UIView, completion: (Void -> Void)?) {
+        self.showView(view, delay: 0.0, completion: completion)
+    }
+    
+    internal class func showView(view: UIView, delay: Double, completion: (Void -> Void)?) {
         self.halfSizeAndMoveUp(view)
         
         let animationDuration = self.getAnimationDuration()
         
-        spring(animationDuration, animations: {
-            self.restoreSizeAndCenter(view)
-        }, completion: completion)
+        spring(animationDuration,
+            animations: {
+                self.restoreSizeAndCenter(view)
+            },
+            delay: delay,
+            completion: completion
+        )
     }
     
     internal class func hideView(view: UIView, completion: (Void -> Void)?) {

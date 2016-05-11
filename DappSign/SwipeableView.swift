@@ -83,7 +83,7 @@ class SwipeableView: UIView {
         
         self.center = self.originalCenter
         
-        AnimationHelper.showView(self, completion: nil)
+        AnimationHelper.showView(self)
     }
     
     // MARK: - pan gesture recognizer

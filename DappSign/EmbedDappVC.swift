@@ -64,7 +64,7 @@ class EmbedDappVC: UIViewController {
     internal func show() {
         self.hideWithAnimation = true
         
-        AnimationHelper.showView(self.view, completion: nil)
+        AnimationHelper.showView(self.view)
     }
     
     // MARK: - IBAction
