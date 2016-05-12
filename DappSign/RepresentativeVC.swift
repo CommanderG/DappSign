@@ -9,13 +9,17 @@
 import UIKit
 
 protocol RepresentativeDelegate {
-    func didDownloadRepresentative()
+    func didDownloadNewRepresentativeData(newData: Bool)
 }
 
 class RepresentativeVC: UIViewController {
     @IBOutlet weak var imageView:     UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var districtLabel: UILabel!
+    
+    private var fullName = ""
+    private var district = ""
+    private var imageURLString = ""
     
     private(set) internal var downloaded = false
     
@@ -43,46 +47,63 @@ class RepresentativeVC: UIViewController {
                 (representatives: [PFObject]?, error: NSError?) -> Void in
                 let representative = representatives?.first
                 
-                self.initFullNameLabelWithRepresentative(representative)
-                self.initDistrictLabelWithRepresentative(representative)
-                self.initImageViewWithRepresentative(representative)
+                let newFullName = self.getFullName(representative)
+                let newDistrict = self.getDistrict(representative)
+                let newImageURLString = self.getImageURLString(representative)
+                
+                if (self.fullName != newFullName ||
+                    self.district != newDistrict ||
+                    self.imageURLString != newImageURLString) {
+                        self.fullName = newFullName
+                        self.district = newDistrict
+                        self.imageURLString = newImageURLString
+                        
+                        self.fullNameLabel.text = self.fullName
+                        self.districtLabel.text = self.district
+                        
+                        if let imageURL = NSURL(string: self.imageURLString) {
+                            self.imageView.sd_setImageWithURL(imageURL)
+                        }
+                        
+                        self.delegate?.didDownloadNewRepresentativeData(true)
+                } else {
+                    self.delegate?.didDownloadNewRepresentativeData(false)
+                }
                 
                 self.downloaded = true
-                
-                self.delegate?.didDownloadRepresentative()
             })
         }
     }
     
     // MARK: - private
     
-    private func initFullNameLabelWithRepresentative(representative: PFObject?) {
+    private func getFullName(representative: PFObject?) -> String {
         if let
             representative = representative,
             fullName = RepresentativeHelper.fullNameForRepresentative(representative) {
-                self.fullNameLabel.text = fullName
-        } else {
-            self.fullNameLabel.text = ""
+                return fullName
         }
+        
+        return ""
     }
     
-    private func initDistrictLabelWithRepresentative(representative: PFObject?) {
+    private func getDistrict(representative: PFObject?) -> String {
         if let
             representative = representative,
             district = RepresentativeHelper.districtForRepresentative(representative) {
-                self.districtLabel.text = district
-        } else {
-            self.districtLabel.text = ""
+                return district
         }
+        
+        return ""
     }
     
-    private func initImageViewWithRepresentative(representative: PFObject?) {
+    private func getImageURLString(representative: PFObject?) -> String {
         if let
             representative = representative,
             imageURL = RepresentativeHelper.imageURLForRepresentative(representative) {
-                self.imageView.sd_setImageWithURL(imageURL)
-        } else {
-            self.imageView.image = nil
+                return imageURL.absoluteString
         }
+        
+        return ""
     }
 }

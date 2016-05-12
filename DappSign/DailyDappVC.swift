@@ -933,13 +933,20 @@ extension DailyDappVC: DappBackSideLinksVCDelegate {
 }
 
 extension DailyDappVC: RepresentativeDelegate {
-    func didDownloadRepresentative() {
+    func didDownloadNewRepresentativeData(newData: Bool) {
+        if !newData {
+            return
+        }
+        
         if let representativeVC = self.representativeVC {
+            if self.animateableViews.contains(representativeVC.view) {
+                return
+            }
+            
             representativeVC.view.alpha = 1.0
             
             AnimationHelper.showView(representativeVC.view)
+            self.initAnimateableViews()
         }
-        
-        self.initAnimateableViews()
     }
 }
