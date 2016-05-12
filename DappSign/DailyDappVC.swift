@@ -54,6 +54,7 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
     private var timer: NSTimer? = nil
     private var currentDappCardType: DappCardType = .DappCardTypeSign
     private var animateableViews: [UIView]! = []
+    private var dappScore: Int? = nil
     
     private let flipDuration = 0.5
     
@@ -111,6 +112,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         if let representativeVC = self.representativeVC {
             representativeVC.view.alpha = 0.0
         }
+        
+        self.dappScoreLabel.alpha = 0.0
     }
     
     override func didReceiveMemoryWarning() {
@@ -500,10 +503,41 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         Requests.userWithID(currentUserID) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user, dappScore = user["dappScore"] as? Int {
-                self.dappScoreLabel.text = "\(dappScore)"
-            } else {
-                self.dappScoreLabel.text = "-"
+                if self.dappScore == nil {
+                    self.dappScore = dappScore
+                    
+                    self.dappScoreLabel.alpha = 1.0
+                    
+                    AnimationHelper.showView(self.dappScoreLabel)
+                    self.initAnimateableViews()
+                }
             }
+            
+            var dappScoreStr = ""
+            
+            if let user = user, dappScore = user["dappScore"] as? Int {
+                dappScoreStr = "\(dappScore)"
+            } else {
+                dappScoreStr = "-"
+            }
+            
+            let dappScoreLabelText = dappScoreStr + " Dapp"
+            let attributedString = NSMutableAttributedString(string: dappScoreLabelText)
+            let fontAvenirBook = UIFont(name: "Avenir-Book", size: 18.0)
+            let fontExoBlack = UIFont(name: "Exo-Black", size: 19.0)
+            
+            if let fontAvenirBook = fontAvenirBook, fontExoBlack = fontExoBlack {
+                attributedString.addAttribute(NSFontAttributeName,
+                    value: fontAvenirBook,
+                    range: NSMakeRange(0, dappScoreStr.characters.count)
+                )
+                attributedString.addAttribute(NSFontAttributeName,
+                    value: fontExoBlack,
+                    range: NSMakeRange(dappScoreStr.characters.count, " Dapp".characters.count)
+                )
+            }
+            
+            self.dappScoreLabel.attributedText = attributedString
         }
     }
     
@@ -863,6 +897,10 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
             self.profileButton,
             self.composeButton
         ]
+        
+        if let _ = self.dappScore {
+            self.animateableViews.append(self.dappScoreLabel)
+        }
         
         if let representativeVC = self.representativeVC {
             if representativeVC.downloaded {
