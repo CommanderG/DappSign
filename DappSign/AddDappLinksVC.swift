@@ -23,7 +23,7 @@ class AddDappLinksVC: UIViewController {
         super.viewDidLoad()
         
         self.containerView.minTranslationX = 150.0
-        self.containerView.delegate = self
+        self.containerView.appearanceDelegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,7 +84,7 @@ extension AddDappLinksVC: DappLinksVCDelegate {
     func openLinkURL(linkURL: NSURL) {}
 }
 
-extension AddDappLinksVC: SwipeableViewDelegate {
+extension AddDappLinksVC: SwipeableViewAppearanceDelegate {
     func willShow(swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .LeftToRight:
@@ -97,6 +97,4 @@ extension AddDappLinksVC: SwipeableViewDelegate {
             break
         }
     }
-    
-    func didSwipe(swipeDirection: SwipeDirection) {}
 }

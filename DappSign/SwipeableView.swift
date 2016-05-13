@@ -13,9 +13,13 @@ internal enum SwipeDirection {
     case RightToLeft
 }
 
-protocol SwipeableViewDelegate: class {
+protocol SwipeableViewAppearanceDelegate {
     func willShow(swipeDirection: SwipeDirection)
+}
+
+protocol SwipeableViewMovementDelegate {
     func didSwipe(swipeDirection: SwipeDirection)
+    func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat)
 }
 
 class SwipeableView: UIView {
@@ -26,7 +30,8 @@ class SwipeableView: UIView {
     private var swipeDirection: SwipeDirection?
     
     internal var minTranslationX: CGFloat?
-    internal weak var delegate: SwipeableViewDelegate?
+    internal var appearanceDelegate: SwipeableViewAppearanceDelegate? = nil
+    internal var movementDelegate: SwipeableViewMovementDelegate? = nil
     internal var canBeDraged: Bool = true
     
     required override init(frame: CGRect) {
@@ -76,7 +81,7 @@ class SwipeableView: UIView {
     
     internal func show() {
         if let swipeDirection = self.swipeDirection {
-            self.delegate?.willShow(swipeDirection)
+            self.appearanceDelegate?.willShow(swipeDirection)
         }
         
         self.animator?.removeAllBehaviors()
@@ -113,6 +118,11 @@ class SwipeableView: UIView {
                 y: self.originalCenter.y + translation.y
             )
             
+            let dx = self.originalCenter.x - self.center.x
+            let dy = self.originalCenter.y - self.center.y
+            
+            self.movementDelegate?.didChangeDistanceFromCenter(dx, andDeltaY: dy)
+            
             break
         case .Ended:
             self.swipeDirection = nil
@@ -138,7 +148,7 @@ class SwipeableView: UIView {
                 }
                 
                 if let swipeDirection = self.swipeDirection {
-                    self.delegate?.didSwipe(swipeDirection)
+                    self.movementDelegate?.didSwipe(swipeDirection)
                 }
             } else {
                 if let snapBehavior = self.snapBehavior {

@@ -81,7 +81,7 @@ class AddDappViewController: UIViewController {
         
         self.initHashtagsTextView()
         
-        self.dappMessageContainerSwipeableView.delegate = self
+        self.dappMessageContainerSwipeableView.appearanceDelegate = self
         self.dappMessageContainerSwipeableView.minTranslationX = 200.0
         
         self.prohibitedWordsLabel.hidden = true
@@ -451,7 +451,7 @@ extension AddDappViewController: UITextFieldDelegate {
     }
 }
 
-extension AddDappViewController: SwipeableViewDelegate {
+extension AddDappViewController: SwipeableViewAppearanceDelegate {
     func willShow(swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .LeftToRight:
@@ -486,8 +486,6 @@ extension AddDappViewController: SwipeableViewDelegate {
             }
         }
     }
-    
-    func didSwipe(swipeDirection: SwipeDirection) {}
 }
 
 extension AddDappViewController: UITextViewDelegate {

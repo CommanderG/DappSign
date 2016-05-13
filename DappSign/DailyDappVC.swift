@@ -15,7 +15,7 @@ enum DappCardType {
     case DappCardTypeMapp
 }
 
-class DailyDappVC: UIViewController, SwipeableViewDelegate {
+class DailyDappVC: UIViewController {
     @IBOutlet weak var dappViewsContainerView:      SwipeableView!
     @IBOutlet weak var dappSignView:                UIView!
     @IBOutlet weak var dappMappView:                UIView!
@@ -78,7 +78,8 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         self.dappScoreLabel.text = nil
         
         self.dappViewsContainerView.hidden = true
-        self.dappViewsContainerView.delegate = self
+        self.dappViewsContainerView.appearanceDelegate = self
+        self.dappViewsContainerView.movementDelegate = self
         self.dappViewsContainerView.minTranslationX = 150.0;
         
         self.showDappView(self.dappSignView)
@@ -640,72 +641,6 @@ class DailyDappVC: UIViewController, SwipeableViewDelegate {
         }
     }
     
-    // MARK: - SwipeableViewDelegate
-    
-    func willShow(swipeDirection: SwipeDirection) {
-        switch self.currentDappCardType {
-        case .DappCardTypeSign:
-            if self.visibleDappView != self.dappSignView {
-                self.showDappView(self.dappSignView)
-            }
-            
-            break
-        case .DappCardTypeMapp:
-            if self.visibleDappView != self.dappMappView {
-                self.showDappView(self.dappMappView)
-            }
-            
-            break
-        }
-        
-        self.initDappView()
-    }
-    
-    func didSwipe(swipeDirection: SwipeDirection) {
-        if (self.visibleDappView == self.dappSignView) {
-            let dapped = (swipeDirection == SwipeDirection.LeftToRight)
-            
-            if let currentDapp = self.dapps.first {
-                self.lastDappedDapp = currentDapp
-                
-                self.sendRequestsForDapp(currentDapp, dapped: dapped)
-                
-                if dapped {
-                    UIView.animateWithDuration(0.4,
-                        animations: {
-                            self.dappViewsContainerView.alpha = 0.0
-                        }, completion: { (finished: Bool) -> Void in
-                            self.performDappAnimationsWithCompletion({
-                                self.dappViewsContainerView.alpha = 1.0
-                                self.currentDappCardType = DappCardType.DappCardTypeMapp
-                                
-                                self.dappViewsContainerView.show()
-                            })
-                        }
-                    )
-                } else {
-                    self.currentDappCardType = DappCardType.DappCardTypeSign
-                    
-                    self.initTimersAfterCheckingLastIntroductoryDappID()
-                }
-            } else {
-                self.lastDappedDapp = nil
-            }
-            
-            if self.dapps.count > 0 {
-                self.dapps.removeAtIndex(0)
-            }
-            
-            if self.dapps.count == 0 {
-                self.downloadDapps()
-            }
-        } else {
-            self.currentDappCardType = DappCardType.DappCardTypeSign
-            
-            self.initTimersAfterCheckingLastIntroductoryDappID()
-        }
-    }
-    
     // MARK: -
     
     private func initTimersAfterCheckingLastIntroductoryDappID() {
@@ -948,5 +883,77 @@ extension DailyDappVC: RepresentativeDelegate {
             AnimationHelper.showView(representativeVC.view)
             self.initAnimateableViews()
         }
+    }
+}
+
+extension DailyDappVC: SwipeableViewAppearanceDelegate {
+    func willShow(swipeDirection: SwipeDirection) {
+        switch self.currentDappCardType {
+        case .DappCardTypeSign:
+            if self.visibleDappView != self.dappSignView {
+                self.showDappView(self.dappSignView)
+            }
+            
+            break
+        case .DappCardTypeMapp:
+            if self.visibleDappView != self.dappMappView {
+                self.showDappView(self.dappMappView)
+            }
+            
+            break
+        }
+        
+        self.initDappView()
+    }
+}
+
+extension DailyDappVC: SwipeableViewMovementDelegate {
+    func didSwipe(swipeDirection: SwipeDirection) {
+        if (self.visibleDappView == self.dappSignView) {
+            let dapped = (swipeDirection == SwipeDirection.LeftToRight)
+
+            if let currentDapp = self.dapps.first {
+                self.lastDappedDapp = currentDapp
+
+                self.sendRequestsForDapp(currentDapp, dapped: dapped)
+
+                if dapped {
+                    UIView.animateWithDuration(0.4,
+                        animations: {
+                            self.dappViewsContainerView.alpha = 0.0
+                        }, completion: { (finished: Bool) -> Void in
+                            self.performDappAnimationsWithCompletion({
+                                self.dappViewsContainerView.alpha = 1.0
+                                self.currentDappCardType = DappCardType.DappCardTypeMapp
+
+                                self.dappViewsContainerView.show()
+                            })
+                        }
+                    )
+                } else {
+                    self.currentDappCardType = DappCardType.DappCardTypeSign
+
+                    self.initTimersAfterCheckingLastIntroductoryDappID()
+                }
+            } else {
+                self.lastDappedDapp = nil
+            }
+
+            if self.dapps.count > 0 {
+                self.dapps.removeAtIndex(0)
+            }
+
+            if self.dapps.count == 0 {
+                self.downloadDapps()
+            }
+        } else {
+            self.currentDappCardType = DappCardType.DappCardTypeSign
+            
+            self.initTimersAfterCheckingLastIntroductoryDappID()
+        }
+    }
+    
+    func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat) {
+        print(dx, dy)
     }
 }

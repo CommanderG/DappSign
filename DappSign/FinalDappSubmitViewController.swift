@@ -35,7 +35,7 @@ class FinalDappSubmitViewController: UIViewController {
         self.dappSignView.alpha = 1
         
         self.containerView.minTranslationX = 150.0
-        self.containerView.delegate = self
+        self.containerView.appearanceDelegate = self
         
         ViewHelper.disableViews([self.shareOnFacebookButton, self.tweetThisCardButton])
         
@@ -260,7 +260,7 @@ class FinalDappSubmitViewController: UIViewController {
     }
 }
 
-extension FinalDappSubmitViewController: SwipeableViewDelegate {
+extension FinalDappSubmitViewController: SwipeableViewAppearanceDelegate {
     func willShow(swipeDirection: SwipeDirection) {
         self.dismissViewControllerAnimated(true, completion: {
             self.addDappLinksVC?.dismissViewControllerAnimated(true, completion: {
@@ -268,6 +268,4 @@ extension FinalDappSubmitViewController: SwipeableViewDelegate {
             })
         })
     }
-    
-    func didSwipe(swipeDirection: SwipeDirection) {}
 }
