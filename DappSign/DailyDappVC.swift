@@ -965,4 +965,16 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
     func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat) {
         print(dx, dy)
     }
+    
+    func didStartMoving() {
+        self.tweetThisCardButton.hidden = true
+        self.showLinksButton.hidden = true
+        self.shareOnFacebookButton.hidden = true
+    }
+    
+    func didStopMoving() {
+        self.tweetThisCardButton.hidden = false
+        self.showLinksButton.hidden = false
+        self.shareOnFacebookButton.hidden = false
+    }
 }

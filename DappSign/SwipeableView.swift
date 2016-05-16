@@ -20,6 +20,8 @@ protocol SwipeableViewAppearanceDelegate {
 protocol SwipeableViewMovementDelegate {
     func didSwipe(swipeDirection: SwipeDirection)
     func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat)
+    func didStartMoving()
+    func didStopMoving()
 }
 
 class SwipeableView: UIView {
@@ -99,6 +101,7 @@ class SwipeableView: UIView {
         switch panGR.state {
         case .Began:
             self.animator?.removeAllBehaviors()
+            self.movementDelegate?.didStartMoving()
             
             break
         case .Changed:
@@ -151,6 +154,8 @@ class SwipeableView: UIView {
                     self.animator?.addBehavior(snapBehavior)
                 }
             }
+            
+            self.movementDelegate?.didStopMoving()
             
             break
         default:
