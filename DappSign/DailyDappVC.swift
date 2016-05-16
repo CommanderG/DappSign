@@ -38,6 +38,7 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var signedLabel:                 UILabel!
     @IBOutlet weak var hashtagsLabel:               UILabel!
     @IBOutlet weak var dailyDappTimeLeftLabel:      UILabel!
+    @IBOutlet weak var topContainerView:            UIView!
     
     @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
@@ -104,15 +105,13 @@ class DailyDappVC: UIViewController {
             object: nil
         )
         
-        let labels = [
+        let labels: [UIView] = [
             self.plusOneDappsCountLabel,
             self.plusOneRepresentativeLabel,
             self.signedLabel
         ]
         
-        for label in labels {
-            self.hideLabel(label)
-        }
+        ViewHelper.hideViews(labels)
         
         self.hashtagsLabel.text = ""
         
@@ -726,11 +725,9 @@ class DailyDappVC: UIViewController {
         self.animatingPlusOneLabels = true
         
         self.showPlusOneLabels {
-            self.showSignedLabel {
-                self.animatingPlusOneLabels = false
-                
-                completion()
-            }
+            self.animatingPlusOneLabels = false
+            
+            completion()
         }
     }
     
@@ -748,7 +745,7 @@ class DailyDappVC: UIViewController {
                 initialSpringVelocity: 0.0,
                 options: .CurveLinear,
                 animations: {
-                    self.showLabel(plusOneLabelAnimationInfo.label)
+                    ViewHelper.showViews([ plusOneLabelAnimationInfo.label ])
                     
                     plusOneLabelAnimationInfo.topLC.constant =
                         plusOneLabelAnimationInfo.minTopSpaceConstraint
@@ -758,7 +755,7 @@ class DailyDappVC: UIViewController {
                     (finished: Bool) -> Void in
                     UIView.animateWithDuration(0.3,
                         animations: {
-                            self.hideLabel(plusOneLabelAnimationInfo.label)
+                            ViewHelper.hideViews([ plusOneLabelAnimationInfo.label ])
                         }, completion: {
                             (finished: Bool) -> Void in
                             plusOneLabelAnimationInfo.topLC.constant =
@@ -776,12 +773,12 @@ class DailyDappVC: UIViewController {
         }
     }
     
-    private func showSignedLabel(completion: Void -> Void) {
+    private func showSignedLabel(completion: (Void -> Void)?) {
         let viewHeight = CGRectGetHeight(self.view.frame)
         let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
         let bottomConst = (viewHeight - signedLabelHeight) / 2
         
-        self.showLabel(self.signedLabel)
+        ViewHelper.showViews([ self.signedLabel ])
         
         UIView.animateWithDuration(0.5,
             delay: 0.0,
@@ -799,25 +796,17 @@ class DailyDappVC: UIViewController {
                     delay: 0.15,
                     options: .CurveLinear,
                     animations: {
-                        self.hideLabel(self.signedLabel)
+                        ViewHelper.hideViews([ self.signedLabel ])
                     }, completion: { (finished: Bool) -> Void in
                         self.hideSignedLabel()
                         
                         self.signedLabel.transform = CGAffineTransformIdentity
                         
-                        completion()
+                        completion?()
                     }
                 )
             }
         )
-    }
-    
-    private func showLabel(label: UILabel) {
-        label.alpha = 1.0
-    }
-    
-    private func hideLabel(label: UILabel) {
-        label.alpha = 0.0
     }
     
     // MARK: -
@@ -920,13 +909,14 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
     func didSwipe(swipeDirection: SwipeDirection) {
         if (self.visibleDappView == self.dappSignView) {
             let dapped = (swipeDirection == SwipeDirection.LeftToRight)
-
+            
             if let currentDapp = self.dapps.first {
                 self.lastDappedDapp = currentDapp
-
+                
                 self.sendRequestsForDapp(currentDapp, dapped: dapped)
-
+                
                 if dapped {
+                    self.showSignedLabel(nil)
                     UIView.animateWithDuration(0.4,
                         animations: {
                             self.dappViewsContainerView.alpha = 0.0
@@ -934,8 +924,9 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                             self.performDappAnimationsWithCompletion({
                                 self.dappViewsContainerView.alpha = 1.0
                                 self.currentDappCardType = DappCardType.DappCardTypeMapp
-
+                                
                                 self.dappViewsContainerView.show()
+                                self.showBottomUI()
                             })
                         }
                     )
@@ -943,15 +934,16 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                     self.currentDappCardType = DappCardType.DappCardTypeSign
                     
                     self.initTimersAfterCheckingLastIntroductoryDappID()
+                    self.showBottomUI()
                 }
             } else {
                 self.lastDappedDapp = nil
             }
-
+            
             if self.dapps.count > 0 {
                 self.dapps.removeAtIndex(0)
             }
-
+            
             if self.dapps.count == 0 {
                 self.downloadDapps()
             }
@@ -959,20 +951,73 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
             self.currentDappCardType = DappCardType.DappCardTypeSign
             
             self.initTimersAfterCheckingLastIntroductoryDappID()
+            self.showBottomUI()
         }
     }
     
     func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat) {
-        print(dx, dy)
+        if self.visibleDappView != self.dappSignView {
+            return
+        }
+        
+        if let minTranslationX = self.dappViewsContainerView.minTranslationX {
+            if dx > 0.0 {
+                let viewHeight = CGRectGetHeight(self.view.frame)
+                let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
+                let signedLabelMaxBottomConstraint = (viewHeight / 2 - signedLabelHeight / 2) * 0.4
+                let signedLabelBottomConstraint =
+                (dx / minTranslationX) * signedLabelMaxBottomConstraint - signedLabelHeight
+                
+                ViewHelper.showViews([ self.signedLabel ])
+                
+                self.signedLabelBottomConstraint.constant = signedLabelBottomConstraint
+            }
+        }
     }
     
     func didStartMoving() {
+        self.hideTopUI()
+        self.hideBottomUI()
+    }
+    
+    func didStopMoving(swiped: Bool) {
+        self.showTopUI()
+        
+        if !swiped {
+            self.showBottomUI()
+        }
+    }
+    
+    func willSnapBack() {
+        spring(0.5) {
+            self.hideSignedLabel()
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // MARK: - private
+    
+    private func hideTopUI() {
+        self.topContainerView.hidden = true
+        self.dappScoreLabel.hidden = true
+        self.representativeVC?.view.hidden = true
+        self.hashtagsLabel.hidden = true
+    }
+    
+    private func showTopUI() {
+        self.topContainerView.hidden = false
+        self.dappScoreLabel.hidden = false
+        self.representativeVC?.view.hidden = false
+        self.hashtagsLabel.hidden = false
+    }
+    
+    private func hideBottomUI() {
         self.tweetThisCardButton.hidden = true
         self.showLinksButton.hidden = true
         self.shareOnFacebookButton.hidden = true
     }
     
-    func didStopMoving() {
+    private func showBottomUI() {
         self.tweetThisCardButton.hidden = false
         self.showLinksButton.hidden = false
         self.shareOnFacebookButton.hidden = false

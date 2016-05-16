@@ -52,6 +52,20 @@ class ViewHelper {
         }
     }
     
+    // MARK: - showing/hiding views
+    
+    internal class func hideViews(views: [UIView]) {
+        for view in views {
+            view.alpha = 0.0
+        }
+    }
+    
+    internal class func showViews(views: [UIView]) {
+        for view in views {
+            view.alpha = 1.0
+        }
+    }
+    
     // MARK: - private
     
     private class func addBorderToView(view: UIView) {

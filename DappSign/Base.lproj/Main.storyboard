@@ -2273,6 +2273,7 @@
                         <outlet property="showLinksButton" destination="Jb6-vv-27X" id="bjo-lN-0dl"/>
                         <outlet property="signedLabel" destination="rvm-Fb-8NV" id="wEr-FR-YNX"/>
                         <outlet property="signedLabelBottomConstraint" destination="Szj-oP-D5E" id="IOQ-xk-swt"/>
+                        <outlet property="topContainerView" destination="kSv-5s-8f3" id="VGQ-W8-kfY"/>
                         <outlet property="tweetThisCardButton" destination="gal-zO-XBA" id="39p-0V-aen"/>
                     </connections>
                 </viewController>

@@ -21,7 +21,8 @@ protocol SwipeableViewMovementDelegate {
     func didSwipe(swipeDirection: SwipeDirection)
     func didChangeDistanceFromCenter(dx: CGFloat, andDeltaY dy: CGFloat)
     func didStartMoving()
-    func didStopMoving()
+    func didStopMoving(swiped: Bool)
+    func willSnapBack()
 }
 
 class SwipeableView: UIView {
@@ -117,8 +118,8 @@ class SwipeableView: UIView {
                 y: self.originalCenter.y + translation.y
             )
             
-            let dx = self.originalCenter.x - self.center.x
-            let dy = self.originalCenter.y - self.center.y
+            let dx = self.center.x - self.originalCenter.x
+            let dy = self.center.y - self.originalCenter.y
             
             self.movementDelegate?.didChangeDistanceFromCenter(dx, andDeltaY: dy)
             
@@ -152,10 +153,13 @@ class SwipeableView: UIView {
             } else {
                 if let snapBehavior = self.snapBehavior {
                     self.animator?.addBehavior(snapBehavior)
+                    self.movementDelegate?.willSnapBack()
                 }
             }
             
-            self.movementDelegate?.didStopMoving()
+            let swiped = self.swipeDirection != nil
+            
+            self.movementDelegate?.didStopMoving(swiped)
             
             break
         default:
