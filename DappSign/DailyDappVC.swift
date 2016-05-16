@@ -126,15 +126,15 @@ class DailyDappVC: UIViewController {
         let plusOneDappsCountLabelAnimationInfo = PlusOneLabelAnimationInfo(
             label: self.plusOneDappsCountLabel,
             topLC: self.plusOneDappsCountLabelTopConstraint,
-            maxTopSpaceConstraint: -16.0,
-            minTopSpaceConstraint: -16.0 + 80.0
+            maxTopSpaceConstraint: -75.0,
+            minTopSpaceConstraint: -75.0 + 80.0
         )
         
         let plusOneRepresentativeLabelAnimationInfo = PlusOneLabelAnimationInfo(
             label: self.plusOneRepresentativeLabel,
             topLC: self.plusOneRepresentativeLabelTopConstraint,
-            maxTopSpaceConstraint: 30.0,
-            minTopSpaceConstraint: 30.0 + 80.0
+            maxTopSpaceConstraint: -15.0,
+            minTopSpaceConstraint: -15.0 + 80.0
         )
         
         self.plusOneLabelsAnimationInfo = [
