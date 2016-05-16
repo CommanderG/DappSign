@@ -44,39 +44,35 @@ class SwipeableView: UIView {
         super.init(coder: decoder)
         
         self.addPanGesture()
+        
+        self.originalCenter = self.center
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        if let superview = self.superview {
+            self.animator = UIDynamicAnimator(referenceView: superview)
+            
+            self.snapBehavior = UISnapBehavior(item: self, snapToPoint: self.originalCenter)
+            
+            self.snapBehavior?.damping = 0.4
+            
+            self.gravity = UIGravityBehavior(items: [self])
+            
+            self.gravity?.action = {
+                if (CGRectGetMinY(self.frame) > CGRectGetHeight(superview.frame) ||
+                    CGRectGetMaxY(self.frame) < 0.0) {
+                        self.show()
+                }
+            }
+        }
     }
     
     private func addPanGesture() {
         let panGR = UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:"))
         
         self.addGestureRecognizer(panGR)
-    }
-    
-    override func layoutSubviews() {
-        self.originalCenter = self.center
-        
-        if let superview = self.superview {
-            if self.animator == nil {
-                self.animator = UIDynamicAnimator(referenceView: superview)
-            }
-            
-            if self.snapBehavior == nil {
-                let snapBehaviour = UISnapBehavior(item: self, snapToPoint: self.originalCenter)
-                snapBehaviour.damping = 0.4
-                
-                self.snapBehavior = snapBehaviour
-            }
-            
-            if self.gravity == nil {
-                self.gravity = UIGravityBehavior(items: [self])
-                self.gravity?.action = {
-                    if (CGRectGetMinY(self.frame) > CGRectGetHeight(superview.frame) ||
-                        CGRectGetMaxY(self.frame) < 0.0) {
-                            self.show()
-                    }
-                }
-            }
-        }
     }
     
     internal func show() {

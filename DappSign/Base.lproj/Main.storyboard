@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -2157,45 +2157,61 @@
                                     <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="8ce-ju-qMi"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-Tb-bMp">
-                                <rect key="frame" x="30" y="131" width="260" height="363"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="uCZ-4j-vJ6" kind="embed" identifier="embedDappBackSideLinksVC" id="VIb-Ct-6ma"/>
-                                </connections>
-                            </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzC-sE-TlJ">
                                 <rect key="frame" x="30" y="131" width="260" height="363"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zae-OY-t6s">
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-Tb-bMp">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
                                         <animations/>
                                         <connections>
-                                            <segue destination="H3r-2u-yja" kind="embed" identifier="embedDappSignVC" id="bpX-mN-qEi"/>
+                                            <segue destination="uCZ-4j-vJ6" kind="embed" identifier="embedDappBackSideLinksVC" id="VIb-Ct-6ma"/>
                                         </connections>
                                     </containerView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-hP-uaa">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zae-OY-t6s">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
+                                                <animations/>
+                                                <connections>
+                                                    <segue destination="H3r-2u-yja" kind="embed" identifier="embedDappSignVC" id="bpX-mN-qEi"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-hP-uaa">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="363"/>
+                                                <animations/>
+                                                <connections>
+                                                    <segue destination="KpH-yQ-AVM" kind="embed" identifier="embedDappMappVC" id="Kqc-ii-ahC"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="zae-OY-t6s" secondAttribute="trailing" id="G7j-nd-gJH"/>
+                                            <constraint firstItem="Rnh-hP-uaa" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="top" id="M9f-y6-ZjN"/>
+                                            <constraint firstAttribute="bottom" secondItem="Rnh-hP-uaa" secondAttribute="bottom" id="MpJ-zz-lTO"/>
+                                            <constraint firstItem="zae-OY-t6s" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="top" id="UyR-vI-Iyk"/>
+                                            <constraint firstItem="zae-OY-t6s" firstAttribute="leading" secondItem="osF-qS-9VI" secondAttribute="leading" id="YNA-vx-2kb"/>
+                                            <constraint firstAttribute="bottom" secondItem="zae-OY-t6s" secondAttribute="bottom" id="jSU-Y8-xz8"/>
+                                            <constraint firstAttribute="trailing" secondItem="Rnh-hP-uaa" secondAttribute="trailing" id="vp6-yS-xVs"/>
+                                            <constraint firstItem="Rnh-hP-uaa" firstAttribute="leading" secondItem="osF-qS-9VI" secondAttribute="leading" id="zNk-ym-OwQ"/>
+                                        </constraints>
                                         <connections>
-                                            <segue destination="KpH-yQ-AVM" kind="embed" identifier="embedDappMappVC" id="Kqc-ii-ahC"/>
+                                            <outletCollection property="gestureRecognizers" destination="q1g-OL-5Pe" appends="YES" id="5Bq-tI-Jf8"/>
                                         </connections>
-                                    </containerView>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstItem="Rnh-hP-uaa" firstAttribute="leading" secondItem="osF-qS-9VI" secondAttribute="leading" id="1hE-U8-ICE"/>
-                                    <constraint firstAttribute="bottom" secondItem="zae-OY-t6s" secondAttribute="bottom" id="WiK-9F-xIt"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rnh-hP-uaa" secondAttribute="bottom" id="cSN-11-oqu"/>
-                                    <constraint firstAttribute="trailing" secondItem="zae-OY-t6s" secondAttribute="trailing" id="ezf-g4-nB4"/>
-                                    <constraint firstItem="zae-OY-t6s" firstAttribute="leading" secondItem="osF-qS-9VI" secondAttribute="leading" id="hSR-jL-uZt"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rnh-hP-uaa" secondAttribute="trailing" id="mbj-QV-BNv"/>
-                                    <constraint firstItem="Rnh-hP-uaa" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="top" id="mft-Ic-frz"/>
-                                    <constraint firstItem="zae-OY-t6s" firstAttribute="top" secondItem="osF-qS-9VI" secondAttribute="top" id="pdI-3g-ePw"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kpx-Tb-bMp" secondAttribute="bottom" id="2Fn-I5-CF7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kpx-Tb-bMp" secondAttribute="trailing" id="P9l-0H-P38"/>
+                                    <constraint firstItem="Kpx-Tb-bMp" firstAttribute="top" secondItem="HzC-sE-TlJ" secondAttribute="top" id="RiD-JJ-Zs1"/>
+                                    <constraint firstAttribute="bottom" secondItem="osF-qS-9VI" secondAttribute="bottom" id="YSI-Mz-jO1"/>
+                                    <constraint firstAttribute="trailing" secondItem="osF-qS-9VI" secondAttribute="trailing" id="bJ3-RD-WPw"/>
+                                    <constraint firstItem="Kpx-Tb-bMp" firstAttribute="leading" secondItem="HzC-sE-TlJ" secondAttribute="leading" id="bca-Tx-zjS"/>
+                                    <constraint firstItem="osF-qS-9VI" firstAttribute="top" secondItem="HzC-sE-TlJ" secondAttribute="top" id="mOM-ZY-biR"/>
+                                    <constraint firstItem="osF-qS-9VI" firstAttribute="leading" secondItem="HzC-sE-TlJ" secondAttribute="leading" id="yjQ-Qn-9dp"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="q1g-OL-5Pe" appends="YES" id="5Bq-tI-Jf8"/>
-                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNED!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvm-Fb-8NV">
                                 <rect key="frame" x="79" y="259" width="162" height="59"/>
@@ -2212,34 +2228,30 @@
                             <constraint firstItem="iRV-8I-LT2" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="25" id="1AX-Br-YGh"/>
                             <constraint firstItem="kSv-5s-8f3" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="19" id="2Ks-1M-V9j"/>
                             <constraint firstAttribute="trailing" secondItem="1s5-eb-nyT" secondAttribute="trailing" id="31i-Wl-xM1"/>
-                            <constraint firstItem="Kpx-Tb-bMp" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="75X-xl-qNU"/>
                             <constraint firstItem="Jb6-vv-27X" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="C9i-yz-879"/>
+                            <constraint firstItem="HzC-sE-TlJ" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="CQG-dn-Mhb"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="2" id="Cyi-tJ-ZpM"/>
-                            <constraint firstAttribute="trailing" secondItem="Kpx-Tb-bMp" secondAttribute="trailing" constant="30" id="F1S-mJ-zQV"/>
-                            <constraint firstItem="osF-qS-9VI" firstAttribute="centerX" secondItem="Kpx-Tb-bMp" secondAttribute="centerX" id="Hea-6V-Mv1"/>
                             <constraint firstItem="iRV-8I-LT2" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="bottom" constant="3" id="Hkc-Sj-TgG"/>
-                            <constraint firstItem="osF-qS-9VI" firstAttribute="centerY" secondItem="Kpx-Tb-bMp" secondAttribute="centerY" id="IDp-cU-P6U"/>
                             <constraint firstItem="kSv-5s-8f3" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="15" id="K9N-yT-v2G"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="gal-zO-XBA" secondAttribute="bottom" constant="14" id="OKy-wa-riN"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="16" id="P9h-Aj-5Ld"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="rvm-Fb-8NV" secondAttribute="bottom" constant="250" id="Szj-oP-D5E"/>
                             <constraint firstAttribute="trailing" secondItem="kSv-5s-8f3" secondAttribute="trailing" constant="19" id="TAr-pd-vxQ"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="66" id="UZ5-Kl-WR6"/>
-                            <constraint firstItem="Kpx-Tb-bMp" firstAttribute="top" secondItem="bLv-ni-urr" secondAttribute="bottom" constant="27" id="VF2-Yq-vHF"/>
                             <constraint firstItem="bLv-ni-urr" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="64" id="VxM-2s-KUI"/>
+                            <constraint firstItem="Jb6-vv-27X" firstAttribute="top" secondItem="HzC-sE-TlJ" secondAttribute="bottom" constant="7" id="ZLQ-Wc-naG"/>
                             <constraint firstItem="bLv-ni-urr" firstAttribute="leading" secondItem="iRV-8I-LT2" secondAttribute="trailing" constant="8" id="ZhZ-Bd-VOE"/>
-                            <constraint firstItem="Jb6-vv-27X" firstAttribute="top" secondItem="Kpx-Tb-bMp" secondAttribute="bottom" constant="7" id="drQ-as-hAf"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Jb6-vv-27X" secondAttribute="bottom" constant="16" id="gwy-xt-gbf"/>
-                            <constraint firstItem="osF-qS-9VI" firstAttribute="height" secondItem="Kpx-Tb-bMp" secondAttribute="height" id="icg-Me-MPw"/>
                             <constraint firstItem="1s5-eb-nyT" firstAttribute="top" secondItem="bLv-ni-urr" secondAttribute="bottom" constant="2" id="l9q-bY-dLu"/>
                             <constraint firstItem="1s5-eb-nyT" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" id="lMk-Rs-urq"/>
-                            <constraint firstItem="osF-qS-9VI" firstAttribute="width" secondItem="Kpx-Tb-bMp" secondAttribute="width" id="ljD-wm-Hkg"/>
+                            <constraint firstItem="HzC-sE-TlJ" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="30" id="m9q-Eb-B9c"/>
                             <constraint firstItem="rvm-Fb-8NV" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="mP4-IE-40T"/>
                             <constraint firstAttribute="trailing" secondItem="Yu2-AW-APN" secondAttribute="trailing" constant="25" id="p1i-Vd-OIP"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="20" id="q9Z-eg-Dvm"/>
                             <constraint firstAttribute="trailing" secondItem="bLv-ni-urr" secondAttribute="trailing" constant="25" id="t2W-0f-nKg"/>
                             <constraint firstAttribute="trailing" secondItem="ayB-nL-AF9" secondAttribute="trailing" constant="17" id="tHT-S5-a0n"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="38" id="yVX-II-mav"/>
+                            <constraint firstItem="HzC-sE-TlJ" firstAttribute="top" secondItem="1s5-eb-nyT" secondAttribute="bottom" constant="5" id="yap-c3-wNQ"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -4660,9 +4672,9 @@
         <segue reference="IfF-6V-hkZ"/>
         <segue reference="jeY-SL-Q8Z"/>
         <segue reference="bpX-mN-qEi"/>
-        <segue reference="ss8-uX-HsK"/>
         <segue reference="sqW-Bo-68U"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="iW7-1y-626"/>
         <segue reference="032-in-2ND"/>
     </inferredMetricsTieBreakers>
 </document>
