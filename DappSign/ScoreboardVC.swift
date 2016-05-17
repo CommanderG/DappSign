@@ -68,6 +68,18 @@ class ScoreboardVC: UIViewController {
     
     // MARK: - @IBActions
     
+    @IBAction func showTwiterPage() {
+        if let twitterURL = AppURLs.twitterURL {
+            ViewControllerHelper.openLinkWithURL(twitterURL, inViewController: self)
+        }
+    }
+    
+    @IBAction func showFacebookPage() {
+        if let facebookURL = AppURLs.facebookURL {
+            ViewControllerHelper.openLinkWithURL(facebookURL, inViewController: self)
+        }
+    }
+    
     @IBAction func tweet() {
         let dappSignImage = self.scoreboardDappSignVC?.frontSideImage()
         

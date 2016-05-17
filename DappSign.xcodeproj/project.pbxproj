@@ -24,6 +24,7 @@
 		274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */; };
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
 		274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BB0CB1B99DD5900D6DC44 /* XIBView.swift */; };
+		274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274CF8E11CEB788200AF966E /* AppURLs.swift */; };
 		2756D1971CB2909100C9A41A /* DappTransferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2756D1961CB2909000C9A41A /* DappTransferHelper.swift */; };
 		275955811CC7AF0100080D63 /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955801CC7AF0100080D63 /* ViewControllerHelper.swift */; };
 		275955831CC7B68000080D63 /* ScoreboardRepresentativeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */; };
@@ -192,6 +193,7 @@
 		274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappIndexHelper.swift; sourceTree = "<group>"; };
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
 		274BB0CB1B99DD5900D6DC44 /* XIBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
+		274CF8E11CEB788200AF966E /* AppURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppURLs.swift; sourceTree = "<group>"; };
 		2756D1961CB2909000C9A41A /* DappTransferHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappTransferHelper.swift; sourceTree = "<group>"; };
 		275955801CC7AF0100080D63 /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
 		275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardRepresentativeVC.swift; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				2773BFCA1CAEB8CA0082FC96 /* ArrayUtil.swift */,
 				848B651A1CBF78FB00E6D155 /* LocalStorage.swift */,
 				8459C34F1CC9086400421769 /* SVGMapData.swift */,
+				274CF8E11CEB788200AF966E /* AppURLs.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27B4E5321CC546AB008E3560 /* DappSignViewsHelper.swift in Sources */,
+				274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */,
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
 				275955831CC7B68000080D63 /* ScoreboardRepresentativeVC.swift in Sources */,
 				27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */,
