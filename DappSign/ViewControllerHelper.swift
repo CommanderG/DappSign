@@ -21,6 +21,8 @@ class ViewControllerHelper {
             
             linkVC.didMoveToParentViewController(viewController)
             linkVC.openURL(linkURL)
+            
+            AnimationHelper.showView(linkVC.view)
         }
     }
 }

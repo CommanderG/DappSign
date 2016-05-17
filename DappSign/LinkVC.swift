@@ -28,9 +28,11 @@ class LinkVC: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func close() {
-        self.willMoveToParentViewController(nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
+        AnimationHelper.hideView(self.view) {
+            self.willMoveToParentViewController(nil)
+            self.view.removeFromSuperview()
+            self.removeFromParentViewController()
+        }
     }
     
     // MARK: -
