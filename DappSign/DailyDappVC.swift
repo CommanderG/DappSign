@@ -46,7 +46,6 @@ class DailyDappVC: UIViewController {
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
-    private var embedDappVC: EmbedDappVC? = nil
     private var dappSignVC: DappSignVC? = nil
     private var dappMappVC: DappMappVC? = nil
     private var representativeVC: RepresentativeVC? = nil
@@ -221,7 +220,10 @@ class DailyDappVC: UIViewController {
         if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.dapps.first {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
-                view2: dappBackSideLinksVC.view
+                view2: dappBackSideLinksVC.view,
+                completion: {
+                    self.disableShareButons()
+                }
             )
             
             dappBackSideLinksVC.showLinksForDapp(dapp)
@@ -232,7 +234,10 @@ class DailyDappVC: UIViewController {
         if let dappBackSideLinksView = self.dappBackSideLinksVC?.view {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
-                view2: dappBackSideLinksView
+                view2: dappBackSideLinksView,
+                completion: {
+                    self.enableShareButtons()
+                }
             )
         }
     }
@@ -285,23 +290,30 @@ class DailyDappVC: UIViewController {
     
     @IBAction func showLinkView(sender: AnyObject) {
         if let dapp = self.dapps.first, embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
+            embedDappVC.delegate = self
+            
             self.addChildViewController(embedDappVC)
             
             let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
             
             embedDappVC.view.frame = frame
             
-            self.view.addSubview(embedDappVC.view)
+            self.dappViewsContainerView.addSubview(embedDappVC.view)
             
             embedDappVC.didMoveToParentViewController(self)
             embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
             embedDappVC.show()
+            self.disableShareButons()
         }
     }
     
     // MARK: -
     
-    private func flipWithDuration(duration: NSTimeInterval, view1: UIView, view2: UIView) {
+    private func flipWithDuration(duration: NSTimeInterval,
+        view1: UIView,
+        view2: UIView,
+        completion: (Void -> Void)?
+    ) {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(duration)
         UIView.setAnimationTransition(.FlipFromLeft, forView: view1, cache: true)
@@ -315,6 +327,10 @@ class DailyDappVC: UIViewController {
         view2.hidden = !view2.hidden
         
         UIView.commitAnimations()
+        
+        delay(duration) {
+            completion?()
+        }
     }
     
     private func sendRequestsForDapp(dapp: PFObject, dapped: Bool) {
@@ -500,10 +516,6 @@ class DailyDappVC: UIViewController {
                 )
                 
                 self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
-            case "embedEmbedDappVCSegue":
-                self.embedDappVC = segue.destinationViewController as? EmbedDappVC
-                
-                self.embedDappVC?.view.hidden = true
             case DappSignVC.embedSegueID:
                 self.dappSignVC = segue.destinationViewController as? DappSignVC
             case "embedDappMappVC":
@@ -857,6 +869,26 @@ class DailyDappVC: UIViewController {
         
         return "\(doubleDigitInt)"
     }
+    
+    private func disableShareButons() {
+        let shareButtons = self.shareButtons()
+        
+        ViewHelper.disableButtons(shareButtons)
+    }
+    
+    private func enableShareButtons() {
+        let shareButtons = self.shareButtons()
+        
+        ViewHelper.enableButtons(shareButtons)
+    }
+    
+    private func shareButtons() -> [UIButton!] {
+        let shareButtons = [
+            self.tweetThisCardButton, self.showLinksButton, self.shareOnFacebookButton
+        ]
+        
+        return shareButtons
+    }
 }
 
 extension DailyDappVC: DappBackSideLinksVCDelegate {
@@ -1021,5 +1053,11 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
         self.tweetThisCardButton.hidden = false
         self.showLinksButton.hidden = false
         self.shareOnFacebookButton.hidden = false
+    }
+}
+
+extension DailyDappVC: EmbedDappDelegate {
+    func didRemoveFromParentViewController() {
+        self.enableShareButtons()
     }
 }

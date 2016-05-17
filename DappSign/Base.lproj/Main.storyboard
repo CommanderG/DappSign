@@ -2157,7 +2157,7 @@
                                     <action selector="postCurrentDappCardToFacebook:" destination="EG5-sL-doW" eventType="touchUpInside" id="8ce-ju-qMi"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzC-sE-TlJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzC-sE-TlJ">
                                 <rect key="frame" x="30" y="131" width="260" height="363"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-Tb-bMp">
