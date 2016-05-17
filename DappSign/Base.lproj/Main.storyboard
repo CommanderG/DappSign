@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1093,6 +1093,9 @@
                                     <constraint firstAttribute="height" constant="27" id="lqR-YG-Gri"/>
                                 </constraints>
                                 <state key="normal" image="twitterIcon"/>
+                                <connections>
+                                    <action selector="showRepresentativeTwitterProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="hAK-vu-RHQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-ZI-L22">
                                 <rect key="frame" x="140" y="208" width="36" height="29"/>
@@ -1103,6 +1106,9 @@
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" image="facebookIcon"/>
+                                <connections>
+                                    <action selector="showRepresentativeFacebookProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="9zF-T3-qP8"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-N3-9uB">
                                 <rect key="frame" x="124" y="188" width="36" height="17"/>
@@ -4680,12 +4686,12 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bpX-mN-qEi"/>
         <segue reference="8GL-5h-4zG"/>
         <segue reference="fu7-hF-c08"/>
-        <segue reference="sqW-Bo-68U"/>
+        <segue reference="ss8-uX-HsK"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="sqW-Bo-68U"/>
+        <segue reference="bpX-mN-qEi"/>
         <segue reference="032-in-2ND"/>
-        <segue reference="iW7-1y-626"/>
     </inferredMetricsTieBreakers>
 </document>

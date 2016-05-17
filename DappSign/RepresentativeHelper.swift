@@ -31,6 +31,28 @@ class RepresentativeHelper {
         return nil
     }
     
+    internal class func twitterProfileURLForRepresentative(representative: PFObject) -> NSURL? {
+        if let twitterID = representative["twitterID"] as? String {
+            let URLString = "https://twitter.com/" + twitterID
+            let URL = NSURL(string: URLString)
+            
+            return URL
+        }
+        
+        return nil
+    }
+    
+    internal class func facebookProfileURLForRepresentative(representative: PFObject) -> NSURL? {
+        if let facebookID = representative["facebookID"] as? String {
+            let URLString = "https://facebook.com/" + facebookID
+            let URL = NSURL(string: URLString)
+            
+            return URL
+        }
+        
+        return nil
+    }
+    
     // MARK: - private
     
     private class func distringStringWithInt(district: Int) -> String {

@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var changeButton:   UIButton!
     
     private var dapps: [PFObject] = []
+    private var representative: PFObject? = nil
     private var petitionsTVC: PetitionsTVC? = nil
     private var segmentsVC: SegmentsVC? = nil
     
@@ -40,6 +41,15 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBarHidden = true
+        
+        self.representative = nil
+        
+        if let userID = user?.objectId {
+            Requests.downloadRepresentativesForUserWithID(userID, completion: {
+                (representatives: [PFObject]?, error: NSError?) -> Void in
+                self.representative = representatives?.first
+            })
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -112,6 +122,22 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - @IBActions
+    
+    @IBAction func showRepresentativeFacebookProfile() {
+        if let representative = self.representative {
+            if let URL = RepresentativeHelper.facebookProfileURLForRepresentative(representative) {
+                ViewControllerHelper.openLinkWithURL(URL, inViewController: self)
+            }
+        }
+    }
+    
+    @IBAction func showRepresentativeTwitterProfile() {
+        if let representative = self.representative {
+            if let URL = RepresentativeHelper.twitterProfileURLForRepresentative(representative) {
+                ViewControllerHelper.openLinkWithURL(URL, inViewController: self)
+            }
+        }
+    }
     
     @IBAction func close(sender: AnyObject) {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
