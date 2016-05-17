@@ -221,6 +221,8 @@ class ZipCodeViewController: UIViewController {
                 
                 self.deleteRepresentativesWithUserID(userID) {
                     let fullName =  "\(firstName) \(lastName)"
+                    let facebookID = self.facebookID(houseRepresentative)
+                    let twitterID = self.twitterID(houseRepresentative)
                     
                     Requests.addRepresentativeWithUserID(userID,
                         imageURLString: imageURLString,
@@ -228,6 +230,8 @@ class ZipCodeViewController: UIViewController {
                         title: title,
                         party: party,
                         district: district,
+                        facebookID: facebookID,
+                        twitterID: twitterID,
                         completion: {
                             (success: Bool, error: NSError?) -> Void in
                             completion(success: success)
@@ -248,6 +252,22 @@ class ZipCodeViewController: UIViewController {
                 completion()
             }
         }
+    }
+    
+    private func twitterID(houseRepresentative: NSDictionary) -> String {
+        if let twitterID = houseRepresentative["twitter_id"] as? String {
+            return twitterID
+        }
+        
+        return ""
+    }
+    
+    private func facebookID(houseRepresentative: NSDictionary) -> String {
+        if let facebookID = houseRepresentative["facebook_id"] as? String {
+            return facebookID
+        }
+        
+        return ""
     }
 }
 

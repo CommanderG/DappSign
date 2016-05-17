@@ -268,6 +268,8 @@ class Requests {
         title: String,
         party: String,
         district: String,
+        facebookID: String,
+        twitterID: String,
         completion: (success: Bool, error: NSError?) -> Void
     ) {
         let representative = PFObject(className: "UserRepresentatives")
@@ -278,6 +280,8 @@ class Requests {
         representative["Title"]                   = title
         representative["Party"]                   = party
         representative["congressionalDistrictID"] = district
+        representative["facebookID"]              = facebookID
+        representative["twitterID"]               = twitterID
         
         representative.saveInBackgroundWithBlock(completion)
     }
