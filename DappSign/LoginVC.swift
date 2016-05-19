@@ -10,15 +10,31 @@
 import UIKit
 
 class LoginVC: UIViewController {
-    private let segueShowZipCode = "showZipCode"
-    private let segueShowMainVC = "showMainVC"
+    private let segueShowZipCode    = "showZipCode"
+    private let segueShowMainVC     = "showMainVC"
+    private let segueShowEmailLogin = "showEmailLogin"
     
     private var shouldShowMainScene = false
     
     @IBOutlet weak var logInWithFacebookButton: UIButton!
+    @IBOutlet weak var registerWithEmailButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let
+            registerWithEmailLabel = self.registerWithEmailButton.titleLabel,
+            text = registerWithEmailLabel.text {
+                let attributedText = NSMutableAttributedString(string: text)
+                let textRange = NSMakeRange(0, text.characters.count)
+                
+                attributedText.addAttribute(NSUnderlineStyleAttributeName,
+                    value: NSUnderlineStyle.StyleSingle.rawValue,
+                    range: textRange
+                )
+                
+                registerWithEmailLabel.attributedText = attributedText
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +90,10 @@ class LoginVC: UIViewController {
                 let zipCodeVC = segue.destinationViewController as? ZipCodeViewController
                 
                 zipCodeVC?.delegate = self
+            case segueShowEmailLogin:
+                let emailLoginVC = segue.destinationViewController as? EmailLoginVC
+                
+                emailLoginVC?.delegate = self
             case _:
                 break
             }
@@ -84,5 +104,16 @@ class LoginVC: UIViewController {
 extension LoginVC: ZipCodeDelegate {
     func didSaveRepresentativeAndDistrictInformation(success: Bool) {
         self.shouldShowMainScene = success
+    }
+}
+
+extension LoginVC: EmailLoginDelegate {
+    func didRegister() {
+        LocalStorage.saveUserIsNew(true)
+        self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
+    }
+    
+    func didSignIn() {
+        self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
     }
 }

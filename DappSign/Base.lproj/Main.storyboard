@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -455,6 +455,19 @@
                                     <action selector="logInWithFacebook:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="my0-yy-Pyy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-yF-sSx">
+                                <rect key="frame" x="48" y="518" width="225" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Iv0-0L-Alv"/>
+                                    <constraint firstAttribute="width" constant="225" id="WzD-lS-0oI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Register with email"/>
+                                <connections>
+                                    <segue destination="irj-PG-aY3" kind="modal" identifier="showEmailLogin" id="hrX-77-uZo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.026213619858026505" green="0.60553789138793945" blue="0.95094698667526245" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -462,14 +475,17 @@
                             <constraint firstItem="A9c-HG-7TN" firstAttribute="top" secondItem="mUe-E1-ZtY" secondAttribute="bottom" constant="23" id="21P-eN-fRR"/>
                             <constraint firstItem="A9c-HG-7TN" firstAttribute="centerX" secondItem="mUe-E1-ZtY" secondAttribute="centerX" constant="0.5" id="7qe-eg-wJq"/>
                             <constraint firstAttribute="centerX" secondItem="Dc7-Lr-jcy" secondAttribute="centerX" constant="-0.5" id="G5i-X4-v3e"/>
+                            <constraint firstItem="2M9-yF-sSx" firstAttribute="top" secondItem="Dc7-Lr-jcy" secondAttribute="bottom" constant="14" id="LlL-ac-Yn2"/>
                             <constraint firstItem="mUe-E1-ZtY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="117" id="PPK-xD-xwY"/>
                             <constraint firstAttribute="centerX" secondItem="mUe-E1-ZtY" secondAttribute="centerX" id="Vet-oY-Caq"/>
+                            <constraint firstItem="2M9-yF-sSx" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="apz-9i-4dH"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Dc7-Lr-jcy" secondAttribute="bottom" constant="64" id="kEF-MA-PF7"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="logInWithFacebookButton" destination="Dc7-Lr-jcy" id="D2m-aB-KB4"/>
+                        <outlet property="registerWithEmailButton" destination="2M9-yF-sSx" id="oOa-6o-4ea"/>
                         <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="iW7-1y-626"/>
                         <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="4GY-aV-x4s"/>
                     </connections>
@@ -4669,6 +4685,127 @@
             </objects>
             <point key="canvasLocation" x="1816" y="-1155"/>
         </scene>
+        <!--Email LoginVC-->
+        <scene sceneID="iVY-fh-ExM">
+            <objects>
+                <viewController id="irj-PG-aY3" customClass="EmailLoginVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="krk-aH-ALr"/>
+                        <viewControllerLayoutGuide type="bottom" id="yxt-O9-7qA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kf7-dD-0F5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="To4-bG-Jqv">
+                                <rect key="frame" x="55" y="166" width="210" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="irj-PG-aY3" id="lYp-bx-a3z"/>
+                                </connections>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3d-Fk-PKd">
+                                <rect key="frame" x="71" y="208" width="178" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vc-dZ-qWs">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <state key="normal" title="Sign in"/>
+                                        <connections>
+                                            <action selector="signIn" destination="irj-PG-aY3" eventType="touchUpInside" id="wlo-CY-azV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-IO-nYW">
+                                        <rect key="frame" x="98" y="0.0" width="80" height="30"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancel" destination="irj-PG-aY3" eventType="touchUpInside" id="cQ8-tD-ehg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7I-nC-Gb4">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <state key="normal" title="Register"/>
+                                        <connections>
+                                            <action selector="register" destination="irj-PG-aY3" eventType="touchUpInside" id="WHs-qT-HnI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="178" id="Nug-Cc-enB"/>
+                                    <constraint firstAttribute="height" constant="30" id="VeI-jy-VjD"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czg-E1-gO9">
+                                <rect key="frame" x="55" y="82" width="210" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="irj-PG-aY3" id="BR2-Ii-FfF"/>
+                                </connections>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Lfh-hq-jhh">
+                                <rect key="frame" x="55" y="40" width="210" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Register"/>
+                                    <segment title="Sign in"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="handleSegmentedControlValueChange" destination="irj-PG-aY3" eventType="valueChanged" id="9n9-Dw-QIP"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRd-Bs-dlE">
+                                <rect key="frame" x="55" y="124" width="210" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="irj-PG-aY3" id="DFe-oi-BCS"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.027450980390000001" green="0.60392156860000001" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pRd-Bs-dlE" firstAttribute="leading" secondItem="Kf7-dD-0F5" secondAttribute="leading" constant="55" id="5Jt-BZ-m5A"/>
+                            <constraint firstItem="czg-E1-gO9" firstAttribute="top" secondItem="Lfh-hq-jhh" secondAttribute="bottom" constant="14" id="8f9-0L-xhT"/>
+                            <constraint firstItem="czg-E1-gO9" firstAttribute="leading" secondItem="Kf7-dD-0F5" secondAttribute="leading" constant="55" id="EgA-v5-vAF"/>
+                            <constraint firstItem="Lfh-hq-jhh" firstAttribute="top" secondItem="krk-aH-ALr" secondAttribute="bottom" constant="40" id="GXk-JW-8aP"/>
+                            <constraint firstItem="J3d-Fk-PKd" firstAttribute="centerX" secondItem="Kf7-dD-0F5" secondAttribute="centerX" id="HHr-YZ-R75"/>
+                            <constraint firstAttribute="trailing" secondItem="To4-bG-Jqv" secondAttribute="trailing" constant="55" id="VKq-nb-Ioy"/>
+                            <constraint firstItem="Lfh-hq-jhh" firstAttribute="leading" secondItem="Kf7-dD-0F5" secondAttribute="leading" constant="55" id="hDc-3I-EKv"/>
+                            <constraint firstItem="To4-bG-Jqv" firstAttribute="leading" secondItem="Kf7-dD-0F5" secondAttribute="leading" constant="55" id="mz6-HY-oOZ"/>
+                            <constraint firstItem="To4-bG-Jqv" firstAttribute="top" secondItem="pRd-Bs-dlE" secondAttribute="bottom" constant="12" id="qp0-Wf-5KT"/>
+                            <constraint firstAttribute="trailing" secondItem="pRd-Bs-dlE" secondAttribute="trailing" constant="55" id="uOh-Bu-GTS"/>
+                            <constraint firstItem="pRd-Bs-dlE" firstAttribute="top" secondItem="czg-E1-gO9" secondAttribute="bottom" constant="12" id="ulZ-PW-hgn"/>
+                            <constraint firstAttribute="trailing" secondItem="Lfh-hq-jhh" secondAttribute="trailing" constant="55" id="vmJ-hT-8tZ"/>
+                            <constraint firstAttribute="trailing" secondItem="czg-E1-gO9" secondAttribute="trailing" constant="55" id="wAX-cL-DN4"/>
+                            <constraint firstItem="J3d-Fk-PKd" firstAttribute="top" secondItem="To4-bG-Jqv" secondAttribute="bottom" constant="12" id="ylo-g6-4Gp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="pRd-Bs-dlE" id="kIE-aZ-FTZ"/>
+                        <outlet property="fullNameTextField" destination="czg-E1-gO9" id="qFf-xl-tZT"/>
+                        <outlet property="passwordTextField" destination="To4-bG-Jqv" id="NCg-W3-Ydx"/>
+                        <outlet property="registerButton" destination="d7I-nC-Gb4" id="P6C-fi-D9L"/>
+                        <outlet property="segmentedControl" destination="Lfh-hq-jhh" id="Mwx-B4-NCC"/>
+                        <outlet property="signInButton" destination="9Vc-dZ-qWs" id="d5a-wy-1Fl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6i3-rM-Y0B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="1029"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Facebook" width="513" height="116"/>
@@ -4686,12 +4823,12 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8GL-5h-4zG"/>
         <segue reference="fu7-hF-c08"/>
-        <segue reference="ss8-uX-HsK"/>
+        <segue reference="8GL-5h-4zG"/>
         <segue reference="Tb5-sO-Miv"/>
         <segue reference="sqW-Bo-68U"/>
-        <segue reference="bpX-mN-qEi"/>
+        <segue reference="iW7-1y-626"/>
         <segue reference="032-in-2ND"/>
+        <segue reference="bpX-mN-qEi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -59,6 +59,7 @@
 		27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5291CC52369008E3560 /* DappSignVC.swift */; };
 		27B4E5301CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */; };
 		27B4E5321CC546AB008E3560 /* DappSignViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */; };
+		27B818BA1CEE2DEF0092E63B /* EmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27BB68D01CC6781100B3E2BE /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */; };
 		27BB68D21CC6968D00B3E2BE /* ScoreboardDappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */; };
@@ -230,6 +231,7 @@
 		27B4E5291CC52369008E3560 /* DappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignVC.swift; sourceTree = "<group>"; };
 		27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappSignFrontSideVC.swift; sourceTree = "<group>"; };
 		27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignViewsHelper.swift; sourceTree = "<group>"; };
+		27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginVC.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappSignVC.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
+				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				27EE61121CBFC319009CBF0B /* MainVC.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
@@ -1106,6 +1109,7 @@
 				848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */,
 				8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */,
 				279A31221AB30EA700850508 /* AdminTVC.swift in Sources */,
+				27B818BA1CEE2DEF0092E63B /* EmailLoginVC.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */,
