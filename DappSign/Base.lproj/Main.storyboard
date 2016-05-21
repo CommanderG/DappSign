@@ -587,7 +587,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEw-ct-YHx">
-                                <rect key="frame" x="0.0" y="100" width="260" height="17"/>
+                                <rect key="frame" x="0.0" y="88" width="260" height="17"/>
                                 <animations/>
                                 <string key="text">Here's where this petition is most popular:
 </string>
@@ -619,7 +619,7 @@
                                 </constraints>
                             </view>
                             <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPl-9N-fb4">
-                                <rect key="frame" x="27" y="135" width="205" height="119"/>
+                                <rect key="frame" x="27" y="113" width="205" height="119"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -629,6 +629,74 @@
                                     <outlet property="delegate" destination="KpH-yQ-AVM" id="r3b-hQ-e6J"/>
                                 </connections>
                             </webView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top 3 Districts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hV-As-oKP">
+                                <rect key="frame" x="52" y="249" width="48" height="28"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="qcA-R7-2bi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. NY-15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2B-zM-mog">
+                                <rect key="frame" x="110" y="245" width="48" height="14"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="pAz-PV-7Mc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. CA-12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koa-12-kVl">
+                                <rect key="frame" x="110" y="257" width="48" height="14"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="Wte-oB-cMM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. TX-0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd8-Z3-Xe4">
+                                <rect key="frame" x="110" y="269" width="48" height="14"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="oJk-18-NHV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your district ranked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxb-5h-bvR">
+                                <rect key="frame" x="162" y="245" width="86" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOg-eX-pDv">
+                                <rect key="frame" x="168" y="259" width="16" height="20"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="435" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-N2-adM">
+                                <rect key="frame" x="219" y="259" width="24" height="20"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="out of" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpL-ml-e6L">
+                                <rect key="frame" x="188" y="261" width="27" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.49411764705882355" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -638,31 +706,52 @@
                             <constraint firstItem="2F1-Iu-AK0" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" constant="14" id="5e6-af-J1U"/>
                             <constraint firstItem="eub-gR-DO5" firstAttribute="top" secondItem="tWc-Bz-kjS" secondAttribute="bottom" constant="4" id="6HW-Yk-hON"/>
                             <constraint firstItem="2F1-Iu-AK0" firstAttribute="top" secondItem="fni-F2-k2E" secondAttribute="bottom" id="7Q5-bJ-Tsc"/>
+                            <constraint firstItem="tWc-Bz-kjS" firstAttribute="top" secondItem="3e4-N2-adM" secondAttribute="bottom" constant="4" id="8Bf-5B-hQA"/>
                             <constraint firstItem="5J3-jV-4Yq" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" id="9Yr-NM-YS7"/>
                             <constraint firstItem="aEw-ct-YHx" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" id="BM7-F5-NUc"/>
+                            <constraint firstItem="hd8-Z3-Xe4" firstAttribute="leading" secondItem="5hV-As-oKP" secondAttribute="trailing" constant="10" id="CU5-Bb-dD4"/>
                             <constraint firstItem="juu-6z-660" firstAttribute="top" secondItem="S2t-GE-RmU" secondAttribute="bottom" constant="24" id="JaU-6L-Sqe"/>
+                            <constraint firstItem="koa-12-kVl" firstAttribute="leading" secondItem="5hV-As-oKP" secondAttribute="trailing" constant="10" id="Jda-90-eN0"/>
                             <constraint firstItem="S2t-GE-RmU" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" constant="90" id="MyP-fR-p51"/>
                             <constraint firstItem="fni-F2-k2E" firstAttribute="top" secondItem="iIq-Tr-8Ex" secondAttribute="bottom" id="Nyl-Qr-xVu"/>
-                            <constraint firstItem="aEw-ct-YHx" firstAttribute="top" secondItem="5J3-jV-4Yq" secondAttribute="bottom" constant="20" id="Q39-pU-fbp"/>
+                            <constraint firstItem="aEw-ct-YHx" firstAttribute="top" secondItem="5J3-jV-4Yq" secondAttribute="bottom" constant="8" id="Q39-pU-fbp"/>
                             <constraint firstItem="vPl-9N-fb4" firstAttribute="centerX" secondItem="31h-6f-adw" secondAttribute="centerX" id="RCP-Xx-HaM"/>
                             <constraint firstItem="S2t-GE-RmU" firstAttribute="top" secondItem="tWc-Bz-kjS" secondAttribute="bottom" constant="4" id="ROe-mr-zXi"/>
+                            <constraint firstItem="hd8-Z3-Xe4" firstAttribute="top" secondItem="koa-12-kVl" secondAttribute="bottom" constant="-2" id="TmK-Qb-SjT"/>
+                            <constraint firstItem="5hV-As-oKP" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" constant="52" id="U6u-Li-ydg"/>
                             <constraint firstAttribute="trailing" secondItem="5J3-jV-4Yq" secondAttribute="trailing" constant="50" id="Wkt-n5-LVV"/>
+                            <constraint firstItem="3e4-N2-adM" firstAttribute="top" secondItem="fxb-5h-bvR" secondAttribute="bottom" id="XeW-HI-hh4"/>
                             <constraint firstItem="S2t-GE-RmU" firstAttribute="leading" secondItem="eub-gR-DO5" secondAttribute="trailing" id="Yg1-gO-SdU"/>
+                            <constraint firstItem="NpL-ml-e6L" firstAttribute="leading" secondItem="vOg-eX-pDv" secondAttribute="trailing" constant="4" id="ahn-ug-FMm"/>
                             <constraint firstAttribute="trailing" secondItem="S2t-GE-RmU" secondAttribute="trailing" constant="8" id="avH-HA-Akn"/>
                             <constraint firstAttribute="trailing" secondItem="aEw-ct-YHx" secondAttribute="trailing" id="brx-FN-jIJ"/>
+                            <constraint firstItem="3e4-N2-adM" firstAttribute="leading" secondItem="NpL-ml-e6L" secondAttribute="trailing" constant="4" id="c21-fk-zCm"/>
                             <constraint firstAttribute="trailing" secondItem="fni-F2-k2E" secondAttribute="trailing" constant="14" id="cS8-fJ-ZaB"/>
+                            <constraint firstItem="fxb-5h-bvR" firstAttribute="leading" secondItem="koa-12-kVl" secondAttribute="trailing" constant="4" id="dFH-EH-RTN"/>
                             <constraint firstItem="tWc-Bz-kjS" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" constant="50" id="ebU-2T-RyJ"/>
+                            <constraint firstItem="vOg-eX-pDv" firstAttribute="leading" secondItem="hd8-Z3-Xe4" secondAttribute="trailing" constant="10" id="gF4-0i-TKw"/>
                             <constraint firstItem="5J3-jV-4Yq" firstAttribute="top" secondItem="2F1-Iu-AK0" secondAttribute="bottom" constant="4" id="hHU-Aw-CNd"/>
+                            <constraint firstItem="tWc-Bz-kjS" firstAttribute="top" secondItem="5hV-As-oKP" secondAttribute="bottom" constant="6" id="hjG-cf-Cyp"/>
+                            <constraint firstItem="tWc-Bz-kjS" firstAttribute="top" secondItem="hd8-Z3-Xe4" secondAttribute="bottom" id="kgN-aq-smi"/>
+                            <constraint firstItem="koa-12-kVl" firstAttribute="top" secondItem="n2B-zM-mog" secondAttribute="bottom" constant="-2" id="lIC-xr-saL"/>
                             <constraint firstAttribute="trailing" secondItem="tWc-Bz-kjS" secondAttribute="trailing" id="orc-Yx-wmS"/>
-                            <constraint firstItem="vPl-9N-fb4" firstAttribute="top" secondItem="aEw-ct-YHx" secondAttribute="bottom" constant="18" id="pZM-pj-gAf"/>
+                            <constraint firstItem="tWc-Bz-kjS" firstAttribute="top" secondItem="NpL-ml-e6L" secondAttribute="bottom" constant="8" id="p7g-5I-mQ4"/>
+                            <constraint firstItem="vPl-9N-fb4" firstAttribute="top" secondItem="aEw-ct-YHx" secondAttribute="bottom" constant="8" id="pZM-pj-gAf"/>
+                            <constraint firstItem="tWc-Bz-kjS" firstAttribute="top" secondItem="vOg-eX-pDv" secondAttribute="bottom" constant="4" id="skV-JP-pEF"/>
                             <constraint firstAttribute="trailing" secondItem="2F1-Iu-AK0" secondAttribute="trailing" constant="74" id="uAl-HJ-jhA"/>
+                            <constraint firstItem="n2B-zM-mog" firstAttribute="leading" secondItem="5hV-As-oKP" secondAttribute="trailing" constant="10" id="z0I-wg-O65"/>
                             <constraint firstItem="vPl-9N-fb4" firstAttribute="leading" secondItem="31h-6f-adw" secondAttribute="leading" constant="27" id="z9a-gT-SG3"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="districtRankLabel" destination="vOg-eX-pDv" id="EL3-Kt-uKq"/>
                         <outlet property="districtsLabel" destination="2F1-Iu-AK0" id="nGn-i5-POT"/>
                         <outlet property="percentsView" destination="eub-gR-DO5" id="xa5-1X-pX1"/>
+                        <outlet property="secondTopDistrictLabel" destination="koa-12-kVl" id="psv-71-Kcs"/>
+                        <outlet property="thirdTopDistrictLabel" destination="hd8-Z3-Xe4" id="unq-2X-Hl5"/>
+                        <outlet property="topDistrictLabel" destination="n2B-zM-mog" id="eef-h3-ewl"/>
+                        <outlet property="totalDistrictsCountLabel" destination="3e4-N2-adM" id="wNg-rj-cho"/>
                         <outlet property="webView" destination="vPl-9N-fb4" id="cMo-cd-nl6"/>
                     </connections>
                 </viewController>

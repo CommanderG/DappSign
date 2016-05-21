@@ -11,9 +11,14 @@ import UIKit
 class DappMappVC: UIViewController {
     internal static let storyboardID = "dappMappVC"
     
-    @IBOutlet weak var districtsLabel: UILabel!
-    @IBOutlet weak var webView:        UIWebView!
-    @IBOutlet weak var percentsView:   PercentsView!
+    @IBOutlet weak var districtsLabel:           UILabel!
+    @IBOutlet weak var webView:                  UIWebView!
+    @IBOutlet weak var percentsView:             PercentsView!
+    @IBOutlet weak var topDistrictLabel:         UILabel!
+    @IBOutlet weak var secondTopDistrictLabel:   UILabel!
+    @IBOutlet weak var thirdTopDistrictLabel:    UILabel!
+    @IBOutlet weak var districtRankLabel:        UILabel!
+    @IBOutlet weak var totalDistrictsCountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +36,30 @@ class DappMappVC: UIViewController {
         let emptySVGMapURLString = SVGMapGenerator.generateEmptyMap()
         
         self.initDistrictsLabelTextWithDistricsOnTheMapCount(0)
-        self.showMapWithURL(emptySVGMapURLString)
+        DappMappViewHelper.initMapWebView(self.webView, mapURLString: emptySVGMapURLString)
+        DappMappViewHelper.initDistrictLabels(
+            topDistrictLabel: self.topDistrictLabel,
+            secondTopDistrictLabel: self.secondTopDistrictLabel,
+            thirdTopDistrictLabel: self.thirdTopDistrictLabel,
+            dappMappInfo: nil
+        )
+        self.initRankLabels(nil)
         self.percentsView.showPercents(0)
         
         DappMappHelper.dappMappInfoForDapp(dapp) {
             (dappMappInfo: DappMappInfo?) -> Void in
             if let dappMappInfo = dappMappInfo {
                 self.initDistrictsLabelTextWithDistricsOnTheMapCount(dappMappInfo.IDsFreqs.count)
-                self.showMapWithURL(dappMappInfo.mapURLString)
+                DappMappViewHelper.initMapWebView(self.webView,
+                    mapURLString: dappMappInfo.mapURLString
+                )
+                DappMappViewHelper.initDistrictLabels(
+                    topDistrictLabel: self.topDistrictLabel,
+                    secondTopDistrictLabel: self.secondTopDistrictLabel,
+                    thirdTopDistrictLabel: self.thirdTopDistrictLabel,
+                    dappMappInfo: dappMappInfo
+                )
+                self.initRankLabels(dappMappInfo)
                 self.percentsView.showPercents(dappMappInfo.percents)
             }
         }
@@ -53,28 +74,21 @@ class DappMappVC: UIViewController {
                                    "Districts support this petition."
     }
     
-    private func showMapWithURL(SVGMapURLPath: String?) {
-        self.webView.hidden = true
-        
-        if let mapURLPath = SVGMapURLPath {
-            let URL = NSURL(fileURLWithPath: mapURLPath)
-            let request = NSURLRequest(URL: URL)
-            
-            self.webView.loadRequest(request)
-            self.webView.hidden = false
+    private func initRankLabels(dappMappInfo: DappMappInfo?) {
+        if let rank = dappMappInfo?.userDistrictRank {
+            self.districtRankLabel.text = "\(rank)"
+        } else {
+            self.districtRankLabel.text = "0"
         }
+        
+        let totalDistrictsCount = SVGMapGenerator.districtsCount()
+        
+        self.totalDistrictsCountLabel.text = "\(totalDistrictsCount)"
     }
 }
 
 extension DappMappVC: UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView) {
-        let scaleX = CGRectGetWidth(webView.bounds) / webView.scrollView.contentSize.width
-        let scaleY = CGRectGetHeight(webView.bounds) / webView.scrollView.contentSize.height
-        let scale = max(scaleX, scaleY)
-        
-        webView.scrollView.minimumZoomScale = scale
-        webView.scrollView.maximumZoomScale = scale
-        webView.scrollView.zoomScale = scale
-        webView.scrollView.scrollEnabled = false
+        DappMappViewHelper.handleWebViewDidFinishLoad(webView)
     }
 }
