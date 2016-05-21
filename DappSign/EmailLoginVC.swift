@@ -70,6 +70,8 @@ class EmailLoginVC: UIViewController {
                     return
                 }
                 
+                PFUser.logOut()
+                
                 let user = PFUser()
                 
                 user.username = email_
@@ -123,6 +125,7 @@ class EmailLoginVC: UIViewController {
                 return
             }
             
+            PFUser.logOut()
             PFUser.logInWithUsernameInBackground(email_, password: password_, block: {
                 (user: PFUser?, error: NSError?) -> Void in
                 if let _ = user {
