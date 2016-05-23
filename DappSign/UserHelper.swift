@@ -40,25 +40,27 @@ class UserHelper {
             let newDappScore = dappScore + 1
             
             user[dappScoreKey] = newDappScore
-            
-            user.saveInBackgroundWithBlock({
-                (success: Bool, error: NSError!) -> Void in
-                if success {
-                    completion(success: success, errorMessage: nil)
-                } else if let error = error {
-                    let errorMessage =
-                    "Failed to update dappScore for user with ID \(user.objectId). " +
-                    "Error: \(error.localizedDescription)"
-                    
-                    completion(success: success, errorMessage: errorMessage)
-                } else {
-                    let errorMessage =
-                    "Failed to update dappScore for user with ID \(user.objectId). Unknown error."
-                    
-                    completion(success: success, errorMessage: errorMessage)
-                }
-            })
+        } else {
+            user[dappScoreKey] = 1
         }
+        
+        user.saveInBackgroundWithBlock({
+            (success: Bool, error: NSError!) -> Void in
+            if success {
+                completion(success: success, errorMessage: nil)
+            } else if let error = error {
+                let errorMessage =
+                "Failed to update dappScore for user with ID \(user.objectId). " +
+                "Error: \(error.localizedDescription)"
+                
+                completion(success: success, errorMessage: errorMessage)
+            } else {
+                let errorMessage =
+                "Failed to update dappScore for user with ID \(user.objectId). Unknown error."
+                
+                completion(success: success, errorMessage: errorMessage)
+            }
+        })
     }
     
     internal class func downloadAllUsersWithDistrict(district: String,
