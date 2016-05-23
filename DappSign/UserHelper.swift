@@ -33,6 +33,67 @@ class UserHelper {
         }
     }
     
+    internal class func downloadAllUsersWithDistrict(district: String,
+        completion: (users: [PFUser]?, error: NSError?) -> Void
+    ) {
+        let query = PFUser.query()
+        
+        query.whereKey("congressionalDistrictID", equalTo: district)
+        
+        ParseHelper.downloadAllObjectsWithQuery(query, downloadedObjects: []) {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            let users = objects as? [PFUser]
+            
+            completion(users: users, error: error)
+        }
+    }
+    
+    internal class func initCurrentUserWithTheirFacebookProfileInformation(
+        completion: Void -> Void
+    ) {
+        let user = PFUser.currentUser()
+        
+        if user == nil {
+            completion()
+            
+            return
+        }
+        
+        let FBSession = PFFacebookUtils.session()
+        let accessToken = FBSession.accessTokenData.accessToken
+        let URLString = "https://graph.facebook.com/me/picture?" +
+                        "type=large"                             +
+                        "&return_ssl_resources+1"                +
+                        "&access_token=\(accessToken)"
+        
+        let url = NSURL(string: URLString)
+        let urlRequest = NSURLRequest(URL: url!)
+        let queue = NSOperationQueue.mainQueue()
+        
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) {
+            (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+            user["image"] = data
+            user["dappScore"] = 0
+            
+            user.saveInBackgroundWithBlock({
+                (succeeded: Bool, error: NSError!) -> Void in
+                if succeeded {
+                    print("Successfully saved user's image and set user's dappScore to 0.")
+                    
+                    self.initCurrentUserNameWithTheirFacebookProfileName(completion)
+                } else {
+                    print(
+                        "Failed to save user's image and set user's dappScore to 0. Error: \(error)"
+                    )
+                    
+                    completion()
+                }
+            })
+        }
+    }
+    
+    // MARK: -
+    
     private class func incrementDappScoreForUser(user: PFUser, completion: completionClosure) {
         let dappScoreKey = "dappScore"
         
@@ -63,18 +124,37 @@ class UserHelper {
         })
     }
     
-    internal class func downloadAllUsersWithDistrict(district: String,
-        completion: (users: [PFUser]?, error: NSError?) -> Void
-    ) {
-        let query = PFUser.query()
+    private class func initCurrentUserNameWithTheirFacebookProfileName(completion: Void -> Void) {
+        let user = PFUser.currentUser()
         
-        query.whereKey("congressionalDistrictID", equalTo: district)
-        
-        ParseHelper.downloadAllObjectsWithQuery(query, downloadedObjects: []) {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            let users = objects as? [PFUser]
+        if user == nil {
+            completion()
             
-            completion(users: users, error: error)
+            return
         }
+        
+        FBRequestConnection.startForMeWithCompletionHandler({
+            connection, result, error in
+            if let resultDict = result as? NSDictionary {
+                let name = resultDict["name"] as! String
+                
+                user["name"] = name
+                user["lowercaseName"] = name.lowercaseString
+                
+                user.saveInBackgroundWithBlock({
+                    (succeeded: Bool, error: NSError!) -> Void in
+                    if succeeded {
+                        print("Successfully saved user's name.")
+                    } else {
+                        print("Failed to save user's name.")
+                        print("Errro: \(error)")
+                    }
+                    
+                    completion()
+                })
+            } else {
+                completion()
+            }
+        })
     }
 }

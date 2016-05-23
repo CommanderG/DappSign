@@ -67,7 +67,9 @@ class LoginVC: UIViewController {
                 if user.isNew {
                     print("User signed up and logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
+                    UserHelper.initCurrentUserWithTheirFacebookProfileInformation {
+                        self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
+                    }
                 } else {
                     print("User logged in through Facebook!")
                     
