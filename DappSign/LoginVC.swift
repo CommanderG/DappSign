@@ -35,6 +35,14 @@ class LoginVC: UIViewController {
                 
                 registerWithEmailLabel.attributedText = attributedText
         }
+        
+        if let fbVC = self.storyboard?.instantiateViewControllerWithIdentifier("fb") as? FacebookSharedContentVC {
+            self.view.addSubview(fbVC.view)
+            
+            fbVC.render()
+            
+            fbVC.view.removeFromSuperview()
+        }
     }
     
     override func didReceiveMemoryWarning() {
