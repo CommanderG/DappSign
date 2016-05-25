@@ -96,8 +96,6 @@ class DailyDappVC: UIViewController {
             self.profileButton.hidden = true
         }
         
-        self.updateUserInformation()
-        
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: Selector("handleDappSwipedNotification:"),
             name: DappSwipedNotification,
@@ -418,80 +416,6 @@ class DailyDappVC: UIViewController {
                 print(errorMessage)
             }
         })
-    }
-    
-    // MARK: - Requests
-    
-    private func updateUserInformation() {
-        let user = PFUser.currentUser()
-        
-        if user == nil {
-            return
-        }
-        
-        let userName = user["name"] as? String
-        
-        if userName != nil {
-            return
-        }
-        
-        let FBSession = PFFacebookUtils.session()
-        let accessToken = FBSession.accessTokenData.accessToken
-        let URLString = "https://graph.facebook.com/me/picture?" +
-                        "type=large"                             +
-                        "&return_ssl_resources+1"                +
-                        "&access_token=\(accessToken)"
-        
-        let url = NSURL(string: URLString)
-        let urlRequest = NSURLRequest(URL: url!)
-        let queue = NSOperationQueue.mainQueue()
-        
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) {
-            (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
-            user["image"] = data
-            
-            user.saveInBackgroundWithBlock({
-                (succeeded: Bool, error: NSError!) -> Void in
-                if succeeded {
-                    print("Successfully saved user's image.")
-                } else {
-                    print("Failed to save user's image.")
-                    print("Errro: \(error)")
-                }
-            })
-            
-            FBRequestConnection.startForMeWithCompletionHandler({
-                connection, result, error in
-                if let resultDict = result as? NSDictionary {
-                    let name = resultDict["name"] as! String
-                    
-                    user["name"] = name
-                    user["lowercaseName"] = name.lowercaseString
-                    
-                    user.saveInBackgroundWithBlock({
-                        (succeeded: Bool, error: NSError!) -> Void in
-                        if succeeded {
-                            print("Successfully saved user's name.")
-                        } else {
-                            print("Failed to save user's name.")
-                            print("Errro: \(error)")
-                        }
-                    })
-                }
-            })
-            
-            user["dappScore"] = 0
-            
-            user.saveInBackgroundWithBlock({
-                (succeeded: Bool, error: NSError!) -> Void in
-                if succeeded {
-                    print("Successfully set user's dappScore to 0.")
-                } else {
-                    print("Failed to set user's dappScore to 0.")
-                    print("Errro: \(error)")
-                }
-            })
-        }
     }
     
     // MARK: - Navigation

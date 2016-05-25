@@ -76,6 +76,7 @@ class EmailLoginVC: UIViewController {
                 
                 user.username = email_
                 user.password = password_
+                user["dappScore"] = 0
                 user["name"] = fullName_
                 user["lowercaseName"] = fullName_.lowercaseString
                 
