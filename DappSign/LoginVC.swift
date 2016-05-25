@@ -37,11 +37,9 @@ class LoginVC: UIViewController {
         }
         
         if let fbVC = self.storyboard?.instantiateViewControllerWithIdentifier("fb") as? FacebookSharedContentVC {
-            self.view.addSubview(fbVC.view)
+            let img = fbVC.renderInViewController(self)
             
-            fbVC.render()
-            
-            fbVC.view.removeFromSuperview()
+            print(img)
         }
     }
     

@@ -22,141 +22,119 @@ class FacebookSharedContentVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    internal func render() -> UIImage? {
+    internal func renderInViewController(viewController: UIViewController) -> UIImage? {
+        viewController.view.addSubview(self.view)
         
-        let imageWidth = self.containerViewWidthLC.constant
-        let imageHeight = self.containerViewHeightLC.constant
-        let horizontalImagesCountFloat = imageWidth / self.view.bounds.width
-        let verticalImagesCountFloat = imageHeight / self.view.bounds.height
+        let viewWidth = self.containerViewWidthLC.constant
+        let viewHeight = self.containerViewHeightLC.constant
+        let viewVisibleWidth = self.view.bounds.width
+        let viewVisibleHeight = self.view.bounds.height
+        let horizontalImagesCountFloat = viewWidth / viewVisibleWidth
+        let verticalImagesCountFloat = viewHeight / viewVisibleHeight
+        let (horizImgsIntPart, horizImgsFracPart) = modf(horizontalImagesCountFloat)
+        let (vertImgsIntPart, vertImgsFracPart) = modf(verticalImagesCountFloat)
         
-        let (horizontalImagesCountIntPart, horizontalImagesCountFracPart) = modf(horizontalImagesCountFloat)
-        let (verticalImagesCountIntPart, verticalImagesCountFracPart) = modf(verticalImagesCountFloat)
+        var horizontalImagesCount = Int(horizImgsIntPart)
         
-        var horizontalImagesCount = Int(horizontalImagesCountIntPart)
-        
-        if horizontalImagesCountFracPart > 0.0 {
+        if horizImgsFracPart > 0.0 {
             ++horizontalImagesCount
         }
         
-        var verticalImagesCount = Int(verticalImagesCountIntPart)
+        var verticalImagesCount = Int(vertImgsIntPart)
         
-        if verticalImagesCountFracPart > 0.0 {
+        if vertImgsFracPart > 0.0 {
             ++verticalImagesCount
         }
         
-        print(imageWidth, imageHeight)
-        print(horizontalImagesCountFloat, verticalImagesCountFloat)
-        print(modf(horizontalImagesCountFloat), modf(verticalImagesCountFloat))
-        print(horizontalImagesCount, verticalImagesCount)
-        
-        
-        
-        
-        
         let mainScreen = UIScreen.mainScreen()
         let scale = mainScreen.scale
-        let size = CGSizeMake(imageWidth, imageHeight)
-        let bgImg = self.bgImg(size)
+        let size = CGSizeMake(viewWidth, viewHeight)
+        let whiteColor = UIColor.whiteColor()
+        var resultImg = self.getImageWith(size, andColor: whiteColor)
         
-        var imageCount = 0
-        var resultImg = bgImg
+        if resultImg == nil {
+            self.view.removeFromSuperview()
+            
+            return nil
+        }
         
-        for y in 0 ..< verticalImagesCount {
+        for verticalImageIndex in 0 ..< verticalImagesCount {
             self.leftLC.constant = 0.0
             
-            var h: CGFloat = 0.0
+            var viewImageHeight = viewVisibleHeight
             
-            if y == verticalImagesCount - 1 {
-                h = self.view.bounds.height * verticalImagesCountFracPart
-            } else {
-                h = self.view.bounds.height
+            if verticalImageIndex == verticalImagesCount - 1 {
+                viewImageHeight *= vertImgsFracPart
             }
             
-            for x in 0 ..< horizontalImagesCount {
-                print("left: \(self.leftLC.constant), top: \(self.topLC.constant)")
+            for horizontalImageIndex in 0 ..< horizontalImagesCount {
+                var viewImageWidth = viewVisibleWidth
                 
-                var w: CGFloat = 0.0
-                
-                if x == horizontalImagesCount - 1 {
-                    w = self.view.bounds.width * horizontalImagesCountFracPart
-                } else {
-                    w = self.view.bounds.width
+                if horizontalImageIndex == horizontalImagesCount - 1 {
+                    viewImageWidth *= horizImgsFracPart
                 }
                 
-                let size = CGSizeMake(w, h)
+                let size = CGSizeMake(viewImageWidth, viewImageHeight)
                 
-                UIGraphicsBeginImageContextWithOptions(size, false, scale)
-                
-                if let context = UIGraphicsGetCurrentContext() {
-                    self.view.layer.renderInContext(context)
-                    
-                    let img = UIGraphicsGetImageFromCurrentImageContext()
-                    
-                    UIGraphicsEndImageContext()
-                    
-                    let paths = NSSearchPathForDirectoriesInDomains(
-                        NSSearchPathDirectory.DocumentDirectory,
-                        NSSearchPathDomainMask.UserDomainMask,
-                        true
-                    )
-                    let folderPath = paths.first
-                    
-                    if let resultImg_1 = resultImg {
-                        let originX = CGFloat(x) * self.view.bounds.width
-                        let originY = CGFloat(y) * self.view.bounds.height
-                        let origin = CGPointMake(originX, originY)
+                if let
+                    viewImage = self.getViewImage(size, scale: scale),
+                    currentResultImg = resultImg {
+                        let viewImageOriginX = CGFloat(horizontalImageIndex) * viewVisibleWidth
+                        let viewImageOriginY = CGFloat(verticalImageIndex) * viewVisibleHeight
+                        let viewImageOrigin = CGPointMake(viewImageOriginX, viewImageOriginY)
                         
-                        resultImg = self.addImage(img,
-                            toBackgroundImage: resultImg_1,
-                            origin: origin
+                        resultImg = self.addImage(viewImage,
+                            atPosition: viewImageOrigin,
+                            toBackgroundImage: currentResultImg
                         )
-                        
-                        if let
-                            resultImg_2 = resultImg,
-                            folderPath = folderPath,
-                            imageData = UIImagePNGRepresentation(resultImg_2) {
-                                let imgPath = folderPath + "/res_img\(imageCount).png"
-                                
-                                imageData.writeToFile(imgPath, atomically: true)
-                        }
-                    }
+                } else {
+                    self.topLC.constant = 0.0
+                    self.leftLC.constant = 0.0
                     
-                    if let folderPath = folderPath, imageData = UIImagePNGRepresentation(img) {
-                        let imgPath = folderPath + "/img\(imageCount).png"
-                        
-                        imageData.writeToFile(imgPath, atomically: true)
-                        
-                        print(imgPath)
-                    }
+                    self.view.removeFromSuperview()
+                    
+                    return nil
                 }
                 
-                ++imageCount
-                
-                self.leftLC.constant -= self.view.bounds.width
+                self.leftLC.constant -= viewVisibleWidth
             }
             
-            self.topLC.constant -= self.view.bounds.height
+            self.topLC.constant -= viewVisibleHeight
+        }
+        
+        return resultImg
+    }
+    
+    private func getViewImage(size: CGSize, scale: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            self.view.layer.renderInContext(context)
+            
+            let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            return viewImage
         }
         
         return nil
     }
     
-    private func bgImg(size: CGSize) -> UIImage? {
+    private func getImageWith(size: CGSize, andColor color: UIColor) -> UIImage? {
         let rect = CGRectMake(0.0, 0.0, size.width, size.height)
         
         UIGraphicsBeginImageContext(size)
         
-        let bgColor = UIColor.whiteColor()
-        
         if let context = UIGraphicsGetCurrentContext() {
-            CGContextSetFillColorWithColor(context, bgColor.CGColor)
+            CGContextSetFillColorWithColor(context, color.CGColor)
             CGContextFillRect(context, rect)
             
-            let img = UIGraphicsGetImageFromCurrentImageContext()
+            let image = UIGraphicsGetImageFromCurrentImageContext()
             
             UIGraphicsEndImageContext()
             
-            return img
+            return image
         }
         
         return nil
@@ -164,42 +142,26 @@ class FacebookSharedContentVC: UIViewController {
     
     private func addImage(
         fgImg: UIImage,
-        toBackgroundImage bgImg: UIImage,
-        origin: CGPoint
+        atPosition fgImgOrigin: CGPoint,
+        toBackgroundImage bgImg: UIImage
     ) -> UIImage {
-//        UIGraphicsBeginImageContextWithOptions(bgImg.size, false, 0.0)
-//        
-//        let bgImgRect = CGRectMake(0.0, 0.0, bgImg.size.width, bgImg.size.height)
-//        
-//        bgImg.drawInRect(bgImgRect)
-//        
-//        let fgImgRect = CGRectMake(origin.x, origin.y, fgImg.size.width, fgImg.size.height)
-//        
-//        fgImg.drawInRect(fgImgRect)
-//        
-//        let img = UIGraphicsGetImageFromCurrentImageContext()
-//        
-//        UIGraphicsEndImageContext()
-//        
-//        return img
-        
-        
-        
-        
-        
         UIGraphicsBeginImageContextWithOptions(bgImg.size, false, 0.0)
         
-        bgImg.drawInRect(CGRectMake(0.0, 0.0, bgImg.size.width, bgImg.size.height))
-        fgImg.drawInRect(CGRectMake(origin.x, origin.y, fgImg.size.width, fgImg.size.height))
+        let bgImgRect = CGRectMake(0.0, 0.0, bgImg.size.width, bgImg.size.height)
+        let fgImgRect = CGRectMake(
+            fgImgOrigin.x,
+            fgImgOrigin.y,
+            fgImg.size.width,
+            fgImg.size.height
+        )
+        
+        bgImg.drawInRect(bgImgRect)
+        fgImg.drawInRect(fgImgRect)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
         return newImage
-        
-        
-        
-        
     }
 }
