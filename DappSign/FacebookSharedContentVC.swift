@@ -14,6 +14,8 @@ class FacebookSharedContentVC: UIViewController {
     @IBOutlet weak var containerViewWidthLC: NSLayoutConstraint!
     @IBOutlet weak var containerViewHeightLC: NSLayoutConstraint!
     
+    private var dappSignVC: DappSignVC? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,9 +24,11 @@ class FacebookSharedContentVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    internal func renderInViewController(viewController: UIViewController) -> UIImage? {
-        viewController.view.addSubview(self.view)
-        
+    internal func showDapp(dapp: PFObject) {
+        self.dappSignVC?.showDappObject(dapp)
+    }
+    
+    internal func render() -> UIImage? {
         let viewWidth = self.containerViewWidthLC.constant
         let viewHeight = self.containerViewHeightLC.constant
         let viewVisibleWidth = self.view.bounds.width
@@ -53,8 +57,6 @@ class FacebookSharedContentVC: UIViewController {
         var resultImg = self.getImageWith(size, andColor: whiteColor)
         
         if resultImg == nil {
-            self.view.removeFromSuperview()
-            
             return nil
         }
         
@@ -91,8 +93,6 @@ class FacebookSharedContentVC: UIViewController {
                     self.topLC.constant = 0.0
                     self.leftLC.constant = 0.0
                     
-                    self.view.removeFromSuperview()
-                    
                     return nil
                 }
                 
@@ -104,6 +104,19 @@ class FacebookSharedContentVC: UIViewController {
         
         return resultImg
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case DappSignVC.embedSegueID:
+                self.dappSignVC = segue.destinationViewController as? DappSignVC
+            case _:
+                break
+            }
+        }
+    }
+    
+    // MARK: - private
     
     private func getViewImage(size: CGSize, scale: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
