@@ -46,16 +46,26 @@ class FacebookHelper {
         self.getHashtagsStringForDapp(dapp, completion: {
             (hashtagsString: String?, error: NSError?) -> Void in
             if let hashtagsString = hashtagsString {
-                let message = self.getPostMessageWithHashtagsString(hashtagsString, dapp: dapp)
-                
-                self.requestPublishPermission {
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.makePostWithMessage(message, picture: image, completion: completion)
-                    } else {
-                        completion(success: false, error: error)
+                self.getLinksForDapp(dapp, completion: {
+                    (linkURLStrs: [String], error: NSError?) -> Void in
+                    
+                    let message = self.getPostMessageWithHashtagsString(hashtagsString,
+                        dapp: dapp,
+                        linkURLStrs: linkURLStrs
+                    )
+                    
+                    self.requestPublishPermission {
+                        (success: Bool, error: NSError?) -> Void in
+                        if success {
+                            self.makePostWithMessage(message,
+                                picture: image,
+                                completion: completion
+                            )
+                        } else {
+                            completion(success: false, error: error)
+                        }
                     }
-                }
+                })
             } else {
                 completion(success: false, error: error)
             }
@@ -85,7 +95,8 @@ class FacebookHelper {
     }
     
     private class func getPostMessageWithHashtagsString(hashtagsString: String,
-        dapp: PFObject
+        dapp: PFObject,
+        linkURLStrs: [String]
     ) -> String {
         var updatedHashtagsString = hashtagsString
         let dailyDappHashtag = "#DailyDapp"
@@ -100,6 +111,20 @@ class FacebookHelper {
         
         if let dappSignID = dapp.objectId {
             message += "\nwww.dappsign.com/\(dappSignID)"
+        }
+        
+        if linkURLStrs.count > 0 {
+            message += "\n\n"
+            
+            for linkIndex in 0 ..< linkURLStrs.count {
+                let linkURLStr = linkURLStrs[linkIndex]
+                
+                message += "Link \(linkIndex + 1): \(linkURLStr)"
+                
+                if linkIndex < linkURLStrs.count - 1 {
+                    message += "\n\n"
+                }
+            }
         }
         
         return message
@@ -177,5 +202,40 @@ class FacebookHelper {
         }
         
         return false
+    }
+    
+    private class func getLinksForDapp(dapp: PFObject,
+        completion: (linkURLStrs: [String], error: NSError?) -> Void
+    ) {
+        Requests.downloadLinksForDapp(dapp, completion: {
+            (linkObjs: [PFObject]?, error: NSError?) -> Void in
+            if let linkObjs = linkObjs {
+                let links = linkObjs.map({
+                    (linkObj: PFObject) -> Link in
+                    let link = Link(linkObj: linkObj)
+                    
+                    return link
+                })
+                
+                let linkURLStrs = links.map({
+                    (link: Link) -> String? in
+                    return link.URLStr
+                }).filter({
+                    (linkURLStr: String?) -> Bool in
+                    if let _ = linkURLStr {
+                        return true
+                    }
+                    
+                    return false
+                }).map({
+                    (linkURLStr: String?) -> String in
+                    return linkURLStr!
+                })
+                
+                completion(linkURLStrs: linkURLStrs, error: nil)
+            } else {
+                completion(linkURLStrs: [], error: nil)
+            }
+        })
     }
 }
