@@ -12,17 +12,13 @@ import TwitterKit
 import Fabric
 import Crashlytics
 
- 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
+    
+    func application(application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?
+    ) -> Bool {
         // production
 //        Parse.setApplicationId("cDeJlDRgoAyGETx9QNNx8Dif22QnLLsuHmgbGjLN",
 //            clientKey: "uanRP24yCqZPpCNoYR0nfiN2dzJyvd42fuYl6mB3"
@@ -46,6 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 ProhibitedPhrases.setProhibitedPhrases(defaultProhibitedPhrases)
             }
+        }
+        
+        if let
+            facebookSharedContentVC = FacebookSharedContentVC.sharedInstance,
+            window = self.window {
+                var frame = window.frame
+                
+                frame.origin.y += CGRectGetHeight(frame)
+                
+                facebookSharedContentVC.view.frame = frame
+                
+                window.addSubview(facebookSharedContentVC.view)
         }
         
         return true

@@ -63,7 +63,6 @@ class DailyDappVC: UIViewController {
     private var animateableViews: [UIView]! = []
     private var dappScore: Int? = nil
     private var plusOneLabelsAnimationInfo: [PlusOneLabelAnimationInfo] = []
-    private var facebookSharedContentVC: FacebookSharedContentVC? = nil
     
     private let flipDuration = 0.5
     
@@ -139,17 +138,6 @@ class DailyDappVC: UIViewController {
             plusOneDappsCountLabelAnimationInfo,
             plusOneRepresentativeLabelAnimationInfo
         ]
-        
-        self.facebookSharedContentVC =
-            self.storyboard?.instantiateViewControllerWithIdentifier("fb") as? FacebookSharedContentVC
-        
-        if let viewController = self.facebookSharedContentVC {
-            var frame = self.view.frame
-            
-            frame.origin.y += CGRectGetHeight(frame)
-            
-            viewController.view.addSubview(self.view)
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -253,10 +241,12 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dapp = self.dapps.first {
-            self.facebookSharedContentVC?.showDapp(dapp)
-            
-            if let img = self.facebookSharedContentVC?.render() {
+        if let
+            dapp = self.dapps.first,
+            facebookSharedContentVC = FacebookSharedContentVC.sharedInstance {
+                facebookSharedContentVC.showDapp(dapp)
+                
+            if let img = facebookSharedContentVC.render() {
                 FacebookHelper.postImageToFacebook(img, dapp: dapp, completion: {
                     (success: Bool, error: NSError?) -> Void in
                     if success {

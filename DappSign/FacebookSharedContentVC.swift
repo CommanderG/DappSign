@@ -9,6 +9,8 @@
 import UIKit
 
 class FacebookSharedContentVC: UIViewController {
+    internal static let sharedInstance = StoryboardHelper.instantiateFacebookSharedContentVC()
+    
     @IBOutlet weak var topLC: NSLayoutConstraint!
     @IBOutlet weak var leftLC: NSLayoutConstraint!
     @IBOutlet weak var containerViewWidthLC: NSLayoutConstraint!
