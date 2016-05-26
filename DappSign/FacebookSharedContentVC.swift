@@ -102,6 +102,9 @@ class FacebookSharedContentVC: UIViewController {
             self.topLC.constant -= viewVisibleHeight
         }
         
+        self.topLC.constant = 0.0
+        self.leftLC.constant = 0.0
+        
         if let resultImg = resultImg {
             let facebookResultImg = self.resizeImageForFacebook(resultImg)
             
