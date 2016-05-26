@@ -53,13 +53,17 @@ class FacebookHelper {
                         message = (hashtagNames as NSArray).componentsJoinedByString(" ")
                     }
                     
+                    if message.characters.count == 0 {
+                        message += "#DailyDapp"
+                    } else {
+                        message += " #DailyDapp"
+                    }
+                    
                     message += "\nwww.dappsign.com";
                     
                     if let dappSignID = dapp.objectId {
                         message += "//" + dappSignID
                     }
-                    
-                    message += "\n#DappSign"
                     
                     let parameters = [
                         "message": message,
