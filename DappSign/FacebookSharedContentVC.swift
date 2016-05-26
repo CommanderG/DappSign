@@ -102,6 +102,12 @@ class FacebookSharedContentVC: UIViewController {
             self.topLC.constant -= viewVisibleHeight
         }
         
+        if let resultImg = resultImg {
+            let facebookResultImg = self.resizeImageForFacebook(resultImg)
+            
+            return facebookResultImg
+        }
+        
         return resultImg
     }
     
@@ -176,5 +182,27 @@ class FacebookSharedContentVC: UIViewController {
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    private func resizeImageForFacebook(image: UIImage) -> UIImage {
+        // https://www.facebook.com/help/266520536764594
+        
+        let resultImageWidthInPixels = image.size.width * image.scale
+        let facebookImageWidthInPixels: CGFloat = 960.0
+        let scale = facebookImageWidthInPixels / resultImageWidthInPixels
+        let transform = CGAffineTransformMakeScale(scale, scale)
+        let size = CGSizeApplyAffineTransform(image.size, transform)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        let rect = CGRect(origin: CGPointZero, size: size)
+        
+        image.drawInRect(rect)
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return scaledImage
     }
 }

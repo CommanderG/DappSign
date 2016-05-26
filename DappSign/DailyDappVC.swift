@@ -256,30 +256,24 @@ class DailyDappVC: UIViewController {
         if let dapp = self.dapps.first {
             self.facebookSharedContentVC?.showDapp(dapp)
             
-            let img = self.facebookSharedContentVC?.render()
-            
-            print(img)
-        }
-        
-        let dappImage = self.dappViewsContainerView.toImage()
-        
-        if let dappImage = dappImage, currentDapp = self.dapps.first {
-            FacebookHelper.postImageToFacebook(dappImage, dapp: currentDapp, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully posted."
-                    )
-                } else if let error = error {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Error: \(error)"
-                    )
-                } else {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Unknown error."
-                    )
-                }
-            })
+            if let img = self.facebookSharedContentVC?.render() {
+                FacebookHelper.postImageToFacebook(img, dapp: dapp, completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "The card has been successfully posted."
+                        )
+                    } else if let error = error {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to post the card. Error: \(error)"
+                        )
+                    } else {
+                        self.showAlertViewWithOKButtonAndMessage(
+                            "Failed to post the card. Unknown error."
+                        )
+                    }
+                })
+            }
         }
     }
     
