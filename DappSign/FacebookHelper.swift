@@ -96,10 +96,10 @@ class FacebookHelper {
             updatedHashtagsString += " \(dailyDappHashtag)"
         }
         
-        var message = "hashtagsString"
+        var message = updatedHashtagsString
         
         if let dappSignID = dapp.objectId {
-            message += "\nwww.dappsign.com\(dappSignID)"
+            message += "\nwww.dappsign.com/\(dappSignID)"
         }
         
         return message
