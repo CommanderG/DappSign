@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum SocialNetwork {
+    case Facebook
+    case Twitter
+}
+
 class SocialVC: UIViewController {
     internal static let sharedInstance = StoryboardHelper.instantiateFacebookSharedContentVC()
     
@@ -26,7 +31,9 @@ class SocialVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    internal func renderWithDapp(dapp: PFObject) -> UIImage? {
+    internal func renderWithDapp(dapp: PFObject,
+        forSocialNetwork socialNetwork: SocialNetwork
+    ) -> UIImage? {
         self.dappSignVC?.showDappObject(dapp)
         
         let viewWidth = self.containerViewWidthLC.constant
@@ -105,13 +112,18 @@ class SocialVC: UIViewController {
         self.topLC.constant = 0.0
         self.leftLC.constant = 0.0
         
-        if let resultImg = resultImg {
-            let facebookResultImg = self.resizeImageForFacebook(resultImg)
+        switch socialNetwork {
+        case .Facebook:
+            if let resultImg = resultImg {
+                let facebookResultImg = self.resizeImageForFacebook(resultImg)
+                
+                return facebookResultImg
+            }
             
-            return facebookResultImg
+            return resultImg
+        case .Twitter:
+            return resultImg
         }
-        
-        return resultImg
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
