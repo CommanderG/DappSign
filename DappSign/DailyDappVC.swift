@@ -241,29 +241,11 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let
-            dapp = self.dapps.first,
-            facebookSharedContentVC = FacebookSharedContentVC.sharedInstance {
-                facebookSharedContentVC.showDapp(dapp)
-                
-            if let img = facebookSharedContentVC.render() {
-                FacebookHelper.postImageToFacebook(img, dapp: dapp, completion: {
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully posted."
-                        )
-                    } else if let error = error {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to post the card. Error: \(error)"
-                        )
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to post the card. Unknown error."
-                        )
-                    }
-                })
-            }
+        if let dapp = self.dapps.first {
+            FacebookHelper.shareDapp(dapp, completion: {
+                (message: String) -> Void in
+                self.showAlertViewWithOKButtonAndMessage(message)
+            })
         }
     }
     

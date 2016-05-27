@@ -9,7 +9,26 @@
 import Foundation
 
 class FacebookHelper {
-    class func postImageToFacebook(
+    internal class func shareDapp(dapp: PFObject, completion: (message: String) -> Void) {
+        if let facebookSharedContentVC = FacebookSharedContentVC.sharedInstance {
+            facebookSharedContentVC.showDapp(dapp)
+            
+            if let img = facebookSharedContentVC.render() {
+                self.postImageToFacebook(img, dapp: dapp, completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
+                        completion(message: "The card has been successfully posted.")
+                    } else if let error = error {
+                        completion(message: "Failed to post the card. Error: \(error)")
+                    } else {
+                        completion(message: "Failed to post the card. Unknown error.")
+                    }
+                })
+            }
+        }
+    }
+    
+    private class func postImageToFacebook(
         image: UIImage,
         dapp: PFObject,
         completion: (success: Bool, error: NSError?) -> Void

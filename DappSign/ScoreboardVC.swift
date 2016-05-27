@@ -112,24 +112,10 @@ class ScoreboardVC: UIViewController {
     }
     
     @IBAction func postToFacebook() {
-        let dappSignImage = self.scoreboardDappSignVC?.frontSideImage()
-        
-        if let currentDapp = self.currentDapp(), dappSignImage = dappSignImage {
-            FacebookHelper.postImageToFacebook(dappSignImage, dapp: currentDapp, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully posted."
-                    )
-                } else if let error = error {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Error: \(error)"
-                    )
-                } else {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Unknown error."
-                    )
-                }
+        if let currentDapp = self.currentDapp() {
+            FacebookHelper.shareDapp(currentDapp, completion: {
+                (message: String) -> Void in
+                self.showAlertViewWithOKButtonAndMessage(message)
             })
         }
     }

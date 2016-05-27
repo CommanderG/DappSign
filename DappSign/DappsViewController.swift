@@ -189,27 +189,11 @@ class DappsViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let  currentDapp = self.dappsInfo?.dapps.first
-            ,   currentDappCardAsImage = self.dappView.toImage() {
-                FacebookHelper.postImageToFacebook(currentDappCardAsImage
-                ,   dapp: currentDapp
-                ,   completion: { (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "The card has been successfully posted."
-                        )
-                    } else {
-                        if let error = error {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Error: \(error)"
-                            )
-                        } else {
-                            self.showAlertViewWithOKButtonAndMessage(
-                                "Failed to post the card. Unknown error."
-                            )
-                        }
-                    }
-                })
+        if let dapp = self.dappsInfo?.dapps.first {
+            FacebookHelper.shareDapp(dapp, completion: {
+                (message: String) -> Void in
+                self.showAlertViewWithOKButtonAndMessage(message)
+            })
         }
     }
     

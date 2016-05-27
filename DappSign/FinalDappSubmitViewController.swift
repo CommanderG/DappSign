@@ -51,24 +51,10 @@ class FinalDappSubmitViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        let dappImage = self.dappSignView.toImage()
-        
-        if let dappObj = self.dappObj, dappImage = dappImage {
-            FacebookHelper.postImageToFacebook(dappImage, dapp: dappObj, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully posted."
-                    )
-                } else if let error = error {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Error: \(error)"
-                    )
-                } else {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to post the card. Unknown error."
-                    )
-                }
+        if let dapp = self.dappObj {
+            FacebookHelper.shareDapp(dapp, completion: {
+                (message: String) -> Void in
+                self.showAlertViewWithOKButtonAndMessage(message)
             })
         }
     }
