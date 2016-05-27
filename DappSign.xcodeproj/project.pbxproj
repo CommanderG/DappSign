@@ -125,7 +125,7 @@
 		8459C3501CC9086400421769 /* SVGMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C34F1CC9086400421769 /* SVGMapData.swift */; };
 		8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C3511CC9168200421769 /* DappMappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
-		8485EC301CF4E70100E5A889 /* FacebookSharedContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485EC2F1CF4E70100E5A889 /* FacebookSharedContentVC.swift */; settings = {ASSET_TAGS = (); }; };
+		8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485EC2F1CF4E70100E5A889 /* SocialVC.swift */; settings = {ASSET_TAGS = (); }; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
@@ -306,7 +306,7 @@
 		8459C34F1CC9086400421769 /* SVGMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapData.swift; sourceTree = "<group>"; };
 		8459C3511CC9168200421769 /* DappMappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappHelper.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
-		8485EC2F1CF4E70100E5A889 /* FacebookSharedContentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookSharedContentVC.swift; sourceTree = "<group>"; };
+		8485EC2F1CF4E70100E5A889 /* SocialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVC.swift; sourceTree = "<group>"; };
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
 		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 				27B4E5291CC52369008E3560 /* DappSignVC.swift */,
 				84AFF9521CC819E300F97FEE /* PercentsVC.swift */,
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
-				8485EC2F1CF4E70100E5A889 /* FacebookSharedContentVC.swift */,
+				8485EC2F1CF4E70100E5A889 /* SocialVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -1010,7 +1010,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27B4E5321CC546AB008E3560 /* DappSignViewsHelper.swift in Sources */,
-				8485EC301CF4E70100E5A889 /* FacebookSharedContentVC.swift in Sources */,
+				8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */,
 				274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */,
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
 				275955831CC7B68000080D63 /* ScoreboardRepresentativeVC.swift in Sources */,

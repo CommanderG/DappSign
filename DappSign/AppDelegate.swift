@@ -44,16 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        if let
-            facebookSharedContentVC = FacebookSharedContentVC.sharedInstance,
-            window = self.window {
-                var frame = window.frame
-                
-                frame.origin.y += CGRectGetHeight(frame)
-                
-                facebookSharedContentVC.view.frame = frame
-                
-                window.addSubview(facebookSharedContentVC.view)
+        if let socialVC = SocialVC.sharedInstance, window = self.window {
+            var frame = window.frame
+            
+            frame.origin.y += CGRectGetHeight(frame)
+            
+            socialVC.view.frame = frame
+            
+            window.addSubview(socialVC.view)
         }
         
         return true

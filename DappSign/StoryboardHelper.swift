@@ -48,8 +48,8 @@ class StoryboardHelper {
         return self.viewControllerWithID("dappsNavigationController")
     }
     
-    internal class func instantiateFacebookSharedContentVC() -> FacebookSharedContentVC? {
-        return self.viewControllerWithID("fb")
+    internal class func instantiateFacebookSharedContentVC() -> SocialVC? {
+        return self.viewControllerWithID("SocialVC")
     }
     
     // MARK: - private

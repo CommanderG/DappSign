@@ -10,10 +10,10 @@ import Foundation
 
 class FacebookHelper {
     internal class func shareDapp(dapp: PFObject, completion: (message: String) -> Void) {
-        if let facebookSharedContentVC = FacebookSharedContentVC.sharedInstance {
-            facebookSharedContentVC.showDapp(dapp)
+        if let socialVC = SocialVC.sharedInstance {
+            socialVC.showDapp(dapp)
             
-            if let img = facebookSharedContentVC.render() {
+            if let img = socialVC.render() {
                 self.postImageToFacebook(img, dapp: dapp, completion: {
                     (success: Bool, error: NSError?) -> Void in
                     if success {
