@@ -26,11 +26,9 @@ class SocialVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    internal func showDapp(dapp: PFObject) {
+    internal func renderWithDapp(dapp: PFObject) -> UIImage? {
         self.dappSignVC?.showDappObject(dapp)
-    }
-    
-    internal func render() -> UIImage? {
+        
         let viewWidth = self.containerViewWidthLC.constant
         let viewHeight = self.containerViewHeightLC.constant
         let viewVisibleWidth = self.view.bounds.width
