@@ -198,26 +198,25 @@ class DappsViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let 	currentDapp = self.dappsInfo?.dapps.first
-            ,	currentDappCardAsImage = self.dappView.toImage() {
-            TwitterHelper.tweetDapp(currentDapp
-            ,   image: currentDappCardAsImage
-            ,   completion: { (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully tweeted."
-                    )
-                } else {
-                    if let error = error {
+        if let currentDapp = self.dappsInfo?.dapps.first {
+            TwitterHelper.tweetDapp(currentDapp,
+                completion: {
+                    (success: Bool, error: NSError?) -> Void in
+                    if success {
                         self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Error: \(error)"
+                            "The card has been successfully tweeted."
                         )
                     } else {
-                        self.showAlertViewWithOKButtonAndMessage(
-                            "Failed to tweet the card. Unknown error."
-                        )
+                        if let error = error {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Error: \(error)"
+                            )
+                        } else {
+                            self.showAlertViewWithOKButtonAndMessage(
+                                "Failed to tweet the card. Unknown error."
+                            )
+                        }
                     }
-                }
             })
         }
     }

@@ -60,10 +60,8 @@ class FinalDappSubmitViewController: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let dappImage = self.dappSignView.toImage()
-        
-        if let dappObj = self.dappObj, dappImage = dappImage {
-            TwitterHelper.tweetDapp(dappObj, image: dappImage, completion: {
+        if let dappObj = self.dappObj {
+            TwitterHelper.tweetDapp(dappObj, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
                     self.showAlertViewWithOKButtonAndMessage(

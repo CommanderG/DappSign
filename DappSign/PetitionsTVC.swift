@@ -165,8 +165,8 @@ extension PetitionsTVC: DappProfileCellDelegate {
     }
     
     func tweetPetitionInCell(cell: DappProfileCell) {
-        if let dapp = self.dappInCell(cell), dappSignImage = cell.dappSignView.toImage() {
-            TwitterHelper.tweetDapp(dapp, image: dappSignImage, completion: {
+        if let dapp = self.dappInCell(cell) {
+            TwitterHelper.tweetDapp(dapp, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
                     self.showAlertViewWithOKButtonAndMessage(

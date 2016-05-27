@@ -81,10 +81,8 @@ class ScoreboardVC: UIViewController {
     }
     
     @IBAction func tweet() {
-        let dappSignImage = self.scoreboardDappSignVC?.frontSideImage()
-        
-        if let currentDapp = self.currentDapp(), dappSignImage = dappSignImage {
-            TwitterHelper.tweetDapp(currentDapp, image: dappSignImage, completion: {
+        if let currentDapp = self.currentDapp() {
+            TwitterHelper.tweetDapp(currentDapp, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
                     self.showAlertViewWithOKButtonAndMessage(

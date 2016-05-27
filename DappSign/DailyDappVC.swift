@@ -250,10 +250,8 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        let dappImage = self.dappViewsContainerView.toImage()
-        
-        if let dappImage = dappImage, currentDapp = self.dapps.first {
-            TwitterHelper.tweetDapp(currentDapp, image: dappImage, completion: {
+        if let currentDapp = self.dapps.first {
+            TwitterHelper.tweetDapp(currentDapp, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
                     self.showAlertViewWithOKButtonAndMessage(

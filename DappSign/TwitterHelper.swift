@@ -10,8 +10,8 @@ import Foundation
 import TwitterKit
 
 class TwitterHelper {
-    class func tweetDapp(dapp: PFObject,
-        image: UIImage,
+    internal class func tweetDapp(
+        dapp: PFObject,
         completion: (success: Bool, error: NSError?) -> Void
     ) -> Void {
         Twitter.sharedInstance().logInWithCompletion {
@@ -19,62 +19,66 @@ class TwitterHelper {
             if let session = session {
                 print("Signed in Twitter as \(session.userName)")
                 
-                self.uploadImageToTwitterWithUserID(session.userID, image: image, completion: {
-                    (mediaID: String?) -> Void in
-                    if let mediaID = mediaID {
-                        let hashtagsRelation = dapp.relationForKey("hashtags")
-                        
-                        hashtagsRelation.query().findObjectsInBackgroundWithBlock({
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
-                            var status = ""
-                            
-                            if objects != nil {
-                                let hashtags = objects as! [PFObject]
-                                let hashtagNames = hashtags.filter({
-                                    $0["name"] != nil
-                                }).map({
-                                    $0["name"] as! String
-                                }).map({
-                                    "#" + $0
-                                })
+                if let
+                    socialVC = SocialVC.sharedInstance,
+                    image = socialVC.renderWithDapp(dapp, forSocialNetwork: .Twitter) {
+                        self.uploadImageToTwitterWithUserID(session.userID, image: image, completion: {
+                            (mediaID: String?) -> Void in
+                            if let mediaID = mediaID {
+                                let hashtagsRelation = dapp.relationForKey("hashtags")
                                 
-                                status = (hashtagNames as NSArray).componentsJoinedByString(" ")
-                            }
-                            
-                            status += "\nwww.dappsign.com";
-                            
-                            if let dappSignID = dapp.objectId {
-                                status += "//" + dappSignID
-                            }
-                            
-                            status += "\n#DappSign"
-                            
-                            self.tweetImageWithUserID(session.userID,
-                                mediaID: mediaID,
-                                status: status,
-                                completion: {
-                                    (success: Bool) -> Void in
-                                    if success {
-                                        completion(success: true, error: nil)
-                                    } else {
-                                        completion(success: false, error: nil)
+                                hashtagsRelation.query().findObjectsInBackgroundWithBlock({
+                                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                                    var status = ""
+                                    
+                                    if objects != nil {
+                                        let hashtags = objects as! [PFObject]
+                                        let hashtagNames = hashtags.filter({
+                                            $0["name"] != nil
+                                        }).map({
+                                            $0["name"] as! String
+                                        }).map({
+                                            "#" + $0
+                                        })
+                                        
+                                        status = (hashtagNames as NSArray).componentsJoinedByString(" ")
                                     }
-                            })
+                                    
+                                    status += "\nwww.dappsign.com";
+                                    
+                                    if let dappSignID = dapp.objectId {
+                                        status += "//" + dappSignID
+                                    }
+                                    
+                                    status += "\n#DappSign"
+                                    
+                                    self.tweetImageWithUserID(session.userID,
+                                        mediaID: mediaID,
+                                        status: status,
+                                        completion: {
+                                            (success: Bool) -> Void in
+                                            if success {
+                                                completion(success: true, error: nil)
+                                            } else {
+                                                completion(success: false, error: nil)
+                                            }
+                                    })
+                                })
+                            } else {
+                                let errorUserInfo = [
+                                    NSLocalizedDescriptionKey:
+                                    "Failed to upload image of the card to Twitter"
+                                ]
+                                let error = NSError(
+                                    domain: "Twitter image upload",
+                                    code: 0,
+                                    userInfo: errorUserInfo
+                                )
+                                
+                                completion(success: false, error: error)
+                            }
                         })
-                    } else {
-                        let errorUserInfo = [
-                            NSLocalizedDescriptionKey:
-                            "Failed to upload image of the card to Twitter"
-                        ]
-                        let error = NSError(
-                            domain: "Twitter image upload",
-                            code: 0,
-                            userInfo: errorUserInfo
-                        )
-                        
-                        completion(success: false, error: error)
-                    }
-                })
+                }
             } else {
                 print("Failed to sign in")
                 
