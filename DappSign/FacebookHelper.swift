@@ -124,10 +124,10 @@ class FacebookHelper {
             updatedHashtagsString += " \(dailyDappHashtag)"
         }
         
-        var message = updatedHashtagsString
+        var message = "A petition to your rep in the House:\n\\n(updatedHashtagsString)"
         
         if let dappSignID = dapp.objectId {
-            message += "\nwww.dappsign.com/\(dappSignID)"
+            message += "\n\nwww.dappsign.com/\(dappSignID)"
         }
         
         if linkURLStrs.count > 0 {
