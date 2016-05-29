@@ -138,6 +138,92 @@ class DappsHelper {
         return dappScore
     }
     
+    internal class func getHashtagsStringForDapp(dapp: PFObject,
+        completion: (hashtagsString: String?, error: NSError?) -> Void
+    ) {
+        let hashtagsRelation = dapp.relationForKey("hashtags")
+        let query = hashtagsRelation.query()
+        
+        query.findObjectsInBackgroundWithBlock({
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if let objects = objects as? [PFObject] {
+                let hashtags = objects.map({
+                    (object: PFObject) -> String? in
+                    let hashtagName = object["name"] as? String
+                    
+                    return hashtagName
+                }).map({
+                    (hashtagName: String?) -> String in
+                    return hashtagName!
+                }).map({
+                    (hashtagName: String) -> String in
+                    return "#" + hashtagName
+                })
+                
+                let hashtagsString = hashtags.joinWithSeparator(" ")
+                
+                completion(hashtagsString: hashtagsString, error: nil)
+            } else {
+                completion(hashtagsString: nil, error: error)
+            }
+        })
+    }
+    
+    internal class func getLinksForDapp(dapp: PFObject,
+        completion: (linkURLStrs: [String], error: NSError?) -> Void
+    ) {
+        Requests.downloadLinksForDapp(dapp, completion: {
+            (linkObjs: [PFObject]?, error: NSError?) -> Void in
+            if let linkObjs = linkObjs {
+                let links = linkObjs.map({
+                    (linkObj: PFObject) -> Link in
+                    let link = Link(linkObj: linkObj)
+                    
+                    return link
+                })
+                
+                let linkURLStrs = links.map({
+                    (link: Link) -> String? in
+                    return link.URLStr
+                }).filter({
+                    (linkURLStr: String?) -> Bool in
+                    if let _ = linkURLStr {
+                        return true
+                    }
+                    
+                    return false
+                }).map({
+                    (linkURLStr: String?) -> String in
+                    return linkURLStr!
+                })
+                
+                completion(linkURLStrs: linkURLStrs, error: nil)
+            } else {
+                completion(linkURLStrs: [], error: nil)
+            }
+        })
+    }
+    
+    internal class func joinDappLinkURLStrings(linkURLStrings: [String],
+        separator: String
+    ) -> String {
+        var string = ""
+        
+        if linkURLStrings.count > 0 {
+            for linkIndex in 0 ..< linkURLStrings.count {
+                let linkURLStr = linkURLStrings[linkIndex]
+                
+                string += "Link \(linkIndex + 1): \(linkURLStr)"
+                
+                if linkIndex < linkURLStrings.count - 1 {
+                    string += separator
+                }
+            }
+        }
+        
+        return string
+    }
+    
     // MARK: -
     
     private class func usersDappScoresWithUsers(users: [PFUser]) -> [UserDappScore] {
