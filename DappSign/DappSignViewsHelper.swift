@@ -23,7 +23,7 @@ class DappSignViewsHelper {
         view: UIView!,
         lineSpacing: DappSignLineSpacing
     ) {
-        let fontSize: CGFloat = 25.0
+        var fontSize: CGFloat = 25.0
         
         if let dapp = dapp {
             let defaultFont = UIFont.systemFontOfSize(fontSize)
@@ -44,10 +44,12 @@ class DappSignViewsHelper {
                 
                 break
             case .SocialSharingImage:
+                fontSize = 30.0
+                
                 if let dappStatement = dapp["dappStatement"] as? String {
                     let paragraphStyle = NSMutableParagraphStyle()
                     
-                    paragraphStyle.lineSpacing = 40.0
+                    paragraphStyle.lineSpacing = 20.0
                     paragraphStyle.alignment = .Center
                     
                     let attributedString = NSMutableAttributedString(string: dappStatement)
