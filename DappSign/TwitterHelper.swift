@@ -70,35 +70,22 @@ class TwitterHelper {
         DappsHelper.getHashtagsStringForDapp(dapp) {
             (hashtagsString: String?, error: NSError?) -> Void in
             if let hashtagsString = hashtagsString {
-                DappsHelper.getLinksForDapp(dapp, completion: {
-                    (linkURLStrs: [String], error: NSError?) -> Void in
-                    if let error = error {
-                        completion(status: nil, error: error)
-                    } else {
-                        var updatedHashtagsString = hashtagsString
-                        let dailyDappHashtag = "#DailyDapp"
-                        
-                        if hashtagsString.characters.count == 0 {
-                            updatedHashtagsString += dailyDappHashtag
-                        } else {
-                            updatedHashtagsString += " \(dailyDappHashtag)"
-                        }
-                        
-                        var status = updatedHashtagsString
-                        
-                        if let dappSignID = dapp.objectId {
-                            status += " www.dappsign.com/\(dappSignID)"
-                        }
-                        
-                        if linkURLStrs.count > 0 {
-                            status += " " + DappsHelper.joinDappLinkURLStrings(linkURLStrs,
-                                separator: " "
-                            )
-                        }
-                        
-                        completion(status: status, error: nil)
-                    }
-                })
+                var updatedHashtagsString = hashtagsString
+                let dailyDappHashtag = "#DailyDapp"
+                
+                if hashtagsString.characters.count == 0 {
+                    updatedHashtagsString += dailyDappHashtag
+                } else {
+                    updatedHashtagsString += " \(dailyDappHashtag)"
+                }
+                
+                var status = updatedHashtagsString
+                
+                if let dappSignID = dapp.objectId {
+                    status += " www.dappsign.com/\(dappSignID)"
+                }
+                
+                completion(status: status, error: nil)
             } else {
                 completion(status: nil, error: error)
             }
