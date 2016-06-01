@@ -15,7 +15,7 @@ enum DappCardType {
     case DappCardTypeMapp
 }
 
-struct PlusOneLabelAnimationInfo {
+struct LabelAnimationInfo {
     let label: UILabel!
     let topLC: NSLayoutConstraint!
     let maxTopSpaceConstraint: CGFloat
@@ -23,46 +23,46 @@ struct PlusOneLabelAnimationInfo {
 }
 
 class DailyDappVC: UIViewController {
-    @IBOutlet weak var dappViewsContainerView:      SwipeableView!
-    @IBOutlet weak var dappSignView:                UIView!
-    @IBOutlet weak var dappMappView:                UIView!
-    @IBOutlet weak var tweetThisCardButton:         UIButton!
-    @IBOutlet weak var showLinksButton:             UIButton!
-    @IBOutlet weak var shareOnFacebookButton:       UIButton!
-    @IBOutlet weak var profileButton:               UIButton!
-    @IBOutlet weak var composeButton:               UIButton!
-    @IBOutlet weak var searchButton:                UIButton!
-    @IBOutlet weak var dappScoreLabel:              UILabel!
-    @IBOutlet weak var plusOneDappsCountLabel:      UILabel!
-    @IBOutlet weak var plusOneRepresentativeLabel:  UILabel!
-    @IBOutlet weak var signedLabel:                 UILabel!
-    @IBOutlet weak var hashtagsLabel:               UILabel!
-    @IBOutlet weak var dailyDappTimeLeftLabel:      UILabel!
-    @IBOutlet weak var topContainerView:            UIView!
+    @IBOutlet weak var dappViewsContainerView     : SwipeableView!
+    @IBOutlet weak var dappSignView               : UIView!
+    @IBOutlet weak var dappMappView               : UIView!
+    @IBOutlet weak var tweetThisCardButton        : UIButton!
+    @IBOutlet weak var showLinksButton            : UIButton!
+    @IBOutlet weak var shareOnFacebookButton      : UIButton!
+    @IBOutlet weak var profileButton              : UIButton!
+    @IBOutlet weak var composeButton              : UIButton!
+    @IBOutlet weak var searchButton               : UIButton!
+    @IBOutlet weak var dappScoreLabel             : UILabel!
+    @IBOutlet weak var plusDappsCountLabel        : UILabel!
+    @IBOutlet weak var plusOneRepresentativeLabel : UILabel!
+    @IBOutlet weak var signedLabel                : UILabel!
+    @IBOutlet weak var hashtagsLabel              : UILabel!
+    @IBOutlet weak var dailyDappTimeLeftLabel     : UILabel!
+    @IBOutlet weak var topContainerView           : UIView!
     
-    @IBOutlet weak var plusOneDappsCountLabelTopConstraint:     NSLayoutConstraint!
-    @IBOutlet weak var plusOneRepresentativeLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var signedLabelBottomConstraint:             NSLayoutConstraint!
+    @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
+    @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
+    @IBOutlet weak var signedLabelBottomConstraint             : NSLayoutConstraint!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
-    private var dappSignVC: DappSignVC? = nil
-    private var dappMappVC: DappMappVC? = nil
-    private var representativeVC: RepresentativeVC? = nil
-    private var visibleDappView: UIView!
-    private var lastDappedDapp: PFObject?
-    private var dappBackSideLinksVC: DappBackSideLinksVC?
-    private var dailyDappTimeLeftLabelUpdateTimer: NSTimer? = nil
-    private var dailyDappTimeLeftUpdateTimer: NSTimer? = nil
-    private var dailyDappTimeLeft: (Int, Int)? = nil
-    private var animatingPlusOneLabels = false
-    private var dapps: [PFObject] = []
-    private var lastIntroductoryDappID: String? = nil
-    private var timer: NSTimer? = nil
-    private var currentDappCardType: DappCardType = .DappCardTypeSign
-    private var animateableViews: [UIView]! = []
-    private var dappScore: Int? = nil
-    private var plusOneLabelsAnimationInfo: [PlusOneLabelAnimationInfo] = []
+    private var dappSignVC                        : DappSignVC?          = nil
+    private var dappMappVC                        : DappMappVC?          = nil
+    private var representativeVC                  : RepresentativeVC?    = nil
+    private var visibleDappView                   : UIView!              = nil
+    private var lastDappedDapp                    : PFObject?            = nil
+    private var dappBackSideLinksVC               : DappBackSideLinksVC? = nil
+    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?             = nil
+    private var dailyDappTimeLeftUpdateTimer      : NSTimer?             = nil
+    private var dailyDappTimeLeft                 : (Int, Int)?          = nil
+    private var animatingPlusOneLabels            : Bool                 = false
+    private var dapps                             : [PFObject]           = []
+    private var lastIntroductoryDappID            : String?              = nil
+    private var timer                             : NSTimer?             = nil
+    private var currentDappCardType               : DappCardType         = .DappCardTypeSign
+    private var animateableViews                  : [UIView]!            = []
+    private var dappScore                         : Int?                 = nil
+    private var labelsAnimationInfo               : [LabelAnimationInfo] = []
     
     private let flipDuration = 0.5
     
@@ -103,7 +103,7 @@ class DailyDappVC: UIViewController {
         )
         
         let labels: [UIView] = [
-            self.plusOneDappsCountLabel,
+            self.plusDappsCountLabel,
             self.plusOneRepresentativeLabel,
             self.signedLabel
         ]
@@ -120,21 +120,21 @@ class DailyDappVC: UIViewController {
         
         self.dappScoreLabel.alpha = 0.0
         
-        let plusOneDappsCountLabelAnimationInfo = PlusOneLabelAnimationInfo(
-            label: self.plusOneDappsCountLabel,
-            topLC: self.plusOneDappsCountLabelTopConstraint,
+        let plusOneDappsCountLabelAnimationInfo = LabelAnimationInfo(
+            label: self.plusDappsCountLabel,
+            topLC: self.plusDappsCountLabelTopConstraint,
             maxTopSpaceConstraint: -75.0,
             minTopSpaceConstraint: -75.0 + 80.0
         )
         
-        let plusOneRepresentativeLabelAnimationInfo = PlusOneLabelAnimationInfo(
+        let plusOneRepresentativeLabelAnimationInfo = LabelAnimationInfo(
             label: self.plusOneRepresentativeLabel,
             topLC: self.plusOneRepresentativeLabelTopConstraint,
             maxTopSpaceConstraint: -15.0,
             minTopSpaceConstraint: -15.0 + 80.0
         )
         
-        self.plusOneLabelsAnimationInfo = [
+        self.labelsAnimationInfo = [
             plusOneDappsCountLabelAnimationInfo,
             plusOneRepresentativeLabelAnimationInfo
         ]
@@ -181,9 +181,9 @@ class DailyDappVC: UIViewController {
         
         self.hideSignedLabel()
         
-        for plusOneLabelAnimationInfo in self.plusOneLabelsAnimationInfo {
-            let topLC = plusOneLabelAnimationInfo.topLC
-            let maxTopSpaceConstraint = plusOneLabelAnimationInfo.maxTopSpaceConstraint
+        for labelAnimationInfo in self.labelsAnimationInfo {
+            let topLC = labelAnimationInfo.topLC
+            let maxTopSpaceConstraint = labelAnimationInfo.maxTopSpaceConstraint
             
             topLC.constant = maxTopSpaceConstraint
         }
@@ -445,15 +445,25 @@ class DailyDappVC: UIViewController {
         
         Requests.userWithID(currentUserID) {
             (user: PFUser?, error: NSError?) -> Void in
-            if let user = user, dappScore = user["dappScore"] as? Int {
-                if self.dappScore == nil {
-                    self.dappScore = dappScore
-                    
+            if let user = user, newDappScore = user["dappScore"] as? Int {
+                if let dappScore = self.dappScore {
+                    if dappScore < newDappScore {
+                        let deltaDappScore = newDappScore - dappScore
+                        
+                        self.plusDappsCountLabel.text = "+\(deltaDappScore)"
+                        
+                        self.showDappScorePlusOneLabel {
+                            self.plusDappsCountLabel.text = "+1"
+                        }
+                    }
+                } else {
                     self.dappScoreLabel.alpha = 1.0
                     
                     AnimationHelper.showView(self.dappScoreLabel)
                     self.initAnimateableViews()
                 }
+                
+                self.dappScore = newDappScore
             }
             
             var dappScoreStr = ""
@@ -654,10 +664,10 @@ class DailyDappVC: UIViewController {
     private func showPlusOneLabels(completion: Void -> Void) {
         let animationDuration = 0.6
         
-        for var index = 0; index < self.plusOneLabelsAnimationInfo.count; ++index {
-            let labelsCount = Double(self.plusOneLabelsAnimationInfo.count)
+        for var index = 0; index < self.labelsAnimationInfo.count; ++index {
+            let labelsCount = Double(self.labelsAnimationInfo.count)
             let animationDelay = animationDuration / labelsCount * Double(index)
-            let plusOneLabelAnimationInfo = self.plusOneLabelsAnimationInfo[index]
+            let animationInfo = self.labelsAnimationInfo[index]
             
             UIView.animateWithDuration(animationDuration,
                 delay: animationDelay,
@@ -665,24 +675,22 @@ class DailyDappVC: UIViewController {
                 initialSpringVelocity: 0.0,
                 options: .CurveLinear,
                 animations: {
-                    ViewHelper.showViews([ plusOneLabelAnimationInfo.label ])
+                    ViewHelper.showViews([ animationInfo.label ])
                     
-                    plusOneLabelAnimationInfo.topLC.constant =
-                        plusOneLabelAnimationInfo.minTopSpaceConstraint
+                    animationInfo.topLC.constant = animationInfo.minTopSpaceConstraint
                     
                     self.view.layoutIfNeeded()
                 }, completion: {
                     (finished: Bool) -> Void in
                     UIView.animateWithDuration(0.3,
                         animations: {
-                            ViewHelper.hideViews([ plusOneLabelAnimationInfo.label ])
+                            ViewHelper.hideViews([ animationInfo.label ])
                         }, completion: {
                             (finished: Bool) -> Void in
-                            plusOneLabelAnimationInfo.topLC.constant =
-                                plusOneLabelAnimationInfo.maxTopSpaceConstraint
+                            animationInfo.topLC.constant = animationInfo.maxTopSpaceConstraint
                             
-                            if let lastPlusOneLabelAI = self.plusOneLabelsAnimationInfo.last {
-                                if lastPlusOneLabelAI.label == plusOneLabelAnimationInfo.label {
+                            if let lastAnimationInfo = self.labelsAnimationInfo.last {
+                                if lastAnimationInfo.label == animationInfo.label {
                                     completion()
                                 }
                             }
@@ -727,6 +735,46 @@ class DailyDappVC: UIViewController {
                 )
             }
         )
+    }
+    
+    private func showDappScorePlusOneLabel(completion: Void -> Void) {
+        let animationDuration = 0.6
+        
+        var plusOneDappsCountLabelAnimationInfo: LabelAnimationInfo? = nil
+        
+        for labelAnimationInfo in self.labelsAnimationInfo {
+            if labelAnimationInfo.label == self.plusDappsCountLabel {
+                plusOneDappsCountLabelAnimationInfo = labelAnimationInfo
+                
+                break
+            }
+        }
+        
+        if let animationInfo = plusOneDappsCountLabelAnimationInfo {
+            UIView.animateWithDuration(animationDuration,
+                delay: 0.0,
+                usingSpringWithDamping: 0.4,
+                initialSpringVelocity: 0.0,
+                options: .CurveLinear,
+                animations: {
+                    ViewHelper.showViews([ animationInfo.label ])
+                    
+                    animationInfo.topLC.constant = animationInfo.minTopSpaceConstraint
+                    
+                    self.view.layoutIfNeeded()
+                }, completion: {
+                    (finished: Bool) -> Void in
+                    UIView.animateWithDuration(0.3,
+                        animations: {
+                            ViewHelper.hideViews([ animationInfo.label ])
+                        }, completion: {
+                            (finished: Bool) -> Void in
+                            animationInfo.topLC.constant = animationInfo.maxTopSpaceConstraint
+                        }
+                    )
+                }
+            )
+        }
     }
     
     // MARK: -
