@@ -20,19 +20,64 @@ class DappSignViewsHelper {
     internal class func showDappObject(dapp: PFObject?,
         dappStatementLabel: UILabel!,
         dappSubmitterLabel: UILabel!,
-        view: UIView!
+        view: UIView!,
+        lineSpacing: DappSignLineSpacing
     ) {
+        let fontSize: CGFloat = 25.0
+        
         if let dapp = dapp {
-            dappStatementLabel.text = dapp["dappStatement"] as? String
+            let defaultFont = UIFont.systemFontOfSize(fontSize)
             
-            if let
-                dappFontName = dapp["dappFont"] as? String,
-                fontName = FontName(rawValue: dappFontName) {
-                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
+            dappStatementLabel.font = defaultFont
+            
+            switch lineSpacing {
+            case .Default:
+                dappStatementLabel.text = dapp["dappStatement"] as? String
+                
+                if let
+                    dappFontName = dapp["dappFont"] as? String,
+                    fontName = FontName(rawValue: dappFontName) {
+                        let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                        
+                        dappStatementLabel.font = UIFont(name: fontFileName, size: fontSize)
+                }
+                
+                break
+            case .SocialSharingImage:
+                if let dappStatement = dapp["dappStatement"] as? String {
+                    let paragraphStyle = NSMutableParagraphStyle()
                     
-                    dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+                    paragraphStyle.lineSpacing = 40.0
+                    paragraphStyle.alignment = .Center
+                    
+                    let attributedString = NSMutableAttributedString(string: dappStatement)
+                    let allStringRange = NSMakeRange(0, attributedString.length)
+                    
+                    attributedString.addAttribute(NSParagraphStyleAttributeName,
+                        value: paragraphStyle,
+                        range: allStringRange
+                    )
+                    
+                    if let
+                        dappFontName = dapp["dappFont"] as? String,
+                        fontName = FontName(rawValue: dappFontName) {
+                            let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                            if let font = UIFont(name: fontFileName, size: fontSize) {
+                                attributedString.addAttribute(NSFontAttributeName,
+                                    value: font,
+                                    range: allStringRange
+                                )
+                            }
+                    }
+                    
+                    dappStatementLabel.attributedText = attributedString
+                } else {
+                    dappStatementLabel.text = ""
+                }
+                
+                break
             }
-            
+        
             if let
                 dappBgColoName = dapp["dappBackgroundColor"] as? String,
                 colorName = ColorName(rawValue: dappBgColoName) {
@@ -43,10 +88,11 @@ class DappSignViewsHelper {
             
             let fontFileName = DappFonts.fontFileNameWithName(.Exo)
             
-            dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+            dappStatementLabel.font = UIFont(name: fontFileName, size: fontSize)
         }
         
         view.backgroundColor = dappStatementLabel.backgroundColor
+        
         self.initDappSubmitterLabelTextWithDapp(dapp, dappSubmitterLabel: dappSubmitterLabel)
     }
     

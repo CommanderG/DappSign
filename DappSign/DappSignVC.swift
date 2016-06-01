@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum DappSignLineSpacing {
+    case Default
+    case SocialSharingImage
+}
+
 class DappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel: UILabel!
     @IBOutlet weak var dappSubmitterLabel: UILabel!
@@ -25,11 +30,12 @@ class DappSignVC: UIViewController {
     
     // MARK: - internal
     
-    internal func showDappObject(dapp: PFObject?) {
+    internal func showDappObject(dapp: PFObject?, lineSpacing: DappSignLineSpacing = .Default) {
         DappSignViewsHelper.showDappObject(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
-            view: self.view
+            view: self.view,
+            lineSpacing: lineSpacing
         )
     }
     

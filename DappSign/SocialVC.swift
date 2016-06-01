@@ -34,7 +34,7 @@ class SocialVC: UIViewController {
     internal func renderWithDapp(dapp: PFObject,
         forSocialNetwork socialNetwork: SocialNetwork
     ) -> UIImage? {
-        self.dappSignVC?.showDappObject(dapp)
+        self.dappSignVC?.showDappObject(dapp, lineSpacing: .SocialSharingImage)
         
         let viewWidth = self.containerViewWidthLC.constant
         let viewHeight = self.containerViewHeightLC.constant

@@ -54,7 +54,8 @@ class ScoreboardDappSignFrontSideVC: UIViewController {
         DappSignViewsHelper.showDappObject(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
-            view: self.view
+            view: self.view,
+            lineSpacing: .Default
         )
         self.secondsLeft = self.maxSeconds
         self.initAndFireCountdownTimer()
