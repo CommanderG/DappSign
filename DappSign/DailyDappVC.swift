@@ -41,12 +41,14 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var topContainerView           : UIView!
     @IBOutlet weak var oneMinuteLeftLabel         : UILabel!
     @IBOutlet weak var dailyDappBeginsInLabel     : UILabel!
+    @IBOutlet weak var secondsLeftLabel           : UILabel!
     
     @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
     @IBOutlet weak var signedLabelBottomConstraint             : NSLayoutConstraint!
     @IBOutlet weak var oneMinuteLeftLabelBottomLC              : NSLayoutConstraint!
     @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
+    @IBOutlet weak var secondsLeftLabelBottomLC                : NSLayoutConstraint!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -111,7 +113,8 @@ class DailyDappVC: UIViewController {
             self.plusOneRepresentativeLabel,
             self.signedLabel,
             self.oneMinuteLeftLabel,
-            self.dailyDappBeginsInLabel
+            self.dailyDappBeginsInLabel,
+            self.secondsLeftLabel
         ]
         
         ViewHelper.hideViews(labels)
@@ -190,6 +193,7 @@ class DailyDappVC: UIViewController {
         self.hideLabel(self.dailyDappBeginsInLabel,
             labelBottomLC: self.dailyDappBeginsInLabelBottomLC
         )
+        self.hideLabel(self.secondsLeftLabel, labelBottomLC: self.secondsLeftLabelBottomLC)
         
         for labelAnimationInfo in self.labelsAnimationInfo {
             let topLC = labelAnimationInfo.topLC
@@ -522,10 +526,6 @@ class DailyDappVC: UIViewController {
             } else {
                 self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
             }
-            
-            if minutes <= 0 && seconds <= 0 {
-                self.transitionDelegate?.transitionFromViewController(self)
-            }
         } else {
             if show.colon {
                 self.dailyDappTimeLeftLabel.text = "--:--"
@@ -544,14 +544,25 @@ class DailyDappVC: UIViewController {
                     self.showCountdownLabel(self.oneMinuteLeftLabel,
                         countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
                     )
-                } else if (minutes == 0) {
-                    if (seconds == 6) {
-                        self.showCountdownLabel(self.dailyDappBeginsInLabel,
-                            countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC
-                        )
-                    } else if (seconds < 6 && seconds > 0) {
-                        
-                    }
+                } else if (minutes == 0 && seconds == 5) {
+                    self.showCountdownLabel(self.dailyDappBeginsInLabel,
+                        countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
+                        completion: {
+                            self.hideTopUI()
+                            self.hideBottomUI()
+                            
+                            self.dappViewsContainerView.hidden = true
+                            
+                            self.showLabelsCountingDownToOneFrom(5, completion: {
+                                self.showTopUI()
+                                self.showBottomUI()
+                                
+                                self.dappViewsContainerView.hidden = false
+                                
+                                self.transitionDelegate?.transitionFromViewController(self)
+                            })
+                        }
+                    )
                 }
             }
         } else {
@@ -838,6 +849,25 @@ class DailyDappVC: UIViewController {
                 self.dappViewsContainerView.hidden = false
                 
                 completion?()
+            }
+        )
+    }
+    
+    private func showLabelsCountingDownToOneFrom(n: Int, completion: (Void -> Void)? = nil) {
+        if n == 0 {
+            completion?()
+            
+            return
+        }
+        
+        self.secondsLeftLabel.text = "\(n)"
+        
+        self.showLabel(self.secondsLeftLabel,
+            bottomLC: self.secondsLeftLabelBottomLC,
+            completion: {
+                delay(0.05) {
+                    self.showLabelsCountingDownToOneFrom(n - 1, completion: completion)
+                }
             }
         )
     }

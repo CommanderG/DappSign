@@ -39,6 +39,7 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -2579,6 +2580,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIh-Pe-YFI">
+                                <rect key="frame" x="149" y="267" width="23" height="51"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="38"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980392156862" green="0.60392156862745094" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2610,9 +2618,11 @@
                             <constraint firstItem="rvm-Fb-8NV" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="mP4-IE-40T"/>
                             <constraint firstAttribute="trailing" secondItem="Yu2-AW-APN" secondAttribute="trailing" constant="25" id="p1i-Vd-OIP"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="20" id="q9Z-eg-Dvm"/>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="eIh-Pe-YFI" secondAttribute="bottom" constant="250" id="rlM-ny-F4k"/>
                             <constraint firstItem="6D9-D3-dkP" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="spN-fJ-sNu"/>
                             <constraint firstAttribute="trailing" secondItem="bLv-ni-urr" secondAttribute="trailing" constant="25" id="t2W-0f-nKg"/>
                             <constraint firstAttribute="trailing" secondItem="ayB-nL-AF9" secondAttribute="trailing" constant="20" id="tHT-S5-a0n"/>
+                            <constraint firstItem="eIh-Pe-YFI" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="w5D-bX-O0Y"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="10" id="yVX-II-mav"/>
                             <constraint firstItem="HzC-sE-TlJ" firstAttribute="top" secondItem="1s5-eb-nyT" secondAttribute="bottom" constant="5" id="yap-c3-wNQ"/>
                         </constraints>
@@ -2636,6 +2646,8 @@
                         <outlet property="plusOneRepresentativeLabelTopConstraint" destination="UZ5-Kl-WR6" id="kdn-cd-uig"/>
                         <outlet property="profileButton" destination="Vml-Hd-jrV" id="ic7-m5-LdB"/>
                         <outlet property="searchButton" destination="AK8-hn-XfR" id="eMg-q7-0U5"/>
+                        <outlet property="secondsLeftLabel" destination="eIh-Pe-YFI" id="gyH-5c-up8"/>
+                        <outlet property="secondsLeftLabelBottomLC" destination="rlM-ny-F4k" id="w08-Qm-aMF"/>
                         <outlet property="shareOnFacebookButton" destination="Yu2-AW-APN" id="lrk-tP-7Uq"/>
                         <outlet property="showLinksButton" destination="Jb6-vv-27X" id="bjo-lN-0dl"/>
                         <outlet property="signedLabel" destination="rvm-Fb-8NV" id="wEr-FR-YNX"/>
