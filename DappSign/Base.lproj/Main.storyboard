@@ -37,6 +37,7 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -2557,11 +2558,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ONE MINUTE LEFT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D9-D3-dkP">
+                                <rect key="frame" x="79" y="196" width="162" height="176"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="AUA-7h-alL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="44"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980392156862" green="0.60392156862745094" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="6D9-D3-dkP" secondAttribute="bottom" constant="196" id="0od-yM-WHB"/>
                             <constraint firstItem="iRV-8I-LT2" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="25" id="1AX-Br-YGh"/>
                             <constraint firstItem="kSv-5s-8f3" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="19" id="2Ks-1M-V9j"/>
                             <constraint firstAttribute="trailing" secondItem="1s5-eb-nyT" secondAttribute="trailing" id="31i-Wl-xM1"/>
@@ -2585,6 +2597,7 @@
                             <constraint firstItem="rvm-Fb-8NV" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="mP4-IE-40T"/>
                             <constraint firstAttribute="trailing" secondItem="Yu2-AW-APN" secondAttribute="trailing" constant="25" id="p1i-Vd-OIP"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="20" id="q9Z-eg-Dvm"/>
+                            <constraint firstItem="6D9-D3-dkP" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="spN-fJ-sNu"/>
                             <constraint firstAttribute="trailing" secondItem="bLv-ni-urr" secondAttribute="trailing" constant="25" id="t2W-0f-nKg"/>
                             <constraint firstAttribute="trailing" secondItem="ayB-nL-AF9" secondAttribute="trailing" constant="20" id="tHT-S5-a0n"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="10" id="yVX-II-mav"/>
@@ -2600,6 +2613,8 @@
                         <outlet property="dappSignView" destination="zae-OY-t6s" id="8oO-Or-Yox"/>
                         <outlet property="dappViewsContainerView" destination="osF-qS-9VI" id="VG8-ml-Uw0"/>
                         <outlet property="hashtagsLabel" destination="1s5-eb-nyT" id="TWp-9H-nTm"/>
+                        <outlet property="oneMinuteLeftLabel" destination="6D9-D3-dkP" id="jp2-BL-sQB"/>
+                        <outlet property="oneMinuteLeftLabelBottomLC" destination="0od-yM-WHB" id="9PK-AC-npv"/>
                         <outlet property="plusDappsCountLabel" destination="GdT-Xa-E10" id="kR5-Q1-htP"/>
                         <outlet property="plusDappsCountLabelTopConstraint" destination="Cyi-tJ-ZpM" id="d8I-ZQ-eCz"/>
                         <outlet property="plusOneRepresentativeLabel" destination="ayB-nL-AF9" id="sEz-V7-ttL"/>

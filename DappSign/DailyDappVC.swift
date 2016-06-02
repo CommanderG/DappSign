@@ -39,10 +39,12 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var hashtagsLabel              : UILabel!
     @IBOutlet weak var dailyDappTimeLeftLabel     : UILabel!
     @IBOutlet weak var topContainerView           : UIView!
+    @IBOutlet weak var oneMinuteLeftLabel         : UILabel!
     
     @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
     @IBOutlet weak var signedLabelBottomConstraint             : NSLayoutConstraint!
+    @IBOutlet weak var oneMinuteLeftLabelBottomLC              : NSLayoutConstraint!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -105,7 +107,8 @@ class DailyDappVC: UIViewController {
         let labels: [UIView] = [
             self.plusDappsCountLabel,
             self.plusOneRepresentativeLabel,
-            self.signedLabel
+            self.signedLabel,
+            self.oneMinuteLeftLabel
         ]
         
         ViewHelper.hideViews(labels)
@@ -179,7 +182,8 @@ class DailyDappVC: UIViewController {
             repeats:  true
         )
         
-        self.hideSignedLabel()
+        self.hideLabel(self.signedLabel, labelBottomLC: self.signedLabelBottomConstraint)
+        self.hideLabel(self.oneMinuteLeftLabel, labelBottomLC: self.oneMinuteLeftLabelBottomLC)
         
         for labelAnimationInfo in self.labelsAnimationInfo {
             let topLC = labelAnimationInfo.topLC
@@ -528,6 +532,12 @@ class DailyDappVC: UIViewController {
     internal func updateDailyDappTimeLeft() {
         if let timeInterval = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd() {
             self.dailyDappTimeLeft = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
+            
+            if let (minutes, seconds) = self.dailyDappTimeLeft {
+                if (minutes == 1 && seconds == 0) {
+                    self.showOneMinuteLeftLabel()
+                }
+            }
         } else {
             self.dailyDappTimeLeft = nil
         }
@@ -641,10 +651,10 @@ class DailyDappVC: UIViewController {
         return true
     }
     
-    private func hideSignedLabel() {
-        let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
+    private func hideLabel(label: UILabel!, labelBottomLC: NSLayoutConstraint!) {
+        let labelHeight = CGRectGetHeight(label.frame)
         
-        self.signedLabelBottomConstraint.constant = -signedLabelHeight
+        labelBottomLC.constant = -labelHeight
     }
     
     private func performDappAnimationsWithCompletion(completion: Void -> Void) {
@@ -701,12 +711,17 @@ class DailyDappVC: UIViewController {
         }
     }
     
-    private func showSignedLabel(completion: (Void -> Void)?) {
-        let viewHeight = CGRectGetHeight(self.view.frame)
-        let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
-        let bottomConst = (viewHeight - signedLabelHeight) / 2
+    private func showLabel(label: UILabel!,
+        bottomLC: NSLayoutConstraint!,
+        completion: (Void -> Void)? = nil
+    ) {
+        NSLog("show")
         
-        ViewHelper.showViews([ self.signedLabel ])
+        let viewHeight = CGRectGetHeight(self.view.frame)
+        let labelHeight = CGRectGetHeight(label.frame)
+        let bottomConst = (viewHeight - labelHeight) / 2
+        
+        ViewHelper.showViews([ label ])
         
         UIView.animateWithDuration(0.5,
             delay: 0.0,
@@ -714,21 +729,30 @@ class DailyDappVC: UIViewController {
             initialSpringVelocity: 0.0,
             options: .CurveLinear,
             animations: {
-                self.signedLabelBottomConstraint.constant = bottomConst
-                self.signedLabel.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                bottomLC.constant = bottomConst
+                
+                NSLog("anim. 1., %f", bottomLC.constant)
+                
+                label.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 
                 self.view.layoutIfNeeded()
             }, completion: {
                 (finished: Bool) -> Void in
+                NSLog("finished. 1.")
                 UIView.animateWithDuration(0.3,
                     delay: 0.15,
                     options: .CurveLinear,
                     animations: {
-                        ViewHelper.hideViews([ self.signedLabel ])
-                    }, completion: { (finished: Bool) -> Void in
-                        self.hideSignedLabel()
+                        ViewHelper.hideViews([ label ])
+                    }, completion: {
+                        (finished: Bool) -> Void in
+                        NSLog("finished. 2.")
                         
-                        self.signedLabel.transform = CGAffineTransformIdentity
+                        self.hideLabel(label, labelBottomLC: bottomLC)
+                        
+                        NSLog("anim. 2., %f", bottomLC.constant)
+                        
+                        label.transform = CGAffineTransformIdentity
                         
                         completion?()
                     }
@@ -775,6 +799,37 @@ class DailyDappVC: UIViewController {
                 }
             )
         }
+    }
+    
+    private func showOneMinuteLeftLabel(completion: (Void -> Void)? = nil) {
+        struct OneMinuteLeftLabel {
+            static var canBeShown = true
+        }
+        
+        if !OneMinuteLeftLabel.canBeShown {
+            return
+        }
+        
+        OneMinuteLeftLabel.canBeShown = false
+        
+        self.hideTopUI()
+        self.hideBottomUI()
+        
+        self.dappViewsContainerView.hidden = true
+        
+        self.showLabel(self.oneMinuteLeftLabel,
+            bottomLC: self.oneMinuteLeftLabelBottomLC,
+            completion: {
+                OneMinuteLeftLabel.canBeShown = true
+                
+                self.showTopUI()
+                self.showBottomUI()
+                
+                self.dappViewsContainerView.hidden = false
+                
+                completion?()
+            }
+        )
     }
     
     // MARK: -
@@ -904,7 +959,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                 self.sendRequestsForDapp(currentDapp, dapped: dapped)
                 
                 if dapped {
-                    self.showSignedLabel(nil)
+                    self.showLabel(self.signedLabel, bottomLC: self.signedLabelBottomConstraint)
                     UIView.animateWithDuration(0.4,
                         animations: {
                             self.dappViewsContainerView.alpha = 0.0
@@ -978,7 +1033,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
     
     func willSnapBack() {
         spring(0.5) {
-            self.hideSignedLabel()
+            self.hideLabel(self.signedLabel, labelBottomLC: self.signedLabelBottomConstraint)
             self.view.layoutIfNeeded()
         }
     }
