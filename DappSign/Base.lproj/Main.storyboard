@@ -38,6 +38,7 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -2568,6 +2569,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp begins in ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaM-mX-B5y">
+                                <rect key="frame" x="60" y="233" width="200" height="102"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Fed-kF-eK9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="38"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.027450980392156862" green="0.60392156862745094" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2586,11 +2597,13 @@
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="16" id="P9h-Aj-5Ld"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="rvm-Fb-8NV" secondAttribute="bottom" constant="250" id="Szj-oP-D5E"/>
                             <constraint firstAttribute="trailing" secondItem="kSv-5s-8f3" secondAttribute="trailing" constant="19" id="TAr-pd-vxQ"/>
+                            <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="ZaM-mX-B5y" secondAttribute="bottom" constant="233" id="TSu-0q-eiV"/>
                             <constraint firstItem="ayB-nL-AF9" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="65" id="UZ5-Kl-WR6"/>
                             <constraint firstItem="bLv-ni-urr" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="64" id="VxM-2s-KUI"/>
                             <constraint firstItem="Jb6-vv-27X" firstAttribute="top" secondItem="HzC-sE-TlJ" secondAttribute="bottom" constant="7" id="ZLQ-Wc-naG"/>
                             <constraint firstItem="bLv-ni-urr" firstAttribute="leading" secondItem="iRV-8I-LT2" secondAttribute="trailing" constant="8" id="ZhZ-Bd-VOE"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Jb6-vv-27X" secondAttribute="bottom" constant="16" id="gwy-xt-gbf"/>
+                            <constraint firstItem="ZaM-mX-B5y" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="irE-CH-nTN"/>
                             <constraint firstItem="1s5-eb-nyT" firstAttribute="top" secondItem="bLv-ni-urr" secondAttribute="bottom" constant="2" id="l9q-bY-dLu"/>
                             <constraint firstItem="1s5-eb-nyT" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" id="lMk-Rs-urq"/>
                             <constraint firstItem="HzC-sE-TlJ" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="24" id="m9q-Eb-B9c"/>
@@ -2607,6 +2620,8 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="composeButton" destination="DgS-C9-laX" id="zAY-Ii-UAc"/>
+                        <outlet property="dailyDappBeginsInLabel" destination="ZaM-mX-B5y" id="cw7-S5-mAf"/>
+                        <outlet property="dailyDappBeginsInLabelBottomLC" destination="TSu-0q-eiV" id="sYZ-Mr-fN0"/>
                         <outlet property="dailyDappTimeLeftLabel" destination="iXB-gx-DWe" id="J6L-PO-dba"/>
                         <outlet property="dappMappView" destination="Rnh-hP-uaa" id="a0O-a4-8IY"/>
                         <outlet property="dappScoreLabel" destination="iRV-8I-LT2" id="WCb-nb-3bl"/>

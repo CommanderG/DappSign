@@ -40,11 +40,13 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var dailyDappTimeLeftLabel     : UILabel!
     @IBOutlet weak var topContainerView           : UIView!
     @IBOutlet weak var oneMinuteLeftLabel         : UILabel!
+    @IBOutlet weak var dailyDappBeginsInLabel     : UILabel!
     
     @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
     @IBOutlet weak var signedLabelBottomConstraint             : NSLayoutConstraint!
     @IBOutlet weak var oneMinuteLeftLabelBottomLC              : NSLayoutConstraint!
+    @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
     
     internal var transitionDelegate: TransitionDelegate? = nil
     
@@ -108,7 +110,8 @@ class DailyDappVC: UIViewController {
             self.plusDappsCountLabel,
             self.plusOneRepresentativeLabel,
             self.signedLabel,
-            self.oneMinuteLeftLabel
+            self.oneMinuteLeftLabel,
+            self.dailyDappBeginsInLabel
         ]
         
         ViewHelper.hideViews(labels)
@@ -184,6 +187,9 @@ class DailyDappVC: UIViewController {
         
         self.hideLabel(self.signedLabel, labelBottomLC: self.signedLabelBottomConstraint)
         self.hideLabel(self.oneMinuteLeftLabel, labelBottomLC: self.oneMinuteLeftLabelBottomLC)
+        self.hideLabel(self.dailyDappBeginsInLabel,
+            labelBottomLC: self.dailyDappBeginsInLabelBottomLC
+        )
         
         for labelAnimationInfo in self.labelsAnimationInfo {
             let topLC = labelAnimationInfo.topLC
@@ -535,7 +541,17 @@ class DailyDappVC: UIViewController {
             
             if let (minutes, seconds) = self.dailyDappTimeLeft {
                 if (minutes == 1 && seconds == 0) {
-                    self.showOneMinuteLeftLabel()
+                    self.showCountdownLabel(self.oneMinuteLeftLabel,
+                        countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
+                    )
+                } else if (minutes == 0) {
+                    if (seconds == 6) {
+                        self.showCountdownLabel(self.dailyDappBeginsInLabel,
+                            countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC
+                        )
+                    } else if (seconds < 6 && seconds > 0) {
+                        
+                    }
                 }
             }
         } else {
@@ -715,8 +731,6 @@ class DailyDappVC: UIViewController {
         bottomLC: NSLayoutConstraint!,
         completion: (Void -> Void)? = nil
     ) {
-        NSLog("show")
-        
         let viewHeight = CGRectGetHeight(self.view.frame)
         let labelHeight = CGRectGetHeight(label.frame)
         let bottomConst = (viewHeight - labelHeight) / 2
@@ -731,14 +745,11 @@ class DailyDappVC: UIViewController {
             animations: {
                 bottomLC.constant = bottomConst
                 
-                NSLog("anim. 1., %f", bottomLC.constant)
-                
                 label.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 
                 self.view.layoutIfNeeded()
             }, completion: {
                 (finished: Bool) -> Void in
-                NSLog("finished. 1.")
                 UIView.animateWithDuration(0.3,
                     delay: 0.15,
                     options: .CurveLinear,
@@ -746,11 +757,7 @@ class DailyDappVC: UIViewController {
                         ViewHelper.hideViews([ label ])
                     }, completion: {
                         (finished: Bool) -> Void in
-                        NSLog("finished. 2.")
-                        
                         self.hideLabel(label, labelBottomLC: bottomLC)
-                        
-                        NSLog("anim. 2., %f", bottomLC.constant)
                         
                         label.transform = CGAffineTransformIdentity
                         
@@ -801,26 +808,29 @@ class DailyDappVC: UIViewController {
         }
     }
     
-    private func showOneMinuteLeftLabel(completion: (Void -> Void)? = nil) {
-        struct OneMinuteLeftLabel {
+    private func showCountdownLabel(countdownLabel: UILabel!,
+        countdownLabelBottomLC: NSLayoutConstraint!,
+        completion: (Void -> Void)? = nil
+    ) {
+        struct CountdownLabel {
             static var canBeShown = true
         }
         
-        if !OneMinuteLeftLabel.canBeShown {
+        if !CountdownLabel.canBeShown {
             return
         }
         
-        OneMinuteLeftLabel.canBeShown = false
+        CountdownLabel.canBeShown = false
         
         self.hideTopUI()
         self.hideBottomUI()
         
         self.dappViewsContainerView.hidden = true
         
-        self.showLabel(self.oneMinuteLeftLabel,
-            bottomLC: self.oneMinuteLeftLabelBottomLC,
+        self.showLabel(countdownLabel,
+            bottomLC: countdownLabelBottomLC,
             completion: {
-                OneMinuteLeftLabel.canBeShown = true
+                CountdownLabel.canBeShown = true
                 
                 self.showTopUI()
                 self.showBottomUI()
