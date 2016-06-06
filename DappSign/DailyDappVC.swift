@@ -563,6 +563,8 @@ class DailyDappVC: UIViewController {
                             })
                         }
                     )
+                } else if (minutes <= 0 && seconds <= 0) {
+                    self.transitionDelegate?.transitionFromViewController(self)
                 }
             }
         } else {
