@@ -63,7 +63,7 @@
         <!--ScoreboardVC-->
         <scene sceneID="wTc-DD-CRb">
             <objects>
-                <viewController storyboardIdentifier="scoreboardVC" id="PwR-Zb-Hy4" customClass="ScoreboardVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scoreboardVC" id="PwR-Zb-Hy4" customClass="ScoreboardVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oUj-zD-NFi"/>
                         <viewControllerLayoutGuide type="bottom" id="Rji-im-Yxj"/>
@@ -416,7 +416,7 @@
         <!--LoginVC-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="LoginVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="LoginVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -426,7 +426,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Democracy App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9c-HG-7TN">
-                                <rect key="frame" x="68" y="204" width="185" height="26"/>
+                                <rect key="frame" x="68" y="207" width="185" height="26"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="185" id="Pd6-8t-0VF"/>
@@ -436,13 +436,9 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DappSign" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
-                                <rect key="frame" x="51" y="117" width="218" height="64"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-E1-ZtY">
+                                <rect key="frame" x="44" y="117" width="232" height="67"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="218" id="JtJ-hC-p6d"/>
-                                    <constraint firstAttribute="height" constant="64" id="fLO-9x-XqD"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -503,7 +499,7 @@
         <!--RepresentativeVC-->
         <scene sceneID="sIZ-SD-iK6">
             <objects>
-                <viewController id="8KN-fy-Qhr" customClass="RepresentativeVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8KN-fy-Qhr" customClass="RepresentativeVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BhI-pp-RyO"/>
                         <viewControllerLayoutGuide type="bottom" id="kqB-vf-33U"/>
@@ -561,7 +557,7 @@
         <!--Dapp MappVC-->
         <scene sceneID="LlE-nX-Gjd">
             <objects>
-                <viewController storyboardIdentifier="dappMappVC" id="KpH-yQ-AVM" customClass="DappMappVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="dappMappVC" id="KpH-yQ-AVM" customClass="DappMappVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iIq-Tr-8Ex"/>
                         <viewControllerLayoutGuide type="bottom" id="juu-6z-660"/>
@@ -619,7 +615,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eub-gR-DO5" customClass="PercentsView" customModule="DappSign" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eub-gR-DO5" customClass="PercentsView" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="44" y="293" width="60" height="60"/>
                                 <animations/>
                                 <constraints>
@@ -784,7 +780,7 @@
         <!--MainVC-->
         <scene sceneID="5ma-5g-yJf">
             <objects>
-                <viewController id="Hgo-sM-Fqq" customClass="MainVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hgo-sM-Fqq" customClass="MainVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8D2-Tw-27Y"/>
                         <viewControllerLayoutGuide type="bottom" id="SDD-CH-ZAW"/>
@@ -803,7 +799,7 @@
         <!--LinkVC-->
         <scene sceneID="Yrn-Ur-Cja">
             <objects>
-                <viewController storyboardIdentifier="LinkVC" id="RoV-uS-VGX" customClass="LinkVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LinkVC" id="RoV-uS-VGX" customClass="LinkVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z5g-LK-ljs"/>
                         <viewControllerLayoutGuide type="bottom" id="liN-kt-W0J"/>
@@ -901,7 +897,7 @@
         <!--Dapps View Controller-->
         <scene sceneID="Pgl-cl-cad">
             <objects>
-                <viewController id="xMM-mz-go9" customClass="DappsViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xMM-mz-go9" customClass="DappsViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kry-Hm-l5C"/>
                         <viewControllerLayoutGuide type="bottom" id="v1L-KF-kX8"/>
@@ -1129,7 +1125,7 @@
         <!--Profile-->
         <scene sceneID="gWr-LM-htg">
             <objects>
-                <viewController id="Q8A-2e-yyY" customClass="ProfileViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Q8A-2e-yyY" customClass="ProfileViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5g8-4v-4qN"/>
                         <viewControllerLayoutGuide type="bottom" id="lQ7-Ig-0M9"/>
@@ -1327,7 +1323,7 @@
         <!--Admin-->
         <scene sceneID="lVc-PM-esS">
             <objects>
-                <tableViewController id="AnE-wK-30e" customClass="AdminTVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="AnE-wK-30e" customClass="AdminTVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="o81-2a-XCA">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1518,7 +1514,7 @@
         <!--No Array Dapps-->
         <scene sceneID="06S-ss-Qab">
             <objects>
-                <tableViewController title="No Array Dapps" id="xFt-5Q-mqi" customClass="DappsWithoutArrayTVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="No Array Dapps" id="xFt-5Q-mqi" customClass="DappsWithoutArrayTVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EcF-Do-VJP">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1560,14 +1556,14 @@
         <!--Dapps Table View Controller-->
         <scene sceneID="Hlb-zG-ZSx">
             <objects>
-                <tableViewController id="Mdb-Kg-7xy" customClass="DappsTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Mdb-Kg-7xy" customClass="DappsTableViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Z6-LJ-EkI">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="44" id="9tV-Ff-7qU" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="44" id="9tV-Ff-7qU" customClass="DappCardCell" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9tV-Ff-7qU" id="snw-bu-eDm">
@@ -1620,7 +1616,7 @@
         <!--Search-->
         <scene sceneID="fg3-xU-1Bh">
             <objects>
-                <tableViewController id="qHv-ol-044" customClass="SearchTableViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="qHv-ol-044" customClass="SearchTableViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5vD-zq-xWA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1646,7 +1642,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DappSign" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="default" indentationWidth="10" reuseIdentifier="dappCell" rowHeight="44" id="T84-8X-LD8" customClass="DappCardCell" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="154" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T84-8X-LD8" id="1lD-Lw-W7s">
@@ -1716,7 +1712,7 @@
         <!--Zip Code View Controller-->
         <scene sceneID="W0c-qM-8D3">
             <objects>
-                <viewController id="b3w-fh-uIK" customClass="ZipCodeViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b3w-fh-uIK" customClass="ZipCodeViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="csI-jl-BEi"/>
                         <viewControllerLayoutGuide type="bottom" id="7Rb-cy-3Sk"/>
@@ -1824,7 +1820,7 @@
         <!--SocialVC-->
         <scene sceneID="REU-ww-f9L">
             <objects>
-                <viewController storyboardIdentifier="SocialVC" id="Rur-3e-RKm" customClass="SocialVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SocialVC" id="Rur-3e-RKm" customClass="SocialVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kdU-la-2IH"/>
                         <viewControllerLayoutGuide type="bottom" id="t1U-RD-NxX"/>
@@ -2021,7 +2017,7 @@
         <!--Dapp SignVC-->
         <scene sceneID="1th-ZQ-QiE">
             <objects>
-                <viewController id="H3r-2u-yja" customClass="DappSignVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="H3r-2u-yja" customClass="DappSignVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xZr-Os-rbT"/>
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
@@ -2210,7 +2206,7 @@
         <!--Dapp Back Side LinksVC-->
         <scene sceneID="fGF-c1-anh">
             <objects>
-                <viewController storyboardIdentifier="DappBackSideLinksVC" id="uCZ-4j-vJ6" customClass="DappBackSideLinksVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DappBackSideLinksVC" id="uCZ-4j-vJ6" customClass="DappBackSideLinksVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nRf-Gp-OZb"/>
                         <viewControllerLayoutGuide type="bottom" id="Cfd-TZ-9Mo"/>
@@ -2296,7 +2292,7 @@
         <!--Daily DappVC-->
         <scene sceneID="01m-FC-o7H">
             <objects>
-                <viewController storyboardIdentifier="dailyDappVC" id="EG5-sL-doW" customClass="DailyDappVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="dailyDappVC" id="EG5-sL-doW" customClass="DailyDappVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1wQ-Gn-sef"/>
                         <viewControllerLayoutGuide type="bottom" id="9LT-gV-9QU"/>
@@ -2500,7 +2496,7 @@
                                             <segue destination="uCZ-4j-vJ6" kind="embed" identifier="embedDappBackSideLinksVC" id="VIb-Ct-6ma"/>
                                         </connections>
                                     </containerView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osF-qS-9VI" customClass="SwipeableView" customModule="DailyDapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="272" height="363"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zae-OY-t6s">
@@ -2661,7 +2657,7 @@
         <!--Add Dapp View Controller-->
         <scene sceneID="TsA-eP-hJD">
             <objects>
-                <viewController id="Run-wI-cqj" customClass="AddDappViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Run-wI-cqj" customClass="AddDappViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tWS-wq-AeD"/>
                         <viewControllerLayoutGuide type="bottom" id="apy-Z1-UZh"/>
@@ -2734,7 +2730,7 @@
                                     <constraint firstItem="71P-fY-lCw" firstAttribute="leading" secondItem="bcb-Gi-DLY" secondAttribute="trailing" constant="4" id="t8e-LB-NU1"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJa-9Z-fOu" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJa-9Z-fOu" customClass="SwipeableView" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="75" width="280" height="279"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JHT-lw-Hmf">
@@ -3200,7 +3196,7 @@
         <!--Add Dapp LinksVC-->
         <scene sceneID="X2g-8d-dnS">
             <objects>
-                <viewController id="rgj-nO-uI9" customClass="AddDappLinksVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rgj-nO-uI9" customClass="AddDappLinksVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SB6-R8-5e2"/>
                         <viewControllerLayoutGuide type="bottom" id="i3y-g4-Bxn"/>
@@ -3273,7 +3269,7 @@
                                     <constraint firstItem="stc-la-bJy" firstAttribute="leading" secondItem="ZYn-58-7hO" secondAttribute="leading" id="wJS-p4-T8W"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xQ-jp-maW" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xQ-jp-maW" customClass="SwipeableView" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="115" width="280" height="392"/>
                                 <animations/>
                                 <connections>
@@ -3308,7 +3304,7 @@
         <!--Final Dapp Submit View Controller-->
         <scene sceneID="Itr-os-Csg">
             <objects>
-                <viewController id="TpI-xw-hu0" customClass="FinalDappSubmitViewController" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TpI-xw-hu0" customClass="FinalDappSubmitViewController" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dOA-gx-OMr"/>
                         <viewControllerLayoutGuide type="bottom" id="0dP-lB-hma"/>
@@ -3445,7 +3441,7 @@
                                     <constraint firstItem="rxQ-QQ-fdb" firstAttribute="leading" secondItem="1tz-TQ-Xo9" secondAttribute="trailing" constant="2" id="tbb-bh-EOb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zY-fB-rZt" customClass="SwipeableView" customModule="DappSign" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zY-fB-rZt" customClass="SwipeableView" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="158" width="280" height="393"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK2-Ak-S5o">
@@ -3497,7 +3493,7 @@
         <!--Dapp LinksVC-->
         <scene sceneID="zp8-lC-DXf">
             <objects>
-                <viewController id="NaO-nL-Zz9" customClass="DappLinksVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NaO-nL-Zz9" customClass="DappLinksVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rik-gQ-giC"/>
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
@@ -3511,7 +3507,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DappSign" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DailyDapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="232" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="euJ-7K-3P7" id="dpn-2j-Ir6">
@@ -3564,7 +3560,7 @@
                                             <outlet property="linkIndexLabel" destination="JtU-QY-NAL" id="I3E-Qu-Sl3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="enterLinkCell" rowHeight="84" id="iAG-7k-JeT" customClass="EnterLinkCell" customModule="DappSign" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="enterLinkCell" rowHeight="84" id="iAG-7k-JeT" customClass="EnterLinkCell" customModule="DailyDapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="112" width="232" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iAG-7k-JeT" id="acG-Ob-k0P">
@@ -3630,7 +3626,7 @@
                                             <outlet property="linkAddressTextField" destination="Q8a-sZ-gdP" id="2hX-Le-Q42"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="linkCell" rowHeight="58" id="rVO-vc-0KH" customClass="LinkCell" customModule="DappSign" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="linkCell" rowHeight="58" id="rVO-vc-0KH" customClass="LinkCell" customModule="DailyDapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="196" width="232" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rVO-vc-0KH" id="6kI-fU-Jdl">
@@ -3702,7 +3698,7 @@
                                             <outlet property="linkTitleLabel" destination="HU7-Jb-EB1" id="jGc-3r-gSQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteLinkCell" rowHeight="80" id="VjQ-QH-e2X" customClass="DeleteLinkCell" customModule="DappSign" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteLinkCell" rowHeight="80" id="VjQ-QH-e2X" customClass="DeleteLinkCell" customModule="DailyDapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="254" width="232" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VjQ-QH-e2X" id="FiV-Y9-dgt">
@@ -3835,7 +3831,7 @@
         <!--DailyDapp Start Time-->
         <scene sceneID="saj-wb-Kq1">
             <objects>
-                <viewController id="VAw-yF-NTF" customClass="DailyDappStartTimeVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VAw-yF-NTF" customClass="DailyDappStartTimeVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Und-et-bqn"/>
                         <viewControllerLayoutGuide type="bottom" id="mjm-ym-ydX"/>
@@ -3879,21 +3875,21 @@
         <!--PetitionsTVC-->
         <scene sceneID="xak-e3-Gsb">
             <objects>
-                <tableViewController id="fob-3V-qSp" customClass="PetitionsTVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fob-3V-qSp" customClass="PetitionsTVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="267" sectionHeaderHeight="28" sectionFooterHeight="28" id="2o6-y7-MbP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="222"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="267" id="DRt-IW-ePf" customClass="DappProfileCell" customModule="DappSign" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="267" id="DRt-IW-ePf" customClass="DappProfileCell" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="267"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DRt-IW-ePf" id="fqS-W6-4tn">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="267"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-fm-fHV" customClass="DappSignView" customModule="DappSign" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-fm-fHV" customClass="DappSignView" customModule="DailyDapp" customModuleProvider="target">
                                             <rect key="frame" x="18" y="0.0" width="180" height="257"/>
                                             <animations/>
                                             <constraints>
@@ -4033,7 +4029,7 @@
         <!--Edit Links-->
         <scene sceneID="Sth-3F-d7h">
             <objects>
-                <viewController id="nEk-aB-hTr" customClass="EditDappLinksVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nEk-aB-hTr" customClass="EditDappLinksVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CxA-X5-EER"/>
                         <viewControllerLayoutGuide type="bottom" id="KYz-93-VaS"/>
@@ -4068,7 +4064,7 @@
         <!--Embed DappVC-->
         <scene sceneID="l9f-t8-zCf">
             <objects>
-                <viewController storyboardIdentifier="embedDappVC" id="w2R-OH-fci" customClass="EmbedDappVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="embedDappVC" id="w2R-OH-fci" customClass="EmbedDappVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dcy-6V-USl"/>
                         <viewControllerLayoutGuide type="bottom" id="4Ff-qO-pe1"/>
@@ -4218,7 +4214,7 @@
         <!--Scoreboard Dapp SignVC-->
         <scene sceneID="L7V-Kh-fFz">
             <objects>
-                <viewController id="aw4-Wj-Yab" customClass="ScoreboardDappSignVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aw4-Wj-Yab" customClass="ScoreboardDappSignVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ahg-db-Hag"/>
                         <viewControllerLayoutGuide type="bottom" id="jfz-un-nQf"/>
@@ -4236,7 +4232,7 @@
         <!--Scoreboard Dapp Sign Front SideVC-->
         <scene sceneID="MNf-m5-cEC">
             <objects>
-                <viewController storyboardIdentifier="ScoreboardDappSignFrontSideVC" id="icw-bs-bQo" customClass="ScoreboardDappSignFrontSideVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScoreboardDappSignFrontSideVC" id="icw-bs-bQo" customClass="ScoreboardDappSignFrontSideVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zli-P7-0lr"/>
                         <viewControllerLayoutGuide type="bottom" id="FTe-ZS-XXj"/>
@@ -4407,7 +4403,7 @@
         <!--Scoreboard RepresentativeVC-->
         <scene sceneID="eNZ-D2-Txp">
             <objects>
-                <viewController id="82Z-z3-lPJ" customClass="ScoreboardRepresentativeVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="82Z-z3-lPJ" customClass="ScoreboardRepresentativeVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZHS-1P-tMS"/>
                         <viewControllerLayoutGuide type="bottom" id="Rug-RY-UFn"/>
@@ -4496,7 +4492,7 @@
         <!--PercentsVC-->
         <scene sceneID="YpW-qB-3vL">
             <objects>
-                <viewController id="TCb-ok-ZyG" customClass="PercentsVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TCb-ok-ZyG" customClass="PercentsVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I0X-hU-XC6"/>
                         <viewControllerLayoutGuide type="bottom" id="szS-ga-nae"/>
@@ -4556,7 +4552,7 @@
         <!--Scoreboard Dapp MappVC-->
         <scene sceneID="LUW-MO-At5">
             <objects>
-                <viewController id="6iX-fb-apt" customClass="ScoreboardDappMappVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6iX-fb-apt" customClass="ScoreboardDappMappVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wl3-xk-Z7u"/>
                         <viewControllerLayoutGuide type="bottom" id="wNT-nH-xsa"/>
@@ -4757,7 +4753,7 @@
         <!--SegmentsVC-->
         <scene sceneID="vyq-yf-LQq">
             <objects>
-                <viewController id="ZtG-39-1nm" customClass="SegmentsVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZtG-39-1nm" customClass="SegmentsVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qpb-3s-pXV"/>
                         <viewControllerLayoutGuide type="bottom" id="MUd-rY-oKg"/>
@@ -4835,7 +4831,7 @@
         <!--RepresentativeVC-->
         <scene sceneID="z7a-3F-8FS">
             <objects>
-                <viewController id="6dF-JK-tmE" customClass="RepresentativeVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6dF-JK-tmE" customClass="RepresentativeVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mle-0c-RaG"/>
                         <viewControllerLayoutGuide type="bottom" id="oIQ-Xl-B5k"/>
@@ -4893,7 +4889,7 @@
         <!--Profile Dapp MappVC-->
         <scene sceneID="6aG-e1-q9r">
             <objects>
-                <viewController storyboardIdentifier="profileDappMappVC" id="MI1-aN-0Hj" customClass="ProfileDappMappVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileDappMappVC" id="MI1-aN-0Hj" customClass="ProfileDappMappVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3je-d1-zcq"/>
                         <viewControllerLayoutGuide type="bottom" id="TrV-4C-pxD"/>
@@ -5027,7 +5023,7 @@
         <!--Email LoginVC-->
         <scene sceneID="iVY-fh-ExM">
             <objects>
-                <viewController id="irj-PG-aY3" customClass="EmailLoginVC" customModule="DappSign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="irj-PG-aY3" customClass="EmailLoginVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="krk-aH-ALr"/>
                         <viewControllerLayoutGuide type="bottom" id="yxt-O9-7qA"/>
@@ -5180,12 +5176,12 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8GL-5h-4zG"/>
-        <segue reference="fu7-hF-c08"/>
-        <segue reference="gia-uV-wAw"/>
-        <segue reference="ss8-uX-HsK"/>
-        <segue reference="Tb5-sO-Miv"/>
         <segue reference="bpX-mN-qEi"/>
         <segue reference="bkt-29-1zK"/>
+        <segue reference="iW7-1y-626"/>
+        <segue reference="fu7-hF-c08"/>
+        <segue reference="8GL-5h-4zG"/>
+        <segue reference="Tb5-sO-Miv"/>
+        <segue reference="gia-uV-wAw"/>
     </inferredMetricsTieBreakers>
 </document>
