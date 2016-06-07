@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CD9C9741AA1D59900046CA2"
-               BuildableName = "DappSign.app"
-               BlueprintName = "DappSign"
-               ReferencedContainer = "container:DappSign.xcodeproj">
+               BuildableName = "DailyDapp.app"
+               BlueprintName = "DailyDapp"
+               ReferencedContainer = "container:DailyDapp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CD9C98C1AA1D59900046CA2"
-               BuildableName = "DappSignTests.xctest"
-               BlueprintName = "DappSignTests"
-               ReferencedContainer = "container:DappSign.xcodeproj">
+               BuildableName = "DailyDapp.xctest"
+               BlueprintName = "DailyDappTests"
+               ReferencedContainer = "container:DailyDapp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD9C9741AA1D59900046CA2"
-            BuildableName = "DappSign.app"
-            BlueprintName = "DappSign"
-            ReferencedContainer = "container:DappSign.xcodeproj">
+            BuildableName = "DailyDapp.app"
+            BlueprintName = "DailyDapp"
+            ReferencedContainer = "container:DailyDapp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD9C9741AA1D59900046CA2"
-            BuildableName = "DappSign.app"
-            BlueprintName = "DappSign"
-            ReferencedContainer = "container:DappSign.xcodeproj">
+            BuildableName = "DailyDapp.app"
+            BlueprintName = "DailyDapp"
+            ReferencedContainer = "container:DailyDapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4CD9C9741AA1D59900046CA2"
-            BuildableName = "DappSign.app"
-            BlueprintName = "DappSign"
-            ReferencedContainer = "container:DappSign.xcodeproj">
+            BuildableName = "DailyDapp.app"
+            BlueprintName = "DailyDapp"
+            ReferencedContainer = "container:DailyDapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
