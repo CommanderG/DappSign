@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1174,17 +1174,62 @@
                                     <constraint firstAttribute="height" constant="2" id="Ztd-1q-fdv"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-jf-3nF">
+                            <containerView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-jf-3nF">
                                 <rect key="frame" x="0.0" y="186" width="108" height="92"/>
                                 <animations/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="HaK-mP-zaL"/>
                                     <constraint firstAttribute="height" constant="92" id="aks-gA-eYz"/>
-                                    <constraint firstAttribute="width" constant="108" id="mUQ-8z-klg"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="6dF-JK-tmE" kind="embed" identifier="embedRepresentativeVC" id="4rd-vx-zWb"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rge-lr-WWe">
+                                <rect key="frame" x="108" y="188" width="154" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-N3-9uB">
+                                        <rect key="frame" x="16" y="0.0" width="36" height="17"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0df-ZJ-knT">
+                                        <rect key="frame" x="0.0" y="20" width="32" height="27"/>
+                                        <animations/>
+                                        <state key="normal" image="twitterIcon"/>
+                                        <connections>
+                                            <action selector="showRepresentativeTwitterProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="hAK-vu-RHQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-ZI-L22">
+                                        <rect key="frame" x="32" y="20" width="36" height="29"/>
+                                        <animations/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <state key="normal" image="facebookIcon"/>
+                                        <connections>
+                                            <action selector="showRepresentativeFacebookProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="9zF-T3-qP8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jw8-v7-fdY">
+                                        <rect key="frame" x="90" y="22" width="64" height="29"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                        <state key="normal" title="Change">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="ss8-uX-HsK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="JoU-EN-9Do"/>
+                                    <constraint firstAttribute="width" constant="154" id="soR-H3-0FV"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2K-NT-6L8">
                                 <rect key="frame" x="255" y="67" width="42" height="40"/>
                                 <animations/>
@@ -1210,53 +1255,6 @@
                                 </state>
                                 <connections>
                                     <segue destination="AnE-wK-30e" kind="push" id="x94-HX-jKb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0df-ZJ-knT">
-                                <rect key="frame" x="108" y="208" width="32" height="27"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="gIc-EI-TLJ"/>
-                                    <constraint firstAttribute="height" constant="27" id="lqR-YG-Gri"/>
-                                </constraints>
-                                <state key="normal" image="twitterIcon"/>
-                                <connections>
-                                    <action selector="showRepresentativeTwitterProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="hAK-vu-RHQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-ZI-L22">
-                                <rect key="frame" x="140" y="208" width="36" height="29"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="2tG-8Y-8J7"/>
-                                    <constraint firstAttribute="width" constant="36" id="NYT-Dv-HrT"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" image="facebookIcon"/>
-                                <connections>
-                                    <action selector="showRepresentativeFacebookProfile" destination="Q8A-2e-yyY" eventType="touchUpInside" id="9zF-T3-qP8"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-N3-9uB">
-                                <rect key="frame" x="124" y="188" width="36" height="17"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jw8-v7-fdY">
-                                <rect key="frame" x="198" y="210" width="64" height="29"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="Q8r-yZ-0RN"/>
-                                    <constraint firstAttribute="width" constant="64" id="Zas-6L-fy1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
-                                <state key="normal" title="Change">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="ss8-uX-HsK"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-lU-ieN">
@@ -1290,30 +1288,24 @@
                             <constraint firstItem="Tjd-g6-cR7" firstAttribute="top" secondItem="p0L-jf-3nF" secondAttribute="bottom" constant="5" id="5Fo-da-Zk7"/>
                             <constraint firstItem="qVw-LX-2E5" firstAttribute="top" secondItem="gUc-lU-ieN" secondAttribute="bottom" constant="11" id="7ZN-6x-ebw"/>
                             <constraint firstAttribute="trailing" secondItem="T2K-NT-6L8" secondAttribute="trailing" constant="23" id="7z0-bM-TEd"/>
-                            <constraint firstItem="mOB-N3-9uB" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="12" id="7zA-0E-gg6"/>
-                            <constraint firstItem="jw8-v7-fdY" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="34" id="Gf0-hi-8GI"/>
                             <constraint firstItem="lQ7-Ig-0M9" firstAttribute="top" secondItem="qVw-LX-2E5" secondAttribute="bottom" id="Hvg-9Q-Nnz"/>
                             <constraint firstAttribute="trailing" secondItem="qWd-fV-Llh" secondAttribute="trailing" constant="38" id="JZA-yd-7M5"/>
-                            <constraint firstItem="0df-ZJ-knT" firstAttribute="top" secondItem="mOB-N3-9uB" secondAttribute="bottom" constant="3" id="LUX-7R-j1i"/>
                             <constraint firstAttribute="trailing" secondItem="Ylj-62-KEJ" secondAttribute="trailing" constant="74" id="Lu5-w2-5ET"/>
                             <constraint firstItem="LAM-48-Y6k" firstAttribute="top" secondItem="Ylj-62-KEJ" secondAttribute="bottom" id="O7O-qj-CXl"/>
                             <constraint firstItem="qWd-fV-Llh" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="10" id="P6Z-YQ-xTA"/>
-                            <constraint firstItem="ukS-ZI-L22" firstAttribute="top" secondItem="mOB-N3-9uB" secondAttribute="bottom" constant="3" id="S5l-fd-wUi"/>
-                            <constraint firstItem="0df-ZJ-knT" firstAttribute="leading" secondItem="p0L-jf-3nF" secondAttribute="trailing" id="SBd-hN-gGT"/>
                             <constraint firstItem="p0L-jf-3nF" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="Tu3-V7-fYE"/>
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="top" secondItem="5g8-4v-4qN" secondAttribute="bottom" constant="10" id="WSV-fN-zev"/>
                             <constraint firstItem="Ylj-62-KEJ" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="10" id="X0e-Hx-Zvt"/>
-                            <constraint firstItem="mOB-N3-9uB" firstAttribute="leading" secondItem="p0L-jf-3nF" secondAttribute="trailing" constant="16" id="Ya5-af-tgf"/>
                             <constraint firstItem="qVw-LX-2E5" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="YeK-af-bao"/>
                             <constraint firstItem="qWd-fV-Llh" firstAttribute="top" secondItem="Kyh-qi-u7D" secondAttribute="bottom" constant="8" id="YyS-C8-Uju"/>
                             <constraint firstItem="DK8-vZ-zto" firstAttribute="top" secondItem="T2K-NT-6L8" secondAttribute="bottom" id="eN8-pZ-R4i"/>
+                            <constraint firstItem="Rge-lr-WWe" firstAttribute="leading" secondItem="p0L-jf-3nF" secondAttribute="trailing" id="fR9-sM-0S7"/>
                             <constraint firstAttribute="trailing" secondItem="qVw-LX-2E5" secondAttribute="trailing" id="flm-fI-sbj"/>
+                            <constraint firstItem="Rge-lr-WWe" firstAttribute="top" secondItem="qWd-fV-Llh" secondAttribute="bottom" constant="12" id="hcq-Le-3MF"/>
                             <constraint firstAttribute="trailing" secondItem="Kyh-qi-u7D" secondAttribute="trailing" constant="80" id="jXY-LL-u8Q"/>
                             <constraint firstItem="Kyh-qi-u7D" firstAttribute="top" secondItem="LAM-48-Y6k" secondAttribute="bottom" constant="6" id="kR6-8n-Lmz"/>
                             <constraint firstItem="gUc-lU-ieN" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="13" id="kbv-FC-4w1"/>
                             <constraint firstItem="Tjd-g6-cR7" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" id="mC0-IG-qY5"/>
-                            <constraint firstItem="ukS-ZI-L22" firstAttribute="leading" secondItem="0df-ZJ-knT" secondAttribute="trailing" id="oep-wT-YuV"/>
-                            <constraint firstItem="jw8-v7-fdY" firstAttribute="leading" secondItem="ukS-ZI-L22" secondAttribute="trailing" constant="22" id="rb3-nH-nv6"/>
                             <constraint firstAttribute="trailing" secondItem="DK8-vZ-zto" secondAttribute="trailing" id="wZS-xM-pov"/>
                             <constraint firstItem="LAM-48-Y6k" firstAttribute="leading" secondItem="LfZ-v8-fqo" secondAttribute="leading" constant="12" id="z5t-cG-SQm"/>
                         </constraints>
@@ -1324,6 +1316,7 @@
                         <outlet property="changeButton" destination="jw8-v7-fdY" id="q2D-tw-J3f"/>
                         <outlet property="dappScoreLabel" destination="LAM-48-Y6k" id="5Je-eg-IPF"/>
                         <outlet property="nameLabel" destination="Ylj-62-KEJ" id="KTO-lN-Pon"/>
+                        <outlet property="representativeContainerViewWidthLC" destination="HaK-mP-zaL" id="BI8-em-FbB"/>
                         <segue destination="nEk-aB-hTr" kind="push" identifier="editLinksSegue" id="ktt-c9-oWa"/>
                     </connections>
                 </viewController>
@@ -5190,8 +5183,8 @@
         <segue reference="8GL-5h-4zG"/>
         <segue reference="fu7-hF-c08"/>
         <segue reference="gia-uV-wAw"/>
+        <segue reference="ss8-uX-HsK"/>
         <segue reference="Tb5-sO-Miv"/>
-        <segue reference="iW7-1y-626"/>
         <segue reference="bpX-mN-qEi"/>
         <segue reference="bkt-29-1zK"/>
     </inferredMetricsTieBreakers>

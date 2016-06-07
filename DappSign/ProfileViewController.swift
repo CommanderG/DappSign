@@ -9,27 +9,29 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    internal var user: PFUser?
+    @IBOutlet weak var dappScoreLabel : UILabel!
+    @IBOutlet weak var nameLabel      : UILabel!
+    @IBOutlet weak var adminButton    : UIButton!
+    @IBOutlet weak var changeButton   : UIButton!
     
-    @IBOutlet weak var dappScoreLabel: UILabel!
-    @IBOutlet weak var nameLabel:      UILabel!
-    @IBOutlet weak var adminButton:    UIButton!
-    @IBOutlet weak var changeButton:   UIButton!
+    @IBOutlet weak var representativeContainerViewWidthLC: NSLayoutConstraint!
     
-    private var dapps: [PFObject] = []
-    private var representative: PFObject? = nil
-    private var petitionsTVC: PetitionsTVC? = nil
-    private var segmentsVC: SegmentsVC? = nil
+    internal var user: PFUser? = nil
     
-    private var editLinksSegueID = "editLinksSegue"
-    private var dappLinkEdit: PFObject?
+    private var dapps            : [PFObject]        = []
+    private var representative   : PFObject?         = nil
+    private var petitionsTVC     : PetitionsTVC?     = nil
+    private var segmentsVC       : SegmentsVC?       = nil
+    private var representativeVC : RepresentativeVC? = nil
+    private var editLinksSegueID : String            = "editLinksSegue"
+    private var dappLinkEdit     : PFObject?         = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ViewHelper.initButtonLayer(self.changeButton)
         
-        nameLabel.text = self.user?["name"] as? String
+        nameLabel.text = self.user?["name"] as? String ?? ""
         
         self.initDappScoreLabel()
         self.initAdminButton()
@@ -115,6 +117,10 @@ class ProfileViewController: UIViewController {
                 self.segmentsVC = segue.destinationViewController as? SegmentsVC
                 
                 self.segmentsVC?.delegate = self
+            case RepresentativeVC.embedSegueID:
+                self.representativeVC = segue.destinationViewController as? RepresentativeVC
+                
+                self.representativeVC?.delegate = self
             case _:
                 break;
             }
@@ -230,5 +236,21 @@ extension ProfileViewController: PetitionsDelegate {
 extension ProfileViewController: SegmentsDelegate {
     func didSelectSegment(segment: Segment) {
         self.downloadDapps()
+    }
+}
+
+extension ProfileViewController: RepresentativeDelegate {
+    func didDownloadNewRepresentativeData(newData: Bool) {
+        if !newData {
+            return
+        }
+        
+        if let fullNameLabel = self.representativeVC?.fullNameLabel {
+            let fullNameLabelHeight = CGRectGetHeight(fullNameLabel.frame)
+            let sizeToFit = CGSizeMake(CGFloat.max, fullNameLabelHeight)
+            let fullNameLabelSize = fullNameLabel.sizeThatFits(sizeToFit)
+            
+            self.representativeContainerViewWidthLC.constant = fullNameLabelSize.width
+        }
     }
 }
