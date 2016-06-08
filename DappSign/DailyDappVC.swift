@@ -50,8 +50,6 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
     @IBOutlet weak var secondsLeftLabelBottomLC                : NSLayoutConstraint!
     
-    internal var transitionDelegate: TransitionDelegate? = nil
-    
     private var dappSignVC                        : DappSignVC?          = nil
     private var dappMappVC                        : DappMappVC?          = nil
     private var representativeVC                  : RepresentativeVC?    = nil
@@ -559,12 +557,12 @@ class DailyDappVC: UIViewController {
                                 
                                 self.dappViewsContainerView.hidden = false
                                 
-                                self.transitionDelegate?.transitionFromViewController(self)
+//                                self.transitionDelegate?.transitionFromViewController(self)
                             })
                         }
                     )
                 } else if (minutes <= 0 && seconds <= 0) {
-                    self.transitionDelegate?.transitionFromViewController(self)
+//                    self.transitionDelegate?.transitionFromViewController(self)
                 }
             }
         } else {

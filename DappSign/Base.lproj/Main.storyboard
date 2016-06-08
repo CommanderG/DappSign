@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -489,7 +489,7 @@
                         <outlet property="logInWithFacebookButton" destination="Dc7-Lr-jcy" id="D2m-aB-KB4"/>
                         <outlet property="registerWithEmailButton" destination="2M9-yF-sSx" id="oOa-6o-4ea"/>
                         <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="iW7-1y-626"/>
-                        <segue destination="Hgo-sM-Fqq" kind="modal" identifier="showMainVC" id="4GY-aV-x4s"/>
+                        <segue destination="EG5-sL-doW" kind="modal" identifier="showDailyDapp" id="hlC-D5-wHp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -776,25 +776,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qmC-5A-XD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1902" y="910.5"/>
-        </scene>
-        <!--MainVC-->
-        <scene sceneID="5ma-5g-yJf">
-            <objects>
-                <viewController id="Hgo-sM-Fqq" customClass="MainVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8D2-Tw-27Y"/>
-                        <viewControllerLayoutGuide type="bottom" id="SDD-CH-ZAW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XAL-AS-iAw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yYY-oY-Rtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="561" y="297"/>
         </scene>
         <!--LinkVC-->
         <scene sceneID="Yrn-Ur-Cja">

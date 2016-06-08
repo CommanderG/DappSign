@@ -11,10 +11,10 @@ import UIKit
 
 class LoginVC: UIViewController {
     private let segueShowZipCode    = "showZipCode"
-    private let segueShowMainVC     = "showMainVC"
+    private let segueShowDailyDapp  = "showDailyDapp"
     private let segueShowEmailLogin = "showEmailLogin"
     
-    private var shouldShowMainScene = false
+    private var shouldShowDailyDapp = false
     
     @IBOutlet weak var logInWithFacebookButton: UIButton!
     @IBOutlet weak var registerWithEmailButton: UIButton!
@@ -48,8 +48,8 @@ class LoginVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.shouldShowMainScene {
-            self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
+        if self.shouldShowDailyDapp {
+            self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
         }
     }
     
@@ -73,7 +73,7 @@ class LoginVC: UIViewController {
                 } else {
                     print("User logged in through Facebook!")
                     
-                    self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
+                    self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
                 }
             } else if let error = error {
                 print("Failed to log in on Facebook. Error: \(error)")
@@ -105,7 +105,7 @@ class LoginVC: UIViewController {
 
 extension LoginVC: ZipCodeDelegate {
     func didSaveRepresentativeAndDistrictInformation(success: Bool) {
-        self.shouldShowMainScene = success
+        self.shouldShowDailyDapp = success
     }
 }
 
@@ -116,6 +116,6 @@ extension LoginVC: EmailLoginDelegate {
     }
     
     func didSignIn() {
-        self.performSegueWithIdentifier(self.segueShowMainVC, sender: self)
+        self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
     }
 }

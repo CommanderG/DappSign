@@ -73,7 +73,6 @@
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
 		27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */; };
 		27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */; };
-		27EE61131CBFC319009CBF0B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE61121CBFC319009CBF0B /* MainVC.swift */; };
 		27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVC.swift */; };
 		27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */; };
 		27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */; };
@@ -247,7 +246,6 @@
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
 		27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardVC.swift; sourceTree = "<group>"; };
 		27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappStartTimeVC.swift; sourceTree = "<group>"; };
-		27EE61121CBFC319009CBF0B /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		27FD3C041C7DED6000826EBA /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLinkCell.swift; sourceTree = "<group>"; };
 		27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterLinkCell.swift; sourceTree = "<group>"; };
@@ -598,7 +596,6 @@
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
-				27EE61121CBFC319009CBF0B /* MainVC.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
 				27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */,
 				275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */,
@@ -1080,7 +1077,6 @@
 				275955871CC7C6B900080D63 /* DistrictHelper.swift in Sources */,
 				271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */,
 				277970FA1C7F284E006F70ED /* DappLinkHelper.swift in Sources */,
-				27EE61131CBFC319009CBF0B /* MainVC.swift in Sources */,
 				2773BFCB1CAEB8CB0082FC96 /* ArrayUtil.swift in Sources */,
 				270FBCC01C96DADF00BE3019 /* ScoreboardHelper.swift in Sources */,
 				4CD9C9C71AA1EC1A00046CA2 /* BlurView.swift in Sources */,

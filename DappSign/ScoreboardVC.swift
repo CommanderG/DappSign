@@ -18,8 +18,6 @@ class ScoreboardVC: UIViewController {
     @IBOutlet weak var showLinksButton:             UIButton!
     @IBOutlet weak var postToFacebookButton:        UIButton!
     
-    internal var transitionDelegate: TransitionDelegate? = nil
-    
     private var timeUntilNextDailyDappLabelUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDappUpdateTimer: NSTimer? = nil
     private var timeUntilNextDailyDapp: (Int, Int, Int)? = nil
@@ -223,7 +221,7 @@ class ScoreboardVC: UIViewController {
             let lessThanOneHourLeft = hours == 23 && minutes > 0
             
             if lessThanOneHourLeft {
-                self.transitionDelegate?.transitionFromViewController(self)
+//                self.transitionDelegate?.transitionFromViewController(self)
             }
         } else {
             if show.colon {
