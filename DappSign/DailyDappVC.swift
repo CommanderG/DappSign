@@ -10,9 +10,9 @@ import UIKit
 
 internal let DappSwipedNotification = "dappSwipedNotification"
 
-enum DailyDappTimeInterval {
-    case BeforeEnd(timeInterval: NSTimeInterval)
-    case UntilNext(timeInterval: NSTimeInterval)
+enum AppState {
+    case DailyDapp(timeInterval: NSTimeInterval)
+    case Scoreboard(timeInterval: NSTimeInterval)
     case None
 }
 
@@ -57,23 +57,25 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
     @IBOutlet weak var secondsLeftLabelBottomLC                : NSLayoutConstraint!
     
-    private var dappSignVC                        : DappSignVC?           = nil
-    private var dappMappVC                        : DappMappVC?           = nil
-    private var representativeVC                  : RepresentativeVC?     = nil
-    private var visibleDappView                   : UIView!               = nil
-    private var lastDappedDapp                    : PFObject?             = nil
-    private var dappBackSideLinksVC               : DappBackSideLinksVC?  = nil
-    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?              = nil
-    private var dailyDappTimeLeftUpdateTimer      : NSTimer?              = nil
-    private var dailyDappTimeInterval             : DailyDappTimeInterval = .None
-    private var animatingPlusOneLabels            : Bool                  = false
-    private var dapps                             : [PFObject]            = []
-    private var lastIntroductoryDappID            : String?               = nil
-    private var timer                             : NSTimer?              = nil
-    private var currentDappCardType               : DappCardType          = .DappCardTypeSign
-    private var animateableViews                  : [UIView]!             = []
-    private var dappScore                         : Int?                  = nil
-    private var labelsAnimationInfo               : [LabelAnimationInfo]  = []
+    private var dappSignVC                        : DappSignVC?          = nil
+    private var dappMappVC                        : DappMappVC?          = nil
+    private var representativeVC                  : RepresentativeVC?    = nil
+    private var visibleDappView                   : UIView!              = nil
+    private var lastDappedDapp                    : PFObject?            = nil
+    private var dappBackSideLinksVC               : DappBackSideLinksVC? = nil
+    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?             = nil
+    private var dailyDappTimeLeftUpdateTimer      : NSTimer?             = nil
+    private var appState                          : AppState             = .None
+    private var animatingPlusOneLabels            : Bool                 = false
+    private var dailyDapps                        : [PFObject]           = []
+    private var scoreboardDapps                   : [PFObject]           = []
+    private var scoreboardDappIndex               : Int                  = 0
+    private var lastIntroductoryDappID            : String?              = nil
+    private var timer                             : NSTimer?             = nil
+    private var currentDappCardType               : DappCardType         = .DappCardTypeSign
+    private var animateableViews                  : [UIView]!            = []
+    private var dappScore                         : Int?                 = nil
+    private var labelsAnimationInfo               : [LabelAnimationInfo] = []
     
     private let flipDuration = 0.5
     
@@ -232,7 +234,7 @@ class DailyDappVC: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.dapps.first {
+        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.getFirstDapp() {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
                 view2: dappBackSideLinksVC.view,
@@ -258,7 +260,7 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dapp = self.dapps.first {
+        if let dapp = self.getFirstDapp() {
             FacebookHelper.shareDapp(dapp, completion: {
                 (message: String) -> Void in
                 self.showAlertViewWithOKButtonAndMessage(message)
@@ -267,7 +269,7 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let currentDapp = self.dapps.first {
+        if let currentDapp = self.getFirstDapp() {
             TwitterHelper.tweetDapp(currentDapp, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
@@ -288,7 +290,7 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func showLinkView(sender: AnyObject) {
-        if let dapp = self.dapps.first, embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
+        if let dapp = self.getFirstDapp(), embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
             embedDappVC.delegate = self
             
             self.addChildViewController(embedDappVC)
@@ -520,8 +522,8 @@ class DailyDappVC: UIViewController {
         
         show.colon = !show.colon
         
-        switch self.dailyDappTimeInterval {
-        case .BeforeEnd(let timeInterval):
+        switch self.appState {
+        case .DailyDapp(let timeInterval):
             let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
             let minutesString = self.stringForDoubleDigitInt(minutes)
             let secondsString = self.stringForDoubleDigitInt(seconds)
@@ -535,7 +537,7 @@ class DailyDappVC: UIViewController {
             self.dailyDappTimeLabel.text = "Left in today's"
             
             break
-        case .UntilNext(let timeInterval):
+        case .Scoreboard(let timeInterval):
             let (hours, minutes, seconds) = DateHelper.hoursMinutesSecondsInTimeInterval(timeInterval)
             let hoursString = self.stringForDoubleDigitInt(hours)
             let minutesString = self.stringForDoubleDigitInt(minutes)
@@ -563,18 +565,36 @@ class DailyDappVC: UIViewController {
             timeIntervalBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd(),
             timeIntervalUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate() {
                 if timeIntervalBeforeEnd <= 0.0 {
-                    self.dailyDappTimeInterval = .UntilNext(
+                    switch self.appState {
+                    case .Scoreboard(_):
+                        break
+                    case _:
+                        self.downloadDapps()
+                        
+                        break
+                    }
+                    
+                    self.appState = .Scoreboard(
                         timeInterval: timeIntervalUnitlNext
                     )
                 } else {
-                    self.dailyDappTimeInterval = .BeforeEnd(
+                    switch self.appState {
+                    case .DailyDapp(_):
+                        break
+                    case _:
+                        self.downloadDapps()
+                        
+                        break
+                    }
+                    
+                    self.appState = .DailyDapp(
                         timeInterval: timeIntervalBeforeEnd
                     )
                     
                     self.showCountdownAnimation(timeIntervalBeforeEnd)
                 }
         } else {
-            self.dailyDappTimeInterval = .None
+            self.appState = .None
         }
     }
     
@@ -609,12 +629,12 @@ class DailyDappVC: UIViewController {
     
     internal func handleDappSwipedNotification(notification: NSNotification) {
         if let dappId = notification.object as? String {
-            if self.dapps.first?.objectId == dappId {
-                self.dapps.removeAtIndex(0)
+            if self.dailyDapps.first?.objectId == dappId {
+                self.dailyDapps.removeAtIndex(0)
                 
                 self.initDappView()
             } else {
-                self.dapps = self.dapps.filter({ $0.objectId != dappId })
+                self.dailyDapps = self.dailyDapps.filter({ $0.objectId != dappId })
             }
         }
     }
@@ -626,7 +646,7 @@ class DailyDappVC: UIViewController {
             self.dappViewsContainerView.show()
         }
         
-        if let dapp = self.dapps.first {
+        if let dapp = self.getFirstDapp() {
             DappsHelper.downloadHashtagsForDapp(dapp, completion: {
                 (hashtags: [PFObject]?, error: NSError?) -> Void in
                 if let hashtags = hashtags {
@@ -639,8 +659,8 @@ class DailyDappVC: UIViewController {
             self.hashtagsLabel.text = ""
         }
         
-        if (self.visibleDappView == self.dappSignView) {
-            let dapp = self.dapps.first
+        if self.visibleDappView == self.dappSignView {
+            let dapp = self.getFirstDapp()
             
             self.dappSignVC?.showDappObject(dapp)
             
@@ -659,7 +679,7 @@ class DailyDappVC: UIViewController {
                 })
             }
         } else if (self.visibleDappView == self.dappMappView) {
-            if let dapp = self.dapps.first {
+            if let dapp = self.getFirstDapp() {
                 self.dappMappVC?.showInformationAboutDapp(dapp)
             }
         }
@@ -667,9 +687,43 @@ class DailyDappVC: UIViewController {
     
     // MARK: -
     
+    private func getFirstDapp() -> PFObject? {
+        switch self.appState {
+        case .DailyDapp(_):
+            return self.dailyDapps.first
+        case .Scoreboard(_):
+            let index = self.scoreboardDappIndex
+            
+            if index >= 0 && index < self.scoreboardDapps.count {
+                return self.scoreboardDapps[index]
+            }
+            
+            return nil
+        case .None:
+            return nil
+        }
+    }
+    
+    private func removeFirstDapp() {
+        switch self.appState {
+        case .DailyDapp(_):
+            if self.dailyDapps.count > 0 {
+                self.dailyDapps.removeAtIndex(0)
+            }
+            
+            break
+        case .Scoreboard(_):
+            self.scoreboardDappIndex = (self.scoreboardDappIndex + 1) % self.scoreboardDapps.count
+            
+            break
+        case .None:
+            break
+        }
+    }
+    
     private func initTimersAfterCheckingLastIntroductoryDappID() {
         if let lastIntroductoryDappID = self.lastIntroductoryDappID {
-            if self.lastDappedDapp?.objectId == lastIntroductoryDappID || self.dapps.count == 0 {
+            if self.lastDappedDapp?.objectId == lastIntroductoryDappID || self.dailyDapps.count == 0 {
                 self.initTimers()
                 
                 self.lastIntroductoryDappID = nil
@@ -678,22 +732,51 @@ class DailyDappVC: UIViewController {
     }
     
     private func downloadDapps() {
-        self.dapps = []
+        self.dailyDapps = []
+        self.scoreboardDapps = []
         
-        DailyDappHelper.downloadDapps {
-            (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void in
-            self.dapps = dapps
-            self.lastIntroductoryDappID = lastIntroductoryDappID
-            
-            self.initDappView()
-            
-            let userIsNew = LocalStorage.userIsNew()
-            
-            if userIsNew && lastIntroductoryDappID == nil {
-                self.initTimers()
+        self.scoreboardDappIndex = 0
+        
+        switch self.appState {
+        case .DailyDapp(_):
+            DailyDappHelper.downloadDapps {
+                (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void in
+                self.dailyDapps = dapps
+                self.lastIntroductoryDappID = lastIntroductoryDappID
+                
+                self.initDappView()
+                
+                let userIsNew = LocalStorage.userIsNew()
+                
+                if userIsNew && lastIntroductoryDappID == nil {
+                    self.initTimers()
+                }
+                
+                LocalStorage.saveUserIsNew(false)
             }
             
-            LocalStorage.saveUserIsNew(false)
+            break
+        case .Scoreboard(_):
+            ScoreboardHelper.downloadScoreboardDapps {
+                (scoreboardDapps: [PFObject], error: NSError?) -> Void in
+                self.scoreboardDapps = scoreboardDapps
+                
+                self.initDappView()
+                
+//                if let dapp = self.dapps.first {
+//                    self.scoreboardDappSignVC?.view.hidden = false
+//                    self.currentDappIndex = 0
+//
+//                    self.initHashtagsLabelWithHashtagsForDapp(dapp)
+//                    self.scoreboardDappSignVC?.showDappObject(dapp)
+//                    self.scoreboardDappMappVC?.showDappMappDataForDapp(dapp)
+//                    self.enableSharingAndLinkButtons()
+//                }
+            }
+            
+            break
+        case .None:
+            break
         }
     }
     
@@ -1028,10 +1111,17 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
         if (self.visibleDappView == self.dappSignView) {
             let dapped = (swipeDirection == SwipeDirection.LeftToRight)
             
-            if let currentDapp = self.dapps.first {
+            if let currentDapp = self.getFirstDapp() {
                 self.lastDappedDapp = currentDapp
                 
-                self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                switch self.appState {
+                case .DailyDapp(_):
+                    self.sendRequestsForDapp(currentDapp, dapped: dapped)
+                    
+                    break
+                case _:
+                    break
+                }
                 
                 if dapped {
                     self.showLabel(self.signedLabel, bottomLC: self.signedLabelBottomConstraint)
@@ -1058,12 +1148,17 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                 self.lastDappedDapp = nil
             }
             
-            if self.dapps.count > 0 {
-                self.dapps.removeAtIndex(0)
-            }
+            self.removeFirstDapp()
             
-            if self.dapps.count == 0 {
-                self.downloadDapps()
+            switch self.appState {
+            case .DailyDapp(_):
+                if self.dailyDapps.count == 0 {
+                    self.downloadDapps()
+                }
+                
+                break
+            case _:
+                break
             }
         } else {
             self.currentDappCardType = DappCardType.DappCardTypeSign
