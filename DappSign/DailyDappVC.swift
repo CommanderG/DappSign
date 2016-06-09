@@ -10,6 +10,12 @@ import UIKit
 
 internal let DappSwipedNotification = "dappSwipedNotification"
 
+enum DailyDappTimeInterval {
+    case BeforeEnd(timeInterval: NSTimeInterval)
+    case UntilNext(timeInterval: NSTimeInterval)
+    case None
+}
+
 enum DappCardType {
     case DappCardTypeSign;
     case DappCardTypeMapp
@@ -42,6 +48,7 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var oneMinuteLeftLabel         : UILabel!
     @IBOutlet weak var dailyDappBeginsInLabel     : UILabel!
     @IBOutlet weak var secondsLeftLabel           : UILabel!
+    @IBOutlet weak var dailyDappTimeLabel         : UILabel!
     
     @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
@@ -50,23 +57,23 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
     @IBOutlet weak var secondsLeftLabelBottomLC                : NSLayoutConstraint!
     
-    private var dappSignVC                        : DappSignVC?          = nil
-    private var dappMappVC                        : DappMappVC?          = nil
-    private var representativeVC                  : RepresentativeVC?    = nil
-    private var visibleDappView                   : UIView!              = nil
-    private var lastDappedDapp                    : PFObject?            = nil
-    private var dappBackSideLinksVC               : DappBackSideLinksVC? = nil
-    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?             = nil
-    private var dailyDappTimeLeftUpdateTimer      : NSTimer?             = nil
-    private var dailyDappTimeLeft                 : (Int, Int)?          = nil
-    private var animatingPlusOneLabels            : Bool                 = false
-    private var dapps                             : [PFObject]           = []
-    private var lastIntroductoryDappID            : String?              = nil
-    private var timer                             : NSTimer?             = nil
-    private var currentDappCardType               : DappCardType         = .DappCardTypeSign
-    private var animateableViews                  : [UIView]!            = []
-    private var dappScore                         : Int?                 = nil
-    private var labelsAnimationInfo               : [LabelAnimationInfo] = []
+    private var dappSignVC                        : DappSignVC?           = nil
+    private var dappMappVC                        : DappMappVC?           = nil
+    private var representativeVC                  : RepresentativeVC?     = nil
+    private var visibleDappView                   : UIView!               = nil
+    private var lastDappedDapp                    : PFObject?             = nil
+    private var dappBackSideLinksVC               : DappBackSideLinksVC?  = nil
+    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?              = nil
+    private var dailyDappTimeLeftUpdateTimer      : NSTimer?              = nil
+    private var dailyDappTimeInterval             : DailyDappTimeInterval = .None
+    private var animatingPlusOneLabels            : Bool                  = false
+    private var dapps                             : [PFObject]            = []
+    private var lastIntroductoryDappID            : String?               = nil
+    private var timer                             : NSTimer?              = nil
+    private var currentDappCardType               : DappCardType          = .DappCardTypeSign
+    private var animateableViews                  : [UIView]!             = []
+    private var dappScore                         : Int?                  = nil
+    private var labelsAnimationInfo               : [LabelAnimationInfo]  = []
     
     private let flipDuration = 0.5
     
@@ -160,8 +167,8 @@ class DailyDappVC: UIViewController {
             self.initTimers()
         }
         
-        self.updateDailyDappTimeLeftLabel()
-        self.updateDailyDappTimeLeft()
+        self.updateDailyDappTimeLabels()
+        self.updateDailyDappTimeInterval()
         self.downloadDapps()
         
         for view in self.animateableViews {
@@ -174,8 +181,6 @@ class DailyDappVC: UIViewController {
         
         self.dailyDappTimeLeftLabelUpdateTimer?.invalidate()
         self.dailyDappTimeLeftUpdateTimer?.invalidate()
-        
-        self.dailyDappTimeLeft = nil
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -212,13 +217,13 @@ class DailyDappVC: UIViewController {
     private func initTimers() {
         self.dailyDappTimeLeftLabelUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
-            selector: "updateDailyDappTimeLeftLabel",
+            selector: "updateDailyDappTimeLabels",
             userInfo: nil,
             repeats:  true
         )
         self.dailyDappTimeLeftUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
             target:   self,
-            selector: "updateDailyDappTimeLeft",
+            selector: "updateDailyDappTimeInterval",
             userInfo: nil,
             repeats:  true
         )
@@ -508,14 +513,16 @@ class DailyDappVC: UIViewController {
     
     // MARK: - timer functions
     
-    internal func updateDailyDappTimeLeftLabel() {
+    internal func updateDailyDappTimeLabels() {
         struct show {
             static var colon = false
         }
         
         show.colon = !show.colon
         
-        if let (minutes, seconds) = self.dailyDappTimeLeft {
+        switch self.dailyDappTimeInterval {
+        case .BeforeEnd(let timeInterval):
+            let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
             let minutesString = self.stringForDoubleDigitInt(minutes)
             let secondsString = self.stringForDoubleDigitInt(seconds)
             
@@ -524,51 +531,97 @@ class DailyDappVC: UIViewController {
             } else {
                 self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
             }
-        } else {
+            
+            self.dailyDappTimeLabel.text = "Left in today's"
+            
+            break
+        case .UntilNext(let timeInterval):
+            let (hours, minutes, seconds) = DateHelper.hoursMinutesSecondsInTimeInterval(timeInterval)
+            let hoursString = self.stringForDoubleDigitInt(hours)
+            let minutesString = self.stringForDoubleDigitInt(minutes)
+            let secondsString = self.stringForDoubleDigitInt(seconds)
+            
             if show.colon {
-                self.dailyDappTimeLeftLabel.text = "--:--"
+                self.dailyDappTimeLeftLabel.text = "\(hoursString):\(minutesString):\(secondsString)"
             } else {
-                self.dailyDappTimeLeftLabel.text = "-- --"
+                self.dailyDappTimeLeftLabel.text = "\(hoursString) \(minutesString) \(secondsString)"
             }
+            
+            self.dailyDappTimeLabel.text = "Until the next"
+            
+            break
+        case .None:
+            self.dailyDappTimeLeftLabel.text = ""
+            self.dailyDappTimeLabel.text = ""
+            
+            break
         }
     }
     
-    internal func updateDailyDappTimeLeft() {
-        if let timeInterval = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd() {
-            self.dailyDappTimeLeft = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
-            
-            if let (minutes, seconds) = self.dailyDappTimeLeft {
-                if (minutes == 1 && seconds == 0) {
-                    self.showCountdownLabel(self.oneMinuteLeftLabel,
-                        countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
+    internal func updateDailyDappTimeInterval() {
+        if let
+            timeIntervalBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd(),
+            timeIntervalUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate() {
+                if timeIntervalBeforeEnd <= 0.0 {
+                    self.dailyDappTimeInterval = .UntilNext(
+                        timeInterval: timeIntervalUnitlNext
                     )
-                } else if (minutes == 0 && seconds == 5) {
-                    self.showCountdownLabel(self.dailyDappBeginsInLabel,
-                        countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
-                        completion: {
-                            self.hideTopUI()
-                            self.hideBottomUI()
-                            
-                            self.dappViewsContainerView.hidden = true
-                            
-                            self.showLabelsCountingDownToOneFrom(5, completion: {
-                                self.showTopUI()
-                                self.showBottomUI()
-                                
-                                self.dappViewsContainerView.hidden = false
-                                
-//                                self.transitionDelegate?.transitionFromViewController(self)
-                            })
-                        }
+                } else {
+                    self.dailyDappTimeInterval = .BeforeEnd(
+                        timeInterval: timeIntervalBeforeEnd
                     )
-                } else if (minutes <= 0 && seconds <= 0) {
-//                    self.transitionDelegate?.transitionFromViewController(self)
                 }
-            }
         } else {
-            self.dailyDappTimeLeft = nil
+            self.dailyDappTimeInterval = .None
         }
     }
+    
+//    private func transition() {
+////        switch self.dailyDappTimeInterval {
+////        case .BeforeEnd(let timeInterval):
+////            
+////            break
+////        case .UntilNext(let timeInterval):
+////            
+////            break
+////        case .None:
+////            break
+////        }
+//        
+//        
+//        
+////        if let (minutes, seconds) = self.dailyDappTimeLeft {
+////            if (minutes == 1 && seconds == 0) {
+////                self.showCountdownLabel(self.oneMinuteLeftLabel,
+////                    countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
+////                )
+////            } else if (minutes == 0 && seconds == 5) {
+////                self.showCountdownLabel(self.dailyDappBeginsInLabel,
+////                    countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
+////                    completion: {
+////                        self.hideTopUI()
+////                        self.hideBottomUI()
+////                        
+////                        self.dappViewsContainerView.hidden = true
+////                        
+////                        self.showLabelsCountingDownToOneFrom(5, completion: {
+////                            self.showTopUI()
+////                            self.showBottomUI()
+////                            
+////                            self.dappViewsContainerView.hidden = false
+////                            
+//////                            self.transitionDelegate?.transitionFromViewController(self)
+////                        })
+////                    }
+////                )
+////            } else if (minutes <= 0 && seconds <= 0) {
+//////                self.transitionDelegate?.transitionFromViewController(self)
+////            }
+////        }
+//        
+//        
+//        
+//    }
     
     // MARK: -
     

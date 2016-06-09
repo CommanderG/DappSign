@@ -2300,13 +2300,13 @@
                                             <segue destination="2Do-FT-vzw" kind="modal" identifier="showProfile" id="IfF-6V-hkZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="13:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXB-gx-DWe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXB-gx-DWe">
                                         <rect key="frame" x="84" y="-8" width="114" height="39"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="dWZ-e1-utJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="26"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2602,6 +2602,7 @@
                         <outlet property="composeButton" destination="DgS-C9-laX" id="zAY-Ii-UAc"/>
                         <outlet property="dailyDappBeginsInLabel" destination="ZaM-mX-B5y" id="cw7-S5-mAf"/>
                         <outlet property="dailyDappBeginsInLabelBottomLC" destination="TSu-0q-eiV" id="sYZ-Mr-fN0"/>
+                        <outlet property="dailyDappTimeLabel" destination="9Aa-jo-Gkt" id="M4d-wj-sPb"/>
                         <outlet property="dailyDappTimeLeftLabel" destination="iXB-gx-DWe" id="J6L-PO-dba"/>
                         <outlet property="dappMappView" destination="Rnh-hP-uaa" id="a0O-a4-8IY"/>
                         <outlet property="dappScoreLabel" destination="iRV-8I-LT2" id="WCb-nb-3bl"/>
@@ -5122,24 +5123,6 @@
             </objects>
             <point key="canvasLocation" x="561" y="1029"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="04a-4u-vFM">
-            <objects>
-                <viewController id="W6O-DV-es0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6Z6-tr-IVp"/>
-                        <viewControllerLayoutGuide type="bottom" id="vrE-P7-Kbk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rBb-wu-3c7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tBa-zZ-5it" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="Facebook" width="513" height="116"/>
@@ -5157,11 +5140,11 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bpX-mN-qEi"/>
-        <segue reference="bkt-29-1zK"/>
         <segue reference="iW7-1y-626"/>
-        <segue reference="fu7-hF-c08"/>
-        <segue reference="8GL-5h-4zG"/>
+        <segue reference="bpX-mN-qEi"/>
+        <segue reference="IfF-6V-hkZ"/>
+        <segue reference="jeY-SL-Q8Z"/>
+        <segue reference="bkt-29-1zK"/>
         <segue reference="Tb5-sO-Miv"/>
         <segue reference="gia-uV-wAw"/>
     </inferredMetricsTieBreakers>
