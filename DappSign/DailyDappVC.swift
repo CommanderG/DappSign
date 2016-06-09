@@ -570,58 +570,40 @@ class DailyDappVC: UIViewController {
                     self.dailyDappTimeInterval = .BeforeEnd(
                         timeInterval: timeIntervalBeforeEnd
                     )
+                    
+                    self.showCountdownAnimation(timeIntervalBeforeEnd)
                 }
         } else {
             self.dailyDappTimeInterval = .None
         }
     }
     
-//    private func transition() {
-////        switch self.dailyDappTimeInterval {
-////        case .BeforeEnd(let timeInterval):
-////            
-////            break
-////        case .UntilNext(let timeInterval):
-////            
-////            break
-////        case .None:
-////            break
-////        }
-//        
-//        
-//        
-////        if let (minutes, seconds) = self.dailyDappTimeLeft {
-////            if (minutes == 1 && seconds == 0) {
-////                self.showCountdownLabel(self.oneMinuteLeftLabel,
-////                    countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
-////                )
-////            } else if (minutes == 0 && seconds == 5) {
-////                self.showCountdownLabel(self.dailyDappBeginsInLabel,
-////                    countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
-////                    completion: {
-////                        self.hideTopUI()
-////                        self.hideBottomUI()
-////                        
-////                        self.dappViewsContainerView.hidden = true
-////                        
-////                        self.showLabelsCountingDownToOneFrom(5, completion: {
-////                            self.showTopUI()
-////                            self.showBottomUI()
-////                            
-////                            self.dappViewsContainerView.hidden = false
-////                            
-//////                            self.transitionDelegate?.transitionFromViewController(self)
-////                        })
-////                    }
-////                )
-////            } else if (minutes <= 0 && seconds <= 0) {
-//////                self.transitionDelegate?.transitionFromViewController(self)
-////            }
-////        }
-//        
-//        
-//        
-//    }
+    private func showCountdownAnimation(timeInterval: NSTimeInterval) {
+        let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
+        
+        if (minutes == 1 && seconds == 0) {
+            self.showCountdownLabel(self.oneMinuteLeftLabel,
+                countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
+            )
+        } else if (minutes == 0 && seconds == 5) {
+            self.showCountdownLabel(self.dailyDappBeginsInLabel,
+                countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
+                completion: {
+                    self.hideTopUI()
+                    self.hideBottomUI()
+                    
+                    self.dappViewsContainerView.hidden = true
+                    
+                    self.showLabelsCountingDownToOneFrom(5, completion: {
+                        self.showTopUI()
+                        self.showBottomUI()
+                        
+                        self.dappViewsContainerView.hidden = false
+                    })
+                }
+            )
+        }
+    }
     
     // MARK: -
     
