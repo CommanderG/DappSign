@@ -1173,6 +1173,12 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
             return
         }
         
+        let dapp = self.getFirstDapp()
+        
+        if dapp == nil {
+            return
+        }
+        
         if let minTranslationX = self.dappViewsContainerView.minTranslationX {
             if dx > 0.0 {
                 let viewHeight = CGRectGetHeight(self.view.frame)
@@ -1189,8 +1195,10 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
     }
     
     func didStartMoving() {
-        self.hideTopUI()
-        self.hideBottomUI()
+        if let _ = self.getFirstDapp() {
+            self.hideTopUI()
+            self.hideBottomUI()
+        }
     }
     
     func didStopMoving(swiped: Bool) {
