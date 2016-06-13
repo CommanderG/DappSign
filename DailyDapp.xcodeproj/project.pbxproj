@@ -141,7 +141,6 @@
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 		84EA16371CD3FCEE002CC952 /* PetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */; };
-		A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2C8EBFD782538F6BC8E13E /* libPods-DappSign.a */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
 		F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */; };
@@ -392,7 +391,6 @@
 				4CD9C9A81AA1DE2600046CA2 /* CFNetwork.framework in Frameworks */,
 				4CD9C9A61AA1DE1D00046CA2 /* AudioToolbox.framework in Frameworks */,
 				4CD9C9A41AA1DDEE00046CA2 /* Parse.framework in Frameworks */,
-				A647EE2FE1601F61639F15EE /* libPods-DappSign.a in Frameworks */,
 				F78C28BA40F4F211BCFC3FEE /* libPods-DailyDapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -782,8 +780,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CD9C9971AA1D59900046CA2 /* Build configuration list for PBXNativeTarget "DailyDapp" */;
 			buildPhases = (
-				27E9554F5CD7485C5C5D941A /* 📦 Check Pods Manifest.lock */,
 				4B779A627D70CCB141D87FCD /* Check Pods Manifest.lock */,
+				27E9554F5CD7485C5C5D941A /* 📦 Check Pods Manifest.lock */,
 				4CD9C9711AA1D59900046CA2 /* Sources */,
 				4CD9C9721AA1D59900046CA2 /* Frameworks */,
 				4CD9C9731AA1D59900046CA2 /* Resources */,
