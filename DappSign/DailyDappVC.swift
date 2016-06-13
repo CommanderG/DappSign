@@ -1156,14 +1156,26 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                     UIView.animateWithDuration(0.4,
                         animations: {
                             self.dappViewsContainerView.alpha = 0.0
-                        }, completion: { (finished: Bool) -> Void in
-                            self.performDappAnimationsWithCompletion({
+                        }, completion: {
+                            (finished: Bool) -> Void in
+                            let completeAnimation: Void -> Void = {
                                 self.dappViewsContainerView.alpha = 1.0
                                 self.currentDappCardType = DappCardType.DappCardTypeMapp
                                 
                                 self.dappViewsContainerView.show()
                                 self.showBottomUI()
-                            })
+                            }
+                            
+                            switch self.appState {
+                            case .IntroductoryDapps(_), .DailyDapp(_, _):
+                                self.performDappAnimationsWithCompletion(completeAnimation)
+                                
+                                break
+                            case _:
+                                completeAnimation()
+                                
+                                break
+                            }
                         }
                     )
                 } else {
