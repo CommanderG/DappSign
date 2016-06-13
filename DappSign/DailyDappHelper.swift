@@ -71,16 +71,14 @@ class DailyDappHelper {
     }
     
     internal class func downloadDapps(
-        completion: (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void
+        dappsArrays: [DappArray],
+        completion: (dapps: [PFObject]) -> Void
     ) {
-        let dappsArrays = self.dappsArrays()
-        
         self.downloadDappsHelper(dappsArrays, dappsArraysDapps: [:]) {
             (dappsArraysDapps: [DappArray: [PFObject]]) -> Void in
             self.processAndJoinDapps(dappsArraysDapps,
                 dappsArrays: dappsArrays,
                 dapps: [],
-                lastIntroductoryDappID: nil,
                 completion: completion
             )
         }
@@ -172,8 +170,7 @@ class DailyDappHelper {
         dappsArraysDapps: [DappArray: [PFObject]],
         dappsArrays: [DappArray],
         dapps: [PFObject],
-        lastIntroductoryDappID: String?,
-        completion: (dapps: [PFObject], lastIntroductoryDappID: String?) -> Void
+        completion: (dapps: [PFObject]) -> Void
     ) {
         if let dappsArray = dappsArrays.first, currentArrayDapps = dappsArraysDapps[dappsArray] {
             let remainingDappsArrays = Array(dappsArrays.dropFirst())
@@ -182,26 +179,14 @@ class DailyDappHelper {
                 (processedDapps: [PFObject]) -> Void in
                 let newDapps = dapps + processedDapps
                 
-                if dappsArray == .Introductory {
-                    let lastIntroductoryDappID = processedDapps.last?.objectId
-                    
-                    self.processAndJoinDapps(dappsArraysDapps,
-                        dappsArrays: remainingDappsArrays,
-                        dapps: newDapps,
-                        lastIntroductoryDappID: lastIntroductoryDappID,
-                        completion: completion
-                    )
-                } else {
-                    self.processAndJoinDapps(dappsArraysDapps,
-                        dappsArrays: remainingDappsArrays,
-                        dapps: newDapps,
-                        lastIntroductoryDappID: lastIntroductoryDappID,
-                        completion: completion
-                    )
-                }
+                self.processAndJoinDapps(dappsArraysDapps,
+                    dappsArrays: remainingDappsArrays,
+                    dapps: newDapps,
+                    completion: completion
+                )
             })
         } else {
-            completion(dapps: dapps, lastIntroductoryDappID: lastIntroductoryDappID)
+            completion(dapps: dapps)
         }
     }
     
@@ -236,18 +221,5 @@ class DailyDappHelper {
             
             break
         }
-    }
-    
-    private class func dappsArrays() -> [DappArray] {
-        var dappsArrays: [DappArray] = []
-        let userIsNew = LocalStorage.userIsNew()
-        
-        if userIsNew {
-            dappsArrays = [ .Introductory, .Primary, .Secondary ]
-        } else {
-            dappsArrays = [ .Primary, .Secondary ]
-        }
-        
-        return dappsArrays
     }
 }
