@@ -18,8 +18,8 @@ enum Dapps {
 
 enum AppState {
     case DownloadingDapps
-    case IntroductoryDapps(dapps: [PFObject])
-    case DailyDapp(timeInterval: NSTimeInterval, dapps: [PFObject])
+    case IntroductoryDapps(dapps: [PFObject], index: Int)
+    case DailyDapp(timeInterval: NSTimeInterval, dapps: [PFObject], index: Int)
     case Scoreboard(timeInterval: NSTimeInterval, dapps: [PFObject], index: Int)
     case None
 }
@@ -175,7 +175,7 @@ class DailyDappVC: UIViewController {
             self.downloadDapps(.Introductory, completion: {
                 (dapps: [PFObject]) -> Void in
                 if dapps.count > 0 {
-                    self.appState = .IntroductoryDapps(dapps: dapps)
+                    self.appState = .IntroductoryDapps(dapps: dapps, index: 0)
                     
                     self.initDappView()
                 } else {
@@ -247,7 +247,7 @@ class DailyDappVC: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.getFirstDapp() {
+        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.getCurrentDapp() {
             self.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
                 view2: dappBackSideLinksVC.view,
@@ -273,7 +273,7 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dapp = self.getFirstDapp() {
+        if let dapp = self.getCurrentDapp() {
             FacebookHelper.shareDapp(dapp, completion: {
                 (message: String) -> Void in
                 self.showAlertViewWithOKButtonAndMessage(message)
@@ -282,7 +282,7 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let currentDapp = self.getFirstDapp() {
+        if let currentDapp = self.getCurrentDapp() {
             TwitterHelper.tweetDapp(currentDapp, completion: {
                 (success: Bool, error: NSError?) -> Void in
                 if success {
@@ -303,21 +303,23 @@ class DailyDappVC: UIViewController {
     }
     
     @IBAction func showLinkView(sender: AnyObject) {
-        if let dapp = self.getFirstDapp(), embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
-            embedDappVC.delegate = self
+        if let
+            dapp = self.getCurrentDapp(),
+            embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
+                embedDappVC.delegate = self
+                
+                self.addChildViewController(embedDappVC)
             
-            self.addChildViewController(embedDappVC)
-            
-            let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
-            
-            embedDappVC.view.frame = frame
-            
-            self.dappViewsContainerView.addSubview(embedDappVC.view)
-            
-            embedDappVC.didMoveToParentViewController(self)
-            embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
-            embedDappVC.show()
-            self.disableShareButons()
+                let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
+                
+                embedDappVC.view.frame = frame
+                
+                self.dappViewsContainerView.addSubview(embedDappVC.view)
+                
+                embedDappVC.didMoveToParentViewController(self)
+                embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
+                embedDappVC.show()
+                self.disableShareButons()
         }
     }
     
@@ -536,7 +538,7 @@ class DailyDappVC: UIViewController {
         show.colon = !show.colon
         
         switch self.appState {
-        case .DailyDapp(let timeInterval, _):
+        case .DailyDapp(let timeInterval, _, _):
             let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
             let minutesString = self.stringForDoubleDigitInt(minutes)
             let secondsString = self.stringForDoubleDigitInt(seconds)
@@ -575,7 +577,7 @@ class DailyDappVC: UIViewController {
     
     internal func updateDailyDappTimeInterval() {
         switch self.appState {
-        case .None, .DailyDapp(_, _), .Scoreboard(_, _, _):
+        case .None, .DailyDapp(_, _, _), .Scoreboard(_, _, _):
             let timeBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd()
             let timeUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate()
             
@@ -608,8 +610,12 @@ class DailyDappVC: UIViewController {
                     }
                 } else {
                     switch self.appState {
-                    case .DailyDapp(_, let dapps):
-                        self.appState = .DailyDapp(timeInterval: timeBeforeEnd, dapps: dapps)
+                    case .DailyDapp(_, let dapps, let index):
+                        self.appState = .DailyDapp(
+                            timeInterval: timeBeforeEnd,
+                            dapps: dapps,
+                            index: index
+                        )
                         
                         break
                     case _:
@@ -619,7 +625,8 @@ class DailyDappVC: UIViewController {
                             (dapps: [PFObject]) -> Void in
                             self.appState = .DailyDapp(
                                 timeInterval: timeBeforeEnd,
-                                dapps: dapps
+                                dapps: dapps,
+                                index: 0
                             )
                             
                             self.initDappView()
@@ -676,7 +683,7 @@ class DailyDappVC: UIViewController {
             self.dappViewsContainerView.show()
         }
         
-        if let dapp = self.getFirstDapp() {
+        if let dapp = self.getCurrentDapp() {
             DappsHelper.downloadHashtagsForDapp(dapp, completion: {
                 (hashtags: [PFObject]?, error: NSError?) -> Void in
                 if let hashtags = hashtags {
@@ -690,7 +697,7 @@ class DailyDappVC: UIViewController {
         }
         
         if self.visibleDappView == self.dappSignView {
-            let dapp = self.getFirstDapp()
+            let dapp = self.getCurrentDapp()
             
             self.dappSignVC?.showDappObject(dapp)
             
@@ -709,7 +716,7 @@ class DailyDappVC: UIViewController {
                 })
             }
         } else if (self.visibleDappView == self.dappMappView) {
-            if let dapp = self.getFirstDapp() {
+            if let dapp = self.getPreviousDapp() {
                 self.dappMappVC?.showInformationAboutDapp(dapp)
             }
         }
@@ -717,43 +724,62 @@ class DailyDappVC: UIViewController {
     
     // MARK: -
     
-    private func getFirstDapp() -> PFObject? {
+    private func getCurrentDapp() -> PFObject? {
         switch self.appState {
-        case .IntroductoryDapps(let dapps):
-            return dapps.first
-        case .DailyDapp(_, let dapps):
-            return dapps.first
+        case .IntroductoryDapps(let dapps, let index):
+            return self.getCurrentDappInDapp(dapps, currentIndex: index)
+        case .DailyDapp(_, let dapps, let index):
+            return self.getCurrentDappInDapp(dapps, currentIndex: index)
         case .Scoreboard(_, let dapps, let index):
-            if index >= 0 && index < dapps.count {
-                return dapps[index]
-            }
-            
-            return nil
+            return self.getCurrentDappInDapp(dapps, currentIndex: index)
         case _:
             return nil
         }
     }
     
-    private func removeFirstDapp() {
+    private func getPreviousDapp() -> PFObject? {
         switch self.appState {
-        case .IntroductoryDapps(let dapps):
-            if dapps.count > 0 {
-                var newDapps = dapps
-                
-                newDapps.removeAtIndex(0)
-                
-                self.appState = .IntroductoryDapps(dapps: newDapps)
-            }
+        case .IntroductoryDapps(let dapps, let index):
+            return self.getPreviousDappInDapps(dapps, currentIndex: index)
+        case .DailyDapp(_, let dapps, let index):
+            return self.getPreviousDappInDapps(dapps, currentIndex: index)
+        case .Scoreboard(_, let dapps, let index):
+            return self.getPreviousDappInDapps(dapps, currentIndex: index)
+        case _:
+            return nil
+        }
+    }
+    
+    private func getCurrentDappInDapp(dapps: [PFObject], currentIndex: Int) -> PFObject? {
+        if currentIndex >= 0 && currentIndex < dapps.count {
+            return dapps[currentIndex]
+        }
+        
+        return nil
+    }
+    
+    private func getPreviousDappInDapps(dapps: [PFObject], currentIndex: Int) -> PFObject? {
+        let previousIndex = currentIndex - 1
+        
+        return self.getCurrentDappInDapp(dapps, currentIndex: previousIndex)
+    }
+    
+    private func setNextDappAsCurrentDapp() {
+        switch self.appState {
+        case .IntroductoryDapps(let dapps, let index):
+            let newIndex = index + 1
+            
+            self.appState = .IntroductoryDapps(dapps: dapps, index: newIndex)
             
             break
-        case .DailyDapp(let timeInterval, let dapps):
-            if dapps.count > 0 {
-                var newDapps = dapps
-                
-                newDapps.removeAtIndex(0)
-                
-                self.appState = .DailyDapp(timeInterval: timeInterval, dapps: newDapps)
-            }
+        case .DailyDapp(let timeInterval, let dapps, let index):
+            let newIndex = index + 1
+            
+            self.appState = .DailyDapp(
+                timeInterval: timeInterval,
+                dapps: dapps,
+                index: newIndex
+            )
             
             break
         case .Scoreboard(let timeInterval, let dapps, let index):
@@ -769,8 +795,8 @@ class DailyDappVC: UIViewController {
     
     private func goFromIntroductoryStateToOtherStateIfNeeded() {
         switch self.appState {
-        case .IntroductoryDapps(let dapps):
-            if dapps.count == 0 {
+        case .IntroductoryDapps(let dapps, let index):
+            if index == dapps.count {
                 LocalStorage.saveUserIsNew(false)
                 
                 self.appState = .None
@@ -1139,7 +1165,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
         if (self.visibleDappView == self.dappSignView) {
             let dapped = (swipeDirection == SwipeDirection.LeftToRight)
             
-            if let currentDapp = self.getFirstDapp() {
+            if let currentDapp = self.getCurrentDapp() {
                 self.lastDappedDapp = currentDapp
                 
                 switch self.appState {
@@ -1167,7 +1193,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                             }
                             
                             switch self.appState {
-                            case .IntroductoryDapps(_), .DailyDapp(_, _):
+                            case .IntroductoryDapps(_), .DailyDapp(_, _, _):
                                 self.performDappAnimationsWithCompletion(completeAnimation)
                                 
                                 break
@@ -1187,7 +1213,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                 self.lastDappedDapp = nil
             }
             
-            self.removeFirstDapp()
+            self.setNextDappAsCurrentDapp()
             self.goFromIntroductoryStateToOtherStateIfNeeded()
         } else {
             self.currentDappCardType = DappCardType.DappCardTypeSign
@@ -1201,7 +1227,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
             return
         }
         
-        let dapp = self.getFirstDapp()
+        let dapp = self.getCurrentDapp()
         
         if dapp == nil {
             return
@@ -1223,7 +1249,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
     }
     
     func didStartMoving() {
-        if let _ = self.getFirstDapp() {
+        if let _ = self.getCurrentDapp() {
             self.hideTopUI()
             self.hideBottomUI()
         }

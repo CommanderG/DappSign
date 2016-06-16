@@ -63,6 +63,12 @@ class DappMappVC: UIViewController {
                 self.percentsView.showPercents(dappMappInfo.percents)
             }
         }
+        
+        if let
+            dappBackgroundColoName = dapp["dappBackgroundColor"] as? String,
+            colorName = ColorName(rawValue: dappBackgroundColoName) {
+            self.view.backgroundColor = DappColors.colorWithColorName(colorName)
+        }
     }
     
     // MARK: - private
