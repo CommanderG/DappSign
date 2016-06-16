@@ -31,12 +31,16 @@ class RepresentativeVC: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.clearColor()
-        
-        ViewHelper.initRepresentativeImageViewLayer(self.imageView)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        ViewHelper.initRepresentativeImageViewLayer(self.imageView)
     }
     
     override func viewDidAppear(animated: Bool) {
