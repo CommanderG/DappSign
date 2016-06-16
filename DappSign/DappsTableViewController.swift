@@ -120,7 +120,7 @@ class DappsTableViewController: UITableViewController {
     // MARK: - Navigation bar
     
     private func showEditButton() {
-        let selector = Selector("enablePositionsEditing:")
+        let selector = #selector(self.enablePositionsEditing(_:))
         let editBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonSystemItem.Edit,
             target: self,
@@ -131,7 +131,7 @@ class DappsTableViewController: UITableViewController {
     }
     
     private func showSaveButton() {
-        let selector = Selector("savePositions:")
+        let selector = #selector(self.savePositions(_:))
         let saveBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonSystemItem.Save,
             target: self,

@@ -114,7 +114,7 @@ class DailyDappVC: UIViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: Selector("handleDappSwipedNotification:"),
+            selector: #selector(self.handleDappSwipedNotification(_:)),
             name: DappSwipedNotification,
             object: nil
         )
@@ -201,7 +201,7 @@ class DailyDappVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
-            selector: Selector("updateDappScore"),
+            selector: #selector(self.updateDappScore),
             userInfo: nil,
             repeats:  true
         )
@@ -232,13 +232,13 @@ class DailyDappVC: UIViewController {
     private func initTimers() {
         self.dailyDappTimeLeftLabelUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
-            selector: "updateDailyDappTimeLabels",
+            selector: #selector(self.updateDailyDappTimeLabels),
             userInfo: nil,
             repeats:  true
         )
         self.dailyDappTimeLeftUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
             target:   self,
-            selector: "updateDailyDappTimeInterval",
+            selector: #selector(self.updateDailyDappTimeInterval),
             userInfo: nil,
             repeats:  true
         )
@@ -452,7 +452,7 @@ class DailyDappVC: UIViewController {
                 
                 let tapGR = UITapGestureRecognizer(
                     target: self,
-                    action: Selector("handleDappLinksTapGesture:")
+                    action: #selector(self.handleDappSignTapGesture(_:))
                 )
                 
                 self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
@@ -847,7 +847,7 @@ class DailyDappVC: UIViewController {
     private func showPlusOneLabels(completion: Void -> Void) {
         let animationDuration = 0.6
         
-        for var index = 0; index < self.labelsAnimationInfo.count; ++index {
+        for index in 0 ..< self.labelsAnimationInfo.count {
             let labelsCount = Double(self.labelsAnimationInfo.count)
             let animationDelay = animationDuration / labelsCount * Double(index)
             let animationInfo = self.labelsAnimationInfo[index]
