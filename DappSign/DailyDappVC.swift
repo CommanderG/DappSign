@@ -114,7 +114,7 @@ class DailyDappVC: UIViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: #selector(self.handleDappSwipedNotification(_:)),
+            selector: Selector("handleDappSwipedNotification:"),
             name: DappSwipedNotification,
             object: nil
         )
@@ -201,7 +201,7 @@ class DailyDappVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
-            selector: #selector(self.updateDappScore),
+            selector: Selector("updateDappScore"),
             userInfo: nil,
             repeats:  true
         )
@@ -232,13 +232,13 @@ class DailyDappVC: UIViewController {
     private func initTimers() {
         self.dailyDappTimeLeftLabelUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
             target:   self,
-            selector: #selector(self.updateDailyDappTimeLabels),
+            selector: Selector("updateDailyDappTimeLabels"),
             userInfo: nil,
             repeats:  true
         )
         self.dailyDappTimeLeftUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
             target:   self,
-            selector: #selector(self.updateDailyDappTimeInterval),
+            selector: Selector("updateDailyDappTimeInterval"),
             userInfo: nil,
             repeats:  true
         )
@@ -454,7 +454,7 @@ class DailyDappVC: UIViewController {
                 
                 let tapGR = UITapGestureRecognizer(
                     target: self,
-                    action: #selector(self.handleDappSignTapGesture(_:))
+                    action: Selector("handleDappSignTapGesture:")
                 )
                 
                 self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
