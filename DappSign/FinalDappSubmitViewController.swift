@@ -9,18 +9,18 @@
 import UIKit
 
 class FinalDappSubmitViewController: UIViewController {
-    @IBOutlet weak var containerView:         SwipeableView!
-    @IBOutlet weak var dappSignView:          UIView!
-    @IBOutlet weak var shareOnFacebookButton: UIButton!
-    @IBOutlet weak var tweetThisCardButton:   UIButton!
+    @IBOutlet weak var containerView         : SwipeableView!
+    @IBOutlet weak var dappSignView          : UIView!
+    @IBOutlet weak var shareOnFacebookButton : UIButton!
+    @IBOutlet weak var tweetThisCardButton   : UIButton!
     
-    internal var dapp: Dapp?
-    internal var links: [Link]?
-    internal var addDappVC: AddDappViewController?
-    internal var addDappLinksVC: AddDappLinksVC?
+    internal var dapp           : Dapp?
+    internal var links          : [Link]?
+    internal var addDappVC      : AddDappViewController?
+    internal var addDappLinksVC : AddDappLinksVC?
     
-    private var dappObj: PFObject?
-    private var dappSignVC: DappSignVC?
+    private var dappObj    : PFObject?
+    private var dappSignVC : DappSignVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +44,11 @@ class FinalDappSubmitViewController: UIViewController {
         }
         
         self.dappSignVC?.showDapp(self.dapp)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.containerView.configure()
     }
     
     override func didReceiveMemoryWarning() {

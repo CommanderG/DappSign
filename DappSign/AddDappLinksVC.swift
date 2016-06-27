@@ -25,7 +25,12 @@ class AddDappLinksVC: UIViewController {
         self.containerView.minTranslationX = 150.0
         self.containerView.appearanceDelegate = self
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.containerView.configure()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

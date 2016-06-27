@@ -27,34 +27,34 @@ enum Mode {
 }
 
 class AddDappViewController: UIViewController {
-    @IBOutlet weak var prohibitedWordsLabel:               UILabel!
-    @IBOutlet weak var titleLabel:                         UILabel!
-    @IBOutlet weak var dappMessageContainerSwipeableView:  SwipeableView!
-    @IBOutlet weak var dappMessageTextView:                UITextView!
-    @IBOutlet weak var hashtagsTextView:                   UITextField!
-    @IBOutlet weak var buttonsContainerViewsContainerView: UIView!
-    @IBOutlet weak var colorButtonsContainerView:          UIView!
-    @IBOutlet weak var fontButtonsContainerView:           UIView!
+    @IBOutlet weak var prohibitedWordsLabel               : UILabel!
+    @IBOutlet weak var titleLabel                         : UILabel!
+    @IBOutlet weak var dappMessageContainerSwipeableView  : SwipeableView!
+    @IBOutlet weak var dappMessageTextView                : UITextView!
+    @IBOutlet weak var hashtagsTextView                   : UITextField!
+    @IBOutlet weak var buttonsContainerViewsContainerView : UIView!
+    @IBOutlet weak var colorButtonsContainerView          : UIView!
+    @IBOutlet weak var fontButtonsContainerView           : UIView!
     
-    @IBOutlet weak var colorButtonLeftTop:      UIButton!
-    @IBOutlet weak var colorButtonMiddleTop:    UIButton!
-    @IBOutlet weak var colorButtonRightTop:     UIButton!
-    @IBOutlet weak var colorButtonLeftMiddle:   UIButton!
-    @IBOutlet weak var colorButtonMiddleMiddle: UIButton!
-    @IBOutlet weak var colorButtonRightMiddle:  UIButton!
-    @IBOutlet weak var colorButtonLeftBottom:   UIButton!
-    @IBOutlet weak var colorButtonMiddleBottom: UIButton!
-    @IBOutlet weak var colorButtonRightBottom:  UIButton!
+    @IBOutlet weak var colorButtonLeftTop      : UIButton!
+    @IBOutlet weak var colorButtonMiddleTop    : UIButton!
+    @IBOutlet weak var colorButtonRightTop     : UIButton!
+    @IBOutlet weak var colorButtonLeftMiddle   : UIButton!
+    @IBOutlet weak var colorButtonMiddleMiddle : UIButton!
+    @IBOutlet weak var colorButtonRightMiddle  : UIButton!
+    @IBOutlet weak var colorButtonLeftBottom   : UIButton!
+    @IBOutlet weak var colorButtonMiddleBottom : UIButton!
+    @IBOutlet weak var colorButtonRightBottom  : UIButton!
     
-    @IBOutlet weak var fontButtonLeftTop:      UIButton!
-    @IBOutlet weak var fontButtonMiddleTop:    UIButton!
-    @IBOutlet weak var fontButtonRightTop:     UIButton!
-    @IBOutlet weak var fontButtonLeftMiddle:   UIButton!
-    @IBOutlet weak var fontButtonMiddleMiddle: UIButton!
-    @IBOutlet weak var fontButtonRightMiddle:  UIButton!
-    @IBOutlet weak var fontButtonLeftBottom:   UIButton!
-    @IBOutlet weak var fontButtonMiddleBottom: UIButton!
-    @IBOutlet weak var fontButtonRightBottom:  UIButton!
+    @IBOutlet weak var fontButtonLeftTop      : UIButton!
+    @IBOutlet weak var fontButtonMiddleTop    : UIButton!
+    @IBOutlet weak var fontButtonRightTop     : UIButton!
+    @IBOutlet weak var fontButtonLeftMiddle   : UIButton!
+    @IBOutlet weak var fontButtonMiddleMiddle : UIButton!
+    @IBOutlet weak var fontButtonRightMiddle  : UIButton!
+    @IBOutlet weak var fontButtonLeftBottom   : UIButton!
+    @IBOutlet weak var fontButtonMiddleBottom : UIButton!
+    @IBOutlet weak var fontButtonRightBottom  : UIButton!
     
     @IBOutlet weak var dappMessageContainerViewBottomConstraint: NSLayoutConstraint!
     
@@ -131,9 +131,9 @@ class AddDappViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.prepareViewsForCurrentMode()
         self.animateViews()
+        self.dappMessageContainerSwipeableView.configure()
     }
     
     override func didReceiveMemoryWarning() {
