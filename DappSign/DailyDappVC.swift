@@ -8,8 +8,6 @@
 
 import UIKit
 
-internal let DappSwipedNotification = "dappSwipedNotification"
-
 enum Dapps {
     case Introductory
     case Daily
@@ -112,12 +110,6 @@ class DailyDappVC: UIViewController {
         if PFUser.currentUser() == nil {
             self.profileButton.hidden = true
         }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: Selector("handleDappSwipedNotification:"),
-            name: DappSwipedNotification,
-            object: nil
-        )
         
         let labels: [UIView] = [
             self.plusDappsCountLabel,

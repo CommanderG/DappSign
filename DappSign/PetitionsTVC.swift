@@ -129,12 +129,6 @@ class PetitionsTVC: UITableViewController {
                 
                 self.dappsIdsSwipedByLoggedInUser?.append(dapp.objectId)
                 
-                let notificationCenter = NSNotificationCenter.defaultCenter()
-                
-                notificationCenter.postNotificationName(DappSwipedNotification,
-                    object: dapp.objectId
-                )
-                
                 Requests.incrementScoreOfTheDapp(dapp, completion: {
                     (succeeded: Bool, error: NSError?) -> Void in
                 })
