@@ -26,16 +26,16 @@ protocol SwipeableViewMovementDelegate {
 }
 
 class SwipeableView: UIView {
-    private var originalCenter = CGPointZero
-    private var animator: UIDynamicAnimator?
-    private var snapBehavior: UISnapBehavior?
-    private var gravity: UIGravityBehavior?
-    private var swipeDirection: SwipeDirection?
+    private var animator       : UIDynamicAnimator? = nil
+    private var snapBehavior   : UISnapBehavior?    = nil
+    private var gravity        : UIGravityBehavior? = nil
+    private var swipeDirection : SwipeDirection?    = nil
     
-    internal var minTranslationX: CGFloat?
-    internal var appearanceDelegate: SwipeableViewAppearanceDelegate? = nil
-    internal var movementDelegate: SwipeableViewMovementDelegate? = nil
-    internal var canBeDraged: Bool = true
+    internal var originalCenter     : CGPoint                          = CGPointZero
+    internal var minTranslationX    : CGFloat?                         = nil
+    internal var appearanceDelegate : SwipeableViewAppearanceDelegate? = nil
+    internal var movementDelegate   : SwipeableViewMovementDelegate?   = nil
+    internal var canBeDraged        : Bool                             = true
     
     required override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,12 +47,20 @@ class SwipeableView: UIView {
         super.init(coder: decoder)
         
         self.addPanGesture()
-        
-        self.originalCenter = self.center
     }
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+    }
+    
+    private func addPanGesture() {
+        let panGR = UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:"))
+        
+        self.addGestureRecognizer(panGR)
+    }
+    
+    internal func configure() {
+        self.originalCenter = self.center
         
         if let superview = self.superview {
             self.animator = UIDynamicAnimator(referenceView: superview)
@@ -66,16 +74,10 @@ class SwipeableView: UIView {
             self.gravity?.action = {
                 if (CGRectGetMinY(self.frame) > CGRectGetHeight(superview.frame) ||
                     CGRectGetMaxY(self.frame) < 0.0) {
-                        self.show()
+                    self.show()
                 }
             }
         }
-    }
-    
-    private func addPanGesture() {
-        let panGR = UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:"))
-        
-        self.addGestureRecognizer(panGR)
     }
     
     internal func show() {

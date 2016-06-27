@@ -30,10 +30,10 @@ enum DappCardType {
 }
 
 struct LabelAnimationInfo {
-    let label: UILabel!
-    let topLC: NSLayoutConstraint!
-    let maxTopSpaceConstraint: CGFloat
-    let minTopSpaceConstraint: CGFloat
+    let label                 : UILabel!
+    let topLC                 : NSLayoutConstraint!
+    let maxTopSpaceConstraint : CGFloat
+    let minTopSpaceConstraint : CGFloat
 }
 
 class DailyDappVC: UIViewController {
@@ -221,6 +221,7 @@ class DailyDappVC: UIViewController {
         }
         
         self.animateAnimateableViews()
+        self.dappViewsContainerView.configure()
     }
     
     override func viewDidDisappear(animated: Bool) {

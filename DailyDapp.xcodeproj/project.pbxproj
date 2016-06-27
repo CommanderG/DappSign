@@ -780,8 +780,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CD9C9971AA1D59900046CA2 /* Build configuration list for PBXNativeTarget "DailyDapp" */;
 			buildPhases = (
-				4B779A627D70CCB141D87FCD /* Check Pods Manifest.lock */,
 				27E9554F5CD7485C5C5D941A /* 📦 Check Pods Manifest.lock */,
+				4B779A627D70CCB141D87FCD /* Check Pods Manifest.lock */,
 				4CD9C9711AA1D59900046CA2 /* Sources */,
 				4CD9C9721AA1D59900046CA2 /* Frameworks */,
 				4CD9C9731AA1D59900046CA2 /* Resources */,
