@@ -9,15 +9,15 @@
 import UIKit
 
 struct Dapp {
-    var dappStatement:          String?
-    var lowercaseDappStatement: String?
-    var dappFont:               String?
-    var dappBackgroundColor:    String?
-    var name:                   String?
-    var userid:                 String?
-    var dappScore:              Int
-    var isDeleted:              Bool
-    var hashtagNames:           [String]
+    var dappStatement          : String?
+    var lowercaseDappStatement : String?
+    var dappFont               : String?
+    var dappBackgroundColor    : String?
+    var name                   : String?
+    var userid                 : String?
+    var dappScore              : Int
+    var isDeleted              : Bool
+    var hashtagNames           : [String]
 }
 
 enum Mode {
@@ -58,18 +58,15 @@ class AddDappViewController: UIViewController {
     
     @IBOutlet weak var dappMessageContainerViewBottomConstraint: NSLayoutConstraint!
     
-    private let showDappLinksSegueID = "showDappLinks"
+    private let showDappLinksSegueID: String = "showDappLinks"
     
-    private var mode = Mode.ChooseColor
-    private var dappColorName = ColorName.Cinnabar
-    private var dappFontName = FontName.Exo
-    
-    private var colorButtonsColorNames: [UIButton: ColorName] = [:]
-    private var fontButtonsFontNames: [UIButton: FontName] = [:]
-    
-    private var nameString: String!
-    
-    private var originalLocation: CGPoint!
+    private var mode                   : Mode                  = .ChooseColor
+    private var dappColorName          : ColorName             = .Cinnabar
+    private var dappFontName           : FontName              = .Exo
+    private var colorButtonsColorNames : [UIButton: ColorName] = [:]
+    private var fontButtonsFontNames   : [UIButton: FontName]  = [:]
+    private var nameString             : String!               = ""
+    private var originalLocation       : CGPoint!              = CGPointZero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -306,17 +303,6 @@ class AddDappViewController: UIViewController {
             
             self.dappMessageTextView.resignFirstResponder()
             self.hashtagsTextView.resignFirstResponder()
-        }
-        
-        self.updateDappMessageContainerViewBottomConstraintForCurrentMode()
-    }
-    
-    private func updateDappMessageContainerViewBottomConstraintForCurrentMode() {
-        switch self.mode {
-        case .ChooseColor, .ChooseFont:
-            self.dappMessageContainerViewBottomConstraint.constant = 214.0
-        case .AddText:
-            self.dappMessageContainerViewBottomConstraint.constant = 276.0
         }
     }
     
