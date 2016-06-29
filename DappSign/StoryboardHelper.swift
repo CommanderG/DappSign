@@ -27,15 +27,6 @@ class StoryboardHelper {
         return self.viewControllerWithID("LinkVC")
     }
     
-    internal class func instantiateScoreboardVC() -> ScoreboardVC? {
-        return self.viewControllerWithID("scoreboardVC")
-    }
-    
-    internal class func instantiateScoreboardDappSignFrontSideVC(
-    ) -> ScoreboardDappSignFrontSideVC? {
-        return self.viewControllerWithID("ScoreboardDappSignFrontSideVC")
-    }
-    
     internal class func instantiateDappBackSideLinksVC() -> DappBackSideLinksVC? {
         return self.viewControllerWithID("DappBackSideLinksVC")
     }

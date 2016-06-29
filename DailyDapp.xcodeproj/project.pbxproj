@@ -27,11 +27,9 @@
 		274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274CF8E11CEB788200AF966E /* AppURLs.swift */; };
 		2756D1971CB2909100C9A41A /* DappTransferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2756D1961CB2909000C9A41A /* DappTransferHelper.swift */; };
 		275955811CC7AF0100080D63 /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955801CC7AF0100080D63 /* ViewControllerHelper.swift */; };
-		275955831CC7B68000080D63 /* ScoreboardRepresentativeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */; };
 		275955851CC7BB5100080D63 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955841CC7BB5100080D63 /* ViewHelper.swift */; };
 		275955871CC7C6B900080D63 /* DistrictHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955861CC7C6B900080D63 /* DistrictHelper.swift */; };
 		275955891CC7D7FC00080D63 /* HashtagHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275955881CC7D7FC00080D63 /* HashtagHelper.swift */; };
-		2759558B1CC7DF3000080D63 /* ScoreboardDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */; };
 		2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */; };
 		27696F4A1BB3EDE800EE391F /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27696F491BB3EDE800EE391F /* Link.swift */; };
 		276D26231CDB4FB60036DCAF /* StoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */; };
@@ -57,12 +55,10 @@
 		27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */; };
 		27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF934F1B949B690017D8D2 /* PercentsView.swift */; };
 		27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5291CC52369008E3560 /* DappSignVC.swift */; };
-		27B4E5301CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */; };
 		27B4E5321CC546AB008E3560 /* DappSignViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */; };
 		27B818BA1CEE2DEF0092E63B /* EmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */; };
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27BB68D01CC6781100B3E2BE /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */; };
-		27BB68D21CC6968D00B3E2BE /* ScoreboardDappSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */; };
 		27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */; };
 		27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */; };
 		27D3C2A41CB7F61A009CDB2C /* LinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A31CB7F619009CDB2C /* LinkVC.swift */; };
@@ -71,7 +67,6 @@
 		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
-		27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */; };
 		27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */; };
 		27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVC.swift */; };
 		27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */; };
@@ -197,11 +192,9 @@
 		274CF8E11CEB788200AF966E /* AppURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppURLs.swift; sourceTree = "<group>"; };
 		2756D1961CB2909000C9A41A /* DappTransferHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappTransferHelper.swift; sourceTree = "<group>"; };
 		275955801CC7AF0100080D63 /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
-		275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardRepresentativeVC.swift; sourceTree = "<group>"; };
 		275955841CC7BB5100080D63 /* ViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		275955861CC7C6B900080D63 /* DistrictHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistrictHelper.swift; sourceTree = "<group>"; };
 		275955881CC7D7FC00080D63 /* HashtagHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagHelper.swift; sourceTree = "<group>"; };
-		2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappMappVC.swift; sourceTree = "<group>"; };
 		2765383C1B8F232A000C737E /* CongressionalDistrictsIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongressionalDistrictsIDs.swift; sourceTree = "<group>"; };
 		27696F491BB3EDE800EE391F /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardHelper.swift; sourceTree = "<group>"; };
@@ -229,12 +222,10 @@
 		27AF934D1B949A120017D8D2 /* SVGMapGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapGenerator.swift; sourceTree = "<group>"; };
 		27AF934F1B949B690017D8D2 /* PercentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsView.swift; sourceTree = "<group>"; };
 		27B4E5291CC52369008E3560 /* DappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignVC.swift; sourceTree = "<group>"; };
-		27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappSignFrontSideVC.swift; sourceTree = "<group>"; };
 		27B4E5311CC546AB008E3560 /* DappSignViewsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappSignViewsHelper.swift; sourceTree = "<group>"; };
 		27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginVC.swift; sourceTree = "<group>"; };
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
-		27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardDappSignVC.swift; sourceTree = "<group>"; };
 		27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsWithoutArrayTVC.swift; sourceTree = "<group>"; };
 		27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappVC.swift; sourceTree = "<group>"; };
 		27D3C2A31CB7F619009CDB2C /* LinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVC.swift; sourceTree = "<group>"; };
@@ -243,7 +234,6 @@
 		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
-		27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardVC.swift; sourceTree = "<group>"; };
 		27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappStartTimeVC.swift; sourceTree = "<group>"; };
 		27FD3C041C7DED6000826EBA /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLinkCell.swift; sourceTree = "<group>"; };
@@ -595,11 +585,6 @@
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
-				27DDE9811C84AD7F00527953 /* ScoreboardVC.swift */,
-				275955821CC7B68000080D63 /* ScoreboardRepresentativeVC.swift */,
-				27BB68D11CC6968D00B3E2BE /* ScoreboardDappSignVC.swift */,
-				27B4E52F1CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift */,
-				2759558A1CC7DF3000080D63 /* ScoreboardDappMappVC.swift */,
 				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
@@ -780,8 +765,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CD9C9971AA1D59900046CA2 /* Build configuration list for PBXNativeTarget "DailyDapp" */;
 			buildPhases = (
-				27E9554F5CD7485C5C5D941A /* 📦 Check Pods Manifest.lock */,
 				4B779A627D70CCB141D87FCD /* Check Pods Manifest.lock */,
+				27E9554F5CD7485C5C5D941A /* 📦 Check Pods Manifest.lock */,
 				4CD9C9711AA1D59900046CA2 /* Sources */,
 				4CD9C9721AA1D59900046CA2 /* Frameworks */,
 				4CD9C9731AA1D59900046CA2 /* Resources */,
@@ -1010,12 +995,10 @@
 				8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */,
 				274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */,
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
-				275955831CC7B68000080D63 /* ScoreboardRepresentativeVC.swift in Sources */,
 				27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */,
 				279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */,
 				F372467D1AD3ED7600AD56E2 /* SDWebImageDownloader.m in Sources */,
 				F37246841AD3ED7600AD56E2 /* UIImage+WebP.m in Sources */,
-				27BB68D21CC6968D00B3E2BE /* ScoreboardDappSignVC.swift in Sources */,
 				4CD252C51AA75B33006C9C2E /* FinalDappSubmitViewController.swift in Sources */,
 				84D848801AC726D000D1B3F9 /* SWCellScrollView.m in Sources */,
 				27811A641B9589F8007E97EE /* DappSignView.swift in Sources */,
@@ -1064,7 +1047,6 @@
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
 				27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
-				2759558B1CC7DF3000080D63 /* ScoreboardDappMappVC.swift in Sources */,
 				27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */,
 				4CD9C97B1AA1D59900046CA2 /* AppDelegate.swift in Sources */,
 				275955851CC7BB5100080D63 /* ViewHelper.swift in Sources */,
@@ -1090,7 +1072,6 @@
 				270B8C081CDA682400B8725F /* DappMappViewHelper.swift in Sources */,
 				274B33451C9C3AAB00FA1FDF /* DappArraysHelper.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
-				27DDE9821C84AD7F00527953 /* ScoreboardVC.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
 				27979D521CB3E35E002816A6 /* RepresentativeHelper.swift in Sources */,
@@ -1102,7 +1083,6 @@
 				279A31241AB31CE700850508 /* DappsTableViewController.swift in Sources */,
 				4CD9C9CD1AA1EC1A00046CA2 /* SpringAnimation.swift in Sources */,
 				4CD9C9BE1AA1EBBD00046CA2 /* DailyDappVC.swift in Sources */,
-				27B4E5301CC54666008E3560 /* ScoreboardDappSignFrontSideVC.swift in Sources */,
 				F372467B1AD3ED7600AD56E2 /* SDWebImageCompat.m in Sources */,
 				84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */,
 				274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */,
