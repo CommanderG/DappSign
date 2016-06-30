@@ -31,7 +31,7 @@ class AddDappViewController: UIViewController {
     @IBOutlet weak var titleLabel                         : UILabel!
     @IBOutlet weak var dappMessageContainerSwipeableView  : SwipeableView!
     @IBOutlet weak var dappMessageTextView                : UITextView!
-    @IBOutlet weak var hashtagsTextView                   : UITextField!
+    @IBOutlet weak var hashtagsTextField                  : UITextField!
     @IBOutlet weak var buttonsContainerViewsContainerView : UIView!
     @IBOutlet weak var colorButtonsContainerView          : UIView!
     @IBOutlet weak var fontButtonsContainerView           : UIView!
@@ -122,7 +122,7 @@ class AddDappViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.dappMessageContainerSwipeableView.hidden = true
-        self.hashtagsTextView.hidden = true
+        self.hashtagsTextField.hidden = true
         self.buttonsContainerViewsContainerView.hidden = true
     }
     
@@ -143,17 +143,17 @@ class AddDappViewController: UIViewController {
     }
     
     private func initHashtagsTextView() {
-        if let placeholder = self.hashtagsTextView.placeholder {
+        if let placeholder = self.hashtagsTextField.placeholder {
             let blackColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
             let placeholderAttributes = [NSForegroundColorAttributeName: blackColor]
             let attributedPlaceholder = NSAttributedString(string: placeholder,
                 attributes: placeholderAttributes
             )
             
-            self.hashtagsTextView.attributedPlaceholder = attributedPlaceholder
+            self.hashtagsTextField.attributedPlaceholder = attributedPlaceholder
         }
         
-        self.hashtagsTextView.layer.cornerRadius = 6.0
+        self.hashtagsTextField.layer.cornerRadius = 6.0
     }
     
     private func animateViews() {
@@ -244,6 +244,8 @@ class AddDappViewController: UIViewController {
         ]
     }
     
+    // MARK: - @IBActions
+    
     @IBAction func applyColor(sender: AnyObject) {
         if let
             colorButton = sender as? UIButton,
@@ -271,24 +273,35 @@ class AddDappViewController: UIViewController {
         }
     }
     
+    @IBAction func hashtagsTextFieldDidChange(sender: AnyObject) {
+        if let text = self.hashtagsTextField.text {
+            // automatically add # after user added a whitespace
+            if text.characters.last == " " {
+                self.hashtagsTextField.text = text + "#"
+            }
+        }
+    }
+    
+    // MARK: -
+    
     private func prepareViewsForCurrentMode() {
         switch self.mode {
         case .ChooseColor:
             self.titleLabel.text = "Choose a color."
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagsTextView.hidden = true
+            self.hashtagsTextField.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = false
             self.fontButtonsContainerView.hidden = true
             
             self.dappMessageTextView.resignFirstResponder()
-            self.hashtagsTextView.resignFirstResponder()
+            self.hashtagsTextField.resignFirstResponder()
         case .AddText:
             self.titleLabel.text = "Choose your message."
             self.dappMessageTextView.editable = true
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagsTextView.hidden = false
+            self.hashtagsTextField.hidden = false
             self.buttonsContainerViewsContainerView.hidden = true
             
             self.dappMessageTextView.becomeFirstResponder()
@@ -296,13 +309,13 @@ class AddDappViewController: UIViewController {
             self.titleLabel.text = "Choose a font."
             self.dappMessageTextView.editable = false
             self.dappMessageContainerSwipeableView.hidden = false
-            self.hashtagsTextView.hidden = true
+            self.hashtagsTextField.hidden = true
             self.buttonsContainerViewsContainerView.hidden = false
             self.colorButtonsContainerView.hidden = true
             self.fontButtonsContainerView.hidden = false
             
             self.dappMessageTextView.resignFirstResponder()
-            self.hashtagsTextView.resignFirstResponder()
+            self.hashtagsTextField.resignFirstResponder()
         }
     }
     
@@ -318,7 +331,7 @@ class AddDappViewController: UIViewController {
         let isDeleted              = false
         var hashtagNames: [String] = []
         
-        if let hashtagsText = self.hashtagsTextView.text {
+        if let hashtagsText = self.hashtagsTextField.text {
             hashtagNames = hashtagsText.characters.split(" ").map{ String($0) }
             hashtagNames = hashtagNames.map {
                 // removes #
@@ -327,15 +340,15 @@ class AddDappViewController: UIViewController {
         }
         
         let dapp = Dapp(
-            dappStatement:          dappStatement,
-            lowercaseDappStatement: lowercaseDappStatement,
-            dappFont:               dappFont,
-            dappBackgroundColor:    dappBackgroundColor,
-            name:                   name,
-            userid:                 userid,
-            dappScore:              dappScore,
-            isDeleted:              isDeleted,
-            hashtagNames:           hashtagNames
+            dappStatement          :          dappStatement,
+            lowercaseDappStatement : lowercaseDappStatement,
+            dappFont               :               dappFont,
+            dappBackgroundColor    :    dappBackgroundColor,
+            name                   :                   name,
+            userid                 :                 userid,
+            dappScore              :              dappScore,
+            isDeleted              :              isDeleted,
+            hashtagNames           :           hashtagNames
         )
         
         return dapp
@@ -398,11 +411,29 @@ extension String {
 }
 
 extension AddDappViewController: UITextFieldDelegate {
-    func textField(textField: UITextField,
-                   shouldChangeCharactersInRange range: NSRange,
-                   replacementString string: String) -> Bool {
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if self.hashtagsTextField.text?.characters.count == 0 {
+            textField.text = "#"
+        }
+        
+        return true
+    }
+    
+    func textField(
+        textField: UITextField,
+        shouldChangeCharactersInRange range: NSRange,
+        replacementString string: String
+    ) -> Bool {
         if let currText = textField.text as NSString? {
             let newText = currText.stringByReplacingCharactersInRange(range, withString: string)
+            
+            if currText.containsString(newText) {
+                let removed = self.removeWhitespaceAndHashtagSymbol()
+                
+                if removed {
+                    return false
+                }
+            }
             
             if newText.characters.count < 2 {
                 if newText.characters.first == "#" {
@@ -412,11 +443,11 @@ extension AddDappViewController: UITextFieldDelegate {
                 return false
             }
             
-            if newText.rangeOfString("  ") != nil {
+            if let _ = newText.rangeOfString("  ") {
                 return false
             }
             
-            if newText.rangeOfString("# ") != nil {
+            if let _ = newText.rangeOfString("# ") {
                 return false
             }
             
@@ -434,6 +465,41 @@ extension AddDappViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        let characters = self.hashtagsTextField.text?.characters
+        
+        if characters?.count == 1 && characters?.last == "#" {
+            self.hashtagsTextField.text = ""
+        } else {
+            self.removeWhitespaceAndHashtagSymbol()
+        }
+    }
+    
+    // MARK: -
+    
+    private func removeWhitespaceAndHashtagSymbol() -> Bool {
+        guard let text = self.hashtagsTextField.text else {
+            return false
+        }
+        
+        if text.characters.count < 2 {
+            return false
+        }
+        
+        let twoLastSymbols = String(text.characters.suffix(2))
+        
+        if twoLastSymbols == " #" {
+            let startIndex = text.startIndex
+            let endIndex = text.endIndex.predecessor().predecessor()
+            
+            self.hashtagsTextField.text = text[startIndex ..< endIndex]
+            
+            return true
+        }
+        
+        return false
     }
 }
 
