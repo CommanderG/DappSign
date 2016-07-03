@@ -141,7 +141,7 @@ class DappArraysHelper {
             (dappArrayObject: PFObject?, error: NSError?) -> Void in
             if let dappArrayObject = dappArrayObject {
                 let dappsRelation = dappArrayObject.relationForKey(dappsRelationKey)
-                let dappObject = PFObject(withoutDataWithClassName: "Dapps", objectId: dappID)
+                let dappObject = PFObject(outDataWithClassName: "Dapps", objectId: dappID)
                 
                 dappsRelation.removeObject(dappObject)
                 dappArrayObject.saveInBackgroundWithBlock({

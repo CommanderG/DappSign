@@ -14,13 +14,11 @@ class FinalDappSubmitViewController: UIViewController {
     @IBOutlet weak var shareOnFacebookButton : UIButton!
     @IBOutlet weak var tweetThisCardButton   : UIButton!
     
-    internal var dapp           : Dapp?
-    internal var links          : [Link]?
-    internal var addDappVC      : AddDappViewController?
-    internal var addDappLinksVC : AddDappLinksVC?
+    internal var dapp  : Dapp?   = nil
+    internal var links : [Link]? = nil
     
-    private var dappObj    : PFObject?
-    private var dappSignVC : DappSignVC?
+    private var dappObj    : PFObject?   = nil
+    private var dappSignVC : DappSignVC? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -251,10 +249,6 @@ class FinalDappSubmitViewController: UIViewController {
 
 extension FinalDappSubmitViewController: SwipeableViewAppearanceDelegate {
     func willShow(swipeDirection: SwipeDirection) {
-        self.dismissViewControllerAnimated(true, completion: {
-            self.addDappLinksVC?.dismissViewControllerAnimated(true, completion: {
-                self.addDappVC?.dismissViewControllerAnimated(true, completion: nil)
-            })
-        })
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }

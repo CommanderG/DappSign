@@ -12,12 +12,11 @@ class AddDappLinksVC: UIViewController {
     @IBOutlet weak var containerView: SwipeableView!
     
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
-    private let finalDappSegueID = "finalDappSegue"
+    private let finalDappSegueID        = "finalDappSegue"
     
     private var links: [Link] = []
     
-    internal var dapp: Dapp?
-    internal var addDappVC: AddDappViewController?
+    internal var dapp: Dapp? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +57,6 @@ class AddDappLinksVC: UIViewController {
                 
                 finalDappSubmitVC?.dapp = self.dapp
                 finalDappSubmitVC?.links = self.links
-                finalDappSubmitVC?.addDappVC = self.addDappVC
-                finalDappSubmitVC?.addDappLinksVC = self
             case _:
                 break
             }

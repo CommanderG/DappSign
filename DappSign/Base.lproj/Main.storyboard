@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -449,6 +449,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3C-Cg-TR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="233" y="-512"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BBi-ZX-qqx">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="2vC-BQ-tne" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="URm-Rw-Mdk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Run-wI-cqj" kind="relationship" relationship="rootViewController" id="nQN-c3-LIU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zK8-TX-BZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1591" y="297"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TDV-Lk-0ci">
@@ -1522,11 +1539,11 @@
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u2t-LT-sDd">
-                        <rect key="frame" x="0.0" y="0.0" width="272" height="363"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
-                                <rect key="frame" x="0.0" y="0.0" width="208" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="216" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-ZX-Q3l">
                                         <rect key="frame" x="13" y="4" width="11" height="22"/>
@@ -1547,7 +1564,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-L6-7qk">
-                                        <rect key="frame" x="0.0" y="46" width="208" height="2"/>
+                                        <rect key="frame" x="0.0" y="46" width="216" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="vkQ-8N-NUz"/>
@@ -1618,29 +1635,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="88" width="232" height="197"/>
+                                <rect key="frame" x="20" y="88" width="240" height="227"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
-                                <rect key="frame" x="0.0" y="293" width="272" height="58"/>
+                                <rect key="frame" x="0.0" y="323" width="280" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
                                         <rect key="frame" x="91" y="0.0" width="171" height="16"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
-                                        <rect key="frame" x="97" y="21" width="175" height="2"/>
+                                        <rect key="frame" x="97" y="21" width="183" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="ftW-vy-W2E"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Al Gust" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-oS-kT7">
-                                        <rect key="frame" x="10" y="29" width="252" height="32"/>
+                                        <rect key="frame" x="10" y="29" width="260" height="32"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1831,7 +1848,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Run-wI-cqj" kind="modal" id="jeY-SL-Q8Z"/>
+                                            <segue destination="2vC-BQ-tne" kind="modal" id="FW3-lC-cCQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AK8-hn-XfR">
@@ -2599,12 +2616,12 @@
                         <outlet property="hashtagsTextField" destination="vCd-np-NGg" id="qg4-L0-GiW"/>
                         <outlet property="prohibitedWordsLabel" destination="LZD-kY-k84" id="yFd-uB-4zd"/>
                         <outlet property="titleLabel" destination="VuC-wh-17B" id="YQG-52-T88"/>
-                        <segue destination="rgj-nO-uI9" kind="modal" identifier="showDappLinks" modalPresentationStyle="fullScreen" id="ve9-6k-XXj"/>
+                        <segue destination="rgj-nO-uI9" kind="push" identifier="showDappLinks" animates="NO" id="ve9-6k-XXj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KV4-ET-l2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1558" y="297"/>
+            <point key="canvasLocation" x="2000" y="297"/>
         </scene>
         <!--Add Dapp LinksVC-->
         <scene sceneID="X2g-8d-dnS">
@@ -2696,14 +2713,15 @@
                             <constraint firstItem="ZYn-58-7hO" firstAttribute="centerX" secondItem="NRR-67-6C3" secondAttribute="centerX" id="wIh-dS-CzN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Bi5-6K-Adr"/>
                     <connections>
                         <outlet property="containerView" destination="8xQ-jp-maW" id="pPs-Ur-qfR"/>
-                        <segue destination="TpI-xw-hu0" kind="modal" identifier="finalDappSegue" id="w56-UJ-UWD"/>
+                        <segue destination="TpI-xw-hu0" kind="push" identifier="finalDappSegue" animates="NO" id="w56-UJ-UWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSX-vi-wka" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="297"/>
+            <point key="canvasLocation" x="2403" y="297"/>
         </scene>
         <!--Final Dapp Submit View Controller-->
         <scene sceneID="Itr-os-Csg">
@@ -2870,6 +2888,7 @@
                             <constraint firstItem="5nX-go-AQH" firstAttribute="top" secondItem="dOA-gx-OMr" secondAttribute="bottom" constant="8" id="rEh-fJ-ZIa"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="WDE-o4-qYI"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="5zY-fB-rZt" id="DAo-e4-qvY"/>
@@ -2880,7 +2899,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92c-rD-MDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2492" y="297"/>
+            <point key="canvasLocation" x="2794" y="297"/>
         </scene>
         <!--Dapp LinksVC-->
         <scene sceneID="zp8-lC-DXf">
@@ -2891,11 +2910,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cUw-5i-dyQ">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xno-ZK-mtp">
-                                <rect key="frame" x="0.0" y="40" width="240" height="312"/>
+                                <rect key="frame" x="0.0" y="40" width="240" height="308"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DailyDapp" customModuleProvider="target">
@@ -3191,7 +3210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQt-5N-U6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2893" y="911"/>
+            <point key="canvasLocation" x="3005" y="903"/>
         </scene>
         <!--DailyDapp Start Time-->
         <scene sceneID="saj-wb-Kq1">
@@ -3407,7 +3426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQO-0h-MWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887" y="-512"/>
+            <point key="canvasLocation" x="3035" y="-512"/>
         </scene>
         <!--Embed DappVC-->
         <scene sceneID="l9f-t8-zCf">
@@ -3984,9 +4003,9 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iW7-1y-626"/>
-        <segue reference="bpX-mN-qEi"/>
-        <segue reference="Ffg-Dq-WrU"/>
+        <segue reference="ss8-uX-HsK"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="sqW-Bo-68U"/>
+        <segue reference="LI8-Zz-DGc"/>
     </inferredMetricsTieBreakers>
 </document>
