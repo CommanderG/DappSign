@@ -113,8 +113,12 @@
 		4CD9C9DE1AA21A5100046CA2 /* PrintClearly.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D51AA21A5100046CA2 /* PrintClearly.otf */; };
 		4CD9C9DF1AA21A5100046CA2 /* Sansation-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */; };
 		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
-		4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
+		840312C51D2EE94F0032BFA6 /* NewDappParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840312C41D2EE94F0032BFA6 /* NewDappParams.swift */; };
+		841993461D29758900D951AB /* NewDappColorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993451D29758900D951AB /* NewDappColorVC.swift */; };
+		841993481D2975A500D951AB /* NewDappMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993471D2975A500D951AB /* NewDappMessageVC.swift */; };
+		8419934A1D2975F800D951AB /* NewDappFontVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993491D2975F800D951AB /* NewDappFontVC.swift */; };
+		843676871D304F8A00B61D7F /* NewDappViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843676861D304F8A00B61D7F /* NewDappViewsHelper.swift */; };
 		8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */; };
 		8459C3501CC9086400421769 /* SVGMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C34F1CC9086400421769 /* SVGMapData.swift */; };
 		8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C3511CC9168200421769 /* DappMappHelper.swift */; };
@@ -136,6 +140,7 @@
 		84D848831AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487C1AC726D000D1B3F9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 		84EA16371CD3FCEE002CC952 /* PetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */; };
+		84FD979F1D313F75009CDB50 /* NewDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD979E1D313F75009CDB50 /* NewDappHelper.swift */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
 		F372464E1AD3ED3C00AD56E2 /* Nextbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464B1AD3ED3C00AD56E2 /* Nextbutton@2x.png */; };
@@ -285,10 +290,14 @@
 		4CD9C9D61AA21A5100046CA2 /* Sansation-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansation-Regular.ttf"; sourceTree = "<group>"; };
 		4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Walkway_SemiBold.ttf; sourceTree = "<group>"; };
 		4CD9C9E11AA21C4C00046CA2 /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
-		4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDappViewController.swift; sourceTree = "<group>"; };
 		4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DappSign/Pods-DappSign.debug.xcconfig"; sourceTree = "<group>"; };
 		6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DappSignTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		840312C41D2EE94F0032BFA6 /* NewDappParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappParams.swift; sourceTree = "<group>"; };
+		841993451D29758900D951AB /* NewDappColorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappColorVC.swift; sourceTree = "<group>"; };
+		841993471D2975A500D951AB /* NewDappMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappMessageVC.swift; sourceTree = "<group>"; };
+		841993491D2975F800D951AB /* NewDappFontVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappFontVC.swift; sourceTree = "<group>"; };
+		843676861D304F8A00B61D7F /* NewDappViewsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappViewsHelper.swift; sourceTree = "<group>"; };
 		8457DB361C90C83900C8D3DC /* DailyDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappHelper.swift; sourceTree = "<group>"; };
 		8459C34F1CC9086400421769 /* SVGMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapData.swift; sourceTree = "<group>"; };
 		8459C3511CC9168200421769 /* DappMappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappHelper.swift; sourceTree = "<group>"; };
@@ -316,6 +325,7 @@
 		84D8487D1AC726D000D1B3F9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetitionsTVC.swift; sourceTree = "<group>"; };
+		84FD979E1D313F75009CDB50 /* NewDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappHelper.swift; sourceTree = "<group>"; };
 		8885F0992CAD072FAAF76D4E /* libPods-DailyDapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DailyDapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
 		B37714691ACD5A4200B5AE77 /* FacebookBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBridge.m; sourceTree = "<group>"; };
@@ -585,7 +595,6 @@
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
-				4CD9C9E31AA4425600046CA2 /* AddDappViewController.swift */,
 				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */,
@@ -609,6 +618,9 @@
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
 				8485EC2F1CF4E70100E5A889 /* SocialVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
+				841993451D29758900D951AB /* NewDappColorVC.swift */,
+				841993471D2975A500D951AB /* NewDappMessageVC.swift */,
+				841993491D2975F800D951AB /* NewDappFontVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -644,6 +656,8 @@
 				8459C3511CC9168200421769 /* DappMappHelper.swift */,
 				270B8C071CDA682400B8725F /* DappMappViewHelper.swift */,
 				276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */,
+				843676861D304F8A00B61D7F /* NewDappViewsHelper.swift */,
+				84FD979E1D313F75009CDB50 /* NewDappHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -674,6 +688,7 @@
 				848B651A1CBF78FB00E6D155 /* LocalStorage.swift */,
 				8459C34F1CC9086400421769 /* SVGMapData.swift */,
 				274CF8E11CEB788200AF966E /* AppURLs.swift */,
+				840312C41D2EE94F0032BFA6 /* NewDappParams.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -995,6 +1010,7 @@
 				8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */,
 				274CF8E21CEB788300AF966E /* AppURLs.swift in Sources */,
 				F37246831AD3ED7600AD56E2 /* UIImage+MultiFormat.m in Sources */,
+				841993481D2975A500D951AB /* NewDappMessageVC.swift in Sources */,
 				27896E311C8D89F300A6AA4A /* UserHelper.swift in Sources */,
 				279D4D431BA9A2D700408B90 /* HTMLParser.m in Sources */,
 				F372467D1AD3ED7600AD56E2 /* SDWebImageDownloader.m in Sources */,
@@ -1003,6 +1019,8 @@
 				84D848801AC726D000D1B3F9 /* SWCellScrollView.m in Sources */,
 				27811A641B9589F8007E97EE /* DappSignView.swift in Sources */,
 				84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */,
+				840312C51D2EE94F0032BFA6 /* NewDappParams.swift in Sources */,
+				8419934A1D2975F800D951AB /* NewDappFontVC.swift in Sources */,
 				F37246551AD3ED5300AD56E2 /* ZipCodeViewController.swift in Sources */,
 				F37246791AD3ED7600AD56E2 /* NSData+ImageContentType.m in Sources */,
 				276D26231CDB4FB60036DCAF /* StoryboardHelper.swift in Sources */,
@@ -1011,6 +1029,7 @@
 				84C648B71ABDA85300C1B4D8 /* DappProfileCell.swift in Sources */,
 				279D4D421BA9A2D700408B90 /* HTMLNode.m in Sources */,
 				F372467E1AD3ED7600AD56E2 /* SDWebImageDownloaderOperation.m in Sources */,
+				84FD979F1D313F75009CDB50 /* NewDappHelper.swift in Sources */,
 				2788A15F1C738C1D00EBABC7 /* ProhibitedPhrases.swift in Sources */,
 				4CD9C9C81AA1EC1A00046CA2 /* DappColors.swift in Sources */,
 				272187DE1C8DCD3700D61E37 /* DappsHelper.swift in Sources */,
@@ -1028,7 +1047,9 @@
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
 				2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */,
 				F37246811AD3ED7600AD56E2 /* UIButton+WebCache.m in Sources */,
+				843676871D304F8A00B61D7F /* NewDappViewsHelper.swift in Sources */,
 				8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */,
+				841993461D29758900D951AB /* NewDappColorVC.swift in Sources */,
 				27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */,
@@ -1103,7 +1124,6 @@
 				F372467A1AD3ED7600AD56E2 /* SDImageCache.m in Sources */,
 				27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */,
 				4CD9C9CB1AA1EC1A00046CA2 /* DesignableView.swift in Sources */,
-				4CD9C9E41AA4425600046CA2 /* AddDappViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
