@@ -56,7 +56,7 @@ class LinkCellInfoHelper {
         
         for linkCellInfo in linkCellsInfo {
             if linkCellInfo.type == type {
-                ++count
+                count += 1
             }
         }
         

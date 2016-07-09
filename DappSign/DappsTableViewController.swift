@@ -131,7 +131,7 @@ class DappsTableViewController: UITableViewController {
     }
     
     private func showSaveButton() {
-        let selector = Selector("savePositions:")
+        let selector = #selector(DappsTableViewController.savePositions(_:))
         let saveBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonSystemItem.Save,
             target: self,

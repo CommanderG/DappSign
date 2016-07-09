@@ -1193,8 +1193,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcb-Tf-DMG">
-                                            <rect key="frame" x="8" y="11" width="162" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Dapp card statement" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcb-Tf-DMG">
+                                            <rect key="frame" x="8" y="11" width="161" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1647,8 +1647,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
                                 <rect key="frame" x="0.0" y="323" width="280" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="91" y="0.0" width="171" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
+                                        <rect key="frame" x="99" y="0.0" width="171" height="16"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2722,11 +2722,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cUw-5i-dyQ">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xno-ZK-mtp">
-                                <rect key="frame" x="0.0" y="40" width="240" height="312"/>
+                                <rect key="frame" x="0.0" y="40" width="240" height="308"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DailyDapp" customModuleProvider="target">
@@ -3052,7 +3052,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="DailyDapp Start Time" id="FtM-6V-Teq">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="v6W-i5-ouf">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="v6W-i5-ouf">
                             <connections>
                                 <action selector="save:" destination="VAw-yF-NTF" id="KtG-nf-SZN"/>
                             </connections>
@@ -3219,7 +3219,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-kU-6wE">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qk-kU-6wE">
                                 <rect key="frame" x="20" y="90" width="280" height="388"/>
                                 <connections>
                                     <segue destination="NaO-nL-Zz9" kind="embed" identifier="embedDappLinksVCSegue" id="sqW-Bo-68U"/>
@@ -3228,7 +3228,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16862745098039217" green="0.59607843137254901" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="9qk-kU-6wE" firstAttribute="top" secondItem="CxA-X5-EER" secondAttribute="bottom" constant="26" id="2tf-wD-3la"/>
+                            <constraint firstItem="9qk-kU-6wE" firstAttribute="top" secondItem="CxA-X5-EER" secondAttribute="bottom" constant="46" id="2tf-wD-3la"/>
                             <constraint firstAttribute="trailing" secondItem="9qk-kU-6wE" secondAttribute="trailing" constant="20" id="KsV-zz-3LD"/>
                             <constraint firstItem="9qk-kU-6wE" firstAttribute="leading" secondItem="rbP-6X-byg" secondAttribute="leading" constant="20" id="MGN-X3-SCt"/>
                             <constraint firstItem="KYz-93-VaS" firstAttribute="top" secondItem="9qk-kU-6wE" secondAttribute="bottom" constant="90" id="TpP-zV-cA7"/>
@@ -4250,9 +4250,9 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ffg-Dq-WrU"/>
         <segue reference="iW7-1y-626"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="sqW-Bo-68U"/>
         <segue reference="LI8-Zz-DGc"/>
     </inferredMetricsTieBreakers>
 </document>

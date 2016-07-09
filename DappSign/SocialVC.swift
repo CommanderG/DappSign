@@ -48,13 +48,13 @@ class SocialVC: UIViewController {
         var horizontalImagesCount = Int(horizImgsIntPart)
         
         if horizImgsFracPart > 0.0 {
-            ++horizontalImagesCount
+            horizontalImagesCount += 1
         }
         
         var verticalImagesCount = Int(vertImgsIntPart)
         
         if vertImgsFracPart > 0.0 {
-            ++verticalImagesCount
+            verticalImagesCount += 1
         }
         
         let mainScreen = UIScreen.mainScreen()

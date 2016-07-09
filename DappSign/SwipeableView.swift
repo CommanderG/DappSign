@@ -54,7 +54,7 @@ class SwipeableView: UIView {
     }
     
     private func addPanGesture() {
-        let panGR = UIPanGestureRecognizer(target: self, action: Selector("handlePanGesture:"))
+        let panGR = UIPanGestureRecognizer(target: self, action: #selector(SwipeableView.handlePanGesture(_:)))
         
         self.addGestureRecognizer(panGR)
     }

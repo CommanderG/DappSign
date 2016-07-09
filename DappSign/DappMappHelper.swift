@@ -207,7 +207,7 @@ class DappMappHelper {
         
         for (_, (dapped, notDapped)) in districtsDappedNotDapped {
             if dapped > notDapped {
-                ++count
+                count += 1
             }
         }
         

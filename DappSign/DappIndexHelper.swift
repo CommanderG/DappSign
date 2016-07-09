@@ -202,7 +202,7 @@ class DappIndexHelper {
             if dappIndex.index == expectedIndex {
                 dappIndexesSequence.append(dappIndex)
                 
-                ++expectedIndex
+                expectedIndex += 1
             } else {
                 break
             }

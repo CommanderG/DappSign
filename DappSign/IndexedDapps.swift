@@ -63,7 +63,7 @@ class IndexedDapps {
         // if there is a dapp with the same index as dappIndex, then it will be added to the 
         // sortedDapps array, otherwise if there is a dapp without an index or with incorrect index,
         // it will be added to sortedDapps array
-        for var dappIndex = 0; dappIndex < dappMaxIndex; ++dappIndex {
+        for dappIndex in 0 ..< dappMaxIndex {
             if dappWithIndex != nil {
                 if let index = dappWithIndex!["index"] as? Int {
                     if dappIndex == index {

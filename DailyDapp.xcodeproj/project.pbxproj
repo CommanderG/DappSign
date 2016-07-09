@@ -591,11 +591,11 @@
 		84C3D3821AB5FECF00E0F350 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84FD97A01D314E2B009CDB50 /* New Dapp */,
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
 				4CD9C9BD1AA1EBBD00046CA2 /* DailyDappVC.swift */,
-				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */,
 				84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */,
@@ -604,7 +604,6 @@
 				27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
-				27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */,
 				27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */,
 				27FD3C041C7DED6000826EBA /* DappLinksVC.swift */,
 				27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */,
@@ -618,9 +617,6 @@
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
 				8485EC2F1CF4E70100E5A889 /* SocialVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
-				841993451D29758900D951AB /* NewDappColorVC.swift */,
-				841993471D2975A500D951AB /* NewDappMessageVC.swift */,
-				841993491D2975F800D951AB /* NewDappFontVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -710,6 +706,18 @@
 				84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */,
 			);
 			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		84FD97A01D314E2B009CDB50 /* New Dapp */ = {
+			isa = PBXGroup;
+			children = (
+				841993451D29758900D951AB /* NewDappColorVC.swift */,
+				841993471D2975A500D951AB /* NewDappMessageVC.swift */,
+				841993491D2975F800D951AB /* NewDappFontVC.swift */,
+				27769C171BB179DA00FD34AA /* AddDappLinksVC.swift */,
+				4CD252C41AA75B33006C9C2E /* FinalDappSubmitViewController.swift */,
+			);
+			name = "New Dapp";
 			sourceTree = "<group>";
 		};
 		F37246491AD3ED3C00AD56E2 /* images */ = {

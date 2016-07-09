@@ -69,7 +69,7 @@ class Requests {
                     linksError = error
                 }
                 
-                ++linksUploaded
+                linksUploaded += 1
                 
                 if linksUploaded == links.count {
                     completion(linkObjs: linksObjs, error: linksError)
@@ -496,7 +496,7 @@ class Requests {
         for hashtagName in hashtagNames {
             self.uploadHashtagWithName(hashtagName, completion: {
                 (hashtag: PFObject?, error: NSError!) -> Void in
-                --hashtagsLeft
+                hashtagsLeft -= 1
                 
                 if error != nil {
                     print(error)

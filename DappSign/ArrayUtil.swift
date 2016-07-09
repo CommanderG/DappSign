@@ -38,7 +38,7 @@ class ArrayUtil {
         
         for element in array {
             if element == elementToCount {
-                ++count
+                count += 1
             }
         }
         
