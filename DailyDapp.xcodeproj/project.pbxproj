@@ -127,6 +127,7 @@
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
 		849A63E61ABB7C6200A10BEF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */; };
+		84A468AA1D343AF500BF3CDC /* DappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A468A91D343AF500BF3CDC /* DappHelper.swift */; };
 		84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */; };
 		84AFF9531CC819E300F97FEE /* PercentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFF9521CC819E300F97FEE /* PercentsVC.swift */; };
 		84C066221CD9324B00A5D724 /* ProfileDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */; };
@@ -306,6 +307,7 @@
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
 		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		84A468A91D343AF500BF3CDC /* DappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappHelper.swift; sourceTree = "<group>"; };
 		84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappVC.swift; sourceTree = "<group>"; };
 		84AFF9521CC819E300F97FEE /* PercentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsVC.swift; sourceTree = "<group>"; };
 		84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDappMappVC.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				276D26221CDB4FB60036DCAF /* StoryboardHelper.swift */,
 				843676861D304F8A00B61D7F /* NewDappViewsHelper.swift */,
 				84FD979E1D313F75009CDB50 /* NewDappHelper.swift */,
+				84A468A91D343AF500BF3CDC /* DappHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				8457DB371C90C83900C8D3DC /* DailyDappHelper.swift in Sources */,
 				841993461D29758900D951AB /* NewDappColorVC.swift in Sources */,
 				27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */,
+				84A468AA1D343AF500BF3CDC /* DappHelper.swift in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
 				27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */,
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,

@@ -266,21 +266,18 @@ class DappsViewController: UIViewController {
                 
                 self.dappStatementLabel.text = dapp["dappStatement"] as? String
                 
-                if let
-                    dappFontName = dapp["dappFont"] as? String,
-                    fontName = FontName(rawValue: dappFontName) {
-                        let fontFileName = DappFonts.fontFileNameWithName(fontName)
-                        
-                        self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
+                if let fontName = DappHelper.getFontName(dapp) {
+                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                    
+                    self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
                 }
                 
                 self.dappStatementLabel.textColor = UIColor.whiteColor()
                 
-                if let
-                    dappBgColoName = dapp["dappBackgroundColor"] as? String,
-                    colorName = ColorName(rawValue: dappBgColoName) {
-                        self.dappStatementLabel.backgroundColor =
-                            DappColors.colorWithColorName(colorName)
+                if let colorName = DappHelper.getColorName(dapp) {
+                    let color = DappColors.colorWithColorName(colorName)
+                    
+                    self.dappStatementLabel.backgroundColor = color
                 }
                 
                 self.usernameLabel.text = nil

@@ -64,9 +64,7 @@ class DappMappVC: UIViewController {
             }
         }
         
-        if let
-            dappBackgroundColoName = dapp["dappBackgroundColor"] as? String,
-            colorName = ColorName(rawValue: dappBackgroundColoName) {
+        if let colorName = DappHelper.getColorName(dapp) {
             self.view.backgroundColor = DappColors.colorWithColorName(colorName)
         }
     }

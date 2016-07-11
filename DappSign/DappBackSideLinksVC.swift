@@ -33,10 +33,8 @@ class DappBackSideLinksVC: UIViewController {
         self.dappLinksVC?.tableViewTopLC.constant = 0.0
         self.dappLinksVC?.tableViewBottomLC.constant = 0.0
         
-        if let
-            dappBgColoName = dapp["dappBackgroundColor"] as? String,
-            colorName = ColorName(rawValue: dappBgColoName) {
-                self.view.backgroundColor = DappColors.colorWithColorName(colorName)
+        if let colorName = DappHelper.getColorName(dapp) {
+            self.view.backgroundColor = DappColors.colorWithColorName(colorName)
         }
         
         self.dappLinksVC?.initWithMode(.Read, andLinks: [])

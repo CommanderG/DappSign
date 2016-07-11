@@ -34,12 +34,10 @@ class DappSignViewsHelper {
             case .Default:
                 dappStatementLabel.text = dapp["dappStatement"] as? String
                 
-                if let
-                    dappFontName = dapp["dappFont"] as? String,
-                    fontName = FontName(rawValue: dappFontName) {
-                        let fontFileName = DappFonts.fontFileNameWithName(fontName)
-                        
-                        dappStatementLabel.font = UIFont(name: fontFileName, size: fontSize)
+                if let fontName = DappHelper.getFontName(dapp) {
+                    let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                    
+                    dappStatementLabel.font = UIFont(name: fontFileName, size: fontSize)
                 }
                 
                 break
@@ -60,16 +58,15 @@ class DappSignViewsHelper {
                         range: allStringRange
                     )
                     
-                    if let
-                        dappFontName = dapp["dappFont"] as? String,
-                        fontName = FontName(rawValue: dappFontName) {
-                            let fontFileName = DappFonts.fontFileNameWithName(fontName)
-                            if let font = UIFont(name: fontFileName, size: fontSize) {
-                                attributedString.addAttribute(NSFontAttributeName,
-                                    value: font,
-                                    range: allStringRange
-                                )
-                            }
+                    if let fontName = DappHelper.getFontName(dapp) {
+                        let fontFileName = DappFonts.fontFileNameWithName(fontName)
+                        
+                        if let font = UIFont(name: fontFileName, size: fontSize) {
+                            attributedString.addAttribute(NSFontAttributeName,
+                                value: font,
+                                range: allStringRange
+                            )
+                        }
                     }
                     
                     dappStatementLabel.attributedText = attributedString
@@ -79,11 +76,9 @@ class DappSignViewsHelper {
                 
                 break
             }
-        
-            if let
-                dappBgColoName = dapp["dappBackgroundColor"] as? String,
-                colorName = ColorName(rawValue: dappBgColoName) {
-                    dappStatementLabel.backgroundColor = DappColors.colorWithColorName(colorName)
+            
+            if let colorName = DappHelper.getColorName(dapp) {
+                dappStatementLabel.backgroundColor = DappColors.colorWithColorName(colorName)
             }
         } else {
             dappStatementLabel.text = "No more DappSigns. Feel free to submit your own!"

@@ -56,11 +56,8 @@ class EditDappLinksVC: UIViewController {
                 }
             })
             
-            if let
-                dappBgColoName = dapp["dappBackgroundColor"] as? String,
-                colorName = ColorName(rawValue: dappBgColoName) {
-                    self.dappLinksVC?.view.backgroundColor =
-                        DappColors.colorWithColorName(colorName)
+            if let colorName = DappHelper.getColorName(dapp) {
+                self.dappLinksVC?.view.backgroundColor = DappColors.colorWithColorName(colorName)
             }
         }
     }
