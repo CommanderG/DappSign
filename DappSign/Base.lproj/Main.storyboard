@@ -2577,14 +2577,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxV-Zi-oAs">
-                                <rect key="frame" x="42" y="67" width="233" height="51"/>
+                                <rect key="frame" x="42" y="67" width="246" height="51"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hu-Hr-qjl">
-                                        <rect key="frame" x="0.0" y="5" width="50" height="42"/>
+                                        <rect key="frame" x="0.0" y="1" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="hUi-9E-wAh"/>
+                                            <constraint firstAttribute="height" constant="50" id="hUi-9E-wAh"/>
                                             <constraint firstAttribute="width" constant="50" id="pCG-pB-x9N"/>
                                         </constraints>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="4"/>
                                         <state key="normal" image="twitterIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2593,7 +2594,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlh-CN-W6b">
-                                        <rect key="frame" x="91" y="0.0" width="51" height="51"/>
+                                        <rect key="frame" x="98" y="0.0" width="51" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="51" id="p5t-l6-X3d"/>
                                             <constraint firstAttribute="height" constant="51" id="vdL-7f-5a0"/>
@@ -2606,11 +2607,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52N-Q2-5Y5">
-                                        <rect key="frame" x="208" y="1" width="25" height="45"/>
+                                        <rect key="frame" x="195" y="0.0" width="51" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="yRJ-2n-8MB"/>
-                                            <constraint firstAttribute="width" constant="25" id="zJm-Cc-2Z8"/>
+                                            <constraint firstAttribute="height" constant="51" id="yRJ-2n-8MB"/>
+                                            <constraint firstAttribute="width" constant="51" id="zJm-Cc-2Z8"/>
                                         </constraints>
+                                        <inset key="contentEdgeInsets" minX="13" minY="3" maxX="13" maxY="3"/>
                                         <state key="normal" image="facebookIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2621,12 +2623,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wlh-CN-W6b" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="top" id="6FF-tx-xHb"/>
-                                    <constraint firstItem="52N-Q2-5Y5" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="top" constant="1" id="7Vq-qb-Pcf"/>
-                                    <constraint firstAttribute="bottom" secondItem="4hu-Hr-qjl" secondAttribute="bottom" constant="4" id="SUj-YO-a8u"/>
-                                    <constraint firstItem="4hu-Hr-qjl" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="top" constant="5" id="Yb3-Ql-ZdS"/>
+                                    <constraint firstItem="52N-Q2-5Y5" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="top" id="7Vq-qb-Pcf"/>
+                                    <constraint firstAttribute="bottom" secondItem="4hu-Hr-qjl" secondAttribute="bottom" id="SUj-YO-a8u"/>
+                                    <constraint firstItem="4hu-Hr-qjl" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="top" constant="1" id="Yb3-Ql-ZdS"/>
                                     <constraint firstAttribute="trailing" secondItem="52N-Q2-5Y5" secondAttribute="trailing" id="Z06-GW-9r3"/>
                                     <constraint firstAttribute="bottom" secondItem="wlh-CN-W6b" secondAttribute="bottom" id="ar9-we-rGu"/>
-                                    <constraint firstAttribute="bottom" secondItem="52N-Q2-5Y5" secondAttribute="bottom" constant="5" id="fCM-NU-Rjf"/>
+                                    <constraint firstAttribute="bottom" secondItem="52N-Q2-5Y5" secondAttribute="bottom" id="fCM-NU-Rjf"/>
                                     <constraint firstItem="wlh-CN-W6b" firstAttribute="centerX" secondItem="uxV-Zi-oAs" secondAttribute="centerX" id="fua-Wb-5ac"/>
                                     <constraint firstAttribute="height" constant="51" id="gqs-sD-0ES"/>
                                     <constraint firstItem="4hu-Hr-qjl" firstAttribute="leading" secondItem="uxV-Zi-oAs" secondAttribute="leading" id="oxi-Cg-wFz"/>
@@ -2690,7 +2692,7 @@
                         <constraints>
                             <constraint firstItem="uxV-Zi-oAs" firstAttribute="leading" secondItem="c2b-9Y-uYI" secondAttribute="leading" constant="42" id="0RI-p8-yXV"/>
                             <constraint firstItem="0dP-lB-hma" firstAttribute="top" secondItem="5zY-fB-rZt" secondAttribute="bottom" constant="17" id="1Qz-2Q-tU9"/>
-                            <constraint firstAttribute="trailing" secondItem="uxV-Zi-oAs" secondAttribute="trailing" constant="45" id="1uk-Rv-hWM"/>
+                            <constraint firstAttribute="trailing" secondItem="uxV-Zi-oAs" secondAttribute="trailing" constant="32" id="1uk-Rv-hWM"/>
                             <constraint firstItem="5zY-fB-rZt" firstAttribute="top" secondItem="hzT-wa-Tj0" secondAttribute="bottom" constant="6" id="7i9-Nb-tSJ"/>
                             <constraint firstItem="uxV-Zi-oAs" firstAttribute="top" secondItem="5nX-go-AQH" secondAttribute="bottom" constant="1" id="E9V-5w-HC8"/>
                             <constraint firstItem="hzT-wa-Tj0" firstAttribute="top" secondItem="uxV-Zi-oAs" secondAttribute="bottom" constant="6" id="LFF-JF-2xi"/>
