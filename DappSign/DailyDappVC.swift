@@ -91,9 +91,22 @@ class DailyDappVC: UIViewController {
         ]
         
         for button in buttons {
-            button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.layer.borderWidth = 2.0
-            button.layer.cornerRadius = 6.0
+            let borderLayer = CALayer()
+            let insets = button.contentEdgeInsets
+            let borderLayerX = insets.left
+            let borderLayerY = insets.top
+            let borderLayerWidth = button.frame.size.width - borderLayerX - insets.right
+            let borderLayerHeight = button.frame.size.height - borderLayerY - insets.bottom
+            
+            borderLayer.frame = CGRectMake(borderLayerX,
+                                           borderLayerY,
+                                           borderLayerWidth,
+                                           borderLayerHeight)
+            borderLayer.borderColor = UIColor.whiteColor().CGColor
+            borderLayer.borderWidth = 2.0
+            borderLayer.cornerRadius = 6.0
+            
+            button.layer.addSublayer(borderLayer)
         }
         
         self.searchButton.hidden = true
