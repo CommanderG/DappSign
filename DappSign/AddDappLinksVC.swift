@@ -14,9 +14,36 @@ class AddDappLinksVC: UIViewController {
     private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
     private let finalDappSegueID        = "finalDappSegue"
     
-    private var links: [Link] = []
+    private var tableView : UITableView? = nil
+    private var links     : [Link]       = []
     
     internal var dapp: Dapp? = nil
+    
+    required init?(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(AddDappLinksVC.handleKeyboardWillShowNotification(_:)),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(AddDappLinksVC.handleKeyboardWillHideNotification(_:)),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    deinit {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        
+        notificationCenter.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,32 +62,58 @@ class AddDappLinksVC: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let segueID = segue.identifier {
-            switch segueID {
-            case embedDappLinksVCSegueID:
-                let dappLinksVC = segue.destinationViewController as? DappLinksVC
-                
-                dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
-                dappLinksVC?.addBorder()
-                
-                dappLinksVC?.delegate = self
-                
-                if let
-                    dappBgColoName = dapp?.dappBackgroundColor,
-                    colorName = ColorName(rawValue: dappBgColoName) {
-                        dappLinksVC?.view.backgroundColor =
-                            DappColors.colorWithColorName(colorName)
-                }
-            case finalDappSegueID:
-                let finalDappSubmitVC =
-                    segue.destinationViewController as? FinalDappSubmitViewController
-                
-                finalDappSubmitVC?.dapp = self.dapp
-                finalDappSubmitVC?.links = self.links
-            case _:
-                break
-            }
+        guard let segueID = segue.identifier else {
+            return
         }
+        
+        switch segueID {
+        case embedDappLinksVCSegueID:
+            let dappLinksVC = segue.destinationViewController as? DappLinksVC
+            
+            dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
+            dappLinksVC?.addBorder()
+            
+            dappLinksVC?.delegate = self
+            
+            self.tableView = dappLinksVC?.linksTableView
+            
+            if let
+                dappBgColoName = dapp?.dappBackgroundColor,
+                colorName = ColorName(rawValue: dappBgColoName) {
+                    dappLinksVC?.view.backgroundColor =
+                        DappColors.colorWithColorName(colorName)
+            }
+        case finalDappSegueID:
+            let finalDappSubmitVC =
+                segue.destinationViewController as? FinalDappSubmitViewController
+            
+            finalDappSubmitVC?.dapp = self.dapp
+            finalDappSubmitVC?.links = self.links
+        case _:
+            break
+        }
+    }
+    
+    // MARK: - keyboard notifications
+    
+    internal func handleKeyboardWillShowNotification(notification: NSNotification) {
+        let keyboardBoundsObject = notification.userInfo?["UIKeyboardBoundsUserInfoKey"]
+        
+        guard let keyboardBounds = (keyboardBoundsObject as? NSValue)?.CGRectValue() else {
+            return
+        }
+        
+        let topInset: CGFloat = 0.0
+        let leftInset: CGFloat = 0.0
+        let bottomInset: CGFloat = keyboardBounds.height
+        let rightInset: CGFloat = 0.0
+        let contentInset = UIEdgeInsetsMake(topInset, leftInset, bottomInset, rightInset)
+        
+        self.tableView?.contentInset = contentInset
+    }
+    
+    internal func handleKeyboardWillHideNotification(notification: NSNotification) {
+        self.tableView?.contentInset = UIEdgeInsetsZero
     }
 }
 

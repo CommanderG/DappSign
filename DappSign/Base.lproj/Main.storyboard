@@ -2729,11 +2729,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cUw-5i-dyQ">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xno-ZK-mtp">
-                                <rect key="frame" x="0.0" y="40" width="240" height="308"/>
+                                <rect key="frame" x="0.0" y="40" width="240" height="312"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DailyDapp" customModuleProvider="target">
@@ -2804,7 +2804,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="ObW-9J-lqQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL"/>
                                                 </textField>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbf-5o-DRq">
                                                     <rect key="frame" x="152" y="46" width="80" height="30"/>
@@ -4259,7 +4259,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="iW7-1y-626"/>
         <segue reference="Tb5-sO-Miv"/>
-        <segue reference="sqW-Bo-68U"/>
+        <segue reference="Ffg-Dq-WrU"/>
         <segue reference="LI8-Zz-DGc"/>
     </inferredMetricsTieBreakers>
 </document>
