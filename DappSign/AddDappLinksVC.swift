@@ -11,11 +11,11 @@ import UIKit
 class AddDappLinksVC: UIViewController {
     @IBOutlet weak var containerView: SwipeableView!
     
-    private let embedDappLinksVCSegueID = "embedDappLinksVCSegue"
-    private let finalDappSegueID        = "finalDappSegue"
+    private let finalDappSegueID = "finalDappSegue"
     
-    private var tableView : UITableView? = nil
-    private var links     : [Link]       = []
+    private var dappLinksVC : DappLinksVC? = nil
+    private var dappSignVC  : DappSignVC?  = nil
+    private var links       : [Link]       = []
     
     internal var dapp: Dapp? = nil
     
@@ -55,6 +55,26 @@ class AddDappLinksVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.containerView.configure()
+        
+        guard
+            let dappSignView = self.dappSignVC?.view,
+            let dappLinksView = self.dappLinksVC?.view
+            else { return }
+        
+        let dapp = self.getDapp()
+        
+        self.dappSignVC?.showDapp(dapp)
+        
+        dappSignView.hidden = false
+        dappLinksView.hidden = true
+        
+        delay(0.75) {
+            ViewHelper.flipWithDuration(0.5,
+                view1: dappSignView,
+                view2: dappLinksView,
+                completion: nil
+            )
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,28 +87,35 @@ class AddDappLinksVC: UIViewController {
         }
         
         switch segueID {
-        case embedDappLinksVCSegueID:
-            let dappLinksVC = segue.destinationViewController as? DappLinksVC
+        case "embedDappLinksVCSegue":
+            self.dappLinksVC = segue.destinationViewController as? DappLinksVC
             
-            dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
-            dappLinksVC?.addBorder()
+            self.dappLinksVC?.initWithMode(.AddEdit, andLinks: [])
+            self.dappLinksVC?.addBorder()
             
-            dappLinksVC?.delegate = self
-            
-            self.tableView = dappLinksVC?.linksTableView
+            self.dappLinksVC?.delegate = self
             
             if let
                 dappBgColoName = dapp?.dappBackgroundColor,
                 colorName = ColorName(rawValue: dappBgColoName) {
-                    dappLinksVC?.view.backgroundColor =
-                        DappColors.colorWithColorName(colorName)
+                let color = DappColors.colorWithColorName(colorName)
+                
+                self.dappLinksVC?.view.backgroundColor = color
             }
+            
+            break
+        case "embedDappSignVCSegue":
+            self.dappSignVC = segue.destinationViewController as? DappSignVC
+            
+            break
         case finalDappSegueID:
             let finalDappSubmitVC =
                 segue.destinationViewController as? FinalDappSubmitViewController
             
             finalDappSubmitVC?.dapp = self.dapp
             finalDappSubmitVC?.links = self.links
+            
+            break
         case _:
             break
         }
@@ -109,11 +136,40 @@ class AddDappLinksVC: UIViewController {
         let rightInset: CGFloat = 0.0
         let contentInset = UIEdgeInsetsMake(topInset, leftInset, bottomInset, rightInset)
         
-        self.tableView?.contentInset = contentInset
+        self.dappLinksVC?.linksTableView?.contentInset = contentInset
     }
     
     internal func handleKeyboardWillHideNotification(notification: NSNotification) {
-        self.tableView?.contentInset = UIEdgeInsetsZero
+        self.dappLinksVC?.linksTableView?.contentInset = UIEdgeInsetsZero
+    }
+    
+    // MARK: - 
+    
+    private func getDapp() -> Dapp {
+        let user                   = PFUser.currentUser()
+        let dappStatement          = NewDappParams.message
+        let lowercaseDappStatement = NewDappParams.message.lowercaseString
+        let dappFont               = NewDappParams.fontName.rawValue
+        let dappBackgroundColor    = NewDappParams.colorName.rawValue
+        let name                   = user["name"] as? String
+        let userid                 = user.objectId
+        let dappScore              = 1
+        let isDeleted              = false
+        let hashtagNames: [String] = []
+        
+        let dapp = Dapp(
+            dappStatement          :          dappStatement,
+            lowercaseDappStatement : lowercaseDappStatement,
+            dappFont               :               dappFont,
+            dappBackgroundColor    :    dappBackgroundColor,
+            name                   :                   name,
+            userid                 :                 userid,
+            dappScore              :              dappScore,
+            isDeleted              :              isDeleted,
+            hashtagNames           :           hashtagNames
+        )
+        
+        return dapp
     }
 }
 

@@ -1543,7 +1543,7 @@
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u2t-LT-sDd">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="393"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
@@ -1639,13 +1639,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="88" width="240" height="227"/>
+                                <rect key="frame" x="20" y="88" width="240" height="226"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
-                                <rect key="frame" x="0.0" y="323" width="280" height="58"/>
+                                <rect key="frame" x="0.0" y="322" width="280" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
                                         <rect key="frame" x="99" y="0.0" width="171" height="16"/>
@@ -2509,6 +2509,12 @@
                                     <constraint firstItem="stc-la-bJy" firstAttribute="leading" secondItem="ZYn-58-7hO" secondAttribute="leading" id="wJS-p4-T8W"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x98-Hz-EsR">
+                                <rect key="frame" x="20" y="115" width="280" height="392"/>
+                                <connections>
+                                    <segue destination="H3r-2u-yja" kind="embed" identifier="embedDappSignVCSegue" id="MA2-gt-BdZ"/>
+                                </connections>
+                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xQ-jp-maW" customClass="SwipeableView" customModule="DailyDapp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="115" width="280" height="392"/>
                                 <connections>
@@ -4258,8 +4264,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iW7-1y-626"/>
-        <segue reference="Tb5-sO-Miv"/>
+        <segue reference="MA2-gt-BdZ"/>
         <segue reference="Ffg-Dq-WrU"/>
-        <segue reference="LI8-Zz-DGc"/>
+        <segue reference="Tb5-sO-Miv"/>
     </inferredMetricsTieBreakers>
 </document>

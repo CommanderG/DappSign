@@ -24,6 +24,31 @@ class ViewHelper {
         imageView.layer.cornerRadius = cornerRadius
     }
     
+    internal class func flipWithDuration(
+        duration: NSTimeInterval,
+        view1: UIView,
+        view2: UIView,
+        completion: (Void -> Void)?
+    ) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationTransition(.FlipFromLeft, forView: view1, cache: true)
+        UIView.commitAnimations()
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationTransition(.FlipFromLeft, forView: view2, cache: true)
+        
+        view1.hidden = !view1.hidden
+        view2.hidden = !view2.hidden
+        
+        UIView.commitAnimations()
+        
+        delay(duration) {
+            completion?()
+        }
+    }
+    
     // MARK: - enabling/disabling views
     
     internal class func enableViews(views: [UIView]) {

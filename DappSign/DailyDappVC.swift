@@ -254,7 +254,7 @@ class DailyDappVC: UIViewController {
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.getCurrentDapp() {
-            self.flipWithDuration(self.flipDuration,
+            ViewHelper.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
                 view2: dappBackSideLinksVC.view,
                 completion: {
@@ -268,7 +268,7 @@ class DailyDappVC: UIViewController {
     
     @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
         if let dappBackSideLinksView = self.dappBackSideLinksVC?.view {
-            self.flipWithDuration(self.flipDuration,
+            ViewHelper.flipWithDuration(self.flipDuration,
                 view1: self.dappViewsContainerView,
                 view2: dappBackSideLinksView,
                 completion: {
@@ -330,30 +330,6 @@ class DailyDappVC: UIViewController {
     }
     
     // MARK: -
-    
-    private func flipWithDuration(duration: NSTimeInterval,
-        view1: UIView,
-        view2: UIView,
-        completion: (Void -> Void)?
-    ) {
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(duration)
-        UIView.setAnimationTransition(.FlipFromLeft, forView: view1, cache: true)
-        UIView.commitAnimations()
-        
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(duration)
-        UIView.setAnimationTransition(.FlipFromLeft, forView: view2, cache: true)
-        
-        view1.hidden = !view1.hidden
-        view2.hidden = !view2.hidden
-        
-        UIView.commitAnimations()
-        
-        delay(duration) {
-            completion?()
-        }
-    }
     
     private func sendRequestsForDapp(dapp: PFObject, dapped: Bool) {
         let currentUser = PFUser.currentUser()
