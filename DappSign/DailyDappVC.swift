@@ -183,6 +183,7 @@ class DailyDappVC: UIViewController {
                     self.appState = .IntroductoryDapps(dapps: dapps, index: 0)
                     
                     self.initDappView()
+                    self.initHashtagsLabel()
                 } else {
                     self.appState = .None
                 }
@@ -253,80 +254,90 @@ class DailyDappVC: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func handleDappSignTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappBackSideLinksVC = self.dappBackSideLinksVC, dapp = self.getCurrentDapp() {
-            ViewHelper.flipWithDuration(self.flipDuration,
-                view1: self.dappViewsContainerView,
-                view2: dappBackSideLinksVC.view,
-                completion: {
-                    self.disableShareButons()
-                }
-            )
-            
-            dappBackSideLinksVC.showLinksForDapp(dapp)
-        }
+        guard
+            let dappBackSideLinksVC = self.dappBackSideLinksVC,
+            let dapp = self.getCurrentDapp()
+            else { return }
+        
+        ViewHelper.flipWithDuration(self.flipDuration,
+            view1: self.dappViewsContainerView,
+            view2: dappBackSideLinksVC.view,
+            completion: {
+                self.disableShareButons()
+            }
+        )
+        
+        dappBackSideLinksVC.showLinksForDapp(dapp)
     }
     
     @IBAction func handleDappLinksTapGesture(tapGR: UITapGestureRecognizer) {
-        if let dappBackSideLinksView = self.dappBackSideLinksVC?.view {
-            ViewHelper.flipWithDuration(self.flipDuration,
-                view1: self.dappViewsContainerView,
-                view2: dappBackSideLinksView,
-                completion: {
-                    self.enableShareButtons()
-                }
-            )
+        guard let dappBackSideLinksView = self.dappBackSideLinksVC?.view else {
+            return
         }
+        
+        ViewHelper.flipWithDuration(self.flipDuration,
+            view1: self.dappViewsContainerView,
+            view2: dappBackSideLinksView,
+            completion: {
+                self.enableShareButtons()
+            }
+        )
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dapp = self.getCurrentDapp() {
-            FacebookHelper.shareDapp(dapp, completion: {
-                (message: String) -> Void in
-                self.showAlertViewWithOKButtonAndMessage(message)
-            })
+        guard let dapp = self.getCurrentDapp() else {
+            return
         }
+        
+        FacebookHelper.shareDapp(dapp, completion: {
+            (message: String) -> Void in
+            self.showAlertViewWithOKButtonAndMessage(message)
+        })
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
-        if let currentDapp = self.getCurrentDapp() {
-            TwitterHelper.tweetDapp(currentDapp, completion: {
-                (success: Bool, error: NSError?) -> Void in
-                if success {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "The card has been successfully tweeted."
-                    )
-                } else if let error = error {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to tweet the card. Error: \(error)"
-                    )
-                } else {
-                    self.showAlertViewWithOKButtonAndMessage(
-                        "Failed to tweet the card. Unknown error."
-                    )
-                }
-            })
+        guard let currentDapp = self.getCurrentDapp() else {
+            return
         }
+        
+        TwitterHelper.tweetDapp(currentDapp, completion: {
+            (success: Bool, error: NSError?) -> Void in
+            if success {
+                self.showAlertViewWithOKButtonAndMessage(
+                    "The card has been successfully tweeted."
+                )
+            } else if let error = error {
+                self.showAlertViewWithOKButtonAndMessage(
+                    "Failed to tweet the card. Error: \(error)"
+                )
+            } else {
+                self.showAlertViewWithOKButtonAndMessage(
+                    "Failed to tweet the card. Unknown error."
+                )
+            }
+        })
     }
     
     @IBAction func showLinkView(sender: AnyObject) {
-        if let
-            dapp = self.getCurrentDapp(),
-            embedDappVC = StoryboardHelper.instantiateEmbedDappVC() {
-                embedDappVC.delegate = self
-                
-                self.addChildViewController(embedDappVC)
-            
-                let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
-                
-                embedDappVC.view.frame = frame
-                
-                self.dappViewsContainerView.addSubview(embedDappVC.view)
-                
-                embedDappVC.didMoveToParentViewController(self)
-                embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
-                embedDappVC.show()
-                self.disableShareButons()
-        }
+        guard
+            let dapp = self.getCurrentDapp(),
+            let embedDappVC = StoryboardHelper.instantiateEmbedDappVC()
+            else { return }
+        
+        embedDappVC.delegate = self
+        
+        self.addChildViewController(embedDappVC)
+    
+        let frame = embedDappVC.frameWithDappViewFrame(self.dappViewsContainerView.frame)
+        
+        embedDappVC.view.frame = frame
+        
+        self.dappViewsContainerView.addSubview(embedDappVC.view)
+        
+        embedDappVC.didMoveToParentViewController(self)
+        embedDappVC.showURLAndIFrameCodeForDappWithID(dapp.objectId)
+        embedDappVC.show()
+        self.disableShareButons()
     }
     
     // MARK: -
@@ -421,36 +432,38 @@ class DailyDappVC: UIViewController {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let segueIdentifier = segue.identifier {
-            switch segueIdentifier {
-            case "showProfile":
-                let profileNC = segue.destinationViewController as? UINavigationController
-                let profileVC = profileNC?.viewControllers.first as? ProfileViewController
-                
-                profileVC?.user = PFUser.currentUser()
-            case "embedDappBackSideLinksVC":
-                self.dappBackSideLinksVC = segue.destinationViewController as? DappBackSideLinksVC
-                
-                self.dappBackSideLinksVC?.view.hidden = true
-                self.dappBackSideLinksVC?.delegate = self
-                
-                let tapGR = UITapGestureRecognizer(
-                    target: self,
-                    action: #selector(DailyDappVC.handleDappSignTapGesture(_:))
-                )
-                
-                self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
-            case DappSignVC.embedSegueID:
-                self.dappSignVC = segue.destinationViewController as? DappSignVC
-            case "embedDappMappVC":
-                self.dappMappVC = segue.destinationViewController as? DappMappVC
-            case RepresentativeVC.embedSegueID:
-                self.representativeVC = segue.destinationViewController as? RepresentativeVC
-                
-                self.representativeVC?.delegate = self
-            case _:
-                break
-            }
+        guard let segueIdentifier = segue.identifier else {
+            return
+        }
+        
+        switch segueIdentifier {
+        case "showProfile":
+            let profileNC = segue.destinationViewController as? UINavigationController
+            let profileVC = profileNC?.viewControllers.first as? ProfileViewController
+            
+            profileVC?.user = PFUser.currentUser()
+        case "embedDappBackSideLinksVC":
+            self.dappBackSideLinksVC = segue.destinationViewController as? DappBackSideLinksVC
+            
+            self.dappBackSideLinksVC?.view.hidden = true
+            self.dappBackSideLinksVC?.delegate = self
+            
+            let tapGR = UITapGestureRecognizer(
+                target: self,
+                action: #selector(DailyDappVC.handleDappSignTapGesture(_:))
+            )
+            
+            self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
+        case DappSignVC.embedSegueID:
+            self.dappSignVC = segue.destinationViewController as? DappSignVC
+        case "embedDappMappVC":
+            self.dappMappVC = segue.destinationViewController as? DappMappVC
+        case RepresentativeVC.embedSegueID:
+            self.representativeVC = segue.destinationViewController as? RepresentativeVC
+            
+            self.representativeVC?.delegate = self
+        case _:
+            break
         }
     }
     
@@ -560,65 +573,67 @@ class DailyDappVC: UIViewController {
     internal func updateDailyDappTimeInterval() {
         switch self.appState {
         case .None, .DailyDapp(_, _, _), .Scoreboard(_, _, _):
-            let timeBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd()
-            let timeUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate()
+            guard
+                let timeBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd(),
+                let timeUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate()
+                else { return }
             
-            if let timeBeforeEnd = timeBeforeEnd, timeUnitlNext = timeUnitlNext {
-                if timeBeforeEnd <= 0.0 {
-                    switch self.appState {
-                    case .Scoreboard(_, let dapps, let index):
+            if timeBeforeEnd <= 0.0 {
+                switch self.appState {
+                case .Scoreboard(_, let dapps, let index):
+                    self.appState = .Scoreboard(
+                        timeInterval: timeUnitlNext,
+                        dapps: dapps,
+                        index: index
+                    )
+                    
+                    break
+                case _:
+                    self.appState = .DownloadingDapps
+                    
+                    self.downloadDapps(.Scoreboard, completion: {
+                        (dapps: [PFObject]) -> Void in
                         self.appState = .Scoreboard(
                             timeInterval: timeUnitlNext,
                             dapps: dapps,
-                            index: index
+                            index: 0
                         )
                         
-                        break
-                    case _:
-                        self.appState = .DownloadingDapps
-                        
-                        self.downloadDapps(.Scoreboard, completion: {
-                            (dapps: [PFObject]) -> Void in
-                            self.appState = .Scoreboard(
-                                timeInterval: timeUnitlNext,
-                                dapps: dapps,
-                                index: 0
-                            )
-                            
-                            self.initDappView()
-                        })
-                        
-                        break
-                    }
-                } else {
-                    switch self.appState {
-                    case .DailyDapp(_, let dapps, let index):
+                        self.initDappView()
+                        self.initHashtagsLabel()
+                    })
+                    
+                    break
+                }
+            } else {
+                switch self.appState {
+                case .DailyDapp(_, let dapps, let index):
+                    self.appState = .DailyDapp(
+                        timeInterval: timeBeforeEnd,
+                        dapps: dapps,
+                        index: index
+                    )
+                    
+                    break
+                case _:
+                    self.appState = .DownloadingDapps
+                    
+                    self.downloadDapps(.Daily, completion: {
+                        (dapps: [PFObject]) -> Void in
                         self.appState = .DailyDapp(
                             timeInterval: timeBeforeEnd,
                             dapps: dapps,
-                            index: index
+                            index: 0
                         )
                         
-                        break
-                    case _:
-                        self.appState = .DownloadingDapps
-                        
-                        self.downloadDapps(.Daily, completion: {
-                            (dapps: [PFObject]) -> Void in
-                            self.appState = .DailyDapp(
-                                timeInterval: timeBeforeEnd,
-                                dapps: dapps,
-                                index: 0
-                            )
-                            
-                            self.initDappView()
-                        })
-                        
-                        break
-                    }
+                        self.initDappView()
+                        self.initHashtagsLabel()
+                    })
                     
-                    self.showCountdownAnimation(timeBeforeEnd)
+                    break
                 }
+                
+                self.showCountdownAnimation(timeBeforeEnd)
             }
         case _:
             break
@@ -665,19 +680,6 @@ class DailyDappVC: UIViewController {
             self.dappViewsContainerView.show()
         }
         
-        if let dapp = self.getCurrentDapp() {
-            DappsHelper.downloadHashtagsForDapp(dapp, completion: {
-                (hashtags: [PFObject]?, error: NSError?) -> Void in
-                if let hashtags = hashtags {
-                    let hashtagNames = HashtagHelper.hashtagNamesStringWithHashtags(hashtags)
-                    
-                    self.hashtagsLabel.text = hashtagNames
-                }
-            })
-        } else {
-            self.hashtagsLabel.text = ""
-        }
-        
         if self.visibleDappView == self.dappSignView {
             let dapp = self.getCurrentDapp()
             
@@ -702,6 +704,25 @@ class DailyDappVC: UIViewController {
                 self.dappMappVC?.showInformationAboutDapp(dapp)
             }
         }
+    }
+    
+    private func initHashtagsLabel() {
+        self.hashtagsLabel.text = ""
+        
+        guard let dapp = self.getCurrentDapp() else {
+            return
+        }
+        
+        DappsHelper.downloadHashtagsForDapp(dapp, completion: {
+            (hashtags: [PFObject]?, error: NSError?) -> Void in
+            guard let hashtags = hashtags else {
+                return
+            }
+            
+            let hashtagNames = HashtagHelper.hashtagNamesStringWithHashtags(hashtags)
+            
+            self.hashtagsLabel.text = hashtagNames
+        })
     }
     
     // MARK: -
@@ -762,7 +783,6 @@ class DailyDappVC: UIViewController {
                 dapps: dapps,
                 index: newIndex
             )
-            
             break
         case .Scoreboard(let timeInterval, let dapps, let index):
             let newIndex = (index + 1) % dapps.count
@@ -946,31 +966,33 @@ class DailyDappVC: UIViewController {
             }
         }
         
-        if let animationInfo = plusOneDappsCountLabelAnimationInfo {
-            UIView.animateWithDuration(animationDuration,
-                delay: 0.0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 0.0,
-                options: .CurveLinear,
-                animations: {
-                    ViewHelper.showViews([ animationInfo.label ])
-                    
-                    animationInfo.topLC.constant = animationInfo.minTopSpaceConstraint
-                    
-                    self.view.layoutIfNeeded()
-                }, completion: {
-                    (finished: Bool) -> Void in
-                    UIView.animateWithDuration(0.3,
-                        animations: {
-                            ViewHelper.hideViews([ animationInfo.label ])
-                        }, completion: {
-                            (finished: Bool) -> Void in
-                            animationInfo.topLC.constant = animationInfo.maxTopSpaceConstraint
-                        }
-                    )
-                }
-            )
+        guard let animationInfo = plusOneDappsCountLabelAnimationInfo else {
+            return
         }
+        
+        UIView.animateWithDuration(animationDuration,
+            delay: 0.0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0.0,
+            options: .CurveLinear,
+            animations: {
+                ViewHelper.showViews([ animationInfo.label ])
+                
+                animationInfo.topLC.constant = animationInfo.minTopSpaceConstraint
+                
+                self.view.layoutIfNeeded()
+            }, completion: {
+                (finished: Bool) -> Void in
+                UIView.animateWithDuration(0.3,
+                    animations: {
+                        ViewHelper.hideViews([ animationInfo.label ])
+                    }, completion: {
+                        (finished: Bool) -> Void in
+                        animationInfo.topLC.constant = animationInfo.maxTopSpaceConstraint
+                    }
+                )
+            }
+        )
     }
     
     private func showCountdownLabel(countdownLabel: UILabel!,
@@ -1108,16 +1130,18 @@ extension DailyDappVC: RepresentativeDelegate {
             return
         }
         
-        if let representativeVC = self.representativeVC {
-            if self.animateableViews.contains(representativeVC.view) {
-                return
-            }
-            
-            representativeVC.view.alpha = 1.0
-            
-            AnimationHelper.showView(representativeVC.view)
-            self.initAnimateableViews()
+        guard let representativeVC = self.representativeVC else {
+            return
         }
+        
+        if self.animateableViews.contains(representativeVC.view) {
+            return
+        }
+        
+        representativeVC.view.alpha = 1.0
+        
+        AnimationHelper.showView(representativeVC.view)
+        self.initAnimateableViews()
     }
 }
 
@@ -1127,6 +1151,10 @@ extension DailyDappVC: SwipeableViewAppearanceDelegate {
         case .DappCardTypeSign:
             if self.visibleDappView != self.dappSignView {
                 self.showDappView(self.dappSignView)
+                
+                self.initHashtagsLabel()
+            } else if (swipeDirection == .RightToLeft) {
+                self.initHashtagsLabel()
             }
             
             break
@@ -1134,6 +1162,8 @@ extension DailyDappVC: SwipeableViewAppearanceDelegate {
             if self.visibleDappView != self.dappMappView {
                 self.showDappView(self.dappMappView)
             }
+            
+            self.hashtagsLabel.text = ""
             
             break
         }
@@ -1215,18 +1245,20 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
             return
         }
         
-        if let minTranslationX = self.dappViewsContainerView.minTranslationX {
-            if dx > 0.0 {
-                let viewHeight = CGRectGetHeight(self.view.frame)
-                let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
-                let signedLabelMaxBottomConstraint = (viewHeight / 2 - signedLabelHeight / 2) * 0.4
-                let signedLabelBottomConstraint =
-                (dx / minTranslationX) * signedLabelMaxBottomConstraint - signedLabelHeight
-                
-                ViewHelper.showViews([ self.signedLabel ])
-                
-                self.signedLabelBottomConstraint.constant = signedLabelBottomConstraint
-            }
+        guard let minTranslationX = self.dappViewsContainerView.minTranslationX else {
+            return
+        }
+        
+        if dx > 0.0 {
+            let viewHeight = CGRectGetHeight(self.view.frame)
+            let signedLabelHeight = CGRectGetHeight(self.signedLabel.frame)
+            let signedLabelMaxBottomConstraint = (viewHeight / 2 - signedLabelHeight / 2) * 0.4
+            let signedLabelBottomConstraint =
+            (dx / minTranslationX) * signedLabelMaxBottomConstraint - signedLabelHeight
+            
+            ViewHelper.showViews([ self.signedLabel ])
+            
+            self.signedLabelBottomConstraint.constant = signedLabelBottomConstraint
         }
     }
     
