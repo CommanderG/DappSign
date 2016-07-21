@@ -22,19 +22,20 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let
-            registerWithEmailLabel = self.logInWithEmailButton.titleLabel,
-            text = registerWithEmailLabel.text {
-                let attributedText = NSMutableAttributedString(string: text)
-                let textRange = NSMakeRange(0, text.characters.count)
-                
-                attributedText.addAttribute(NSUnderlineStyleAttributeName,
-                    value: NSUnderlineStyle.StyleSingle.rawValue,
-                    range: textRange
-                )
-                
-                registerWithEmailLabel.attributedText = attributedText
-        }
+        guard
+            let registerWithEmailLabel = self.logInWithEmailButton.titleLabel,
+            let text = registerWithEmailLabel.text
+            else { return; }
+        
+        let attributedText = NSMutableAttributedString(string: text)
+        let textRange = NSMakeRange(0, text.characters.count)
+        
+        attributedText.addAttribute(NSUnderlineStyleAttributeName,
+            value: NSUnderlineStyle.StyleSingle.rawValue,
+            range: textRange
+        )
+        
+        registerWithEmailLabel.attributedText = attributedText
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,19 +87,21 @@ class LoginVC: UIViewController {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let segueID = segue.identifier {
-            switch segueID {
-            case segueShowZipCode:
-                let zipCodeVC = segue.destinationViewController as? ZipCodeViewController
-                
-                zipCodeVC?.delegate = self
-            case segueShowEmailLogin:
-                let emailLoginVC = segue.destinationViewController as? EmailLoginVC
-                
-                emailLoginVC?.delegate = self
-            case _:
-                break
-            }
+        guard let segueID = segue.identifier else {
+            return
+        }
+        
+        switch segueID {
+        case segueShowZipCode:
+            let zipCodeVC = segue.destinationViewController as? ZipCodeViewController
+            
+            zipCodeVC?.delegate = self
+        case segueShowEmailLogin:
+            let emailLoginVC = segue.destinationViewController as? EmailLoginVC
+            
+            emailLoginVC?.delegate = self
+        case _:
+            break
         }
     }
 }
