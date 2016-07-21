@@ -14,12 +14,12 @@ protocol EmailLoginDelegate {
 }
 
 class EmailLoginVC: UIViewController {
-    @IBOutlet weak var segmentedControl:  UISegmentedControl!
-    @IBOutlet weak var fullNameTextField: UITextField!
-    @IBOutlet weak var emailTextField:    UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var registerButton:    UIButton!
-    @IBOutlet weak var signInButton:      UIButton!
+    @IBOutlet weak var segmentedControl  : UISegmentedControl!
+    @IBOutlet weak var fullNameTextField : UITextField!
+    @IBOutlet weak var emailTextField    : UITextField!
+    @IBOutlet weak var passwordTextField : UITextField!
+    @IBOutlet weak var registerButton    : UIButton!
+    @IBOutlet weak var signInButton      : UIButton!
     
     internal var delegate: EmailLoginDelegate? = nil
     
@@ -39,107 +39,110 @@ class EmailLoginVC: UIViewController {
     }
     
     @IBAction func register() {
-        if let
-            fullName = self.fullNameTextField.text,
-            email = self.emailTextField.text,
-            password = self.passwordTextField.text {
-                let fullName_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(fullName)
-                
-                if fullName_.characters.count == 0 {
-                    showAlertViewWithOKButtonAndMessage("Please enter your full name")
-                    self.fullNameTextField.becomeFirstResponder()
+        guard
+            let fullName = self.fullNameTextField.text,
+            let email = self.emailTextField.text,
+            let password = self.passwordTextField.text
+            else { return; }
+        
+        let fullName_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(fullName)
+        
+        if fullName_.characters.count == 0 {
+            showAlertViewWithOKButtonAndMessage("Please enter your full name")
+            self.fullNameTextField.becomeFirstResponder()
+            
+            return
+        }
+        
+        let email_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(email)
+        
+        if email_.characters.count == 0 {
+            showAlertViewWithOKButtonAndMessage("Please enter your email")
+            self.emailTextField.becomeFirstResponder()
+            
+            return
+        }
+        
+        let password_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(password)
+        
+        if password_.characters.count == 0 {
+            showAlertViewWithOKButtonAndMessage("Please enter your password")
+            self.passwordTextField.becomeFirstResponder()
+            
+            return
+        }
+        
+        PFUser.logOut()
+        
+        let user = PFUser()
+        
+        user.username = email_
+        user.password = password_
+        user["dappScore"] = 0
+        user["name"] = fullName_
+        user["lowercaseName"] = fullName_.lowercaseString
+        
+        user.signUpInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if success {
+                self.dismissViewControllerAnimated(true, completion: {
+                    self.delegate?.didRegister()
+                })
+            } else if let error = error, errorString = error.userInfo["error"] as? String {
+                if error.domain == "Parse" && error.code == 202 {
+                    let emailErrorString =
+                    errorString.stringByReplacingOccurrencesOfString("username",
+                        withString: "Email"
+                    ).stringByReplacingOccurrencesOfString("already",
+                        withString: "is already"
+                    )
                     
-                    return
+                    self.showAlertViewWithOKButtonAndMessage(emailErrorString)
+                } else {
+                    self.showAlertViewWithOKButtonAndMessage(errorString)
                 }
-                
-                let email_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(email)
-                
-                if email_.characters.count == 0 {
-                    showAlertViewWithOKButtonAndMessage("Please enter your email")
-                    self.emailTextField.becomeFirstResponder()
-                    
-                    return
-                }
-                
-                let password_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(password)
-                
-                if password_.characters.count == 0 {
-                    showAlertViewWithOKButtonAndMessage("Please enter your password")
-                    self.passwordTextField.becomeFirstResponder()
-                    
-                    return
-                }
-                
-                PFUser.logOut()
-                
-                let user = PFUser()
-                
-                user.username = email_
-                user.password = password_
-                user["dappScore"] = 0
-                user["name"] = fullName_
-                user["lowercaseName"] = fullName_.lowercaseString
-                
-                user.signUpInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if success {
-                        self.dismissViewControllerAnimated(true, completion: {
-                            self.delegate?.didRegister()
-                        })
-                    } else if let error = error, errorString = error.userInfo["error"] as? String {
-                        if error.domain == "Parse" && error.code == 202 {
-                            let emailErrorString =
-                            errorString.stringByReplacingOccurrencesOfString("username",
-                                withString: "Email"
-                                ).stringByReplacingOccurrencesOfString("already",
-                                    withString: "is already"
-                            )
-                            
-                            self.showAlertViewWithOKButtonAndMessage(emailErrorString)
-                        } else {
-                            self.showAlertViewWithOKButtonAndMessage(errorString)
-                        }
-                    } else {
-                        self.showAlertViewWithOKButtonAndMessage("Unknown error")
-                    }
-                }
+            } else {
+                self.showAlertViewWithOKButtonAndMessage("Unknown error")
+            }
         }
     }
     
     @IBAction func signIn() {
-        if let email = self.emailTextField.text, password = self.passwordTextField.text {
-            let email_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(email)
-            
-            if email_.characters.count == 0 {
-                showAlertViewWithOKButtonAndMessage("Please enter your email")
-                self.emailTextField.becomeFirstResponder()
-                
-                return
-            }
-            
-            let password_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(password)
-            
-            if password_.characters.count == 0 {
-                showAlertViewWithOKButtonAndMessage("Please enter your password")
-                self.passwordTextField.becomeFirstResponder()
-                
-                return
-            }
-            
-            PFUser.logOut()
-            PFUser.logInWithUsernameInBackground(email_, password: password_, block: {
-                (user: PFUser?, error: NSError?) -> Void in
-                if let _ = user {
-                    self.dismissViewControllerAnimated(true, completion: {
-                        self.delegate?.didSignIn()
-                    })
-                } else if let errorString = error?.userInfo["error"] as? String {
-                    self.showAlertViewWithOKButtonAndMessage(errorString)
-                } else {
-                    self.showAlertViewWithOKButtonAndMessage("Unknown error")
-                }
-            })
+        guard let email = self.emailTextField.text, password = self.passwordTextField.text else {
+            return;
         }
+        
+        let email_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(email)
+        
+        if email_.characters.count == 0 {
+            showAlertViewWithOKButtonAndMessage("Please enter your email")
+            self.emailTextField.becomeFirstResponder()
+            
+            return
+        }
+        
+        let password_ = self.stringWithRemoveLeadingAndTrailingWhitespacesInString(password)
+        
+        if password_.characters.count == 0 {
+            showAlertViewWithOKButtonAndMessage("Please enter your password")
+            self.passwordTextField.becomeFirstResponder()
+            
+            return
+        }
+        
+        PFUser.logOut()
+        PFUser.logInWithUsernameInBackground(email_, password: password_, block: {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let _ = user {
+                self.dismissViewControllerAnimated(true, completion: {
+                    self.delegate?.didSignIn()
+                })
+            } else if let errorString = error?.userInfo["error"] as? String {
+                self.showAlertViewWithOKButtonAndMessage(errorString)
+            } else {
+                self.showAlertViewWithOKButtonAndMessage("Unknown error")
+            }
+        })
     }
     
     @IBAction func cancel() {
