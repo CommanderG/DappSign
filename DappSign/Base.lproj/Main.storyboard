@@ -105,7 +105,7 @@
                                     <constraint firstAttribute="width" constant="225" id="WzD-lS-0oI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="Register with email"/>
+                                <state key="normal" title="Log in with email"/>
                                 <connections>
                                     <segue destination="irj-PG-aY3" kind="modal" identifier="showEmailLogin" id="hrX-77-uZo"/>
                                 </connections>
@@ -125,8 +125,8 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="logInWithEmailButton" destination="2M9-yF-sSx" id="tyl-yQ-tk5"/>
                         <outlet property="logInWithFacebookButton" destination="Dc7-Lr-jcy" id="D2m-aB-KB4"/>
-                        <outlet property="registerWithEmailButton" destination="2M9-yF-sSx" id="oOa-6o-4ea"/>
                         <segue destination="b3w-fh-uIK" kind="modal" identifier="showZipCode" id="iW7-1y-626"/>
                         <segue destination="EG5-sL-doW" kind="modal" identifier="showDailyDapp" id="hlC-D5-wHp"/>
                     </connections>

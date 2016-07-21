@@ -16,14 +16,14 @@ class LoginVC: UIViewController {
     
     private var shouldShowDailyDapp = false
     
-    @IBOutlet weak var logInWithFacebookButton: UIButton!
-    @IBOutlet weak var registerWithEmailButton: UIButton!
+    @IBOutlet weak var logInWithFacebookButton : UIButton!
+    @IBOutlet weak var logInWithEmailButton    : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let
-            registerWithEmailLabel = self.registerWithEmailButton.titleLabel,
+            registerWithEmailLabel = self.logInWithEmailButton.titleLabel,
             text = registerWithEmailLabel.text {
                 let attributedText = NSMutableAttributedString(string: text)
                 let textRange = NSMakeRange(0, text.characters.count)
