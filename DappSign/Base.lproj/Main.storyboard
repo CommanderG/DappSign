@@ -1270,14 +1270,6 @@
                                     <action selector="goToHomeViewController:" destination="b3w-fh-uIK" eventType="touchUpInside" id="Vdg-3I-HgU"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zVZ-1C-d5L">
-                                <rect key="frame" x="50" y="245" width="221" height="30"/>
-                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                <connections>
-                                    <outlet property="delegate" destination="b3w-fh-uIK" id="xdF-Wg-ghT"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your zip code to find your representative in the Congress" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNg-7W-t4R">
                                 <rect key="frame" x="34" y="122" width="252" height="82"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="20"/>
@@ -1319,6 +1311,14 @@
                                     <constraint firstAttribute="bottom" secondItem="Aok-3g-N1C" secondAttribute="bottom" constant="22" id="ysE-rd-yYg"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zVZ-1C-d5L">
+                                <rect key="frame" x="50" y="245" width="221" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="b3w-fh-uIK" id="xdF-Wg-ghT"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.026213619858026505" green="0.60553789138793945" blue="0.95094698667526245" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -3725,9 +3725,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vc-dZ-qWs">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                        <state key="normal" title="Sign in"/>
+                                        <state key="normal" title="Log in"/>
                                         <connections>
-                                            <action selector="signIn" destination="irj-PG-aY3" eventType="touchUpInside" id="wlo-CY-azV"/>
+                                            <action selector="logIn" destination="irj-PG-aY3" eventType="touchUpInside" id="Vuh-K9-sHI"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-IO-nYW">
@@ -3760,11 +3760,11 @@
                                     <outlet property="delegate" destination="irj-PG-aY3" id="BR2-Ii-FfF"/>
                                 </connections>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Lfh-hq-jhh">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lfh-hq-jhh">
                                 <rect key="frame" x="55" y="40" width="210" height="29"/>
                                 <segments>
                                     <segment title="Register"/>
-                                    <segment title="Sign in"/>
+                                    <segment title="Log in"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -3801,10 +3801,10 @@
                     <connections>
                         <outlet property="emailTextField" destination="pRd-Bs-dlE" id="kIE-aZ-FTZ"/>
                         <outlet property="fullNameTextField" destination="czg-E1-gO9" id="qFf-xl-tZT"/>
+                        <outlet property="logInButton" destination="9Vc-dZ-qWs" id="f3o-ol-QRi"/>
                         <outlet property="passwordTextField" destination="To4-bG-Jqv" id="NCg-W3-Ydx"/>
                         <outlet property="registerButton" destination="d7I-nC-Gb4" id="P6C-fi-D9L"/>
                         <outlet property="segmentedControl" destination="Lfh-hq-jhh" id="Mwx-B4-NCC"/>
-                        <outlet property="signInButton" destination="9Vc-dZ-qWs" id="d5a-wy-1Fl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6i3-rM-Y0B" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -19,7 +19,7 @@ class EmailLoginVC: UIViewController {
     @IBOutlet weak var emailTextField    : UITextField!
     @IBOutlet weak var passwordTextField : UITextField!
     @IBOutlet weak var registerButton    : UIButton!
-    @IBOutlet weak var signInButton      : UIButton!
+    @IBOutlet weak var logInButton       : UIButton!
     
     internal var delegate: EmailLoginDelegate? = nil
     
@@ -107,7 +107,7 @@ class EmailLoginVC: UIViewController {
         }
     }
     
-    @IBAction func signIn() {
+    @IBAction func logIn() {
         guard let email = self.emailTextField.text, password = self.passwordTextField.text else {
             return;
         }
@@ -154,11 +154,11 @@ class EmailLoginVC: UIViewController {
     private func initUI() {
         if self.segmentedControl.selectedSegmentIndex == 0 {
             self.fullNameTextField.hidden = false
-            self.signInButton.hidden = true
+            self.logInButton.hidden = true
             self.registerButton.hidden = false
         } else {
             self.fullNameTextField.hidden = true
-            self.signInButton.hidden = false
+            self.logInButton.hidden = false
             self.registerButton.hidden = true
             
             if self.fullNameTextField.isFirstResponder() {
@@ -189,7 +189,7 @@ extension EmailLoginVC: UITextFieldDelegate {
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 self.register()
             } else {
-                self.signIn()
+                self.logIn()
             }
         }
         
