@@ -17,12 +17,14 @@ class DappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel : UILabel!
     @IBOutlet weak var dappSubmitterLabel : UILabel!
     @IBOutlet weak var dappScoreLabel     : UILabel!
+    @IBOutlet weak var dailyDappLabel     : UILabel!
     
     internal static let embedSegueID: String = "embedDappSignVC"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DappSignViewsHelper.initViewLayer(self.view)
+        DappSignViewsHelper.initFontsInDailyDappLabel(self.dailyDappLabel, fontSize: 12.0)
     }
     
     override func didReceiveMemoryWarning() {

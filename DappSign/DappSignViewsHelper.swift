@@ -129,6 +129,30 @@ class DappSignViewsHelper {
         }
     }
     
+    internal class func initFontsInDailyDappLabel(dailyDappLabel: UILabel!, fontSize: CGFloat) {
+        guard
+            let dailyDappLabelText = dailyDappLabel.text,
+            let exoBlackFont = UIFont(name: "Exo-Black", size: fontSize),
+            let avenirBlackFont = UIFont(name: "Avenir-Black", size: fontSize)
+            else { return }
+        
+        let dailyDappStringCharactersCount = "DailyDapp: ".characters.count
+        let attributedString = NSMutableAttributedString(string: dailyDappLabelText)
+        
+        attributedString.addAttribute(
+            NSFontAttributeName,
+            value: exoBlackFont,
+            range: NSMakeRange(0, dailyDappStringCharactersCount)
+        )
+        attributedString.addAttribute(
+            NSFontAttributeName,
+            value: avenirBlackFont,
+            range: NSMakeRange(dailyDappStringCharactersCount, "Make Demands".length)
+        )
+        
+        dailyDappLabel.attributedText = attributedString
+    }
+    
     // MARK: - private
     
     private class func initDappSubmitterLabelTextWithDapp(dapp: PFObject?,

@@ -14,6 +14,7 @@ class DappSignView: XIBView {
     @IBOutlet weak var dappStatementLabel : UILabel!
     @IBOutlet weak var dappSubmitterLabel : UILabel!
     @IBOutlet weak var dappScoreLabel     : UILabel!
+    @IBOutlet weak var dailyDappLabel     : UILabel!
     
     @IBOutlet var arrowImageViewsAndLabels: [UIView]!
     
@@ -56,6 +57,8 @@ class DappSignView: XIBView {
         
         self.dappSignView?.backgroundColor = self.dappStatementLabel.backgroundColor
         self.initDappSubmitterLabelTextWithDapp(dapp)
+        
+        DappSignViewsHelper.initFontsInDailyDappLabel(self.dailyDappLabel, fontSize: 9.0)
     }
     
     internal func showDapp(dapp: Dapp?) {
@@ -100,7 +103,7 @@ class DappSignView: XIBView {
         if dappScore == 1 {
             self.dappScoreLabel.text = "1 Dapp"
         } else {
-            self.dappScoreLabel.text = "\(dappScore) Dapp"
+            self.dappScoreLabel.text = "\(dappScore) Dapps"
         }
     }
 }

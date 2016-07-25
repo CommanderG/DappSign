@@ -35,6 +35,7 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -1618,24 +1619,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
                                 <rect key="frame" x="0.0" y="293" width="272" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="85" y="-1" width="177" height="17"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="DailyDapp: ">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="12" name="Exo-Black"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="The Democracy App">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="12" name="Avenir-Black"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: Make Demands" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
+                                        <rect key="frame" x="117" y="0.0" width="145" height="16"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
@@ -1694,6 +1681,7 @@
                     <navigationItem key="navigationItem" id="iku-7z-4Xp"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="dailyDappLabel" destination="NZ9-5t-sAC" id="TnV-Nu-DOM"/>
                         <outlet property="dappScoreLabel" destination="wpO-s8-uqr" id="OMR-Pq-YYW"/>
                         <outlet property="dappStatementLabel" destination="LKb-On-0yW" id="q0G-pG-bO2"/>
                         <outlet property="dappSubmitterLabel" destination="Ipg-oS-kT7" id="0Fm-cm-hpc"/>
