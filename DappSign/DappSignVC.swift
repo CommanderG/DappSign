@@ -14,8 +14,9 @@ enum DappSignLineSpacing {
 }
 
 class DappSignVC: UIViewController {
-    @IBOutlet weak var dappStatementLabel: UILabel!
-    @IBOutlet weak var dappSubmitterLabel: UILabel!
+    @IBOutlet weak var dappStatementLabel : UILabel!
+    @IBOutlet weak var dappSubmitterLabel : UILabel!
+    @IBOutlet weak var dappScoreLabel     : UILabel!
     
     internal static let embedSegueID: String = "embedDappSignVC"
     
@@ -34,6 +35,7 @@ class DappSignVC: UIViewController {
         DappSignViewsHelper.showDappObject(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
+            dappScoreLabel: self.dappScoreLabel,
             view: self.view,
             lineSpacing: lineSpacing
         )
@@ -43,6 +45,7 @@ class DappSignVC: UIViewController {
         DappSignViewsHelper.showDapp(dapp,
             dappStatementLabel: self.dappStatementLabel,
             dappSubmitterLabel: self.dappSubmitterLabel,
+            dappScoreLabel: self.dappScoreLabel,
             view: self.view
         )
     }

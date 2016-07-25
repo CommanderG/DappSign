@@ -185,14 +185,10 @@ class DailyDappVC: UIViewController {
         } else {
             self.downloadDapps(.Daily, completion: {
                 (dapps: [PFObject]) -> Void in
-                if dapps.count > 0 {
-                    self.appState = .DailyDapp(dapps: dapps, index: 0)
-                    
-                    self.initDappView()
-                    self.initHashtagsLabel()
-                } else {
-                    self.appState = .None
-                }
+                self.appState = .DailyDapp(dapps: dapps, index: 0)
+                
+                self.initDappView()
+                self.initHashtagsLabel()
             })
         }
         

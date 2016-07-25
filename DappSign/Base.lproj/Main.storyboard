@@ -34,6 +34,7 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
+            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
             <string>Exo-Regular</string>
@@ -1517,7 +1518,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
-                                <rect key="frame" x="0.0" y="0.0" width="208" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="218" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-ZX-Q3l">
                                         <rect key="frame" x="13" y="4" width="11" height="22"/>
@@ -1538,32 +1539,32 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-L6-7qk">
-                                        <rect key="frame" x="0.0" y="46" width="208" height="2"/>
+                                        <rect key="frame" x="0.0" y="46" width="218" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="vkQ-8N-NUz"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to sign." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbP-tM-rvq">
-                                        <rect key="frame" x="66" y="59" width="34" height="14"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                        <rect key="frame" x="66" y="59" width="36" height="14"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztX-3k-WBZ">
-                                        <rect key="frame" x="102" y="56" width="28" height="18"/>
+                                        <rect key="frame" x="104" y="56" width="28" height="18"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to learn more." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vP-bD-qOi">
-                                        <rect key="frame" x="151" y="59" width="63" height="14"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                        <rect key="frame" x="153" y="59" width="68" height="14"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bwF-7b-Kz5">
-                                        <rect key="frame" x="133" y="54" width="15" height="22"/>
+                                        <rect key="frame" x="135" y="54" width="15" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="fRq-mc-0H6"/>
                                             <constraint firstAttribute="height" constant="22" id="xvo-QD-mbG"/>
@@ -1609,7 +1610,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="88" width="232" height="197"/>
+                                <rect key="frame" x="20" y="98" width="232" height="187"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1617,10 +1618,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
                                 <rect key="frame" x="0.0" y="293" width="272" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="91" y="0.0" width="171" height="16"/>
-                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
+                                        <rect key="frame" x="85" y="-1" width="177" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="DailyDapp: ">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="12" name="Exo-Black"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="The Democracy App">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="12" name="Avenir-Black"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
@@ -1650,24 +1665,36 @@
                                     <constraint firstItem="aNQ-qs-JX7" firstAttribute="top" secondItem="NZ9-5t-sAC" secondAttribute="bottom" constant="5" id="sfk-oj-RoY"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="1 Dapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpO-s8-uqr">
+                                <rect key="frame" x="12" y="80" width="39" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="qS4-gX-8pm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.87058823529411766" green="0.41176470588235292" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LKb-On-0yW" firstAttribute="leading" secondItem="u2t-LT-sDd" secondAttribute="leading" constant="20" id="Ajg-On-O57"/>
+                            <constraint firstItem="wpO-s8-uqr" firstAttribute="top" secondItem="lgl-ZE-WNQ" secondAttribute="bottom" id="CK5-qN-wee"/>
                             <constraint firstItem="R3f-dJ-sne" firstAttribute="top" secondItem="A3n-F7-8CM" secondAttribute="bottom" constant="12" id="F3W-HF-J0b"/>
                             <constraint firstAttribute="trailing" secondItem="A3n-F7-8CM" secondAttribute="trailing" id="G62-Hb-aOq"/>
+                            <constraint firstItem="LKb-On-0yW" firstAttribute="top" secondItem="wpO-s8-uqr" secondAttribute="bottom" id="KUF-Tu-WN6"/>
+                            <constraint firstItem="wpO-s8-uqr" firstAttribute="leading" secondItem="u2t-LT-sDd" secondAttribute="leading" constant="12" id="W2s-s9-rsS"/>
                             <constraint firstItem="A3n-F7-8CM" firstAttribute="leading" secondItem="u2t-LT-sDd" secondAttribute="leading" id="YPQ-bR-pPd"/>
                             <constraint firstItem="A3n-F7-8CM" firstAttribute="top" secondItem="LKb-On-0yW" secondAttribute="bottom" constant="8" id="cgP-is-3El"/>
                             <constraint firstAttribute="trailing" secondItem="LKb-On-0yW" secondAttribute="trailing" constant="20" id="dDR-nf-arP"/>
                             <constraint firstItem="lgl-ZE-WNQ" firstAttribute="top" secondItem="xZr-Os-rbT" secondAttribute="bottom" id="gF4-64-qeU"/>
                             <constraint firstItem="lgl-ZE-WNQ" firstAttribute="leading" secondItem="u2t-LT-sDd" secondAttribute="leading" id="gsJ-2C-KjJ"/>
-                            <constraint firstItem="LKb-On-0yW" firstAttribute="top" secondItem="lgl-ZE-WNQ" secondAttribute="bottom" constant="8" id="phJ-Fv-hOE"/>
-                            <constraint firstAttribute="trailing" secondItem="lgl-ZE-WNQ" secondAttribute="trailing" constant="64" id="uvC-6Y-sJ7"/>
+                            <constraint firstAttribute="trailing" secondItem="lgl-ZE-WNQ" secondAttribute="trailing" constant="54" id="uvC-6Y-sJ7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iku-7z-4Xp"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="dappScoreLabel" destination="wpO-s8-uqr" id="OMR-Pq-YYW"/>
                         <outlet property="dappStatementLabel" destination="LKb-On-0yW" id="q0G-pG-bO2"/>
                         <outlet property="dappSubmitterLabel" destination="Ipg-oS-kT7" id="0Fm-cm-hpc"/>
                     </connections>
@@ -1785,6 +1812,12 @@
                                             <segue destination="2Do-FT-vzw" kind="modal" identifier="showProfile" id="IfF-6V-hkZ"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAV-6h-VKA">
+                                        <rect key="frame" x="103" y="6" width="112" height="32"/>
+                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgS-C9-laX">
                                         <rect key="frame" x="224" y="0.0" width="94" height="51"/>
                                         <constraints>
@@ -1824,6 +1857,8 @@
                                     <constraint firstItem="AK8-hn-XfR" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" id="P79-dv-mjO"/>
                                     <constraint firstAttribute="trailing" secondItem="AK8-hn-XfR" secondAttribute="trailing" id="ZIJ-G0-VSR"/>
                                     <constraint firstAttribute="height" constant="51" id="e2G-tf-WSg"/>
+                                    <constraint firstItem="iAV-6h-VKA" firstAttribute="centerX" secondItem="kSv-5s-8f3" secondAttribute="centerX" id="fbm-GT-ldV"/>
+                                    <constraint firstItem="iAV-6h-VKA" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" constant="6" id="ndL-xl-BR9"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-ni-urr">

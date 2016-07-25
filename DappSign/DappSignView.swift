@@ -11,8 +11,9 @@ import UIKit
 class DappSignView: XIBView {
     private var dappSignView: UIView? = nil
     
-    @IBOutlet weak var dappStatementLabel: UILabel!
-    @IBOutlet weak var dappSubmitterLabel: UILabel!
+    @IBOutlet weak var dappStatementLabel : UILabel!
+    @IBOutlet weak var dappSubmitterLabel : UILabel!
+    @IBOutlet weak var dappScoreLabel     : UILabel!
     
     @IBOutlet var arrowImageViewsAndLabels: [UIView]!
     
@@ -37,6 +38,10 @@ class DappSignView: XIBView {
                 
                 self.dappStatementLabel.font = UIFont(name: fontFileName, size: 25.0)
             }
+            
+            let dappScore = dapp["dappScore"] as? Int
+            
+            self.initDappScoreLabel(dappScore)
             
             if let colorName = DappHelper.getColorName(dapp) {
                 self.dappStatementLabel.backgroundColor = DappColors.colorWithColorName(colorName)
@@ -82,6 +87,20 @@ class DappSignView: XIBView {
             self.dappSubmitterLabel.text = "From \(userName)"
         } else {
             self.dappSubmitterLabel.text = ""
+        }
+    }
+    
+    private func initDappScoreLabel(dappScore: Int?) {
+        guard let dappScore = dappScore else {
+            self.dappScoreLabel.text = "0 Dapps"
+            
+            return
+        }
+        
+        if dappScore == 1 {
+            self.dappScoreLabel.text = "1 Dapp"
+        } else {
+            self.dappScoreLabel.text = "\(dappScore) Dapp"
         }
     }
 }
