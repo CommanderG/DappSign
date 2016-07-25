@@ -27,18 +27,10 @@ class DappMappHelper {
         Requests.percents(dapp, completion: {
             (usersDapped: [PFUser:Bool]?, error: NSError?) -> Void in
             if let usersDapped = usersDapped {
-                if usersDapped.count >= 20 {
-                    self.downloadAndGenerateDappMappInfo(usersDapped,
-                        dapp: dapp,
-                        completion: completion
-                    )
-                } else {
-                    let dappMappInfo = self.generateRandomDappMappInfo()
-                    
-                    self.findTop3DistrictsWithIDsFrequencies(dappMappInfo.IDsFreqs)
-                    
-                    completion(dappMappInfo: dappMappInfo)
-                }
+                self.downloadAndGenerateDappMappInfo(usersDapped,
+                    dapp: dapp,
+                    completion: completion
+                )
             }
         })
     }
@@ -89,67 +81,6 @@ class DappMappHelper {
                 completion(dappMappInfo: nil)
             }
         })
-    }
-    
-    private class func generateRandomDappMappInfo() -> DappMappInfo {
-        var dappsCount = UInt(10 + arc4random_uniform(20))
-        var IDsFreqs = CongressionalDistrictsIDs.getRandomIDsFreqs(dappsCount)
-        
-        var percents: UInt = 0
-        let SVGMapURL = SVGMapGenerator.generate(IDsFreqs)
-        
-        if let
-            user = PFUser.currentUser(),
-            congrDistrID = user["congressionalDistrictID"] as? String {
-                let additionalFreq = UInt(1 + arc4random_uniform(4))
-                var dappTotalViews: UInt = 1
-                var dappDapps: UInt = 1
-                
-                if let freq = IDsFreqs[congrDistrID] as UInt? {
-                    IDsFreqs[congrDistrID] = freq + additionalFreq
-                    
-                    dappTotalViews = freq + additionalFreq
-                } else {
-                    IDsFreqs[congrDistrID] = additionalFreq
-                    
-                    dappTotalViews = additionalFreq
-                }
-                
-                dappDapps = UInt(arc4random_uniform(UInt32(dappTotalViews)))
-                
-                if dappDapps == 0 {
-                    dappDapps = 1
-                } else if dappDapps > dappTotalViews {
-                    dappDapps = dappTotalViews
-                }
-                
-                percents = UInt(roundf(Float(dappDapps) / Float(dappTotalViews) * 100))
-                
-                dappsCount += additionalFreq
-        }
-        
-        let maxRandom = UInt32(roundf(Float(IDsFreqs.count) / 2))
-        let districtsWithMajoritySupportCount = Int(1 + arc4random_uniform(maxRandom))
-        
-        let (topDistrict, secondTopDistrict, thirdTopDistrict) =
-            self.findTop3DistrictsWithIDsFrequencies(IDsFreqs)
-        
-        let userDistrictRank = self.calculateRankForUserDistrict(IDsFreqs)
-        let districtsTotalCount = SVGMapGenerator.districtsCount()
-        
-        let dappMappInfo = DappMappInfo(
-            IDsFreqs:                          IDsFreqs,
-            mapURLString:                      SVGMapURL,
-            percents:                          percents,
-            districtsWithMajoritySupportCount: districtsWithMajoritySupportCount,
-            topDistrict:                       topDistrict,
-            secondTopDistrict:                 secondTopDistrict,
-            thirdTopDistrict:                  thirdTopDistrict,
-            userDistrictRank:                  userDistrictRank,
-            districtsTotalCount:               districtsTotalCount
-        )
-        
-        return dappMappInfo
     }
     
     private class func calculateDappedCount(usersDapped: [PFUser:Bool]) -> Int {
