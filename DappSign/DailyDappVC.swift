@@ -239,7 +239,11 @@ class DailyDappVC: UIViewController {
             view1: self.dappViewsContainerView,
             view2: dappBackSideLinksVC.view,
             completion: {
-                self.disableShareButons()
+                if self.dappViewsContainerView.hidden {
+                    self.disableShareButons()
+                } else {
+                    self.enableShareButtons()
+                }
             }
         )
         
