@@ -3545,10 +3545,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syt-w3-sRD">
-                                <rect key="frame" x="11" y="21" width="84" height="52"/>
+                                <rect key="frame" x="8" y="21" width="90" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="PGt-B5-FGo"/>
+                                    <constraint firstAttribute="width" constant="90" id="PGt-B5-FGo"/>
                                     <constraint firstAttribute="height" constant="52" id="sXj-sx-vUT"/>
                                 </constraints>
                                 <connections>
@@ -4218,8 +4218,8 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iW7-1y-626"/>
         <segue reference="bpX-mN-qEi"/>
+        <segue reference="ss8-uX-HsK"/>
         <segue reference="Tb5-sO-Miv"/>
         <segue reference="Ffg-Dq-WrU"/>
     </inferredMetricsTieBreakers>

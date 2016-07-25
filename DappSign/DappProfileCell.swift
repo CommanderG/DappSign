@@ -112,11 +112,7 @@ class DappProfileCell: SWTableViewCell {
         if let profileDappMappVC = self.profileDappMappVC {
             let profileDappMappView = profileDappMappVC.view
             
-            let width = CGRectGetWidth(self.dappMappViewContainer.frame)
-            let height = CGRectGetHeight(self.dappMappViewContainer.frame)
-            let frame = CGRectMake(0.0, 0.0, width, height)
-            
-            profileDappMappView.frame = frame;
+            profileDappMappView.frame = self.dappMappViewContainer.bounds
             
             self.dappMappViewContainer.addSubview(profileDappMappView)
         }
