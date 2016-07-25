@@ -54,7 +54,7 @@ class IndexedDapps {
         var dappMaxIndex = 0
         
         switch dappsType {
-        case .Primary, .Scoreboard:
+        case .Primary:
             dappMaxIndex = primaryDappsMaxCount
         case .Secondary, .Introductory:
             dappMaxIndex = dapps.count

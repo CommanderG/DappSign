@@ -115,8 +115,6 @@ extension DappsWithoutArrayTVC: UIActionSheetDelegate {
             dappArray = .Secondary
         case actionSheetButtonMoveToIntroductoryArray:
             dappArray = .Introductory
-        case actionSheetButtonMoveToScoreboardArray:
-            dappArray = .Scoreboard
         case _:
             dappArray = nil
         }

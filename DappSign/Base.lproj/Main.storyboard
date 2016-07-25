@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -34,11 +34,8 @@
             <string>Exo-Black</string>
             <string>Exo-Black</string>
             <string>Exo-Black</string>
-            <string>Exo-Black</string>
         </mutableArray>
         <mutableArray key="Exo-Regular.otf">
-            <string>Exo-Regular</string>
-            <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
             <string>Exo-Regular</string>
@@ -991,35 +988,8 @@
                                             <segue destination="Mdb-Kg-7xy" kind="push" identifier="showIntroductoryDapps" id="rDJ-8j-zWb"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Kba-1v-oTr" detailTextLabel="rvK-3d-8eY" style="IBUITableViewCellStyleValue1" id="bnW-2H-bZI">
-                                        <rect key="frame" x="0.0" y="154" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bnW-2H-bZI" id="E9G-iz-Z8R">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Scoreboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kba-1v-oTr">
-                                                    <rect key="frame" x="15" y="10" width="88" height="23"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rvK-3d-8eY">
-                                                    <rect key="frame" x="265" y="11" width="20" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Mdb-Kg-7xy" kind="push" identifier="showScoreboardDapps" id="gEv-9V-DYV"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="S2t-dh-rd0" style="IBUITableViewCellStyleDefault" id="qqX-sS-PTJ">
-                                        <rect key="frame" x="0.0" y="198" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="154" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qqX-sS-PTJ" id="Djg-KN-G83">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1043,7 +1013,7 @@
                             <tableViewSection headerTitle="DailyDapp time" id="8rY-PT-kxV">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kcj-8a-MNc">
-                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="220" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kcj-8a-MNc" id="AE7-Si-wTW">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1543,11 +1513,11 @@
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u2t-LT-sDd">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="272" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
-                                <rect key="frame" x="0.0" y="0.0" width="216" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="208" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-ZX-Q3l">
                                         <rect key="frame" x="13" y="4" width="11" height="22"/>
@@ -1568,7 +1538,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-L6-7qk">
-                                        <rect key="frame" x="0.0" y="46" width="216" height="2"/>
+                                        <rect key="frame" x="0.0" y="46" width="208" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="vkQ-8N-NUz"/>
@@ -1639,29 +1609,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="88" width="240" height="226"/>
+                                <rect key="frame" x="20" y="88" width="232" height="197"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
-                                <rect key="frame" x="0.0" y="322" width="280" height="58"/>
+                                <rect key="frame" x="0.0" y="293" width="272" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: The Democracy App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="99" y="0.0" width="171" height="16"/>
+                                        <rect key="frame" x="91" y="0.0" width="171" height="16"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
-                                        <rect key="frame" x="97" y="21" width="183" height="2"/>
+                                        <rect key="frame" x="97" y="21" width="175" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="ftW-vy-W2E"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Al Gust" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-oS-kT7">
-                                        <rect key="frame" x="10" y="29" width="260" height="32"/>
+                                        <rect key="frame" x="10" y="29" width="252" height="32"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1815,33 +1785,6 @@
                                             <segue destination="2Do-FT-vzw" kind="modal" identifier="showProfile" id="IfF-6V-hkZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXB-gx-DWe">
-                                        <rect key="frame" x="102" y="-8" width="114" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="dWZ-e1-utJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="26"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Left in today's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Aa-jo-Gkt">
-                                        <rect key="frame" x="102" y="19" width="114" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="17" id="a2A-QV-9bu"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="DailyDapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dch-Ht-a2o">
-                                        <rect key="frame" x="102" y="31" width="114" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="DeE-fR-Wyq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgS-C9-laX">
                                         <rect key="frame" x="224" y="0.0" width="94" height="51"/>
                                         <constraints>
@@ -1874,22 +1817,13 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="9Aa-jo-Gkt" firstAttribute="top" secondItem="iXB-gx-DWe" secondAttribute="bottom" constant="-12" id="3aw-MH-fo0"/>
                                     <constraint firstItem="DgS-C9-laX" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" id="56Z-mz-0my"/>
-                                    <constraint firstAttribute="bottom" secondItem="dch-Ht-a2o" secondAttribute="bottom" id="BNi-jH-ken"/>
-                                    <constraint firstItem="iXB-gx-DWe" firstAttribute="leading" secondItem="Vml-Hd-jrV" secondAttribute="trailing" constant="8" id="Bhu-iX-wcZ"/>
-                                    <constraint firstItem="9Aa-jo-Gkt" firstAttribute="width" secondItem="iXB-gx-DWe" secondAttribute="width" id="G6s-dg-feM"/>
                                     <constraint firstAttribute="trailing" secondItem="DgS-C9-laX" secondAttribute="trailing" id="GIa-Qd-0we"/>
-                                    <constraint firstItem="dch-Ht-a2o" firstAttribute="centerX" secondItem="iXB-gx-DWe" secondAttribute="centerX" id="GIz-YT-0uo"/>
                                     <constraint firstItem="Vml-Hd-jrV" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" id="HjJ-K6-seV"/>
                                     <constraint firstItem="Vml-Hd-jrV" firstAttribute="leading" secondItem="kSv-5s-8f3" secondAttribute="leading" id="OzV-pL-gbP"/>
                                     <constraint firstItem="AK8-hn-XfR" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" id="P79-dv-mjO"/>
-                                    <constraint firstItem="AK8-hn-XfR" firstAttribute="leading" secondItem="iXB-gx-DWe" secondAttribute="trailing" constant="8" id="Rtm-iS-GL6"/>
                                     <constraint firstAttribute="trailing" secondItem="AK8-hn-XfR" secondAttribute="trailing" id="ZIJ-G0-VSR"/>
-                                    <constraint firstItem="iXB-gx-DWe" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="top" constant="-8" id="aUf-pJ-pCF"/>
-                                    <constraint firstItem="9Aa-jo-Gkt" firstAttribute="centerX" secondItem="iXB-gx-DWe" secondAttribute="centerX" id="hRb-b7-enF"/>
-                                    <constraint firstItem="dch-Ht-a2o" firstAttribute="top" secondItem="9Aa-jo-Gkt" secondAttribute="bottom" constant="-5" id="oMq-cz-Tpt"/>
-                                    <constraint firstItem="dch-Ht-a2o" firstAttribute="width" secondItem="iXB-gx-DWe" secondAttribute="width" id="t1V-iG-tap"/>
+                                    <constraint firstAttribute="height" constant="51" id="e2G-tf-WSg"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-ni-urr">
@@ -2065,7 +1999,6 @@
                             <constraint firstItem="HzC-sE-TlJ" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="CQG-dn-Mhb"/>
                             <constraint firstItem="GdT-Xa-E10" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="-15" id="Cyi-tJ-ZpM"/>
                             <constraint firstItem="iRV-8I-LT2" firstAttribute="top" secondItem="kSv-5s-8f3" secondAttribute="bottom" constant="3" id="Hkc-Sj-TgG"/>
-                            <constraint firstItem="kSv-5s-8f3" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="15" id="K9N-yT-v2G"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="gal-zO-XBA" secondAttribute="bottom" constant="5" id="OKy-wa-riN"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="Yu2-AW-APN" secondAttribute="bottom" constant="9" id="P9h-Aj-5Ld"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="rvm-Fb-8NV" secondAttribute="bottom" constant="250" id="Szj-oP-D5E"/>
@@ -2082,6 +2015,7 @@
                             <constraint firstItem="HzC-sE-TlJ" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="24" id="m9q-Eb-B9c"/>
                             <constraint firstItem="rvm-Fb-8NV" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="mP4-IE-40T"/>
                             <constraint firstAttribute="trailing" secondItem="Yu2-AW-APN" secondAttribute="trailing" constant="8" id="p1i-Vd-OIP"/>
+                            <constraint firstItem="kSv-5s-8f3" firstAttribute="top" secondItem="1wQ-Gn-sef" secondAttribute="bottom" constant="15" id="pJM-kj-Q01"/>
                             <constraint firstItem="gal-zO-XBA" firstAttribute="leading" secondItem="y0b-e0-s53" secondAttribute="leading" constant="15" id="q9Z-eg-Dvm"/>
                             <constraint firstItem="9LT-gV-9QU" firstAttribute="top" secondItem="eIh-Pe-YFI" secondAttribute="bottom" constant="250" id="rlM-ny-F4k"/>
                             <constraint firstItem="6D9-D3-dkP" firstAttribute="centerX" secondItem="y0b-e0-s53" secondAttribute="centerX" id="spN-fJ-sNu"/>
@@ -2097,8 +2031,6 @@
                         <outlet property="composeButton" destination="DgS-C9-laX" id="zAY-Ii-UAc"/>
                         <outlet property="dailyDappBeginsInLabel" destination="ZaM-mX-B5y" id="cw7-S5-mAf"/>
                         <outlet property="dailyDappBeginsInLabelBottomLC" destination="TSu-0q-eiV" id="sYZ-Mr-fN0"/>
-                        <outlet property="dailyDappTimeLabel" destination="9Aa-jo-Gkt" id="M4d-wj-sPb"/>
-                        <outlet property="dailyDappTimeLeftLabel" destination="iXB-gx-DWe" id="J6L-PO-dba"/>
                         <outlet property="dappMappView" destination="Rnh-hP-uaa" id="a0O-a4-8IY"/>
                         <outlet property="dappScoreLabel" destination="iRV-8I-LT2" id="WCb-nb-3bl"/>
                         <outlet property="dappSignView" destination="zae-OY-t6s" id="8oO-Or-Yox"/>
@@ -4264,8 +4196,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iW7-1y-626"/>
-        <segue reference="MA2-gt-BdZ"/>
-        <segue reference="Ffg-Dq-WrU"/>
+        <segue reference="bpX-mN-qEi"/>
         <segue reference="Tb5-sO-Miv"/>
+        <segue reference="Ffg-Dq-WrU"/>
     </inferredMetricsTieBreakers>
 </document>

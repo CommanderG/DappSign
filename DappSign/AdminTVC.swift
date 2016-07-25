@@ -12,15 +12,13 @@ class AdminTVC: UITableViewController {
     var dappArrayDappsCount: [DappArray: Int32?] = [
         .Primary:      nil,
         .Secondary:    nil,
-        .Introductory: nil,
-        .Scoreboard:   nil
+        .Introductory: nil
     ]
     
     let rowDappArray: [Int: DappArray] = [
         0: .Primary,
         1: .Secondary,
-        2: .Introductory,
-        3: .Scoreboard
+        2: .Introductory
     ]
     
     enum SegueIdentifier: String {
@@ -137,8 +135,6 @@ class AdminTVC: UITableViewController {
                 dappsType = .Secondary
             case SegueIdentifier.ShowIntroductoryDapps.rawValue:
                 dappsType = .Introductory
-            case SegueIdentifier.ShowScoreboardDapps.rawValue:
-                dappsType = .Scoreboard
             default:
                 break
             }
@@ -196,7 +192,6 @@ class AdminTVC: UITableViewController {
         self.refreshTableViewContentForDappArray(.Primary)
         self.refreshTableViewContentForDappArray(.Secondary)
         self.refreshTableViewContentForDappArray(.Introductory)
-        self.refreshTableViewContentForDappArray(.Scoreboard)
     }
     
     private func refreshTableViewContentForDappArray(dappArray: DappArray) -> Void {

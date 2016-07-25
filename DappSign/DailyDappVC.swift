@@ -11,14 +11,12 @@ import UIKit
 enum Dapps {
     case Introductory
     case Daily
-    case Scoreboard
 }
 
 enum AppState {
     case DownloadingDapps
     case IntroductoryDapps(dapps: [PFObject], index: Int)
-    case DailyDapp(timeInterval: NSTimeInterval, dapps: [PFObject], index: Int)
-    case Scoreboard(timeInterval: NSTimeInterval, dapps: [PFObject], index: Int)
+    case DailyDapp(dapps: [PFObject], index: Int)
     case None
 }
 
@@ -49,12 +47,10 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var plusOneRepresentativeLabel : UILabel!
     @IBOutlet weak var signedLabel                : UILabel!
     @IBOutlet weak var hashtagsLabel              : UILabel!
-    @IBOutlet weak var dailyDappTimeLeftLabel     : UILabel!
     @IBOutlet weak var topContainerView           : UIView!
     @IBOutlet weak var oneMinuteLeftLabel         : UILabel!
     @IBOutlet weak var dailyDappBeginsInLabel     : UILabel!
     @IBOutlet weak var secondsLeftLabel           : UILabel!
-    @IBOutlet weak var dailyDappTimeLabel         : UILabel!
     
     @IBOutlet weak var plusDappsCountLabelTopConstraint        : NSLayoutConstraint!
     @IBOutlet weak var plusOneRepresentativeLabelTopConstraint : NSLayoutConstraint!
@@ -63,21 +59,19 @@ class DailyDappVC: UIViewController {
     @IBOutlet weak var dailyDappBeginsInLabelBottomLC          : NSLayoutConstraint!
     @IBOutlet weak var secondsLeftLabelBottomLC                : NSLayoutConstraint!
     
-    private var dappSignVC                        : DappSignVC?          = nil
-    private var dappMappVC                        : DappMappVC?          = nil
-    private var representativeVC                  : RepresentativeVC?    = nil
-    private var visibleDappView                   : UIView!              = nil
-    private var lastDappedDapp                    : PFObject?            = nil
-    private var dappBackSideLinksVC               : DappBackSideLinksVC? = nil
-    private var dailyDappTimeLeftLabelUpdateTimer : NSTimer?             = nil
-    private var dailyDappTimeLeftUpdateTimer      : NSTimer?             = nil
-    private var appState                          : AppState             = .None
-    private var animatingPlusOneLabels            : Bool                 = false
-    private var timer                             : NSTimer?             = nil
-    private var currentDappCardType               : DappCardType         = .DappCardTypeSign
-    private var animateableViews                  : [UIView]!            = []
-    private var dappScore                         : Int?                 = nil
-    private var labelsAnimationInfo               : [LabelAnimationInfo] = []
+    private var dappSignVC             : DappSignVC?          = nil
+    private var dappMappVC             : DappMappVC?          = nil
+    private var representativeVC       : RepresentativeVC?    = nil
+    private var visibleDappView        : UIView!              = nil
+    private var lastDappedDapp         : PFObject?            = nil
+    private var dappBackSideLinksVC    : DappBackSideLinksVC? = nil
+    private var appState               : AppState             = .None
+    private var animatingPlusOneLabels : Bool                 = false
+    private var timer                  : NSTimer?             = nil
+    private var currentDappCardType    : DappCardType         = .DappCardTypeSign
+    private var animateableViews       : [UIView]!            = []
+    private var dappScore              : Int?                 = nil
+    private var labelsAnimationInfo    : [LabelAnimationInfo] = []
     
     private let flipDuration = 0.5
     
@@ -188,20 +182,23 @@ class DailyDappVC: UIViewController {
                     self.appState = .None
                 }
             })
+        } else {
+            self.downloadDapps(.Daily, completion: {
+                (dapps: [PFObject]) -> Void in
+                if dapps.count > 0 {
+                    self.appState = .DailyDapp(dapps: dapps, index: 0)
+                    
+                    self.initDappView()
+                    self.initHashtagsLabel()
+                } else {
+                    self.appState = .None
+                }
+            })
         }
-        
-        self.initTimers()
         
         for view in self.animateableViews {
             view.alpha = 0.0
         }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.dailyDappTimeLeftLabelUpdateTimer?.invalidate()
-        self.dailyDappTimeLeftUpdateTimer?.invalidate()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -232,23 +229,6 @@ class DailyDappVC: UIViewController {
     
     override func viewDidDisappear(animated: Bool) {
         self.timer?.invalidate()
-    }
-    
-    // MARK: -
-    
-    private func initTimers() {
-        self.dailyDappTimeLeftLabelUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
-            target:   self,
-            selector: #selector(DailyDappVC.updateDailyDappTimeLabels),
-            userInfo: nil,
-            repeats:  true
-        )
-        self.dailyDappTimeLeftUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5,
-            target:   self,
-            selector: #selector(DailyDappVC.updateDailyDappTimeInterval),
-            userInfo: nil,
-            repeats:  true
-        )
     }
     
     // MARK: - @IBActions
@@ -523,150 +503,6 @@ class DailyDappVC: UIViewController {
         }
     }
     
-    // MARK: - timer functions
-    
-    internal func updateDailyDappTimeLabels() {
-        struct show {
-            static var colon = false
-        }
-        
-        show.colon = !show.colon
-        
-        switch self.appState {
-        case .DailyDapp(let timeInterval, _, _):
-            let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
-            let minutesString = self.stringForDoubleDigitInt(minutes)
-            let secondsString = self.stringForDoubleDigitInt(seconds)
-            
-            if show.colon {
-                self.dailyDappTimeLeftLabel.text = "\(minutesString):\(secondsString)"
-            } else {
-                self.dailyDappTimeLeftLabel.text = "\(minutesString) \(secondsString)"
-            }
-            
-            self.dailyDappTimeLabel.text = "Left in today's"
-            
-            break
-        case .Scoreboard(let timeInterval, _, _):
-            let (hours, minutes, seconds) = DateHelper.hoursMinutesSecondsInTimeInterval(timeInterval)
-            let hoursString = self.stringForDoubleDigitInt(hours)
-            let minutesString = self.stringForDoubleDigitInt(minutes)
-            let secondsString = self.stringForDoubleDigitInt(seconds)
-            
-            if show.colon {
-                self.dailyDappTimeLeftLabel.text = "\(hoursString):\(minutesString):\(secondsString)"
-            } else {
-                self.dailyDappTimeLeftLabel.text = "\(hoursString) \(minutesString) \(secondsString)"
-            }
-            
-            self.dailyDappTimeLabel.text = "Until the next"
-            
-            break
-        case _:
-            self.dailyDappTimeLeftLabel.text = ""
-            self.dailyDappTimeLabel.text = ""
-            
-            break
-        }
-    }
-    
-    internal func updateDailyDappTimeInterval() {
-        switch self.appState {
-        case .None, .DailyDapp(_, _, _), .Scoreboard(_, _, _):
-            guard
-                let timeBeforeEnd = DailyDappDatesHelper.timeIntervalBeforeCurrentDailyDappEnd(),
-                let timeUnitlNext = DailyDappDatesHelper.timeIntervalUntilNextDailyDappStartDate()
-                else { return }
-            
-            if timeBeforeEnd <= 0.0 {
-                switch self.appState {
-                case .Scoreboard(_, let dapps, let index):
-                    self.appState = .Scoreboard(
-                        timeInterval: timeUnitlNext,
-                        dapps: dapps,
-                        index: index
-                    )
-                    
-                    break
-                case _:
-                    self.appState = .DownloadingDapps
-                    
-                    self.downloadDapps(.Scoreboard, completion: {
-                        (dapps: [PFObject]) -> Void in
-                        self.appState = .Scoreboard(
-                            timeInterval: timeUnitlNext,
-                            dapps: dapps,
-                            index: 0
-                        )
-                        
-                        self.initDappView()
-                        self.initHashtagsLabel()
-                    })
-                    
-                    break
-                }
-            } else {
-                switch self.appState {
-                case .DailyDapp(_, let dapps, let index):
-                    self.appState = .DailyDapp(
-                        timeInterval: timeBeforeEnd,
-                        dapps: dapps,
-                        index: index
-                    )
-                    
-                    break
-                case _:
-                    self.appState = .DownloadingDapps
-                    
-                    self.downloadDapps(.Daily, completion: {
-                        (dapps: [PFObject]) -> Void in
-                        self.appState = .DailyDapp(
-                            timeInterval: timeBeforeEnd,
-                            dapps: dapps,
-                            index: 0
-                        )
-                        
-                        self.initDappView()
-                        self.initHashtagsLabel()
-                    })
-                    
-                    break
-                }
-                
-                self.showCountdownAnimation(timeBeforeEnd)
-            }
-        case _:
-            break
-        }
-    }
-    
-    private func showCountdownAnimation(timeInterval: NSTimeInterval) {
-        let (minutes, seconds) = DateHelper.minutesAndSecondsInTimeInterval(timeInterval)
-        
-        if (minutes == 1 && seconds == 0) {
-            self.showCountdownLabel(self.oneMinuteLeftLabel,
-                countdownLabelBottomLC: self.oneMinuteLeftLabelBottomLC
-            )
-        } else if (minutes == 0 && seconds == 5) {
-            self.showCountdownLabel(self.dailyDappBeginsInLabel,
-                countdownLabelBottomLC: self.dailyDappBeginsInLabelBottomLC,
-                completion: {
-                    self.hideTopUI()
-                    self.hideBottomUI()
-                    
-                    self.dappViewsContainerView.hidden = true
-                    
-                    self.showLabelsCountingDownToOneFrom(5, completion: {
-                        self.showTopUI()
-                        self.showBottomUI()
-                        
-                        self.dappViewsContainerView.hidden = false
-                    })
-                }
-            )
-        }
-    }
-    
     // MARK: -
     
     internal func handleDappSwipedNotification(notification: NSNotification) {
@@ -731,9 +567,7 @@ class DailyDappVC: UIViewController {
         switch self.appState {
         case .IntroductoryDapps(let dapps, let index):
             return self.getCurrentDappInDapp(dapps, currentIndex: index)
-        case .DailyDapp(_, let dapps, let index):
-            return self.getCurrentDappInDapp(dapps, currentIndex: index)
-        case .Scoreboard(_, let dapps, let index):
+        case .DailyDapp(let dapps, let index):
             return self.getCurrentDappInDapp(dapps, currentIndex: index)
         case _:
             return nil
@@ -744,9 +578,7 @@ class DailyDappVC: UIViewController {
         switch self.appState {
         case .IntroductoryDapps(let dapps, let index):
             return self.getPreviousDappInDapps(dapps, currentIndex: index)
-        case .DailyDapp(_, let dapps, let index):
-            return self.getPreviousDappInDapps(dapps, currentIndex: index)
-        case .Scoreboard(_, let dapps, let index):
+        case .DailyDapp(let dapps, let index):
             return self.getPreviousDappInDapps(dapps, currentIndex: index)
         case _:
             return nil
@@ -775,19 +607,10 @@ class DailyDappVC: UIViewController {
             self.appState = .IntroductoryDapps(dapps: dapps, index: newIndex)
             
             break
-        case .DailyDapp(let timeInterval, let dapps, let index):
+        case .DailyDapp(let dapps, let index):
             let newIndex = index + 1
             
-            self.appState = .DailyDapp(
-                timeInterval: timeInterval,
-                dapps: dapps,
-                index: newIndex
-            )
-            break
-        case .Scoreboard(let timeInterval, let dapps, let index):
-            let newIndex = (index + 1) % dapps.count
-            
-            self.appState = .Scoreboard(timeInterval: timeInterval, dapps: dapps, index: newIndex)
+            self.appState = .DailyDapp(dapps: dapps, index: newIndex)
             
             break
         case _:
@@ -824,13 +647,6 @@ class DailyDappVC: UIViewController {
                 (dapps: [PFObject]) -> Void in
                 completion(dapps: dapps)
             })
-            
-            break
-        case .Scoreboard:
-            ScoreboardHelper.downloadScoreboardDapps {
-                (scoreboardDapps: [PFObject], error: NSError?) -> Void in
-                completion(dapps: scoreboardDapps)
-            }
             
             break
         }
@@ -1205,7 +1021,7 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                             }
                             
                             switch self.appState {
-                            case .IntroductoryDapps(_), .DailyDapp(_, _, _):
+                            case .IntroductoryDapps(_), .DailyDapp(_, _):
                                 self.performDappAnimationsWithCompletion(completeAnimation)
                                 
                                 break

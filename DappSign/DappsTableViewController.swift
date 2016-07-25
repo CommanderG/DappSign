@@ -13,7 +13,6 @@ class DappsTableViewController: UITableViewController {
     let actionSheetButtonMoveToPrimaryArray      = "Move to Primary array"
     let actionSheetButtonMoveToSecondaryArray    = "Move to Secondary array"
     let actionSheetButtonMoveToIntroductoryArray = "Move to Introductory array"
-    let actionSheetButtonAddToScoreboardArray    = "Add to Scoreboard array"
     let actionSheetButtonCancel                  = "Cancel"
     
     let dappStatementKey = "dappStatement"
@@ -49,8 +48,6 @@ class DappsTableViewController: UITableViewController {
                 self.title = "Secondary Dapps"
             case .Introductory:
                 self.title = "Introductory Dapps"
-            case .Scoreboard:
-                self.title = "Scoreboard Dapps"
             }
             
             DappArraysHelper.downloadAllDappsInArray(dappsArray, completion: {
@@ -302,8 +299,7 @@ class DappsTableViewController: UITableViewController {
                     cancelButtonTitle:      actionSheetButtonCancel,
                     destructiveButtonTitle: actionSheetButtonRemoveFromThisArray,
                     otherButtonTitles:      actionSheetButtonMoveToSecondaryArray,
-                                            actionSheetButtonMoveToIntroductoryArray,
-                                            actionSheetButtonAddToScoreboardArray
+                                            actionSheetButtonMoveToIntroductoryArray
                 )
             case .Secondary:
                 return UIActionSheet(
@@ -311,8 +307,7 @@ class DappsTableViewController: UITableViewController {
                     delegate:               self,
                     cancelButtonTitle:      actionSheetButtonCancel,
                     destructiveButtonTitle: actionSheetButtonRemoveFromThisArray,
-                    otherButtonTitles:      actionSheetButtonMoveToPrimaryArray,
-                                            actionSheetButtonAddToScoreboardArray
+                    otherButtonTitles:      actionSheetButtonMoveToPrimaryArray
                 )
             case .Introductory:
                 return UIActionSheet(
@@ -321,15 +316,7 @@ class DappsTableViewController: UITableViewController {
                     cancelButtonTitle:      actionSheetButtonCancel,
                     destructiveButtonTitle: actionSheetButtonRemoveFromThisArray,
                     otherButtonTitles:      actionSheetButtonMoveToPrimaryArray,
-                                            actionSheetButtonMoveToSecondaryArray,
-                                            actionSheetButtonAddToScoreboardArray
-                )
-            case .Scoreboard:
-                return UIActionSheet(
-                    title:                  title,
-                    delegate:               self,
-                    cancelButtonTitle:      actionSheetButtonCancel,
-                    destructiveButtonTitle: actionSheetButtonRemoveFromThisArray
+                                            actionSheetButtonMoveToSecondaryArray
                 )
             }
         }
@@ -434,32 +421,6 @@ extension DappsTableViewController: UIActionSheetDelegate {
                     toArray: .Introductory,
                     afterRemovingItFromArray: dappsArray
                 )
-            case actionSheetButtonAddToScoreboardArray:
-                self.checkIfDappWithID(selectedDapp.objectId,
-                    existsInArray: .Scoreboard,
-                    completion: {
-                        (exists: Bool?, error: NSError?) -> Void in
-                        if let exists = exists {
-                            if exists {
-                                self.showAlertViewWithOKButtonAndMessage(
-                                    "This dapp has already been added to Scoreboard array."
-                                )
-                                
-                                return
-                            }
-                            
-                            DappTransferHelper.addDapp(selectedDapp,
-                                toArray: .Scoreboard,
-                                completion: {
-                                    (error: NSError?) -> Void in
-                                    if let error = error {
-                                        self.showAlertViewWithOKButtonAndError(error)
-                                    }
-                            })
-                        } else if let error = error {
-                            self.showAlertViewWithOKButtonAndError(error)
-                        }
-                })
             default:
                 break
             }
@@ -526,10 +487,10 @@ extension DappsTableViewController: UIActionSheetDelegate {
     }
     
     private func checkIfDappWithID(dappID: String,
-        existsInArray: DappArray,
+        existsInArray array: DappArray,
         completion: (exists: Bool?, error: NSError?) -> Void
     ) {
-        DappArraysHelper.downloadAllDappsInArray(.Scoreboard, completion: {
+        DappArraysHelper.downloadAllDappsInArray(array, completion: {
             (dapps: [PFObject]?, error: NSError?) -> Void in
             if let dapps = dapps {
                 for dapp in dapps {

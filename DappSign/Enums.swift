@@ -10,5 +10,4 @@ internal enum DappArray: String {
     case Primary      = "Primary"
     case Secondary    = "Secondary"
     case Introductory = "Introductory"
-    case Scoreboard   = "Scoreboard"
 }

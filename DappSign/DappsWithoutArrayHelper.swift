@@ -12,12 +12,7 @@ class DappsWithoutArrayHelper {
     internal class func downloadDappsWithoutArray(
         completion: (dappsWithoutArray: [PFObject]?, error: NSError?) -> Void
     ) {
-        let allDappArrays: [DappArray] = [
-            .Primary,
-            .Secondary,
-            .Introductory,
-            .Scoreboard
-        ]
+        let allDappArrays: [DappArray] = [ .Primary, .Secondary, .Introductory ]
         
         self.downloadDappsInArrays(allDappArrays, downloadedDapps: []) {
             (dappsInArrays: [PFObject]?, error: NSError?) -> Void in
