@@ -18,31 +18,35 @@ class TwitterHelper {
         
         twitter.logInWithCompletion {
             (session: TWTRSession?, error: NSError?) -> Void in
-            if let session = session {
-                self.createAndUploadImage(dapp, session: session, completion: {
-                    (mediaID: String?, error: NSError?) -> Void in
-                    if let mediaID = mediaID {
-                        self.getStatusForDapp(dapp, completion: {
-                            (status: String?, error: NSError?) -> Void in
-                            if let status = status {
-                                self.tweetImageWithUserID(session.userID,
-                                    mediaID: mediaID,
-                                    status: status,
-                                    completion: completion
-                                )
-                            } else {
-                                completion(success: false, error: error)
-                            }
-                        })
-                    } else {
-                        completion(success: false, error: error)
-                    }
-                })
-            } else {
-                print("Failed to sign in")
-                
+            guard let session = session else {
                 completion(success: false, error: error)
+                
+                return
             }
+            
+            self.createAndUploadImage(dapp, session: session, completion: {
+                (mediaID: String?, error: NSError?) -> Void in
+                guard let mediaID = mediaID else {
+                    completion(success: false, error: error)
+                    
+                    return
+                }
+                
+                self.getStatusForDapp(dapp, completion: {
+                    (status: String?, error: NSError?) -> Void in
+                    guard let status = status else {
+                        completion(success: false, error: error)
+                        
+                        return
+                    }
+                    
+                    self.tweetImageWithUserID(session.userID,
+                        mediaID: mediaID,
+                        status: status,
+                        completion: completion
+                    )
+                })
+            })
         }
     }
     
