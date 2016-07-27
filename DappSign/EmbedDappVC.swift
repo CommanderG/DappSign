@@ -34,6 +34,10 @@ class EmbedDappVC: UIViewController {
         self.dappURLLabelContainerView.layer.cornerRadius = 8.0
         self.iframeCodeTextViewContainerView.layer.cornerRadius = 8.0
         self.doneButton.layer.cornerRadius = 8.0
+        
+        self.dappURLLabelContainerView.backgroundColor = Colors.getLightBlueColor()
+        self.iframeCodeTextViewContainerView.backgroundColor = Colors.getLightBlueColor()
+        self.doneButton.backgroundColor = Colors.getLightBlueColor()
     }
     
     override func didReceiveMemoryWarning() {

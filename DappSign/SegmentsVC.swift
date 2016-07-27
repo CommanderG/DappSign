@@ -87,9 +87,7 @@ class SegmentsVC: UIViewController {
     }
     
     private func selectButton(button: UIButton) {
-        let color = UIColor(red: 0.0, green: 118.0 / 255.0, blue: 1.0, alpha: 1.0)
-        
-        button.backgroundColor = color
+        button.backgroundColor = Colors.getLightBlueColor()
     }
     
     private func deselectButton(button: UIButton) {
