@@ -23,6 +23,7 @@ class FinalDappSubmitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
         self.shareOnFacebookButton?.layer.cornerRadius = 8.0
         self.tweetThisCardButton?.layer.cornerRadius = 8.0
         

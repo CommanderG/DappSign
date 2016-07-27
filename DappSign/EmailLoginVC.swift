@@ -26,6 +26,8 @@ class EmailLoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
+        
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {

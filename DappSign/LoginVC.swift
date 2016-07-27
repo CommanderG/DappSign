@@ -22,6 +22,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         guard
             let registerWithEmailLabel = self.logInWithEmailButton.titleLabel,
             let text = registerWithEmailLabel.text

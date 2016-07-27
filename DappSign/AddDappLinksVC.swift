@@ -48,6 +48,7 @@ class AddDappLinksVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
         self.containerView.minTranslationX = 150.0
         self.containerView.appearanceDelegate = self
     }

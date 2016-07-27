@@ -35,6 +35,7 @@ class NewDappColorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
         self.dappMessageContainer.appearanceDelegate = self
         self.dappMessageContainer.minTranslationX = 200.0
         

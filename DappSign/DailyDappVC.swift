@@ -78,6 +78,8 @@ class DailyDappVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         let buttons = [
             self.profileButton,
             self.composeButton,

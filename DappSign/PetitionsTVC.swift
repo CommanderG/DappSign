@@ -26,6 +26,8 @@ class PetitionsTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.downloadDappsSwipedByUser()
+        
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,6 +53,7 @@ class PetitionsTVC: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! DappProfileCell
         
         cell.cellDelegate = self
+        cell.backgroundColor = UIColor.clearColor()
         
         let dapp = self.dapps[indexPath.row]
         

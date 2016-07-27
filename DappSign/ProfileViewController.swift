@@ -29,6 +29,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         ViewHelper.initButtonLayer(self.changeButton)
         
         nameLabel.text = self.user?["name"] as? String ?? ""

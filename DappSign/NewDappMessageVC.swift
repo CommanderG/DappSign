@@ -17,6 +17,7 @@ class NewDappMessageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
         self.dappMessageTextView.delegate = self
         
         self.initHashtagsTextView()

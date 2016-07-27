@@ -27,6 +27,8 @@ class ZipCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         self.nextButton.hidden = true
         self.representativeContrainerView.hidden = true
         

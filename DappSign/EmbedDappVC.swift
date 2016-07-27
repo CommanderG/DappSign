@@ -26,6 +26,7 @@ class EmbedDappVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
         self.view.layer.borderColor = UIColor.whiteColor().CGColor
         self.view.layer.borderWidth = 2.0
         self.view.layer.cornerRadius = 20.0
