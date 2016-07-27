@@ -4,10 +4,8 @@
 <dict>
 	<key>AdminUsersIDs</key>
 	<array>
-		<string>X4tSHJBJ7Q</string>
-		<string>iullo2rCHd</string>
-		<string>qDCt6a1CVE</string>
-		<string>1SQHVHeSL4</string>
+		<string>6dxKP0Pg6f</string>
+		<string>craek2EMP9</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -45,7 +43,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>13</string>
+	<string>14</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

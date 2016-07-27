@@ -84,21 +84,26 @@ class ProfileViewController: UIViewController {
     }
     
     private func initAdminButton() {
-//        if let currentUser = PFUser.currentUser() {
-//            let mainBundle = NSBundle.mainBundle()
-//            let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String]
-//            
-//            if let adminUsersIDs = adminUsersIDs, user = self.user {
-//                if !adminUsersIDs.contains(currentUser.objectId) ||
-//                    user.objectId != currentUser.objectId {
-//                        self.adminButton.hidden = true
-//                }
-//            } else {
-//                self.adminButton.hidden = true
-//            }
-//        } else {
-//            self.adminButton.hidden = true
-//        }
+        guard let currentUser = PFUser.currentUser() else {
+            self.adminButton.hidden = true
+            
+            return
+        }
+        
+        let mainBundle = NSBundle.mainBundle()
+        
+        guard
+            let adminUsersIDs = mainBundle.objectForInfoDictionaryKey("AdminUsersIDs") as? [String],
+            let user = self.user
+            else {
+                self.adminButton.hidden = true
+                
+                return
+        }
+        
+        if !adminUsersIDs.contains(currentUser.objectId) || user.objectId != currentUser.objectId {
+            self.adminButton.hidden = true
+        }
     }
     
     // MARK: -
