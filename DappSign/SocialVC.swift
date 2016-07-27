@@ -16,15 +16,18 @@ enum SocialNetwork {
 class SocialVC: UIViewController {
     internal static let sharedInstance = StoryboardHelper.instantiateFacebookSharedContentVC()
     
-    @IBOutlet weak var topLC: NSLayoutConstraint!
-    @IBOutlet weak var leftLC: NSLayoutConstraint!
-    @IBOutlet weak var containerViewWidthLC: NSLayoutConstraint!
-    @IBOutlet weak var containerViewHeightLC: NSLayoutConstraint!
+    @IBOutlet weak var containerView         : UIView!
+    @IBOutlet weak var topLC                 : NSLayoutConstraint!
+    @IBOutlet weak var leftLC                : NSLayoutConstraint!
+    @IBOutlet weak var containerViewWidthLC  : NSLayoutConstraint!
+    @IBOutlet weak var containerViewHeightLC : NSLayoutConstraint!
     
     private var dappSignVC: DappSignVC? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.containerView.backgroundColor = Colors.getViewControllerBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {

@@ -20,6 +20,8 @@ class EditDappLinksVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         if let font = UIFont(name: "Exo-Regular", size: 18.0) {
             self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
         }

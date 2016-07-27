@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1496,6 +1496,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="980" height="650"/>
                     <connections>
+                        <outlet property="containerView" destination="iSl-O6-dLz" id="7Ac-Gp-Qie"/>
                         <outlet property="containerViewHeightLC" destination="ecb-iC-iYM" id="F6H-th-T0b"/>
                         <outlet property="containerViewWidthLC" destination="Bvi-us-fmp" id="gNk-Fi-4E1"/>
                         <outlet property="leftLC" destination="MFh-qE-RyE" id="JS7-08-S7h"/>
@@ -1515,11 +1516,11 @@
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u2t-LT-sDd">
-                        <rect key="frame" x="0.0" y="0.0" width="272" height="363"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="625"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
-                                <rect key="frame" x="0.0" y="0.0" width="218" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="386" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-ZX-Q3l">
                                         <rect key="frame" x="13" y="4" width="11" height="22"/>
@@ -1540,7 +1541,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-L6-7qk">
-                                        <rect key="frame" x="0.0" y="46" width="218" height="2"/>
+                                        <rect key="frame" x="0.0" y="46" width="386" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="vkQ-8N-NUz"/>
@@ -1611,29 +1612,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="98" width="232" height="187"/>
+                                <rect key="frame" x="20" y="98" width="400" height="449"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
-                                <rect key="frame" x="0.0" y="293" width="272" height="58"/>
+                                <rect key="frame" x="0.0" y="555" width="440" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: Make Demands" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="117" y="0.0" width="145" height="16"/>
+                                        <rect key="frame" x="285" y="0.0" width="145" height="16"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
-                                        <rect key="frame" x="97" y="21" width="175" height="2"/>
+                                        <rect key="frame" x="97" y="21" width="343" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="ftW-vy-W2E"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Al Gust" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-oS-kT7">
-                                        <rect key="frame" x="10" y="29" width="252" height="32"/>
+                                        <rect key="frame" x="10" y="29" width="420" height="32"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2690,11 +2691,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wil-eL-qNT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cUw-5i-dyQ">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xno-ZK-mtp">
-                                <rect key="frame" x="0.0" y="40" width="240" height="312"/>
+                                <rect key="frame" x="0.0" y="40" width="240" height="308"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addLinkCell" rowHeight="84" id="euJ-7K-3P7" customClass="AddLinkCell" customModule="DailyDapp" customModuleProvider="target">
@@ -4218,9 +4219,9 @@
         <image name="twitterIcon" width="61" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bpX-mN-qEi"/>
+        <segue reference="ywf-rR-AI0"/>
         <segue reference="ss8-uX-HsK"/>
         <segue reference="Tb5-sO-Miv"/>
-        <segue reference="Ffg-Dq-WrU"/>
+        <segue reference="sqW-Bo-68U"/>
     </inferredMetricsTieBreakers>
 </document>
