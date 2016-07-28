@@ -57,6 +57,7 @@
 		27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA7D811ABC2B4100E480AD /* DappsViewController.swift */; };
 		27BB68D01CC6781100B3E2BE /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */; };
 		27C7FD451C9C618F00821230 /* DappsWithoutArrayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */; };
+		27CCFDFB1D4A4BA10051CD42 /* IntroPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFDFA1D4A4BA10051CD42 /* IntroPVC.swift */; };
 		27D3C2A21CB7CB95009CDB2C /* EmbedDappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */; };
 		27D3C2A41CB7F61A009CDB2C /* LinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A31CB7F619009CDB2C /* LinkVC.swift */; };
 		27D3C2A61CB7FB97009CDB2C /* RepresentativeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */; };
@@ -228,6 +229,7 @@
 		27BA7D811ABC2B4100E480AD /* DappsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsViewController.swift; sourceTree = "<group>"; };
 		27BB68CF1CC6781100B3E2BE /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsWithoutArrayTVC.swift; sourceTree = "<group>"; };
+		27CCFDFA1D4A4BA10051CD42 /* IntroPVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPVC.swift; sourceTree = "<group>"; };
 		27D3C2A11CB7CB95009CDB2C /* EmbedDappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedDappVC.swift; sourceTree = "<group>"; };
 		27D3C2A31CB7F619009CDB2C /* LinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVC.swift; sourceTree = "<group>"; };
 		27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeVC.swift; sourceTree = "<group>"; };
@@ -414,6 +416,13 @@
 			name = "HTML Parser";
 			sourceTree = "<group>";
 		};
+		27CCFDFC1D4A67D70051CD42 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
 		27FD3C061C7DF4D700826EBA /* Link cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,7 +598,9 @@
 		84C3D3821AB5FECF00E0F350 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				27CCFDFC1D4A67D70051CD42 /* Intro */,
 				84FD97A01D314E2B009CDB50 /* New Dapp */,
+				27CCFDFA1D4A4BA10051CD42 /* IntroPVC.swift */,
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
 				F37246521AD3ED5300AD56E2 /* ZipCodeViewController.swift */,
@@ -1049,6 +1060,7 @@
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,
 				2719C9811C9C52E40092BC0A /* DappsWithoutArrayHelper.swift in Sources */,
+				27CCFDFB1D4A4BA10051CD42 /* IntroPVC.swift in Sources */,
 				271431891AB0C318002F9527 /* UIViewToUIImageExtension.swift in Sources */,
 				2765383D1B8F232A000C737E /* CongressionalDistrictsIDs.swift in Sources */,
 				F37246811AD3ED7600AD56E2 /* UIButton+WebCache.m in Sources */,

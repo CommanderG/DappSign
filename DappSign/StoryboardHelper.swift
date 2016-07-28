@@ -43,6 +43,30 @@ class StoryboardHelper {
         return self.viewControllerWithID("SocialVC")
     }
     
+    internal class func instantiateFirstIntroVC() -> UIViewController? {
+        return self.viewControllerWithID("firstIntroScene")
+    }
+    
+    internal class func instantiateSecondIntroVC() -> UIViewController? {
+        return self.viewControllerWithID("secondIntroScene")
+    }
+    
+    internal class func instantiateThirdIntroVC() -> UIViewController? {
+        return self.viewControllerWithID("thirdIntroScene")
+    }
+    
+    internal class func instantiateFourthIntroVC() -> UIViewController? {
+        return self.viewControllerWithID("fourthIntroScene")
+    }
+    
+    internal class func instantiateIntroPVC() -> IntroPVC? {
+        return self.viewControllerWithID("IntroPVC")
+    }
+    
+    internal class func instantiateLoginVC() -> LoginVC? {
+        return self.viewControllerWithID("LoginVC")
+    }
+    
     // MARK: - private
     
     private class func viewControllerWithID<T>(viewControllerStoryboardID: String) -> T? {

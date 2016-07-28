@@ -54,6 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.addSubview(socialVC.view)
         }
         
+        let pageControl = UIPageControl.appearance()
+        pageControl.backgroundColor = Colors.getViewControllerBackgroundColor()
+        
         return true
     }
     
