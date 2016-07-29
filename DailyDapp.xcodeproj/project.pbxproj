@@ -128,6 +128,7 @@
 		84A468AA1D343AF500BF3CDC /* DappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A468A91D343AF500BF3CDC /* DappHelper.swift */; };
 		84A5C3C31CB83A7A00D22120 /* DappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */; };
 		84AFF9531CC819E300F97FEE /* PercentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFF9521CC819E300F97FEE /* PercentsVC.swift */; };
+		84B7EDB21D4B50E6003C035F /* ThirdIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7EDB11D4B50E6003C035F /* ThirdIntroVC.swift */; };
 		84C066221CD9324B00A5D724 /* ProfileDappMappVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */; };
 		84C3D3871AB6030E00E0F350 /* DappCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3D3861AB6030E00E0F350 /* DappCardCell.swift */; };
 		84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */; };
@@ -140,6 +141,7 @@
 		84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */; };
 		84EA16371CD3FCEE002CC952 /* PetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */; };
 		84F167D61D481561004CB3CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F167D51D481561004CB3CB /* Colors.swift */; };
+		84F5D7F91D4B4A4100DBF56C /* SecondIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D7F81D4B4A4100DBF56C /* SecondIntroVC.swift */; };
 		84FD979F1D313F75009CDB50 /* NewDappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD979E1D313F75009CDB50 /* NewDappHelper.swift */; };
 		B377146A1ACD5A4200B5AE77 /* FacebookBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B37714691ACD5A4200B5AE77 /* FacebookBridge.m */; };
 		F372464D1AD3ED3C00AD56E2 /* Nextbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F372464A1AD3ED3C00AD56E2 /* Nextbutton.png */; };
@@ -307,6 +309,7 @@
 		84A468A91D343AF500BF3CDC /* DappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappHelper.swift; sourceTree = "<group>"; };
 		84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappVC.swift; sourceTree = "<group>"; };
 		84AFF9521CC819E300F97FEE /* PercentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentsVC.swift; sourceTree = "<group>"; };
+		84B7EDB11D4B50E6003C035F /* ThirdIntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdIntroVC.swift; sourceTree = "<group>"; };
 		84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDappMappVC.swift; sourceTree = "<group>"; };
 		84C3D3861AB6030E00E0F350 /* DappCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCardCell.swift; sourceTree = "<group>"; };
 		84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsVC.swift; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 		84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetitionsTVC.swift; sourceTree = "<group>"; };
 		84F167D51D481561004CB3CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		84F5D7F81D4B4A4100DBF56C /* SecondIntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondIntroVC.swift; sourceTree = "<group>"; };
 		84FD979E1D313F75009CDB50 /* NewDappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappHelper.swift; sourceTree = "<group>"; };
 		8885F0992CAD072FAAF76D4E /* libPods-DailyDapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DailyDapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B37714681ACD5A4200B5AE77 /* FacebookBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookBridge.h; sourceTree = "<group>"; };
@@ -419,6 +423,8 @@
 		27CCFDFC1D4A67D70051CD42 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				84F5D7F81D4B4A4100DBF56C /* SecondIntroVC.swift */,
+				84B7EDB11D4B50E6003C035F /* ThirdIntroVC.swift */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -1083,6 +1089,7 @@
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
+				84B7EDB21D4B50E6003C035F /* ThirdIntroVC.swift in Sources */,
 				27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */,
 				27BA7D821ABC2B4100E480AD /* DappsViewController.swift in Sources */,
 				27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				277970FC1C7F6060006F70ED /* LinkCellInfoHelper.swift in Sources */,
 				270B8C081CDA682400B8725F /* DappMappViewHelper.swift in Sources */,
 				274B33451C9C3AAB00FA1FDF /* DappArraysHelper.swift in Sources */,
+				84F5D7F91D4B4A4100DBF56C /* SecondIntroVC.swift in Sources */,
 				27AF93501B949B690017D8D2 /* PercentsView.swift in Sources */,
 				84D8487F1AC726D000D1B3F9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				27DAEFEE1BAFF4DF001DA66D /* DappLinksView.swift in Sources */,
