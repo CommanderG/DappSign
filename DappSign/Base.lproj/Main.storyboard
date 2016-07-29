@@ -1357,106 +1357,52 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steer the news." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKu-DS-ZVW">
-                                        <rect key="frame" x="722" y="241" width="208" height="137"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make Demands." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKu-DS-ZVW">
+                                        <rect key="frame" x="722" y="241" width="228" height="137"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="50"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hux-jy-d8M">
-                                        <rect key="frame" x="14" y="94" width="232" height="297"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Check-in between ">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Book"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="noon-1">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Black"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" to get ">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Book"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="the news">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Black"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" delivered as ">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Book"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="petitions">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Black"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" aimed at your rep in the ">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Book"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Congress">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Black"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=".">
-                                                <attributes>
-                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="31" name="Avenir-Book"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign this petition! DailyDapp presents you with petitions aimed at your rep in the Congress." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hux-jy-d8M">
+                                        <rect key="frame" x="14" y="120" width="236" height="246"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-Gg-jjq">
-                                        <rect key="frame" x="14" y="403" width="58" height="34"/>
+                                        <rect key="frame" x="14" y="378" width="58" height="34"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dapp_right" translatesAutoresizingMaskIntoConstraints="NO" id="jeD-9w-0ki">
-                                        <rect key="frame" x="80" y="399" width="37" height="43"/>
+                                        <rect key="frame" x="80" y="374" width="37" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="TOK-uI-1WT"/>
                                             <constraint firstAttribute="width" constant="37" id="tlC-37-lha"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tapp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-id-BRh">
-                                        <rect key="frame" x="76" y="455" width="30" height="44"/>
+                                        <rect key="frame" x="76" y="430" width="30" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="5cn-VJ-G1y"/>
                                             <constraint firstAttribute="width" constant="30" id="Vtr-6G-DBo"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-5c-8Nr">
-                                        <rect key="frame" x="14" y="460" width="54" height="34"/>
+                                        <rect key="frame" x="14" y="435" width="54" height="34"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to learn more." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-ye-bso">
-                                        <rect key="frame" x="114" y="462" width="139" height="31"/>
+                                        <rect key="frame" x="114" y="437" width="139" height="31"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to sign." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqR-yB-5sj">
-                                        <rect key="frame" x="125" y="405" width="73" height="31"/>
+                                        <rect key="frame" x="125" y="380" width="73" height="31"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1465,7 +1411,7 @@
                                 <color key="backgroundColor" red="0.16862745098039217" green="0.59607843137254901" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="jeD-9w-0ki" firstAttribute="leading" secondItem="Ybl-Gg-jjq" secondAttribute="trailing" constant="8" id="1vm-Jd-oJV"/>
-                                    <constraint firstItem="hux-jy-d8M" firstAttribute="top" secondItem="iSl-O6-dLz" secondAttribute="top" constant="94" id="8R2-5C-g5h"/>
+                                    <constraint firstItem="hux-jy-d8M" firstAttribute="top" secondItem="iSl-O6-dLz" secondAttribute="top" constant="120" id="8R2-5C-g5h"/>
                                     <constraint firstItem="jeD-9w-0ki" firstAttribute="centerY" secondItem="Ybl-Gg-jjq" secondAttribute="centerY" id="9et-gv-agp"/>
                                     <constraint firstItem="hFO-id-BRh" firstAttribute="centerY" secondItem="d0t-5c-8Nr" secondAttribute="centerY" id="BIO-eL-Djs"/>
                                     <constraint firstAttribute="width" constant="980" id="Bvi-us-fmp"/>
@@ -1475,9 +1421,9 @@
                                     <constraint firstItem="m5f-ye-bso" firstAttribute="leading" secondItem="hFO-id-BRh" secondAttribute="trailing" constant="8" id="L2q-aU-bTO"/>
                                     <constraint firstItem="QOQ-fs-IIB" firstAttribute="centerX" secondItem="iSl-O6-dLz" secondAttribute="centerX" id="OtT-of-xfP"/>
                                     <constraint firstItem="ct0-j1-3wt" firstAttribute="leading" secondItem="QOQ-fs-IIB" secondAttribute="trailing" constant="12" id="Qef-dY-0VV"/>
-                                    <constraint firstItem="QOQ-fs-IIB" firstAttribute="leading" secondItem="hux-jy-d8M" secondAttribute="trailing" constant="24" id="Slj-lR-bnZ"/>
+                                    <constraint firstItem="QOQ-fs-IIB" firstAttribute="leading" secondItem="hux-jy-d8M" secondAttribute="trailing" constant="20" id="Slj-lR-bnZ"/>
                                     <constraint firstItem="KKu-DS-ZVW" firstAttribute="leading" secondItem="QOQ-fs-IIB" secondAttribute="trailing" constant="12" id="Vv0-td-v9J"/>
-                                    <constraint firstAttribute="trailing" secondItem="KKu-DS-ZVW" secondAttribute="trailing" constant="50" id="WJA-DG-nfO"/>
+                                    <constraint firstAttribute="trailing" secondItem="KKu-DS-ZVW" secondAttribute="trailing" constant="30" id="WJA-DG-nfO"/>
                                     <constraint firstItem="hFO-id-BRh" firstAttribute="leading" secondItem="d0t-5c-8Nr" secondAttribute="trailing" constant="8" id="Wma-FG-Kt2"/>
                                     <constraint firstItem="Ybl-Gg-jjq" firstAttribute="leading" secondItem="iSl-O6-dLz" secondAttribute="leading" constant="14" id="XNQ-kG-wpc"/>
                                     <constraint firstAttribute="height" constant="650" id="ecb-iC-iYM"/>
@@ -1521,11 +1467,11 @@
                         <viewControllerLayoutGuide type="bottom" id="R3f-dJ-sne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u2t-LT-sDd">
-                        <rect key="frame" x="0.0" y="0.0" width="272" height="363"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="625"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgl-ZE-WNQ">
-                                <rect key="frame" x="0.0" y="0.0" width="218" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="386" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-ZX-Q3l">
                                         <rect key="frame" x="13" y="4" width="11" height="22"/>
@@ -1546,7 +1492,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-L6-7qk">
-                                        <rect key="frame" x="0.0" y="46" width="218" height="2"/>
+                                        <rect key="frame" x="0.0" y="46" width="386" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="vkQ-8N-NUz"/>
@@ -1617,29 +1563,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oil may be cheap but the sun shines for free. Solar farms in the heartland. It's time to harvest sun." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LKb-On-0yW">
-                                <rect key="frame" x="20" y="98" width="232" height="187"/>
+                                <rect key="frame" x="20" y="98" width="400" height="449"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-F7-8CM">
-                                <rect key="frame" x="0.0" y="293" width="272" height="58"/>
+                                <rect key="frame" x="0.0" y="555" width="440" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DailyDapp: Make Demands" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ9-5t-sAC">
-                                        <rect key="frame" x="117" y="0.0" width="145" height="16"/>
+                                        <rect key="frame" x="285" y="0.0" width="145" height="16"/>
                                         <fontDescription key="fontDescription" name="Exo-Black" family="Exo" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-qs-JX7">
-                                        <rect key="frame" x="97" y="21" width="175" height="2"/>
+                                        <rect key="frame" x="97" y="21" width="343" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="ftW-vy-W2E"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Al Gust" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ipg-oS-kT7">
-                                        <rect key="frame" x="10" y="29" width="252" height="32"/>
+                                        <rect key="frame" x="10" y="29" width="420" height="32"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -4830,8 +4776,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iW7-1y-626"/>
-        <segue reference="bpX-mN-qEi"/>
         <segue reference="Tb5-sO-Miv"/>
         <segue reference="bkt-29-1zK"/>
+        <segue reference="ywf-rR-AI0"/>
     </inferredMetricsTieBreakers>
 </document>
