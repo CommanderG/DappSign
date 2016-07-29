@@ -18,7 +18,7 @@ class SecondIntroVC: UIViewController {
     }
     
     // MARK: - Navigation
- 
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let segueIdentifier = segue.identifier else {
             return

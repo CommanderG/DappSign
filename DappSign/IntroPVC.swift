@@ -43,7 +43,6 @@ class IntroPVC: UIPageViewController {
         }
         
         self.dataSource = self
-        self.delegate = self
         
         if let firstIntroVC = self.introViewControllers.first {
             self.setViewControllers(
@@ -109,16 +108,5 @@ extension IntroPVC: UIPageViewControllerDataSource {
         }
         
         return 0
-    }
-}
-
-extension IntroPVC: UIPageViewControllerDelegate {
-    internal func pageViewController(
-        pageViewController: UIPageViewController,
-        didFinishAnimating finished: Bool,
-        previousViewControllers: [UIViewController],
-        transitionCompleted completed: Bool
-    ) {
-        print(previousViewControllers)
     }
 }

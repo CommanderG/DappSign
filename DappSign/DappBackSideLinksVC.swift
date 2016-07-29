@@ -51,6 +51,12 @@ class DappBackSideLinksVC: UIViewController {
         })
     }
     
+    internal func showLinks(links: [Link]) {
+        self.view.backgroundColor = UIColor.orangeColor()
+        
+        self.dappLinksVC?.initWithMode(.Read, andLinks: links)
+    }
+    
     internal func setBackgroundColor(backgroundColor: UIColor) {
         self.view.backgroundColor = backgroundColor
         self.dappLinksVC?.view.backgroundColor = backgroundColor
