@@ -4,6 +4,7 @@
 <dict>
 	<key>AdminUsersIDs</key>
 	<array>
+		<string>m0YnuibmV7</string>
 		<string>6dxKP0Pg6f</string>
 		<string>craek2EMP9</string>
 	</array>
@@ -43,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>14</string>
+	<string>plist</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
