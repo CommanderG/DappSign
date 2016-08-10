@@ -200,12 +200,7 @@ class DailyDappVC: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0,
-            target:   self,
-            selector: #selector(DailyDappVC.updateDappScore),
-            userInfo: nil,
-            repeats:  true
-        )
+        self.startDappScoreUpdateTimer()
         
         self.hideLabel(self.signedLabel, labelBottomLC: self.signedLabelBottomConstraint)
         self.hideLabel(self.oneMinuteLeftLabel, labelBottomLC: self.oneMinuteLeftLabelBottomLC)
@@ -226,7 +221,7 @@ class DailyDappVC: UIViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        self.timer?.invalidate()
+        self.stoptDappScoreUpdateTimer()
     }
     
     // MARK: - @IBActions
@@ -322,6 +317,22 @@ class DailyDappVC: UIViewController {
         self.disableShareButons()
     }
     
+    // MARK: - dapp score update timer
+    
+    private func startDappScoreUpdateTimer() {
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(
+            1.0,
+            target: self,
+            selector: #selector(DailyDappVC.updateDappScore),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    private func stoptDappScoreUpdateTimer() {
+        self.timer?.invalidate()
+    }
+    
     // MARK: -
     
     private func sendRequestsForDapp(dapp: PFObject, dapped: Bool) {
@@ -339,6 +350,20 @@ class DailyDappVC: UIViewController {
             
             if !dapped {
                 return
+            }
+            
+            self.stoptDappScoreUpdateTimer()
+            
+            if let dappScore = self.dappScore {
+                self.dappScore = dappScore + 1
+            } else {
+                self.dappScore = 1
+            }
+            
+            self.updateDappScoreLabel()
+            
+            delay(1.0) {
+                self.startDappScoreUpdateTimer()
             }
             
             Requests.addDappToDappsDappedArray(dapp, user: currentUser, completion: {
@@ -477,32 +502,36 @@ class DailyDappVC: UIViewController {
                 self.dappScore = newDappScore
             }
             
-            var dappScoreStr = ""
-            
-            if let user = user, dappScore = user["dappScore"] as? Int {
-                dappScoreStr = "\(dappScore)"
-            } else {
-                dappScoreStr = "-"
-            }
-            
-            let dappScoreLabelText = dappScoreStr + " Dapp"
-            let attributedString = NSMutableAttributedString(string: dappScoreLabelText)
-            let fontAvenirBook = UIFont(name: "Avenir-Book", size: 18.0)
-            let fontExoBlack = UIFont(name: "Exo-Black", size: 19.0)
-            
-            if let fontAvenirBook = fontAvenirBook, fontExoBlack = fontExoBlack {
-                attributedString.addAttribute(NSFontAttributeName,
-                    value: fontAvenirBook,
-                    range: NSMakeRange(0, dappScoreStr.characters.count)
-                )
-                attributedString.addAttribute(NSFontAttributeName,
-                    value: fontExoBlack,
-                    range: NSMakeRange(dappScoreStr.characters.count, " Dapp".characters.count)
-                )
-            }
-            
-            self.dappScoreLabel.attributedText = attributedString
+            self.updateDappScoreLabel()
         }
+    }
+    
+    private func updateDappScoreLabel() {
+        var dappScoreStr = ""
+        
+        if let dappScore = self.dappScore {
+            dappScoreStr = "\(dappScore)"
+        } else {
+            dappScoreStr = "-"
+        }
+        
+        let dappScoreLabelText = dappScoreStr + " Dapp"
+        let attributedString = NSMutableAttributedString(string: dappScoreLabelText)
+        let fontAvenirBook = UIFont(name: "Avenir-Book", size: 18.0)
+        let fontExoBlack = UIFont(name: "Exo-Black", size: 19.0)
+        
+        if let fontAvenirBook = fontAvenirBook, fontExoBlack = fontExoBlack {
+            attributedString.addAttribute(NSFontAttributeName,
+                                          value: fontAvenirBook,
+                                          range: NSMakeRange(0, dappScoreStr.characters.count)
+            )
+            attributedString.addAttribute(NSFontAttributeName,
+                                          value: fontExoBlack,
+                                          range: NSMakeRange(dappScoreStr.characters.count, " Dapp".characters.count)
+            )
+        }
+        
+        self.dappScoreLabel.attributedText = attributedString
     }
     
     // MARK: -
