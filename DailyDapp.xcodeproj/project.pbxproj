@@ -65,7 +65,6 @@
 		27DAEFF01BAFF4EE001DA66D /* DappLinksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */; };
 		27DAEFF51BAFF83B001DA66D /* DappLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */; };
 		27DAEFF61BAFF83B001DA66D /* DappLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */; };
-		27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */; };
 		27FD3C051C7DED6000826EBA /* DappLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C041C7DED6000826EBA /* DappLinksVC.swift */; };
 		27FD3C081C7DF4FE00826EBA /* AddLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */; };
 		27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */; };
@@ -239,7 +238,6 @@
 		27DAEFEF1BAFF4EE001DA66D /* DappLinksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinksView.xib; sourceTree = "<group>"; };
 		27DAEFF31BAFF83B001DA66D /* DappLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinkCell.swift; sourceTree = "<group>"; };
 		27DAEFF41BAFF83B001DA66D /* DappLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappLinkCell.xib; sourceTree = "<group>"; };
-		27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyDappStartTimeVC.swift; sourceTree = "<group>"; };
 		27FD3C041C7DED6000826EBA /* DappLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappLinksVC.swift; sourceTree = "<group>"; };
 		27FD3C071C7DF4FE00826EBA /* AddLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLinkCell.swift; sourceTree = "<group>"; };
 		27FD3C091C7DF50F00826EBA /* EnterLinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterLinkCell.swift; sourceTree = "<group>"; };
@@ -626,7 +624,6 @@
 				27D3C2A51CB7FB97009CDB2C /* RepresentativeVC.swift */,
 				84A5C3C21CB83A7A00D22120 /* DappMappVC.swift */,
 				848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */,
-				27EE610E1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift */,
 				27B4E5291CC52369008E3560 /* DappSignVC.swift */,
 				84AFF9521CC819E300F97FEE /* PercentsVC.swift */,
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
@@ -1076,7 +1073,6 @@
 				27B4E52A1CC52369008E3560 /* DappSignVC.swift in Sources */,
 				84A468AA1D343AF500BF3CDC /* DappHelper.swift in Sources */,
 				84D848821AC726D000D1B3F9 /* SWTableViewCell.m in Sources */,
-				27EE610F1CBF9B13009CBF0B /* DailyDappStartTimeVC.swift in Sources */,
 				F37246861AD3ED7600AD56E2 /* UIImageView+WebCache.m in Sources */,
 				27769C181BB179DB00FD34AA /* AddDappLinksVC.swift in Sources */,
 				274BB0CC1B99DD5900D6DC44 /* XIBView.swift in Sources */,

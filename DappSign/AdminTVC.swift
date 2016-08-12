@@ -28,11 +28,6 @@ class AdminTVC: UITableViewController {
         case ShowScoreboardDapps   = "showScoreboardDapps"
     }
     
-    enum Section: Int {
-        case Dapps = 0
-        case DailyDappTime = 1
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,30 +75,8 @@ class AdminTVC: UITableViewController {
     ) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        if (indexPath.section == Section.Dapps.rawValue) {
-            if let dappArray = self.rowDappArray[indexPath.row] {
-                self.showDappCountInCell(cell, dappArray: dappArray)
-            }
-        } else {
-            if let dailyDappStartTime = LocalStorage.dailyDappStartTime() {
-                let (hour, minute) = dailyDappStartTime
-                
-                let dateFormatter = NSDateFormatter()
-                
-                dateFormatter.dateFormat = "HH:mm"
-                
-                if let date = dateFormatter.dateFromString("\(hour):\(minute)") {
-                    dateFormatter.dateFormat = "hh:mm a"
-                    
-                    let dateString = dateFormatter.stringFromDate(date)
-                    
-                    cell.textLabel?.text = "\(dateString) (\(hour):\(minute))"
-                } else {
-                    cell.textLabel?.text = "\(hour):\(minute)"
-                }
-            } else {
-                cell.textLabel?.text = "12:00"
-            }
+        if let dappArray = self.rowDappArray[indexPath.row] {
+            self.showDappCountInCell(cell, dappArray: dappArray)
         }
         
         return cell

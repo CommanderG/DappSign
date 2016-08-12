@@ -1017,21 +1017,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="DailyDapp time" id="8rY-PT-kxV">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kcj-8a-MNc">
-                                        <rect key="frame" x="0.0" y="220" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kcj-8a-MNc" id="AE7-Si-wTW">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="VAw-yF-NTF" kind="push" id="dHm-iK-6ms"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="AnE-wK-30e" id="2o9-cw-6m1"/>
@@ -1081,7 +1066,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKR-Dp-yaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2927" y="-1193"/>
+            <point key="canvasLocation" x="2899" y="-1161"/>
         </scene>
         <!--Dapps Table View Controller-->
         <scene sceneID="Hlb-zG-ZSx">
@@ -2944,48 +2929,6 @@
             </objects>
             <point key="canvasLocation" x="3005" y="903"/>
         </scene>
-        <!--DailyDapp Start Time-->
-        <scene sceneID="saj-wb-Kq1">
-            <objects>
-                <viewController id="VAw-yF-NTF" customClass="DailyDappStartTimeVC" customModule="DailyDapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Und-et-bqn"/>
-                        <viewControllerLayoutGuide type="bottom" id="mjm-ym-ydX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ccn-qB-I5C">
-                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="QYB-8n-JKh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
-                                <date key="date" timeIntervalSinceReferenceDate="482319040.019786">
-                                    <!--2016-04-14 09:30:40 +0000-->
-                                </date>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="QYB-8n-JKh" firstAttribute="leading" secondItem="Ccn-qB-I5C" secondAttribute="leading" id="13M-bn-23S"/>
-                            <constraint firstItem="mjm-ym-ydX" firstAttribute="top" secondItem="QYB-8n-JKh" secondAttribute="bottom" id="C4K-FC-xAL"/>
-                            <constraint firstAttribute="trailing" secondItem="QYB-8n-JKh" secondAttribute="trailing" id="ItT-lZ-upR"/>
-                            <constraint firstItem="QYB-8n-JKh" firstAttribute="top" secondItem="Und-et-bqn" secondAttribute="bottom" id="uKi-bw-d7X"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="DailyDapp Start Time" id="FtM-6V-Teq">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="v6W-i5-ouf">
-                            <connections>
-                                <action selector="save:" destination="VAw-yF-NTF" id="KtG-nf-SZN"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="datePicker" destination="QYB-8n-JKh" id="qbi-ZL-zei"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ual-FL-apy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2472" y="-1193"/>
-        </scene>
         <!--PetitionsTVC-->
         <scene sceneID="xak-e3-Gsb">
             <objects>
@@ -4776,8 +4719,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iW7-1y-626"/>
-        <segue reference="Tb5-sO-Miv"/>
         <segue reference="bkt-29-1zK"/>
+        <segue reference="D2a-aL-0oF"/>
         <segue reference="ywf-rR-AI0"/>
     </inferredMetricsTieBreakers>
 </document>
