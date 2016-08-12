@@ -117,7 +117,7 @@ class DappsTableViewController: UITableViewController {
     // MARK: - Navigation bar
     
     private func showEditButton() {
-        let selector = Selector("enablePositionsEditing_:")
+        let selector = #selector(DappsTableViewController.enablePositionsEditing(_:))
         let editBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonSystemItem.Edit,
             target: self,
