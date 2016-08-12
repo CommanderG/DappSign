@@ -168,23 +168,24 @@ class DailyDappVC: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let userIsNew = LocalStorage.userIsNew()
-        
-        if userIsNew {
-            self.appState = .DownloadingDapps
-            
-            self.downloadDapps(.Introductory, completion: {
-                (dapps: [PFObject]) -> Void in
-                if dapps.count > 0 {
-                    self.appState = .IntroductoryDapps(dapps: dapps, index: 0)
-                    
-                    self.initDappView()
-                    self.initHashtagsLabel()
-                } else {
-                    self.appState = .None
-                }
-            })
-        } else {
+        // uncomment this when petition's position is fixed
+//        let userIsNew = LocalStorage.userIsNew()
+//        
+//        if userIsNew {
+//            self.appState = .DownloadingDapps
+//            
+//            self.downloadDapps(.Introductory, completion: {
+//                (dapps: [PFObject]) -> Void in
+//                if dapps.count > 0 {
+//                    self.appState = .IntroductoryDapps(dapps: dapps, index: 0)
+//                    
+//                    self.initDappView()
+//                    self.initHashtagsLabel()
+//                } else {
+//                    self.appState = .None
+//                }
+//            })
+//        } else {
             self.downloadDapps(.Daily, completion: {
                 (dapps: [PFObject]) -> Void in
                 self.appState = .DailyDapp(dapps: dapps, index: 0)
@@ -192,7 +193,7 @@ class DailyDappVC: UIViewController {
                 self.initDappView()
                 self.initHashtagsLabel()
             })
-        }
+//        }
         
         for view in self.animateableViews {
             view.alpha = 0.0
