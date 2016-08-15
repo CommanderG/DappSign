@@ -47,9 +47,9 @@ class EmbedDappVC: UIViewController {
     // MARK: -
     
     internal func showURLAndIFrameCodeForDappWithID(dappID: String) {
-        self.dappURLLabel.text = "http://www.dappsign.com/\(dappID)"
+        self.dappURLLabel.text = "http://dappsign.com/?petition_id=\(dappID)"
         self.iframeCodeTextView.text = "<iframe width=\"260\" height=\"420\" " +
-                                       "src=\"http://www.dappsign.com/embed/\(dappID)\" " +
+                                       "src=\"http://www.dappsign.com/embed/?petition_id=\(dappID)\" " +
                                        "frameborder=\"0\"></iframe>"
     }
     

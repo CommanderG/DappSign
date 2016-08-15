@@ -127,7 +127,7 @@ class FacebookHelper {
         var message = "A petition to your rep in the House:\n\n\(updatedHashtagsString)"
         
         if let dappSignID = dapp.objectId {
-            message += "\n\nwww.dappsign.com/\(dappSignID)"
+            message += "\n\nhttp://dappsign.com/?petition_id=\(dappSignID)"
         }
         
         if linkURLStrs.count > 0 {

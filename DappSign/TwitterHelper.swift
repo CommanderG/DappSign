@@ -86,7 +86,7 @@ class TwitterHelper {
                 var status = updatedHashtagsString
                 
                 if let dappSignID = dapp.objectId {
-                    status += " www.dappsign.com/\(dappSignID)"
+                    status += " http://dappsign.com/?petition_id=\(dappSignID)"
                 }
                 
                 completion(status: status, error: nil)
