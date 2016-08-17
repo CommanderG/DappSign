@@ -183,11 +183,15 @@ extension PetitionsTVC: DappProfileCellDelegate {
     }
     
     func postToFacebookPetitionInCell(cell: DappProfileCell) {
-        if let dapp = self.dappInCell(cell) {
-            FacebookHelper.shareDapp(dapp, completion: {
-                (message: String) -> Void in
+        guard let dapp = self.dappInCell(cell) else {
+            return
+        }
+        
+        FacebookHelper.shareDapp(dapp, viewController: self) {
+            (message: String?) in
+            if let message = message {
                 self.showAlertViewWithOKButtonAndMessage(message)
-            })
+            }
         }
     }
     

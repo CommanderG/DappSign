@@ -183,11 +183,15 @@ class DappsViewController: UIViewController {
     }
     
     @IBAction func postCurrentDappCardToFacebook(sender: AnyObject) {
-        if let dapp = self.dappsInfo?.dapps.first {
-            FacebookHelper.shareDapp(dapp, completion: {
-                (message: String) -> Void in
+        guard let dapp = self.dappsInfo?.dapps.first else {
+            return
+        }
+        
+        FacebookHelper.shareDapp(dapp, viewController: self) {
+            (message: String?) in
+            if let message = message {
                 self.showAlertViewWithOKButtonAndMessage(message)
-            })
+            }
         }
     }
     

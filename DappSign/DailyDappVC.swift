@@ -267,10 +267,16 @@ class DailyDappVC: UIViewController {
             return
         }
         
-        FacebookHelper.shareDapp(dapp, completion: {
-            (message: String) -> Void in
-            self.showAlertViewWithOKButtonAndMessage(message)
-        })
+        ViewHelper.disableButtons([ self.shareOnFacebookButton ])
+        
+        FacebookHelper.shareDapp(dapp, viewController: self) {
+            (message: String?) in
+            ViewHelper.enableButtons([ self.shareOnFacebookButton ])
+            
+            if let message = message {
+                self.showAlertViewWithOKButtonAndMessage(message)
+            }
+        }
     }
     
     @IBAction func tweetCurrentDappCard(sender: AnyObject) {
