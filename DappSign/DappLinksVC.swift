@@ -56,10 +56,15 @@ class DappLinksVC: UIViewController {
                 }
             }
             
-            for row in self.linkCellsInfo.count - 1 ... 3 {
-                let linkCellInfo = LinkCellInfo(row: row, link: nil, type: .AddLink)
-                
-                self.linkCellsInfo.append(linkCellInfo)
+            let startRow = self.linkCellsInfo.count - 1
+            let endRow = 3
+            
+            if startRow < endRow {
+                for row in startRow ... endRow {
+                    let linkCellInfo = LinkCellInfo(row: row, link: nil, type: .AddLink)
+                    
+                    self.linkCellsInfo.append(linkCellInfo)
+                }
             }
         case .Read:
             for linkIndex in 0 ..< links.count {
@@ -211,36 +216,42 @@ extension DappLinksVC: AddLinkCellDelegate {
 
 extension DappLinksVC: EnterLinkCellDelegate {
     func addLinkWithAddress(address: String, cell: EnterLinkCell) {
-        if let
-            indexPath = self.linksTableView.indexPathForCell(cell),
-            existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
+        guard
+            let indexPath = self.linksTableView.indexPathForCell(cell),
+            let existingLinkCellInfo = LinkCellInfoHelper.linkCellInfoWithRow(indexPath.row,
                 linkCellsInfo: self.linkCellsInfo
-            ) {
-                DappLinkHelper.linkWithAddress(address, completion: {
-                    (link: Link?, errorMessage: String?) -> Void in
-                    cell.linkAddressTextField.text = ""
-                    
-                    if let link = link {
-                        self.addLink(link, existingLinkCellInfo: existingLinkCellInfo)
-                    } else {
-                        if let errorMessage = errorMessage {
-                            self.showAlertViewWithOKButtonAndMessage(errorMessage)
-                        }
-                        
-                        let newLinkCellInfo = LinkCellInfo(
-                            row:  existingLinkCellInfo.row,
-                            link: nil,
-                            type: .AddLink
-                        )
-                        
-                        self.linkCellsInfo = LinkCellInfoHelper.replaceLinkCellInfoWithRow(
-                            existingLinkCellInfo.row,
-                            withLinkCellInfo: newLinkCellInfo,
-                            linkCellsInfo: self.linkCellsInfo
-                        )
-                    }
-                })
-        }
+            )
+            else { return }
+        
+        cell.alpha = 0.5
+        cell.userInteractionEnabled = false
+        
+        DappLinkHelper.linkWithAddress(address, completion: {
+            (link: Link?, errorMessage: String?) -> Void in
+            cell.alpha = 1.0
+            cell.userInteractionEnabled = true
+            cell.linkAddressTextField.text = ""
+            
+            if let link = link {
+                self.addLink(link, existingLinkCellInfo: existingLinkCellInfo)
+            } else {
+                if let errorMessage = errorMessage {
+                    self.showAlertViewWithOKButtonAndMessage(errorMessage)
+                }
+                
+                let newLinkCellInfo = LinkCellInfo(
+                    row:  existingLinkCellInfo.row,
+                    link: nil,
+                    type: .AddLink
+                )
+                
+                self.linkCellsInfo = LinkCellInfoHelper.replaceLinkCellInfoWithRow(
+                    existingLinkCellInfo.row,
+                    withLinkCellInfo: newLinkCellInfo,
+                    linkCellsInfo: self.linkCellsInfo
+                )
+            }
+        })
     }
     
     // MARK: - private
