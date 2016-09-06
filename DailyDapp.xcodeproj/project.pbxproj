@@ -112,6 +112,7 @@
 		4CD9C9E01AA21A5100046CA2 /* Walkway_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD9C9D71AA21A5100046CA2 /* Walkway_SemiBold.ttf */; };
 		4CD9C9E61AA4FA1900046CA2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */; };
 		840312C51D2EE94F0032BFA6 /* NewDappParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840312C41D2EE94F0032BFA6 /* NewDappParams.swift */; };
+		840D0C431D7F674F00C1F6B2 /* TermsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */; };
 		841993461D29758900D951AB /* NewDappColorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993451D29758900D951AB /* NewDappColorVC.swift */; };
 		841993481D2975A500D951AB /* NewDappMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993471D2975A500D951AB /* NewDappMessageVC.swift */; };
 		8419934A1D2975F800D951AB /* NewDappFontVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841993491D2975F800D951AB /* NewDappFontVC.swift */; };
@@ -292,6 +293,7 @@
 		675070C473162647AB60B5DC /* Pods-DappSign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DappSign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DappSign/Pods-DappSign.debug.xcconfig"; sourceTree = "<group>"; };
 		6A499C0095D78A98A4C86874 /* libPods-DappSignTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DappSignTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840312C41D2EE94F0032BFA6 /* NewDappParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappParams.swift; sourceTree = "<group>"; };
+		840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsHelper.swift; sourceTree = "<group>"; };
 		841993451D29758900D951AB /* NewDappColorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappColorVC.swift; sourceTree = "<group>"; };
 		841993471D2975A500D951AB /* NewDappMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappMessageVC.swift; sourceTree = "<group>"; };
 		841993491D2975F800D951AB /* NewDappFontVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDappFontVC.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				84FD979E1D313F75009CDB50 /* NewDappHelper.swift */,
 				84A468A91D343AF500BF3CDC /* DappHelper.swift */,
 				84F167D51D481561004CB3CB /* Colors.swift */,
+				840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1128,6 +1131,7 @@
 				84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */,
 				274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */,
 				848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */,
+				840D0C431D7F674F00C1F6B2 /* TermsHelper.swift in Sources */,
 				8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */,
 				279A31221AB30EA700850508 /* AdminTVC.swift in Sources */,
 				27B818BA1CEE2DEF0092E63B /* EmailLoginVC.swift in Sources */,

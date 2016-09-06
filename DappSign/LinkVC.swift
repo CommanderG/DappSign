@@ -12,6 +12,8 @@ class LinkVC: UIViewController {
     @IBOutlet private var closeButton: UIButton!
     @IBOutlet private var webView: UIWebView!
     
+    internal var didClose: (Void -> Void)? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +34,7 @@ class LinkVC: UIViewController {
             self.willMoveToParentViewController(nil)
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
+            self.didClose?()
         }
     }
     

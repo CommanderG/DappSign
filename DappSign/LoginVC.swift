@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     private let segueShowEmailLogin = "showEmailLogin"
     
     private var shouldShowDailyDapp = false
+    private var user: PFUser? = nil
     
     @IBOutlet weak var logInWithFacebookButton : UIButton!
     @IBOutlet weak var logInWithEmailButton    : UIButton!
@@ -62,21 +63,17 @@ class LoginVC: UIViewController {
         ViewHelper.disableButtons([ self.logInWithFacebookButton ])
         PFFacebookUtils.logInWithPermissions(permissions, block: {
             (user: PFUser?, error: NSError?) -> Void in
+            self.user = user
+            
             ViewHelper.enableButtons([ self.logInWithFacebookButton ])
             
             if let user = user {
                 LocalStorage.saveUserIsNew(user.isNew)
                 
-                if user.isNew {
-                    print("User signed up and logged in through Facebook!")
-                    
-                    UserHelper.initCurrentUserWithTheirFacebookProfileInformation {
-                        self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
-                    }
+                if !TermsHelper.userAgreedToTerms(user) {
+                    TermsHelper.showAlertViewWithDelegate(self)
                 } else {
-                    print("User logged in through Facebook!")
-                    
-                    self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
+                    self.proceedToNextScene()
                 }
             } else if let error = error {
                 print("Failed to log in on Facebook. Error: \(error)")
@@ -84,6 +81,26 @@ class LoginVC: UIViewController {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
         })
+    }
+    
+    // MARK: - 
+    
+    private func proceedToNextScene() {
+        guard let user = self.user else {
+            return
+        }
+        
+        if user.isNew {
+            print("User signed up and logged in through Facebook!")
+            
+            UserHelper.initCurrentUserWithTheirFacebookProfileInformation {
+                self.performSegueWithIdentifier(self.segueShowZipCode, sender: self)
+            }
+        } else {
+            print("User logged in through Facebook!")
+            
+            self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
+        }
     }
     
     // MARK: - Navigation
@@ -122,5 +139,24 @@ extension LoginVC: EmailLoginDelegate {
     
     func didSignIn() {
         self.performSegueWithIdentifier(self.segueShowDailyDapp, sender: self)
+    }
+}
+
+extension LoginVC: UIAlertViewDelegate {
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        guard let user = self.user else {
+            return
+        }
+        
+        TermsHelper.handleAlertView(
+            alertView,
+            clickedButtonAtIndex: buttonIndex,
+            viewController: self,
+            user: user) {
+                (agreed: Bool) in
+                if agreed {
+                    self.proceedToNextScene()
+                }
+        }
     }
 }

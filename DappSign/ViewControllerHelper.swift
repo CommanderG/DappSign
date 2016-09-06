@@ -11,18 +11,22 @@ import UIKit
 class ViewControllerHelper {
     internal class func openLinkWithURL(linkURL: NSURL,
         inViewController viewController: UIViewController
-    ) {
-        if let linkVC = StoryboardHelper.instantiateLinkVC() {
-            viewController.addChildViewController(linkVC)
-            
-            linkVC.view.frame = viewController.view.bounds
-            
-            viewController.view.addSubview(linkVC.view)
-            
-            linkVC.didMoveToParentViewController(viewController)
-            linkVC.openURL(linkURL)
-            
-            AnimationHelper.showView(linkVC.view)
+    ) -> LinkVC? {
+        guard let linkVC = StoryboardHelper.instantiateLinkVC() else {
+            return nil
         }
+        
+        viewController.addChildViewController(linkVC)
+        
+        linkVC.view.frame = viewController.view.bounds
+        
+        viewController.view.addSubview(linkVC.view)
+        
+        linkVC.didMoveToParentViewController(viewController)
+        linkVC.openURL(linkURL)
+        
+        AnimationHelper.showView(linkVC.view)
+        
+        return linkVC
     }
 }
