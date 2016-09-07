@@ -23,6 +23,8 @@ class EmailLoginVC: UIViewController {
     
     internal var delegate: EmailLoginDelegate? = nil
     
+    private var user: PFUser? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
@@ -87,9 +89,7 @@ class EmailLoginVC: UIViewController {
         user.signUpInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if success {
-                self.dismissViewControllerAnimated(true, completion: {
-                    self.delegate?.didRegister()
-                })
+                self.dismissOrShowTermsForUser(user)
             } else if let error = error, errorString = error.userInfo["error"] as? String {
                 if error.domain == "Parse" && error.code == 202 {
                     let emailErrorString =
@@ -135,10 +135,8 @@ class EmailLoginVC: UIViewController {
         PFUser.logOut()
         PFUser.logInWithUsernameInBackground(email_, password: password_, block: {
             (user: PFUser?, error: NSError?) -> Void in
-            if let _ = user {
-                self.dismissViewControllerAnimated(true, completion: {
-                    self.delegate?.didSignIn()
-                })
+            if let user = user {
+                self.dismissOrShowTermsForUser(user)
             } else if let errorString = error?.userInfo["error"] as? String {
                 self.showAlertViewWithOKButtonAndMessage(errorString)
             } else {
@@ -149,6 +147,36 @@ class EmailLoginVC: UIViewController {
     
     @IBAction func cancel() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - 
+    
+    private func dismissOrShowTermsForUser(user: PFUser) {
+        self.user = user
+        
+        if user.isNew {
+            TermsHelper.showAlertViewWithDelegate(self)
+        } else {
+            if TermsHelper.userAgreedToTerms(user) {
+                self.dismiss()
+            } else {
+                TermsHelper.showAlertViewWithDelegate(self)
+            }
+        }
+    }
+    
+    private func dismiss() {
+        guard let user = self.user else {
+            return
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: {
+            if user.isNew {
+                self.delegate?.didRegister()
+            } else {
+                self.delegate?.didSignIn()
+            }
+        })
     }
     
     // MARK: - UI
@@ -196,5 +224,29 @@ extension EmailLoginVC: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension EmailLoginVC: UIAlertViewDelegate {
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        guard let user = self.user else {
+            return
+        }
+        
+        TermsHelper.handleAlertView(
+            alertView,
+            clickedButtonAtIndex: buttonIndex,
+            viewController: self,
+            user: user
+        ) {
+            (agreed: Bool) in
+            if agreed {
+                self.dismiss()
+            } else if user.isNew {
+                self.segmentedControl.selectedSegmentIndex = 1
+                
+                self.handleSegmentedControlValueChange()
+            }
+        }
     }
 }
