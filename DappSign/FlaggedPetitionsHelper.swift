@@ -12,16 +12,31 @@ class FlaggedPetitionsHelper: NSObject {
     private static let flaggedPetitionClassName = "FlaggedPetition"
     
     internal class func flagPetition(petition: PFObject, completion: (success: Bool) -> Void) {
-        let flaggedPetition = PFObject(className: flaggedPetitionClassName)
-        
-        flaggedPetition["petition"] = petition
-        
-        flaggedPetition.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) in
-            completion(success: success)
+        self.flaggedPetitions {
+            (petitions: [PFObject]?) in
+            guard let flaggedPetitions = petitions else {
+                return
+            }
             
-            if let error = error {
-                print("Failed to flag petition. Error: \(error)")
+            for flaggedPetition in flaggedPetitions {
+                if flaggedPetition.objectId == petition.objectId {
+                    completion(success: true)
+                    
+                    return
+                }
+            }
+            
+            let flaggedPetition = PFObject(className: flaggedPetitionClassName)
+            
+            flaggedPetition["petition"] = petition
+            
+            flaggedPetition.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) in
+                completion(success: success)
+                
+                if let error = error {
+                    print("Failed to flag petition. Error: \(error)")
+                }
             }
         }
     }
