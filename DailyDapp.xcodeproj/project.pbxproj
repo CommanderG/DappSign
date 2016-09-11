@@ -123,6 +123,7 @@
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
 		8485DB5C1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */; };
 		8485DB5E1D85804E00731FE4 /* FlaggedPetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */; };
+		8485DB601D85B9D000731FE4 /* BlockedUsersHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */; };
 		8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485EC2F1CF4E70100E5A889 /* SocialVC.swift */; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
@@ -306,6 +307,7 @@
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
 		8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedPetitionsHelper.swift; sourceTree = "<group>"; };
 		8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedPetitionsTVC.swift; sourceTree = "<group>"; };
+		8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersHelper.swift; sourceTree = "<group>"; };
 		8485EC2F1CF4E70100E5A889 /* SocialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVC.swift; sourceTree = "<group>"; };
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
 		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 				84F167D51D481561004CB3CB /* Colors.swift */,
 				840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */,
 				8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */,
+				8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1093,6 +1096,7 @@
 				4CD9C9CC1AA1EC1A00046CA2 /* Misc.swift in Sources */,
 				271431961AB0D27D002F9527 /* TwitterHelper.swift in Sources */,
 				84D848841AC726D000D1B3F9 /* SWUtilityButtonView.m in Sources */,
+				8485DB601D85B9D000731FE4 /* BlockedUsersHelper.swift in Sources */,
 				277D910E1BA71BD900941C7B /* SwipeableView.swift in Sources */,
 				84B7EDB21D4B50E6003C035F /* ThirdIntroVC.swift in Sources */,
 				27FD3C0A1C7DF50F00826EBA /* EnterLinkCell.swift in Sources */,

@@ -61,6 +61,47 @@ class DappSignVC: UIViewController {
         }
     }
     
+    @IBAction func blockUser(sender: AnyObject?) {
+        guard let dapp = self.dapp, userId = dapp["userid"] as? String else {
+            return
+        }
+        
+        if let currentUser = PFUser.currentUser() {
+            if currentUser.objectId == userId {
+                let alertView = UIAlertView(
+                    title: nil,
+                    message: "You can't block yourself",
+                    delegate: nil,
+                    cancelButtonTitle: "OK"
+                )
+                
+                alertView.show()
+                
+                return
+            }
+        }
+        
+        BlockedUsersHelper.addUserWithId(userId) {
+            (success: Bool) in
+            var message = ""
+            
+            if success {
+                message = "Successfully blocked user."
+            } else {
+                message = "Failed to block user. Please try again later."
+            }
+            
+            let alertView = UIAlertView(
+                title: nil,
+                message: message,
+                delegate: nil,
+                cancelButtonTitle: "OK"
+            )
+            
+            alertView.show()
+        }
+    }
+    
     // MARK: - internal
     
     internal func showDappObject(dapp: PFObject?, lineSpacing: DappSignLineSpacing = .Default) {
