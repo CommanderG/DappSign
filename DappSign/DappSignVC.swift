@@ -21,6 +21,8 @@ class DappSignVC: UIViewController {
     
     internal static let embedSegueID: String = "embedDappSignVC"
     
+    private var dapp: PFObject? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DappSignViewsHelper.initViewLayer(self.view)
@@ -29,6 +31,34 @@ class DappSignVC: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func flagPetition(sender: AnyObject?) {
+        guard let dapp = self.dapp else {
+            return
+        }
+        
+        FlaggedPetitionsHelper.flagPetition(dapp) {
+            (success: Bool) in
+            var message = ""
+            
+            if success {
+                message = "Successfully flagged petition."
+            } else {
+                message = "Failed to flag petition. Please try again later."
+            }
+            
+            let alertView = UIAlertView(
+                title: nil,
+                message: message,
+                delegate: nil,
+                cancelButtonTitle: "OK"
+            )
+            
+            alertView.show()
+        }
     }
     
     // MARK: - internal
@@ -41,6 +71,8 @@ class DappSignVC: UIViewController {
             view: self.view,
             lineSpacing: lineSpacing
         )
+        
+        self.dapp = dapp
     }
     
     internal func showDapp(dapp: Dapp?) {

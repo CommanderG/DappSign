@@ -121,6 +121,7 @@
 		8459C3501CC9086400421769 /* SVGMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C34F1CC9086400421769 /* SVGMapData.swift */; };
 		8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C3511CC9168200421769 /* DappMappHelper.swift */; };
 		84726EE61ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */; };
+		8485DB5C1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */; };
 		8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485EC2F1CF4E70100E5A889 /* SocialVC.swift */; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
@@ -302,6 +303,7 @@
 		8459C34F1CC9086400421769 /* SVGMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGMapData.swift; sourceTree = "<group>"; };
 		8459C3511CC9168200421769 /* DappMappHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappMappHelper.swift; sourceTree = "<group>"; };
 		84726EE51ABD6DDB003EA408 /* NSObjectPerformOnlyOneTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectPerformOnlyOneTime.swift; sourceTree = "<group>"; };
+		8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedPetitionsHelper.swift; sourceTree = "<group>"; };
 		8485EC2F1CF4E70100E5A889 /* SocialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVC.swift; sourceTree = "<group>"; };
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
 		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				84A468A91D343AF500BF3CDC /* DappHelper.swift */,
 				84F167D51D481561004CB3CB /* Colors.swift */,
 				840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */,
+				8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				84C52B3C1CD7ABE2006A99DB /* SegmentsVC.swift in Sources */,
 				274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */,
 				848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */,
+				8485DB5C1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift in Sources */,
 				840D0C431D7F674F00C1F6B2 /* TermsHelper.swift in Sources */,
 				8459C3521CC9168200421769 /* DappMappHelper.swift in Sources */,
 				279A31221AB30EA700850508 /* AdminTVC.swift in Sources */,

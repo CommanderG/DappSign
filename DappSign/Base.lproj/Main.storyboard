@@ -1606,6 +1606,9 @@
                                 <state key="normal" title="Flag petition">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="flagPetition:" destination="H3r-2u-yja" eventType="touchUpInside" id="cj4-Cn-T3O"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZu-W0-2RX">
                                 <rect key="frame" x="218" y="31" width="50" height="23"/>
