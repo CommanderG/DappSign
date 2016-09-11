@@ -9,11 +9,13 @@
 import UIKit
 
 class AdminTVC: UITableViewController {
-    var dappArrayDappsCount: [DappArray: Int32?] = [
+    private var dappArrayDappsCount: [DappArray: Int32?] = [
         .Primary:      nil,
         .Secondary:    nil,
         .Introductory: nil
     ]
+    
+    private var flaggedDappsCount: Int32 = 0
     
     let rowDappArray: [Int: DappArray] = [
         0: .Primary,
@@ -26,6 +28,12 @@ class AdminTVC: UITableViewController {
         case ShowSecondaryDapps    = "showSecondaryDapps"
         case ShowIntroductoryDapps = "showIntroductoryDapps"
         case ShowScoreboardDapps   = "showScoreboardDapps"
+        case ShowFlaggedDapps      = "showFlaggedDapps"
+    }
+    
+    enum Sections: Int {
+        case Dapps = 0
+        case FlaggedDapps = 1
     }
     
     override func viewDidLoad() {
@@ -53,6 +61,15 @@ class AdminTVC: UITableViewController {
         }
         
         self.refreshTableViewContent()
+        
+        FlaggedPetitionsHelper.flaggedPetitionsCount({
+            (count: Int32) in
+            self.flaggedDappsCount = count
+            
+            let indexPath = NSIndexPath(forRow: 0, inSection: Sections.FlaggedDapps.rawValue)
+            
+            self.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,13 +92,27 @@ class AdminTVC: UITableViewController {
     ) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        if let dappArray = self.rowDappArray[indexPath.row] {
-            self.showDappCountInCell(cell, dappArray: dappArray)
+        if indexPath.section == Sections.Dapps.rawValue {
+            if let dappArray = self.rowDappArray[indexPath.row] {
+                self.showDappCountInCell(cell, dappArray: dappArray)
+            }
+        } else {
+            if self.flaggedDappsCount > 0 {
+                cell.detailTextLabel?.text = "\(self.flaggedDappsCount)"
+                
+                cell.accessoryType = .DisclosureIndicator
+                cell.selectionStyle = .Default
+            } else {
+                cell.detailTextLabel?.text = "0"
+                
+                cell.accessoryType = .None
+                cell.selectionStyle = .None
+            }
         }
         
         return cell
     }
-    
+
     // MARK: - Navigation
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
@@ -92,6 +123,12 @@ class AdminTVC: UITableViewController {
             return self.shouldPerformSegueToShowDappsWithType(.Secondary)
         case SegueIdentifier.ShowIntroductoryDapps.rawValue:
             return self.shouldPerformSegueToShowDappsWithType(.Introductory)
+        case SegueIdentifier.ShowFlaggedDapps.rawValue:
+            if self.flaggedDappsCount > 0 {
+                return true
+            }
+            
+            return false
         default:
             return true
         }
