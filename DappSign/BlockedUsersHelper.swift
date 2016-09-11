@@ -14,7 +14,7 @@ class BlockedUsersHelper: NSObject {
     
     internal class func addUserWithId(userId: String, completion: (success: Bool) -> Void) {
         self.blockedUsers {
-            (users: [PFObject]?) in
+            (users: [PFUser]?) in
             guard let blockedUsers = users else {
                 completion(success: false)
                 
@@ -46,7 +46,7 @@ class BlockedUsersHelper: NSObject {
         }
     }
     
-    internal class func blockedUsers(completion: (users: [PFObject]?) -> Void) {
+    internal class func blockedUsers(completion: (users: [PFUser]?) -> Void) {
         let query = PFQuery(className: self.blockedUserClassName)
         
         query.limit = 1000
@@ -74,6 +74,22 @@ class BlockedUsersHelper: NSObject {
             } else {
                 completion(users: nil)
                 print(error)
+            }
+        }
+    }
+    
+    internal class func blockedUsersCount(completion: (count: Int32) -> Void) {
+        let query = PFQuery(className: self.blockedUserClassName)
+        
+        query.limit = 1000
+        
+        query.countObjectsInBackgroundWithBlock {
+            (count: Int32, error: NSError?) in
+            if let error = error {
+                completion(count: count)
+                print(error)
+            } else {
+                completion(count: count)
             }
         }
     }

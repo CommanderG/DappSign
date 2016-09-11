@@ -124,6 +124,7 @@
 		8485DB5C1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */; };
 		8485DB5E1D85804E00731FE4 /* FlaggedPetitionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */; };
 		8485DB601D85B9D000731FE4 /* BlockedUsersHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */; };
+		8485DB621D85D78000731FE4 /* BlockedUsersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485DB611D85D77D00731FE4 /* BlockedUsersTVC.swift */; };
 		8485EC301CF4E70100E5A889 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485EC2F1CF4E70100E5A889 /* SocialVC.swift */; };
 		848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */; };
 		848B651B1CBF78FB00E6D155 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B651A1CBF78FB00E6D155 /* LocalStorage.swift */; };
@@ -308,6 +309,7 @@
 		8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedPetitionsHelper.swift; sourceTree = "<group>"; };
 		8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedPetitionsTVC.swift; sourceTree = "<group>"; };
 		8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersHelper.swift; sourceTree = "<group>"; };
+		8485DB611D85D77D00731FE4 /* BlockedUsersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersTVC.swift; sourceTree = "<group>"; };
 		8485EC2F1CF4E70100E5A889 /* SocialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVC.swift; sourceTree = "<group>"; };
 		848AF3B81CBEBCD600DBEE6D /* DappBackSideLinksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBackSideLinksVC.swift; sourceTree = "<group>"; };
 		848B651A1CBF78FB00E6D155 /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
 				8485EC2F1CF4E70100E5A889 /* SocialVC.swift */,
 				8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */,
+				8485DB611D85D77D00731FE4 /* BlockedUsersTVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -1072,6 +1075,7 @@
 				2714318B1AB0C463002F9527 /* FacebookHelper.swift in Sources */,
 				848AF3B91CBEBCD600DBEE6D /* DappBackSideLinksVC.swift in Sources */,
 				F37246781AD3ED7600AD56E2 /* MKAnnotationView+WebCache.m in Sources */,
+				8485DB621D85D78000731FE4 /* BlockedUsersTVC.swift in Sources */,
 				27AF934E1B949A120017D8D2 /* SVGMapGenerator.swift in Sources */,
 				F37246851AD3ED7600AD56E2 /* UIImageView+HighlightedWebCache.m in Sources */,
 				2719C9811C9C52E40092BC0A /* DappsWithoutArrayHelper.swift in Sources */,

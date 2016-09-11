@@ -16,6 +16,7 @@ class AdminTVC: UITableViewController {
     ]
     
     private var flaggedDappsCount: Int32 = 0
+    private var blockedUsersCount: Int32 = 0
     
     let rowDappArray: [Int: DappArray] = [
         0: .Primary,
@@ -29,11 +30,13 @@ class AdminTVC: UITableViewController {
         case ShowIntroductoryDapps = "showIntroductoryDapps"
         case ShowScoreboardDapps   = "showScoreboardDapps"
         case ShowFlaggedDapps      = "showFlaggedDapps"
+        case ShowBlockedUsers      = "showBlockedUsers"
     }
     
     enum Sections: Int {
-        case Dapps = 0
+        case Dapps        = 0
         case FlaggedDapps = 1
+        case BlockedUsers = 2
     }
     
     override func viewDidLoad() {
@@ -70,11 +73,19 @@ class AdminTVC: UITableViewController {
             
             self.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
         })
+        
+        BlockedUsersHelper.blockedUsersCount {
+            (count: Int32) in
+            self.blockedUsersCount = count
+            
+            let indexPath = NSIndexPath(forRow: 0, inSection: Sections.BlockedUsers.rawValue)
+            
+            self.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - <UITableViewDataSource>
@@ -96,15 +107,23 @@ class AdminTVC: UITableViewController {
             if let dappArray = self.rowDappArray[indexPath.row] {
                 self.showDappCountInCell(cell, dappArray: dappArray)
             }
-        } else {
+        } else if indexPath.section == Sections.FlaggedDapps.rawValue {
             if self.flaggedDappsCount > 0 {
                 cell.detailTextLabel?.text = "\(self.flaggedDappsCount)"
-                
                 cell.accessoryType = .DisclosureIndicator
                 cell.selectionStyle = .Default
             } else {
                 cell.detailTextLabel?.text = "0"
-                
+                cell.accessoryType = .None
+                cell.selectionStyle = .None
+            }
+        } else if indexPath.section == Sections.BlockedUsers.rawValue {
+            if self.blockedUsersCount > 0 {
+                cell.detailTextLabel?.text = "\(self.blockedUsersCount)"
+                cell.accessoryType = .DisclosureIndicator
+                cell.selectionStyle = .Default
+            } else {
+                cell.detailTextLabel?.text = "0"
                 cell.accessoryType = .None
                 cell.selectionStyle = .None
             }
@@ -125,6 +144,12 @@ class AdminTVC: UITableViewController {
             return self.shouldPerformSegueToShowDappsWithType(.Introductory)
         case SegueIdentifier.ShowFlaggedDapps.rawValue:
             if self.flaggedDappsCount > 0 {
+                return true
+            }
+            
+            return false
+        case SegueIdentifier.ShowBlockedUsers.rawValue:
+            if self.blockedUsersCount > 0 {
                 return true
             }
             
