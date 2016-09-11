@@ -515,26 +515,34 @@ class DailyDappVC: UIViewController {
     
     private func updateDappScoreLabel() {
         var dappScoreStr = ""
+        var dappsStr = ""
         
         if let dappScore = self.dappScore {
             dappScoreStr = "\(dappScore)"
+            
+            if dappScore == 1 {
+                dappsStr = " Dapp"
+            } else {
+                dappsStr = " Dapps"
+            }
         } else {
             dappScoreStr = "-"
+            dappsStr = " Dapps"
         }
         
-        let dappScoreLabelText = dappScoreStr + " Dapp"
+        let dappScoreLabelText = dappScoreStr + dappsStr
         let attributedString = NSMutableAttributedString(string: dappScoreLabelText)
         let fontAvenirBook = UIFont(name: "Avenir-Book", size: 18.0)
         let fontExoBlack = UIFont(name: "Exo-Black", size: 19.0)
         
         if let fontAvenirBook = fontAvenirBook, fontExoBlack = fontExoBlack {
             attributedString.addAttribute(NSFontAttributeName,
-                                          value: fontAvenirBook,
-                                          range: NSMakeRange(0, dappScoreStr.characters.count)
+                value: fontAvenirBook,
+                range: NSMakeRange(0, dappScoreStr.characters.count)
             )
             attributedString.addAttribute(NSFontAttributeName,
-                                          value: fontExoBlack,
-                                          range: NSMakeRange(dappScoreStr.characters.count, " Dapp".characters.count)
+                value: fontExoBlack,
+                range: NSMakeRange(dappScoreStr.characters.count, dappsStr.characters.count)
             )
         }
         
