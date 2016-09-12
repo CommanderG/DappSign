@@ -614,6 +614,7 @@
 			children = (
 				27CCFDFC1D4A67D70051CD42 /* Intro */,
 				84FD97A01D314E2B009CDB50 /* New Dapp */,
+				84F111DE1D87391E00030472 /* Admin */,
 				27CCFDFA1D4A4BA10051CD42 /* IntroPVC.swift */,
 				4CD9C97F1AA1D59900046CA2 /* LoginVC.swift */,
 				27B818B91CEE2DEF0092E63B /* EmailLoginVC.swift */,
@@ -622,9 +623,6 @@
 				4CD9C9E51AA4FA1900046CA2 /* ProfileViewController.swift */,
 				84C066211CD9324B00A5D724 /* ProfileDappMappVC.swift */,
 				84EA16361CD3FCEE002CC952 /* PetitionsTVC.swift */,
-				279A31211AB30EA700850508 /* AdminTVC.swift */,
-				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
-				27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */,
 				849A63E51ABB7C6200A10BEF /* SearchTableViewController.swift */,
 				27BA7D811ABC2B4100E480AD /* DappsViewController.swift */,
 				27769C191BB179FF00FD34AA /* EditDappLinksVC.swift */,
@@ -638,8 +636,6 @@
 				84AFF9521CC819E300F97FEE /* PercentsVC.swift */,
 				84C52B3B1CD7ABE2006A99DB /* SegmentsVC.swift */,
 				8485EC2F1CF4E70100E5A889 /* SocialVC.swift */,
-				8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */,
-				8485DB611D85D77D00731FE4 /* BlockedUsersTVC.swift */,
 				F37246561AD3ED7600AD56E2 /* SDWebImage */,
 			);
 			name = "View Controllers";
@@ -732,6 +728,18 @@
 				84D8487E1AC726D000D1B3F9 /* SWUtilityButtonView.m */,
 			);
 			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		84F111DE1D87391E00030472 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				279A31211AB30EA700850508 /* AdminTVC.swift */,
+				279A31231AB31CE700850508 /* DappsTableViewController.swift */,
+				27C7FD441C9C618F00821230 /* DappsWithoutArrayTVC.swift */,
+				8485DB5D1D85804D00731FE4 /* FlaggedPetitionsTVC.swift */,
+				8485DB611D85D77D00731FE4 /* BlockedUsersTVC.swift */,
+			);
+			name = Admin;
 			sourceTree = "<group>";
 		};
 		84FD97A01D314E2B009CDB50 /* New Dapp */ = {
