@@ -154,6 +154,15 @@ class DappArraysHelper {
         }
     }
     
+    internal class func dappArrayForDappWithId(
+        dappId: String,
+        completion: (dappArray: DappArray?) -> Void
+    ) {
+        let dappArrays: [DappArray] = [ .Primary, .Secondary, .Introductory ]
+        
+        self.dappArrayForDappWithIdAux(dappId, dappArrays: dappArrays, completion: completion)
+    }
+    
     // MARK: - private
     
     private class func downloadDappArrayObject(
@@ -221,5 +230,36 @@ class DappArraysHelper {
         }
         
         return false
+    }
+    
+    internal class func dappArrayForDappWithIdAux(
+        dappId: String,
+        dappArrays: [DappArray],
+        completion: (dappArray: DappArray?) -> Void
+    ) {
+        guard let dappArray = dappArrays.first else {
+            completion(dappArray: nil)
+            
+            return
+        }
+        
+        self.downloadAllDappsInArray(dappArray) {
+            (dapps: [PFObject]?, error: NSError?) in
+            if let dapps = dapps {
+                for dapp in dapps {
+                    if dapp.objectId == dappId {
+                        completion(dappArray: dappArray)
+                        
+                        return
+                    }
+                }
+            }
+            
+            self.dappArrayForDappWithIdAux(
+                dappId,
+                dappArrays: Array(dappArrays.dropFirst()),
+                completion: completion
+            )
+        }
     }
 }

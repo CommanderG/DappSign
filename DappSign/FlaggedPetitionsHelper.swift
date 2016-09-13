@@ -88,4 +88,42 @@ class FlaggedPetitionsHelper: NSObject {
             }
         }
     }
+    
+    internal class func deleteObjectWithDappId(
+        dappId: String,
+        completion: (error: NSError?) -> Void
+    ) {
+        let query = PFQuery(className: flaggedPetitionClassName)
+        
+        query.limit = 1000
+        
+        query.includeKey("petition")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) in
+            guard let flaggedPetitions = objects as? [PFObject] else {
+                completion(error: error)
+                
+                return
+            }
+            
+            var foundFlaggedPetition: PFObject? = nil
+            
+            for flaggedPetition in flaggedPetitions {
+                if let petition = flaggedPetition["petition"] as? PFObject {
+                    if petition.objectId == dappId {
+                        foundFlaggedPetition = flaggedPetition
+                    }
+                }
+            }
+            
+            if let foundFlaggedPetition = foundFlaggedPetition {
+                foundFlaggedPetition.deleteInBackgroundWithBlock({
+                    (success: Bool, error: NSError?) in
+                    completion(error: error)
+                })
+            } else {
+                completion(error: nil)
+            }
+        }
+    }
 }

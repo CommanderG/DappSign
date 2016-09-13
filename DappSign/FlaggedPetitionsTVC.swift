@@ -58,4 +58,66 @@ class FlaggedPetitionsTVC: UITableViewController {
         
         return cell
     }
+    
+    // MARK: - <UITableViewDelegate>
+    
+    override func tableView(
+        tableView: UITableView,
+        didSelectRowAtIndexPath indexPath: NSIndexPath
+    ) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let actionSheet = UIActionSheet(
+            title: nil,
+            delegate: self,
+            cancelButtonTitle: "Cancel",
+            destructiveButtonTitle: "Remove petition"
+        )
+        
+        actionSheet.tag = indexPath.row
+        
+        actionSheet.showInView(self.view)
+    }
+}
+
+extension FlaggedPetitionsTVC: UIActionSheetDelegate {
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 0 /* Remove petition */ {
+            let dapp = self.petitions[actionSheet.tag]
+            
+            DappArraysHelper.dappArrayForDappWithId(dapp.objectId, completion: {
+                (dappArray: DappArray?) in
+                guard let dappArray = dappArray else {
+                    self.petitions.removeAtIndex(actionSheet.tag)
+                    self.tableView.reloadData()
+                    
+                    return
+                }
+                
+                DappArraysHelper.removeDappWithID(
+                    dapp.objectId,
+                    fromArray: dappArray,
+                    completion: {
+                        (error: NSError?) in
+                        if let error = error {
+                            print(error)
+                            
+                            return
+                        }
+                        
+                        FlaggedPetitionsHelper.deleteObjectWithDappId(dapp.objectId,
+                            completion: {
+                                (error: NSError?) in
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    self.petitions.removeAtIndex(actionSheet.tag)
+                                    self.tableView.reloadData()
+                                }
+                        })
+                    }
+                )
+            })
+        }
+    }
 }
