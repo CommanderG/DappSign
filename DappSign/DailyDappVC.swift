@@ -680,21 +680,37 @@ class DailyDappVC: UIViewController {
     }
     
     private func downloadDapps(dapps: Dapps, completion: (dapps: [PFObject]) -> Void) {
-        switch dapps {
-        case .Introductory:
-            DailyDappHelper.downloadDapps([ .Introductory ], completion: {
-                (dapps: [PFObject]) -> Void in
-                completion(dapps: dapps)
+        UserHelper.currentUserBlockedUsers {
+            (success: Bool, error: NSError?, blockedUsers: [PFUser]?) in
+            guard let blockedUsres = blockedUsers else {
+                print("Failed to download blocked users. Error: \(error)")
+                
+                return
+            }
+            
+            let blockedUserIds = blockedUsres.map({
+                (blockedUser: PFUser) -> String in
+                return blockedUser.objectId
             })
             
-            break
-        case .Daily:
-            DailyDappHelper.downloadDapps([ .Primary, .Secondary ], completion: {
-                (dapps: [PFObject]) -> Void in
-                completion(dapps: dapps)
-            })
-            
-            break
+            switch dapps {
+            case .Introductory:
+                DailyDappHelper.downloadDapps([ .Introductory ],
+                    blockedUserIds: blockedUserIds, completion: {
+                    (dapps: [PFObject]) -> Void in
+                    completion(dapps: dapps)
+                })
+                
+                break
+            case .Daily:
+                DailyDappHelper.downloadDapps([ .Primary, .Secondary ],
+                    blockedUserIds: blockedUserIds, completion: {
+                    (dapps: [PFObject]) -> Void in
+                    completion(dapps: dapps)
+                })
+                
+                break
+            }
         }
     }
     

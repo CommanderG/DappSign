@@ -11,6 +11,8 @@ import Foundation
 class UserHelper {
     typealias completionClosure = (success: Bool, errorMessage: String?) -> Void
     
+    private static let blockedUsersRelationKey = "blockedUsers"
+    
     internal class func incrementDappScoreForUserWithID(
         userID: String,
         completion: completionClosure
@@ -94,19 +96,42 @@ class UserHelper {
     
     internal class func addBlockedUserWithId(
         userId: String,
-        completion: (error: NSError?) -> Void
+        completion: (success: Bool, error: NSError?) -> Void
     ) {
         guard let currentUser = PFUser.currentUser() else {
+            completion(success: false, error: nil)
+            
             return
         }
         
-        let blockedUsersRelation = currentUser.relationForKey("blockedUsers")
+        let blockedUsersRelation = currentUser.relationForKey(self.blockedUsersRelationKey)
         let user = PFUser(outDataWithObjectId: userId)
         
         blockedUsersRelation.addObject(user)
         currentUser.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) in
-            completion(error: error)
+            completion(success: success, error: error)
+        }
+    }
+    
+    internal class func currentUserBlockedUsers(
+        completion: (success: Bool, error: NSError?, blockedUsers: [PFUser]?) -> Void
+    ) {
+        guard let currentUser = PFUser.currentUser() else {
+            completion(success: false, error: nil, blockedUsers: nil)
+            
+            return
+        }
+        
+        let relation = currentUser.relationForKey(self.blockedUsersRelationKey)
+        
+        relation.query().findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) in
+            if let blockedUsers = objects as? [PFUser] {
+                completion(success: true, error: nil, blockedUsers: blockedUsers)
+            } else {
+                completion(success: false, error: error, blockedUsers: nil)
+            }
         }
     }
     

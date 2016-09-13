@@ -72,15 +72,20 @@ class DailyDappHelper {
     
     internal class func downloadDapps(
         dappsArrays: [DappArray],
+        blockedUserIds: [String],
         completion: (dapps: [PFObject]) -> Void
     ) {
-        self.downloadDappsHelper(dappsArrays, dappsArraysDapps: [:]) {
-            (dappsArraysDapps: [DappArray: [PFObject]]) -> Void in
-            self.processAndJoinDapps(dappsArraysDapps,
-                dappsArrays: dappsArrays,
-                dapps: [],
-                completion: completion
-            )
+        self.downloadDappsHelper(
+            dappsArrays,
+            dappsArraysDapps: [:],
+            blockedUserIds: blockedUserIds) {
+                (dappsArraysDapps: [DappArray: [PFObject]]) -> Void in
+                self.processAndJoinDapps(
+                    dappsArraysDapps,
+                    dappsArrays: dappsArrays,
+                    dapps: [],
+                    completion: completion
+                )
         }
     }
     
@@ -137,6 +142,7 @@ class DailyDappHelper {
     private class func downloadDappsHelper(
         dappsArrays: [DappArray],
         dappsArraysDapps: [DappArray: [PFObject]],
+        blockedUserIds: [String],
         completion: (dappArraysDapps: [DappArray: [PFObject]]) -> Void
     ) {
         guard let dappArray = dappsArrays.first else {
@@ -150,6 +156,7 @@ class DailyDappHelper {
         DappArraysHelper.downloadDappsInArray(
             dappArray,
             notSwipedAndNotCreatedByUser: user,
+            blockedUserIds: blockedUserIds,
             completion: {
                 (dapps: [PFObject]?, error: NSError?) -> Void in
                 guard let dapps = dapps else {
@@ -166,6 +173,7 @@ class DailyDappHelper {
                 
                 self.downloadDappsHelper(remainingDappsArrays,
                     dappsArraysDapps: newDappsArraysDapps,
+                    blockedUserIds: blockedUserIds,
                     completion: completion
                 )
         })

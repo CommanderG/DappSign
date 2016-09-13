@@ -31,38 +31,58 @@ class DappArraysHelper {
         }
     }
     
-    internal class func downloadDappsInArray(dappArray: DappArray,
+    internal class func downloadDappsInArray(
+        dappArray: DappArray,
         notSwipedAndNotCreatedByUser user: PFUser,
+        blockedUserIds: [String],
         completion: (dapps: [PFObject]? , error: NSError?) -> Void
     ) {
         self.downloadAllDappsInArray(dappArray) {
             (dapps: [PFObject]?, error: NSError?) -> Void in
-            if let allDapps = dapps {
-                self.downloadDappsSwipedByUser(user, completion: {
-                    (dapps: [PFObject]?, error: NSError?) -> Void in
-                    if let dappsSwipedByUser = dapps {
-                        let dappsNotSwipedByUser = self.dappsNotSwipedByUserWithAllDapps(allDapps,
-                            andDappsSwipedByUser: dappsSwipedByUser
-                        )
-                        let dappsNotSwipedAndNotCreatedByUser = dappsNotSwipedByUser.filter({
-                            dapp -> Bool in
-                            let userID = dapp["userid"] as? String
-                            
-                            if user.objectId == userID {
-                                return false
-                            }
-                            
-                            return true
-                        })
-                        
-                        completion(dapps: dappsNotSwipedAndNotCreatedByUser, error: nil)
-                    } else {
-                        completion(dapps: nil, error: error)
-                    }
-                })
-            } else {
+            guard let allDapps = dapps else {
                 completion(dapps: nil, error: error)
+                
+                return
             }
+            
+            self.downloadDappsSwipedByUser(user, completion: {
+                (dapps: [PFObject]?, error: NSError?) -> Void in
+                guard let dappsSwipedByUser = dapps else {
+                    completion(dapps: nil, error: error)
+                    
+                    return
+                }
+                
+                let dappsNotSwipedByUser = self.dappsNotSwipedByUserWithAllDapps(allDapps,
+                    andDappsSwipedByUser: dappsSwipedByUser
+                )
+                
+                let dappsNotSwipedAndNotCreatedByUser = dappsNotSwipedByUser.filter({
+                    dapp -> Bool in
+                    let userID = dapp["userid"] as? String
+                    
+                    if user.objectId == userID {
+                        return false
+                    }
+                    
+                    return true
+                })
+                
+                let filteredDapps = dappsNotSwipedAndNotCreatedByUser.filter({
+                    (dapp: PFObject) -> Bool in
+                    if let dappUserId = dapp["userid"] as? String {
+                        if blockedUserIds.contains(dappUserId) {
+                            return false
+                        }
+                        
+                        return true
+                    }
+                    
+                    return false
+                })
+                
+                completion(dapps: filteredDapps, error: nil)
+            })
         }
     }
     
