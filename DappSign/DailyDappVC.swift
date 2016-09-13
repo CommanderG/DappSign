@@ -470,6 +470,8 @@ class DailyDappVC: UIViewController {
             self.dappBackSideLinksVC?.view.addGestureRecognizer(tapGR)
         case DappSignVC.embedSegueID:
             self.dappSignVC = segue.destinationViewController as? DappSignVC
+            
+            self.dappSignVC?.delegate = self
         case "embedDappMappVC":
             self.dappMappVC = segue.destinationViewController as? DappMappVC
         case RepresentativeVC.embedSegueID:
@@ -1194,5 +1196,21 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
 extension DailyDappVC: EmbedDappDelegate {
     func didRemoveFromParentViewController() {
         self.enableShareButtons()
+    }
+}
+
+extension DailyDappVC: DappSignVCDelegate {
+    func didBlockUser() {
+        self.dappSignVC?.view.alpha = 0.0
+        
+        self.downloadDapps(.Daily) {
+            (dapps: [PFObject]) in
+            self.dappSignVC?.view.alpha = 1.0
+            
+            self.appState = .DailyDapp(dapps: dapps, index: 0)
+            
+            self.initDappView()
+            self.initHashtagsLabel()
+        }
     }
 }

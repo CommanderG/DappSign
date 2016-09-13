@@ -13,6 +13,10 @@ enum DappSignLineSpacing {
     case SocialSharingImage
 }
 
+protocol DappSignVCDelegate {
+    func didBlockUser()
+}
+
 class DappSignVC: UIViewController {
     @IBOutlet weak var dappStatementLabel : UILabel!
     @IBOutlet weak var dappSubmitterLabel : UILabel!
@@ -20,6 +24,8 @@ class DappSignVC: UIViewController {
     @IBOutlet weak var dailyDappLabel     : UILabel!
     
     internal static let embedSegueID: String = "embedDappSignVC"
+    
+    internal var delegate: DappSignVCDelegate? = nil
     
     private var dapp: PFObject? = nil
     
@@ -83,28 +89,47 @@ class DappSignVC: UIViewController {
         
         BlockedUsersHelper.addUserWithId(userId) {
             (success: Bool) in
-            var message = ""
-            
-            if success {
-                message = "Successfully blocked user."
-            } else {
-                message = "Failed to block user. Please try again later."
+            if !success {
+                let alertView = UIAlertView(
+                    title: nil,
+                    message: "Failed to block user. Please try again later.",
+                    delegate: nil,
+                    cancelButtonTitle: "OK"
+                )
+                
+                alertView.show()
+                
+                return
             }
             
-            let alertView = UIAlertView(
-                title: nil,
-                message: message,
-                delegate: nil,
-                cancelButtonTitle: "OK"
-            )
-            
-            alertView.show()
-        }
-        
-        UserHelper.addBlockedUserWithId(userId) {
-            (success: Bool, error: NSError?) in
-            if let error = error {
-                print("Failed to add user with ID \(userId) to blocked users. Error: \(error)")
+            UserHelper.addBlockedUserWithId(userId) {
+                (success: Bool, error: NSError?) in
+                if let error = error {
+                    print(
+                        "Failed to add user with ID \(userId) to blocked users. " +
+                        "Error: \(error)"
+                    )
+                    
+                    let alertView = UIAlertView(
+                        title: nil,
+                        message: "Failed to block user. Please try again later.",
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+                } else {
+                    let alertView = UIAlertView(
+                        title: nil,
+                        message: "Successfully blocked user.",
+                        delegate: nil,
+                        cancelButtonTitle: "OK"
+                    )
+                    
+                    alertView.show()
+                    
+                    self.delegate?.didBlockUser()
+                }
             }
         }
     }
