@@ -139,31 +139,36 @@ class DailyDappHelper {
         dappsArraysDapps: [DappArray: [PFObject]],
         completion: (dappArraysDapps: [DappArray: [PFObject]]) -> Void
     ) {
-        if let dappArray = dappsArrays.first {
-            let user = PFUser.currentUser()
-            
-            DappArraysHelper.downloadDappsInArray(dappArray,
-                notSwipedAndNotCreatedByUser: user,
-                completion: {
-                    (dapps: [PFObject]?, error: NSError?) -> Void in
-                    if let dapps = dapps {
-                        var newDappsArraysDapps = dappsArraysDapps
-                        
-                        newDappsArraysDapps[dappArray] = dapps
-                        
-                        let remainingDappsArrays = Array(dappsArrays.dropFirst())
-                        
-                        self.downloadDappsHelper(remainingDappsArrays,
-                            dappsArraysDapps: newDappsArraysDapps,
-                            completion: completion
-                        )
-                    } else {
-                        completion(dappArraysDapps: dappsArraysDapps)
-                    }
-            })
-        } else {
+        guard let dappArray = dappsArrays.first else {
             completion(dappArraysDapps: dappsArraysDapps)
+            
+            return
         }
+        
+        let user = PFUser.currentUser()
+        
+        DappArraysHelper.downloadDappsInArray(
+            dappArray,
+            notSwipedAndNotCreatedByUser: user,
+            completion: {
+                (dapps: [PFObject]?, error: NSError?) -> Void in
+                guard let dapps = dapps else {
+                    completion(dappArraysDapps: dappsArraysDapps)
+                    
+                    return
+                }
+                
+                var newDappsArraysDapps = dappsArraysDapps
+                
+                newDappsArraysDapps[dappArray] = dapps
+                
+                let remainingDappsArrays = Array(dappsArrays.dropFirst())
+                
+                self.downloadDappsHelper(remainingDappsArrays,
+                    dappsArraysDapps: newDappsArraysDapps,
+                    completion: completion
+                )
+        })
     }
     
     private class func processAndJoinDapps(

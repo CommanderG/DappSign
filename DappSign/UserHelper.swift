@@ -92,6 +92,24 @@ class UserHelper {
         }
     }
     
+    internal class func addBlockedUserWithId(
+        userId: String,
+        completion: (error: NSError?) -> Void
+    ) {
+        guard let currentUser = PFUser.currentUser() else {
+            return
+        }
+        
+        let blockedUsersRelation = currentUser.relationForKey("blockedUsers")
+        let user = PFUser(outDataWithObjectId: userId)
+        
+        blockedUsersRelation.addObject(user)
+        currentUser.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) in
+            completion(error: error)
+        }
+    }
+    
     // MARK: -
     
     private class func incrementDappScoreForUser(user: PFUser, completion: completionClosure) {

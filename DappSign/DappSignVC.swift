@@ -100,6 +100,13 @@ class DappSignVC: UIViewController {
             
             alertView.show()
         }
+        
+        UserHelper.addBlockedUserWithId(userId) {
+            (error: NSError?) in
+            if let error = error {
+                print("Failed to add user with ID \(userId) to blocked users. Error: \(error)")
+            }
+        }
     }
     
     // MARK: - internal
