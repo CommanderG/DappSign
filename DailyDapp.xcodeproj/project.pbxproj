@@ -17,6 +17,7 @@
 		271D0DC71ABAD8E400227DE7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D0DC61ABAD8E400227DE7 /* Requests.swift */; };
 		271E435D1C7776FD0076DB5F /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271E435C1C7776FD0076DB5F /* Consts.swift */; };
 		272187DE1C8DCD3700D61E37 /* DappsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272187DD1C8DCD3700D61E37 /* DappsHelper.swift */; };
+		27422DDF1D8C1ADB0091345B /* SignHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27422DDE1D8C1ADB0091345B /* SignHelper.swift */; };
 		274B33451C9C3AAB00FA1FDF /* DappArraysHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B33441C9C3AAA00FA1FDF /* DappArraysHelper.swift */; };
 		274B33471C9C3C5000FA1FDF /* DappIndexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */; };
 		274BB0C71B99C3A300D6DC44 /* PercentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274BB0C61B99C3A300D6DC44 /* PercentsView.xib */; };
@@ -193,6 +194,7 @@
 		271D0DC61ABAD8E400227DE7 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		271E435C1C7776FD0076DB5F /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		272187DD1C8DCD3700D61E37 /* DappsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHelper.swift; sourceTree = "<group>"; };
+		27422DDE1D8C1ADB0091345B /* SignHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignHelper.swift; sourceTree = "<group>"; };
 		274B33441C9C3AAA00FA1FDF /* DappArraysHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappArraysHelper.swift; sourceTree = "<group>"; };
 		274B33461C9C3C5000FA1FDF /* DappIndexHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappIndexHelper.swift; sourceTree = "<group>"; };
 		274BB0C61B99C3A300D6DC44 /* PercentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PercentsView.xib; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 				840D0C421D7F674F00C1F6B2 /* TermsHelper.swift */,
 				8485DB5B1D855F9F00731FE4 /* FlaggedPetitionsHelper.swift */,
 				8485DB5F1D85B9D000731FE4 /* BlockedUsersHelper.swift */,
+				27422DDE1D8C1ADB0091345B /* SignHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				279A31221AB30EA700850508 /* AdminTVC.swift in Sources */,
 				27B818BA1CEE2DEF0092E63B /* EmailLoginVC.swift in Sources */,
 				4CD9C9CA1AA1EC1A00046CA2 /* Data.swift in Sources */,
+				27422DDF1D8C1ADB0091345B /* SignHelper.swift in Sources */,
 				2714318D1AB0CA63002F9527 /* UIViewControllerAlertViewExtension.swift in Sources */,
 				27810DF11AB7297300223350 /* IndexedDapps.swift in Sources */,
 				84C066221CD9324B00A5D724 /* ProfileDappMappVC.swift in Sources */,

@@ -1070,6 +1070,17 @@ extension DailyDappVC: SwipeableViewMovementDelegate {
                 }
                 
                 if dapped {
+                    if let
+                        user = PFUser.currentUser(),
+                        userDistrict = user["congressionalDistrictID"] as? String {
+                        SignHelper.addSignWithPetition(
+                            currentDapp,
+                            user: user,
+                            userDistrict: userDistrict,
+                            completion: nil
+                        )
+                    }
+                    
                     self.showLabel(self.signedLabel, bottomLC: self.signedLabelBottomConstraint)
                     UIView.animateWithDuration(0.4,
                         animations: {
